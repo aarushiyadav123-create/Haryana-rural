@@ -17,28 +17,22 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 50px; }
         
-        /* Top Bar */
         .top-bar { background: #113f14; color: #ffeb3b; font-size: 13px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; }
         .lang-btn { background: #ffc107; color: #000; border: none; padding: 3px 8px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 11px; }
 
-        /* Header */
         header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 20px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         header h1 { font-size: 1.8rem; margin-bottom: 5px; }
         header p { font-size: 0.95rem; opacity: 0.9; }
 
-        /* News Ticker */
         .news-container { background: var(--news-bg); border-bottom: 2px solid #ffc107; padding: 8px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 15px; border-radius: 6px; }
         .news-title { background: #ffc107; color: #000; padding: 3px 6px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; margin-right: 8px; white-space: nowrap; }
         .news-ticker marquee { font-size: 0.85rem; color: var(--news-text); font-weight: 500; }
 
-        /* Main Container */
         .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
 
-        /* Cards */
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .card h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
 
-        /* Form Controls */
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
         select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; outline: none; background: #fafafa; }
@@ -49,16 +43,13 @@
         .btn-secondary { background: var(--secondary); margin-top: 10px; }
         .btn-secondary:hover { background: #e65100; }
 
-        /* Results & Listings */
         .result-box { margin-top: 15px; }
         .shop-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px; margin-bottom: 10px; border-radius: 6px; text-align: left; }
         .shop-item h4 { color: var(--primary); font-size: 1rem; }
         .shop-item p { font-size: 0.85rem; color: #666; margin-top: 3px; }
 
-        /* Admin Panel Hidden */
         .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; }
         
-        /* Footer */
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
 </head>
@@ -76,7 +67,6 @@
 
     <div class="container">
 
-        <!-- लाइव न्यूज़ टिकर -->
         <div class="news-container">
             <span class="news-title">ताज़ा अपडेट</span>
             <div class="news-ticker">
@@ -86,7 +76,6 @@
             </div>
         </div>
 
-        <!-- गाँव और सेवा खोजें -->
         <div class="card">
             <h2>🔍 अपने गाँव की सेवाएँ खोजें</h2>
             <div class="form-group">
@@ -112,7 +101,6 @@
             <div class="result-box" id="searchResult"></div>
         </div>
 
-        <!-- दुकान रजिस्टर करने का फॉर्म -->
         <div class="card">
             <h2>📝 अपनी दुकान / सेवा यहाँ रजिस्टर करें</h2>
             <div class="form-group">
@@ -140,7 +128,6 @@
             <button class="btn" onclick="registerService()">रजिस्टर करें</button>
         </div>
 
-        <!-- एडमिन लॉगिन पैनल -->
         <div class="card" style="text-align: center;">
             <button class="btn btn-secondary" onclick="toggleAdminPanel()">🔒 एडमिन लॉगिन पैनल</button>
             
