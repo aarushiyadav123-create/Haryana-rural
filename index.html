@@ -31,8 +31,9 @@
         .weather-title { font-size: 1rem; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
 
         .news-container { background: var(--news-bg); border-left: 4px solid var(--secondary); padding: 10px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .news-title-tag { background: var(--secondary); color: #fff; padding: 4px 8px; font-size: 0.8rem; font-weight: bold; border-radius: 4px; margin-right: 10px; white-space: nowrap; }
-        .news-ticker marquee { font-size: 0.9rem; color: var(--news-text); font-weight: 600; width: 100%; }
+        .news-title-tag { background: var(--secondary); color: #fff; padding: 4px 8px; font-size: 0.8rem; font-weight: bold; border-radius: 4px; margin-right: 10px; white-space: nowrap; z-index: 2; }
+        .news-ticker { width: 100%; overflow: hidden; white-space: nowrap; }
+        .news-ticker marquee { font-size: 0.9rem; color: var(--news-text); font-weight: 600; width: 100%; display: block; }
 
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
@@ -70,7 +71,6 @@
 
     <div class="top-bar">
         <span id="t-founder">👨‍💼 संस्थापक: राजेश यादव (माल्कोश)</span>
-        <!-- भाषा बदलने वाला बटन -->
         <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">English</button>
     </div>
 
@@ -190,7 +190,7 @@
             </div>
 
             <div class="btn-box">
-                <button class="custom-btn" id="t-f-submit-btn" onclick="registerService()">एडमिन के पास अप्रूवल के लिए भेजें</button>
+                <button class="custom-btn" id="t-f-submit-btn" onclick="registerService()">सीधे पोर्टल पर लाइव करें</button>
             </div>
         </div>
 
@@ -219,16 +219,12 @@
             
             <div class="admin-section" id="adminPanel">
                 <h3 id="t-admin-box-title" style="color: #e65100; margin-bottom: 10px; font-size: 1rem;">एडमिन नियंत्रण एवं सत्यापन कक्ष</h3>
-                <!-- यहाँ से (admin123) हटा दिया गया है -->
                 <input type="password" id="adminPass" placeholder="पासवर्ड दर्ज करें" style="margin-bottom: 10px;">
                 <div class="btn-box" style="margin-top:0;">
                     <button class="custom-btn" id="t-admin-login-btn" onclick="verifyAdmin()" style="padding: 8px 15px;">लॉगिन करें</button>
                 </div>
                 <div id="adminControls" style="display:none; margin-top: 15px; text-align: left;">
                     <p id="t-admin-success" style="color: green; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px;">✔ एडमिन एक्सेस मिल गया!</p>
-                    
-                    <h4 id="t-pending-title" style="font-size: 0.95rem; color: #e65100; margin-bottom: 5px;">⏳ पेंडिंग दुकानें (सत्यापन बाकी):</h4>
-                    <div id="pendingShopsList" style="margin-bottom: 15px;"></div>
 
                     <h4 id="t-all-shops-title" style="font-size: 0.95rem; color: var(--primary); margin-bottom: 5px;">📋 पोर्टल की सभी दुकानें (डिलीट करने की पावर):</h4>
                     <div id="allShopsList"></div>
@@ -275,7 +271,7 @@
                 fVillLabel: "गाँव चुनें:",
                 fCatLabel: "श्रेणी (Category चुनें):",
                 fPhoneLabel: "मोबाइल नंबर:",
-                fSubmitBtn: "एडमिन के पास अप्रूवल के लिए भेजें",
+                fSubmitBtn: "सीधे पोर्टल पर लाइव करें",
                 schemeHeading: "📜 हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव पोर्टल)",
                 schemeLabel: "अपने जिले के अनुसार योजनाओं का पोर्टल देखें:",
                 adminToggleBtn: "🔒 एडमिन / वेरिफिकेशन पैनल",
@@ -283,7 +279,6 @@
                 adminPassPlaceholder: "पासवर्ड दर्ज करें",
                 adminLoginBtn: "लॉगिन करें",
                 adminSuccess: "✔ एडमिन एक्सेस मिल गया!",
-                pendingTitle: "⏳ पेंडिंग दुकानें (सत्यापन बाकी):",
                 allShopsTitle: "📋 पोर्टल की सभी दुकानें (डिलीट करने की पावर):",
                 footer: "&copy; 2026 हरियाणा ग्रामीण सेवा पोर्टल | संस्थापक: राजेश यादव (माल्कोश)"
             },
@@ -316,7 +311,7 @@
                 fVillLabel: "Select Village:",
                 fCatLabel: "Select Category:",
                 fPhoneLabel: "Mobile Number:",
-                fSubmitBtn: "Submit to Admin for Approval",
+                fSubmitBtn: "Publish Live on Portal",
                 schemeHeading: "📜 Haryana Govt Major Schemes (District-wise Live)",
                 schemeLabel: "View scheme portals according to your district:",
                 adminToggleBtn: "🔒 Admin / Verification Panel",
@@ -324,7 +319,6 @@
                 adminPassPlaceholder: "Enter password",
                 adminLoginBtn: "Login",
                 adminSuccess: "✔ Admin access granted!",
-                pendingTitle: "⏳ Pending Shops (Awaiting Verification):",
                 allShopsTitle: "📋 All Portal Shops (Delete Power):",
                 footer: "&copy; 2026 Haryana Rural Service Portal | Founder: Rajesh Yadav (Malkosh)"
             }
@@ -370,7 +364,6 @@
             document.getElementById('adminPass').placeholder = t.adminPassPlaceholder;
             document.getElementById('t-admin-login-btn').textContent = t.adminLoginBtn;
             document.getElementById('t-admin-success').textContent = t.adminSuccess;
-            document.getElementById('t-pending-title').textContent = t.pendingTitle;
             document.getElementById('t-all-shops-title').textContent = t.allShopsTitle;
             document.getElementById('t-footer').innerHTML = t.footer;
 
@@ -396,12 +389,15 @@
                 const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(newsUrl));
                 const data = await response.json();
                 
-                let newsHTML = "";
+                let newsList = [];
                 if(data && data.items) {
-                    data.items.slice(0, 5).forEach(item => {
-                        newsHTML += item.title + " &nbsp;&bull;&nbsp; ";
+                    data.items.forEach(item => {
+                        // डुप्लीकेट खबरें हटाने के लिए चेक करें
+                        if(!newsList.includes(item.title)) {
+                            newsList.push(item.title);
+                        }
                     });
-                    document.getElementById('autoNewsTicker').innerHTML = newsHTML;
+                    document.getElementById('autoNewsTicker').innerHTML = newsList.join(" &nbsp;&bull;&nbsp; ");
                 }
             } catch (error) {
                 document.getElementById('autoNewsTicker').innerHTML = currentLang === 'hi' ? "माल्कोश व आसपास के गाँवों में विकास कार्य जारी | हरियाणा ग्रामीण सेवा पोर्टल निरंतर अपडेट है।" : "Development work continues in Malkosh and surrounding villages | Portal is fully updated.";
@@ -501,29 +497,33 @@
         }
 
         function searchServices() {
-            const village = document.getElementById('villageSelect').value;
+            const selectedVillage = document.getElementById('villageSelect').value.trim().toLowerCase();
             const resultBox = document.getElementById('searchResult');
             
-            if(!village) {
+            if(!selectedVillage) {
                 alert(currentLang === 'hi' ? 'कृपया पहले जिला और फिर ड्रॉपडाउन से अपना गाँव चुनें!' : 'Please select a district and village first!');
                 return;
             }
 
             let defaultHidden = JSON.parse(localStorage.getItem('hiddenDefaultShops') || '[]');
-            let savedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
-            let filtered = savedShops.filter(s => s.village.toLowerCase() === village.toLowerCase());
-
-            let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">'${village}' ${currentLang === 'hi' ? 'में उपलब्ध सेवाएँ:' : 'Available Services:'}</h3>`;
+            let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
             
-            if(!defaultHidden.includes("default_shyam")) {
+            // सटीक मिलान के लिए फ़िल्टर (गाँव के नाम का कोई हिस्सा मैच होने पर भी दिखेगा)
+            let filtered = approvedShops.filter(s => s.village.trim().toLowerCase().includes(selectedVillage) || selectedVillage.includes(s.village.trim().toLowerCase()));
+
+            let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">${currentLang === 'hi' ? 'में उपलब्ध सेवाएँ:' : 'Available Services:'}</h3>`;
+            let foundCount = 0;
+            
+            if(!defaultHidden.includes("default_shyam") && ("माल्कोश / malkosh").includes(selectedVillage)) {
                 html += `
                     <div class="shop-item">
                         <div class="shop-info">
-                            <h4>श्री श्याम जनरल स्टोर / Shri Shyam General Store (${village})</h4>
+                            <h4>श्री श्याम जनरल स्टोर / Shri Shyam General Store</h4>
                             <p>${currentLang === 'hi' ? 'श्रेणी: किराना | संपर्क:' : 'Category: Grocery | Contact:'} 9876543210</p>
                         </div>
                     </div>
                 `;
+                foundCount++;
             }
 
             if(filtered.length > 0) {
@@ -532,18 +532,19 @@
                         <div class="shop-item">
                             <div class="shop-info">
                                 <h4>${s.name}</h4>
-                                <p>${currentLang === 'hi' ? 'श्रेणी:' : 'Category:'} ${s.category} | ${currentLang === 'hi' ? 'संपर्क:' : 'Contact:'} ${s.phone}</p>
+                                <p>${currentLang === 'hi' ? 'गाँव:' : 'Village:'} ${s.village} | ${currentLang === 'hi' ? 'श्रेणी:' : 'Category:'} ${s.category} | ${currentLang === 'hi' ? 'संपर्क:' : 'Contact:'} ${s.phone}</p>
                             </div>
                         </div>
                     `;
+                    foundCount++;
                 });
             }
 
-            if(defaultHidden.includes("default_shyam") && filtered.length === 0) {
-                html += `<p style="font-size: 0.9rem; color: #666;">${currentLang === 'hi' ? 'इस गाँव में अभी कोई दुकान उपलब्ध नहीं है।' : 'No shops available in this village yet.'}</p>`;
+            if(foundCount === 0) {
+                resultBox.innerHTML = `<p style="font-size: 0.9rem; color: #666;">${currentLang === 'hi' ? 'इस गाँव में अभी कोई दुकान उपलब्ध नहीं है।' : 'No shops available in this village yet.'}</p>`;
+            } else {
+                resultBox.innerHTML = html;
             }
-
-            resultBox.innerHTML = html;
         }
 
         function registerService() {
@@ -559,11 +560,17 @@
             }
 
             let newShop = { id: Date.now(), name, district, village, category, phone };
-            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
-            pendingShops.push(newShop);
-            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+            let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
+            approvedShops.push(newShop);
+            localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
 
-            alert(currentLang === 'hi' ? 'दुकान का डेटा एडमिन के पास वेरिफिकेशन के लिए सफलतापूर्वक भेज दिया गया है!' : 'Shop registration sent to admin for verification successfully!');
+            let customVillages = JSON.parse(localStorage.getItem('addedVillages') || '[]');
+            if(!customVillages.includes(village)) {
+                customVillages.push(village);
+                localStorage.setItem('addedVillages', JSON.stringify(customVillages));
+            }
+
+            alert(currentLang === 'hi' ? 'दुकान सफलतापूर्वक रजिस्टर होकर पोर्टल पर लाइव हो गई है!' : 'Shop registered and published live on portal successfully!');
             document.getElementById('regShopName').value = '';
             document.getElementById('regPhone').value = '';
             document.getElementById('addShopFormBox').style.display = 'none';
@@ -579,39 +586,11 @@
             const pass = document.getElementById('adminPass').value;
             if(pass === 'admin123') {
                 document.getElementById('adminControls').style.display = 'block';
-                loadAdminLists();
+                loadAllShops();
                 alert(currentLang === 'hi' ? 'लॉगिन सफल!' : 'Login Successful!');
             } else {
                 alert(currentLang === 'hi' ? 'गलत पासवर्ड!' : 'Incorrect Password!');
             }
-        }
-
-        function loadAdminLists() {
-            loadPendingShops();
-            loadAllShops();
-        }
-
-        function loadPendingShops() {
-            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
-            let listDiv = document.getElementById('pendingShopsList');
-            
-            if(pendingShops.length === 0) {
-                listDiv.innerHTML = `<p style="font-size: 0.82rem; color: #666;">${currentLang === 'hi' ? 'कोई पेंडिंग दुकान नहीं है।' : 'No pending shops.'}</p>`;
-                return;
-            }
-
-            let html = '';
-            pendingShops.forEach((s, index) => {
-                html += `
-                    <div style="background: #fff; padding: 8px; margin-bottom: 6px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.85rem;">
-                        <strong>${s.name}</strong> (${s.village})<br>
-                        ${currentLang === 'hi' ? 'श्रेणी:' : 'Category:'} ${s.category} | ${currentLang === 'hi' ? 'फोन:' : 'Phone:'} ${s.phone}<br>
-                        <button class="custom-btn" style="padding: 3px 8px; font-size: 0.75rem; margin-top: 4px; width:auto;" onclick="approveShop(${index})">${currentLang === 'hi' ? '✔ अप्रूव करें' : '✔ Approve'}</button>
-                        <button class="btn-danger" style="margin-left: 5px; padding: 3px 8px; font-size: 0.75rem;" onclick="rejectPendingShop(${index})">${currentLang === 'hi' ? '❌ हटाएं' : '❌ Remove'}</button>
-                    </div>
-                `;
-            });
-            listDiv.innerHTML = html;
         }
 
         function loadAllShops() {
@@ -653,34 +632,6 @@
             listDiv.innerHTML = html;
         }
 
-        function approveShop(index) {
-            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
-            let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
-            
-            let approved = pendingShops.splice(index, 1)[0];
-            approvedShops.push(approved);
-
-            let customVillages = JSON.parse(localStorage.getItem('addedVillages') || '[]');
-            if(!customVillages.includes(approved.village)) {
-                customVillages.push(approved.village);
-                localStorage.setItem('addedVillages', JSON.stringify(customVillages));
-            }
-
-            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
-            localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
-
-            loadAdminLists();
-            alert(currentLang === 'hi' ? 'दुकान सत्यापित होकर पोर्टल पर लाइव कर दी गई है!' : 'Shop approved and published live!');
-        }
-
-        function rejectPendingShop(index) {
-            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
-            pendingShops.splice(index, 1);
-            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
-            loadAdminLists();
-            alert(currentLang === 'hi' ? 'पेंडिंग रिक्वेस्ट हटा दी गई है।' : 'Pending request removed.');
-        }
-
         function deleteDefaultShop() {
             if(confirm(currentLang === 'hi' ? 'क्या आप डिफ़ॉल्ट श्री श्याम जनरल स्टोर को हटाना चाहते हैं?' : 'Do you want to delete default Shri Shyam General Store?')) {
                 let defaultHidden = JSON.parse(localStorage.getItem('hiddenDefaultShops') || '[]');
@@ -688,7 +639,7 @@
                     defaultHidden.push("default_shyam");
                     localStorage.setItem('hiddenDefaultShops', JSON.stringify(defaultHidden));
                 }
-                loadAdminLists();
+                loadAllShops();
                 alert(currentLang === 'hi' ? 'डिफ़ॉल्ट दुकान हटा दी गई है!' : 'Default shop deleted!');
             }
         }
@@ -698,7 +649,7 @@
                 let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
                 approvedShops.splice(index, 1);
                 localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
-                loadAdminLists();
+                loadAllShops();
                 alert(currentLang === 'hi' ? 'दुकान सफलतापूर्वक डिलीट कर दी गई है!' : 'Shop deleted successfully!');
             }
         }
