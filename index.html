@@ -7,127 +7,59 @@
     <style>
         :root {
             --primary: #1b5e20;
-            --secondary: #4caf50;
-            --bg: #f4f6f8;
-            --text: #333;
-            --accent: #ffc107;
+            --secondary: #ff8f00;
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
             --news-bg: #fff3e0;
             --news-text: #e65100;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .top-bar {
-            background: #113f14;
-            color: #ffeb3b;
-            font-size: 13px;
-            padding: 8px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .lang-btn {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 3px 8px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 11px;
-        }
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .brand-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 5px;
-        }
-        .logo {
-            background: var(--accent);
-            color: #000;
-            font-weight: bold;
-            font-size: 22px;
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-        }
-        .title-text h1 {
-            margin: 0;
-            font-size: 20px;
-        }
-        .title-text span {
-            background: rgba(255,255,255,0.2);
-            padding: 2px 6px;
-            font-size: 10px;
-            border-radius: 4px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 50px; }
         
-        /* News Ticker Styling */
-        .news-container { background: var(--news-bg); border-bottom: 2px solid var(--accent); padding: 8px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 12px; border-radius: 6px; }
-        .news-title { background: var(--accent); color: #000; padding: 3px 6px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; margin-right: 8px; white-space: nowrap; }
+        /* Top Bar */
+        .top-bar { background: #113f14; color: #ffeb3b; font-size: 13px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; }
+        .lang-btn { background: #ffc107; color: #000; border: none; padding: 3px 8px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 11px; }
+
+        /* Header */
+        header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 20px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        header h1 { font-size: 1.8rem; margin-bottom: 5px; }
+        header p { font-size: 0.95rem; opacity: 0.9; }
+
+        /* News Ticker */
+        .news-container { background: var(--news-bg); border-bottom: 2px solid #ffc107; padding: 8px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 15px; border-radius: 6px; }
+        .news-title { background: #ffc107; color: #000; padding: 3px 6px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; margin-right: 8px; white-space: nowrap; }
         .news-ticker marquee { font-size: 0.85rem; color: var(--news-text); font-weight: 500; }
 
-        .container {
-            padding: 12px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .card {
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 12px;
-        }
-        h3 {
-            margin-top: 0;
-            color: var(--primary);
-            font-size: 15px;
-        }
-        select, input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-        .btn-main {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 15px;
-        }
-        .btn-main:hover { background-color: #388e3c; }
+        /* Main Container */
+        .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+
+        /* Cards */
+        .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .card h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
+
+        /* Form Controls */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+        select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; outline: none; background: #fafafa; }
+        select:focus, input:focus { border-color: var(--primary); background: #fff; }
+
+        .btn { display: block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.3s; text-align: center; }
+        .btn:hover { background: #2e7d32; }
+        .btn-secondary { background: var(--secondary); margin-top: 10px; }
+        .btn-secondary:hover { background: #e65100; }
+
+        /* Results & Listings */
+        .result-box { margin-top: 15px; }
+        .shop-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px; margin-bottom: 10px; border-radius: 6px; text-align: left; }
+        .shop-item h4 { color: var(--primary); font-size: 1rem; }
+        .shop-item p { font-size: 0.85rem; color: #666; margin-top: 3px; }
+
+        /* Admin Panel Hidden */
+        .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; }
         
-        .shop-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 10px; margin-top: 10px; border-radius: 4px; text-align: left; }
-        .shop-item h4 { margin: 0; color: var(--primary); font-size: 14px; }
-        .shop-item p { margin: 3px 0 0; font-size: 12px; color: #666; }
-        
-        footer { text-align: center; font-size: 12px; color: #777; margin-top: 20px; }
+        /* Footer */
+        footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
 </head>
 <body>
@@ -138,14 +70,8 @@
     </div>
 
     <header>
-        <div class="brand-box">
-            <div class="logo">हग्र</div>
-            <div class="title-text">
-                <h1>हरियाणा ग्रामीण सेवा</h1>
-                <span>ओरिजिनल लिस्टिंग पोर्टल</span>
-            </div>
-        </div>
-        <p style="font-size: 11px; margin: 5px 0 0; opacity: 0.9;">रोहतक, भिवानी, हिसार व चरखी दादरी डिजिटल निर्देशिका</p>
+        <h1>हरियाणा ग्रामीण सेवा</h1>
+        <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
     </header>
 
     <div class="container">
@@ -155,16 +81,16 @@
             <span class="news-title">ताज़ा अपडेट</span>
             <div class="news-ticker">
                 <marquee behavior="scroll" direction="left" scrollamount="5">
-                    📢 हरियाणा ग्रामीण पोर्टल पर आपका स्वागत है! अपने गाँव की दुकान या सेवा फ्री में रजिस्टर करें। | 🌾 किसानों के लिए नई सरकारी योजनाएं जल्द अपडेट होंगी।
+                    📢 हरियाणा ग्रामीण पोर्टल पर आपका स्वागत है! अपने गाँव की दुकान या सेवा फ्री में रजिस्टर करें। | 🌾 मंडी भाव: गेहूँ ₹2275, बाजरा ₹2500, सरसों ₹5400 प्रति क्विंटल।
                 </marquee>
             </div>
         </div>
 
-        <!-- गाँव और सेवा खोजें (Dropdown Auto-Load System) -->
+        <!-- गाँव और सेवा खोजें (Dropdown Menu with Villages) -->
         <div class="card">
-            <h3>🔍 अपने जिले व गाँव की सेवाएँ खोजें</h3>
-            <div style="margin-bottom: 8px;">
-                <label style="font-size: 13px; font-weight: bold;">1. जिला चुनें:</label>
+            <h2>🔍 अपने गाँव की सेवाएँ खोजें</h2>
+            <div class="form-group">
+                <label>जिला चुनें:</label>
                 <select id="districtSelect" onchange="updateVillages()">
                     <option value="">-- जिला चुनें --</option>
                     <option value="rohtak">रोहतक</option>
@@ -174,39 +100,60 @@
                 </select>
             </div>
 
-            <div style="margin-bottom: 8px;">
-                <label style="font-size: 13px; font-weight: bold;">2. गाँव चुनें:</label>
+            <div class="form-group">
+                <label>गाँव चुनें:</label>
                 <select id="villageSelect">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
             </div>
 
-            <button class="btn-main" onclick="searchServices()">दुकानें देखें</button>
+            <button class="btn" onclick="searchServices()">दुकानें देखें</button>
 
-            <div id="searchResult"></div>
+            <div class="result-box" id="searchResult">
+                <!-- यहाँ दुकानें दिखेंगी -->
+            </div>
         </div>
 
-        <!-- दुकान रजिस्टर करने का फॉर्म -->
+        <!-- दुकान या सेवा रजिस्टर करने का फॉर्म -->
         <div class="card">
-            <h3>📝 अपनी दुकान / सेवा रजिस्टर करें</h3>
-            <label style="font-size: 12px; font-weight: bold;">दुकान का नाम:</label>
-            <input type="text" id="regShopName" placeholder="जैसे: शर्मा किराना स्टोर">
+            <h2>📝 अपनी दुकान / सेवा यहाँ रजिस्टर करें</h2>
+            <div class="form-group">
+                <label>दुकान या सेवा का नाम:</label>
+                <input type="text" id="regShopName" placeholder="जैसे: शर्मा किराना स्टोर">
+            </div>
+            <div class="form-group">
+                <label>गाँव का नाम:</label>
+                <input type="text" id="regVillage" placeholder="गाँव का नाम">
+            </div>
+            <div class="form-group">
+                <label>श्रेणी (Category):</label>
+                <select id="regCategory">
+                    <option value="kirana">किराना / जनरल स्टोर</option>
+                    <option value="medical">मेडिकल / दवाइयां</option>
+                    <option value="repair">रिपेयरिंग (इलेक्ट्रॉनिक्स/वाहन)</option>
+                    <option value="tractor">ट्रैक्टर / कृषि सेवा</option>
+                    <option value="other">अन्य सेवा</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>मोबाइल नंबर:</label>
+                <input type="tel" id="regPhone" placeholder="10 अंकों का मोबाइल नंबर">
+            </div>
+            <button class="btn" onclick="registerService()">रजिस्टर करें</button>
+        </div>
+
+        <!-- एडमिन लॉगिन पैनल -->
+        <div class="card" style="text-align: center;">
+            <button class="btn btn-secondary" onclick="toggleAdminPanel()">🔒 एडमिन लॉगिन पैनल</button>
             
-            <label style="font-size: 12px; font-weight: bold;">गाँव का नाम:</label>
-            <input type="text" id="regVillage" placeholder="गाँव का नाम">
-
-            <label style="font-size: 12px; font-weight: bold;">श्रेणी:</label>
-            <select id="regCategory">
-                <option value="kirana">किराना / जनरल स्टोर</option>
-                <option value="medical">मेडिकल / दवाइयां</option>
-                <option value="repair">रिपेयरिंग</option>
-                <option value="tractor">कृषि सेवा / ट्रैक्टर</option>
-            </select>
-
-            <label style="font-size: 12px; font-weight: bold;">मोबाइल नंबर:</label>
-            <input type="tel" id="regPhone" placeholder="10 अंकों का नंबर">
-
-            <button class="btn-main" onclick="registerService()" style="margin-top: 5px;">रजिस्टर करें</button>
+            <div class="admin-section" id="adminPanel">
+                <h3 style="color: #e65100; margin-bottom: 10px; font-size: 1rem;">एडमिन नियंत्रण कक्ष</h3>
+                <input type="password" id="adminPass" placeholder="पासवर्ड दर्ज करें (admin123)" style="margin-bottom: 10px;">
+                <button class="btn" onclick="verifyAdmin()" style="padding: 8px;">लॉगिन करें</button>
+                <div id="adminControls" style="display:none; margin-top: 10px;">
+                    <p style="color: green; font-weight: bold; font-size: 0.9rem;">✔ एडमिन एक्सेस मिल गया!</p>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -250,11 +197,11 @@
             let savedShops = JSON.parse(localStorage.getItem('ruralShops') || '[]');
             let filtered = savedShops.filter(s => s.village.toLowerCase() === village.toLowerCase());
 
-            let html = `<p style="font-size: 13px; font-weight: bold; margin-top: 10px; color: #333;">'${village}' में उपलब्ध सेवाएँ:</p>`;
+            let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">'${village}' में उपलब्ध सेवाएँ:</h3>`;
             
             html += `
                 <div class="shop-item">
-                    <h4>श्री श्याम जनरल स्टोर</h4>
+                    <h4>श्री श्याम जनरल स्टोर (डिफ़ॉल्ट)</h4>
                     <p>श्रेणी: किराना | संपर्क: 9876543210</p>
                 </div>
             `;
@@ -293,6 +240,21 @@
             document.getElementById('regShopName').value = '';
             document.getElementById('regVillage').value = '';
             document.getElementById('regPhone').value = '';
+        }
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function verifyAdmin() {
+            const pass = document.getElementById('adminPass').value;
+            if(pass === 'admin123') {
+                document.getElementById('adminControls').style.display = 'block';
+                alert('लॉगिन सफल!');
+            } else {
+                alert('गलत पासवर्ड!');
+            }
         }
     </script>
 </body>
