@@ -5,23 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
     <style>
-        :root { --primary: #1b5e20; --secondary: #ff8f00; --bg-color: #f4f6f9; --card-bg: #ffffff; --text-color: #333; --news-bg: #fff3e0; --news-text: #e65100; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        :root {
+            --primary: #1b5e20;
+            --secondary: #ff8f00;
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --news-bg: #fff3e0;
+            --news-text: #e65100;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 50px; }
         
         .top-bar { background: #113f14; color: #ffeb3b; font-size: 13px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; }
-        .lang-btn { background: #ffc107; color: #000; border: none; padding: 5px 12px; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        .lang-btn { background: #ffc107; color: #000; border: none; padding: 5px 12px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 12px; }
 
-        header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 20px 15px; text-align: center; }
+        header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 20px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        header h1 { font-size: 1.8rem; margin-bottom: 5px; }
+        header p { font-size: 0.95rem; opacity: 0.9; }
+        .badge { background: #388e3c; color: #fff; padding: 3px 10px; font-size: 0.75rem; border-radius: 12px; display: inline-block; margin-top: 5px; border: 1px solid #81c784; }
+
         .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
 
+        /* मौसम कार्ड (पुराना वाला) */
+        .weather-card { background: linear-gradient(135deg, #00acc1, #00838f); color: white; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .weather-title { font-size: 1rem; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .weather-grid { display: flex; justify-content: space-between; margin-top: 10px; text-align: center; }
+        .weather-day { background: rgba(255,255,255,0.2); padding: 8px 5px; border-radius: 8px; font-size: 0.8rem; width: 23%; }
+
+        /* न्यूज़ और मंडी टिकर */
+        .news-container { background: var(--news-bg); border-left: 4px solid var(--secondary); padding: 8px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 10px; border-radius: 6px; }
+        .news-title-tag { background: var(--secondary); color: #fff; padding: 3px 6px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; margin-right: 8px; white-space: nowrap; }
+        .news-ticker marquee { font-size: 0.85rem; color: var(--news-text); font-weight: 600; width: 100%; }
+
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .news-container { background: var(--news-bg); padding: 10px; border-radius: 6px; margin-bottom: 20px; border-left: 5px solid var(--secondary); }
-        
-        label { display: block; font-weight: 600; margin-bottom: 5px; }
-        select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px; }
-        .custom-btn { width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .btn-danger { background: #d32f2f; color: white; padding: 5px 10px; border-radius: 4px; border: none; cursor: pointer; }
+        .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+        select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; outline: none; background: #fafafa; }
+        select:focus, input:focus { border-color: var(--primary); background: #fff; }
+
+        .btn-box { text-align: center; margin-top: 15px; }
+        .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
+        .custom-btn:hover { background: #2e7d32; }
+        .btn-secondary { background: var(--secondary); }
+        .btn-danger { background: #d32f2f; color: white; padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
+
+        .result-box { margin-top: 15px; }
+        .shop-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px; margin-bottom: 10px; border-radius: 6px; text-align: left; }
+        .shop-item h4 { color: var(--primary); font-size: 1rem; }
+        .shop-item p { font-size: 0.85rem; color: #666; margin-top: 3px; }
+
+        .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; text-align: left; }
+        footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
 </head>
 <body>
@@ -32,131 +69,298 @@
     </div>
 
     <header>
-        <h1 id="mainHeader">हरियाणा ग्रामीण सेवा</h1>
+        <h1>हरियाणा ग्रामीण सेवा</h1>
+        <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
+        <div class="badge">ओरिजिनल लिस्टिंग पोर्टल</div>
     </header>
 
     <div class="container">
-        <!-- लाइव न्यूज़ (सिर्फ खबर) -->
-        <div class="news-container">
-            <marquee id="newsMarqueeText">मंडी भाव: गेहूँ ₹2275, बाजरा ₹2500, सरसों ₹5400 क्विंटल। | मौसम: आज आसमान साफ रहेगा, तापमान 34°C।</marquee>
+
+        <!-- मौसम अपडेट (पुराना सुंदर रूप) -->
+        <div class="weather-card">
+            <div class="weather-title">
+                <span>🌤 मौसम अपडेट (हरियाणा)</span>
+                <span>तापमान: 34°C | साफ आसमान</span>
+            </div>
+            <div style="font-size: 0.85rem; margin-bottom: 8px; opacity: 0.9;">📅 आगामी 4 दिनों का मौसम:</div>
+            <div class="weather-grid">
+                <div class="weather-day">आज<br>☀️ 34°C</div>
+                <div class="weather-day">सोम<br>⛅ 35°C</div>
+                <div class="weather-day">मंगल<br>🌥 34°C</div>
+                <div class="weather-day">बुध<br>☀️ 35°C</div>
+            </div>
         </div>
 
-        <!-- सर्च सेक्शन -->
+        <!-- लाइव हरियाणा न्यूज़ टिकर -->
+        <div class="news-container">
+            <span class="news-title-tag">ताज़ा न्यूज़</span>
+            <div class="news-ticker">
+                <marquee behavior="scroll" direction="left" scrollamount="4">
+                    हरियाणा ग्रामीण सेवा पोर्टल पर सभी का स्वागत है। अपने गाँव की दुकानें और सेवाएँ आसानी से खोजें और जोड़ें!
+                </marquee>
+            </div>
+        </div>
+
+        <!-- मंडी भाव टिकर (अलग पट्टी) -->
+        <div class="news-container" style="border-left-color: #388e3c; background: #e8f5e9;">
+            <span class="news-title-tag" style="background: #388e3c;">मंडी भाव</span>
+            <div class="news-ticker">
+                <marquee behavior="scroll" direction="left" scrollamount="4" style="color: #1b5e20;">
+                    गेहूँ: ₹2275 प्रति क्विंटल | बाजरा: ₹2500 प्रति क्विंटल | सरसों: ₹5400 प्रति क्विंटल | धान: ₹3100 प्रति क्विंटल
+                </marquee>
+            </div>
+        </div>
+
+        <!-- जिला व गाँव खोजें -->
         <div class="card">
             <h2>🔍 अपने गाँव की सेवाएँ खोजें</h2>
-            <label>1. जिला चुनें:</label>
-            <select id="districtSelect" onchange="updateVillages()">
-                <option value="">-- जिला चुनें --</option>
-                <option value="rohtak">रोहतक</option>
-                <option value="bhiwani">भिवानी</option>
-                <option value="hisar">हिसार</option>
-                <option value="charkhi_dadri">चरखी दादरी</option>
-            </select>
+            
+            <div class="form-group">
+                <label>1. जिला चुनें:</label>
+                <select id="districtSelect" onchange="updateVillages()">
+                    <option value="">-- जिला चुनें --</option>
+                    <option value="rohtak">रोहतक</option>
+                    <option value="bhiwani">भिवानी</option>
+                    <option value="hisar">हिसार</option>
+                    <option value="charkhi_dadri">चरखी दादरी</option>
+                </select>
+            </div>
 
-            <label>2. गाँव चुनें:</label>
-            <select id="villageSelect"><option value="">-- जिला चुनें --</option></select>
+            <div class="form-group">
+                <label>2. गाँव चुनें (ड्रॉपडाउन):</label>
+                <select id="villageSelect" onchange="document.getElementById('manualVillageInput').value=''">
+                    <option value="">-- पहले जिला चुनें --</option>
+                </select>
+            </div>
 
-            <label>3. गाँव का नाम टाइप करें:</label>
-            <input type="text" id="manualVillageInput" placeholder="नाम लिखें...">
-            <button class="custom-btn" onclick="searchServices()">दुकानें देखें</button>
-            <div id="searchResult" style="margin-top:15px;"></div>
+            <div class="form-group">
+                <label>3. या अपने गाँव का नाम खुद टाइप करें:</label>
+                <input type="text" id="manualVillageInput" placeholder="जैसे: इस्मला, बाढड़ा, गोपी...">
+            </div>
+
+            <div class="btn-box">
+                <button class="custom-btn" onclick="searchServices()">दुकानें देखें</button>
+            </div>
+
+            <div class="result-box" id="searchResult"></div>
         </div>
 
-        <!-- रजिस्टर सेक्शन -->
+        <!-- दुकान रजिस्टर करने का फॉर्म (Category के साथ) -->
         <div class="card">
-            <h2>📝 दुकान रजिस्टर करें</h2>
-            <input type="text" id="regShopName" placeholder="दुकान का नाम">
-            <input type="text" id="regVillage" placeholder="गाँव का नाम">
-            <select id="regCategory">
-                <option>किराना स्टोर</option><option>मेडिकल</option><option>इलेक्ट्रॉनिक्स</option>
-            </select>
-            <input type="tel" id="regPhone" placeholder="मोबाइल नंबर">
-            <button class="custom-btn" onclick="registerService()">➕ दुकान रजिस्टर करें</button>
+            <h2>📝 अपनी दुकान / सेवा यहाँ रजिस्टर करें</h2>
+            
+            <div class="form-group">
+                <label>दुकान या सेवा का नाम:</label>
+                <input type="text" id="regShopName" placeholder="जैसे: शर्मा किराना स्टोर">
+            </div>
+
+            <div class="form-group">
+                <label>गाँव का नाम:</label>
+                <input type="text" id="regVillage" placeholder="गाँव का नाम दर्ज करें">
+            </div>
+
+            <div class="form-group">
+                <label>श्रेणी (Category चुनें):</label>
+                <select id="regCategory">
+                    <option value="किराना / जनरल स्टोर">किराना / जनरल स्टोर</option>
+                    <option value="मेडिकल / दवाइयां">मेडिकल / दवाइयां</option>
+                    <option value="रिपेयरिंग (इलेक्ट्रॉनिक्स/वाहन)">रिपेयरिंग (इलेक्ट्रॉनिक्स/वाहन)</option>
+                    <option value="ट्रैक्टर / कृषि सेवा">ट्रैक्टर / कृषि सेवा</option>
+                    <option value="अन्य सेवा">अन्य सेवा</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>मोबाइल नंबर:</label>
+                <input type="tel" id="regPhone" placeholder="10 अंकों का मोबाइल नंबर">
+            </div>
+
+            <div class="btn-box">
+                <button class="custom-btn" onclick="registerService()">➕ दुकान रजिस्टर करें</button>
+            </div>
         </div>
 
-        <!-- एडमिन -->
-        <div class="card">
-            <button class="custom-btn" style="background:#ff8f00" onclick="document.getElementById('adminPanel').style.display='block'">🔒 एडमिन वेरिफिकेशन</button>
-            <div id="adminPanel" style="display:none; margin-top:15px;">
-                <input type="password" id="adminPass" placeholder="पासवर्ड (admin123)">
-                <button class="custom-btn" onclick="verifyAdmin()">लॉगिन</button>
-                <div id="adminControls" style="display:none;">
-                    <h4>पेंडिंग:</h4>
-                    <div id="pendingList"></div>
+        <!-- एडमिन पैनल -->
+        <div class="card" style="text-align: center;">
+            <div class="btn-box" style="margin-top:0;">
+                <button class="custom-btn btn-secondary" onclick="toggleAdminPanel()">🔒 एडमिन / वेरिफिकेशन पैनल</button>
+            </div>
+            
+            <div class="admin-section" id="adminPanel">
+                <h3 style="color: #e65100; margin-bottom: 10px; font-size: 1rem;">एडमिन नियंत्रण एवं सत्यापन कक्ष</h3>
+                <input type="password" id="adminPass" placeholder="पासवर्ड दर्ज करें (admin123)" style="margin-bottom: 10px;">
+                <div class="btn-box" style="margin-top:0;">
+                    <button class="custom-btn" onclick="verifyAdmin()" style="padding: 8px 15px;">लॉगिन करें</button>
+                </div>
+                <div id="adminControls" style="display:none; margin-top: 15px; text-align: left;">
+                    <p style="color: green; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px;">✔ एडमिन एक्सेस मिल गया!</p>
+                    <h4 style="font-size: 0.95rem; color: #333; margin-bottom: 5px;">पेंडिंग दुकानें (अप्रूवल दें):</h4>
+                    <div id="pendingShopsList"></div>
                 </div>
             </div>
         </div>
+
     </div>
+
+    <footer>
+        <p>&copy; 2026 हरियाणा ग्रामीण सेवा पोर्टल | सर्वाधिकार सुरक्षित</p>
+    </footer>
 
     <script>
         let customVillages = JSON.parse(localStorage.getItem('addedVillages') || '[]');
+
+        const defaultVillageData = {
+            rohtak: ["इस्मला", "कलानौर", "मदीना", "बहू अकबरपुर", "संघान", "रिटौली", "सुन्दराणा", "भैंसरवाल कलाँ", "खरावड़", "आनंदपुर", "टिकरी", "गरनावठी", "महेहम"],
+            bhiwani: ["लोहारू", "बाढड़ा", "सिवानी", "दिनोद", "बवानी खेड़ा", "तोशाम", "किरावड़", "बिमला", "खरक कलाँ", "बहल", "सिंगाणी", "सान्गा", "झुप्पा"],
+            hisar: ["हाँसी", "बरवाला", "नारनौंद", "उकलाना", "आदमपुर", "अग्रोहा", "सिसाय", "राया", "ढंढूर", "किरथान", "मसूदपुर", "डानी गोपाल", "मित्ताथल"],
+            charkhi_dadri: ["बाढड़ा", "झोझू कलां", "बोध कलां", "डूडवा", "चरखी दादरी शहर", "पैंघुवा", "मानकावास", "कैलियाणा", "मोड़ी", "गोपी", "पिचौपा कलाँ", "अचिजपुरा", "किरावड़"]
+        };
 
         function updateVillages() {
             const district = document.getElementById('districtSelect').value;
             const villageSelect = document.getElementById('villageSelect');
             villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-            
-            // डिफ़ॉल्ट गाँव लोड करें (यहाँ आप और भी जोड़ सकते हैं)
-            const defaultVillages = ["गोपी", "इस्मला", "बाढड़ा"]; 
-            defaultVillages.forEach(v => {
-                let opt = document.createElement('option'); opt.value = v; opt.textContent = v;
-                villageSelect.appendChild(opt);
-            });
 
-            // नए जोड़े गए गाँव दिखाएं
-            customVillages.forEach(v => {
-                let opt = document.createElement('option'); opt.value = v; opt.textContent = v;
-                villageSelect.appendChild(opt);
-            });
+            if (district && defaultVillageData[district]) {
+                let list = [...defaultVillageData[district], ...customVillages];
+                // डुप्लीकेट हटाने के लिए
+                list = [...new Set(list)];
+                list.forEach(village => {
+                    let option = document.createElement('option');
+                    option.value = village;
+                    option.textContent = village;
+                    villageSelect.appendChild(option);
+                });
+            }
+        }
+
+        function searchServices() {
+            let village = document.getElementById('manualVillageInput').value.trim();
+            if(!village) {
+                village = document.getElementById('villageSelect').value;
+            }
+            const resultBox = document.getElementById('searchResult');
+            
+            if(!village) {
+                alert('कृपया पहले ड्रॉपडाउन से गाँव चुनें या नीचे नाम टाइप करें!');
+                return;
+            }
+
+            let savedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
+            let filtered = savedShops.filter(s => s.village.toLowerCase() === village.toLowerCase());
+
+            let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">'${village}' में उपलब्ध सेवाएँ:</h3>`;
+            
+            html += `
+                <div class="shop-item">
+                    <h4>श्री श्याम जनरल स्टोर (डिफ़ॉल्ट)</h4>
+                    <p>श्रेणी: किराना | संपर्क: 9876543210</p>
+                </div>
+            `;
+
+            if(filtered.length > 0) {
+                filtered.forEach(s => {
+                    html += `
+                        <div class="shop-item">
+                            <h4>${s.name}</h4>
+                            <p>श्रेणी: ${s.category} | संपर्क: ${s.phone}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            resultBox.innerHTML = html;
         }
 
         function registerService() {
-            const name = document.getElementById('regShopName').value;
-            const village = document.getElementById('regVillage').value;
-            const phone = document.getElementById('regPhone').value;
-            
-            let pending = JSON.parse(localStorage.getItem('pendingShops') || '[]');
-            pending.push({ name, village, phone });
-            localStorage.setItem('pendingShops', JSON.stringify(pending));
-            alert('सफलता! एडमिन वेरिफिकेशन के बाद जुड़ जाएगा।');
+            const name = document.getElementById('regShopName').value.trim();
+            const village = document.getElementById('regVillage').value.trim();
+            const category = document.getElementById('regCategory').value;
+            const phone = document.getElementById('regPhone').value.trim();
+
+            if(!name || !village || !phone) {
+                alert('कृपया दुकान का नाम, गाँव और मोबाइल नंबर जरूर भरें!');
+                return;
+            }
+
+            let newShop = { id: Date.now(), name, village, category, phone };
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            pendingShops.push(newShop);
+            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+
+            alert('दुकान रजिस्टर हो गई है! एडमिन द्वारा सत्यापन (Verification) के बाद यह पोर्टल पर दिखने लगेगी।');
+            document.getElementById('regShopName').value = '';
+            document.getElementById('regVillage').value = '';
+            document.getElementById('regPhone').value = '';
+        }
+
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
         }
 
         function verifyAdmin() {
-            if(document.getElementById('adminPass').value === 'admin123') {
+            const pass = document.getElementById('adminPass').value;
+            if(pass === 'admin123') {
                 document.getElementById('adminControls').style.display = 'block';
-                loadPending();
-            } else alert('गलत पासवर्ड');
+                loadPendingShops();
+                alert('लॉगिन सफल!');
+            } else {
+                alert('गलत पासवर्ड!');
+            }
         }
 
-        function loadPending() {
-            let list = document.getElementById('pendingList');
-            let pending = JSON.parse(localStorage.getItem('pendingShops') || '[]');
-            list.innerHTML = '';
-            pending.forEach((s, index) => {
-                list.innerHTML += `<div>${s.name} (${s.village}) <button onclick="approve(${index})">✔</button></div>`;
-            });
-        }
-
-        function approve(index) {
-            let pending = JSON.parse(localStorage.getItem('pendingShops') || '[]');
-            let approved = JSON.parse(localStorage.getItem('approvedShops') || '[]');
-            let shop = pending.splice(index, 1)[0];
-            approved.push(shop);
+        function loadPendingShops() {
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            let listDiv = document.getElementById('pendingShopsList');
             
-            // गाँव को ऑटो-ऐड करें
-            if(!customVillages.includes(shop.village)) {
-                customVillages.push(shop.village);
+            if(pendingShops.length === 0) {
+                listDiv.innerHTML = `<p style="font-size: 0.85rem; color: #666;">कोई नई दुकान सत्यापन के लिए लंबित नहीं है।</p>`;
+                return;
+            }
+
+            let html = '';
+            pendingShops.forEach((s, index) => {
+                html += `
+                    <div style="background: #fff; padding: 8px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.85rem;">
+                        <strong>${s.name}</strong> (${s.village})<br>
+                        श्रेणी: ${s.category} | फोन: ${s.phone}<br>
+                        <button class="custom-btn" style="padding: 4px 10px; font-size: 0.75rem; margin-top: 5px; width:auto;" onclick="approveShop(${index})">✔ अप्रूव करें (Verify)</button>
+                        <button class="btn-danger" style="margin-left: 5px;" onclick="rejectShop(${index})">❌ हटाएं</button>
+                    </div>
+                `;
+            });
+            listDiv.innerHTML = html;
+        }
+
+        function approveShop(index) {
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
+            
+            let approved = pendingShops.splice(index, 1)[0];
+            approvedShops.push(approved);
+
+            // गाँव को आटोमैटिक सर्च लिस्ट में जोड़ने के लिए
+            if(!customVillages.includes(approved.village)) {
+                customVillages.push(approved.village);
                 localStorage.setItem('addedVillages', JSON.stringify(customVillages));
             }
 
-            localStorage.setItem('pendingShops', JSON.stringify(pending));
-            localStorage.setItem('approvedShops', JSON.stringify(approved));
-            alert('सत्यापित! गाँव अब सर्च में आ जाएगा।');
-            location.reload();
+            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+            localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
+
+            loadPendingShops();
+            updateVillages();
+            alert('दुकान सत्यापित हो गई है और नया गाँव सर्च लिस्ट में जोड़ दिया गया है!');
         }
 
-        // लोड होते ही ड्रॉपडाउन अपडेट करें
-        updateVillages();
+        function rejectShop(index) {
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            pendingShops.splice(index, 1);
+            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+            loadPendingShops();
+            alert('दुकान हटा दी गई है।');
+        }
     </script>
 </body>
 </html>
