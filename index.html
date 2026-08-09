@@ -53,11 +53,15 @@
         .shop-item h4 { color: var(--primary); font-size: 1rem; }
         .shop-item p { font-size: 0.85rem; color: #666; margin-top: 3px; }
 
+        .scheme-item { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 12px; margin-bottom: 10px; border-radius: 6px; text-align: left; }
+        .scheme-item h4 { color: #1b5e20; font-size: 1rem; }
+        .scheme-item p { font-size: 0.85rem; color: #444; margin-top: 3px; }
+
         .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; text-align: left; }
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
 </head>
-<body onload="initPortal()">
+<body>
 
     <div class="top-bar">
         <span>👨‍💼 संस्थापक: राजेश यादव (माल्कोश)</span>
@@ -130,9 +134,9 @@
             <div class="result-box" id="searchResult"></div>
         </div>
 
-        <!-- दुकान रजिस्टर करने का फॉर्म -->
+        <!-- 1. दुकान रजिस्टर करने का फॉर्म (+ Add Shop) -->
         <div class="card">
-            <h2>📝 अपनी दुकान / सेवा यहाँ रजिस्टर करें</h2>
+            <h2>➕ अपनी दुकान / सेवा यहाँ रजिस्टर करें (+ Add Shop)</h2>
             
             <div class="form-group">
                 <label>दुकान या सेवा का नाम:</label>
@@ -150,7 +154,7 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव का नाम (सही नाम लिखें):</label>
+                <label>गाँव का नाम:</label>
                 <input type="text" id="regVillage" placeholder="जैसे: माल्कोश">
             </div>
 
@@ -172,6 +176,23 @@
 
             <div class="btn-box">
                 <button class="custom-btn" onclick="registerService()">➕ दुकान रजिस्टर करें</button>
+            </div>
+        </div>
+
+        <!-- 2. सरकारी योजनाएं सेक्शन (बिल्कुल नीचे) -->
+        <div class="card">
+            <h2>📜 हरियाणा सरकार की मुख्य योजनाएं</h2>
+            <div class="scheme-item">
+                <h4>परिवार पहचान पत्र (PPP) सेवा</h4>
+                <p>डाटा अपडेट, आय प्रमाण पत्र और नई फैमिली आईडी से जुड़ी सहायता।</p>
+            </div>
+            <div class="scheme-item">
+                <h4>बुढ़ापा / सामाजिक सुरक्षा भत्ता योजना</h4>
+                <p>पात्र नागरिकों के पेंशन स्टेटस और कागजी प्रक्रिया की जानकारी।</p>
+            </div>
+            <div class="scheme-item">
+                <h4>मेरी फसल मेरा ब्योरा</h4>
+                <p>फसलों के पंजीकरण और सरकारी खरीद पोर्टल की सहायता।</p>
             </div>
         </div>
 
@@ -209,10 +230,6 @@
             hisar: ["हाँसी", "बरवाला", "नारनौंद", "उकलाना", "आदमपुर", "अग्रोहा", "सिसाय", "राया", "ढंढूर", "किरथान", "मसूदपुर", "डानी गोपाल", "मित्ताथल"],
             charkhi_dadri: ["माल्कोश", "बाढड़ा", "झोझू कलां", "बोध कलां", "डूडवा", "चरखी दादरी शहर", "पैंघुवा", "मानकावास", "कैलियाणा", "मोड़ी", "गोपी", "पिचौपा कलाँ", "अचिजपुरा", "किरावड़"]
         };
-
-        function initPortal() {
-            // कोई पुराना एरर हो तो साफ़ करें
-        }
 
         function updateVillageDropdown() {
             const district = document.getElementById('districtSelect').value;
