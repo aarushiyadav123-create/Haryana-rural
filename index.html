@@ -170,10 +170,10 @@
             </div>
 
             <div class="form-group">
-                <label id="t-f-vill-label">गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव टाइप करें):</label>
+                <label id="t-f-vill-label">गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव खुद टाइप करें):</label>
                 <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम यहाँ लिखें या चुनें...">
                 <datalist id="regVillageList">
-                    <!-- जावास्क्रिप्ट द्वारा जिले के अनुसार विकल्प भरेंगे -->
+                    <!-- जिले के अनुसार ऑप्शन आएंगे और नया मैनुअल भी टाइप कर सकेंगे -->
                 </datalist>
             </div>
 
@@ -408,19 +408,12 @@
             updateDistrictSchemes();
         }
 
+        // बिल्कुल सही और अलग-अलग जिलेवार गाँवों की सूचियाँ (अब माल्कोश सिर्फ चरखी दादरी में रहेगा)
         const villageData = {
             rohtak: ["इस्मला / Ismaila", "कलानौर / Kalanaur", "मदीना / Madina", "बहू अकबरपुर / Bhalu Akbarpur", "संघान / Sanghan", "रिटौली / Ritolli", "सुन्दराणा / Sundrana", "भैंसरवाल कलाँ / Bhainswar Kalan", "खरावड़ / Kharawar", "आनंदपुर / Anandpur", "टिकरी / Tikri", "गरनावठी / Garnawathi", "महेहम / Meham"],
             bhiwani: ["लोहारू / Loharu", "बाढड़ा / Badhra", "सिवानी / Siwani", "दिनोद / Dinod", "बवानी खेड़ा / Bawani Khera", "तोशाम / Tosham", "किरावड़ / Kirawad", "बिमला / Bimala", "खरक कलाँ / Kharak Kalan", "बहल / Behal", "सिंगाणी / Singani", "सान्गा / Sanga", "झुप्पा / Jhuppa"],
             hisar: ["हाँसी / Hansi", "बरवाला / Barwala", "नारनौंद / Narnaund", "उकलाना / Uklana", "आदमपुर / Adampur", "अग्रोहा / Agroha", "सिसाय / Sisai", "राया / Raya", "ढंढूर / Dhandhoor", "किरथान / Kirthan", "मसूदपुर / Masoodpur", "डानी गोपाल / Dani Gopal", "मित्ताथल / Mittathal"],
             charkhi_dadri: ["माल्कोश / Malkosh", "बाढड़ा / Badhra", "झोझू कलां / Jhojhu Kalan", "बोध कलां / Bodh Kalan", "डूडवा / Dudwa", "चरखी दादरी शहर / Charkhi Dadri City", "पैंघुवा / Panghuwa", "मानकावास / Mankawas", "कैलियाणा / Kailyana", "मोड़ी / Modi", "गोपी / Gopi", "पिचौपा कलाँ / Pichoupa Kalan", "अचिजपुरा / Achijpura", "किरावड़ / Kirawad"]
-        };
-
-        // जिला मैपिंग यह जाँचने के लिए कि गाँव सही जिले का है या नहीं
-        const districtVillageMapping = {
-            rohtak: ["इस्मला", "कलानौर", "मदीना", "बहू अकबरपुर", "संघान", "रिटौली", "सुन्दराणा", "भैंसरवाल", "खरावड़", "आनंदपुर", "टिकरी", "गरनावठी", "महेहम"],
-            bhiwani: ["लोहारू", "बाढड़ा", "सिवानी", "दिनोद", "बवानी", "तोशाम", "किरावड़", "बिमला", "खरक", "बहल", "सिंगाणी", "सान्गा", "झुप्पा"],
-            hisar: ["हाँसी", "बरवाला", "नारनौंद", "उकलाना", "आदमपुर", "अग्रोहा", "सिसाय", "राया", "ढंढूर", "किरथान", "मसूदपुर", "डानी", "मित्ताथल"],
-            charkhi_dadri: ["माल्कोश", "बाढड़ा", "झोझू", "बोध", "डूडवा", "चरखी", "पैंघुवा", "मानकावास", "कैलियाणा", "मोड़ी", "गोपी", "पिचौपा", "अचिजपुरा", "किरावड़"]
         };
 
         function initPortal() {
@@ -474,7 +467,11 @@
             datalist.innerHTML = '';
 
             if (district && villageData[district]) {
-                villageData[district].forEach(village => {
+                let customVillages = JSON.parse(localStorage.getItem('addedVillages') || '[]');
+                let list = [...villageData[district], ...customVillages];
+                list = [...new Set(list)];
+
+                list.forEach(village => {
                     let option = document.createElement('option');
                     option.value = village;
                     datalist.appendChild(option);
@@ -622,38 +619,11 @@
             const lng = document.getElementById('regLng').value;
             const photoInput = document.getElementById('regPhoto');
 
-            if(!name || !village || !phone) {
-                alert(currentLang === 'hi' ? 'कृपया दुकान का नाम, गाँव और मोबाइल नंबर सभी फ़ील्ड भरें!' : 'Please fill all required shop details!');
+            if(!name || !village || !phone || !district) {
+                alert(currentLang === 'hi' ? 'कृपया जिला, दुकान का नाम, गाँव और मोबाइल नंबर सभी फ़ील्ड भरें!' : 'Please fill district, shop name, village and phone number!');
                 return;
             }
 
-            // जिला और गाँव का गलत मिलान चेक करने की सुविधा (Validation)
-            let isKnownDistrictVillage = false;
-            if(districtVillageMapping[district]) {
-                for(let knownVill of districtVillageMapping[district]) {
-                    if(village.toLowerCase().includes(knownVill.toLowerCase())) {
-                        isKnownDistrictVillage = true;
-                        break;
-                    }
-                }
-            }
-
-            // अगर गाँव किसी अन्य जिले की प्रसिद्ध सूची से मेल खाता है तो वार्निंग दें
-            if(!isKnownDistrictVillage && village.length > 2) {
-                // चेक करें कि क्या यह किसी दूसरे जिले का मुख्य गाँव तो नहीं
-                for(let distKey in districtVillageMapping) {
-                    if(distKey !== district) {
-                        for(let otherVill of districtVillageMapping[distKey]) {
-                            if(village.toLowerCase().includes(otherVill.toLowerCase())) {
-                                alert(`⚠️ चेतावनी: '${village}' गाँव आपके चुने गए जिले (${district}) से मेल नहीं खाता है! कृपया सही जिला या गाँव चुनें।`);
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-
-            // फोटो को Base64 में बदलकर सेव करना ताकि लोकल स्टोरेज में सुरक्षित रहे
             if(photoInput.files && photoInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -671,6 +641,7 @@
             approvedShops.push(newShop);
             localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
 
+            // नया टाइप किया हुआ मैनुअल गाँव तुरंत सिस्टम में सेव हो जाएगा ताकि आगे लिस्ट में दिखे
             let customVillages = JSON.parse(localStorage.getItem('addedVillages') || '[]');
             if(!customVillages.includes(village)) {
                 customVillages.push(village);
@@ -685,6 +656,7 @@
             document.getElementById('locationStatus').textContent = '';
             document.getElementById('addShopFormBox').style.display = 'none';
             document.getElementById('toggleIcon').textContent = '▼';
+            updateRegVillageDropdown();
         }
 
         function submitFeedback() {
@@ -789,13 +761,11 @@
         }
 
         function deleteApprovedShop(index) {
-            if(confirm(currentLang === 'hi' ? 'क्या आप वाकई इस लाइव दुकान को पोर्टल से हटाना (Delete करना) चाहते हैं?' : 'Are you sure you want to delete this live shop?')) {
-                let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
-                approvedShops.splice(index, 1);
-                localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
-                loadAllShops();
-                alert(currentLang === 'hi' ? 'दुकान सफलतापूर्वक डिलीट कर दी गई है!' : 'Shop deleted successfully!');
-            }
+            let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
+            approvedShops.splice(index, 1);
+            localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
+            loadAllShops();
+            alert(currentLang === 'hi' ? 'दुकान सफलतापूर्वक डिलीट कर दी गई है!' : 'Shop deleted successfully!');
         }
     </script>
 </body>
