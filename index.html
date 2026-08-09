@@ -49,6 +49,7 @@
         .custom-btn { display: inline-block; width: auto; min-width: 180px; background: var(--primary); color: white; padding: 10px 20px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); }
+        .btn-danger { background: #d32f2f; color: white; padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
 
         .result-box { margin-top: 15px; }
         .shop-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px; margin-bottom: 10px; border-radius: 6px; text-align: left; }
@@ -133,7 +134,7 @@
             <div class="result-box" id="searchResult"></div>
         </div>
 
-        <!-- दुकान रजिस्टर करने का फॉर्म -->
+        <!-- दुकान रजिस्टर करने का फॉर्म (सबलॉगिन प्रोटेक्टेड) -->
         <div class="card">
             <h2 id="regCardTitle">📝 अपनी दुकान / सेवा यहाँ रजिस्टर करें</h2>
             
@@ -168,20 +169,22 @@
             </div>
         </div>
 
-        <!-- एडमिन पैनल -->
+        <!-- एडमिन पैनल & वेरिफिकेशन -->
         <div class="card" style="text-align: center;">
             <div class="btn-box" style="margin-top:0;">
-                <button class="custom-btn btn-secondary" onclick="toggleAdminPanel()" id="adminBtnText">🔒 एडमिन लॉगिन पैनल</button>
+                <button class="custom-btn btn-secondary" onclick="toggleAdminPanel()" id="adminBtnText">🔒 एडमिन / वेरिफिकेशन पैनल</button>
             </div>
             
             <div class="admin-section" id="adminPanel">
-                <h3 style="color: #e65100; margin-bottom: 10px; font-size: 1rem;" id="adminHeading">एडमिन नियंत्रण कक्ष</h3>
+                <h3 style="color: #e65100; margin-bottom: 10px; font-size: 1rem;" id="adminHeading">एडमिन नियंत्रण एवं सत्यापन कक्ष</h3>
                 <input type="password" id="adminPass" placeholder="पासवर्ड दर्ज करें (admin123)" style="margin-bottom: 10px;">
                 <div class="btn-box" style="margin-top:0;">
                     <button class="custom-btn" onclick="verifyAdmin()" style="padding: 8px 15px;" id="adminLoginBtn">लॉगिन करें</button>
                 </div>
-                <div id="adminControls" style="display:none; margin-top: 10px;">
-                    <p style="color: green; font-weight: bold; font-size: 0.9rem;" id="adminSuccessText">✔ एडमिन एक्सेस मिल गया!</p>
+                <div id="adminControls" style="display:none; margin-top: 15px; text-align: left;">
+                    <p style="color: green; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px;" id="adminSuccessText">✔ एडमिन एक्सेस मिल गया!</p>
+                    <h4 style="font-size: 0.95rem; color: #333; margin-bottom: 5px;">पेंडिंग दुकानें (अप्रूवल दें):</h4>
+                    <div id="pendingShopsList"></div>
                 </div>
             </div>
         </div>
@@ -266,8 +269,8 @@
                 document.getElementById('labelPhone').innerText = "Mobile Number:";
                 document.getElementById('regPhone').placeholder = "10-digit mobile number";
                 document.getElementById('regBtnText').innerText = "➕ Register Shop";
-                document.getElementById('adminBtnText').innerText = "🔒 Admin Login Panel";
-                document.getElementById('adminHeading').innerText = "Admin Control Panel";
+                document.getElementById('adminBtnText').innerText = "🔒 Admin / Verification Panel";
+                document.getElementById('adminHeading').innerText = "Admin Control & Verification Panel";
                 document.getElementById('adminPass').placeholder = "Enter Password (admin123)";
                 document.getElementById('adminLoginBtn').innerText = "Login";
                 document.getElementById('adminSuccessText').innerText = "✔ Admin Access Granted!";
@@ -321,8 +324,8 @@
                 document.getElementById('labelPhone').innerText = "मोबाइल नंबर:";
                 document.getElementById('regPhone').placeholder = "10 अंकों का मोबाइल नंबर";
                 document.getElementById('regBtnText').innerText = "➕ दुकान रजिस्टर करें";
-                document.getElementById('adminBtnText').innerText = "🔒 एडमिन लॉगिन पैनल";
-                document.getElementById('adminHeading').innerText = "एडमिन नियंत्रण कक्ष";
+                document.getElementById('adminBtnText').innerText = "🔒 एडमिन / वेरिफिकेशन पैनल";
+                document.getElementById('adminHeading').innerText = "एडमिन नियंत्रण एवं सत्यापन कक्ष";
                 document.getElementById('adminPass').placeholder = "पासवर्ड दर्ज करें (admin123)";
                 document.getElementById('adminLoginBtn').innerText = "लॉगिन करें";
                 document.getElementById('adminSuccessText').innerText = "✔ एडमिन एक्सेस मिल गया!";
@@ -362,7 +365,7 @@
                 return;
             }
 
-            let savedShops = JSON.parse(localStorage.getItem('ruralShops') || '[]');
+            let savedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
             let filtered = savedShops.filter(s => s.village.toLowerCase() === village.toLowerCase());
 
             let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">${currentLang === 'hi' ? `'${village}' में उपलब्ध सेवाएँ:` : `Services available in '${village}':`}</h3>`;
@@ -399,12 +402,12 @@
                 return;
             }
 
-            let newShop = { name, village, category, phone };
-            let savedShops = JSON.parse(localStorage.getItem('ruralShops') || '[]');
-            savedShops.push(newShop);
-            localStorage.setItem('ruralShops', JSON.stringify(savedShops));
+            let newShop = { id: Date.now(), name, village, category, phone };
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            pendingShops.push(newShop);
+            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
 
-            alert(currentLang === 'hi' ? 'सफलतापूर्वक दुकान रजिस्टर हो गई!' : 'Shop successfully registered!');
+            alert(currentLang === 'hi' ? 'दुकान रजिस्टर हो गई है! एडमिन द्वारा सत्यापन (Verification) के बाद यह पोर्टल पर दिखने लगेगी।' : 'Shop registered! It will appear on portal after Admin verification.');
             document.getElementById('regShopName').value = '';
             document.getElementById('regVillage').value = '';
             document.getElementById('regPhone').value = '';
@@ -419,10 +422,56 @@
             const pass = document.getElementById('adminPass').value;
             if(pass === 'admin123') {
                 document.getElementById('adminControls').style.display = 'block';
+                loadPendingShops();
                 alert(currentLang === 'hi' ? 'लॉगिन सफल!' : 'Login Successful!');
             } else {
                 alert(currentLang === 'hi' ? 'गलत पासवर्ड!' : 'Incorrect Password!');
             }
+        }
+
+        function loadPendingShops() {
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            let listDiv = document.getElementById('pendingShopsList');
+            
+            if(pendingShops.length === 0) {
+                listDiv.innerHTML = `<p style="font-size: 0.85rem; color: #666;">कोई नई दुकान सत्यापन के लिए लंबित नहीं है।</p>`;
+                return;
+            }
+
+            let html = '';
+            pendingShops.forEach((s, index) => {
+                html += `
+                    <div style="background: #fff; padding: 8px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.85rem;">
+                        <strong>${s.name}</strong> (${s.village})<br>
+                        श्रेणी: ${s.category} | फोन: ${s.phone}<br>
+                        <button class="custom-btn" style="padding: 4px 10px; font-size: 0.75rem; margin-top: 5px;" onclick="approveShop(${index})">✔ अप्रूव करें (Verify)</button>
+                        <button class="btn-danger" style="margin-left: 5px;" onclick="rejectShop(${index})">❌ हटाएं</button>
+                    </div>
+                `;
+            });
+            listDiv.innerHTML = html;
+        }
+
+        function approveShop(index) {
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
+            
+            let approved = pendingShops.splice(index, 1)[0];
+            approvedShops.push(approved);
+
+            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+            localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
+
+            loadPendingShops();
+            alert('दुकान सफलतापूर्वक सत्यापित (Verify & Approve) कर दी गई है!');
+        }
+
+        function rejectShop(index) {
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            pendingShops.splice(index, 1);
+            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+            loadPendingShops();
+            alert('दुकान हटा दी गई है।');
         }
     </script>
 </body>
