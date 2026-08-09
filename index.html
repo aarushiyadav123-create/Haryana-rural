@@ -160,7 +160,7 @@
             </div>
         </div>
 
-        <!-- गाँव और सेवा खोजें (Auto-Search Enabled) -->
+        <!-- गाँव और सेवा खोजें (Dropdown Auto-Load System) -->
         <div class="card">
             <h3>🔍 अपने जिले व गाँव की सेवाएँ खोजें</h3>
             <div style="margin-bottom: 8px;">
@@ -175,11 +175,10 @@
             </div>
 
             <div style="margin-bottom: 8px;">
-                <label style="font-size: 13px; font-weight: bold;">2.गाँव का नाम (ऑटो-सर्च):</label>
-                <input type="text" id="villageInput" list="villageList" placeholder="गाँव का नाम लिखें या चुनें...">
-                <datalist id="villageList">
-                    <!-- जिले के अनुसार डेटा यहाँ आएगा -->
-                </datalist>
+                <label style="font-size: 13px; font-weight: bold;">2. गाँव चुनें:</label>
+                <select id="villageSelect">
+                    <option value="">-- पहले जिला चुनें --</option>
+                </select>
             </div>
 
             <button class="btn-main" onclick="searchServices()">दुकानें देखें</button>
@@ -226,24 +225,25 @@
 
         function updateVillages() {
             const district = document.getElementById('districtSelect').value;
-            const datalist = document.getElementById('villageList');
-            datalist.innerHTML = '';
+            const villageSelect = document.getElementById('villageSelect');
+            villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
 
             if (villageData[district]) {
                 villageData[district].forEach(village => {
                     let option = document.createElement('option');
                     option.value = village;
-                    datalist.appendChild(option);
+                    option.textContent = village;
+                    villageSelect.appendChild(option);
                 });
             }
         }
 
         function searchServices() {
-            const village = document.getElementById('villageInput').value.trim();
+            const village = document.getElementById('villageSelect').value;
             const resultBox = document.getElementById('searchResult');
             
             if(!village) {
-                alert('कृपया पहले गाँव का नाम लिखें या चुनें!');
+                alert('कृपया पहले जिला और गाँव चुनें!');
                 return;
             }
 
