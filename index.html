@@ -16,14 +16,9 @@
         body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 50px; }
         
         /* Header */
-        header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        header h1 { font-size: 1.6rem; margin-bottom: 5px; }
-        header p { font-size: 0.9rem; opacity: 0.9; }
-
-        /* News Ticker */
-        .news-container { background: #fff3e0; border-bottom: 2px solid var(--secondary); padding: 10px; display: flex; align-items: center; overflow: hidden; }
-        .news-title { background: var(--secondary); color: white; padding: 4px 8px; font-size: 0.8rem; font-weight: bold; border-radius: 4px; margin-right: 10px; white-space: nowrap; }
-        .news-ticker marquee { font-size: 0.9rem; color: #e65100; font-weight: 500; }
+        header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 25px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        header h1 { font-size: 1.8rem; margin-bottom: 5px; }
+        header p { font-size: 0.95rem; opacity: 0.9; }
 
         /* Main Container */
         .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
@@ -63,24 +58,14 @@
         <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
     </header>
 
-    <!-- ऑटोमैटिक लाइव न्यूज़ स्ट्रिप -->
-    <div class="news-container">
-        <span class="news-title">ताज़ा अपडेट</span>
-        <div class="news-ticker">
-            <marquee behavior="scroll" direction="left" scrollamount="5">
-                📢 हरियाणा ग्रामीण पोर्टल पर आपका स्वागत है! अपनेगाँव की दुकान या सेवा फ्री में रजिस्टर करें। | 🌾 किसानों के लिए नई सरकारी योजनाएं जल्द अपडेट होंगी। | 🔴 किसी भी सहायता के लिए नीचे एडमिन पैनल से संपर्क करें।
-            </marquee>
-        </div>
-    </div>
-
     <div class="container">
 
-        <!-- गाँव और सेवा खोजें (Auto-Search Enabled) -->
+        <!-- गाँव और सेवा खोजें -->
         <div class="card">
-            <h2>🔍 अपनेगाँव की सेवाएँ खोजें</h2>
+            <h2>🔍 अपने गाँव की सेवाएँ खोजें</h2>
             <div class="form-group">
                 <label>जिला चुनें:</label>
-                <select id="districtSelect" onchange="updateVillages()">
+                <select id="districtSelect">
                     <option value="">-- जिला चुनें --</option>
                     <option value="rohtak">रोहतक</option>
                     <option value="bhiwani">भिवानी</option>
@@ -90,18 +75,14 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव का नाम (ऑटो-सर्च):</label>
-                <!-- Datalist का उपयोग जिससे टाइप करते ही ऑटोमैटिक नाम सजेस्ट होंगे -->
-                <input type="text" id="villageInput" list="villageList" placeholder="गाँव का नाम लिखें या चुनें...">
-                <datalist id="villageList">
-                    <!-- जिले के अनुसार डेटा यहाँ जावास्क्रिप्ट से आएगा -->
-                </datalist>
+                <label>गाँव का नाम:</label>
+                <input type="text" id="villageInput" placeholder="गाँव का नाम लिखें...">
             </div>
 
             <button class="btn" onclick="searchServices()">दुकानें देखें</button>
 
             <div class="result-box" id="searchResult">
-                <!-- यहाँ सर्च किए गए गाँवों की दुकानें दिखेंगी -->
+                <!-- यहाँ दुकानें दिखेंगी -->
             </div>
         </div>
 
@@ -133,7 +114,7 @@
             <button class="btn" onclick="registerService()">रजिस्टर करें</button>
         </div>
 
-        <!-- एडमिन लॉगिन बटन -->
+        <!-- एडमिन लॉगिन पैनल -->
         <div class="card" style="text-align: center;">
             <button class="btn btn-secondary" onclick="toggleAdminPanel()">🔒 एडमिन लॉगिन पैनल</button>
             
@@ -143,7 +124,6 @@
                 <button class="btn" onclick="verifyAdmin()" style="padding: 8px;">लॉगिन करें</button>
                 <div id="adminControls" style="display:none; margin-top: 10px;">
                     <p style="color: green; font-weight: bold; font-size: 0.9rem;">✔ एडमिन एक्सेस मिल गया!</p>
-                    <p style="font-size: 0.85rem; margin-top: 5px;">पेंडिंग रिक्वेस्ट अप्रूव करने का सिस्टम एक्टिव है।</p>
                 </div>
             </div>
         </div>
@@ -155,36 +135,12 @@
     </footer>
 
     <script>
-        // गाँवों का डेटाबेस ऑटो-सर्च के लिए
-        const villageData = {
-            rohtak: ["इस्मला", "कलानौर", "मदीना", "बहू अकबरपुर", "संघान", "रिटौली"],
-            bhiwani: ["लोहारू", "बाढड़ा", "सिואणी", "दिनोद", "बवानी खेड़ा"],
-            hisar: ["हाँसी", "बरवाला", "नारनौंद", "उकलाना", "आदमपुर"],
-            charkhi_dadri: ["बाढड़ा", "झोझू कलां", "बोद कलां", "डूडवा"]
-        };
-
-        // जिला बदलने पर ऑटोमैटिक गाँव लिस्ट datalist में लोड होना
-        function updateVillages() {
-            const district = document.getElementById('districtSelect').value;
-            const datalist = document.getElementById('villageList');
-            datalist.innerHTML = '';
-
-            if (villageData[district]) {
-                villageData[district].forEach(village => {
-                    let option = document.createElement('option');
-                    option.value = village;
-                    datalist.appendChild(option);
-                });
-            }
-        }
-
-        // लोकल स्टोरेज में सेव दुकानें देखने का फंक्शन
         function searchServices() {
             const village = document.getElementById('villageInput').value.trim();
             const resultBox = document.getElementById('searchResult');
             
             if(!village) {
-                alert('कृपया पहले गाँव का नाम लिखें या चुनें!');
+                alert('कृपया पहले गाँव का नाम लिखें!');
                 return;
             }
 
@@ -193,10 +149,9 @@
 
             let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">'${village}' में उपलब्ध सेवाएँ:</h3>`;
             
-            // कुछ डमी डिफ़ॉल्ट डेटा ताकि खाली न दिखे
             html += `
                 <div class="shop-item">
-                    <h4>श्री श्याम जनरल स्टोर</h4>
+                    <h4>श्री श्याम जनरल स्टोर (डिफ़ॉल्ट)</h4>
                     <p>श्रेणी: किराना | संपर्क: 9876543210</p>
                 </div>
             `;
@@ -215,7 +170,6 @@
             resultBox.innerHTML = html;
         }
 
-        // नई दुकान रजिस्टर करने का फंक्शन (लोकल स्टोरेज में सेव)
         function registerService() {
             const name = document.getElementById('regShopName').value;
             const village = document.getElementById('regVillage').value;
@@ -232,7 +186,7 @@
             savedShops.push(newShop);
             localStorage.setItem('ruralShops', JSON.stringify(savedShops));
 
-            alert('सफलतापूर्वक रजिस्टर हो गया! यह अब सर्च में दिखने लगेगा।');
+            alert('सफलतापूर्वक रजिस्टर हो गया!');
             document.getElementById('regShopName').value = '';
             document.getElementById('regVillage').value = '';
             document.getElementById('regPhone').value = '';
@@ -255,3 +209,4 @@
     </script>
 </body>
 </html>
+
