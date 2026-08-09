@@ -165,7 +165,7 @@
                     <option value="rohtak">रोहतक</option>
                     <option value="bhiwani">भिवानी</option>
                     <option value="hisar">हिसार</option>
-                    <option value="charkhi_dadri" selected>चरखी दादरी</option>
+                    <option value="charkhi_dadri">चरखी दादरी</option>
                 </select>
             </div>
 
@@ -173,7 +173,7 @@
                 <label id="t-f-vill-label">गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव खुद टाइप करें):</label>
                 <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम यहाँ लिखें या चुनें...">
                 <datalist id="regVillageList">
-                    <!-- जिले के अनुसार ऑप्शन आएंगे और नया मैनुअल भी टाइप कर सकेंगे -->
+                    <!-- जिले के अनुसार ऑप्शन आएंगे -->
                 </datalist>
             </div>
 
@@ -303,7 +303,7 @@
                 formHeading: "नया दुकान/सेवा रजिस्ट्रेशन फॉर्म",
                 fNameLabel: "दुकान या सेवा का नाम:",
                 fDistLabel: "जिला चुनें:",
-                fVillLabel: "गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव टाइप करें):",
+                fVillLabel: "गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव खुद टाइप करें):",
                 fCatLabel: "श्रेणी (Category चुनें):",
                 fPhoneLabel: "मोबाइल नंबर:",
                 fSubmitBtn: "सीधे पोर्टल पर लाइव करें",
@@ -408,10 +408,9 @@
             updateDistrictSchemes();
         }
 
-        // फिक्स: माल्कोश सिर्फ चरखी दादरी में रहेगा, रोहतक/भिवानी/हिसार से पूरी तरह हटा दिया गया है
         const villageData = {
             rohtak: ["इस्मला / Ismaila", "कलानौर / Kalanaur", "मदीना / Madina", "बहू अकबरपुर / Bhalu Akbarpur", "संघान / Sanghan", "रिटौली / Ritolli", "सुन्दराणा / Sundrana", "भैंसरवाल कलाँ / Bhainswar Kalan", "खरावड़ / Kharawar", "आनंदपुर / Anandpur", "टिकरी / Tikri", "गरनावठी / Garnawathi", "महेहम / Meham"],
-            bhiwani: ["लोहारू / Loharu", "बाढड़ा / Badhra", "सिवानी / Siwani", "दिनोद / Dinod", "बवानी खेड़ा / Bawani Khera", "तोशाम / Tosham", "किरावड़ / Kirawad", "बिमला / Bimala", "खरक कलाँ / Kharak Kalan", "बहल / Behal", "सिंगाणी / Singani", "सान्गा / Sanga", "झुप्पा / Jhuppa"],
+            bhiwani: ["लोहारू / Loharu", "बाढड़ा / Badhra", "सिवानी / Siwani", "दिनोद / Dinod", "बवानी खेड़ा / Bawani Khera", "तोशाम / Tosham", "किरावड़ / Kirawad", "बिमला / Bimala", "बामला / Bamla", "खरक कलाँ / Kharak Kalan", "बहल / Behal", "सिंगाणी / Singani", "सान्गा / Sanga", "झुप्पा / Jhuppa"],
             hisar: ["हाँसी / Hansi", "बरवाला / Barwala", "नारनौंद / Narnaund", "उकलाना / Uklana", "आदमपुर / Adampur", "अग्रोहा / Agroha", "सिसाय / Sisai", "राया / Raya", "ढंढूर / Dhandhoor", "किरथान / Kirthan", "मसूदपुर / Masoodpur", "डानी गोपाल / Dani Gopal", "मित्ताथल / Mittathal"],
             charkhi_dadri: ["माल्कोश / Malkosh", "बाढड़ा / Badhra", "झोझू कलां / Jhojhu Kalan", "बोध कलां / Bodh Kalan", "डूडवा / Dudwa", "चरखी दादरी शहर / Charkhi Dadri City", "पैंघुवा / Panghuwa", "मानकावास / Mankawas", "कैलियाणा / Kailyana", "मोड़ी / Modi", "गोपी / Gopi", "पिचौपा कलाँ / Pichoupa Kalan", "अचिजपुरा / Achijpura", "किरावड़ / Kirawad"]
         };
@@ -572,7 +571,6 @@
             let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">${currentLang === 'hi' ? 'में उपलब्ध सेवाएँ:' : 'Available Services:'}</h3>`;
             let foundCount = 0;
             
-            // डिफ़ॉल्ट दुकान सिर्फ चरखी दादरी के माल्कोश में दिखेगी
             if(!defaultHidden.includes("default_shyam") && ("माल्कोश / malkosh").includes(selectedVillage)) {
                 html += `
                     <div class="shop-item">
@@ -625,6 +623,18 @@
                 return;
             }
 
+            // 🛑 स्मार्ट एरर डिटेक्शन: यदि गाँव पहले से किसी अन्य जिले में रजिस्टर्ड है, तो सिस्टम एरर देगा
+            for (let distKey in villageData) {
+                if (distKey !== district) {
+                    let exactMatch = villageData[distKey].some(v => v.toLowerCase().includes(village.toLowerCase()));
+                    if (exactMatch) {
+                        let distNames = {rohtak: "रोहतक", bhiwani: "भिवानी", hisar: "हिसार", charkhi_dadri: "चरखी दादरी"};
+                        alert(`❌ [System Error]: "${village}" गाँव '${distNames[distKey]}' जिले के अंतर्गत आता है, इसे '${distNames[district]}' जिले में सेव नहीं किया जा सकता! कृपया सही जिला चुनें।`);
+                        return;
+                    }
+                }
+            }
+
             if(photoInput.files && photoInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -642,7 +652,6 @@
             approvedShops.push(newShop);
             localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
 
-            // मैनुअल टाइप किया हुआ गाँव उसी चुने हुए जिले में परमानेंट सेव हो जाएगा
             let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + district) || '[]');
             if(!customVillages.includes(village)) {
                 customVillages.push(village);
@@ -728,6 +737,7 @@
                 `;
             });
 
+            listDiv.html = html;
             listDiv.innerHTML = html;
         }
 
