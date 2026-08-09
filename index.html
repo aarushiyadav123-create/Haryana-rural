@@ -408,7 +408,7 @@
             updateDistrictSchemes();
         }
 
-        // बिल्कुल सही और अलग-अलग जिलेवार गाँवों की सूचियाँ (अब माल्कोश सिर्फ चरखी दादरी में रहेगा)
+        // फिक्स: माल्कोश सिर्फ चरखी दादरी में रहेगा, रोहतक/भिवानी/हिसार से पूरी तरह हटा दिया गया है
         const villageData = {
             rohtak: ["इस्मला / Ismaila", "कलानौर / Kalanaur", "मदीना / Madina", "बहू अकबरपुर / Bhalu Akbarpur", "संघान / Sanghan", "रिटौली / Ritolli", "सुन्दराणा / Sundrana", "भैंसरवाल कलाँ / Bhainswar Kalan", "खरावड़ / Kharawar", "आनंदपुर / Anandpur", "टिकरी / Tikri", "गरनावठी / Garnawathi", "महेहम / Meham"],
             bhiwani: ["लोहारू / Loharu", "बाढड़ा / Badhra", "सिवानी / Siwani", "दिनोद / Dinod", "बवानी खेड़ा / Bawani Khera", "तोशाम / Tosham", "किरावड़ / Kirawad", "बिमला / Bimala", "खरक कलाँ / Kharak Kalan", "बहल / Behal", "सिंगाणी / Singani", "सान्गा / Sanga", "झुप्पा / Jhuppa"],
@@ -448,7 +448,7 @@
             villageSelect.innerHTML = `<option value="">${currentLang === 'hi' ? '-- गाँव चुनें --' : '-- Select Village --'}</option>`;
 
             if (district && villageData[district]) {
-                let customVillages = JSON.parse(localStorage.getItem('addedVillages') || '[]');
+                let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + district) || '[]');
                 let list = [...villageData[district], ...customVillages];
                 list = [...new Set(list)];
                 
@@ -467,7 +467,7 @@
             datalist.innerHTML = '';
 
             if (district && villageData[district]) {
-                let customVillages = JSON.parse(localStorage.getItem('addedVillages') || '[]');
+                let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + district) || '[]');
                 let list = [...villageData[district], ...customVillages];
                 list = [...new Set(list)];
 
@@ -572,6 +572,7 @@
             let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">${currentLang === 'hi' ? 'में उपलब्ध सेवाएँ:' : 'Available Services:'}</h3>`;
             let foundCount = 0;
             
+            // डिफ़ॉल्ट दुकान सिर्फ चरखी दादरी के माल्कोश में दिखेगी
             if(!defaultHidden.includes("default_shyam") && ("माल्कोश / malkosh").includes(selectedVillage)) {
                 html += `
                     <div class="shop-item">
@@ -641,11 +642,11 @@
             approvedShops.push(newShop);
             localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
 
-            // नया टाइप किया हुआ मैनुअल गाँव तुरंत सिस्टम में सेव हो जाएगा ताकि आगे लिस्ट में दिखे
-            let customVillages = JSON.parse(localStorage.getItem('addedVillages') || '[]');
+            // मैनुअल टाइप किया हुआ गाँव उसी चुने हुए जिले में परमानेंट सेव हो जाएगा
+            let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + district) || '[]');
             if(!customVillages.includes(village)) {
                 customVillages.push(village);
-                localStorage.setItem('addedVillages', JSON.stringify(customVillages));
+                localStorage.setItem('addedVillages_' + district, JSON.stringify(customVillages));
             }
 
             alert(currentLang === 'hi' ? 'दुकान सफलतापूर्वक रजिस्टर होकर पोर्टल पर लाइव हो गई है!' : 'Shop registered and published live on portal successfully!');
