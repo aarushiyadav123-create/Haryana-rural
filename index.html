@@ -30,9 +30,9 @@
         .weather-card { background: linear-gradient(135deg, #00acc1, #00838f); color: white; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .weather-title { font-size: 1rem; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
 
-        .news-container { background: var(--news-bg); border-left: 4px solid var(--secondary); padding: 8px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 10px; border-radius: 6px; }
-        .news-title-tag { background: var(--secondary); color: #fff; padding: 3px 6px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; margin-right: 8px; white-space: nowrap; }
-        .news-ticker marquee { font-size: 0.85rem; color: var(--news-text); font-weight: 600; width: 100%; }
+        .news-container { background: var(--news-bg); border-left: 4px solid var(--secondary); padding: 10px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .news-title-tag { background: var(--secondary); color: #fff; padding: 4px 8px; font-size: 0.8rem; font-weight: bold; border-radius: 4px; margin-right: 10px; white-space: nowrap; }
+        .news-ticker marquee { font-size: 0.9rem; color: var(--news-text); font-weight: 600; width: 100%; }
 
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
@@ -48,20 +48,26 @@
         .btn-secondary { background: var(--secondary); }
         .btn-danger { background: #d32f2f; color: white; padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
 
+        /* कोलेप्सेबल ऐड शॉप पट्टी */
+        .add-shop-toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .add-shop-form-container { display: none; background: #ffffff; border: 2px dashed var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+
         .result-box { margin-top: 15px; }
         .shop-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px; margin-bottom: 10px; border-radius: 6px; text-align: left; }
         .shop-item h4 { color: var(--primary); font-size: 1rem; }
         .shop-item p { font-size: 0.85rem; color: #666; margin-top: 3px; }
 
-        .scheme-item { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 12px; margin-bottom: 10px; border-radius: 6px; text-align: left; }
-        .scheme-item h4 { color: #1b5e20; font-size: 1rem; }
-        .scheme-item p { font-size: 0.85rem; color: #444; margin-top: 3px; }
+        .scheme-item { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 12px; margin-bottom: 12px; border-radius: 6px; text-align: left; }
+        .scheme-item h4 { color: #1b5e20; font-size: 1rem; margin-bottom: 4px; }
+        .scheme-item p { font-size: 0.85rem; color: #444; }
+        .scheme-link { display: inline-block; margin-top: 6px; font-size: 0.8rem; color: #2e7d32; font-weight: bold; text-decoration: none; }
+        .scheme-link:hover { text-decoration: underline; }
 
         .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; text-align: left; }
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
 </head>
-<body>
+<body onload="initPortal()">
 
     <div class="top-bar">
         <span>👨‍💼 संस्थापक: राजेश यादव (माल्कोश)</span>
@@ -85,27 +91,27 @@
             <div style="font-size: 0.85rem; opacity: 0.9;">हवा की गति: 4.4 km/h | स्थिति: बिल्कुल साफ (धूप)</div>
         </div>
 
-        <!-- लाइव न्यूज़ टिकर -->
+        <!-- लाइव लोकल न्यूज़ टिकर -->
         <div class="news-container">
-            <span class="news-title-tag">ताज़ा न्यूज़</span>
+            <span class="news-title-tag">📢 ताज़ा लोकल न्यूज़</span>
             <div class="news-ticker">
-                <marquee behavior="scroll" direction="left" scrollamount="4">
-                    हरियाणा ग्रामीण सेवा पोर्टल पर आपका स्वागत है। अपने गाँव की दुकानें और सेवाएँ आसानी से खोजें और जोड़ें! | राज्य में डिजिटल सेवाओं का विस्तार तेजी से जारी है।
+                <marquee behavior="scroll" direction="left" scrollamount="5">
+                    माल्कोश व आसपास के गाँवों में बिजली आपूर्ति सुचारू रूप से जारी | चरखी दादरी जिला प्रशासन द्वारा ग्रामीण विकास कार्यों की समीक्षा बैठक संपन्न | किसानों के लिए खाद और बीज की उपलब्धता सुनिश्चित।
                 </marquee>
             </div>
         </div>
 
         <!-- मंडी भाव टिकर -->
         <div class="news-container" style="border-left-color: #388e3c; background: #e8f5e9;">
-            <span class="news-title-tag" style="background: #388e3c;">मंडी भाव</span>
+            <span class="news-title-tag" style="background: #388e3c;">🌾 मंडी भाव</span>
             <div class="news-ticker">
-                <marquee behavior="scroll" direction="left" scrollamount="4" style="color: #1b5e20;">
+                <marquee behavior="scroll" direction="left" scrollamount="5" style="color: #1b5e20;">
                     गेहूँ: ₹2275-₹2350 | बाजरा: ₹2500-₹2600 | सरसों: ₹5400-₹5600 | नरमा: ₹7200 प्रति क्विंटल (ताज़ा मंडी अपडेट)
                 </marquee>
             </div>
         </div>
 
-        <!-- सर्च सेक्शन (केवल ड्रॉपडाउन) -->
+        <!-- सर्च सेक्शन (गाँव की सेवाएँ खोजने के लिए) -->
         <div class="card">
             <h2>🔍 अपने गाँव की सेवाएँ खोजें</h2>
             
@@ -134,9 +140,15 @@
             <div class="result-box" id="searchResult"></div>
         </div>
 
-        <!-- 1. दुकान रजिस्टर करने का फॉर्म (+ Add Shop) -->
-        <div class="card">
-            <h2>➕ अपनी दुकान / सेवा यहाँ रजिस्टर करें (+ Add Shop)</h2>
+        <!-- ➕ एक लाइन की क्लिकेबल पट्टी (+ Add Shop) -->
+        <div class="add-shop-toggle-bar" onclick="toggleAddShopForm()">
+            <span>➕ अपनी दुकान / सेवा यहाँ रजिस्टर करें (+ Add Shop)</span>
+            <span id="toggleIcon">▼</span>
+        </div>
+
+        <!-- दुकान रजिस्टर करने का फॉर्म (डिफ़ॉल्ट बंद रहेगा) -->
+        <div class="add-shop-form-container" id="addShopFormBox">
+            <h2 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px;">नया दुकान/सेवा रजिस्ट्रेशन फॉर्म</h2>
             
             <div class="form-group">
                 <label>दुकान या सेवा का नाम:</label>
@@ -145,7 +157,8 @@
 
             <div class="form-group">
                 <label>जिला चुनें:</label>
-                <select id="regDistrict">
+                <select id="regDistrict" onchange="updateRegVillageDropdown()">
+                    <option value="">-- जिला चुनें --</option>
                     <option value="rohtak">रोहतक</option>
                     <option value="bhiwani">भिवानी</option>
                     <option value="hisar">हिसार</option>
@@ -154,8 +167,10 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव का नाम:</label>
-                <input type="text" id="regVillage" placeholder="जैसे: माल्कोश">
+                <label>गाँव चुनें:</label>
+                <select id="regVillageSelect">
+                    <option value="">-- पहले जिला चुनें --</option>
+                </select>
             </div>
 
             <div class="form-group">
@@ -175,24 +190,26 @@
             </div>
 
             <div class="btn-box">
-                <button class="custom-btn" onclick="registerService()">➕ दुकान रजिस्टर करें</button>
+                <button class="custom-btn" onclick="registerService()">एडमिन के पास अप्रूवल के लिए भेजें</button>
             </div>
         </div>
 
-        <!-- 2. सरकारी योजनाएं सेक्शन (बिल्कुल नीचे) -->
+        <!-- हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव लिंक्स के साथ) -->
         <div class="card">
-            <h2>📜 हरियाणा सरकार की मुख्य योजनाएं</h2>
-            <div class="scheme-item">
-                <h4>परिवार पहचान पत्र (PPP) सेवा</h4>
-                <p>डाटा अपडेट, आय प्रमाण पत्र और नई फैमिली आईडी से जुड़ी सहायता।</p>
+            <h2>📜 हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव पोर्टल)</h2>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="font-size: 0.85rem; color: #555;">अपने जिले के अनुसार योजनाओं का पोर्टल देखें:</label>
+                <select id="schemeDistrictSelect" onchange="updateDistrictSchemes()">
+                    <option value="charkhi_dadri">चरखी दादरी (डिफ़ॉल्ट)</option>
+                    <option value="rohtak">रोहतक</option>
+                    <option value="bhiwani">भिवानी</option>
+                    <option value="hisar">हिसार</option>
+                </select>
             </div>
-            <div class="scheme-item">
-                <h4>बुढ़ापा / सामाजिक सुरक्षा भत्ता योजना</h4>
-                <p>पात्र नागरिकों के पेंशन स्टेटस और कागजी प्रक्रिया की जानकारी।</p>
-            </div>
-            <div class="scheme-item">
-                <h4>मेरी फसल मेरा ब्योरा</h4>
-                <p>फसलों के पंजीकरण और सरकारी खरीद पोर्टल की सहायता।</p>
+
+            <div id="districtSchemeContent">
+                <!-- डायनेमिक योजनाओं का कंटेंट यहाँ लोड होगा -->
             </div>
         </div>
 
@@ -223,7 +240,6 @@
     </footer>
 
     <script>
-        // जिला और गाँव का डेटा (माल्कोश सिर्फ चरखी दादरी में)
         const villageData = {
             rohtak: ["इस्मला", "कलानौर", "मदीना", "बहू अकबरपुर", "संघान", "रिटौली", "सुन्दराणा", "भैंसरवाल कलाँ", "खरावड़", "आनंदपुर", "टिकरी", "गरनावठी", "महेहम"],
             bhiwani: ["लोहारू", "बाढड़ा", "सिवानी", "दिनोद", "बवानी खेड़ा", "तोशाम", "किरावड़", "बिमला", "खरक कलाँ", "बहल", "सिंगाणी", "सान्गा", "झुप्पा"],
@@ -231,6 +247,12 @@
             charkhi_dadri: ["माल्कोश", "बाढड़ा", "झोझू कलां", "बोध कलां", "डूडवा", "चरखी दादरी शहर", "पैंघुवा", "मानकावास", "कैलियाणा", "मोड़ी", "गोपी", "पिचौपा कलाँ", "अचिजपुरा", "किरावड़"]
         };
 
+        function initPortal() {
+            updateRegVillageDropdown();
+            updateDistrictSchemes();
+        }
+
+        // सर्च सेक्शन के लिए गाँव ड्रॉपडाउन
         function updateVillageDropdown() {
             const district = document.getElementById('districtSelect').value;
             const villageSelect = document.getElementById('villageSelect');
@@ -248,6 +270,64 @@
                     villageSelect.appendChild(option);
                 });
             }
+        }
+
+        // रजिस्ट्रेशन फॉर्म के लिए गाँव ड्रॉपडाउन (गलत टाइपिंग रोकने हेतु)
+        function updateRegVillageDropdown() {
+            const district = document.getElementById('regDistrict').value;
+            const villageSelect = document.getElementById('regVillageSelect');
+            villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+
+            if (district && villageData[district]) {
+                villageData[district].forEach(village => {
+                    let option = document.createElement('option');
+                    option.value = village;
+                    option.textContent = village;
+                    villageSelect.appendChild(option);
+                });
+            }
+        }
+
+        // + Add Shop फॉर्म खोलने/बंद करने के लिए
+        function toggleAddShopForm() {
+            const formBox = document.getElementById('addShopFormBox');
+            const icon = document.getElementById('toggleIcon');
+            if (formBox.style.display === 'block') {
+                formBox.style.display = 'none';
+                icon.textContent = '▼';
+            } else {
+                formBox.style.display = 'block';
+                icon.textContent = '▲';
+            }
+        }
+
+        // जिलावार लाइव योजनाएं दिखाना
+        function updateDistrictSchemes() {
+            const dist = document.getElementById('schemeDistrictSelect').value;
+            const container = document.getElementById('districtSchemeContent');
+            
+            let distNameHindi = "चरखी दादरी";
+            if(dist === 'rohtak') distNameHindi = "रोहतक";
+            if(dist === 'bhiwani') distNameHindi = "भिवानी";
+            if(dist === 'hisar') distNameHindi = "हिसार";
+
+            container.innerHTML = `
+                <div class="scheme-item">
+                    <h4>📂 जिला ${distNameHindi} - परिवार पहचान पत्र (PPP)</h4>
+                    <p>जिला नागरिक संसाधन सूचना विभाग, ${distNameHindi} के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा।</p>
+                    <a href="https://meraparivar.haryana.gov.in" target="_blank" class="scheme-link">🔗 पीपीपी पोर्टल (${distNameHindi} लाइव) &rarr;</a>
+                </div>
+                <div class="scheme-item">
+                    <h4>👵 जिला ${distNameHindi} - सामाजिक सुरक्षा पेंशन</h4>
+                    <p>बुढ़ापा, विधवा एवं विकलांग पेंशन के लाइव आवेदन व स्टेटस की जानकारी (${distNameHindi} समाज कल्याण शाखा)।</p>
+                    <a href="https://socialjustice.haryana.gov.in" target="_blank" class="scheme-link">🔗 पेंशन पोर्टल देखें &rarr;</a>
+                </div>
+                <div class="scheme-item">
+                    <h4>🌾 जिला ${distNameHindi} - मेरी फसल मेरा ब्योरा</h4>
+                    <p>कृषि एवं किसान कल्याण विभाग (${distNameHindi}) द्वारा फसल पंजीकरण एवं एमएसपी पोर्टल।</p>
+                    <a href="https://fasal.haryana.gov.in" target="_blank" class="scheme-link">🔗 फसल ब्योरा पोर्टल &rarr;</a>
+                </div>
+            `;
         }
 
         function searchServices() {
@@ -285,26 +365,29 @@
             resultBox.innerHTML = html;
         }
 
+        // दुकान रजिस्टर करके एडमिन के पास भेजना
         function registerService() {
             const name = document.getElementById('regShopName').value.trim();
-            const village = document.getElementById('regVillage').value.trim();
+            const district = document.getElementById('regDistrict').value;
+            const village = document.getElementById('regVillageSelect').value;
             const category = document.getElementById('regCategory').value;
             const phone = document.getElementById('regPhone').value.trim();
 
             if(!name || !village || !phone) {
-                alert('कृपया दुकान का नाम, गाँव और मोबाइल नंबर जरूर भरें!');
+                alert('कृपया दुकान का नाम, गाँव और मोबाइल नंबर सभी फ़ील्ड भरें!');
                 return;
             }
 
-            let newShop = { id: Date.now(), name, village, category, phone };
+            let newShop = { id: Date.now(), name, district, village, category, phone };
             let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
             pendingShops.push(newShop);
             localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
 
-            alert('दुकान सफलतापर्वक रजिस्टर हो गई है! एडमिन द्वारा सत्यापन के बाद यह पोर्टल पर दिखने लगेगी।');
+            alert('दुकान का डेटा एडमिन के पास वेरिफिकेशन के लिए सफलतापूर्वक भेज दिया गया है!');
             document.getElementById('regShopName').value = '';
-            document.getElementById('regVillage').value = '';
             document.getElementById('regPhone').value = '';
+            document.getElementById('addShopFormBox').style.display = 'none';
+            document.getElementById('toggleIcon').textContent = '▼';
         }
 
         function toggleAdminPanel() {
@@ -335,8 +418,8 @@
             let html = '';
             pendingShops.forEach((s, index) => {
                 html += `
-                    <div style="background: #fff; padding: 8px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.85rem;">
-                        <strong>${s.name}</strong> (${s.village})<br>
+                    <div style="background: #fff; padding: 10px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #ddd; font-size: 0.85rem;">
+                        <strong>${s.name}</strong> (गाँव: ${s.village}, जिला: ${s.district})<br>
                         श्रेणी: ${s.category} | फोन: ${s.phone}<br>
                         <button class="custom-btn" style="padding: 4px 10px; font-size: 0.75rem; margin-top: 5px; width:auto;" onclick="approveShop(${index})">✔ अप्रूव करें</button>
                         <button class="btn-danger" style="margin-left: 5px;" onclick="rejectShop(${index})">❌ हटाएं</button>
@@ -363,7 +446,7 @@
             localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
 
             loadPendingShops();
-            alert('दुकान सत्यापित हो गई है!');
+            alert('दुकान सत्यापित होकर पोर्टल पर लाइव कर दी गई है!');
         }
 
         function rejectShop(index) {
@@ -371,7 +454,7 @@
             pendingShops.splice(index, 1);
             localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
             loadPendingShops();
-            alert('दुकान हटा दी गई है।');
+            alert('दुकान की रिक्वेस्ट हटा दी गई है।');
         }
     </script>
 </body>
