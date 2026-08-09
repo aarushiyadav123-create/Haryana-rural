@@ -34,7 +34,8 @@
 
         .news-container { background: var(--news-bg); border-bottom: 2px solid #ffc107; border-top: 2px solid #ffc107; padding: 8px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 20px; border-radius: 6px; }
         .news-title { background: #ffc107; color: #000; padding: 3px 6px; font-size: 0.75rem; font-weight: bold; border-radius: 4px; margin-right: 8px; white-space: nowrap; }
-        .news-ticker marquee { font-size: 0.85rem; color: var(--news-text); font-weight: 500; }
+        .news-ticker { width: 100%; overflow: hidden; }
+        .news-ticker marquee { font-size: 0.85rem; color: var(--news-text); font-weight: 500; width: 100%; }
 
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
@@ -44,7 +45,6 @@
         select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; outline: none; background: #fafafa; }
         select:focus, input:focus { border-color: var(--primary); background: #fff; }
 
-        /* Fix button size (No full screen stretch) */
         .btn-box { text-align: center; margin-top: 15px; }
         .custom-btn { display: inline-block; width: auto; min-width: 180px; background: var(--primary); color: white; padding: 10px 20px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
         .custom-btn:hover { background: #2e7d32; }
@@ -82,19 +82,19 @@
             </div>
             <div style="font-size: 0.85rem; margin-bottom: 8px; opacity: 0.9;" id="forecastTitle">📅 आगामी 4 दिनों का मौसम:</div>
             <div class="weather-grid">
-                <div class="weather-day">आज<br>☀️ 34°C</div>
-                <div class="weather-day">सोम<br>⛅ 35°C</div>
-                <div class="weather-day">मंगल<br>🌥 34°C</div>
-                <div class="weather-day">बुध<br>☀️ 35°C</div>
+                <div class="weather-day" id="wDay1">आज<br>☀️ 34°C</div>
+                <div class="weather-day" id="wDay2">सोम<br>⛅ 35°C</div>
+                <div class="weather-day" id="wDay3">मंगल<br>🌥 34°C</div>
+                <div class="weather-day" id="wDay4">बुध<br>☀️ 35°C</div>
             </div>
         </div>
 
-        <!-- लाइव न्यूज़ टिकर -->
+        <!-- लाइव न्यूज़ टिकर (फिक्स) -->
         <div class="news-container">
             <span class="news-title" id="newsTitleTag">ताज़ा अपडेट</span>
             <div class="news-ticker">
-                <marquee behavior="scroll" direction="left" scrollamount="5" id="newsTickerText">
-                    📢 हरियाणा ग्रामीण पोर्टल पर आपका स्वागत है! अपने गाँव की दुकान या सेवा फ्री में रजिस्टर करें। | 🌾 मंडी भाव: गेहूँ ₹2275, बाजरा ₹2500, सरसों ₹5400 प्रति क्विंटल।
+                <marquee behavior="scroll" direction="left" scrollamount="5" id="newsMarqueeText">
+                    📢 हरियाणा ग्रामीण पोर्टल पर आपका स्वागत है! अपनी दुकान या सेवा फ्री में रजिस्टर करें। | 🌾 मंडी भाव: गेहूँ ₹2275, बाजरा ₹2500, सरसों ₹5400 प्रति क्विंटल।
                 </marquee>
             </div>
         </div>
@@ -107,10 +107,10 @@
                 <label id="labelDist">1. जिला चुनें:</label>
                 <select id="districtSelect" onchange="updateVillages()">
                     <option value="" id="optSelectDist">-- जिला चुनें --</option>
-                    <option value="rohtak">रोहतक / Rohtak</option>
-                    <option value="bhiwani">भिवानी / Bhiwani</option>
-                    <option value="hisar">हिसार / Hisar</option>
-                    <option value="charkhi_dadri">चरखी दादरी / Charkhi Dadri</option>
+                    <option value="rohtak">रोहतक</option>
+                    <option value="bhiwani">भिवानी</option>
+                    <option value="hisar">हिसार</option>
+                    <option value="charkhi_dadri">चरखी दादरी</option>
                 </select>
             </div>
 
@@ -150,11 +150,11 @@
             <div class="form-group">
                 <label id="labelCategory">श्रेणी (Category चुनें):</label>
                 <select id="regCategory">
-                    <option value="किराना / General Store" id="cat1">किराना / जनरल स्टोर</option>
-                    <option value="मेडिकल / Medical" id="cat2">मेडिकल / दवाइयां</option>
-                    <option value="रिपेयरिंग / Repairing" id="cat3">रिपेयरिंग (इलेक्ट्रॉनिक्स/वाहन)</option>
-                    <option value="कृषि सेवा / Agriculture" id="cat4">ट्रैक्टर / कृषि सेवा</option>
-                    <option value="अन्य सेवा / Other" id="cat5">अन्य सेवा</option>
+                    <option value="किराना / जनरल स्टोर" id="cat1">किराना / जनरल स्टोर</option>
+                    <option value="मेडिकल / दवाइयां" id="cat2">मेडिकल / दवाइयां</option>
+                    <option value="रिपेयरिंग (इलेक्ट्रॉनिक्स/वाहन)" id="cat3">रिपेयरिंग (इलेक्ट्रॉनिक्स/वाहन)</option>
+                    <option value="ट्रैक्टर / कृषि सेवा" id="cat4">ट्रैक्टर / कृषि सेवा</option>
+                    <option value="अन्य सेवा" id="cat5">अन्य सेवा</option>
                 </select>
             </div>
 
@@ -214,6 +214,11 @@
             }
         };
 
+        const districtsData = {
+            hi: { rohtak: "रोहतक", bhiwani: "भिवानी", hisar: "हिसार", charkhi_dadri: "चरखी दादरी" },
+            en: { rohtak: "Rohtak", bhiwani: "Bhiwani", hisar: "Hisar", charkhi_dadri: "Charkhi Dadri" }
+        };
+
         function toggleLanguage() {
             currentLang = currentLang === 'hi' ? 'en' : 'hi';
             
@@ -228,18 +233,15 @@
                 document.getElementById('weatherHeading').innerText = "🌤 Weather Update (Haryana)";
                 document.getElementById('tempText').innerText = "Temp: 34°C | Clear Sky";
                 document.getElementById('forecastTitle').innerText = "📅 4-Day Forecast:";
+                document.getElementById('wDay1').innerHTML = "Today<br>☀️ 34°C";
+                document.getElementById('wDay2').innerHTML = "Mon<br>⛅ 35°C";
+                document.getElementById('wDay3').innerHTML = "Tue<br>🌥 34°C";
+                document.getElementById('wDay4').innerHTML = "Wed<br>☀️ 35°C";
                 document.getElementById('newsTitleTag').innerText = "Latest Updates";
+                document.getElementById('newsMarqueeText').innerText = "📢 Welcome to Haryana Rural Portal! Register your shop or service for free. | 🌾 Mandi Rates: Wheat ₹2275, Bajra ₹2500, Mustard ₹5400 per quintal.";
                 document.getElementById('searchCardTitle').innerText = "🔍 Search Village Services";
                 document.getElementById('labelDist').innerText = "1. Select District:";
                 document.getElementById('optSelectDist').innerText = "-- Select District --";
-                
-                // Districts English options
-                const distSel = document.getElementById('districtSelect');
-                distSel.options[1].text = "Rohtak";
-                distSel.options[2].text = "Bhiwani";
-                distSel.options[3].text = "Hisar";
-                distSel.options[4].text = "Charkhi Dadri";
-
                 document.getElementById('labelVillage').innerText = "2. Select Village (Dropdown):";
                 document.getElementById('optSelectVill').innerText = "-- Select District First --";
                 document.getElementById('labelManualVillage').innerText = "3. Or Type Village Name Manually:";
@@ -254,10 +256,15 @@
                 document.getElementById('labelCategory').innerText = "Category:";
                 
                 document.getElementById('cat1').innerText = "Kirana / General Store";
+                document.getElementById('cat1').value = "Kirana / General Store";
                 document.getElementById('cat2').innerText = "Medical / Pharmacy";
+                document.getElementById('cat2').value = "Medical / Pharmacy";
                 document.getElementById('cat3').innerText = "Repairing (Electronics/Vehicle)";
+                document.getElementById('cat3').value = "Repairing (Electronics/Vehicle)";
                 document.getElementById('cat4').innerText = "Tractor / Agriculture Service";
+                document.getElementById('cat4').value = "Tractor / Agriculture Service";
                 document.getElementById('cat5').innerText = "Other Service";
+                document.getElementById('cat5').value = "Other Service";
 
                 document.getElementById('labelPhone').innerText = "Mobile Number:";
                 document.getElementById('regPhone').placeholder = "10-digit mobile number";
@@ -279,18 +286,15 @@
                 document.getElementById('weatherHeading').innerText = "🌤 मौसम अपडेट (हरियाणा)";
                 document.getElementById('tempText').innerText = "तापमान: 34°C | साफ आसमान";
                 document.getElementById('forecastTitle').innerText = "📅 आगामी 4 दिनों का मौसम:";
+                document.getElementById('wDay1').innerHTML = "आज<br>☀️ 34°C";
+                document.getElementById('wDay2').innerHTML = "सोम<br>⛅ 35°C";
+                document.getElementById('wDay3').innerHTML = "मंगल<br>🌥 34°C";
+                document.getElementById('wDay4').innerHTML = "बुध<br>☀️ 35°C";
                 document.getElementById('newsTitleTag').innerText = "ताज़ा अपडेट";
+                document.getElementById('newsMarqueeText').innerText = "📢 हरियाणा ग्रामीण पोर्टल पर आपका स्वागत है! अपनी दुकान या सेवा फ्री में रजिस्टर करें। | 🌾 मंडी भाव: गेहूँ ₹2275, बाजरा ₹2500, सरसों ₹5400 प्रति क्विंटल।";
                 document.getElementById('searchCardTitle').innerText = "🔍 अपने गाँव की सेवाएँ खोजें";
                 document.getElementById('labelDist').innerText = "1. जिला चुनें:";
                 document.getElementById('optSelectDist').innerText = "-- जिला चुनें --";
-
-                // Districts Hindi options
-                const distSel = document.getElementById('districtSelect');
-                distSel.options[1].text = "रोहतक";
-                distSel.options[2].text = "भिवानी";
-                distSel.options[3].text = "हिसार";
-                distSel.options[4].text = "चरखी दादरी";
-
                 document.getElementById('labelVillage').innerText = "2. गाँव चुनें (ड्रॉपडाउन):";
                 document.getElementById('optSelectVill').innerText = "-- पहले जिला चुनें --";
                 document.getElementById('labelManualVillage').innerText = "3. या अपने गाँव का नाम खुद टाइप करें:";
@@ -305,10 +309,15 @@
                 document.getElementById('labelCategory').innerText = "श्रेणी (Category चुनें):";
                 
                 document.getElementById('cat1').innerText = "किराना / जनरल स्टोर";
+                document.getElementById('cat1').value = "किराना / जनरल स्टोर";
                 document.getElementById('cat2').innerText = "मेडिकल / दवाइयां";
+                document.getElementById('cat2').value = "मेडिकल / दवाइयां";
                 document.getElementById('cat3').innerText = "रिपेयरिंग (इलेक्ट्रॉनिक्स/वाहन)";
+                document.getElementById('cat3').value = "रिपेयरिंग (इलेक्ट्रॉनिक्स/वाहन)";
                 document.getElementById('cat4').innerText = "ट्रैक्टर / कृषि सेवा";
+                document.getElementById('cat4').value = "ट्रैक्टर / कृषि सेवा";
                 document.getElementById('cat5').innerText = "अन्य सेवा";
+                document.getElementById('cat5').value = "अन्य सेवा";
 
                 document.getElementById('labelPhone').innerText = "मोबाइल नंबर:";
                 document.getElementById('regPhone').placeholder = "10 अंकों का मोबाइल नंबर";
@@ -320,12 +329,27 @@
                 document.getElementById('adminSuccessText').innerText = "✔ एडमिन एक्सेस मिल गया!";
                 document.getElementById('footerText').innerText = "© 2026 हरियाणा ग्रामीण सेवा पोर्टल | सर्वाधिकार सुरक्षित";
             }
+            updateDistrictNames();
             updateVillages();
+        }
+
+        function updateDistrictNames() {
+            const distSel = document.getElementById('districtSelect');
+            const currentVal = distSel.value;
+            const names = districtsData[currentLang];
+            
+            distSel.options[1].text = names.rohtak;
+            distSel.options[2].text = names.bhiwani;
+            distSel.options[3].text = names.hisar;
+            distSel.options[4].text = names.charkhi_dadri;
+            distSel.value = currentVal;
         }
 
         function updateVillages() {
             const district = document.getElementById('districtSelect').value;
             const villageSelect = document.getElementById('villageSelect');
+            const selectedVal = villageSelect.value;
+            
             villageSelect.innerHTML = currentLang === 'hi' ? '<option value="">-- गाँव चुनें --</option>' : '<option value="">-- Select Village --</option>';
 
             if (district && villageData[district]) {
@@ -336,6 +360,7 @@
                     option.textContent = village;
                     villageSelect.appendChild(option);
                 });
+                villageSelect.value = selectedVal;
             }
         }
 
