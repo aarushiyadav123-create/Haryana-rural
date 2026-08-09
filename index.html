@@ -74,36 +74,36 @@
 
     <div class="container">
 
-        <!-- लाइव मौसम अपडेट (ऑटोमैटिक API) -->
+        <!-- लाइव मौसम अपडेट -->
         <div class="weather-card">
             <div class="weather-title">
                 <span>🌤 हरियाणा लाइव मौसम</span>
-                <span id="liveTemp">लोड हो رہا है...</span>
+                <span id="liveTemp">29.6°C</span>
             </div>
-            <div id="weatherDesc" style="font-size: 0.85rem; opacity: 0.9;">मौसम की जानकारी प्राप्त की जा रही है...</div>
+            <div id="weatherDesc" style="font-size: 0.85rem; opacity: 0.9;">हवा की गति: 4.4 km/h | स्थिति: बिल्कुल साफ</div>
         </div>
 
-        <!-- लाइव हरियाणा न्यूज़ टिकर (ऑटोमैटिक) -->
+        <!-- लाइव हरियाणा न्यूज़ टिकर -->
         <div class="news-container">
             <span class="news-title-tag">ताज़ा न्यूज़</span>
             <div class="news-ticker">
                 <marquee behavior="scroll" direction="left" scrollamount="4" id="liveNewsMarquee">
-                    हरियाणा की ताज़ा खबरें लोड हो रही हैं... पोर्टल पर आपका स्वागत है!
+                    हरियाणा ग्रामीण सेवा पोर्टल पर आपका स्वागत है। अपने गाँव की दुकानें और सेवाएँ आसानी से खोजें और जोड़ें! | राज्य में डिजिटल सेवाओं का विस्तार तेजी से जारी है।
                 </marquee>
             </div>
         </div>
 
-        <!-- लाइव मंडी भाव टिकर (ऑटोमैटिक अपडेटेड) -->
+        <!-- लाइव मंडी भाव टिकर -->
         <div class="news-container" style="border-left-color: #388e3c; background: #e8f5e9;">
             <span class="news-title-tag" style="background: #388e3c;">मंडी भाव</span>
             <div class="news-ticker">
-                <marquee behavior="scroll" direction="left" scrollamount="4" style="color: #1b5e20;" id="mandiMarquee">
+                <marquee behavior="scroll" direction="left" scrollamount="4" style="color: #1b5e20;">
                     गेहूँ: ₹2275-₹2350 | बाजरा: ₹2500-₹2600 | सरसों: ₹5400-₹5600 | नरमा: ₹7200 प्रति क्विंटल (ताज़ा मंडी अपडेट)
                 </marquee>
             </div>
         </div>
 
-        <!-- जिला व गाँव खोजें -->
+        <!-- जिला व गाँव खोजें (सिर्फ जिला-वार ड्रॉपडाउन) -->
         <div class="card">
             <h2>🔍 अपने गाँव की सेवाएँ खोजें</h2>
             
@@ -120,14 +120,9 @@
 
             <div class="form-group">
                 <label>2. गाँव चुनें (ड्रॉपडाउन):</label>
-                <select id="villageSelect" onchange="document.getElementById('manualVillageInput').value=''">
+                <select id="villageSelect">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
-            </div>
-
-            <div class="form-group">
-                <label>3. या अपने गाँव का नाम खुद टाइप करें:</label>
-                <input type="text" id="manualVillageInput" placeholder="जैसे: माल्कोश, इस्मला, बाढड़ा...">
             </div>
 
             <div class="btn-box">
@@ -137,7 +132,7 @@
             <div class="result-box" id="searchResult"></div>
         </div>
 
-        <!-- दुकान रजिस्टर करने का फॉर्म -->
+        <!-- दुकान रजिस्टर करने का फॉर्म (Category के साथ) -->
         <div class="card">
             <h2>📝 अपनी दुकान / सेवा यहाँ रजिस्टर करें</h2>
             
@@ -147,8 +142,18 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव का नाम:</label>
-                <input type="text" id="regVillage" placeholder="गाँव का नाम दर्ज करें (जैसे: माल्कोश)">
+                <label>जिला चुनें:</label>
+                <select id="regDistrict">
+                    <option value="rohtak">रोहतक</option>
+                    <option value="bhiwani">भिवानी</option>
+                    <option value="hisar">हिसार</option>
+                    <option value="charkhi_dadri">चरखी दादरी</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>गाँव का नाम (ड्रॉपडाउन से चुनें या सही नाम लिखें):</label>
+                <input type="text" id="regVillage" placeholder="गाँव का नाम (जैसे: माल्कोश)">
             </div>
 
             <div class="form-group">
@@ -201,10 +206,11 @@
     <script>
         let customVillages = JSON.parse(localStorage.getItem('addedVillages') || '[]');
 
+        // 'माल्कोश' को सिर्फ चरखी दादरी में रखा गया है
         const defaultVillageData = {
-            rohtak: ["माल्कोश", "इस्मला", "कलानौर", "मदीना", "बहू अकबरपुर", "संघान", "रिटौली", "सुन्दराणा", "भैंसरवाल कलाँ", "खरावड़", "आनंदपुर", "टिकरी", "गरनावठी", "महेहम"],
-            bhiwani: ["माल्कोश", "लोहारू", "बाढड़ा", "सिवानी", "दिनोद", "बवानी खेड़ा", "तोशाम", "किरावड़", "बिमला", "खरक कलाँ", "बहल", "सिंगाणी", "सान्गा", "झुप्पा"],
-            hisar: ["माल्कोश", "हाँसी", "बरवाला", "नारनौंद", "उकलाना", "आदमपुर", "अग्रोहा", "सिसाय", "राया", "ढंढूर", "किरथान", "मसूदपुर", "डानी गोपाल", "मित्ताथल"],
+            rohtak: ["इस्मला", "कलानौर", "मदीना", "बहू अकबरपुर", "संघान", "रिटौली", "सुन्दराणा", "भैंसरवाल कलाँ", "खरावड़", "आनंदपुर", "टिकरी", "गरनावठी", "महेहम"],
+            bhiwani: ["लोहारू", "बाढड़ा", "सिवानी", "दिनोद", "बवानी खेड़ा", "तोशाम", "किरावड़", "बिमला", "खरक कलाँ", "बहल", "सिंगाणी", "सान्गा", "झुप्पा"],
+            hisar: ["हाँसी", "बरवाला", "नारनौंद", "उकलाना", "आदमपुर", "अग्रोहा", "सिसाय", "राया", "ढंढूर", "किरथान", "मसूदपुर", "डानी गोपाल", "मित्ताथल"],
             charkhi_dadri: ["माल्कोश", "बाढड़ा", "झोझू कलां", "बोध कलां", "डूडवा", "चरखी दादरी शहर", "पैंघुवा", "मानकावास", "कैलियाणा", "मोड़ी", "गोपी", "पिचौपा कलाँ", "अचिजपुरा", "किरावड़"]
         };
 
@@ -215,7 +221,7 @@
 
             if (district && defaultVillageData[district]) {
                 let list = [...defaultVillageData[district], ...customVillages];
-                list = [...new Set(list)]; // डुप्लीकेट हटाएं
+                list = [...new Set(list)];
                 list.forEach(village => {
                     let option = document.createElement('option');
                     option.value = village;
@@ -225,9 +231,7 @@
             }
         }
 
-        // लाइव मौसम और न्यूज़ API फेच करना
         async function loadLiveData() {
-            // मौसम API (हरियाणा / रोहतक क्षेत्र का लाइव तापमान)
             try {
                 let response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=28.89&longitude=76.58&current_weather=true');
                 let data = await response.json();
@@ -236,32 +240,16 @@
                     document.getElementById('weatherDesc').innerText = `हवा की गति: ${data.current_weather.windspeed} km/h | स्थिति: बिल्कुल साफ`;
                 }
             } catch(e) {
-                document.getElementById('liveTemp').innerText = "34°C";
-                document.getElementById('weatherDesc').innerText = "मौसम: साफ आसमान, धूप खिली है।";
-            }
-
-            // लाइव RSS न्यूज़ (हरियाणा की ताज़ा खबरें)
-            try {
-                let newsRes = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.livehindustan.com/rss/haryana');
-                let newsData = await newsRes.json();
-                if(newsData && newsData.items) {
-                    let headlines = newsData.items.map(item => item.title).join(" | ");
-                    document.getElementById('liveNewsMarquee').innerText = headlines;
-                }
-            } catch(e) {
-                document.getElementById('liveNewsMarquee').innerText = "हरियाणा ग्रामीण सेवा पोर्टल पर आपका स्वागत है। अपने गाँव की दुकानें और सेवाएँ आसानी से खोजें और जोड़ें!";
+                // डिफ़ॉल्ट लाइव डेटा मेन्टेन रहेगा
             }
         }
 
         function searchServices() {
-            let village = document.getElementById('manualVillageInput').value.trim();
-            if(!village) {
-                village = document.getElementById('villageSelect').value;
-            }
+            const village = document.getElementById('villageSelect').value;
             const resultBox = document.getElementById('searchResult');
             
             if(!village) {
-                alert('कृपया पहले ड्रॉपडाउन से गाँव चुनें या नीचे नाम टाइप करें!');
+                alert('कृपया पहले जिला और फिर ड्रॉपडाउन से अपना गाँव चुनें!');
                 return;
             }
 
@@ -298,7 +286,7 @@
             const phone = document.getElementById('regPhone').value.trim();
 
             if(!name || !village || !phone) {
-                alert('कृपया दुकान का नाम, गाँव और मोबाइल नंबर जरूर भरें!');
+                alert('कृपया दुकान का नाम,गाँव और मोबाइल नंबर जरूर भरें!');
                 return;
             }
 
