@@ -40,22 +40,25 @@
 
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
-        select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; outline: none; background: #fafafa; }
-        select:focus, input:focus { border-color: var(--primary); background: #fff; }
+        select, input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; outline: none; background: #fafafa; }
+        select:focus, input:focus, textarea:focus { border-color: var(--primary); background: #fff; }
 
         .btn-box { text-align: center; margin-top: 15px; }
         .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); }
         .btn-danger { background: #d32f2f; color: white; padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
+        .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
 
         .add-shop-toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .add-shop-form-container { display: none; background: #ffffff; border: 2px dashed var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
 
         .result-box { margin-top: 15px; }
-        .shop-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px; margin-bottom: 10px; border-radius: 6px; text-align: left; display: flex; justify-content: space-between; align-items: center; }
+        .shop-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px; margin-bottom: 12px; border-radius: 6px; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .shop-img { width: 55px; height: 55px; object-fit: cover; border-radius: 6px; border: 1px solid #ccc; flex-shrink: 0; }
+        .shop-info { flex-grow: 1; }
         .shop-info h4 { color: var(--primary); font-size: 1rem; }
-        .shop-info p { font-size: 0.85rem; color: #666; margin-top: 3px; }
+        .shop-info p { font-size: 0.82rem; color: #666; margin-top: 3px; }
 
         .scheme-item { background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 12px; margin-bottom: 12px; border-radius: 6px; text-align: left; }
         .scheme-item h4 { color: #1b5e20; font-size: 1rem; margin-bottom: 4px; }
@@ -167,10 +170,11 @@
             </div>
 
             <div class="form-group">
-                <label id="t-f-vill-label">गाँव चुनें:</label>
-                <select id="regVillageSelect">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
+                <label id="t-f-vill-label">गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव टाइप करें):</label>
+                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम यहाँ लिखें या चुनें...">
+                <datalist id="regVillageList">
+                    <!-- जावास्क्रिप्ट द्वारा जिले के अनुसार विकल्प भरेंगे -->
+                </datalist>
             </div>
 
             <div class="form-group">
@@ -187,6 +191,18 @@
             <div class="form-group">
                 <label id="t-f-phone-label">मोबाइल नंबर:</label>
                 <input type="tel" id="regPhone" placeholder="10 अंकों का मोबाइल नंबर">
+            </div>
+
+            <div class="form-group">
+                <label id="t-f-photo-label">📷 दुकान की फोटो अपलोड करें (वैकल्पिक):</label>
+                <input type="file" id="regPhoto" accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="custom-btn btn-secondary" onclick="getLocation()" style="padding: 10px; font-size: 0.9rem;">📍 मेरी वर्तमान जीपीएस लोकेशन (GPS) जोड़ें</button>
+                <p id="locationStatus" style="font-size: 0.8rem; color: #2e7d32; margin-top: 5px; font-weight: bold;"></p>
+                <input type="hidden" id="regLat" value="">
+                <input type="hidden" id="regLng" value="">
             </div>
 
             <div class="btn-box">
@@ -211,6 +227,22 @@
             <div id="districtSchemeContent"></div>
         </div>
 
+        <!-- फीडबैक सेक्शन -->
+        <div class="card">
+            <h2 id="t-feedback-heading">💬 सुझाव एवं फीडबैक (Feedback)</h2>
+            <div class="form-group">
+                <label id="t-fb-name">आपका नाम:</label>
+                <input type="text" id="fbName" placeholder="अपना नाम दर्ज करें">
+            </div>
+            <div class="form-group">
+                <label id="t-fb-msg">आपका सुझाव या शिकायत:</label>
+                <textarea id="fbMsg" rows="3" placeholder="पोर्टल के बारे में अपनी राय या सुधार यहाँ लिखें..."></textarea>
+            </div>
+            <div class="btn-box">
+                <button class="custom-btn" onclick="submitFeedback()">फीडबैक भेजें</button>
+            </div>
+        </div>
+
         <!-- एडमिन पैनल -->
         <div class="card" style="text-align: center;">
             <div class="btn-box" style="margin-top:0;">
@@ -228,6 +260,9 @@
 
                     <h4 id="t-all-shops-title" style="font-size: 0.95rem; color: var(--primary); margin-bottom: 5px;">📋 पोर्टल की सभी दुकानें (डिलीट करने की पावर):</h4>
                     <div id="allShopsList"></div>
+
+                    <h4 style="font-size: 0.95rem; color: var(--secondary); margin-top: 15px; margin-bottom: 5px;">📥 प्राप्त फीडबैक सूची:</h4>
+                    <div id="feedbackListContainer" style="max-height: 150px; overflow-y: auto;"></div>
                 </div>
             </div>
         </div>
@@ -268,12 +303,13 @@
                 formHeading: "नया दुकान/सेवा रजिस्ट्रेशन फॉर्म",
                 fNameLabel: "दुकान या सेवा का नाम:",
                 fDistLabel: "जिला चुनें:",
-                fVillLabel: "गाँव चुनें:",
+                fVillLabel: "गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव टाइप करें):",
                 fCatLabel: "श्रेणी (Category चुनें):",
                 fPhoneLabel: "मोबाइल नंबर:",
                 fSubmitBtn: "सीधे पोर्टल पर लाइव करें",
                 schemeHeading: "📜 हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव पोर्टल)",
                 schemeLabel: "अपने जिले के अनुसार योजनाओं का पोर्टल देखें:",
+                feedbackHeading: "💬 सुझाव एवं फीडबैक (Feedback)",
                 adminToggleBtn: "🔒 एडमिन / वेरिफिकेशन पैनल",
                 adminBoxTitle: "एडमिन नियंत्रण एवं सत्यापन कक्ष",
                 adminPassPlaceholder: "पासवर्ड दर्ज करें",
@@ -308,12 +344,13 @@
                 formHeading: "New Shop/Service Registration Form",
                 fNameLabel: "Shop or Service Name:",
                 fDistLabel: "Select District:",
-                fVillLabel: "Select Village:",
+                fVillLabel: "Select Village name (Select or type manual village):",
                 fCatLabel: "Select Category:",
                 fPhoneLabel: "Mobile Number:",
                 fSubmitBtn: "Publish Live on Portal",
                 schemeHeading: "📜 Haryana Govt Major Schemes (District-wise Live)",
                 schemeLabel: "View scheme portals according to your district:",
+                feedbackHeading: "💬 Suggestions & Feedback",
                 adminToggleBtn: "🔒 Admin / Verification Panel",
                 adminBoxTitle: "Admin Control & Verification Room",
                 adminPassPlaceholder: "Enter password",
@@ -359,6 +396,7 @@
             document.getElementById('t-f-submit-btn').textContent = t.fSubmitBtn;
             document.getElementById('t-scheme-heading').textContent = t.schemeHeading;
             document.getElementById('t-scheme-label').textContent = t.schemeLabel;
+            document.getElementById('t-feedback-heading').textContent = t.feedbackHeading;
             document.getElementById('t-admin-toggle-btn').textContent = t.adminToggleBtn;
             document.getElementById('t-admin-box-title').textContent = t.adminBoxTitle;
             document.getElementById('adminPass').placeholder = t.adminPassPlaceholder;
@@ -377,6 +415,14 @@
             charkhi_dadri: ["माल्कोश / Malkosh", "बाढड़ा / Badhra", "झोझू कलां / Jhojhu Kalan", "बोध कलां / Bodh Kalan", "डूडवा / Dudwa", "चरखी दादरी शहर / Charkhi Dadri City", "पैंघुवा / Panghuwa", "मानकावास / Mankawas", "कैलियाणा / Kailyana", "मोड़ी / Modi", "गोपी / Gopi", "पिचौपा कलाँ / Pichoupa Kalan", "अचिजपुरा / Achijpura", "किरावड़ / Kirawad"]
         };
 
+        // जिला मैपिंग यह जाँचने के लिए कि गाँव सही जिले का है या नहीं
+        const districtVillageMapping = {
+            rohtak: ["इस्मला", "कलानौर", "मदीना", "बहू अकबरपुर", "संघान", "रिटौली", "सुन्दराणा", "भैंसरवाल", "खरावड़", "आनंदपुर", "टिकरी", "गरनावठी", "महेहम"],
+            bhiwani: ["लोहारू", "बाढड़ा", "सिवानी", "दिनोद", "बवानी", "तोशाम", "किरावड़", "बिमला", "खरक", "बहल", "सिंगाणी", "सान्गा", "झुप्पा"],
+            hisar: ["हाँसी", "बरवाला", "नारनौंद", "उकलाना", "आदमपुर", "अग्रोहा", "सिसाय", "राया", "ढंढूर", "किरथान", "मसूदपुर", "डानी", "मित्ताथल"],
+            charkhi_dadri: ["माल्कोश", "बाढड़ा", "झोझू", "बोध", "डूडवा", "चरखी", "पैंघुवा", "मानकावास", "कैलियाणा", "मोड़ी", "गोपी", "पिचौपा", "अचिजपुरा", "किरावड़"]
+        };
+
         function initPortal() {
             updateRegVillageDropdown();
             updateDistrictSchemes();
@@ -392,7 +438,6 @@
                 let newsList = [];
                 if(data && data.items) {
                     data.items.forEach(item => {
-                        // डुप्लीकेट खबरें हटाने के लिए चेक करें
                         if(!newsList.includes(item.title)) {
                             newsList.push(item.title);
                         }
@@ -425,17 +470,34 @@
 
         function updateRegVillageDropdown() {
             const district = document.getElementById('regDistrict').value;
-            const villageSelect = document.getElementById('regVillageSelect');
-            villageSelect.innerHTML = `<option value="">${currentLang === 'hi' ? '-- गाँव चुनें --' : '-- Select Village --'}</option>`;
+            const datalist = document.getElementById('regVillageList');
+            datalist.innerHTML = '';
 
             if (district && villageData[district]) {
                 villageData[district].forEach(village => {
                     let option = document.createElement('option');
                     option.value = village;
-                    option.textContent = village;
-                    villageSelect.appendChild(option);
+                    datalist.appendChild(option);
                 });
             }
+        }
+
+        function getLocation() {
+            const status = document.getElementById('locationStatus');
+            if (!navigator.geolocation) {
+                status.textContent = "आपका ब्राउज़र जीपीएस सपोर्ट नहीं करता है।";
+                return;
+            }
+            status.textContent = "लोकेशन प्राप्त की जा रही है...";
+            navigator.geolocation.getCurrentPosition((position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                document.getElementById('regLat').value = lat;
+                document.getElementById('regLng').value = lng;
+                status.textContent = `✔ जीपीएस लोकेशन सफलतापूर्वक जुड़ गई! (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+            }, () => {
+                status.textContent = "लोकेशन प्राप्त करने में विफल। कृपया लोकेशन परमिशन दें।";
+            });
         }
 
         function toggleAddShopForm() {
@@ -508,7 +570,6 @@
             let defaultHidden = JSON.parse(localStorage.getItem('hiddenDefaultShops') || '[]');
             let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
             
-            // सटीक मिलान के लिए फ़िल्टर (गाँव के नाम का कोई हिस्सा मैच होने पर भी दिखेगा)
             let filtered = approvedShops.filter(s => s.village.trim().toLowerCase().includes(selectedVillage) || selectedVillage.includes(s.village.trim().toLowerCase()));
 
             let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">${currentLang === 'hi' ? 'में उपलब्ध सेवाएँ:' : 'Available Services:'}</h3>`;
@@ -521,6 +582,7 @@
                             <h4>श्री श्याम जनरल स्टोर / Shri Shyam General Store</h4>
                             <p>${currentLang === 'hi' ? 'श्रेणी: किराना | संपर्क:' : 'Category: Grocery | Contact:'} 9876543210</p>
                         </div>
+                        <a href="tel:9876543210" class="call-btn">📞 कॉल करें</a>
                     </div>
                 `;
                 foundCount++;
@@ -528,12 +590,15 @@
 
             if(filtered.length > 0) {
                 filtered.forEach(s => {
+                    let imgTag = s.photo ? `<img src="${s.photo}" class="shop-img">` : '';
                     html += `
                         <div class="shop-item">
+                            ${imgTag}
                             <div class="shop-info">
                                 <h4>${s.name}</h4>
                                 <p>${currentLang === 'hi' ? 'गाँव:' : 'Village:'} ${s.village} | ${currentLang === 'hi' ? 'श्रेणी:' : 'Category:'} ${s.category} | ${currentLang === 'hi' ? 'संपर्क:' : 'Contact:'} ${s.phone}</p>
                             </div>
+                            <a href="tel:${s.phone}" class="call-btn">📞 कॉल करें</a>
                         </div>
                     `;
                     foundCount++;
@@ -550,16 +615,58 @@
         function registerService() {
             const name = document.getElementById('regShopName').value.trim();
             const district = document.getElementById('regDistrict').value;
-            const village = document.getElementById('regVillageSelect').value;
+            const village = document.getElementById('regVillageInput').value.trim();
             const category = document.getElementById('regCategory').value;
             const phone = document.getElementById('regPhone').value.trim();
+            const lat = document.getElementById('regLat').value;
+            const lng = document.getElementById('regLng').value;
+            const photoInput = document.getElementById('regPhoto');
 
             if(!name || !village || !phone) {
                 alert(currentLang === 'hi' ? 'कृपया दुकान का नाम, गाँव और मोबाइल नंबर सभी फ़ील्ड भरें!' : 'Please fill all required shop details!');
                 return;
             }
 
-            let newShop = { id: Date.now(), name, district, village, category, phone };
+            // जिला और गाँव का गलत मिलान चेक करने की सुविधा (Validation)
+            let isKnownDistrictVillage = false;
+            if(districtVillageMapping[district]) {
+                for(let knownVill of districtVillageMapping[district]) {
+                    if(village.toLowerCase().includes(knownVill.toLowerCase())) {
+                        isKnownDistrictVillage = true;
+                        break;
+                    }
+                }
+            }
+
+            // अगर गाँव किसी अन्य जिले की प्रसिद्ध सूची से मेल खाता है तो वार्निंग दें
+            if(!isKnownDistrictVillage && village.length > 2) {
+                // चेक करें कि क्या यह किसी दूसरे जिले का मुख्य गाँव तो नहीं
+                for(let distKey in districtVillageMapping) {
+                    if(distKey !== district) {
+                        for(let otherVill of districtVillageMapping[distKey]) {
+                            if(village.toLowerCase().includes(otherVill.toLowerCase())) {
+                                alert(`⚠️ चेतावनी: '${village}' गाँव आपके चुने गए जिले (${district}) से मेल नहीं खाता है! कृपया सही जिला या गाँव चुनें।`);
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // फोटो को Base64 में बदलकर सेव करना ताकि लोकल स्टोरेज में सुरक्षित रहे
+            if(photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    saveShopData(name, district, village, category, phone, lat, lng, e.target.result);
+                };
+                reader.readAsDataURL(photoInput.files[0]);
+            } else {
+                saveShopData(name, district, village, category, phone, lat, lng, "");
+            }
+        }
+
+        function saveShopData(name, district, village, category, phone, lat, lng, photo) {
+            let newShop = { id: Date.now(), name, district, village, category, phone, lat, lng, photo };
             let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
             approvedShops.push(newShop);
             localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
@@ -572,9 +679,27 @@
 
             alert(currentLang === 'hi' ? 'दुकान सफलतापूर्वक रजिस्टर होकर पोर्टल पर लाइव हो गई है!' : 'Shop registered and published live on portal successfully!');
             document.getElementById('regShopName').value = '';
+            document.getElementById('regVillageInput').value = '';
             document.getElementById('regPhone').value = '';
+            document.getElementById('regPhoto').value = '';
+            document.getElementById('locationStatus').textContent = '';
             document.getElementById('addShopFormBox').style.display = 'none';
             document.getElementById('toggleIcon').textContent = '▼';
+        }
+
+        function submitFeedback() {
+            let name = document.getElementById('fbName').value.trim();
+            let msg = document.getElementById('fbMsg').value.trim();
+            if(!name || !msg) {
+                alert(currentLang === 'hi' ? 'कृपया अपना नाम और सुझाव दोनों दर्ज करें।' : 'Please enter name and feedback.');
+                return;
+            }
+            let feedbacks = JSON.parse(localStorage.getItem('portalFeedbacks') || '[]');
+            feedbacks.push({ name, msg, date: new Date().toLocaleDateString() });
+            localStorage.setItem('portalFeedbacks', JSON.stringify(feedbacks));
+            alert(currentLang === 'hi' ? 'आपका सुझाव सफलतापूर्वक प्राप्त हो गया है। धन्यवाद!' : 'Feedback submitted successfully. Thank you!');
+            document.getElementById('fbName').value = '';
+            document.getElementById('fbMsg').value = '';
         }
 
         function toggleAdminPanel() {
@@ -587,6 +712,7 @@
             if(pass === 'admin123') {
                 document.getElementById('adminControls').style.display = 'block';
                 loadAllShops();
+                loadFeedbacks();
                 alert(currentLang === 'hi' ? 'लॉगिन सफल!' : 'Login Successful!');
             } else {
                 alert(currentLang === 'hi' ? 'गलत पासवर्ड!' : 'Incorrect Password!');
@@ -630,6 +756,24 @@
             });
 
             listDiv.innerHTML = html;
+        }
+
+        function loadFeedbacks() {
+            let feedbacks = JSON.parse(localStorage.getItem('portalFeedbacks') || '[]');
+            let container = document.getElementById('feedbackListContainer');
+            if(feedbacks.length === 0) {
+                container.innerHTML = `<p style="font-size: 0.8rem; color: #666;">कोई फीडबैक नहीं है।</p>`;
+                return;
+            }
+            let html = '';
+            feedbacks.forEach((fb, idx) => {
+                html += `
+                    <div style="background: #fff; padding: 6px; margin-bottom: 5px; border-radius: 4px; font-size: 0.8rem; border-left: 3px solid var(--secondary);">
+                        <strong>${fb.name}</strong> (${fb.date}):<br>${fb.msg}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
         }
 
         function deleteDefaultShop() {
