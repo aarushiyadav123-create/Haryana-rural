@@ -127,7 +127,6 @@
             margin-bottom: 5px;
             color: #333;
         }
-        /* 🛠️ यहाँ सेलेक्ट बॉक्स की पैडिंग और चौड़ाई को ठीक किया गया है ताकि नाम बिल्कुल न कटे */
         .form-group select {
             width: 100%;
             padding: 12px 10px;
@@ -204,7 +203,7 @@
         <!-- 📢 ताज़ा न्यूज़ टिकर -->
         <div class="ticker-card">
             <span style="background: #ff8f00; color: white; padding: 2px 6px; border-radius: 4px; font-size:0.75rem;">ताज़ा लोकल न्यूज़</span>
-            <marquee scrollamount="4">हरियाणा ग्रामीण अपडेट: जिला और गाँव चयन की समस्या को पूरी तरह ठीक कर दिया गया है!</marquee>
+            <marquee scrollamount="4">हरियाणा ग्रामीण अपडेट: माल्कोश गाँव को अब चरखी दादरी जिला के अंतर्गत अपडेट कर दिया गया है!</marquee>
         </div>
 
         <!-- 🌾 मंडी भाव -->
@@ -220,8 +219,8 @@
             <div class="form-group">
                 <label id="txt-lbl-dist">1. जिला चुनें:</label>
                 <select id="district-select" onchange="updateVillages()">
-                    <option value="charkhi_dadri">चरखी दादरी</option>
-                    <option value="mahendragarh">महेंद्रगढ़ (माल्कोश)</option>
+                    <option value="charkhi_dadri">चरखी दादरी (माल्कोश)</option>
+                    <option value="mahendragarh">महेंद्रगढ़</option>
                     <option value="rewari">रेवाड़ी</option>
                     <option value="rohtak">रोहतक</option>
                     <option value="bhiwani">भिवानी</option>
@@ -302,7 +301,7 @@
             <div id="scheme-list-area">
                 <div class="scheme-item">
                     <h4>📁 जिला चरखी दादरी - परिवार पहचान पत्र (PPP)</h4>
-                    <p>जिला नागरिक संसाधन सूचना विभाग, चरखी दादरी के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा।</p>
+                    <p>जिला नागरिक संसाधन सूचना विभाग, चरखी दादरी के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा。</p>
                     <a href="https://meraparivar.haryana.gov.in" target="_blank">🔗 पीपीपी पोर्टल (चरखी दादरी लाइव) &rarr;</a>
                 </div>
                 <div class="scheme-item">
@@ -332,8 +331,8 @@
         let currentLang = 'hi';
 
         const districtVillages = {
-            "charkhi_dadri": ["दादरी शहर", "बाढ़डा", "पैंतावास", "झोझू कलाँ"],
-            "mahendragarh": ["माल्कोश / Malkosh", "कचरी", "नारनौल", "महेंद्रगढ़"],
+            "charkhi_dadri": ["माल्कोश / Malkosh", "दादरी शहर", "बाढ़डा", "पैंतावास", "झोझू कलाँ"],
+            "mahendragarh": ["नारनौल", "महेंद्रगढ़", "कचरी", "अटेली"],
             "rewari": ["रेवाड़ी शहर", "बावल", "धारूहेड़ा", "कोसली"],
             "rohtak": ["रोहतक शहर", "इस्माइला", "कलानौर", "महेम"],
             "bhiwani": ["भिवानी शहर", "बामला", "लोहारू", "सिवानी"],
@@ -459,7 +458,7 @@
             currentLang = (currentLang === 'hi') ? 'en' : 'hi';
             if(currentLang === 'en') {
                 document.getElementById('page-title').innerText = "Haryana Grameen Seva - Digital Gram Portal";
-                document.getElementById('txt-founder').innerText = "👨‍💼 Founder: Kusum w/o Rajesh Yadav Malkosh";
+                document.getElementById('txt-founder').innerText = "👨‍💼 Founder: Kusum w/o राजेश यादव Malkosh";
                 document.getElementById('txt-header-title').innerText = "Haryana Grameen Seva";
                 document.getElementById('txt-badge').innerText = "Every village shop, every service - on your mobile";
                 document.getElementById('txt-subbadge').innerText = "Digital Malkosh & Haryana Portal";
@@ -495,7 +494,7 @@
                 area.innerHTML = `
                     <div class="scheme-item">
                         <h4>📁 जिला चरखी दादरी - परिवार पहचान पत्र (PPP)</h4>
-                        <p>जिला नागरिक संसाधन सूचना विभाग, चरखी दादरी के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा।</p>
+                        <p>जिला नागरिक संसाधन सूचना विभाग, चरखी दादरी के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा。</p>
                         <a href="https://meraparivar.haryana.gov.in" target="_blank">🔗 पीपीपी पोर्टल (चरखी दादरी लाइव) &rarr;</a>
                     </div>
                     <div class="scheme-item">
