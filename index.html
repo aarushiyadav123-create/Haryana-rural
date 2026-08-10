@@ -135,19 +135,25 @@
       font-weight: bold;
       cursor: pointer;
     }
-    /* New Scheme Section Styles */
+    
+    /* हरियाणा सरकार की योजनाएं सेक्शन (स्क्रीनशॉट के अनुसार) */
     .scheme-section {
       background: #fff;
-      border: 1px solid #ddd;
+      border: 1px solid #e0e0e0;
       margin: 12px;
       padding: 15px;
       border-radius: 12px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
     .scheme-title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: bold;
       color: #1b5e20;
+      margin-bottom: 5px;
+    }
+    .scheme-subtitle {
+      font-size: 12px;
+      color: #666;
       margin-bottom: 10px;
     }
     .scheme-dropdown {
@@ -155,37 +161,42 @@
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      margin-bottom: 12px;
-      background: #f9f9f9;
+      margin-bottom: 15px;
+      background: #fdfdfd;
       font-size: 13px;
+      outline: none;
     }
     .link-card {
       background: #f1f8e9;
-      border-left: 4px solid #4caf50;
+      border-left: 4px solid #388e3c;
       padding: 12px;
-      margin-bottom: 10px;
-      border-radius: 4px;
+      margin-bottom: 12px;
+      border-radius: 6px;
     }
     .link-card h4 {
       margin: 0 0 5px 0;
-      font-size: 13px;
-      color: #2e7d32;
+      font-size: 14px;
+      color: #1b5e20;
     }
     .link-card p {
-      margin: 0 0 8px 0;
-      font-size: 11px;
-      color: #555;
+      margin: 0 0 10px 0;
+      font-size: 12px;
+      color: #444;
     }
     .go-btn {
       display: inline-block;
-      background: #2e7d32;
+      background: #388e3c;
       color: white;
-      padding: 6px 12px;
+      padding: 6px 14px;
       text-decoration: none;
       border-radius: 4px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: bold;
     }
+    .go-btn:hover {
+      background: #2e7d32;
+    }
+
     .weather-box {
       background: #00838f;
       color: white;
@@ -232,14 +243,17 @@
     📢 इस डिजिटल पोर्टल को WhatsApp पर शेयर करें
   </a>
 
-  <!-- हरियाणा सरकार की मुख्य योजनाएं सेक्शन (नया जोड़ा गया) -->
+  <!-- हरियाणा सरकार की मुख्य योजनाएं सेक्शन (स्क्रीनशॉट के अनुसार) -->
   <div class="scheme-section">
     <div class="scheme-title">📜 हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव पोर्टल)</div>
+    <div class="scheme-subtitle">अपने जिले के अनुसार योजनाओं का पोर्टल देखें:</div>
+    
     <select class="scheme-dropdown">
       <option>चरखी दादरी (डिफ़ॉल्ट)</option>
       <option>हिसार</option>
       <option>सिरसा</option>
       <option>गुरुग्राम</option>
+      <option>रोहतक</option>
     </select>
     
     <div class="link-card">
