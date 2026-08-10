@@ -31,14 +31,15 @@
       align-items: center;
       font-weight: bold;
     }
-    .english-btn {
+    .admin-link {
       background: #ffeb3b;
       color: #333;
       border: none;
       padding: 4px 10px;
       border-radius: 4px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
+      text-decoration: none;
       cursor: pointer;
     }
 
@@ -105,7 +106,7 @@
       font-weight: bold;
     }
 
-    /* खोज सेक्शन (गाँव चुनें) */
+    /* खोज सेक्शन (गाँव ऑटोमैटिक बदलने वाला) */
     .search-section {
       background: #ffffff;
       border: 1px solid #e0e0e0;
@@ -229,10 +230,10 @@
 
 <div class="portal-container">
 
-  <!-- संस्थापक बार -->
+  <!-- संस्थापक बार और एडमिन पैनल लिंक -->
   <div class="founder-bar">
     <span>👩‍💻 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-    <button class="english-btn">English</button>
+    <a href="#" class="admin-link" onclick="openAdminPanel()">⚙️ Admin</a>
   </div>
 
   <!-- मुख्य बैनर -->
@@ -261,12 +262,12 @@
     </div>
   </div>
 
-  <!-- अपने गाँव की सेवाएँ खोजें (मुख्य सेक्शन) -->
+  <!-- अपने गाँव की सेवाएँ खोजें (ऑटोमैटिक गाँव बदलने वाला सेक्शन) -->
   <div class="search-section">
     <div class="search-title">🔍 अपने गाँव की सेवाएँ खोजें</div>
     
     <label class="label-text">1. जिला चुनें:</label>
-    <select id="main-district" class="dropdown-select">
+    <select id="district-select" class="dropdown-select" onchange="updateVillages()">
       <option value="चरखी दादरी">चरखी दादरी</option>
       <option value="रोहतक">रोहतक</option>
       <option value="झज्जर">झज्जर</option>
@@ -276,7 +277,7 @@
     </select>
 
     <label class="label-text">2. गाँव चुनें:</label>
-    <select class="dropdown-select">
+    <select id="village-select" class="dropdown-select">
       <option>माल्कोश / Malkosh</option>
       <option>अन्य गाँव</option>
     </select>
@@ -332,14 +333,50 @@
 </div>
 
 <script>
-  // जिला बदलने पर योजनाओं में नाम अपडेट करने का लॉजिक
-  document.getElementById('main-district').addEventListener('change', function() {
-    let selectedDistrict = this.value;
+  // जिलों के हिसाब से गाँव ऑटोमैटिक लोड करने का डेटा
+  const villageData = {
+    "चरखी दादरी": ["माल्कोश / Malkosh", "बाढड़ा", "झोझू कलां", "डडेरा", "गोपी"],
+    "रोहतक": ["इ Ismaila-B", "मदीना", "कलानौर", "सांपला", "बोहर"],
+    "झज्जर": ["बादली", "बेरी", "मातनहेल", "दुजाना", "छारा"],
+    "भिवानी": ["लोहारू", "बवानखेड़ा", "सिवानी", "दिनोद"],
+    "हिसार": ["हाँसी", "बरवाला", "नारनौंद", "उकलाना"],
+    "जींद": ["जुलाना", "नरवाना", "सफीदों", "उचाना"]
+  };
+
+  function updateVillages() {
+    let districtSelect = document.getElementById('district-select');
+    let villageSelect = document.getElementById('village-select');
+    let selectedDistrict = districtSelect.value;
+
+    // गाँव का ड्रॉपडाउन खाली करें
+    villageSelect.innerHTML = "";
+
+    // नए गाँवों की लिस्ट जोड़ें
+    if (villageData[selectedDistrict]) {
+      villageData[selectedDistrict].forEach(function(village) {
+        let opt = document.createElement('option');
+        opt.value = village;
+        opt.textContent = village;
+        villageSelect.appendChild(opt);
+      });
+    }
+
+    // नीचे योजनाओं में भी जिले का नाम बदलें
     let distSpans = document.querySelectorAll('.dist-name');
     distSpans.forEach(function(span) {
       span.textContent = selectedDistrict;
     });
-  });
+  }
+
+  // एडमिन पैनल ओपन करने का फंक्शन
+  function openAdminPanel() {
+    let password = prompt("कृपया एडमिन पासवर्ड दर्ज करें:");
+    if (password === "1234" || password === "admin") {
+      alert("एडमिन पैनल में आपका स्वागत है! यहाँ से आप नए गाँव या सेवा जोड़ सकते हैं।");
+    } else if (password !== null) {
+      alert("गलत पासवर्ड!");
+    }
+  }
 </script>
 
 </body>
