@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
+  <title>Haryana Rural Service - Digital Village Portal</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -84,92 +84,6 @@
       font-weight: bold;
       font-size: 13px;
     }
-
-    /* चुटकुला सेक्शन */
-    .joke-box {
-      background: #fffde7;
-      border: 1px solid #ffe082;
-      border-radius: 10px;
-      margin: 12px;
-      padding: 12px;
-      text-align: center;
-    }
-    .joke-text {
-      font-size: 13px;
-      font-weight: bold;
-      color: #795548;
-      margin-bottom: 10px;
-    }
-    .joke-btn {
-      background: #ff9800;
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    /* हरियाणा सरकार की योजनाएं सेक्शन */
-    .scheme-section {
-      background: #fff;
-      border: 1px solid #e0e0e0;
-      margin: 12px;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    .scheme-title {
-      font-size: 15px;
-      font-weight: bold;
-      color: #1b5e20;
-      margin-bottom: 5px;
-    }
-    .scheme-subtitle {
-      font-size: 12px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-    .scheme-dropdown {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      background: #fdfdfd;
-      font-size: 13px;
-      outline: none;
-    }
-    .link-card {
-      background: #edf7ed;
-      border-left: 4px solid #2e7d32;
-      padding: 12px;
-      margin-bottom: 12px;
-      border-radius: 6px;
-    }
-    .link-card h4 {
-      margin: 0 0 5px 0;
-      font-size: 13px;
-      color: #1b5e20;
-    }
-    .link-card p {
-      margin: 0 0 10px 0;
-      font-size: 11px;
-      color: #555;
-    }
-    .go-btn {
-      display: inline-block;
-      background: #27ae60;
-      color: white;
-      padding: 8px 14px;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    /* AI ग्रामीण असिस्टेंट */
     .ai-box {
       background: #ffffff;
       border: 1px solid #bce8f1;
@@ -221,8 +135,6 @@
       font-weight: bold;
       cursor: pointer;
     }
-
-    /* मौसम विजेट */
     .weather-box {
       background: #00838f;
       color: white;
@@ -240,139 +152,116 @@
       font-size: 20px;
       font-weight: bold;
     }
-
-    /* फीडबैक सेक्शन */
-    .feedback-box {
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      margin: 12px;
-      padding: 15px;
-    }
-    .feedback-title {
-      font-size: 14px;
-      font-weight: bold;
-      color: #1b5e20;
-      margin-bottom: 10px;
-    }
-    .feedback-input {
-      width: 100%;
-      padding: 9px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 12px;
-      box-sizing: border-box;
-      margin-bottom: 8px;
-    }
-    .feedback-btn {
-      background: #27ae60;
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 12px;
-      cursor: pointer;
-    }
   </style>
 </head>
-<body>
+<body id="body-content">
 
 <div class="portal-container">
 
-  <!-- संस्थापक और ट्रांसलेट बटन -->
+  <!-- Founder and Translate Button -->
   <div class="founder-bar">
-    <span>👩‍💻 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-    <button class="translate-btn">🌐 English (Translate)</button>
+    <span id="founder-text">👩‍💻 Founder: Kusum w/o Rajesh Yadav Malkosh</span>
+    <button class="translate-btn" onclick="toggleLanguage()" id="translate-btn-elem">🌐 हिंदी (Translate)</button>
   </div>
 
-  <!-- मुख्य बैनर -->
+  <!-- Main Banner -->
   <div class="hero-banner">
-    <h1>हरियाणा ग्रामीण सेवा</h1>
-    <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
-    <div class="hero-badge">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
+    <h1 id="hero-title">Haryana Rural Service</h1>
+    <p id="hero-desc">Every village shop, every service - now on your mobile</p>
+    <div class="hero-badge" id="hero-badge">Digital Malkosh & Haryana Portal</div>
   </div>
 
-  <!-- वेलकम मैसेज -->
-  <div class="welcome-box">
-    राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है
+  <!-- Welcome Message -->
+  <div class="welcome-box" id="welcome-msg">
+    Ram-Ram brothers! Welcome to this portal
   </div>
 
-  <!-- व्हाट्सएप शेयर बटन -->
-  <a href="https://wa.me/?text=हरियाणा%20ग्रामीण%20सेवा%20पोर्टल%20देखें" target="_blank" class="whatsapp-btn">
-    📣 इस डिजिटल पोर्टल को WhatsApp पर शेयर करें
+  <!-- WhatsApp Share Button -->
+  <a href="https://wa.me/?text=Check%20out%20Haryana%20Rural%20Service%20Portal" target="_blank" class="whatsapp-btn" id="whatsapp-btn">
+    📢 Share this digital portal on WhatsApp
   </a>
 
-  <!-- हरियाणवी चुटकुला सेक्शन -->
-  <div class="joke-box">
-    <div class="joke-text" id="joke-content">
-      "बोला: पुलिस वाले तो खुद मेरा फोन ढूंढन खातिर मेरा फोन मांग रहे हैं!" 😂
-    </div>
-    <button class="joke-btn" onclick="changeJoke()">नया चुटकुला सुनें / बदलें 😂</button>
-  </div>
-
-  <!-- हरियाणा सरकार की मुख्य योजनाएं सेक्शन -->
-  <div class="scheme-section">
-    <div class="scheme-title">📜 हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव पोर्टल)</div>
-    <div class="scheme-subtitle">अपने जिले के अनुसार योजनाओं का पोर्टल देखें:</div>
-    
-    <select class="scheme-dropdown">
-      <option>चरखी दादरी (डिफ़ॉल्ट)</option>
-      <option>हिसार</option>
-      <option>सिरसा</option>
-      <option>गुरुग्राम</option>
-      <option>रोहतक</option>
-    </select>
-    
-    <div class="link-card">
-      <h4>📂 जिला चरखी दादरी - परिवार पहचान पत्र (PPP)</h4>
-      <p>जिला नागरिक संसाधन सूचना विभाग, चरखी दादरी के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा।</p>
-      <a href="https://meraparivar.haryana.gov.in/" target="_blank" class="go-btn">पीपीपी पोर्टल (चरखी दादरी लाइव) →</a>
-    </div>
-
-    <div class="link-card">
-      <h4>👵 जिला चरखी दादरी - सामाजिक सुरक्षा पेंशन</h4>
-      <p>बुढ़ापा, विधवा एवं विकलांग पेंशन के लाइव आवेदन व स्टेटस की जानकारी (चरखी दादरी समाज कल्याण शाखा)।</p>
-      <a href="https://pension.socialjusticehry.gov.in/" target="_blank" class="go-btn">पेंशन पोर्टल देखें →</a>
-    </div>
-  </div>
-
-  <!-- AI ग्रामीण असिस्टेंट बॉक्स (पूरा कार्यशील) -->
+  <!-- AI Rural Assistant Box -->
   <div class="ai-box">
-    <div class="ai-title">🤖 AI ग्रामीण असिस्टेन्ट (सवाल पूछें या दुकान/एड भेजें)</div>
-    <div class="ai-desc">आप कुछ भी पूछ सकते हैं या दुकान/एड जोड़ सकते हैं (जैसे: मेरी दुकान जोड़ो...):</div>
-    
+    <div class="ai-title" id="ai-title">🤖 AI Rural Assistant (Ask questions or send shop/ad)</div>
+    <div class="ai-desc" id="ai-desc">You can ask anything or add a shop/ad (e.g., add my shop...):</div>
     <div class="ai-chat-display" id="chat-display">
-      <div><b>असिस्टेंट:</b> राम-राम! मैं आपका AI असिस्टेंट हूँ। आप मौसम, मंडी भाव या खेती से जुड़ा कोई भी सवाल पूछ सकते हैं, या दुकान/विज्ञापन भेजने के लिए कह सकते हैं!</div>
+      <div id="initial-bot-msg"><b>Assistant:</b> Ram-Ram! I am your AI assistant. You can ask anything related to weather, mandi prices, farming, or request to send a shop/advertisement!</div>
     </div>
-    
     <div class="ai-input-group">
-      <input type="text" id="user-input" placeholder="यहाँ अपना सवाल या संदेश लिखें...">
-      <button onclick="handleAIQuery()">भेजें</button>
+      <input type="text" id="user-input" placeholder="Type your question or message here...">
+      <button onclick="handleAIQuery()" id="send-btn">Send</button>
     </div>
   </div>
 
-  <!-- मौसम विजेट -->
+  <!-- Weather Widget -->
   <div class="weather-box">
-    <div class="weather-left">
-      <strong>🌤️ हरियाणा लाइव मौसम</strong><br>
-      हवा की गति: 7.3 km/h | स्थिति: साफ एवं धूप
+    <div class="weather-left" id="weather-left">
+      <strong>🌤️ Haryana Live Weather</strong><br>
+      Wind Speed: 7.3 km/h | Condition: Clear & Sunny
     </div>
     <div class="weather-right">27.9°C</div>
-  </div>
-
-  <!-- फीडबैक एवं सुझाव सेक्शन -->
-  <div class="feedback-box">
-    <div class="feedback-title">💬 सुझाव एवं फीडबैक (Feedback)</div>
-    <input type="text" class="feedback-input" placeholder="आपका नाम...">
-    <input type="text" class="feedback-input" placeholder="आपका सुझाव यहाँ लिखें...">
-    <button class="feedback-btn" onclick="alert('आपका फीडबैक भेज दिया गया है, धन्यवाद!')">भेजें</button>
   </div>
 
 </div>
 
 <script>
-  // AI Assistant Function
+  let currentLang = 'en';
+
+  function toggleLanguage() {
+    const founderText = document.getElementById('founder-text');
+    const translateBtn = document.getElementById('translate-btn-elem');
+    const heroTitle = document.getElementById('hero-title');
+    const heroDesc = document.getElementById('hero-desc');
+    const heroBadge = document.getElementById('hero-badge');
+    const welcomeMsg = document.getElementById('welcome-msg');
+    const whatsappBtn = document.getElementById('whatsapp-btn');
+    const aiTitle = document.getElementById('ai-title');
+    const aiDesc = document.getElementById('ai-desc');
+    const initialBotMsg = document.getElementById('initial-bot-msg');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const weatherLeft = document.getElementById('weather-left');
+
+    if (currentLang === 'en') {
+      // Switch to Hindi
+      currentLang = 'hi';
+      document.documentElement.lang = 'hi';
+      founderText.innerHTML = '👩‍💻 संस्थापक: कुसुम w/o राजेश यादव माल्कोश';
+      translateBtn.innerText = '🌐 English (Translate)';
+      heroTitle.innerText = 'हरियाणा ग्रामीण सेवा';
+      heroDesc.innerText = 'गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर';
+      heroBadge.innerText = 'डिजिटल माल्कोश & हरियाणा पोर्टल';
+      welcomeMsg.innerText = 'राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है';
+      whatsappBtn.href = 'https://wa.me/?text=हरियाणा%20ग्रामीण%20सेवा%20पोर्टल%20देखें';
+      whatsappBtn.innerText = '📢 इस डिजिटल पोर्टल को WhatsApp पर शेयर करें';
+      aiTitle.innerText = '🤖 AI ग्रामीण असिस्टेन्ट (सवाल पूछें या दुकान/एड भेजें)';
+      aiDesc.innerText = 'आप कुछ भी पूछ सकते हैं या दुकान/एड जोड़ सकते हैं (जैसे: मेरी दुकान जोड़ो...):';
+      initialBotMsg.innerHTML = '<b>असिस्टेंट:</b> राम-राम! मैं आपका AI असिस्टेंट हूँ। आप मौसम, मंडी भाव या खेती से जुड़ा कोई भी सवाल पूछ सकते हैं, या दुकान/विज्ञापन भेजने के लिए कह सकते हैं!';
+      userInput.placeholder = 'यहाँ अपना सवाल या संदेश लिखें...';
+      sendBtn.innerText = 'भेजें';
+      weatherLeft.innerHTML = '<strong>🌤️ हरियाणा लाइव मौसम</strong><br>हवा की गति: 7.3 km/h | स्थिति: साफ एवं धूप';
+    } else {
+      // Switch to English
+      currentLang = 'en';
+      document.documentElement.lang = 'en';
+      founderText.innerHTML = '👩‍💻 Founder: Kusum w/o Rajesh Yadav Malkosh';
+      translateBtn.innerText = '🌐 हिंदी (Translate)';
+      heroTitle.innerText = 'Haryana Rural Service';
+      heroDesc.innerText = 'Every village shop, every service - now on your mobile';
+      heroBadge.innerText = 'Digital Malkosh & Haryana Portal';
+      welcomeMsg.innerText = 'Ram-Ram brothers! Welcome to this portal';
+      whatsappBtn.href = 'https://wa.me/?text=Check%20out%20Haryana%20Rural%20Service%20Portal';
+      whatsappBtn.innerText = '📢 Share this digital portal on WhatsApp';
+      aiTitle.innerText = '🤖 AI Rural Assistant (Ask questions or send shop/ad)';
+      aiDesc.innerText = 'You can ask anything or add a shop/ad (e.g., add my shop...):';
+      initialBotMsg.innerHTML = '<b>Assistant:</b> Ram-Ram! I am your AI assistant. You can ask anything related to weather, mandi prices, farming, or request to send a shop/advertisement!';
+      userInput.placeholder = 'Type your question or message here...';
+      sendBtn.innerText = 'Send';
+      weatherLeft.innerHTML = '<strong>🌤️ Haryana Live Weather</strong><br>Wind Speed: 7.3 km/h | Condition: Clear & Sunny';
+    }
+  }
+
   function handleAIQuery() {
     let inputField = document.getElementById('user-input');
     let chatDisplay = document.getElementById('chat-display');
@@ -380,38 +269,37 @@
     
     if(query === "") return;
 
-    chatDisplay.innerHTML += `<div style="margin: 4px 0; color: #333;"><b>आप:</b> ${query}</div>`;
+    let userLabel = currentLang === 'hi' ? 'आप' : 'You';
+    chatDisplay.innerHTML += `<div style="margin: 4px 0; color: #333;"><b>${userLabel}:</b> ${query}</div>`;
     
-    let botReply = "राम-राम! आपका संदेश मिल गया है, हमारी टीम या सिस्टम इस पर जल्द कार्रवाई करेगा।";
+    let botReply = currentLang === 'hi' 
+      ? "राम-राम! आपका संदेश मिल गया है, हमारी टीम या सिस्टम इस पर जल्द कार्रवाई करेगा।"
+      : "Ram-Ram! Your message has been received, our team or system will take action on it soon.";
+    
     let lowerQuery = query.toLowerCase();
 
     if(lowerQuery.includes('मौसम') || lowerQuery.includes('weather')) {
-      botReply = "आज हरियाणा का तापमान 27.9°C है और मौसम साफ एवं धूप वाला है।";
+      botReply = currentLang === 'hi'
+        ? "आज हरियाणा का तापमान 27.9°C है और मौसम साफ एवं धूप वाला है।"
+        : "Today's temperature in Haryana is 27.9°C with clear and sunny weather.";
     } else if(lowerQuery.includes('दुकान') || lowerQuery.includes('shop')) {
-      botReply = "धन्यवाद! आपकी दुकान की जानकारी दर्ज करने की प्रक्रिया शुरू कर दी गई है।";
-    } else if(lowerQuery.includes('भाव') || lowerQuery.includes('mandi')) {
-      botReply = "वर्तमान मंडी भाव: गेहूँ ₹2300/क्विंटल और बाजरा ₹2550/क्विंटल है।";
+      botReply = currentLang === 'hi'
+        ? "धन्यवाद! आपकी दुकान की जानकारी दर्ज करने की प्रक्रिया शुरू कर दी गई है।"
+        : "Thank you! The process of recording your shop information has been initiated.";
+    } else if(lowerQuery.includes('भाव') || lowerQuery.includes('mandi') || lowerQuery.includes('price')) {
+      botReply = currentLang === 'hi'
+        ? "वर्तमान मंडी भाव: गेहूँ ₹2300/क्विंटल और बाजरा ₹2550/क्विंटल है।"
+        : "Current Mandi Prices: Wheat ₹2300/quintal and Bajra ₹2550/quintal.";
     }
 
+    let assistantLabel = currentLang === 'hi' ? 'असिस्टेंट' : 'Assistant';
+
     setTimeout(() => {
-      chatDisplay.innerHTML += `<div style="margin: 4px 0; color: #1a5276;"><b>असिस्टेंट:</b> ${botReply}</div>`;
+      chatDisplay.innerHTML += `<div style="margin: 4px 0; color: #1a5276;"><b>${assistantLabel}:</b> ${botReply}</div>`;
       chatDisplay.scrollTop = chatDisplay.scrollHeight;
     }, 300);
 
     inputField.value = "";
-  }
-
-  // Jokes Changer Function
-  const jokes = [
-    '"बोला: पुलिस वाले तो खुद मेरा फोन ढूंढन खातिर मेरा फोन मांग रहे हैं!" 😂',
-    '"ताऊ ताई से: रे ताई, जे मैं नदियो में डूब जाऊं तो तू के करेगी? ताई: मैं तो किनारे बैठ के रोउंगी... ताऊ: कदे डुबकी मार के बचावण न आवे!" 🤣',
-    '"शिक्षक: रामू बताओ, सबसे तेज दौड़ने वाली चीज़ क्या है? रामू: मास्टर जी, ताऊ का दिमाग जब घरवाली गुस्सा हो!" 😂'
-  ];
-  let jokeIndex = 0;
-  
-  function changeJoke() {
-    jokeIndex = (jokeIndex + 1) % jokes.length;
-    document.getElementById('joke-content').innerText = jokes[jokeIndex];
   }
 </script>
 
