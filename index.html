@@ -33,26 +33,41 @@
         header { 
             background-color: #2e7d32; 
             color: white; 
-            padding: 20px 15px; 
+            padding: 15px; 
             text-align: center; 
+            position: relative;
         }
         header h1 {
             margin: 0;
-            font-size: 1.8rem;
-            letter-spacing: 0.5px;
+            font-size: 1.6rem;
         }
         header p {
-            margin: 5px 0 10px 0;
-            font-size: 0.95rem;
+            margin: 4px 0 0 0;
+            font-size: 0.85rem;
             color: #e8f5e9;
         }
-        .portal-tag {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        /* प्लस बटन स्टाइल */
+        .menu-btn {
+            position: absolute; right: 15px; top: 12px;
+            background: #ffeb3b; color: #2e7d32; border: none;
+            width: 38px; height: 38px; border-radius: 50%;
+            font-size: 24px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
+        /* ड्रॉपडाउन मेनू */
+        .dropdown {
+            display: none; background: white; border: 1px solid #ddd;
+            position: absolute; right: 15px; top: 60px;
+            width: 210px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 100; text-align: left;
+        }
+        .dropdown a {
+            display: block; padding: 10px 15px; border-bottom: 1px solid #eee;
+            text-decoration: none; color: #2e7d32; font-weight: bold; font-size: 0.9rem;
+        }
+        .dropdown a:last-child { border-bottom: none; }
+        .dropdown a:active { background: #e8f5e9; }
+
         .container { 
             padding: 15px; 
             max-width: 600px;
@@ -61,51 +76,13 @@
         .weather-card {
             background: linear-gradient(135deg, #00838b, #006064);
             color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        .news-ticker {
-            background: #fff3e0;
-            border-left: 4px solid #f57c00;
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 15px;
             font-size: 0.9rem;
-            font-weight: 500;
-            color: #d84315;
-        }
-        .mandi-card {
-            background: #e8f5e9;
-            border: 1px solid #a5d6a7;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            color: #1b5e20;
-            font-weight: bold;
-        }
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .feature-btn {
-            background: white;
-            border: 2px solid #2e7d32;
-            color: #2e7d32;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .feature-btn:active {
-            background: #e8f5e9;
         }
         .search-card {
             background: white;
@@ -118,7 +95,7 @@
         .search-card h3 {
             margin-top: 0;
             color: #2e7d32;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             border-bottom: 1px solid #eee;
             padding-bottom: 8px;
         }
@@ -131,14 +108,13 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
-        .form-group select, .form-group input {
+        .form-group select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 1rem;
             background: #fff;
-            box-sizing: border-box;
         }
         .submit-btn {
             background: #1b5e20;
@@ -155,7 +131,7 @@
             background: white;
             border: 2px solid #2e7d32;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 8px;
             margin-bottom: 15px;
             display: none;
         }
@@ -163,87 +139,72 @@
             background: #d32f2f;
             color: white;
             border: none;
-            padding: 4px 8px;
+            padding: 3px 8px;
             border-radius: 4px;
             float: right;
             cursor: pointer;
+            font-size: 0.8rem;
             font-weight: bold;
         }
         .admin-area {
             text-align: center;
-            margin: 30px 0 40px 0;
+            margin: 20px 0;
         }
         .admin-btn {
             background: #2e7d32;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 15px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body onload="playRamRamVoice()">
 
-    <!-- संस्थापक पट्टी -->
     <div class="founder-bar">
         <span>👩‍🌾 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
         <button onclick="alert('English translation coming soon!')">English</button>
     </div>
 
-    <!-- मुख्य हेडर -->
     <header>
         <h1>हरियाणा ग्रामीण सेवा</h1>
-        <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
-        <div class="portal-tag">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
+        <p>गाँव की हर दुकान, हर सेवा - आपके मोबाइल पर</p>
+        <button class="menu-btn" onclick="toggleMenu()">+</button>
     </header>
+
+    <!-- प्लस (+) बटन का मेनू -->
+    <div id="menu" class="dropdown">
+        <a href="#" onclick="showFeature('add_shop')">➕ Add Shop (दुकान जोड़ें)</a>
+        <a href="#" onclick="showFeature('schemes')">📜 सरकारी योजनाएँ (Govt Schemes)</a>
+        <a href="#" onclick="showFeature('nearby')">📍 My Nearby Search</a>
+        <a href="#" onclick="showFeature('entertainment')">🎭 मनोरंजन & जोक्स</a>
+        <a href="#" onclick="adminLogin()">🔒 Admin Panel Login</a>
+    </div>
 
     <div class="container">
 
-        <!-- लाइव मौसम विजेट -->
         <div class="weather-card">
             <div>
-                <span style="font-size: 1rem; font-weight: bold;">⛅ हरियाणा लाइव मौसम</span>
-                <div style="font-size: 0.8rem; margin-top: 4px; opacity: 0.9;">हवा की गति: 1.4 km/h | स्थिति: साफ एवं धूप</div>
+                <strong>⛅ हरियाणा लाइव मौसम</strong>
+                <div style="font-size: 0.75rem; opacity: 0.9;">साफ एवं धूप | 33.2°C</div>
             </div>
-            <div style="font-size: 1.4rem; font-weight: bold;">33.2°C</div>
+            <div style="font-size: 1.2rem; font-weight: bold;">1.4 km/h</div>
         </div>
 
-        <!-- ताज़ा लोकल न्यूज़ -->
-        <div class="news-ticker">
-            📢 <strong>ताज़ा लोकल न्यूज़:</strong> रोहतक, भिवानी, चरखी दादरी, हिसार व सभी जिलों के गाँवों की लिस्टिंग शुरू!
-        </div>
-
-        <!-- मंडी भाव -->
-        <div class="mandi-card">
-            🌾 मंडी भाव: सरसों और गेहूं के ताज़ा सरकारी भाव अपडेट कर दिए गए हैं।
-        </div>
-
-        <!-- 4 मुख्य फीचर्स बटन -->
-        <div class="feature-grid">
-            <div class="feature-btn" onclick="showFeature('nearby')">📍 My Nearby Search</div>
-            <div class="feature-btn" onclick="showFeature('categories')">📂 सभी कैटेगरीज</div>
-            <div class="feature-btn" onclick="showFeature('entertainment')">🎭 मनोरंजन & जोक्स</div>
-            <div class="feature-btn" onclick="showFeature('qr')">📷 Shop QR & Verification</div>
-        </div>
-
-        <!-- डायनेमिक डिस्प्ले बॉक्स -->
         <div id="dynamic-display">
             <button class="close-btn" onclick="closeBox()">बंद करें ✕</button>
             <div id="display-content"></div>
         </div>
 
-        <!-- जिला और गाँव खोजने वाला सेक्शन -->
         <div class="search-card">
             <h3>🔍 अपने गाँव की सेवाएँ खोजें</h3>
             
             <div class="form-group">
-                <label>1. जिला चुनें:</label>
+                <label>जिला चुनें:</label>
                 <select id="district-select" onchange="loadVillages()">
                     <option value="">-- जिला चुनें --</option>
                     <option value="mahendragarh">महेंद्रगढ़ (माल्कोश)</option>
@@ -258,7 +219,7 @@
             </div>
 
             <div class="form-group">
-                <label>2. गाँव चुनें:</label>
+                <label>गाँव चुनें:</label>
                 <select id="village-select">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
@@ -269,13 +230,11 @@
 
     </div>
 
-    <!-- स्पष्ट एडमिन और शॉप रजिस्ट्रेशन पैनल बटन -->
-    <div class="admin-area">
+    <div class="admin-area" style="padding: 0 15px; max-width: 600px; margin: auto;">
         <button class="admin-btn" onclick="adminLogin()">🔒 Admin & Shop Registration Panel</button>
     </div>
 
     <script>
-        // पेज खुलते ही वॉयस बोलने का फंक्शन
         function playRamRamVoice() {
             if ('speechSynthesis' in window) {
                 let speech = new SpeechSynthesisUtterance("राम-राम भाइयो, हरियाणा ग्रामीण सेवा में आपका स्वागत है।");
@@ -285,20 +244,25 @@
             }
         }
 
-        // बटनों के लिए डेटा दिखाने का फंक्शन
+        function toggleMenu() {
+            let m = document.getElementById('menu');
+            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+        }
+
         function showFeature(type) {
+            toggleMenu();
             const box = document.getElementById('dynamic-display');
             const content = document.getElementById('display-content');
             box.style.display = 'block';
 
-            if (type === 'nearby') {
-                content.innerHTML = `<h3>📍 My Nearby Search</h3><p>आपके आस-पास की वेरिफाइड दुकानें और लोकेशन खोजी जा रही हैं...</p>`;
-            } else if (type === 'categories') {
-                content.innerHTML = `<h3>📂 सभी कैटेगरीज</h3><p>किराना स्टोर, खाद-बीज भंडार, मेडिकल स्टोर, रिपेयरिंग और सरकारी योजनाएँ।</p>`;
+            if (type === 'add_shop') {
+                content.innerHTML = `<h3>➕ Add Shop (दुकान रजिस्टर करें)</h3><p>यहाँ दुकानदार अपनी दुकान का नाम, कैटेगरी, लाइव लोकेशन और फोटो अपलोड करके जोड़ सकते हैं।</p>`;
+            } else if (type === 'schemes') {
+                content.innerHTML = `<h3>📜 सरकारी योजनाएँ (Govt Schemes)</h3><p>हरियाणा सरकार की ताज़ा ग्रामीण योजनाएं, पशुधन बीमा, पेंशन और कृषि सब्सिडी की जानकारी।</p>`;
+            } else if (type === 'nearby') {
+                content.innerHTML = `<h3>📍 My Nearby Search</h3><p>आपके आस-पास की खुली हुई दुकानें और सेवाएँ खोजी जा रही हैं...</p>`;
             } else if (type === 'entertainment') {
-                content.innerHTML = `<h3>🎭 मनोरंजन & किस्से</h3><p><strong>ताऊ का जोक:</strong> भाई इब फोन में सब कुछ आ लिया, बस घर बैठे चाय बनाने वाली मशीन आनी बाकी है!</p>`;
-            } else if (type === 'qr') {
-                content.innerHTML = `<h3>📷 Shop QR & Verification</h3><p>दुकानदार यहाँ से अपनी दुकान की लाइव लोकेशन और फोटो अपलोड करके QR वेरीफाई कर सकते हैं।</p>`;
+                content.innerHTML = `<h3>🎭 मनोरंजन & जोक्स</h3><p><strong>ताऊ का जोक:</strong> भाई, फोन में सब कुछ आ लिया, बस घर बैठे चाय बनाने वाली मशीन आनी बाकी है!</p>`;
             }
         }
 
@@ -306,7 +270,6 @@
             document.getElementById('dynamic-display').style.display = 'none';
         }
 
-        // सभी जिलों और उनके गाँवों की पूरी लिस्ट
         function loadVillages() {
             let dist = document.getElementById('district-select').value;
             let villageSelect = document.getElementById('village-select');
@@ -325,9 +288,9 @@
             } else if (dist === 'bhiwani') {
                 villageSelect.innerHTML += '<option value="siwani">सिवानी</option><option value="loharu">लोहारू</option><option value="tosham">तोशाम</option><option value="bhiwani_rural">भिवानी ग्रामीण</option><option value="bawani_khera">बवानी खेड़ा</option>';
             } else if (dist === 'charkhi_dadri') {
-                villageSelect.innerHTML += '<option value="dadri_city">दादरी शहर</option><option value="bodal">बोदल</option><option value="jhojhu_kalan">झोझू कलां</option><option value="makrana">मकराना</option><option value="kodma">कोदमा</option>';
+                villageSelect.innerHTML += '<option value="dadri_city">दादरी शहर</option><option value="bodal">bodal</option><option value="jhojhu_kalan">झोझू कलां</option>';
             } else if (dist === 'hisar') {
-                villageSelect.innerHTML += '<option value="hansi">हांसी</option><option value="adampur">आदमपुर</option><option value="nalwa">नलवा</option><option value="barwala">बरवाला</option><option value="narnaund">नारनौंद</option>';
+                villageSelect.innerHTML += '<option value="hansi">हांसी</option><option value="adampur">आदमपुर</option><option value="barwala">बरवाला</option>';
             }
         }
 
@@ -337,20 +300,15 @@
             if(!dist || !vill) {
                 alert("कृपया पहले जिला और गाँव दोनों चुनें!");
             } else {
-                alert("चयनित क्षेत्र की वेरिफाइड दुकानें और लोकेशन लोड हो रही हैं...");
+                alert("चयनित क्षेत्र की वेरिफाइड दुकानें लोड हो रही हैं...");
             }
         }
 
-        // पासवर्ड प्रोटेक्टेड एडमिन और शॉप वेरिफिकेशन पैनल
         function adminLogin() {
+            if(document.getElementById('menu').style.display === 'block') toggleMenu();
             let pass = prompt("कृपया एडमिन पासवर्ड दर्ज करें:");
             if (pass === "sub123") {
-                let adminAction = prompt("एडमिन और सब-एडमिन पैनल:\n1. नई दुकान जोड़ें (Add Shop)\n2. शॉप वेरिफिकेशन (लोकेशन और फोटो के साथ)\n3. सरकारी योजनाएं अपडेट करें\n(नंबर टाइप करें):");
-                if (adminAction === "1" || adminAction === "2" || adminAction === "3") {
-                    alert("सफलतापूर्वक संबंधित एडमिन एक्शन पैनल खुल गया है!");
-                } else {
-                    alert("एडमिन लॉगिन सफल!");
-                }
+                alert("सफलतापूर्वक एडमिन पैनल खुल गया है!");
             } else if (pass !== null) {
                 alert("गलत पासवर्ड!");
             }
