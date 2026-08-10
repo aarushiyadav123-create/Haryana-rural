@@ -70,6 +70,19 @@
         .scheme-link:hover { text-decoration: underline; }
 
         .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; text-align: left; }
+        
+        .emergency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .emergency-box { background: #ffebee; border: 1px solid #ef9a9a; padding: 10px; border-radius: 8px; text-align: center; }
+        .emergency-box h4 { font-size: 0.85rem; color: #c62828; margin-bottom: 5px; }
+        .emergency-box a { display: block; background: #d32f2f; color: white; padding: 6px; border-radius: 4px; font-size: 0.85rem; text-decoration: none; font-weight: bold; }
+        
+        /* Auto Manoranjan / Jokes Box Style */
+        .joke-box { background: #fffde7; border: 1px dashed #fbc02d; padding: 15px; border-radius: 8px; text-align: center; margin-top: 10px; }
+        .joke-text { font-size: 0.95rem; color: #5d4037; font-weight: 600; margin-bottom: 10px; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+
+        /* Fasal Calculator Box Style */
+        .calc-box { background: #e8f5e9; border: 1px solid #a5d6a7; padding: 15px; border-radius: 8px; margin-top: 15px; }
+
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
 </head>
@@ -77,7 +90,7 @@
 
     <div class="top-bar">
         <span id="t-founder">👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-        <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">English</button>
+        <button class="lang-btn" id="langToggleBtn" onclick="toggleLanguage()">🌐 English (Translate)</button>
     </div>
 
     <header>
@@ -87,6 +100,18 @@
     </header>
 
     <div class="container">
+
+        <!-- Welcome Banner / Translation Text Box -->
+        <div class="card" style="padding: 12px; text-align: center; background: #fffde7; border: 1px dashed #fbc02d; margin-bottom: 15px;">
+            <p id="t-welcome-msg" style="font-size: 1rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है</p>
+        </div>
+
+        <!-- WhatsApp Share Button -->
+        <div class="card" style="padding: 12px; text-align: center; background: #e8f5e9; border: 1px solid #81c784; margin-bottom: 15px;">
+            <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.95rem; padding: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                📢 इस डिजिटल पोर्टल को WhatsApp पर शेयर करें
+            </button>
+        </div>
 
         <!-- मौसम अपडेट -->
         <div class="weather-card">
@@ -112,8 +137,33 @@
             <span class="news-title-tag" id="t-mandi-tag" style="background: #388e3c;">🌾 मंडी भाव</span>
             <div class="news-ticker">
                 <marquee id="t-mandi-text" behavior="scroll" direction="left" scrollamount="5" style="color: #1b5e20;">
-                    गेहूँ: ₹2275-₹2350 | बाजरा: ₹2500-₹2600 | सरसों: ₹5400-₹5600 | नरमा: ₹7200 प्रति क्विंटल (ताज़ा मंडी अपडेट)
+                    गेहूँ: ₹2300 | बाजरा: ₹2550 | सरसों: ₹5500 | नरमा: ₹7200 प्रति क्विंटल (ताज़ा मंडी अपडेट)
                 </marquee>
+            </div>
+        </div>
+
+        <!-- 🌾 Fasal / Mandi Calculator (मंडी भाव के ठीक नीचे) -->
+        <div class="card" style="border-left: 4px solid #388e3c;">
+            <h2 id="t-calc-heading">🌾 फसल भाव कैलकुलेटर (Fasal Calculator)</h2>
+            <p id="t-calc-sub" style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">अपनी फसल की मात्रा (क्विंटल में) डालकर कुल अनुमानित कीमत निकालें:</p>
+            <div class="calc-box">
+                <div class="form-group">
+                    <label id="t-calc-label-crop">फसल चुनें:</label>
+                    <select id="calcCropRate">
+                        <option value="2300">गेहूँ (Wheat) - ₹2300 प्रति क्विंटल</option>
+                        <option value="2550">बाजरा (Bajra) - ₹2550 प्रति क्विंटल</option>
+                        <option value="5500">सरसो (Mustard) - ₹5500 प्रति क्विंटल</option>
+                        <option value="7200">नरमा (Cotton) - ₹7200 प्रति क्विंटल</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="t-calc-label-qty">मात्रा (क्विंटल में / Quintals):</label>
+                    <input type="number" id="calcQty" placeholder="जैसे: 10" value="1">
+                </div>
+                <div class="btn-box" style="margin-top: 10px;">
+                    <button type="button" class="custom-btn" onclick="calculateFasalPrice()" style="background: #388e3c; padding: 10px; font-size: 0.9rem;">कुल कीमत की गणना करें (Calculate)</button>
+                </div>
+                <div id="calcResult" style="margin-top: 10px; font-weight: bold; color: #1b5e20; text-align: center; font-size: 1rem;"></div>
             </div>
         </div>
 
@@ -146,13 +196,12 @@
             <div class="result-box" id="searchResult"></div>
         </div>
 
-        <!-- ➕ Add Shop Toggle Bar -->
+        <!-- Add Shop Toggle Bar -->
         <div class="toggle-bar" onclick="toggleSection('addShopFormBox', 'toggleIcon1')">
             <span id="t-add-shop-bar">➕ अपनी दुकान / सेवा यहाँ रजिस्टर करें (+ Add Shop)</span>
             <span id="toggleIcon1">▼</span>
         </div>
 
-        <!-- दुकान रजिस्टर करने का फॉर्म -->
         <div class="collapsible-form-container" id="addShopFormBox">
             <h2 id="t-form-heading" style="font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px;">नया दुकान/सेवा रजिस्ट्रेशन फॉर्म</h2>
             
@@ -174,7 +223,7 @@
 
             <div class="form-group">
                 <label id="t-f-vill-label">गाँव का नाम:</label>
-                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम यहाँ लिखें या चुनें...">
+                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम यहाँ लिखें...">
                 <datalist id="regVillageList"></datalist>
             </div>
 
@@ -211,20 +260,19 @@
             </div>
         </div>
 
-        <!-- 🛒 Buy & Sell Toggle Bar -->
+        <!-- Buy & Sell Toggle Bar -->
         <div class="toggle-bar toggle-bar-secondary" onclick="toggleSection('buySellFormBox', 'toggleIcon2')">
             <span>🛒 ग्रामीण बाय-सेल मार्केटप्लेस (+ Add Ad)</span>
             <span id="toggleIcon2">▼</span>
         </div>
 
-        <!-- बाय-सेल फॉर्म बॉक्स -->
         <div class="collapsible-form-container" id="buySellFormBox" style="border-color: var(--secondary);">
             <h2 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 10px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px;">🛒 ग्रामीण बाय-सेल (Buy & Sell) विज्ञापन</h2>
             <p style="font-size: 0.85rem; color: #555; margin-bottom: 12px;">पुराना सामान, ट्रैक्टर, पशु या फसल बेचने के लिए फोटो और टोकन फीस के साथ विज्ञापन डालें।</p>
             
             <div class="form-group">
                 <label>सामान का नाम (Title):</label>
-                <input type="text" id="bsItemName" placeholder="जैसे: पुराना ट्रैक्टर / भैंस / मोटरसाइकिल">
+                <input type="text" id="bsItemName" placeholder="जैसे: पुराना ट्रैक्टर / भैंस">
             </div>
             <div class="form-group">
                 <label>गाँव / जिला:</label>
@@ -243,13 +291,12 @@
                 <input type="file" id="bsPhoto" accept="image/*">
             </div>
 
-            <!-- UPI Payment Token Box -->
             <div style="background: #fff8e1; border: 1px dashed var(--secondary); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
                 <p style="font-size: 0.85rem; font-weight: bold; color: #b71c1c; margin-bottom: 6px;">⚡ विज्ञापन शुल्क (Token Fee: ₹10):</p>
-                <p style="font-size: 0.8rem; color: #444; margin-bottom: 6px;">फर्जी विज्ञापनों से बचाने के लिए ₹10 टोकन फीस इस UPI ID पर भेजें: <strong>rajesh@ybl</strong>। फिर UTR/Transaction ID नीचे भरें।</p>
+                <p style="font-size: 0.8rem; color: #444; margin-bottom: 6px;">₹10 टोकन फीस UPI ID पर भेजें: <strong>rajesh@ybl</strong>। फिर UTR/Transaction ID नीचे भरें।</p>
                 <div class="form-group" style="margin-bottom: 5px;">
                     <label style="font-size: 0.8rem;">UPI Transaction ID / UTR No:</label>
-                    <input type="text" id="bsUtr" placeholder="UPI Ref / Transaction ID यहाँ लिखें" style="padding: 8px; font-size: 0.9rem;">
+                    <input type="text" id="bsUtr" placeholder="UPI Ref / Transaction ID" style="padding: 8px; font-size: 0.9rem;">
                 </div>
             </div>
 
@@ -258,17 +305,49 @@
             </div>
         </div>
 
-        <!-- 🟦 NAYA BUTTON: Buy-Sell ke theek niche -->
+        <!-- Near By Location Search Button -->
         <div class="card" style="padding: 10px; margin-bottom: 20px; text-align: center; background: transparent; box-shadow: none; border: none;">
             <button onclick="searchNearByLocation()" class="custom-btn" style="background-color: #1976d2; font-size: 1rem; padding: 14px;">
                 + My Near By Search with Location
             </button>
         </div>
 
-        <!-- उपलब्ध विज्ञापन सूची हमेशा नीचे दिखेगी -->
         <div class="card" style="border: 1px solid #ddd;">
             <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 10px;">📋 उपलब्ध विज्ञापन (Marketplace Listings):</h3>
             <div id="buySellListContainer"></div>
+        </div>
+
+        <!-- Emergency Helplines -->
+        <div class="card" style="border-left: 4px solid #d32f2f;">
+            <h2>🚨 आपातकालीन हेल्पलाइन (Emergency Helplines)</h2>
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">जरूरत पड़ने पर तुरंत इन नंबरों पर संपर्क करें:</p>
+            <div class="emergency-grid">
+                <div class="emergency-box">
+                    <h4>👮 पुलिस (Police)</h4>
+                    <a href="tel:112">📞 112 (डायल करें)</a>
+                </div>
+                <div class="emergency-box">
+                    <h4>🚑 एम्बुलेंस (Ambulance)</h4>
+                    <a href="tel:108">📞 108 (डायल करें)</a>
+                </div>
+                <div class="emergency-box">
+                    <h4>🚒 फायर ब्रिगेड</h4>
+                    <a href="tel:101">📞 101 (डायल करें)</a>
+                </div>
+                <div class="emergency-box">
+                    <h4>⚡ बिजली निगम (Bijli)</h4>
+                    <a href="tel:1912">📞 1912 (डायल करें)</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manoranjan Live (हरियाणवी चुटकुले) -->
+        <div class="card" style="border-left: 4px solid #fbc02d;">
+            <h2 id="t-joke-heading">😂 हरियाणवी & देसी चुटकुले (Manoranjan Live)</h2>
+            <div class="joke-box">
+                <div class="joke-text" id="jokeDisplay">"ताऊ तन्ने कल खेत में कती लेट कर दिया? ताऊ बोला: बेटा बैल ने कंप्यूटर सीख लिया था!"</div>
+                <button onclick="getNewJoke()" class="custom-btn btn-secondary" style="font-size: 0.9rem; padding: 8px; margin-top: 5px;">नया चुटकुला सुनें / बदलें 😂</button>
+            </div>
         </div>
 
         <!-- हरियाणा सरकार की मुख्य योजनाएं -->
@@ -339,19 +418,58 @@
         let currentLang = 'hi';
         let audioPlayed = false;
 
-        // Pyari Default Voice Greeting Function
         function playWelcomeAudioOnce() {
             if (!audioPlayed && 'speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance("Ram Ram Bhayio");
-                utterance.lang = 'hi-IN'; 
-                utterance.pitch = 1.2;    // Meethi awaj ke liye
-                utterance.rate = 0.9;     // Sahaj raftar
+                const welcomeText = currentLang === 'hi' ? "राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है" : "Ram Ram brothers! Welcome to this portal";
+                const utterance = new SpeechSynthesisUtterance(welcomeText);
+                utterance.lang = currentLang === 'hi' ? 'hi-IN' : 'en-US'; 
+                utterance.pitch = 1.2;    
+                utterance.rate = 0.9;     
                 window.speechSynthesis.speak(utterance);
                 audioPlayed = true;
             }
         }
 
-        // Naye Button ka Near By Location function
+        function shareOnWhatsApp() {
+            let portalUrl = window.location.href;
+            let message = currentLang === 'hi' 
+                ? "राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है। हरियाणा ग्रामीण सेवा और डिजिटल माल्कोश पोर्टल पर अपने गाँव की हर दुकान, मंडी भाव, फसल कैलकुलेटर और मौसम की जानकारी देखने के लिए इस लिंक पर क्लिक करें: " + portalUrl
+                : "Ram Ram brothers! Welcome to this portal. Click here to check village shops, mandi rates, crop calculator and weather: " + portalUrl;
+            let whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(message);
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Automatic Live Jokes List
+        const jokesList = [
+            "ताऊ तन्ने कल खेत में कती लेट कर दिया? ताऊ बोला: बेटा बैल ने कंप्यूटर सीख लिया था, रीसेट करने में टाइम लाग गया!",
+            "मास्टर जी बोले: बता बेटा, 'भैंस' पे निबंध लिख! छोरा बोला: भैंस के चार पैर होया करें, एक पूँछ होया करे और दूध देया करे... बाकी मास्टर जी, ताऊ की भैंस गेल मेरा क्या मुकाबला!",
+            "एक आदमी बोला: यार मेरा फोन खो गया! दूसरा बोला: पुलिस स्टेशन जा, रिपोर्ट लिखा दे! पहला बोला: पुलिस वाले तो खुद मेरा फोन ढूंढन खातिर मेरा फोन मांग रहे हैं!",
+            "पड़ोसी: भाई तेरी मुर्गी रोज कितने अंडे देवे है? ताऊ: भाई कती सीधी बात है, रोज एक अंडा देवे है और साथ में 'जय हरियाणा' भी बोले है!"
+        ];
+
+        function getNewJoke() {
+            let randomIndex = Math.floor(Math.random() * jokesList.length);
+            document.getElementById('jokeDisplay').textContent = "\"" + jokesList[randomIndex] + "\"";
+        }
+
+        setInterval(() => {
+            getNewJoke();
+        }, 15000);
+
+        // Fasal Calculator Function
+        function calculateFasalPrice() {
+            let rate = parseFloat(document.getElementById('calcCropRate').value);
+            let qty = parseFloat(document.getElementById('calcQty').value);
+            let resBox = document.getElementById('calcResult');
+            
+            if(isNaN(qty) || qty <= 0) {
+                resBox.textContent = currentLang === 'hi' ? "कृपया सही मात्रा दर्ज करें!" : "Please enter valid quantity!";
+                return;
+            }
+            let total = rate * qty;
+            resBox.textContent = (currentLang === 'hi') ? `कुल अनुमानित कीमत: ₹${total.toLocaleString('en-IN')}` : `Total Estimated Price: ₹${total.toLocaleString('en-IN')}`;
+        }
+
         function searchNearByLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
@@ -359,7 +477,7 @@
                     let lon = position.coords.longitude;
                     alert("Aapki current location mil gayi! Latitude: " + lat.toFixed(4) + ", Longitude: " + lon.toFixed(4));
                 }, function(error) {
-                    alert("Location access ki ijazat dein taaki aas-paas ki dukaanein dikh sakein.");
+                    alert("Location access ki ijazat dein.");
                 });
             } else {
                 alert("Aapka browser location support nahi karta.");
@@ -370,13 +488,18 @@
             hi: {
                 title: "हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल",
                 founder: "👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश",
-                langBtn: "English",
+                langBtn: "🌐 English (Translate)",
+                welcomeMsg: "राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है",
                 mainHeading: "हरियाणा ग्रामीण सेवा",
                 subHeading: "गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर",
                 badge: "डिजिटल माल्कोश & हरियाणा पोर्टल",
                 weatherTitle: "🌤 हरियाणा लाइव मौसम",
                 newsTag: "📢 ताज़ा लोकल न्यूज़",
                 mandiTag: "🌾 मंडी भाव",
+                calcHeading: "🌾 फसल भाव कैलकुलेटर (Fasal Calculator)",
+                calcSub: "अपनी फसल की मात्रा (क्विंटल में) डालकर कुल अनुमानित कीमत निकालें:",
+                calcLabelCrop: "फसल चुनें:",
+                calcLabelQty: "मात्रा (क्विंटल में):",
                 searchHeading: "🔍 अपने गाँव की सेवाएँ खोजें",
                 labelDist: "1. जिला चुनें:",
                 optSelectDist: "-- जिला चुनें --",
@@ -395,6 +518,7 @@
                 fCatLabel: "श्रेणी (Category चुनें):",
                 fPhoneLabel: "मोबाइल नंबर:",
                 fSubmitBtn: "सत्यापन के लिए एडमिन को भेजें",
+                jokeHeading: "😂 हरियाणवी & देसी चुटकुले (Manoranjan Live)",
                 schemeHeading: "📜 हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव पोर्टल)",
                 schemeLabel: "अपने जिले के अनुसार योजनाओं का पोर्टल देखें:",
                 feedbackHeading: "💬 सुझाव एवं फीडबैक (Feedback)",
@@ -409,13 +533,18 @@
             en: {
                 title: "Haryana Rural Service - Digital Village Portal",
                 founder: "👩‍💼 Founder: Kusum w/o Rajesh Yadav Malkosh",
-                langBtn: "हिंदी",
+                langBtn: "🌐 हिंदी (Translate)",
+                welcomeMsg: "Ram Ram brothers! Welcome to this portal",
                 mainHeading: "Haryana Rural Service",
                 subHeading: "Every village shop & service - now on your mobile",
                 badge: "Digital Malkosh & Haryana Portal",
                 weatherTitle: "🌤 Haryana Live Weather",
                 newsTag: "📢 Latest Local News",
                 mandiTag: "🌾 Mandi Rates",
+                calcHeading: "🌾 Crop / Mandi Price Calculator",
+                calcSub: "Enter your crop quantity (in quintals) to calculate total estimated price:",
+                calcLabelCrop: "Select Crop:",
+                calcLabelQty: "Quantity (Quintals):",
                 searchHeading: "🔍 Search Village Services",
                 labelDist: "1. Select District:",
                 optSelectDist: "-- Select District --",
@@ -434,6 +563,7 @@
                 fCatLabel: "Select Category:",
                 fPhoneLabel: "Mobile Number:",
                 fSubmitBtn: "Send to Admin for Verification",
+                jokeHeading: "😂 Haryanvi & Desi Jokes (Manoranjan Live)",
                 schemeHeading: "📜 Haryana Govt Major Schemes (District-wise Live)",
                 schemeLabel: "View scheme portals according to your district:",
                 feedbackHeading: "💬 Suggestions & Feedback",
@@ -454,12 +584,17 @@
             document.getElementById('t-title').textContent = t.title;
             document.getElementById('t-founder').textContent = t.founder;
             document.getElementById('langToggleBtn').textContent = t.langBtn;
+            document.getElementById('t-welcome-msg').textContent = t.welcomeMsg;
             document.getElementById('t-main-heading').textContent = t.mainHeading;
             document.getElementById('t-sub-heading').textContent = t.subHeading;
             document.getElementById('t-badge').textContent = t.badge;
             document.getElementById('t-weather-title').textContent = t.weatherTitle;
             document.getElementById('t-news-tag').textContent = t.newsTag;
             document.getElementById('t-mandi-tag').textContent = t.mandiTag;
+            document.getElementById('t-calc-heading').textContent = t.calcHeading;
+            document.getElementById('t-calc-sub').textContent = t.calcSub;
+            document.getElementById('t-calc-label-crop').textContent = t.calcLabelCrop;
+            document.getElementById('t-calc-label-qty').textContent = t.calcLabelQty;
             document.getElementById('t-search-heading').textContent = t.searchHeading;
             document.getElementById('t-label-dist').textContent = t.labelDist;
             document.getElementById('t-opt-select-dist').textContent = t.optSelectDist;
@@ -478,6 +613,7 @@
             document.getElementById('t-f-cat-label').textContent = t.fCatLabel;
             document.getElementById('t-f-phone-label').textContent = t.fPhoneLabel;
             document.getElementById('t-f-submit-btn').textContent = t.fSubmitBtn;
+            document.getElementById('t-joke-heading').textContent = t.jokeHeading;
             document.getElementById('t-scheme-heading').textContent = t.schemeHeading;
             document.getElementById('t-scheme-label').textContent = t.schemeLabel;
             document.getElementById('t-feedback-heading').textContent = t.feedbackHeading;
@@ -505,7 +641,6 @@
             fetchLiveWeather();
             fetchAutoNews();
             loadBuySellAds();
-            // Automatically play greeting on load
             setTimeout(playWelcomeAudioOnce, 1000);
         }
 
@@ -753,7 +888,7 @@
                 document.getElementById('addShopFormBox').style.display = 'none';
                 document.getElementById('toggleIcon1').textContent = '▼';
             } catch (err) {
-                alert("लोकल स्टोरेज फुल हो सकती है या फोटो बहुत बड़ी है। कृपया छोटी फोटो अपलोड करें या बिना फोटो के प्रयास करें।");
+                alert("लोकल स्टोरेज फुल हो सकती है या फोटो बहुत बड़ी है। कृपया छोटी फोटो अपलोड करें।");
             }
         }
 
