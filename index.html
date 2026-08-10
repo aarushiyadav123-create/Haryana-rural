@@ -3,60 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>लोकल डिजिटल पोर्टल</title>
+    <title>लोकल डिजिटल पोर्टल - हरियाणा</title>
     <style>
-        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
-        /* पुरानी ग्रीन थीम */
-        header { background-color: #2e7d32; color: white; padding: 15px; text-align: center; }
-        .ram-ram { background-color: #c8e6c9; color: #1b5e20; padding: 10px; text-align: center; font-weight: bold; }
-        .container { padding: 15px; }
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .app-btn { background: white; border: 2px solid #2e7d32; padding: 15px; border-radius: 8px; text-align: center; color: #2e7d32; font-weight: bold; cursor: pointer; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f4f4f4; 
+            margin: 0; 
+            padding: 0; 
+            color: #333;
+        }
+        /* पुरानी परफेक्ट ग्रीन थीम हेडर */
+        header { 
+            background-color: #2e7d32; 
+            color: white; 
+            padding: 15px; 
+            text-align: center; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .ram-ram { 
+            background-color: #c8e6c9; 
+            color: #1b5e20; 
+            padding: 10px; 
+            text-align: center; 
+            font-weight: bold; 
+            font-size: 1.1rem;
+            border-bottom: 1px solid #a5d6a7;
+        }
         
-        /* नया डिस्प्ले एरिया */
-        #display-area { background: white; border: 2px solid #2e7d32; padding: 15px; border-radius: 8px; margin-top: 10px; display: none; }
-        .close-btn { background: #d32f2f; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; float: right; }
-        
-        /* एडमिन बटन */
-        .admin-area { text-align: center; margin-top: 20px; opacity: 0.05; }
-        .admin-area:hover { opacity: 1; }
+        .container { 
+            padding: 15px; 
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* चारों बटन का ग्रिड लेआउट (जैसे आपकी पुरानी स्क्रीन में था) */
+        .btn-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 12px; 
+            margin-bottom: 20px; 
+        }
+        .app-btn { 
+            background: white; 
+            border: 2px solid #2e7d32; 
+            padding: 15px; 
+            border-radius: 10px; 
+            text-align: center; 
+            color: #2e7d32; 
+            font-weight: bold; 
+            cursor: pointer; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+        .app-btn:active {
+            transform: scale(0.98);
+            background: #e8f5e9;
+        }
+
+        /* बटन दबाने पर उसी स्क्रीन के अंदर नीचे खुलने वाला बॉक्स */
+        #display-area { 
+            background: white; 
+            border: 2px solid #2e7d32; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin-bottom: 20px; 
+            display: none; /* शुरू में बंद रहेगा */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .close-btn { 
+            background: #d32f2f; 
+            color: white; 
+            border: none; 
+            padding: 5px 10px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            float: right; 
+            font-weight: bold;
+        }
+        .content-box h3 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+
+        /* मनोरंजन / जोक्स का छोटा सेक्शन */
+        .section-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .section-card h3 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+
+        /* गुप्त एडमिन एरिया (जो बहुत हल्का दिखता है और छूने पर दिखता है) */
+        .admin-area { 
+            text-align: center; 
+            margin-top: 30px; 
+            opacity: 0.05; 
+            transition: opacity 0.3s;
+        }
+        .admin-area:hover { 
+            opacity: 1; 
+        }
+        .admin-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
 
-    <header><h1>गाँव और ज़िला पोर्टल</h1></header>
-    <div class="ram-ram">🙏 राम-राम भाइयो!</div>
-
-    <div class="container">
-        <div class="btn-grid">
-            <div class="app-btn" onclick="show('📍 Nearby Search')">My Nearby Search</div>
-            <div class="app-btn" onclick="show('📂 Categories')">सभी कैटेगरीज</div>
-            <div class="app-btn" onclick="show('🎭 मनोरंजन')">मनोरंजन & जोक्स</div>
-            <div class="app-btn" onclick="show('📷 Shop QR')">Shop QR</div>
-        </div>
-
-        <div id="display-area">
-            <button class="close-btn" onclick="hide()">बंद करें</button>
-            <div id="content"></div>
-        </div>
+    <header>
+        <h1>गाँव और ज़िला पोर्टल</h1>
+    </header>
+    
+    <div class="ram-ram">
+        🙏 राम-राम भाइयो!
     </div>
 
+    <div class="container">
+        
+        <!-- चारों मुख्य बटन -->
+        <div class="btn-grid">
+            <div class="app-btn" onclick="showContent('nearby')">My Nearby Search</div>
+            <div class="app-btn" onclick="showContent('categories')">सभी कैटेगरीज</div>
+            <div class="app-btn" onclick="showContent('entertainment')">मनोरंजन & जोक्स</div>
+            <div class="app-btn" onclick="showContent('qr')">Shop QR</div>
+        </div>
+
+        <!-- उसी स्क्रीन के अंदर नीचे खुलने वाला बॉक्स -->
+        <div id="display-area">
+            <button class="close-btn" onclick="hideContent()">बंद करें</button>
+            <div id="content-box" class="content-box">
+                <!-- यहाँ डेटा लोड होगा -->
+            </div>
+        </div>
+
+        <!-- मनोरंजन विजेट -->
+        <div class="section-card">
+            <h3>🌟 आज का खास</h3>
+            <p id="daily-joke">"हरियाणवी चुटकुला: ताऊ बोले — बेटा इंटरनेट पे न्यूटन का नियम तो ठीक है, पर यो बता कैटली में चाय कड़की कैयाँ होवै है!"</p>
+            <button onclick="changeJoke()" style="background:#2e7d32; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer; font-weight:bold;">दूसरा चुटकुला देखें</button>
+        </div>
+
+    </div>
+
+    <!-- गुप्त एडमिन लॉगिन (पासवर्ड: sub123) -->
     <div class="admin-area">
-        <button onclick="adminLogin()">Admin Login</button>
+        <button class="admin-btn" onclick="adminLogin()">🔒 Admin Login</button>
     </div>
 
     <script>
-        function show(text) {
-            document.getElementById('content').innerHTML = "<h3>" + text + "</h3><p>यहाँ जानकारी अपडेट हो रही है...</p>";
-            document.getElementById('display-area').style.display = "block";
+        function showContent(type) {
+            const displayArea = document.getElementById('display-area');
+            const contentBox = document.getElementById('content-box');
+            displayArea.style.display = 'block';
+
+            if (type === 'nearby') {
+                contentBox.innerHTML = `
+                    <h3>📍 My Nearby Search</h3>
+                    <p>आपके आसपास के क्षेत्र की लोकेशन ट्रैक की जा रही है...</p>
+                    <ul>
+                        <li>किराना और जनरल स्टोर - नजदीक</li>
+                        <li>बैंक और एटीएम - 500 मीटर</li>
+                        <li>अस्पताल और मेडिकल - 1 किमी</li>
+                    </ul>
+                `;
+            } else if (type === 'categories') {
+                contentBox.innerHTML = `
+                    <h3>📂 सभी कैटेगरीज</h3>
+                    <p>अपने जिले और गाँव की सभी जरूरी सेवाएं:</p>
+                    <ul>
+                        <li>🛒 दुकानें एवं किराना</li>
+                        <li>🏦 बैंक एवं एटीएम</li>
+                        <li>🏭 फैक्ट्रियां एवं उद्योग</li>
+                        <li>💼 लोकल जॉब्स (रोजगार)</li>
+                    </ul>
+                `;
+            } else if (type === 'entertainment') {
+                contentBox.innerHTML = `
+                    <h3>🎭 मनोरंजन & किस्से</h3>
+                    <p><strong>ताऊ का ज्ञान:</strong> भाई इब फोन में सब कुछ आ लिया, बस घर बैठे चाय बनाने वाली मशीन आनी और बाकी है!</p>
+                `;
+            } else if (type === 'qr') {
+                contentBox.innerHTML = `
+                    <h3>📷 Shop QR Generator</h3>
+                    <p>दुकानदारों के लिए डिजिटल QR कोड जनरेटर। यहाँ से हर दुकान का यूनिक QR कोड बनेगा ताकि ग्राहक स्कैन करके सीधी जानकारी पा सकें।</p>
+                `;
+            }
         }
-        function hide() { document.getElementById('display-area').style.display = "none"; }
-        
+
+        function hideContent() {
+            document.getElementById('display-area').style.display = 'none';
+        }
+
+        function changeJoke() {
+            const jokes = [
+                "ताऊ: भाई इब मोबाइल में ही सब कुछ आ लिया, बस खेत जोतने वाली मशीन और रहनी बाकी है!",
+                "बालक: मास्टर जी, अंग्रेजी में 'कैट' माने बिल्ली होवै है, फेर 'कैटलॉग' का मतलब बिल्ली की आग होवै है क्या?",
+                "सुमित: भाई आज मौसम सुहाना है, चाय पी ली के?"
+            ];
+            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+            document.getElementById("daily-joke").innerText = '"' + randomJoke + '"';
+        }
+
         function adminLogin() {
             let pass = prompt("पासवर्ड दर्ज करें:");
-            if (pass === "sub123") alert("लॉगिन सफल!");
-            else alert("गलत पासवर्ड!");
+            if (pass === "sub123") {
+                alert("सफलतापूर्वक एडमिन लॉगिन हो गया!");
+            } else if (pass !== null) {
+                alert("गलत पासवर्ड!");
+            }
         }
     </script>
+
 </body>
 </html>
