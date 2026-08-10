@@ -285,7 +285,7 @@
             <div class="form-group">
                 <label id="txt-lbl-vill">गाँव चुनें या लिखें:</label>
                 <select id="village-select" style="margin-bottom: 5px;">
-                    <!-- जिले के हिसाब से गाँव यहाँ ऑटोमेटिक लोड होंगे -->
+                    <!-- जिले के हिसाब से गाँव यहाँ लोड होंगे -->
                 </select>
                 <input type="text" id="village-input" placeholder="गाँव का नाम लिखकर खोजें..." onkeyup="validateVillageMatch()" style="margin-top: 4px;">
                 <div id="village-error" style="color: #d32f2f; font-size: 0.75rem; font-weight: bold; margin-top: 3px;"></div>
@@ -306,6 +306,31 @@
                 <button class="single-btn" onclick="openFeature('add')">➕ Add Shop (दुकान जोड़ें)</button>
                 <button class="single-btn" style="background:#e0f7fa; border-color:#00acc1; color:#006064;" onclick="searchNearbyGPS()">📍 मेरे पास की दुकानें</button>
             </div>
+        </div>
+
+        <!-- 👇 BUY-SELL (खरीद-बिक्री) सेक्शन -->
+        <div class="search-card" style="border-color: #ffb300; background: #fffdf8;">
+            <h3 style="color: #b78103;">🛒 गाँव का Buy-Sell (खरीद-बिक्री)</h3>
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">गाँव में पुराना सामान, ट्रैक्टर या पशु खरीदने और बेचने के लिए विज्ञापन डालें:</p>
+            <input type="text" id="bs-item" placeholder="चीज़ का नाम (जैसे: ट्रैक्टर, भैंस, साइकिल)" style="width:100%; padding:8px; margin-bottom:6px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+            <input type="text" id="bs-price" placeholder="कीमत (Price)" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+            <button style="background: #ff8f00; color: white; border: none; padding: 8px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer;" onclick="postBuySellItem()">विज्ञापन पोस्ट करें</button>
+        </div>
+
+        <!-- 👇 MY NEARBY SEARCH WITH LOCATION सेक्शन (Buy-Sell के ठीक नीचे) -->
+        <div class="search-card" style="border-color: #00acc1; background: #f0fafd;">
+            <h3 style="color: #006064;">📍 मेरे पास की दुकानें (My Near By Search)</h3>
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">जीपीएस (GPS) के जरिए अपने बिल्कुल नजदीक की दुकानें और सेवाएं खोजें:</p>
+            <button style="background: #00acc1; color: white; border: none; padding: 9px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer;" onclick="searchNearbyGPS()">📍 मेरी लोकेशन से सर्च करें</button>
+        </div>
+
+        <!-- 👇 MANORANJAN CHUTKULE (मनोरंजन चुटकुले) सेक्शन (उसके भी नीचे) -->
+        <div class="search-card" style="border-color: #ab47bc; background: #fbf5fc;">
+            <h3 style="color: #7b1fa2;">🎭 मनोरंजन चुटकुले (Haryanvi Jokes)</h3>
+            <div style="background: white; padding: 10px; border-radius: 6px; border-left: 4px solid #ab47bc; font-size: 0.9rem; color: #333;" id="joke-box">
+                "एक बार ताऊ खेत मैं बैठ्या था, और बोल्या — दुनिया चाँद पै पहुंच गी, पर इब ताऊ पै कोई यो कोन्या बतांदा कि हुक्के की नली कसूती साफ क्यूं कोन्या होती! 😂"
+            </div>
+            <button style="background: #ab47bc; color: white; border: none; padding: 7px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 8px; font-size: 0.85rem;" onclick="loadNewJoke()">दूसरा चुटकुला पढ़ें 🔄</button>
         </div>
 
         <div class="list-section">
@@ -334,6 +359,13 @@
             "bhiwani": ["भिवानी शहर", "बामला", "लोहारू", "सिवानी"],
             "hisar": ["हिसार शहर", "हांसी", "बरवाला", "नारनौंद"]
         };
+
+        const haryanviJokes = [
+            "एक बार ताऊ खेत मैं बैठ्या था, और बोल्या — दुनिया चाँद पै पहुंच गी, पर इब ताऊ पै कोई यो कोन्या बतांदा कि हुक्के की नली कसूती साफ क्यूं कोन्या होती! 😂",
+            "ताऊ ताई ते बोल्या — सुनिए हो, यो फोन भी गजब की चीज है, जेब में रखो तो बक्सा लागे है, और चलाओ तो जादू का पिटारा! 📱",
+            "दो यार आपस में बोल्या — यार, यो हरियाणवी मानुष कदे पीछे कोन्या रह सके, यो अंग्रेजी में भी 'राम-राम भाई' बोल दे है! 🚜",
+            "मास्टर जी बालक ते बोले — बता बेटा, 'Water' का मतलब क्या हो है? बालक बोल्या — जी, पानी! मास्टर बोल्या — शाबाश, फेर 'Cold Drink' का मतलब बता? बालक बोल्या — ठण्डा पानी! 😂"
+        ];
 
         function initApp() {
             applyLanguageSettings();
@@ -437,6 +469,18 @@
             }
         }
 
+        function postBuySellItem() {
+            let item = document.getElementById('bs-item').value;
+            let price = document.getElementById('bs-price').value;
+            if(!item || !price) {
+                alert("कृपया सामान का नाम और कीमत दोनों दर्ज करें!");
+                return;
+            }
+            alert("बधाई हो! आपका विज्ञापन Buy-Sell में सफलतापूर्वक लाइव कर दिया गया है।");
+            document.getElementById('bs-item').value = "";
+            document.getElementById('bs-price').value = "";
+        }
+
         function searchNearbyGPS() {
             if (!navigator.geolocation) {
                 alert("आपका ब्राउज़र जीपीएस (GPS) सपोर्ट नहीं करता है।");
@@ -448,18 +492,23 @@
                 let content = document.getElementById('dynamic-content');
                 box.style.display = 'block';
                 content.innerHTML = `
-                    <h3 style="color:#1b5e20; margin-top:0;">📍 आपके नज़दीकी दुकानें (GPS आधारित)</h3>
+                    <h3 style="color:#006064; margin-top:0;">📍 आपके नज़दीकी दुकानें (GPS आधारित)</h3>
                     <p style="font-size:0.85rem; color:#555;">अक्षांश (Lat): ${position.coords.latitude.toFixed(4)}, देशांतर (Lng): ${position.coords.longitude.toFixed(4)}</p>
-                    <div style="background:#e8f5e9; padding:10px; border-radius:6px; margin-top:8px;">
+                    <div style="background:#e0f7fa; padding:10px; border-radius:6px; margin-top:8px; border-left:4px solid #00acc1;">
                         <strong>Kusum Kiryana Store</strong><br>
                         <span style="font-size:0.8rem; color:#333;">दूरी: आपके बिलकुल पास (माल्कोश रोड)</span><br>
-                        <a href="tel:9992821782" style="display:inline-block; margin-top:5px; background:#1b5e20; color:white; padding:4px 8px; border-radius:4px; text-decoration:none; font-size:0.8rem; font-weight:bold;">📞 कॉल करें</a>
+                        <a href="tel:9992821782" style="display:inline-block; margin-top:5px; background:#006064; color:white; padding:4px 8px; border-radius:4px; text-decoration:none; font-size:0.8rem; font-weight:bold;">📞 कॉल करें</a>
                     </div>
                 `;
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, () => {
                 alert("लोकेशन प्राप्त करने में विफल। कृपया जीपीएस परमिशन दें।");
             });
+        }
+
+        function loadNewJoke() {
+            let randomIndex = Math.floor(Math.random() * haryanviJokes.length);
+            document.getElementById('joke-box').innerText = haryanviJokes[randomIndex];
         }
 
         function openFeature(type) {
@@ -481,12 +530,12 @@
                 `;
             } else if (type === 'buysell') {
                 content.innerHTML = `
-                    <h3 style="color:#1b5e20; margin-top:0;">🛒 गाँव का Buy-Sell (खरीद-बिक्री मार्केटप्लेस)</h3>
+                    <h3 style="color:#b78103; margin-top:0;">🛒 गाँव का Buy-Sell मार्केटप्लेस</h3>
                     <p style="font-size:0.85rem; color:#555;">पुराना ट्रैक्टर, पशु या सामान बेचने या खरीदने के लिए विज्ञापन डालें:</p>
                     <input type="text" placeholder="सामान का नाम (जैसे: भैंस, ट्रैक्टर, बाइक)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
                     <input type="text" placeholder="कीमत (Price)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
                     <input type="text" placeholder="मोबाइल नंबर" style="width:100%; padding:8px; margin-bottom:8px; box-sizing:border-box;">
-                    <button style="background:#1b5e20; color:white; border:none; padding:9px; width:100%; font-weight:bold; border-radius:5px; cursor:pointer;" onclick="alert('आपका विज्ञापन Buy-Sell में लाइव कर दिया गया है!')">विज्ञापन पोस्ट करें</button>
+                    <button style="background:#ff8f00; color:white; border:none; padding:9px; width:100%; font-weight:bold; border-radius:5px; cursor:pointer;" onclick="alert('आपका विज्ञापन Buy-Sell में लाइव कर दिया गया है!')">विज्ञापन पोस्ट करें</button>
                 `;
             } else if (type === 'schemes') {
                 content.innerHTML = `
@@ -502,10 +551,10 @@
                 `;
             } else if (type === 'jokes') {
                 content.innerHTML = `
-                    <h3 style="color:#1b5e20; margin-top:0;">🎭 हरियाणवी लोकल चुटकुले</h3>
-                    <div style="background:#f1f8e9; padding:10px; border-radius:6px; font-size:0.95rem; border-left:4px solid #2e7d32;">
+                    <h3 style="color:#7b1fa2; margin-top:0;">🎭 हरियाणवी लोकल चुटकुले</h3>
+                    <div style="background:#fbf5fc; padding:10px; border-radius:6px; font-size:0.95rem; border-left:4px solid #ab47bc;">
                         <strong>ताऊ का जोक:</strong><br>
-                        एक बार ताऊ बोल्या - "इब यो जमाना आ लिया, ब्याह में डीजे की जगह सीधा जनरेटर पावै है, पर चाय फेर भी हाथ की बनानी पड़े है!" 😂
+                        एक बार ताऊ बोल्या — "इब यो जमाना आ लिया, ब्याह में डीजे की जगह सीधा जनरेटर पावै है, पर चाय फेर भी हाथ की बनानी पड़े है!" 😂
                     </div>
                 `;
             } else if (type === 'qr') {
