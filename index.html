@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi" id="html-root">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
+    <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -42,7 +42,6 @@
         header h1 {
             margin: 0;
             font-size: 1.8rem;
-            letter-spacing: 0.5px;
         }
         .portal-badge {
             background: rgba(255, 255, 255, 0.2);
@@ -66,13 +65,12 @@
             border-radius: 10px;
             padding: 12px 15px;
             margin-bottom: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .weather-card h3 { margin: 0 0 4px 0; font-size: 1.05rem; }
-        .weather-card p { margin: 0; font-size: 0.82rem; opacity: 0.95; }
+        .weather-card p { margin: 0; font-size: 0.82rem; }
         .weather-temp { font-size: 1.5rem; font-weight: bold; }
 
         .ticker-card {
@@ -101,7 +99,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .search-card {
             background: white;
             border-radius: 10px;
@@ -127,7 +124,7 @@
             margin-bottom: 5px;
             color: #333;
         }
-        .form-group select {
+        .form-group select, .form-group input {
             width: 100%;
             padding: 12px 10px;
             border: 2px solid #2e7d32;
@@ -137,7 +134,6 @@
             background: #fff;
             color: #1b5e20;
             box-sizing: border-box;
-            appearance: auto;
         }
         .main-btn {
             background: #1b5e20;
@@ -150,10 +146,7 @@
             border-radius: 6px;
             cursor: pointer;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .main-btn:active { background: #0e3b12; }
-
         .scheme-item {
             background: #f1f8e9;
             border-left: 4px solid #2e7d32;
@@ -164,7 +157,6 @@
         .scheme-item h4 { margin: 0 0 4px 0; font-size: 0.9rem; color: #1b5e20; }
         .scheme-item p { margin: 0 0 6px 0; font-size: 0.8rem; color: #555; }
         .scheme-item a { color: #1b5e20; font-weight: bold; font-size: 0.8rem; text-decoration: none; }
-
         #dynamic-result-box {
             display: none;
             background: white;
@@ -172,26 +164,25 @@
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body onload="initApp()">
 
     <div class="founder-bar">
-        <span id="txt-founder">👨‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-        <button class="lang-btn" onclick="toggleLanguage()" id="lang-toggle-btn">English</button>
+        <span>👨‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
+        <button class="lang-btn" onclick="alert('पोर्टल हिंदी में सक्रिय है!')">English</button>
     </div>
 
     <header>
-        <h1 id="txt-header-title">हरियाणा ग्रामीण सेवा</h1>
-        <div class="portal-badge" id="txt-badge">गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</div>
-        <div style="font-size: 0.75rem; color: #ffeb3b; margin-top: 5px;" id="txt-subbadge">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
+        <h1>हरियाणा ग्रामीण सेवा</h1>
+        <div class="portal-badge">गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</div>
+        <div style="font-size: 0.75rem; color: #ffeb3b; margin-top: 5px;">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
     </header>
 
     <div class="container">
 
-        <!-- 🌤️ लाइव मौसम -->
+        <!-- लाइव मौसम -->
         <div class="weather-card">
             <div>
                 <h3>🌤️ हरियाणा लाइव मौसम</h3>
@@ -200,312 +191,155 @@
             <div class="weather-temp">27.9°C</div>
         </div>
 
-        <!-- 📢 ताज़ा न्यूज़ टिकर -->
+        <!-- ताज़ा न्यूज़ टिकर -->
         <div class="ticker-card">
-            <span style="background: #ff8f00; color: white; padding: 2px 6px; border-radius: 4px; font-size:0.75rem;">ताज़ा लोकल न्यूज़</span>
-            <marquee scrollamount="4">हरियाणा ग्रामीण अपडेट: माल्कोश गाँव को अब चरखी दादरी जिला के अंतर्गत अपडेट कर दिया गया है!</marquee>
+            <span style="background: #ff8f00; color: white; padding: 2px 6px; border-radius: 4px; font-size:0.75rem;">ताज़ा न्यूज़</span>
+            <marquee scrollamount="4">हरियाणा ग्रामीण अपडेट: माल्कोश गाँव अब चरखी दादरी जिला के अंतर्गत लाइव है!</marquee>
         </div>
 
-        <!-- 🌾 मंडी भाव -->
+        <!-- मंडी भाव -->
         <div class="mandi-card">
             <span>🌾 हरियाणवी मंडी भाव (आज का ताजा)</span>
             <span style="background:#2e7d32; color:white; padding:3px 8px; border-radius:4px; font-size:0.75rem;">लाइव अपडेट</span>
         </div>
 
-        <!-- 🔍 मुख्य सर्च सेक्शन -->
+        <!-- मुख्य सर्च सेक्शन -->
         <div class="search-card">
-            <h3 id="txt-search-title">🔍 अपने गाँव की सेवाएँ खोजें</h3>
-            
+            <h3>🔍 अपने गाँव की सेवाएँ खोजें</h3>
             <div class="form-group">
-                <label id="txt-lbl-dist">1. जिला चुनें:</label>
+                <label>1. जिला चुनें:</label>
                 <select id="district-select" onchange="updateVillages()">
                     <option value="charkhi_dadri">चरखी दादरी (माल्कोश)</option>
                     <option value="mahendragarh">महेंद्रगढ़</option>
                     <option value="rewari">रेवाड़ी</option>
                     <option value="rohtak">रोहतक</option>
-                    <option value="bhiwani">भिवानी</option>
-                    <option value="hisar">हिसार</option>
                 </select>
             </div>
-
             <div class="form-group">
-                <label id="txt-lbl-vill">2. गाँव चुनें:</label>
-                <select id="village-select">
-                    <!-- गाँव लोड होंगे -->
-                </select>
+                <label>2. गाँव चुनें:</label>
+                <select id="village-select"></select>
             </div>
-
             <button class="main-btn" onclick="searchServices()">दुकानें देखें</button>
         </div>
 
-        <!-- 👇 1. अपनी दुकान रजिस्टर करें -->
+        <!-- 1. अपनी दुकान रजिस्टर करें (सीधा खुला हुआ) -->
         <div class="search-card" style="border-color: #2e7d32; background: #f4faf4;">
             <h3 style="color: #1b5e20;">➕ अपनी दुकान / सेवा यहाँ रजिस्टर करें</h3>
-            <div class="form-group" style="margin-bottom:8px;">
-                <input type="text" id="shop-name-in" placeholder="दुकान का नाम (Shop Name)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
-            </div>
-            <div class="form-group" style="margin-bottom:8px;">
-                <input type="text" id="shop-owner-in" placeholder="संचालक का नाम (Owner Name)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
-            </div>
-            <div class="form-group" style="margin-bottom:10px;">
-                <input type="text" id="shop-phone-in" placeholder="मोबाइल नंबर (Mobile No)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
-            </div>
+            <div class="form-group"><input type="text" id="shop-name-in" placeholder="दुकान का नाम (Shop Name)"></div>
+            <div class="form-group"><input type="text" id="shop-owner-in" placeholder="संचालक का नाम (Owner Name)"></div>
+            <div class="form-group"><input type="text" id="shop-phone-in" placeholder="मोबाइल नंबर (Mobile No)"></div>
             <button style="background:#2e7d32; color:white; border:none; width:100%; padding:11px; font-weight:bold; border-radius:6px; cursor:pointer;" onclick="submitNewShop()">दुकान सबमिट करें</button>
         </div>
 
-        <!-- 👇 2. ग्रामीण बाय-सेल मार्केटप्लेस -->
+        <!-- 2. ग्रामीण बाय-सेल मार्केटप्लेस (सीधा खुला हुआ) -->
         <div class="search-card" style="border-color: #ff9800; background: #fffdf8;">
             <h3 style="color: #e65100;">🛒 ग्रामीण बाय-सेल मार्केटप्लेस (विज्ञापन डालें)</h3>
-            <div class="form-group" style="margin-bottom:8px;">
-                <input type="text" id="bs-item-in" placeholder="चीज़ का नाम (जैसे: ट्रैक्टर, भैंस, साइकिल)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
-            </div>
-            <div class="form-group" style="margin-bottom:10px;">
-                <input type="text" id="bs-price-in" placeholder="कीमत (Price)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
-            </div>
+            <div class="form-group"><input type="text" id="bs-item-in" placeholder="चीज़ का नाम (जैसे: ट्रैक्टर, भैंस)"></div>
+            <div class="form-group"><input type="text" id="bs-price-in" placeholder="कीमत (Price)"></div>
             <button style="background:#f57c00; color:white; border:none; width:100%; padding:11px; font-weight:bold; border-radius:6px; cursor:pointer;" onclick="postBuySellAd()">विज्ञापन पोस्ट करें</button>
         </div>
 
-        <!-- 👇 3. मेरे पास की दुकानें -->
+        <!-- 3. मेरे पास की दुकानें (GPS) -->
         <div class="search-card" style="border-color: #00acc1; background: #f0fafd;">
-            <h3 style="color: #006064;">📍 मेरे पास की दुकानें (My Near By Search)</h3>
-            <p style="font-size: 0.82rem; color: #555; margin-bottom: 10px;">जीपीएस (GPS) के माध्यम से अपने बिल्कुल नजदीक की दुकानें तुरंत खोजें:</p>
+            <h3 style="color: #006064;">📍 मेरे पास की दुकानें (GPS Search)</h3>
             <button style="background: #00acc1; color: white; border: none; padding: 11px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer;" onclick="searchNearbyGPS()">📍 मेरी लोकेशन से सर्च करें</button>
         </div>
 
-        <!-- 👇 4. मनोरंजन चुटकुले -->
+        <!-- 4. मनोरंजन चुटकुले -->
         <div class="search-card" style="border-color: #ab47bc; background: #fbf5fc;">
             <h3 style="color: #7b1fa2;">🎭 मनोरंजन चुटकुले (Haryanvi Jokes)</h3>
-            <div style="background: white; padding: 10px; border-radius: 6px; border-left: 4px solid #ab47bc; font-size: 0.88rem; color: #333;" id="joke-box">
+            <div style="background: white; padding: 10px; border-radius: 6px; border-left: 4px solid #ab47bc; font-size: 0.88rem;" id="joke-box">
                 "एक बार ताऊ खेत मैं बैठ्या था, और बोल्या — दुनिया चाँद पै पहुंच गी, पर इब ताऊ पै कोई यो कोन्या बतांदा कि हुक्के की नली कसूती साफ क्यूं कोन्या होती! 😂"
             </div>
-            <button style="background: #ab47bc; color: white; border: none; padding: 9px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 8px; font-size: 0.85rem;" onclick="loadNewJoke()">दूसरा चुटकुला पढ़ें 🔄</button>
+            <button style="background: #ab47bc; color: white; border: none; padding: 9px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 8px;" onclick="loadNewJoke()">दूसरा चुटकुला पढ़ें 🔄</button>
         </div>
 
-        <!-- dynamic result display box -->
+        <!-- रिजल्ट बॉक्स -->
         <div id="dynamic-result-box">
-            <button style="background: #d32f2f; color: white; border: none; padding: 4px 10px; border-radius: 4px; float: right; cursor: pointer; font-weight: bold;" onclick="document.getElementById('dynamic-result-box').style.display='none'">बंद करें ✕</button>
+            <button style="background: #d32f2f; color: white; border: none; padding: 4px 10px; border-radius: 4px; float: right; cursor: pointer;" onclick="document.getElementById('dynamic-result-box').style.display='none'">बंद करें ✕</button>
             <div id="dynamic-result-content"></div>
         </div>
 
-        <!-- 📜 सरकारी योजनाएँ -->
+        <!-- सरकारी योजनाएँ -->
         <div class="search-card">
-            <h3>📜 हरियाणा सरकार की मुख्य योजनाएँ (जिलावार लाइव पोर्टल)</h3>
-            <div class="form-group" style="margin-bottom: 10px;">
-                <label style="font-size:0.8rem;">अपने जिले के अनुसार योजनाओं का पोर्टल देखें:</label>
-                <select id="scheme-dist" onchange="updateSchemes()">
-                    <option value="dadri">चरखी दादरी</option>
-                    <option value="mahendragarh">महेंद्रगढ़</option>
-                    <option value="rewari">रेवाड़ी</option>
-                </select>
+            <h3>📜 हरियाणा सरकार की मुख्य योजनाएँ</h3>
+            <div class="scheme-item">
+                <h4>📁 परिवार पहचान पत्र (PPP)</h4>
+                <p>परिवार पहचान पत्र सत्यापन व सुधार सेवा।</p>
+                <a href="https://meraparivar.haryana.gov.in" target="_blank">🔗 पीपीपी पोर्टल देखें &rarr;</a>
             </div>
-            <div id="scheme-list-area">
-                <div class="scheme-item">
-                    <h4>📁 जिला चरखी दादरी - परिवार पहचान पत्र (PPP)</h4>
-                    <p>जिला नागरिक संसाधन सूचना विभाग, चरखी दादरी के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा。</p>
-                    <a href="https://meraparivar.haryana.gov.in" target="_blank">🔗 पीपीपी पोर्टल (चरखी दादरी लाइव) &rarr;</a>
-                </div>
-                <div class="scheme-item">
-                    <h4>👵 जिला चरखी दादरी - सामाजिक सुरक्षा पेंशन</h4>
-                    <p>बुढ़ापा, विधवा एवं विकलांग पेंशन के लाइव आवेदन व स्टेटस की जानकारी (चरखी दादरी समाज कल्याण शाखा)।</p>
-                    <a href="https://socialjustice.haryana.gov.in" target="_blank">🔗 पेंशन पोर्टल देखें &rarr;</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- 💬 फीडबैक -->
-        <div class="search-card">
-            <h3 style="color: #37474f;">💬 सुझाव एवं फीडबैक (Feedback)</h3>
-            <input type="text" placeholder="आपका नाम..." style="width:100%; padding:10px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
-            <textarea placeholder="अपना सुझाव या शिकायत यहाँ लिखें..." style="width:100%; padding:10px; height:60px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;"></textarea>
-            <button style="background: #2e7d32; color: white; border: none; padding: 10px 15px; font-weight: bold; border-radius: 6px; cursor: pointer;" onclick="alert('आपका फीडबैक सफलतापूर्वक दर्ज हो गया है!')">फीडबैक भेजें</button>
-        </div>
-
-        <!-- 🔒 ADMIN -->
-        <div style="margin-bottom: 20px;">
-            <button style="background: #ffa000; color: white; border: none; width: 100%; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 0.95rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" onclick="adminLogin()">🔒 एडमिन / वेरिफिकेशन पैनल</button>
         </div>
 
     </div>
 
     <script>
-        let currentLang = 'hi';
-
         const districtVillages = {
             "charkhi_dadri": ["माल्कोश / Malkosh", "दादरी शहर", "बाढ़डा", "पैंतावास", "झोझू कलाँ"],
             "mahendragarh": ["नारनौल", "महेंद्रगढ़", "कचरी", "अटेली"],
             "rewari": ["रेवाड़ी शहर", "बावल", "धारूहेड़ा", "कोसली"],
-            "rohtak": ["रोहतक शहर", "इस्माइला", "कलानौर", "महेम"],
-            "bhiwani": ["भिवानी शहर", "बामला", "लोहारू", "सिवानी"],
-            "hisar": ["हिसार शहर", "हांसी", "बरवाला", "नारनौंद"]
+            "rohtak": ["रोहतक शहर", "इस्माइला", "कलानौर", "महेम"]
         };
 
         const haryanviJokes = [
             "एक बार ताऊ खेत मैं बैठ्या था, और बोल्या — दुनिया चाँद पै पहुंच गी, पर इब ताऊ पै कोई यो कोन्या बतांदा कि हुक्के की नली कसूती साफ क्यूं कोन्या होती! 😂",
             "ताऊ ताई ते बोल्या — सुनिए हो, यो फोन भी गजब की चीज है, जेब में रखो तो बक्सा लागे है, और चलाओ तो जादू का पिटारा! 📱",
-            "दो यार आपस में बोल्या — यार, यो हरियाणवी मानुष कदे पीछे कोन्या रह सके, यो अंग्रेजी में भी 'राम-राम भाई' बोल दे है! 🚜",
-            "मास्टर जी बालक ते बोले — बता बेटा, 'Water' का मतलब क्या हो है? बालक बोल्या — जी, पानी! मास्टर बोल्या — शाबाश, फेर 'Cold Drink' का मतलब बता? बालक बोल्या — ठण्डा पानी! 😂"
+            "दो यार आपस में बोल्या — यार, यो हरियाणवी मानुष कदे पीछे कोन्या रह सके, यो अंग्रेजी में भी 'राम-राम भाई' बोल दे है! 🚜"
         ];
 
-        function initApp() {
-            updateVillages();
-        }
+        function initApp() { updateVillages(); }
 
         function updateVillages() {
             let dist = document.getElementById('district-select').value;
             let villSelect = document.getElementById('village-select');
             villSelect.innerHTML = "";
-            let villages = districtVillages[dist] || [];
-            
-            villages.forEach(v => {
+            (districtVillages[dist] || []).forEach(v => {
                 let opt = document.createElement('option');
-                opt.value = v;
-                opt.innerText = v;
+                opt.value = v; opt.innerText = v;
                 villSelect.appendChild(opt);
             });
         }
 
         function submitNewShop() {
-            let name = document.getElementById('shop-name-in').value;
-            if(!name) {
-                alert("कृपया दुकान का नाम दर्ज करें!");
-                return;
-            }
-            alert("बधाई हो! आपकी दुकान वेरिफिकेशन के लिए सफलतापूर्वक सबमिट हो गई है।");
+            if(!document.getElementById('shop-name-in').value) { alert("कृपया दुकान का नाम दर्ज करें!"); return; }
+            alert("बधाई हो! आपकी दुकान वेरिफिकेशन के लिए सबमिट हो गई है।");
             document.getElementById('shop-name-in').value = "";
             document.getElementById('shop-owner-in').value = "";
             document.getElementById('shop-phone-in').value = "";
         }
 
         function postBuySellAd() {
-            let item = document.getElementById('bs-item-in').value;
-            if(!item) {
-                alert("कृपया सामान का नाम दर्ज करें!");
-                return;
-            }
-            alert("आपका विज्ञापन बाय-सेल मार्केटप्लेस में लाइव कर दिया गया है!");
+            if(!document.getElementById('bs-item-in').value) { alert("कृपया सामान का नाम दर्ज करें!"); return; }
+            alert("आपका विज्ञापन मार्केटप्लेस में लाइव कर दिया गया है!");
             document.getElementById('bs-item-in').value = "";
             document.getElementById('bs-price-in').value = "";
         }
 
         function searchNearbyGPS() {
-            if (!navigator.geolocation) {
-                alert("आपका ब्राउज़र जीपीएस सपोर्ट नहीं करता है।");
-                return;
-            }
-            alert("आपकी लाइव जीपीएस लोकेशन डिटेक्ट की जा रही है...");
-            navigator.geolocation.getCurrentPosition((position) => {
-                let box = document.getElementById('dynamic-result-box');
-                let content = document.getElementById('dynamic-result-content');
-                box.style.display = 'block';
-                content.innerHTML = `
-                    <h3 style="color:#006064; margin-top:0;">📍 आपके नज़दीकी दुकानें (GPS आधारित)</h3>
-                    <p style="font-size:0.82rem; color:#555;">Lat: ${position.coords.latitude.toFixed(4)}, Lng: ${position.coords.longitude.toFixed(4)}</p>
-                    <div style="background:#e0f7fa; padding:10px; border-radius:6px; border-left:4px solid #00acc1;">
-                        <strong>माल्कोश जनरल स्टोर</strong><br>
-                        <span style="font-size:0.78rem; color:#333;">दूरी: बिल्कुल नजदीक (गाँव मुख्य मार्ग)</span><br>
-                        <a href="tel:9992821782" style="display:inline-block; margin-top:5px; background:#006064; color:white; padding:3px 8px; border-radius:4px; text-decoration:none; font-size:0.75rem; font-weight:bold;">📞 कॉल करें</a>
-                    </div>
-                `;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, () => {
-                alert("लोकेशन प्राप्त करने में विफल। कृपया जीपीएस परमिशन दें।");
-            });
+            alert("लोकेशन डिटेक्ट की जा रही है...");
+            let box = document.getElementById('dynamic-result-box');
+            box.style.display = 'block';
+            document.getElementById('dynamic-result-content').innerHTML = `
+                <h3 style="color:#006064; margin-top:0;">📍 आपके नज़दीकी दुकानें</h3>
+                <div style="background:#e0f7fa; padding:10px; border-radius:6px;">
+                    <strong>माल्कोश जनरल स्टोर</strong><br><span style="font-size:0.78rem;">दूरी: बिल्कुल नजदीक (गाँव मुख्य मार्ग)</span>
+                </div>`;
         }
 
         function loadNewJoke() {
-            let randomIndex = Math.floor(Math.random() * haryanviJokes.length);
-            document.getElementById('joke-box').innerText = haryanviJokes[randomIndex];
+            let r = Math.floor(Math.random() * haryanviJokes.length);
+            document.getElementById('joke-box').innerText = haryanviJokes[r];
         }
 
         function searchServices() {
-            let dist = document.getElementById('district-select').value;
             let vill = document.getElementById('village-select').value;
             let box = document.getElementById('dynamic-result-box');
-            let content = document.getElementById('dynamic-result-content');
             box.style.display = 'block';
-            content.innerHTML = `
-                <h3 style="color:#1b5e20; margin-top:0;">📋 ${vill} (${dist}) की सेवाएँ</h3>
-                <div style="background:#e8f5e9; padding:10px; border-radius:6px; border-left:4px solid #2e7d32;">
-                    <strong>सुभाष किराना स्टोर</strong><br>
-                    <span style="font-size:0.8rem;">संचालक: सुभाष कुमार | संपर्क: 9876543210</span><br>
-                    <span style="font-size:0.75rem; color:#2e7d32; font-weight:bold;">✔ सत्यापित दुकान</span>
-                </div>
-            `;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function adminLogin() {
-            let pass = prompt("Admin Password दर्ज करें:");
-            if (pass === "sub123") {
-                let box = document.getElementById('dynamic-result-box');
-                let content = document.getElementById('dynamic-result-content');
-                box.style.display = 'block';
-                content.innerHTML = `
-                    <h3 style="color:#d32f2f; margin-top:0;">🔒 Admin Control Panel</h3>
-                    <p style="font-size:0.85rem;">पेंडिंग दुकानें वेरिफिकेशन के लिए:</p>
-                    <div style="background:#f9f9f9; padding:8px; border:1px solid #ccc; border-radius:6px;">
-                        <strong>नया रजिस्ट्रेशन (माल्कोश)</strong><br>
-                        <button style="background:#2e7d32; color:white; border:none; padding:4px 8px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="alert('Approved!')">✔ Approve</button>
-                    </div>
-                `;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (pass !== null) {
-                alert("गलत पासवर्ड!");
-            }
-        }
-
-        function toggleLanguage() {
-            currentLang = (currentLang === 'hi') ? 'en' : 'hi';
-            if(currentLang === 'en') {
-                document.getElementById('page-title').innerText = "Haryana Grameen Seva - Digital Gram Portal";
-                document.getElementById('txt-founder').innerText = "👨‍💼 Founder: Kusum w/o राजेश यादव Malkosh";
-                document.getElementById('txt-header-title').innerText = "Haryana Grameen Seva";
-                document.getElementById('txt-badge').innerText = "Every village shop, every service - on your mobile";
-                document.getElementById('txt-subbadge').innerText = "Digital Malkosh & Haryana Portal";
-                document.getElementById('txt-search-title').innerText = "🔍 Search Village Services";
-                document.getElementById('txt-lbl-dist').innerText = "1. Select District:";
-                document.getElementById('txt-lbl-vill').innerText = "2. Select Village:";
-                document.getElementById('lang-toggle-btn').innerText = "हिन्दी";
-            } else {
-                document.getElementById('page-title').innerText = "हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल";
-                document.getElementById('txt-founder').innerText = "👨‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश";
-                document.getElementById('txt-header-title').innerText = "हरियाणा ग्रामीण सेवा";
-                document.getElementById('txt-badge').innerText = "गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर";
-                document.getElementById('txt-subbadge').innerText = "डिजिटल माल्कोश & हरियाणा पोर्टल";
-                document.getElementById('txt-search-title').innerText = "🔍 अपने गाँव की सेवाएँ खोजें";
-                document.getElementById('txt-lbl-dist').innerText = "1. जिला चुनें:";
-                document.getElementById('txt-lbl-vill').innerText = "2. गाँव चुनें:";
-                document.getElementById('lang-toggle-btn').innerText = "English";
-            }
-        }
-
-        function updateSchemes() {
-            let sDist = document.getElementById('scheme-dist').value;
-            let area = document.getElementById('scheme-list-area');
-            if(sDist === 'mahendragarh') {
-                area.innerHTML = `
-                    <div class="scheme-item">
-                        <h4>📁 जिला महेंद्रगढ़ - परिवार पहचान पत्र (PPP)</h4>
-                        <p>नारनौल व महेंद्रगढ़ क्षेत्र के लिए फैमिली आईडी सुधार सेवा。</p>
-                        <a href="https://meraparivar.haryana.gov.in" target="_blank">🔗 पोर्टल देखें &rarr;</a>
-                    </div>
-                `;
-            } else {
-                area.innerHTML = `
-                    <div class="scheme-item">
-                        <h4>📁 जिला चरखी दादरी - परिवार पहचान पत्र (PPP)</h4>
-                        <p>जिला नागरिक संसाधन सूचना विभाग, चरखी दादरी के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा。</p>
-                        <a href="https://meraparivar.haryana.gov.in" target="_blank">🔗 पीपीपी पोर्टल (चरखी दादरी लाइव) &rarr;</a>
-                    </div>
-                    <div class="scheme-item">
-                        <h4>👵 जिला चरखी दादरी - सामाजिक सुरक्षा पेंशन</h4>
-                        <p>बुढ़ापा, विधवा एवं विकलांग पेंशन के लाइव आवेदन व स्टेटस की जानकारी।</p>
-                        <a href="https://socialjustice.haryana.gov.in" target="_blank">🔗 पेंशन पोर्टल देखें &rarr;</a>
-                    </div>
-                `;
-            }
+            document.getElementById('dynamic-result-content').innerHTML = `
+                <h3 style="color:#1b5e20; margin-top:0;">📋 ${vill} की सेवाएँ</h3>
+                <div style="background:#e8f5e9; padding:10px; border-radius:6px;">
+                    <strong>सुभाष किराना स्टोर</strong><br><span style="font-size:0.8rem;">संपर्क: 9876543210 (सत्यापित)</span>
+                </div>`;
         }
     </script>
-
 </body>
 </html>
