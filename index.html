@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>लोकल डिजिटल पोर्टल - हरियाणा</title>
+    <title>हरियाणा ग्रामीण सेवा</title>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -12,150 +12,273 @@
             padding: 0; 
             color: #333;
         }
-        /* पुरानी परफेक्ट ग्रीन थीम हेडर */
+        /* संस्थापक पट्टी */
+        .founder-bar {
+            background-color: #1b5e20;
+            color: #ffeb3b;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .founder-bar button {
+            background: #ffeb3b;
+            color: #1b5e20;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        /* मुख्य हेडर */
         header { 
             background-color: #2e7d32; 
             color: white; 
-            padding: 15px; 
+            padding: 20px 15px; 
             text-align: center; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         header h1 {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
         }
-        .ram-ram { 
-            background-color: #c8e6c9; 
-            color: #1b5e20; 
-            padding: 10px; 
-            text-align: center; 
-            font-weight: bold; 
-            font-size: 1.1rem;
-            border-bottom: 1px solid #a5d6a7;
+        header p {
+            margin: 5px 0 10px 0;
+            font-size: 0.95rem;
+            color: #e8f5e9;
         }
-        
+        .portal-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
         .container { 
             padding: 15px; 
             max-width: 600px;
             margin: auto;
         }
 
-        /* चारों बटन का ग्रिड लेआउट (जैसे आपकी पुरानी स्क्रीन में था) */
-        .btn-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
-            margin-bottom: 20px; 
+        /* लाइव मौसम विजेट */
+        .weather-card {
+            background: linear-gradient(135deg, #00838b, #006064);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-label: shadow;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .app-btn { 
-            background: white; 
-            border: 2px solid #2e7d32; 
-            padding: 15px; 
-            border-radius: 10px; 
-            text-align: center; 
-            color: #2e7d32; 
-            font-weight: bold; 
-            cursor: pointer; 
+
+        /* ताज़ा न्यूज़ पट्टी */
+        .news-ticker {
+            background: #fff3e0;
+            border-left: 4px solid #f57c00;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #d84315;
+        }
+
+        /* मंडी भाव पट्टी */
+        .mandi-card {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            color: #1b5e20;
+            font-weight: bold;
+        }
+
+        /* नए फीचर्स बटन ग्रिड (Nearby, Categories, Entertainment, QR) */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .feature-btn {
+            background: white;
+            border: 2px solid #2e7d32;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: 0.2s;
         }
-        .app-btn:active {
-            transform: scale(0.98);
+        .feature-btn:active {
             background: #e8f5e9;
         }
 
-        /* बटन दबाने पर उसी स्क्रीन के अंदर नीचे खुलने वाला बॉक्स */
-        #display-area { 
-            background: white; 
-            border: 2px solid #2e7d32; 
-            padding: 15px; 
-            border-radius: 10px; 
-            margin-bottom: 20px; 
-            display: none; /* शुरू में बंद रहेगा */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        /* जिला और गाँव खोजने वाला कार्ड */
+        .search-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
         }
-        .close-btn { 
-            background: #d32f2f; 
-            color: white; 
-            border: none; 
-            padding: 5px 10px; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            float: right; 
-            font-weight: bold;
-        }
-        .content-box h3 {
+        .search-card h3 {
             margin-top: 0;
             color: #2e7d32;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #fff;
+        }
+        .submit-btn {
+            background: #1b5e20;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        /* मनोरंजन / जोक्स का छोटा सेक्शन */
-        .section-card {
+        /* डायनेमिक खुला हुआ बॉक्स (जहाँ डेटा दिखेगा) */
+        #dynamic-display {
             background: white;
+            border: 2px solid #2e7d32;
             padding: 15px;
             border-radius: 10px;
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            display: none;
         }
-        .section-card h3 {
-            margin-top: 0;
-            color: #2e7d32;
+        .close-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            float: right;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        /* गुप्त एडमिन एरिया (जो बहुत हल्का दिखता है और छूने पर दिखता है) */
-        .admin-area { 
-            text-align: center; 
-            margin-top: 30px; 
-            opacity: 0.05; 
+        /* गुप्त एडमिन एरिया (पासवर्ड: sub123) */
+        .admin-area {
+            text-align: center;
+            margin: 30px 0;
+            opacity: 0.03;
             transition: opacity 0.3s;
         }
-        .admin-area:hover { 
-            opacity: 1; 
+        .admin-area:hover {
+            opacity: 1;
         }
         .admin-btn {
             background: #333;
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 6px 12px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 0.8rem;
         }
     </style>
 </head>
-<body>
+<body onload="playRamRamVoice()">
 
-    <header>
-        <h1>गाँव और ज़िला पोर्टल</h1>
-    </header>
-    
-    <div class="ram-ram">
-        🙏 राम-राम भाइयो!
+    <!-- संस्थापक पट्टी -->
+    <div class="founder-bar">
+        <span>👩‍🌾 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
+        <button onclick="alert('English translation coming soon!')">English</button>
     </div>
 
+    <!-- मुख्य हेडर -->
+    <header>
+        <h1>हरियाणा ग्रामीण सेवा</h1>
+        <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
+        <div class="portal-tag">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
+    </header>
+
     <div class="container">
-        
-        <!-- चारों मुख्य बटन -->
-        <div class="btn-grid">
-            <div class="app-btn" onclick="showContent('nearby')">My Nearby Search</div>
-            <div class="app-btn" onclick="showContent('categories')">सभी कैटेगरीज</div>
-            <div class="app-btn" onclick="showContent('entertainment')">मनोरंजन & जोक्स</div>
-            <div class="app-btn" onclick="showContent('qr')">Shop QR</div>
-        </div>
 
-        <!-- उसी स्क्रीन के अंदर नीचे खुलने वाला बॉक्स -->
-        <div id="display-area">
-            <button class="close-btn" onclick="hideContent()">बंद करें</button>
-            <div id="content-box" class="content-box">
-                <!-- यहाँ डेटा लोड होगा -->
+        <!-- लाइव मौसम विजेट -->
+        <div class="weather-card">
+            <div>
+                <span style="font-size: 1rem; font-weight: bold;">⛅ हरियाणा लाइव मौसम</span>
+                <div style="font-size: 0.8rem; margin-top: 4px; opacity: 0.9;">हवा की गति: 1.4 km/h | स्थिति: साफ एवं धूप</div>
             </div>
+            <div style="font-size: 1.4rem; font-weight: bold;">33.2°C</div>
         </div>
 
-        <!-- मनोरंजन विजेट -->
-        <div class="section-card">
-            <h3>🌟 आज का खास</h3>
-            <p id="daily-joke">"हरियाणवी चुटकुला: ताऊ बोले — बेटा इंटरनेट पे न्यूटन का नियम तो ठीक है, पर यो बता कैटली में चाय कड़की कैयाँ होवै है!"</p>
-            <button onclick="changeJoke()" style="background:#2e7d32; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer; font-weight:bold;">दूसरा चुटकुला देखें</button>
+        <!-- ताज़ा लोकल न्यूज़ -->
+        <div class="news-ticker">
+            📢 <strong>ताज़ा लोकल न्यूज़:</strong> हरियाणा ग्रामीण सेवा पोर्टल पर आपके क्षेत्र की डिजिटल लिस्टिंग शुरू हो चुकी है!
+        </div>
+
+        <!-- मंडी भाव -->
+        <div class="mandi-card">
+            🌾 मंडी भाव: सरसों और गेहूं के ताज़ा सरकारी भाव अपडेट कर दिए गए हैं।
+        </div>
+
+        <!-- आपके नए फीचर्स के 4 बेहतरीन बटन -->
+        <div class="feature-grid">
+            <div class="feature-btn" onclick="showFeature('nearby')">📍 My Nearby Search</div>
+            <div class="feature-btn" onclick="showFeature('categories')">📂 सभी कैटेगरीज</div>
+            <div class="feature-btn" onclick="showFeature('entertainment')">🎭 मनोरंजन & जोक्स</div>
+            <div class="feature-btn" onclick="showFeature('qr')">📷 Shop QR Generator</div>
+        </div>
+
+        <!-- डायनेमिक डिस्प्ले बॉक्स (जहाँ बटन का डेटा खुलेगा) -->
+        <div id="dynamic-display">
+            <button class="close-btn" onclick="closeBox()">बंद करें ✕</button>
+            <div id="display-content"></div>
+        </div>
+
+        <!-- मूल जिला और गाँव खोजने वाला सेक्शन -->
+        <div class="search-card">
+            <h3>🔍 अपने गाँव की सेवाएँ खोजें</h3>
+            
+            <div class="form-group">
+                <label>1. जिला चुनें:</label>
+                <select id="district-select" onchange="loadVillages()">
+                    <option value="">-- जिला चुनें --</option>
+                    <option value="mahendragarh">महेंद्रगढ़</option>
+                    <option value="rewari">रेवाड़ी</option>
+                    <option value="gurugram">गुरुग्राम</option>
+                    <option value="Jhajjar">झज्जर</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>2. गाँव चुनें:</label>
+                <select id="village-select">
+                    <option value="">-- पहले जिला चुनें --</option>
+                </select>
+            </div>
+
+            <button class="submit-btn" onclick="searchServices()">दुकानें देखें</button>
         </div>
 
     </div>
@@ -166,59 +289,63 @@
     </div>
 
     <script>
-        function showContent(type) {
-            const displayArea = document.getElementById('display-area');
-            const contentBox = document.getElementById('content-box');
-            displayArea.style.display = 'block';
-
-            if (type === 'nearby') {
-                contentBox.innerHTML = `
-                    <h3>📍 My Nearby Search</h3>
-                    <p>आपके आसपास के क्षेत्र की लोकेशन ट्रैक की जा रही है...</p>
-                    <ul>
-                        <li>किराना और जनरल स्टोर - नजदीक</li>
-                        <li>बैंक और एटीएम - 500 मीटर</li>
-                        <li>अस्पताल और मेडिकल - 1 किमी</li>
-                    </ul>
-                `;
-            } else if (type === 'categories') {
-                contentBox.innerHTML = `
-                    <h3>📂 सभी कैटेगरीज</h3>
-                    <p>अपने जिले और गाँव की सभी जरूरी सेवाएं:</p>
-                    <ul>
-                        <li>🛒 दुकानें एवं किराना</li>
-                        <li>🏦 बैंक एवं एटीएम</li>
-                        <li>🏭 फैक्ट्रियां एवं उद्योग</li>
-                        <li>💼 लोकल जॉब्स (रोजगार)</li>
-                    </ul>
-                `;
-            } else if (type === 'entertainment') {
-                contentBox.innerHTML = `
-                    <h3>🎭 मनोरंजन & किस्से</h3>
-                    <p><strong>ताऊ का ज्ञान:</strong> भाई इब फोन में सब कुछ आ लिया, बस घर बैठे चाय बनाने वाली मशीन आनी और बाकी है!</p>
-                `;
-            } else if (type === 'qr') {
-                contentBox.innerHTML = `
-                    <h3>📷 Shop QR Generator</h3>
-                    <p>दुकानदारों के लिए डिजिटल QR कोड जनरेटर। यहाँ से हर दुकान का यूनिक QR कोड बनेगा ताकि ग्राहक स्कैन करके सीधी जानकारी पा सकें।</p>
-                `;
+        // पेज खुलते ही आवाज में "राम-राम भाइयो" बोलने का फंक्शन
+        function playRamRamVoice() {
+            if ('speechSynthesis' in window) {
+                let speech = new SpeechSynthesisUtterance("राम-राम भाइयो, हरियाणा ग्रामीण सेवा में आपका स्वागत है।");
+                speech.lang = 'hi-IN'; // हिंदी भाषा सेट की गई है
+                speech.rate = 0.9; // बोलने की रफ्तार सामान्य
+                window.speechSynthesis.speak(speech);
             }
         }
 
-        function hideContent() {
-            document.getElementById('display-area').style.display = 'none';
+        // चारों बटनों के लिए स्क्रीन के अंदर डेटा दिखाने का फंक्शन
+        function showFeature(type) {
+            const box = document.getElementById('dynamic-display');
+            const content = document.getElementById('display-content');
+            box.style.display = 'block';
+
+            if (type === 'nearby') {
+                content.innerHTML = `<h3>📍 My Nearby Search</h3><p>आपके नजदीक के बैंक, एटीएम, और किराना स्टोर खोजे जा रहे हैं...</p><ul><li>शिव जनरल स्टोर - 100 मीटर</li><li>राज्य सहकारी बैंक - 500 मीटर</li></ul>`;
+            } else if (type === 'categories') {
+                content.innerHTML = `<h3>📂 सभी कैटेगरीज</h3><p>दुकानें, फैक्ट्रियां, अस्पताल, और सरकारी सेवाएं यहाँ उपलब्ध हैं।</p>`;
+            } else if (type === 'entertainment') {
+                content.innerHTML = `<h3>🎭 मनोरंजन & किस्से</h3><p><strong>ताऊ का जोक:</strong> भाई इब फोन में सब कुछ आ लिया, बस खेत जोतने वाली मशीन आनी बाकी रह रही है!</p>`;
+            } else if (type === 'qr') {
+                content.innerHTML = `<h3>📷 Shop QR Generator</h3><p>यहाँ से दुकानदार अपना यूनिक डिजिटल क्यूआर कोड जनरेट कर सकते हैं।</p>`;
+            }
         }
 
-        function changeJoke() {
-            const jokes = [
-                "ताऊ: भाई इब मोबाइल में ही सब कुछ आ लिया, बस खेत जोतने वाली मशीन और रहनी बाकी है!",
-                "बालक: मास्टर जी, अंग्रेजी में 'कैट' माने बिल्ली होवै है, फेर 'कैटलॉग' का मतलब बिल्ली की आग होवै है क्या?",
-                "सुमित: भाई आज मौसम सुहाना है, चाय पी ली के?"
-            ];
-            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-            document.getElementById("daily-joke").innerText = '"' + randomJoke + '"';
+        function closeBox() {
+            document.getElementById('dynamic-display').style.display = 'none';
         }
 
+        // जिला चुनने पर गाँवों की लिस्ट बदलने का लॉजिक
+        function loadVillages() {
+            let dist = document.getElementById('district-select').value;
+            let villageSelect = document.getElementById('village-select');
+            villageSelect.innerHTML = '<option value="">--गाँव चुनें--</option>';
+            
+            if (dist === 'mahendragarh') {
+                villageSelect.innerHTML += '<option value="malkosh">माल्कोश</option><option value="kanina">कनीना</option>';
+            } else if (dist === 'rewari') {
+                villageSelect.innerHTML += '<option value="kosli">कोसली</option><option value="rewari_rural">रेवाड़ी ग्रामीण</option>';
+            } else if (dist === 'Jhajjar') {
+                villageSelect.innerHTML += '<option value="Ismaila">इस्माइला</option><option value="Bahadurgarh">बहादुरगढ़</option>';
+            }
+        }
+
+        function searchServices() {
+            let dist = document.getElementById('district-select').value;
+            let vill = document.getElementById('village-select').value;
+            if(!dist || !vill) {
+                alert("कृपया पहले जिला और गाँव दोनों चुनें!");
+            } else {
+                alert("आपके चुने हुए क्षेत्र की दुकानें लोड हो रही हैं...");
+            }
+        }
+
+        // पासवर्ड प्रोटेक्टेड एडमिन लॉगिन (sub123)
         function adminLogin() {
             let pass = prompt("पासवर्ड दर्ज करें:");
             if (pass === "sub123") {
