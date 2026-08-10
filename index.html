@@ -49,6 +49,7 @@
         .btn-secondary { background: var(--secondary); }
         .btn-danger { background: #d32f2f; color: white; padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
         .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
+        .map-btn { background: #00838f; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; margin-top: 4px; }
 
         .add-shop-toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .add-shop-form-container { display: none; background: #ffffff; border: 2px dashed var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
@@ -85,7 +86,7 @@
 
     <div class="container">
 
-        <!-- मौसम अपडेट (लाइव एपीआई कनेक्टेड) -->
+        <!-- मौसम अपडेट -->
         <div class="weather-card">
             <div class="weather-title">
                 <span id="t-weather-title">🌤 हरियाणा लाइव मौसम</span>
@@ -149,7 +150,7 @@
             <span id="toggleIcon">▼</span>
         </div>
 
-        <!-- दुकान रजिस्टर करने का फॉर्म (कैटेगरी फिक्स) -->
+        <!-- दुकान रजिस्टर करने का फॉर्म -->
         <div class="add-shop-form-container" id="addShopFormBox">
             <h2 id="t-form-heading" style="font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px;">नया दुकान/सेवा रजिस्ट्रेशन फॉर्म</h2>
             
@@ -172,12 +173,9 @@
             <div class="form-group">
                 <label id="t-f-vill-label">गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव खुद टाइप करें):</label>
                 <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम यहाँ लिखें या चुनें...">
-                <datalist id="regVillageList">
-                    <!-- जिले के अनुसार ऑप्शन आएंगे -->
-                </datalist>
+                <datalist id="regVillageList"></datalist>
             </div>
 
-            <!-- श्रेणी (Category) वाला फील्ड सुरक्षित रूप से यहाँ सेट किया गया है -->
             <div class="form-group">
                 <label id="t-f-cat-label">श्रेणी (Category चुनें):</label>
                 <select id="regCategory">
@@ -211,10 +209,55 @@
             </div>
         </div>
 
+        <!-- 🛒 NEW: Buy & Sell Marketplace Section -->
+        <div class="card" style="border: 2px solid var(--secondary);">
+            <h2 id="t-buysell-heading" style="color: var(--secondary);">🛒 ग्रामीण बाय-सेल (Buy & Sell) मार्केटप्लेस</h2>
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 12px;">पुराना सामान, ट्रैक्टर, पशु या फसल बेचने के लिए फोटो और टोकन फीस के साथ विज्ञापन डालें।</p>
+            
+            <div class="form-group">
+                <label>सामान का नाम (Title):</label>
+                <input type="text" id="bsItemName" placeholder="जैसे: पुराना ट्रैक्टर / भैंस / मोटरसाइकिल">
+            </div>
+            <div class="form-group">
+                <label>गाँव / जिला:</label>
+                <input type="text" id="bsLocation" placeholder="गाँव और जिला नाम">
+            </div>
+            <div class="form-group">
+                <label>कीमत (₹):</label>
+                <input type="number" id="bsPrice" placeholder="कीमत दर्ज करें">
+            </div>
+            <div class="form-group">
+                <label>मोबाइल नंबर:</label>
+                <input type="tel" id="bsPhone" placeholder="संपर्क नंबर">
+            </div>
+            <div class="form-group">
+                <label>सामान की फोटो:</label>
+                <input type="file" id="bsPhoto" accept="image/*">
+            </div>
+
+            <!-- UPI Payment Token Box -->
+            <div style="background: #fff8e1; border: 1px dashed var(--secondary); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                <p style="font-size: 0.85rem; font-weight: bold; color: #b71c1c; margin-bottom: 6px;">⚡ विज्ञापन शुल्क (Token Fee: ₹10):</p>
+                <p style="font-size: 0.8rem; color: #444; margin-bottom: 6px;">फर्जी विज्ञापनों से बचाने के लिए ₹10 टोकन फीस इस UPI ID पर भेजें: <strong>rajesh@ybl</strong> या नीचे दिए गए QR को स्कैन करें। फिर UTR/Transaction ID नीचे भरें।</p>
+                <div class="form-group" style="margin-bottom: 5px;">
+                    <label style="font-size: 0.8rem;">UPI Transaction ID / UTR No:</label>
+                    <input type="text" id="bsUtr" placeholder="UPI Ref / Transaction ID यहाँ लिखें" style="padding: 8px; font-size: 0.9rem;">
+                </div>
+            </div>
+
+            <div class="btn-box">
+                <button class="custom-btn btn-secondary" onclick="publishBuySellAd()">विज्ञापन लाइव करें (Submit Ad)</button>
+            </div>
+
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+            
+            <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 10px;">📋 उपलब्ध विज्ञापन (Marketplace Listings):</h3>
+            <div id="buySellListContainer"></div>
+        </div>
+
         <!-- हरियाणा सरकार की मुख्य योजनाएं -->
         <div class="card">
             <h2 id="t-scheme-heading">📜 हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव पोर्टल)</h2>
-            
             <div class="form-group" style="margin-bottom: 15px;">
                 <label id="t-scheme-label" style="font-size: 0.85rem; color: #555;">अपने जिले के अनुसार योजनाओं का पोर्टल देखें:</label>
                 <select id="schemeDistrictSelect" onchange="updateDistrictSchemes()">
@@ -224,7 +267,6 @@
                     <option value="hisar">हिसार</option>
                 </select>
             </div>
-
             <div id="districtSchemeContent"></div>
         </div>
 
@@ -262,6 +304,9 @@
                     <h4 id="t-all-shops-title" style="font-size: 0.95rem; color: var(--primary); margin-bottom: 5px;">📋 पोर्टल की सभी दुकानें (डिलीट करने की पावर):</h4>
                     <div id="allShopsList"></div>
 
+                    <h4 style="font-size: 0.95rem; color: var(--secondary); margin-top: 15px; margin-bottom: 5px;">🛒 बाय-सेल विज्ञापन सूची:</h4>
+                    <div id="adminBuySellList" style="max-height: 150px; overflow-y: auto; margin-bottom: 10px;"></div>
+
                     <h4 style="font-size: 0.95rem; color: var(--secondary); margin-top: 15px; margin-bottom: 5px;">📥 प्राप्त फीडबैक सूची:</h4>
                     <div id="feedbackListContainer" style="max-height: 150px; overflow-y: auto;"></div>
                 </div>
@@ -288,7 +333,6 @@
                 weatherTitle: "🌤 हरियाणा लाइव मौसम",
                 newsTag: "📢 ताज़ा लोकल न्यूज़",
                 mandiTag: "🌾 मंडी भाव",
-                mandiText: "गेहूँ: ₹2275-₹2350 | बाजरा: ₹2500-₹2600 | सरसों: ₹5400-₹5600 | नरमा: ₹7200 प्रति क्विंटल (ताज़ा मंडी अपडेट)",
                 searchHeading: "🔍 अपने गाँव की सेवाएँ खोजें",
                 labelDist: "1. जिला चुनें:",
                 optSelectDist: "-- जिला चुनें --",
@@ -303,7 +347,7 @@
                 formHeading: "नया दुकान/सेवा रजिस्ट्रेशन फॉर्म",
                 fNameLabel: "दुकान या सेवा का नाम:",
                 fDistLabel: "जिला चुनें:",
-                fVillLabel: "गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव खुद टाइप करें):",
+                fVillLabel: "गाँव का नाम:",
                 fCatLabel: "श्रेणी (Category चुनें):",
                 fPhoneLabel: "मोबाइल नंबर:",
                 fSubmitBtn: "सीधे पोर्टल पर लाइव करें",
@@ -328,7 +372,6 @@
                 weatherTitle: "🌤 Haryana Live Weather",
                 newsTag: "📢 Latest Local News",
                 mandiTag: "🌾 Mandi Rates",
-                mandiText: "Wheat: ₹2275-₹2350 | Bajra: ₹2500-₹2600 | Mustard: ₹5400-₹5600 | Narma: ₹7200 per Quintal",
                 searchHeading: "🔍 Search Village Services",
                 labelDist: "1. Select District:",
                 optSelectDist: "-- Select District --",
@@ -343,7 +386,7 @@
                 formHeading: "New Shop/Service Registration Form",
                 fNameLabel: "Shop or Service Name:",
                 fDistLabel: "Select District:",
-                fVillLabel: "Select Village name (Select or type manual village):",
+                fVillLabel: "Village Name:",
                 fCatLabel: "Select Category:",
                 fPhoneLabel: "Mobile Number:",
                 fSubmitBtn: "Publish Live on Portal",
@@ -373,7 +416,6 @@
             document.getElementById('t-weather-title').textContent = t.weatherTitle;
             document.getElementById('t-news-tag').textContent = t.newsTag;
             document.getElementById('t-mandi-tag').textContent = t.mandiTag;
-            document.getElementById('t-mandi-text').textContent = t.mandiText;
             document.getElementById('t-search-heading').textContent = t.searchHeading;
             document.getElementById('t-label-dist').textContent = t.labelDist;
             document.getElementById('t-opt-select-dist').textContent = t.optSelectDist;
@@ -418,12 +460,11 @@
             updateDistrictSchemes();
             fetchLiveWeather();
             fetchAutoNews();
+            loadBuySellAds();
         }
 
-        // 🌤 लाइव मौसम एपीआई (हरियाणा / दादरी क्षेत्र के लिए)
         async function fetchLiveWeather() {
             try {
-                // रोहतक / चरखी दादरी क्षेत्र के कोऑर्डिनेट्स से ओपन वेदर फ्री एपीआई या मेटेओ एपीआई कॉल
                 let response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=28.58&longitude=76.28&current=temperature_2m,wind_speed_10m,weather_code');
                 let data = await response.json();
                 if(data && data.current) {
@@ -443,7 +484,6 @@
             try {
                 const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(newsUrl));
                 const data = await response.json();
-                
                 let newsList = [];
                 if(data && data.items) {
                     data.items.forEach(item => {
@@ -544,11 +584,6 @@
                         <p>बुढ़ापा, विधवा एवं विकलांग पेंशन के लाइव आवेदन व स्टेटस की जानकारी (${distNameHindi} समाज कल्याण शाखा)।</p>
                         <a href="https://socialjustice.haryana.gov.in" target="_blank" class="scheme-link">🔗 पेंशन पोर्टल देखें &rarr;</a>
                     </div>
-                    <div class="scheme-item">
-                        <h4>🌾 जिला ${distNameHindi} - मेरी फसल मेरा ब्योरा</h4>
-                        <p>कृषि एवं किसान कल्याण विभाग (${distNameHindi}) द्वारा फसल पंजीकरण एवं एमएसपी पोर्टल।</p>
-                        <a href="https://fasal.haryana.gov.in" target="_blank" class="scheme-link">🔗 फसल ब्योरा पोर्टल &rarr;</a>
-                    </div>
                 `;
             } else {
                 container.innerHTML = `
@@ -561,11 +596,6 @@
                         <h4>👵 District ${distName} - Social Security Pension</h4>
                         <p>Live applications and status info for Old Age, Widow & Disability Pension (${distName} Welfare Branch).</p>
                         <a href="https://socialjustice.haryana.gov.in" target="_blank" class="scheme-link">🔗 View Pension Portal &rarr;</a>
-                    </div>
-                    <div class="scheme-item">
-                        <h4>🌾 District ${distName} - Meri Fasal Mera Byora</h4>
-                        <p>Crop registration and MSP portal by Agriculture and Farmers Welfare Dept (${distName}).</p>
-                        <a href="https://fasal.haryana.gov.in" target="_blank" class="scheme-link">🔗 Fasal Byora Portal &rarr;</a>
                     </div>
                 `;
             }
@@ -582,7 +612,6 @@
 
             let defaultHidden = JSON.parse(localStorage.getItem('hiddenDefaultShops') || '[]');
             let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
-            
             let filtered = approvedShops.filter(s => s.village.trim().toLowerCase().includes(selectedVillage) || selectedVillage.includes(s.village.trim().toLowerCase()));
 
             let html = `<h3 style="font-size: 1rem; margin-bottom: 10px; color: #333;">${currentLang === 'hi' ? 'में उपलब्ध सेवाएँ:' : 'Available Services:'}</h3>`;
@@ -595,7 +624,10 @@
                             <h4>श्री श्याम जनरल स्टोर / Shri Shyam General Store</h4>
                             <p>${currentLang === 'hi' ? 'श्रेणी: किराना | संपर्क:' : 'Category: Grocery | Contact:'} 9876543210</p>
                         </div>
-                        <a href="tel:9876543210" class="call-btn">📞 कॉल करें</a>
+                        <div>
+                            <a href="tel:9876543210" class="call-btn">📞 कॉल</a>
+                            <a href="https://maps.google.com/?q=28.58,76.28" target="_blank" class="map-btn">📍 GPS</a>
+                        </div>
                     </div>
                 `;
                 foundCount++;
@@ -604,6 +636,7 @@
             if(filtered.length > 0) {
                 filtered.forEach(s => {
                     let imgTag = s.photo ? `<img src="${s.photo}" class="shop-img">` : '';
+                    let gpsBtn = (s.lat && s.lng) ? `<a href="https://maps.google.com/?q=${s.lat},${s.lng}" target="_blank" class="map-btn">📍 GPS</a>` : '';
                     html += `
                         <div class="shop-item">
                             ${imgTag}
@@ -611,7 +644,10 @@
                                 <h4>${s.name}</h4>
                                 <p>${currentLang === 'hi' ? 'गाँव:' : 'Village:'} ${s.village} | ${currentLang === 'hi' ? 'श्रेणी:' : 'Category:'} ${s.category} | ${currentLang === 'hi' ? 'संपर्क:' : 'Contact:'} ${s.phone}</p>
                             </div>
-                            <a href="tel:${s.phone}" class="call-btn">📞 कॉल करें</a>
+                            <div>
+                                <a href="tel:${s.phone}" class="call-btn">📞 कॉल</a>
+                                ${gpsBtn}
+                            </div>
                         </div>
                     `;
                     foundCount++;
@@ -640,13 +676,12 @@
                 return;
             }
 
-            // 🛑 स्मार्ट एरर डिटेक्शन: यदि गाँव पहले से किसी अन्य जिले में रजिस्टर्ड है, तो सिस्टम एरर देगा
             for (let distKey in villageData) {
                 if (distKey !== district) {
                     let exactMatch = villageData[distKey].some(v => v.toLowerCase().includes(village.toLowerCase()));
                     if (exactMatch) {
                         let distNames = {rohtak: "रोहतक", bhiwani: "भिवानी", hisar: "हिसार", charkhi_dadri: "चरखी दादरी"};
-                        alert(`❌ [System Error]: "${village}" गाँव '${distNames[distKey]}' जिले के अंतर्गत आता है, इसे '${distNames[district]}' जिले में सेव नहीं किया जा सकता! कृपया सही जिला चुनें।`);
+                        alert(`❌ [System Error]: "${village}" गाँव '${distNames[distKey]}' जिले के अंतर्गत आता है, इसे सही जिले के साथ चुनें।`);
                         return;
                     }
                 }
@@ -686,6 +721,70 @@
             updateRegVillageDropdown();
         }
 
+        // 🛒 Buy & Sell Functions
+        function publishBuySellAd() {
+            const title = document.getElementById('bsItemName').value.trim();
+            const location = document.getElementById('bsLocation').value.trim();
+            const price = document.getElementById('bsPrice').value.trim();
+            const phone = document.getElementById('bsPhone').value.trim();
+            const utr = document.getElementById('bsUtr').value.trim();
+            const photoInput = document.getElementById('bsPhoto');
+
+            if(!title || !location || !price || !phone || !utr) {
+                alert(currentLang === 'hi' ? 'कृपया सभी फ़ील्ड और UPI ट्रांजैक्शन आईडी (UTR) भरें!' : 'Please fill all fields and UPI UTR!');
+                return;
+            }
+
+            if(photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    saveBuySellAd(title, location, price, phone, utr, e.target.result);
+                };
+                reader.readAsDataURL(photoInput.files[0]);
+            } else {
+                saveBuySellAd(title, location, price, phone, utr, "");
+            }
+        }
+
+        function saveBuySellAd(title, location, price, phone, utr, photo) {
+            let ads = JSON.parse(localStorage.getItem('buySellAds') || '[]');
+            ads.push({ id: Date.now(), title, location, price, phone, utr, photo });
+            localStorage.setItem('buySellAds', JSON.stringify(ads));
+
+            alert(currentLang === 'hi' ? 'आपका विज्ञापन सत्यापन के लिए जमा हो गया है! एडमिन द्वारा चेक होने के बाद यह लाइव दिखेगा।' : 'Ad submitted for verification!');
+            document.getElementById('bsItemName').value = '';
+            document.getElementById('bsLocation').value = '';
+            document.getElementById('bsPrice').value = '';
+            document.getElementById('bsPhone').value = '';
+            document.getElementById('bsUtr').value = '';
+            document.getElementById('bsPhoto').value = '';
+            loadBuySellAds();
+        }
+
+        function loadBuySellAds() {
+            let ads = JSON.parse(localStorage.getItem('buySellAds') || '[]');
+            let container = document.getElementById('buySellListContainer');
+            if(ads.length === 0) {
+                container.innerHTML = `<p style="font-size: 0.85rem; color: #666;">अभी कोई विज्ञापन उपलब्ध नहीं है।</p>`;
+                return;
+            }
+            let html = '';
+            ads.forEach(ad => {
+                let imgTag = ad.photo ? `<img src="${ad.photo}" class="shop-img">` : '';
+                html += `
+                    <div class="shop-item" style="border-left-color: var(--secondary);">
+                        ${imgTag}
+                        <div class="shop-info">
+                            <h4>${ad.title} - ₹${ad.price}</h4>
+                            <p>स्थान: ${ad.location} | संपर्क: ${ad.phone}</p>
+                        </div>
+                        <a href="tel:${ad.phone}" class="call-btn">📞 कॉल</a>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
         function submitFeedback() {
             let name = document.getElementById('fbName').value.trim();
             let msg = document.getElementById('fbMsg').value.trim();
@@ -696,7 +795,7 @@
             let feedbacks = JSON.parse(localStorage.getItem('portalFeedbacks') || '[]');
             feedbacks.push({ name, msg, date: new Date().toLocaleDateString() });
             localStorage.setItem('portalFeedbacks', JSON.stringify(feedbacks));
-            alert(currentLang === 'hi' ? 'आपका सुझाव सफलतापूर्वक प्राप्त हो गया है। धन्यवाद!' : 'Feedback submitted successfully. Thank you!');
+            alert(currentLang === 'hi' ? 'आपका सुझाव सफलतापूर्वक प्राप्त हो गया है। धन्यवाद!' : 'Feedback submitted successfully.');
             document.getElementById('fbName').value = '';
             document.getElementById('fbMsg').value = '';
         }
@@ -711,6 +810,7 @@
             if(pass === 'admin123') {
                 document.getElementById('adminControls').style.display = 'block';
                 loadAllShops();
+                loadAdminBuySellAds();
                 loadFeedbacks();
                 alert(currentLang === 'hi' ? 'लॉगिन सफल!' : 'Login Successful!');
             } else {
@@ -722,69 +822,47 @@
             let defaultHidden = JSON.parse(localStorage.getItem('hiddenDefaultShops') || '[]');
             let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
             let listDiv = document.getElementById('allShopsList');
-
             let html = '';
 
             if(!defaultHidden.includes("default_shyam")) {
-                html += `
-                    <div style="background: #fff; padding: 8px; margin-bottom: 6px; border-radius: 6px; border: 1px solid #b2dfdb; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <strong>श्री श्याम जनरल स्टोर / Shri Shyam General Store (Default)</strong><br>
-                            <span style="font-size: 0.75rem; color: #555;">Grocery | 9876543210</span>
-                        </div>
-                        <button class="btn-danger" onclick="deleteDefaultShop()">${currentLang === 'hi' ? '🗑 डिलीट' : '🗑 Delete'}</button>
-                    </div>
-                `;
+                html += `<div style="background: #fff; padding: 6px; margin-bottom: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;"><span>श्री श्याम जनरल स्टोर</span><button class="btn-danger" onclick="deleteDefaultShop()">डिलिट</button></div>`;
             }
-
-            if(approvedShops.length === 0 && defaultHidden.includes("default_shyam")) {
-                listDiv.innerHTML = `<p style="font-size: 0.82rem; color: #666;">${currentLang === 'hi' ? 'कोई दुकान उपलब्ध नहीं है।' : 'No shops available.'}</p>`;
-                return;
-            }
-
             approvedShops.forEach((s, index) => {
+                html += `<div style="background: #fff; padding: 6px; margin-bottom: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;"><span>${s.name} (${s.village})</span><button class="btn-danger" onclick="deleteApprovedShop(${index})">डिलिट</button></div>`;
+            });
+            listDiv.innerHTML = html || 'कोई दुकान नहीं';
+        }
+
+        function loadAdminBuySellAds() {
+            let ads = JSON.parse(localStorage.getItem('buySellAds') || '[]');
+            let container = document.getElementById('adminBuySellList');
+            let html = '';
+            ads.forEach((ad, idx) => {
                 html += `
-                    <div style="background: #fff; padding: 8px; margin-bottom: 6px; border-radius: 6px; border: 1px solid #b2dfdb; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <strong>${s.name}</strong> (${s.village})<br>
-                            <span style="font-size: 0.75rem; color: #555;">${s.category} | ${s.phone}</span>
-                        </div>
-                        <button class="btn-danger" onclick="deleteApprovedShop(${index})">${currentLang === 'hi' ? '🗑 डिलीट' : '🗑 Delete'}</button>
+                    <div style="background: #fff; padding: 6px; margin-bottom: 4px; border-radius: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span>${ad.title} (UTR: ${ad.utr})</span>
+                        <button class="btn-danger" onclick="deleteBuySellAd(${idx})">डिलिट</button>
                     </div>
                 `;
             });
-
-            listDiv.innerHTML = html;
+            container.innerHTML = html || 'कोई विज्ञापन नहीं';
         }
 
         function loadFeedbacks() {
             let feedbacks = JSON.parse(localStorage.getItem('portalFeedbacks') || '[]');
             let container = document.getElementById('feedbackListContainer');
-            if(feedbacks.length === 0) {
-                container.innerHTML = `<p style="font-size: 0.8rem; color: #666;">कोई फीडबैक नहीं है।</p>`;
-                return;
-            }
             let html = '';
-            feedbacks.forEach((fb, idx) => {
-                html += `
-                    <div style="background: #fff; padding: 6px; margin-bottom: 5px; border-radius: 4px; font-size: 0.8rem; border-left: 3px solid var(--secondary);">
-                        <strong>${fb.name}</strong> (${fb.date}):<br>${fb.msg}
-                    </div>
-                `;
+            feedbacks.forEach(fb => {
+                html += `<div style="background: #fff; padding: 5px; margin-bottom: 4px; font-size: 0.78rem;"><strong>${fb.name}</strong>: ${fb.msg}</div>`;
             });
-            container.innerHTML = html;
+            container.innerHTML = html || 'कोई फीडबैक नहीं';
         }
 
         function deleteDefaultShop() {
-            if(confirm(currentLang === 'hi' ? 'क्या आप डिफ़ॉल्ट श्री श्याम जनरल स्टोर को हटाना चाहते हैं?' : 'Do you want to delete default Shri Shyam General Store?')) {
-                let defaultHidden = JSON.parse(localStorage.getItem('hiddenDefaultShops') || '[]');
-                if(!defaultHidden.includes("default_shyam")) {
-                    defaultHidden.push("default_shyam");
-                    localStorage.setItem('hiddenDefaultShops', JSON.stringify(defaultHidden));
-                }
-                loadAllShops();
-                alert(currentLang === 'hi' ? 'डिफ़ॉल्ट दुकान हटा दी गई है!' : 'Default shop deleted!');
-            }
+            let defaultHidden = JSON.parse(localStorage.getItem('hiddenDefaultShops') || '[]');
+            defaultHidden.push("default_shyam");
+            localStorage.setItem('hiddenDefaultShops', JSON.stringify(defaultHidden));
+            loadAllShops();
         }
 
         function deleteApprovedShop(index) {
@@ -792,7 +870,14 @@
             approvedShops.splice(index, 1);
             localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
             loadAllShops();
-            alert(currentLang === 'hi' ? 'दुकान सफलतापूर्वक डिलीट कर दी गई है!' : 'Shop deleted successfully!');
+        }
+
+        function deleteBuySellAd(index) {
+            let ads = JSON.parse(localStorage.getItem('buySellAds') || '[]');
+            ads.splice(index, 1);
+            localStorage.setItem('buySellAds', JSON.stringify(ads));
+            loadAdminBuySellAds();
+            loadBuySellAds();
         }
     </script>
 </body>
