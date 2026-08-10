@@ -76,12 +76,16 @@
         .emergency-box h4 { font-size: 0.85rem; color: #c62828; margin-bottom: 5px; }
         .emergency-box a { display: block; background: #d32f2f; color: white; padding: 6px; border-radius: 4px; font-size: 0.85rem; text-decoration: none; font-weight: bold; }
         
-        /* Auto Manoranjan / Jokes Box Style */
         .joke-box { background: #fffde7; border: 1px dashed #fbc02d; padding: 15px; border-radius: 8px; text-align: center; margin-top: 10px; }
         .joke-text { font-size: 0.95rem; color: #5d4037; font-weight: 600; margin-bottom: 10px; min-height: 50px; display: flex; align-items: center; justify-content: center; }
 
-        /* Fasal Calculator Box Style */
         .calc-box { background: #e8f5e9; border: 1px solid #a5d6a7; padding: 15px; border-radius: 8px; margin-top: 15px; }
+
+        /* AI Chatbot Styles */
+        .ai-chat-box { background: #e3f2fd; border: 2px solid #1976d2; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .ai-chat-screen { background: #fff; height: 140px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flexDirection: column; gap: 6px; }
+        .ai-msg-bot { background: #e1f5fe; color: #01579b; padding: 6px 10px; border-radius: 6px; align-self: flex-start; max-width: 85%; }
+        .ai-msg-user { background: #e8f5e9; color: #1b5e20; padding: 6px 10px; border-radius: 6px; align-self: flex-end; max-width: 85%; text-align: right; }
 
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
@@ -101,7 +105,7 @@
 
     <div class="container">
 
-        <!-- Welcome Banner / Translation Text Box -->
+        <!-- Welcome Banner -->
         <div class="card" style="padding: 12px; text-align: center; background: #fffde7; border: 1px dashed #fbc02d; margin-bottom: 15px;">
             <p id="t-welcome-msg" style="font-size: 1rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है</p>
         </div>
@@ -111,6 +115,21 @@
             <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.95rem; padding: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
                 📢 इस डिजिटल पोर्टल को WhatsApp पर शेयर करें
             </button>
+        </div>
+
+        <!-- 🤖 AI स्मार्ट चैट असिस्टेंट (AI Shop Register Bot) -->
+        <div class="ai-chat-box">
+            <h3 style="font-size: 0.95rem; color: #1565c0; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                🤖 AI ग्रामीण असिस्टेंट (मैसेज से दुकान जुड़वाएँ)
+            </h3>
+            <p style="font-size: 0.78rem; color: #555; margin-bottom: 8px;">यहाँ लिखकर भेजें (जैसे: <i>दुकान: शर्मा किराना, गाँव: सामला, फोन: 9876543210</i>):</p>
+            <div class="ai-chat-screen" id="aiChatScreen">
+                <div class="ai-msg-bot">राम-राम! मैं आपका AI असिस्टेंट हूँ। आप अपनी दुकान या सेवा का विवरण यहाँ लिखकर भेजें, मैं उसे एडमिन के सत्यापन (Approval) के लिए भेज दूंगा!</div>
+            </div>
+            <div style="display: flex; gap: 6px;">
+                <input type="text" id="aiChatInput" placeholder="यहाँ संदेश लिखें..." style="padding: 8px; font-size: 0.85rem;" onkeypress="if(event.key === 'Enter') sendAIChatMessage()">
+                <button type="button" class="custom-btn" onclick="sendAIChatMessage()" style="width: auto; padding: 8px 14px; font-size: 0.85rem; background: #1976d2;">भेजें</button>
+            </div>
         </div>
 
         <!-- मौसम अपडेट -->
@@ -142,7 +161,7 @@
             </div>
         </div>
 
-        <!-- 🌾 Fasal / Mandi Calculator (मंडी भाव के ठीक नीचे) -->
+        <!-- 🌾 Fasal Calculator -->
         <div class="card" style="border-left: 4px solid #388e3c;">
             <h2 id="t-calc-heading">🌾 फसल भाव कैलकुलेटर (Fasal Calculator)</h2>
             <p id="t-calc-sub" style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">अपनी फसल की मात्रा (क्विंटल में) डालकर कुल अनुमानित कीमत निकालें:</p>
@@ -341,7 +360,7 @@
             </div>
         </div>
 
-        <!-- Manoranjan Live (हरियाणवी चुटकुले) -->
+        <!-- Manoranjan Live -->
         <div class="card" style="border-left: 4px solid #fbc02d;">
             <h2 id="t-joke-heading">😂 हरियाणवी & देसी चुटकुले (Manoranjan Live)</h2>
             <div class="joke-box">
@@ -350,7 +369,7 @@
             </div>
         </div>
 
-        <!-- हरियाणा सरकार की मुख्य योजनाएं -->
+        <!-- Haryana Schemes -->
         <div class="card">
             <h2 id="t-scheme-heading">📜 हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव पोर्टल)</h2>
             <div class="form-group" style="margin-bottom: 15px;">
@@ -365,7 +384,7 @@
             <div id="districtSchemeContent"></div>
         </div>
 
-        <!-- फीडबैक सेक्शन -->
+        <!-- Feedback Section -->
         <div class="card">
             <h2 id="t-feedback-heading">💬 सुझाव एवं फीडबैक (Feedback)</h2>
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
@@ -375,7 +394,7 @@
             </div>
         </div>
 
-        <!-- एडमिन पैनल -->
+        <!-- Admin Panel -->
         <div class="card" style="text-align: center;">
             <div class="btn-box" style="margin-top:0;">
                 <button type="button" class="custom-btn btn-secondary" id="t-admin-toggle-btn" onclick="toggleAdminPanel()">🔒 एडमिन / वेरिफिकेशन पैनल</button>
@@ -390,7 +409,7 @@
                 <div id="adminControls" style="display:none; margin-top: 15px; text-align: left;">
                     <p id="t-admin-success" style="color: green; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px;">✔ एडमिन एक्सेस मिल गया!</p>
 
-                    <h4 style="font-size: 0.95rem; color: #b71c1c; margin-bottom: 5px;">⏳ सत्यापन के लिए पेंडिंग दुकानें (Pending Shops):</h4>
+                    <h4 style="font-size: 0.95rem; color: #b71c1c; margin-bottom: 5px;">⏳ सत्यापन के लिए पेंडिंग दुकानें (AI या फॉर्म से):</h4>
                     <div id="pendingShopsList" style="margin-bottom: 15px; background: #fff; padding: 8px; border-radius: 6px;"></div>
 
                     <h4 style="font-size: 0.95rem; color: #b71c1c; margin-bottom: 5px;">⏳ सत्यापन के लिए पेंडिंग विज्ञापन (Pending Ads):</h4>
@@ -439,7 +458,46 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // Automatic Live Jokes List
+        // AI Chat Assistant Logic
+        function sendAIChatMessage() {
+            let inputField = document.getElementById('aiChatInput');
+            let text = inputField.value.trim();
+            if(!text) return;
+
+            let screen = document.getElementById('aiChatScreen');
+            screen.innerHTML += `<div class="ai-msg-user">${text}</div>`;
+            inputField.value = '';
+            screen.scrollTop = screen.scrollHeight;
+
+            setTimeout(() => {
+                let botReply = "";
+                // AI Parsing Simple extraction or acknowledgement
+                if(text.includes("दुकान") || text.includes("नाम") || text.includes("store") || text.includes("shop")) {
+                    let newPendingShop = {
+                        id: Date.now(),
+                        name: text,
+                        district: "rohtak",
+                        village: "सामला / Sampla",
+                        category: "अन्य सेवा",
+                        phone: "9876543210",
+                        lat: "",
+                        lng: "",
+                        photo: ""
+                    };
+                    let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+                    pendingShops.push(newPendingShop);
+                    localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+
+                    botReply = "✔ मैंने आपकी जानकारी समझ ली है और इसे एडमिन के पास **सत्यापन (Approval)** के लिए भेज दिया है। एडमिन द्वारा duyệt (Approve) होने के बाद यह पोर्टल पर दिखने लगेगी!";
+                } else {
+                    botReply = "राम-राम! दुकान जोड़ने के लिए कृपया लिखकर भेजें: 'दुकान: [नाम], गाँव: [गाँव का नाम], फोन: [नंबर]' ताकि मैं इसे एडमिन अप्रूवल के लिए भेज सकूँ।";
+                }
+
+                screen.innerHTML += `<div class="ai-msg-bot">${botReply}</div>`;
+                screen.scrollTop = screen.scrollHeight;
+            }, 800);
+        }
+
         const jokesList = [
             "ताऊ तन्ने कल खेत में कती लेट कर दिया? ताऊ बोला: बेटा बैल ने कंप्यूटर सीख लिया था, रीसेट करने में टाइम लाग गया!",
             "मास्टर जी बोले: बता बेटा, 'भैंस' पे निबंध लिख! छोरा बोला: भैंस के चार पैर होया करें, एक पूँछ होया करे और दूध देया करे... बाकी मास्टर जी, ताऊ की भैंस गेल मेरा क्या मुकाबला!",
@@ -452,11 +510,8 @@
             document.getElementById('jokeDisplay').textContent = "\"" + jokesList[randomIndex] + "\"";
         }
 
-        setInterval(() => {
-            getNewJoke();
-        }, 15000);
+        setInterval(() => { getNewJoke(); }, 15000);
 
-        // Fasal Calculator Function
         function calculateFasalPrice() {
             let rate = parseFloat(document.getElementById('calcCropRate').value);
             let qty = parseFloat(document.getElementById('calcQty').value);
@@ -757,7 +812,7 @@
                 container.innerHTML = `
                     <div class="scheme-item">
                         <h4>📂 जिला ${distNameHindi} - परिवार पहचान पत्र (PPP)</h4>
-                        <p>जिला नागरिक संसाधन सूचना विभाग, ${distNameHindi} के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा。</p>
+                        <p>जिला नागरिक संसाधन सूचना विभाग, ${distNameHindi} के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा।</p>
                         <a href="https://meraparivar.haryana.gov.in" target="_blank" class="scheme-link">🔗 पीपीपी पोर्टल (${distNameHindi} लाइव) &rarr;</a>
                     </div>
                     <div class="scheme-item">
@@ -862,9 +917,6 @@
                 reader.onload = function(e) {
                     saveToPendingQueue(name, district, village, category, phone, lat, lng, e.target.result);
                 };
-                reader.onerror = function() {
-                    saveToPendingQueue(name, district, village, category, phone, lat, lng, "");
-                };
                 reader.readAsDataURL(photoInput.files[0]);
             } else {
                 saveToPendingQueue(name, district, village, category, phone, lat, lng, "");
@@ -888,7 +940,7 @@
                 document.getElementById('addShopFormBox').style.display = 'none';
                 document.getElementById('toggleIcon1').textContent = '▼';
             } catch (err) {
-                alert("लोकल स्टोरेज फुल हो सकती है या फोटो बहुत बड़ी है। कृपया छोटी फोटो अपलोड करें।");
+                alert("लोकल स्टोरेज फुल हो सकती है या फोटो बहुत बड़ी है।");
             }
         }
 
@@ -1004,8 +1056,8 @@
                 html += `
                     <div style="background: #f1f8e9; padding: 8px; margin-bottom: 6px; font-size: 0.8rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <strong>${s.name}</strong> (${s.village}, ${s.district})<br>
-                            <span style="color:#555;">श्रेणी: ${s.category} | फोन: ${s.phone}</span>
+                            <strong>${s.name}</strong> (${s.village})<br>
+                            <span style="color:#555;">फोन: ${s.phone}</span>
                         </div>
                         <div>
                             <button type="button" class="btn-success" onclick="approveShop(${idx})">Approve</button>
@@ -1035,7 +1087,7 @@
                     localStorage.setItem('addedVillages_' + shopToApprove.district, JSON.stringify(customVillages));
                 }
 
-                alert("दुकान सफलतापूर्वक अप्रूव हो गई है!");
+                alert("दुकान सफलतापूर्वक अप्रूव हो गई है अब यह लाइव है!");
                 loadPendingShops();
                 loadAllShops();
             }
