@@ -207,7 +207,7 @@
             </div>
 
             <div class="btn-box">
-                <button class="custom-btn" id="t-f-submit-btn" onclick="registerService()">सत्यापन के लिए एडमिन को भेजें</button>
+                <button type="button" class="custom-btn" id="t-f-submit-btn" onclick="registerService()">सत्यापन के लिए एडमिन को भेजें</button>
             </div>
         </div>
 
@@ -254,7 +254,7 @@
             </div>
 
             <div class="btn-box">
-                <button class="custom-btn btn-secondary" onclick="publishBuySellAd()">सत्यापन के लिए भेजें (Submit Ad)</button>
+                <button type="button" class="custom-btn btn-secondary" onclick="publishBuySellAd()">सत्यापन के लिए भेजें (Submit Ad)</button>
             </div>
         </div>
 
@@ -279,33 +279,27 @@
             <div id="districtSchemeContent"></div>
         </div>
 
-        <!-- फीडबैक सेक्शन -->
+        <!-- फीडबैक सेक्शन (सिंगल लाइन लेआउट में अपडेटेड) -->
         <div class="card">
             <h2 id="t-feedback-heading">💬 सुझाव एवं फीडबैक (Feedback)</h2>
-            <div class="form-group">
-                <label id="t-fb-name">आपका नाम:</label>
-                <input type="text" id="fbName" placeholder="अपना नाम दर्ज करें">
-            </div>
-            <div class="form-group">
-                <label id="t-fb-msg">आपका सुझाव या शिकायत:</label>
-                <textarea id="fbMsg" rows="3" placeholder="पोर्टल के बारे में अपनी राय या सुधार यहाँ लिखें..."></textarea>
-            </div>
-            <div class="btn-box">
-                <button class="custom-btn" onclick="submitFeedback()">फीडबैक भेजें</button>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <input type="text" id="fbName" placeholder="आपका नाम..." style="flex: 1; min-width: 140px; padding: 10px; font-size: 0.9rem;">
+                <input type="text" id="fbMsg" placeholder="अपना सुझाव या शिकायत यहाँ लिखें..." style="flex: 2; min-width: 200px; padding: 10px; font-size: 0.9rem;">
+                <button type="button" class="custom-btn" onclick="submitFeedback()" style="flex: 0 0 auto; width: auto; padding: 10px 18px; font-size: 0.9rem;">फीडबैक भेजें</button>
             </div>
         </div>
 
         <!-- एडमिन पैनल -->
         <div class="card" style="text-align: center;">
             <div class="btn-box" style="margin-top:0;">
-                <button class="custom-btn btn-secondary" id="t-admin-toggle-btn" onclick="toggleAdminPanel()">🔒 एडमिन / वेरिफिकेशन पैनल</button>
+                <button type="button" class="custom-btn btn-secondary" id="t-admin-toggle-btn" onclick="toggleAdminPanel()">🔒 एडमिन / वेरिफिकेशन पैनल</button>
             </div>
             
             <div class="admin-section" id="adminPanel">
                 <h3 id="t-admin-box-title" style="color: #e65100; margin-bottom: 10px; font-size: 1rem;">एडमिन नियंत्रण एवं सत्यापन कक्ष</h3>
                 <input type="password" id="adminPass" placeholder="पासवर्ड दर्ज करें" style="margin-bottom: 10px;">
                 <div class="btn-box" style="margin-top:0;">
-                    <button class="custom-btn" id="t-admin-login-btn" onclick="verifyAdmin()" style="padding: 8px 15px;">लॉगिन करें</button>
+                    <button type="button" class="custom-btn" id="t-admin-login-btn" onclick="verifyAdmin()" style="padding: 8px 15px;">लॉगिन करें</button>
                 </div>
                 <div id="adminControls" style="display:none; margin-top: 15px; text-align: left;">
                     <p id="t-admin-success" style="color: green; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px;">✔ एडमिन एक्सेस मिल गया!</p>
@@ -465,7 +459,6 @@
             updateDistrictSchemes();
         }
 
-        // रोहतक की लिस्ट में 'सामला / Sampla' जोड़ दिया गया है
         const villageData = {
             rohtak: ["सामला / Sampla", "इस्मला / Ismaila", "कलानौर / Kalanaur", "मदीना / Madina", "बहू अकबरपुर / Bhalu Akbarpur", "संघान / Sanghan", "रिटौली / Ritolli", "सुन्दराणा / Sundrana", "भैंसरवाल कलाँ / Bhainswar Kalan", "खरावड़ / Kharawar", "आनंदपुर / Anandpur", "टिकरी / Tikri", "गरनावठी / Garnawathi", "महेहम / Meham"],
             bhiwani: ["लोहारू / Loharu", "बाढड़ा / Badhra", "सिवानी / Siwani", "दिनोद / Dinod", "बवानी खेड़ा / Bawani Khera", "तोशाम / Tosham", "किरावड़ / Kirawad", "बिमला / Bimala", "बामला / Bamla", "खरक कलाँ / Kharak Kalan", "बहल / Behal", "सिंगाणी / Singani", "सान्गा / Sanga", "झुप्पा / Jhuppa"],
@@ -822,7 +815,6 @@
             }
         }
 
-        // 🔄 सुधरे हुए एप्रूव और रिजेक्ट फंक्शन्स (अब तुरंत काम करेंगे)
         function loadPendingShops() {
             let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
             let container = document.getElementById('pendingShopsList');
@@ -866,7 +858,7 @@
                     localStorage.setItem('addedVillages_' + shopToApprove.district, JSON.stringify(customVillages));
                 }
 
-                alert("दुकान सफलताપૂર્વक अप्रूव हो गई है!");
+                alert("दुकान सफलतापूर्वक अप्रूव हो गई है!");
                 loadPendingShops();
                 loadAllShops();
             }
@@ -916,7 +908,7 @@
                 localStorage.setItem('buySellAds', JSON.stringify(ads));
                 localStorage.setItem('pendingAds', JSON.stringify(pendingAds));
 
-                alert("विज्ञापन सफलताપૂર્વक अप्रूव हो गया है!");
+                alert("विज्ञापन सफलतापूर्वक अप्रूव हो गया है!");
                 loadPendingAds();
                 loadAdminBuySellAds();
                 loadBuySellAds();
