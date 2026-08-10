@@ -240,21 +240,21 @@
     </div>
 
     <div class="founder-bar">
-        <span id="txt-founder">🌾 Founder: Kusum w/o Rajesh यादव Malkosh</span>
+        <span id="txt-founder">🌾 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
         <button class="lang-btn" onclick="toggleLanguage()" id="lang-toggle-btn">हिन्दी / English</button>
     </div>
 
     <header>
-        <h1 id="txt-header-title">Haryana Grameen Seva</h1>
-        <span class="portal-badge" id="txt-badge">Every village shop, every service - on your mobile</span>
+        <h1 id="txt-header-title">हरियाणा ग्रामीण सेवा</h1>
+        <span class="portal-badge" id="txt-badge">गाँव की हर दुकान, हर सेवा - आपके मोबाइल पर</span>
         <button class="menu-btn" onclick="toggleMenu()">+</button>
     </header>
 
     <div id="menu" class="dropdown">
         <a href="#" onclick="openFeature('buysell')">🛒 <span id="m-buysell">गाँव का Buy-Sell (खरीद-बिक्री)</span></a>
-        <a href="#" onclick="openFeature('schemes')">📜 <span id="m-schemes">Govt Schemes</span></a>
-        <a href="#" onclick="openFeature('jokes')">🎭 <span id="m-jokes">Haryanvi Local Jokes</span></a>
-        <a href="#" onclick="openFeature('qr')">📱 <span id="m-qr">Shop QR Code Generator</span></a>
+        <a href="#" onclick="openFeature('schemes')">📜 <span id="m-schemes">सरकारी योजनाएँ</span></a>
+        <a href="#" onclick="openFeature('jokes')">🎭 <span id="m-jokes">हरियाणवी लोकल चुटकुले</span></a>
+        <a href="#" onclick="openFeature('qr')">📱 <span id="m-qr">Shop QR Code जनरेटर</span></a>
         <a href="#" onclick="adminLogin()">🔒 <span id="m-admin">Admin Panel</span></a>
     </div>
 
@@ -266,10 +266,10 @@
         </div>
 
         <div class="search-card">
-            <h3 id="txt-search-title">🔍 Search Village Services</h3>
+            <h3 id="txt-search-title">🔍 अपने गाँव की सेवाएँ खोजें</h3>
             
             <div class="form-group">
-                <label id="txt-lbl-dist">Select District:</label>
+                <label id="txt-lbl-dist">जिला चुनें:</label>
                 <select id="district-select" onchange="updateVillages()">
                     <option value="mahendragarh">महेंद्रगढ़ (माल्कोश)</option>
                     <option value="charkhi_dadri">चरखी दादरी</option>
@@ -281,7 +281,7 @@
             </div>
 
             <div class="form-group">
-                <label id="txt-lbl-vill">Select or Type Village:</label>
+                <label id="txt-lbl-vill">गाँव चुनें या लिखें:</label>
                 <select id="village-select" style="margin-bottom: 5px;">
                     <option value="malkosh">माल्कोश</option>
                     <option value="kachri">कचरी</option>
@@ -292,7 +292,7 @@
             </div>
 
             <div class="form-group">
-                <label id="txt-lbl-cat">Select Category:</label>
+                <label id="txt-lbl-cat">श्रेणी चुनें:</label>
                 <div class="categories-scroll">
                     <div class="cat-chip active" onclick="selectCategory(this)">सभी सेवाएँ</div>
                     <div class="cat-chip" onclick="selectCategory(this)">🛒 शॉप/किराना</div>
@@ -308,13 +308,13 @@
         </div>
 
         <div class="list-section">
-            <h3 id="txt-list-title">📋 Available List</h3>
+            <h3 id="txt-list-title">📋 उपलब्ध लिस्ट</h3>
             
             <div class="item-card">
                 <span class="verified-badge" id="badge-verified">✔ सत्यापित</span>
-                <h4>Kusum kiryana store - <span id="txt-owner">Owner</span>: Pooja</h4>
-                <p>📍 <span id="txt-addr">Address</span>: Near Shiv Mandir Bamla Road, माल्कोश</p>
-                <p>📞 <span id="txt-contact">Contact</span>: 9992821782</p>
+                <h4>Kusum kiryana store - <span id="txt-owner">संचालक</span>: Pooja</h4>
+                <p>📍 <span id="txt-addr">पता</span>: Near Shiv Mandir Bamla Road, माल्कोश</p>
+                <p>📞 <span id="txt-contact">संपर्क</span>: 9992821782</p>
                 <p style="font-size: 0.75rem; color: #2e7d32; font-weight: bold;">श्रेणी: किराना / शॉप</p>
                 <button class="qr-btn" onclick="showShopQR('Kusum Kiryana Store', '9992821782')">📱 Shop QR Code देखें</button>
             </div>
