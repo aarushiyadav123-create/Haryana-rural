@@ -3,170 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
+  <title>AI ग्रामीण असिस्टेंट पोर्टल</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f7f6;
       margin: 0;
-      padding: 0;
+      padding: 15px;
       color: #333;
     }
     .portal-container {
       max-width: 600px;
       margin: 0 auto;
+    }
+
+    /* AI असिस्टेंट स्टाइल */
+    .ai-box {
       background: #ffffff;
-      min-height: 100vh;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border: 1px solid #bce8f1;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
-    .founder-bar {
-      background: #1e3d2f;
-      color: #ffeb3b;
-      padding: 8px 12px;
+    .ai-title {
+      color: #31708f;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .ai-chat-display {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      height: 120px;
+      overflow-y: auto;
       font-size: 13px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: bold;
+      margin-bottom: 10px;
     }
-    .admin-btn {
-      background: #ffeb3b;
-      color: #333;
+    .ai-input-group {
+      display: flex;
+      gap: 8px;
+    }
+    .ai-input-group input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+    }
+    .ai-input-group button {
+      background: #28a745;
+      color: white;
       border: none;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 11px;
+      padding: 10px 15px;
+      border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
     }
-    .hero-banner {
-      background: #1b5e20;
-      color: white;
-      text-align: center;
-      padding: 25px 15px;
+
+    /* फसल कैलकुलेटर (एक लाइन में) */
+    .calculator-box {
+      background: #ffffff;
+      border: 1px solid #d4edda;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
-    .hero-banner h1 {
-      margin: 0 0 8px 0;
-      font-size: 24px;
+    .calc-title {
+      color: #155724;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
-    .hero-banner p {
-      margin: 0 0 12px 0;
-      font-size: 13px;
-      opacity: 0.9;
-    }
-    .hero-badge {
-      display: inline-block;
-      border: 1px solid rgba(255,255,255,0.6);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-    }
-    .weather-box {
-      background: #00838f;
-      color: white;
-      margin: 12px;
-      padding: 12px 15px;
-      border-radius: 10px;
+    .calc-inline {
       display: flex;
-      justify-content: space-between;
+      gap: 5px;
       align-items: center;
     }
-    .weather-left {
-      font-size: 13px;
+    .calc-inline select, .calc-inline input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 12px;
     }
-    .weather-right {
-      font-size: 20px;
+    .calc-result {
       font-weight: bold;
-    }
-    .ticker-box {
-      background: #fff8e1;
-      border: 1px solid #ffe082;
-      margin: 0 12px 12px 12px;
-      padding: 10px;
-      border-radius: 8px;
+      color: #2e7d32;
       font-size: 13px;
+      white-space: nowrap;
     }
-    .mandi-badge {
-      background: #2e7d32;
-      color: white;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 11px;
-      display: inline-block;
-      margin-bottom: 4px;
-      font-weight: bold;
-    }
-    .search-section {
+
+    /* जिलावार योजनाएं सेक्शन */
+    .scheme-section {
       background: #ffffff;
       border: 1px solid #e0e0e0;
-      margin: 12px;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
-    .search-title {
-      color: #1b5e20;
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 12px;
+    .scheme-title {
+      color: #1a5632;
+      margin: 0 0 5px 0;
+      font-size: 18px;
+      font-weight: 700;
     }
-    .label-text {
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 4px;
-      display: block;
-      color: #444;
+    .scheme-title-sub {
+      font-size: 14px;
+      color: #2d6a4f;
     }
-    .dropdown-select {
+    .district-dropdown {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 14px;
-      margin-bottom: 12px;
+      margin: 12px 0;
       background: #f9f9f9;
       outline: none;
     }
-    .btn-green {
-      display: block;
-      width: 100%;
-      background: #1b5e20;
-      color: white;
-      text-align: center;
-      padding: 12px;
+    .scheme-card {
+      background: #eef5eb;
+      border-left: 5px solid #2e7d32;
       border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 15px;
-      border: none;
-      cursor: pointer;
+      padding: 12px;
       margin-bottom: 12px;
     }
-    .btn-orange {
-      display: block;
-      width: 100%;
-      background: #f39c12;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 15px;
-      margin-bottom: 12px;
+    .scheme-card h4 {
+      margin: 0 0 5px 0;
+      color: #1b5e20;
+      font-size: 14px;
     }
-    .btn-blue {
-      display: block;
-      width: 100%;
-      background: #1976d2;
-      color: white;
-      text-align: center;
-      padding: 12px;
-      border-radius: 6px;
+    .scheme-card p {
+      margin: 0 0 8px 0;
+      font-size: 12px;
+      color: #444;
+    }
+    .scheme-card a {
       text-decoration: none;
-      font-weight: bold;
-      font-size: 15px;
-      margin-bottom: 12px;
+      color: #2e7d32;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .scheme-card a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -174,40 +158,38 @@
 
 <div class="portal-container">
 
-  <div class="founder-bar">
-    <span>👩‍💻 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-    <button class="admin-btn" onclick="openAdmin()">⚙️ Admin</button>
-  </div>
-
-  <div class="hero-banner">
-    <h1>हरियाणा ग्रामीण सेवा</h1>
-    <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
-    <div class="hero-badge">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
-  </div>
-
-  <div class="weather-box">
-    <div class="weather-left">
-      <strong>🌤️ हरियाणा लाइव मौसम</strong><br>
-      हवा की गति: 7.3 km/h | स्थिति: साफ एवं धूप
+  <!-- 1. स्मार्ट AI ग्रामीण असिस्टेंट -->
+  <div class="ai-box">
+    <div class="ai-title">🤖 AI ग्रामीण असिस्टेन्ट (सवाल पूछें)</div>
+    <div class="ai-chat-display" id="chat-display">
+      <div><b>असिस्टेंट:</b> नमस्ते! खेती, मौसम, मंडी भाव या सरकारी योजनाओं (जैसे पेंशन, दयालु योजना, HKRN) के बारे में कुछ भी पूछें।</div>
     </div>
-    <div class="weather-right">27.9°C</div>
-  </div>
-
-  <div class="ticker-box">
-    <span style="background: #f39c12; color: white; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: bold;">ताज़ा लोकल न्यूज़</span>
-    <span style="font-size: 12px; margin-left: 5px;">जिम्मेदारी - totaltv.in • बिजली अपडेट जारी</span>
-    <div style="margin-top: 6px;">
-      <span class="mandi-badge">🌾 मंडी भाव</span>
-      <div style="font-size: 12px; color: #333;">गेहूँ: ₹2300/क्विंटल | बाजरा: ₹2550/क्विंटल</div>
+    <div class="ai-input-group">
+      <input type="text" id="user-input" placeholder="यहाँ अपना सवाल लिखें...">
+      <button onclick="handleAIQuery()">भेजें</button>
     </div>
   </div>
 
-  <div class="search-section">
-    <div class="search-title">🔍 अपने गाँव की सेवाएँ खोजें</div>
+  <!-- 2. फसल भाव कैलकुलेटर (एक लाइन में - Compact) -->
+  <div class="calculator-box">
+    <div class="calc-title">🌾 फसल भाव कैलकुलेटर</div>
+    <div class="calc-inline">
+      <select id="crop-rate" onchange="calculateCrop()">
+        <option value="2300">गेहूँ (₹2300/क्विंटल)</option>
+        <option value="2550">बाजरा (₹2550/क्विंटल)</option>
+      </select>
+      <input type="number" id="crop-wt" placeholder="क्विंटल" oninput="calculateCrop()">
+      <div class="calc-result" id="calc-res">कुल: ₹0</div>
+    </div>
+  </div>
+
+  <!-- 3. हरियाणा सरकार की मुख्य योजनाएं (जिलावार) -->
+  <div class="scheme-section">
+    <h3 class="scheme-title">📜 हरियाणा सरकार की मुख्य योजनाएं</h3>
+    <span class="scheme-title-sub">(जिलावार लाइव पोर्टल)</span>
     
-    <label class="label-text">1. जिला चुनें:</label>
-    <select id="district-select" class="dropdown-select" onchange="loadVillages()">
-      <option value="चरखी दादरी">चरखी दादरी</option>
+    <select id="district-select" class="district-dropdown">
+      <option value="चरखी दादरी">चरखी दादरी (डिफ़ॉल्ट)</option>
       <option value="रोहतक">रोहतक</option>
       <option value="झज्जर">झज्जर</option>
       <option value="भिवानी">भिवानी</option>
@@ -215,56 +197,98 @@
       <option value="जींद">जींद</option>
     </select>
 
-    <label class="label-text">2. गाँव चुनें:</label>
-    <select id="village-select" class="dropdown-select">
-      <option>माल्कोश / Malkosh</option>
-      <option>अन्य गाँव</option>
-    </select>
+    <div id="scheme-cards">
+      <!-- PPP -->
+      <div class="scheme-card">
+        <h4>📁 जिला <span class="dist-name">चरखी दादरी</span> - परिवार पहचान पत्र (PPP)</h4>
+        <p>फैमिली आईडी सत्यापन व सुधार सेवा।</p>
+        <a href="https://meraparivar.haryana.gov.in/" target="_blank">🔗 पीपीपी पोर्टल देखें ➔</a>
+      </div>
 
-    <button class="btn-green">दुकानें देखें</button>
-  </div>
+      <!-- Pension -->
+      <div class="scheme-card">
+        <h4>👵 जिला <span class="dist-name">चरखी दादरी</span> - सामाजिक सुरक्षा पेंशन</h4>
+        <p>बुढ़ापा, विधवा एवं विकलांग पेंशन आवेदन व स्टेटस।</p>
+        <a href="https://pension.socialjusticehry.gov.in/" target="_blank">🔗 पेंशन पोर्टल देखें ➔</a>
+      </div>
 
-  <div style="padding: 0 12px 20px 12px;">
-    <a href="#" class="btn-green">+ अपनी दुकान / सेवा Yहाँ रजिस्टर करें (+ Add Shop)</a>
-    <a href="#" class="btn-orange">🛒 ग्रामीण बाय-सेल मार्केटप्लेस (+ Add Ad)</a>
-    <a href="#" class="btn-blue">+ My Near By Search with Location</a>
+      <!-- Death Claim / Dayalu -->
+      <div class="scheme-card">
+        <h4>🕊️ जिला <span class="dist-name">चरखी दादरी</span> - दयालु योजना (डेथ क्लेम)</h4>
+        <p>मृत्यु या दिव्यांगता पर 1-5 लाख तक आर्थिक सहायता।</p>
+        <a href="https://meraparivar.haryana.gov.in/" target="_blank">🔗 दयालु योजना पोर्टल देखें ➔</a>
+      </div>
+
+      <!-- HKRN -->
+      <div class="scheme-card">
+        <h4>💼 जिला <span class="dist-name">चरखी दादरी</span> - कौशल रोजगार निगम (HKRN)</h4>
+        <p>कच्चे कर्मचारियों की भर्ती और रजिस्ट्रेशन।</p>
+        <a href="https://hkrnl.itiharyana.gov.in/" target="_blank">🔗 HKRN पोर्टल देखें ➔</a>
+      </div>
+
+      <!-- Chirayu / Ayushman -->
+      <div class="scheme-card">
+        <h4>🏥 जिला <span class="dist-name">चरखी दादरी</span> - चिरायु हरियाणा (मुफ्त इलाज)</h4>
+        <p>5 लाख तक के मुफ्त इलाज के लिए गोल्डन कार्ड।</p>
+        <a href="https://chirayuayushmanharyana.in/" target="_blank">🔗 चिरायु पोर्टल देखें ➔</a>
+      </div>
+    </div>
   </div>
 
 </div>
 
 <script>
-  const villagesData = {
-    "चरखी दादरी": ["माल्कोश / Malkosh", "बाढड़ा", "झोझू कलां", "डडेरा", "गोपी"],
-    "रोहतक": ["इ Ismaila-B", "मदीना", "कलानौर", "सांपला", "बोहर"],
-    "झज्जर": ["बादली", "बेरी", "मातनहेल", "दुजाना", "छारा"],
-    "भिवानी": ["लोहारू", "बवानखेड़ा", "सिवानी", "दिनोद"],
-    "हिसार": ["हाँसी", "बरवाला", "नारनौंद", "उकलाना"],
-    "जींद": ["जुलाना", "नरवाना", "सफीदों", "उचाना"]
-  };
+  // 1. स्मार्ट AI लॉजिक (स्मार्ट जवाब देने के लिए)
+  function handleAIQuery() {
+    let inputField = document.getElementById('user-input');
+    let chatDisplay = document.getElementById('chat-display');
+    let query = inputField.value.trim().toLowerCase();
+    
+    if(query === "") return;
 
-  function loadVillages() {
-    let district = document.getElementById('district-select').value;
-    let villageDropdown = document.getElementById('village-select');
-    villageDropdown.innerHTML = "";
+    // यूजर का सवाल चैट में जोड़ें
+    chatDisplay.innerHTML += `<div style="margin: 5px 0;"><b>आप:</b> ${inputField.value}</div>`;
+    
+    let botReply = "खेती, मौसम, मंडी भाव या सरकारी योजनाओं से जुड़ा सवाल पूछें।";
 
-    if(villagesData[district]) {
-      villagesData[district].forEach(function(v) {
-        let opt = document.createElement('option');
-        opt.value = v;
-        opt.textContent = v;
-        villageDropdown.appendChild(opt);
-      });
+    // जवाब के नियम (Knowledge Base)
+    if(query.includes('पेंशन') || query.includes('pension')) {
+      botReply = "पेंशन के आवेदन और स्टेटस के लिए नीचे 'सामाजिक सुरक्षा पेंशन' पोर्टल का लिंक दिया गया है।";
+    } else if(query.includes('डेथ') || query.includes('death') || query.includes('दयालु') || query.includes('claim')) {
+      botReply = "डेथ क्लेम (दयालु योजना) के लिए परिवार पहचान पत्र होना जरूरी है। नीचे 'दयालु योजना' का लिंक देखें।";
+    } else if(query.includes('कौशल') || query.includes('hkrn') || query.includes('नौकरी')) {
+      botReply = "कौशल रोजगार निगम (HKRN) के जरिए नौकरी और रजिस्ट्रेशन के लिए नीचे HKRN पोर्टल पर जाएं।";
+    } else if(query.includes('भाव') || query.includes('मंडी') || query.includes('rate')) {
+      botReply = "गेहूँ का भाव ₹2300 और बाजरा का भाव ₹2550 प्रति क्विंटल है। ऊपर कैलकुलेटर का उपयोग कर सकते हैं।";
+    } else if(query.includes('मौसम') || query.includes('weather')) {
+      botReply = "आज आपके क्षेत्र का मौसम साफ एवं धूप वाला है (लगभग 27.8°C)।";
     }
+
+    // बॉट का जवाब चैट में जोड़ें
+    setTimeout(() => {
+      chatDisplay.innerHTML += `<div style="margin: 5px 0; color: #155724;"><b>असिस्टेंट:</b> ${botReply}</div>`;
+      chatDisplay.scrollTop = chatDisplay.scrollHeight;
+    }, 300);
+
+    inputField.value = "";
   }
 
-  function openAdmin() {
-    let pass = prompt("एडमिन पासवर्ड दर्ज करें:");
-    if(pass === "1234" || pass === "admin") {
-      alert("एडमिन पैनल लॉगिन सफल!");
-    } else if(pass !== null) {
-      alert("गलत पासवर्ड!");
-    }
+  // 2. फसल कैलकुलेटर लॉजिक (एक लाइन के लिए)
+  function calculateCrop() {
+    let rate = parseFloat(document.getElementById('crop-rate').value) || 0;
+    let wt = parseFloat(document.getElementById('crop-wt').value) || 0;
+    let total = rate * wt;
+    document.getElementById('calc-res').innerText = `कुल: ₹${total}`;
   }
+
+  // 3. जिला बदलने का लॉजिक
+  document.getElementById('district-select').addEventListener('change', function() {
+    let selectedDistrict = this.value;
+    let distSpans = document.querySelectorAll('.dist-name');
+    distSpans.forEach(function(span) {
+      span.textContent = selectedDistrict;
+    });
+  });
 </script>
 
 </body>
