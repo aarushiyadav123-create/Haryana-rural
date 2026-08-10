@@ -670,6 +670,7 @@
             }
         }
 
+        // 🛠️ फिक्स किया गया मुख्य रजिस्टर फंक्शन
         function registerService() {
             const name = document.getElementById('regShopName').value.trim();
             const district = document.getElementById('regDistrict').value;
@@ -690,6 +691,10 @@
                 reader.onload = function(e) {
                     saveToPendingQueue(name, district, village, category, phone, lat, lng, e.target.result);
                 };
+                reader.onerror = function() {
+                    // अगर फोटो लोड होने में दिक्कत आए, तो बिना फोटो के सेव कर देगा ताकि फॉर्म अटके नहीं
+                    saveToPendingQueue(name, district, village, category, phone, lat, lng, "");
+                };
                 reader.readAsDataURL(photoInput.files[0]);
             } else {
                 saveToPendingQueue(name, district, village, category, phone, lat, lng, "");
@@ -697,20 +702,25 @@
         }
 
         function saveToPendingQueue(name, district, village, category, phone, lat, lng, photo) {
-            let newShop = { id: Date.now(), name, district, village, category, phone, lat, lng, photo };
-            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
-            pendingShops.push(newShop);
-            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+            try {
+                let newShop = { id: Date.now(), name, district, village, category, phone, lat, lng, photo };
+                let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+                pendingShops.push(newShop);
+                localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
 
-            alert(currentLang === 'hi' ? 'दुकान का रजिस्ट्रेशन फॉर्म एडमिन के पास सत्यापन के लिए भेज दिया गया है।' : 'Shop registration sent to admin for verification!');
-            
-            document.getElementById('regShopName').value = '';
-            document.getElementById('regVillageInput').value = '';
-            document.getElementById('regPhone').value = '';
-            document.getElementById('regPhoto').value = '';
-            document.getElementById('locationStatus').textContent = '';
-            document.getElementById('addShopFormBox').style.display = 'none';
-            document.getElementById('toggleIcon1').textContent = '▼';
+                alert(currentLang === 'hi' ? 'सफलतापूर्वक! दुकान का रजिस्ट्रेशन एडमिन के पास सत्यापन के लिए भेज दिया गया है।' : 'Success! Shop registration sent to admin for verification!');
+                
+                // फॉर्म रीसेट करें
+                document.getElementById('regShopName').value = '';
+                document.getElementById('regVillageInput').value = '';
+                document.getElementById('regPhone').value = '';
+                document.getElementById('regPhoto').value = '';
+                document.getElementById('locationStatus').textContent = '';
+                document.getElementById('addShopFormBox').style.display = 'none';
+                document.getElementById('toggleIcon1').textContent = '▼';
+            } catch (err) {
+                alert("लोकल स्टोरेज फुल हो सकती है या फोटो बहुत बड़ी है। कृपया छोटी फोटो अपलोड करें या बिना फोटो के प्रयास करें।");
+            }
         }
 
         function publishBuySellAd() {
