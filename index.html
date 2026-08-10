@@ -17,7 +17,7 @@
       margin: 0 auto;
     }
 
-    /* 1. AI असिस्टेंट बॉक्स */
+    /* AI असिस्टेंट बॉक्स */
     .ai-box {
       background: #ffffff;
       border: 1px solid #bce8f1;
@@ -64,7 +64,7 @@
       cursor: pointer;
     }
 
-    /* 2. फसल कैलकुलेटर (बिल्कुल एक लाइन में फिक्स) */
+    /* फसल कैलकुलेटर (बिल्कुल एक लाइन में) */
     .calculator-box {
       background: #ffffff;
       border: 1px solid #d4edda;
@@ -109,7 +109,7 @@
       text-align: right;
     }
 
-    /* अन्य बटन्स का स्टाइल (आपकी स्क्रीन 2 के अनुसार) */
+    /* गाँव और अन्य बटन */
     .action-box {
       background: #ffffff;
       border: 1px solid #ddd;
@@ -139,6 +139,7 @@
       font-weight: bold;
       font-size: 14px;
       border: none;
+      cursor: pointer;
       margin-bottom: 10px;
     }
     .btn-green-main {
@@ -181,7 +182,7 @@
       margin-bottom: 12px;
     }
 
-    /* 3. जिलावार योजनाएं सेक्शन */
+    /* हरियाणा सरकार की मुख्य योजनाएं सेक्शन */
     .scheme-section {
       background: #ffffff;
       border: 1px solid #e0e0e0;
@@ -253,7 +254,7 @@
     </div>
   </div>
 
-  <!-- फसल भाव कैलकुलेटर (एक लाइन में फिक्स) -->
+  <!-- फसल भाव कैलकुलेटर (एक लाइन में) -->
   <div class="calculator-box">
     <div class="calc-title">🌾 फसल भाव कैलकुलेटर</div>
     <div class="calc-inline">
@@ -266,7 +267,7 @@
     </div>
   </div>
 
-  <!-- गाँव चुनें और अन्य बटन (स्क्रीन 2 के अनुसार) -->
+  <!-- गाँव चुनें और अन्य बटन -->
   <div class="action-box">
     <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">2. गाँव चुनें:</div>
     <select class="action-dropdown">
@@ -294,35 +295,30 @@
     </select>
 
     <div id="scheme-cards">
-      <!-- PPP -->
       <div class="scheme-card">
         <h4>📁 जिला <span class="dist-name">चरखी दादरी</span> - परिवार पहचान पत्र (PPP)</h4>
         <p>जिला नागरिक संसाधन सूचना विभाग, फैमिली आईडी सत्यापन व सुधार सेवा।</p>
         <a href="https://meraparivar.haryana.gov.in/" target="_blank">🔗 पीपीपी पोर्टल देखें ➔</a>
       </div>
 
-      <!-- Pension -->
       <div class="scheme-card">
         <h4>👵 जिला <span class="dist-name">चरखी दादरी</span> - सामाजिक सुरक्षा पेंशन</h4>
         <p>बुढ़ापा, विधवा एवं विकलांग पेंशन आवेदन व स्टेटस जानकारी।</p>
         <a href="https://pension.socialjusticehry.gov.in/" target="_blank">🔗 पेंशन पोर्टल देखें ➔</a>
       </div>
 
-      <!-- Dayalu / Death Claim -->
       <div class="scheme-card">
         <h4>🕊️ जिला <span class="dist-name">चरखी दादरी</span> - दयालु योजना (डेथ क्लेम)</h4>
         <p>मृत्यु या दिव्यांगता पर आर्थिक सहायता (PPP आधारित)।</p>
         <a href="https://meraparivar.haryana.gov.in/" target="_blank">🔗 दयालु योजना पोर्टल देखें ➔</a>
       </div>
 
-      <!-- HKRN -->
       <div class="scheme-card">
         <h4>💼 जिला <span class="dist-name">चरखी दादरी</span> - कौशल रोजगार निगम (HKRN)</h4>
         <p>कच्चे कर्मचारियों की भर्ती और जॉब रजिस्ट्रेशन।</p>
         <a href="https://hkrnl.itiharyana.gov.in/" target="_blank">🔗 HKRN पोर्टल देखें ➔</a>
       </div>
 
-      <!-- Chirayu Ayushman -->
       <div class="scheme-card">
         <h4>🏥 जिला <span class="dist-name">चरखी दादरी</span> - चिरायु हरियाणा (आयुष्मान)</h4>
         <p>5 लाख रुपये तक के मुफ्त इलाज के लिए गोल्डन कार्ड।</p>
@@ -334,7 +330,6 @@
 </div>
 
 <script>
-  // AI जवाब देने का लॉजिक
   function handleAIQuery() {
     let inputField = document.getElementById('user-input');
     let chatDisplay = document.getElementById('chat-display');
@@ -365,7 +360,6 @@
     inputField.value = "";
   }
 
-  // कैलकुलेटर एक लाइन का लॉजिक
   function calculateCrop() {
     let rate = parseFloat(document.getElementById('crop-rate').value) || 0;
     let wt = parseFloat(document.getElementById('crop-wt').value) || 0;
@@ -373,7 +367,6 @@
     document.getElementById('calc-res').innerText = `कुल: ₹${total}`;
   }
 
-  // जिला बदलने का लॉजिक
   document.getElementById('district-select').addEventListener('change', function() {
     let selectedDistrict = this.value;
     let distSpans = document.querySelectorAll('.dist-name');
