@@ -12,7 +12,6 @@
             padding: 0; 
             color: #333;
         }
-        /* संस्थापक पट्टी */
         .founder-bar {
             background-color: #1b5e20;
             color: #ffeb3b;
@@ -31,7 +30,6 @@
             font-weight: bold;
             cursor: pointer;
         }
-        /* मुख्य हेडर */
         header { 
             background-color: #2e7d32; 
             color: white; 
@@ -55,27 +53,21 @@
             border-radius: 20px;
             font-size: 0.8rem;
         }
-
         .container { 
             padding: 15px; 
             max-width: 600px;
             margin: auto;
         }
-
-        /* लाइव मौसम विजेट */
         .weather-card {
             background: linear-gradient(135deg, #00838b, #006064);
             color: white;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 15px;
-            box-label: shadow;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        /* ताज़ा न्यूज़ पट्टी */
         .news-ticker {
             background: #fff3e0;
             border-left: 4px solid #f57c00;
@@ -86,8 +78,6 @@
             font-weight: 500;
             color: #d84315;
         }
-
-        /* मंडी भाव पट्टी */
         .mandi-card {
             background: #e8f5e9;
             border: 1px solid #a5d6a7;
@@ -97,8 +87,6 @@
             color: #1b5e20;
             font-weight: bold;
         }
-
-        /* नए फीचर्स बटन ग्रिड (Nearby, Categories, Entertainment, QR) */
         .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -119,8 +107,6 @@
         .feature-btn:active {
             background: #e8f5e9;
         }
-
-        /* जिला और गाँव खोजने वाला कार्ड */
         .search-card {
             background: white;
             border-radius: 10px;
@@ -145,13 +131,14 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
-        .form-group select {
+        .form-group select, .form-group input {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 1rem;
             background: #fff;
+            box-sizing: border-box;
         }
         .submit-btn {
             background: #1b5e20;
@@ -164,8 +151,6 @@
             font-weight: bold;
             cursor: pointer;
         }
-
-        /* डायनेमिक खुला हुआ बॉक्स (जहाँ डेटा दिखेगा) */
         #dynamic-display {
             background: white;
             border: 2px solid #2e7d32;
@@ -184,8 +169,6 @@
             cursor: pointer;
             font-weight: bold;
         }
-
-        /* गुप्त एडमिन एरिया (पासवर्ड: sub123) */
         .admin-area {
             text-align: center;
             margin: 30px 0;
@@ -208,13 +191,11 @@
 </head>
 <body onload="playRamRamVoice()">
 
-    <!-- संस्थापक पट्टी -->
     <div class="founder-bar">
         <span>👩‍🌾 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
         <button onclick="alert('English translation coming soon!')">English</button>
     </div>
 
-    <!-- मुख्य हेडर -->
     <header>
         <h1>हरियाणा ग्रामीण सेवा</h1>
         <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
@@ -223,7 +204,6 @@
 
     <div class="container">
 
-        <!-- लाइव मौसम विजेट -->
         <div class="weather-card">
             <div>
                 <span style="font-size: 1rem; font-weight: bold;">⛅ हरियाणा लाइव मौसम</span>
@@ -232,17 +212,14 @@
             <div style="font-size: 1.4rem; font-weight: bold;">33.2°C</div>
         </div>
 
-        <!-- ताज़ा लोकल न्यूज़ -->
         <div class="news-ticker">
-            📢 <strong>ताज़ा लोकल न्यूज़:</strong> हरियाणा ग्रामीण सेवा पोर्टल पर आपके क्षेत्र की डिजिटल लिस्टिंग शुरू हो चुकी है!
+            📢 <strong>ताज़ा लोकल न्यूज़:</strong> रोहतक, भिवानी, चरखी दादरी और हिसार के सभी गाँवों की डिजिटल लिस्टिंग शुरू!
         </div>
 
-        <!-- मंडी भाव -->
         <div class="mandi-card">
             🌾 मंडी भाव: सरसों और गेहूं के ताज़ा सरकारी भाव अपडेट कर दिए गए हैं।
         </div>
 
-        <!-- आपके नए फीचर्स के 4 बेहतरीन बटन -->
         <div class="feature-grid">
             <div class="feature-btn" onclick="showFeature('nearby')">📍 My Nearby Search</div>
             <div class="feature-btn" onclick="showFeature('categories')">📂 सभी कैटेगरीज</div>
@@ -250,13 +227,11 @@
             <div class="feature-btn" onclick="showFeature('qr')">📷 Shop QR Generator</div>
         </div>
 
-        <!-- डायनेमिक डिस्प्ले बॉक्स (जहाँ बटन का डेटा खुलेगा) -->
         <div id="dynamic-display">
             <button class="close-btn" onclick="closeBox()">बंद करें ✕</button>
             <div id="display-content"></div>
         </div>
 
-        <!-- मूल जिला और गाँव खोजने वाला सेक्शन -->
         <div class="search-card">
             <h3>🔍 अपने गाँव की सेवाएँ खोजें</h3>
             
@@ -264,10 +239,10 @@
                 <label>1. जिला चुनें:</label>
                 <select id="district-select" onchange="loadVillages()">
                     <option value="">-- जिला चुनें --</option>
-                    <option value="mahendragarh">महेंद्रगढ़</option>
-                    <option value="rewari">रेवाड़ी</option>
-                    <option value="gurugram">गुरुग्राम</option>
-                    <option value="Jhajjar">झज्जर</option>
+                    <option value="rohtak">रोहतक</option>
+                    <option value="bhiwani">भिवानी</option>
+                    <option value="charkhi_dadri">चरखी दादरी</option>
+                    <option value="hisar">हिसार</option>
                 </select>
             </div>
 
@@ -283,36 +258,33 @@
 
     </div>
 
-    <!-- गुप्त एडमिन लॉगिन (पासवर्ड: sub123) -->
     <div class="admin-area">
         <button class="admin-btn" onclick="adminLogin()">🔒 Admin Login</button>
     </div>
 
     <script>
-        // पेज खुलते ही आवाज में "राम-राम भाइयो" बोलने का फंक्शन
         function playRamRamVoice() {
             if ('speechSynthesis' in window) {
                 let speech = new SpeechSynthesisUtterance("राम-राम भाइयो, हरियाणा ग्रामीण सेवा में आपका स्वागत है।");
-                speech.lang = 'hi-IN'; // हिंदी भाषा सेट की गई है
-                speech.rate = 0.9; // बोलने की रफ्तार सामान्य
+                speech.lang = 'hi-IN';
+                speech.rate = 0.9;
                 window.speechSynthesis.speak(speech);
             }
         }
 
-        // चारों बटनों के लिए स्क्रीन के अंदर डेटा दिखाने का फंक्शन
         function showFeature(type) {
             const box = document.getElementById('dynamic-display');
             const content = document.getElementById('display-content');
             box.style.display = 'block';
 
             if (type === 'nearby') {
-                content.innerHTML = `<h3>📍 My Nearby Search</h3><p>आपके नजदीक के बैंक, एटीएम, और किराना स्टोर खोजे जा रहे हैं...</p><ul><li>शिव जनरल स्टोर - 100 मीटर</li><li>राज्य सहकारी बैंक - 500 मीटर</li></ul>`;
+                content.innerHTML = `<h3>📍 My Nearby Search</h3><p>रोहतक, भिवानी, चरखी दादरी और हिसार के आसपास की दुकानें और एटीएम खोजे जा रहे हैं...</p>`;
             } else if (type === 'categories') {
-                content.innerHTML = `<h3>📂 सभी कैटेगरीज</h3><p>दुकानें, फैक्ट्रियां, अस्पताल, और सरकारी सेवाएं यहाँ उपलब्ध हैं।</p>`;
+                content.innerHTML = `<h3>📂 सभी कैटेगरीज</h3><p>किराना, खाद-बीज, मेडिकल, बैंक, और रिपेयरिंग शॉप्स की सूची।</p>`;
             } else if (type === 'entertainment') {
-                content.innerHTML = `<h3>🎭 मनोरंजन & किस्से</h3><p><strong>ताऊ का जोक:</strong> भाई इब फोन में सब कुछ आ लिया, बस खेत जोतने वाली मशीन आनी बाकी रह रही है!</p>`;
+                content.innerHTML = `<h3>🎭 मनोरंजन & किस्से</h3><p><strong>ताऊ का जोक:</strong> भाई इब मोबाइल में सब कुछ आ लिया, बस घर बैठे चाय बनाने वाली मशीन आनी बाकी है!</p>`;
             } else if (type === 'qr') {
-                content.innerHTML = `<h3>📷 Shop QR Generator</h3><p>यहाँ से दुकानदार अपना यूनिक डिजिटल क्यूआर कोड जनरेट कर सकते हैं।</p>`;
+                content.innerHTML = `<h3>📷 Shop QR Generator & Verification</h3><p>यहाँ से दुकानदार अपनी दुकान की लोकेशन और फोटो के साथ QR कोड वेरीफाई कर सकते हैं।</p>`;
             }
         }
 
@@ -320,18 +292,19 @@
             document.getElementById('dynamic-display').style.display = 'none';
         }
 
-        // जिला चुनने पर गाँवों की लिस्ट बदलने का लॉजिक
         function loadVillages() {
             let dist = document.getElementById('district-select').value;
             let villageSelect = document.getElementById('village-select');
             villageSelect.innerHTML = '<option value="">--गाँव चुनें--</option>';
             
-            if (dist === 'mahendragarh') {
-                villageSelect.innerHTML += '<option value="malkosh">माल्कोश</option><option value="kanina">कनीना</option>';
-            } else if (dist === 'rewari') {
-                villageSelect.innerHTML += '<option value="kosli">कोसली</option><option value="rewari_rural">रेवाड़ी ग्रामीण</option>';
-            } else if (dist === 'Jhajjar') {
-                villageSelect.innerHTML += '<option value="Ismaila">इस्माइला</option><option value="Bahadurgarh">बहादुरगढ़</option>';
+            if (dist === 'rohtak') {
+                villageSelect.innerHTML += '<option value="kiloi">किलोई</option><option value="kalanaur">कलानौर</option><option value="meham">महम</option><option value="lakhan_majra">लाखन माजरा</option><option value="sanghi">सांघी</option>';
+            } else if (dist === 'bhiwani') {
+                villageSelect.innerHTML += '<option value="siwani">सिवानी</option><option value="loharu">लोहारू</option><option value="tosham">तोशाम</option><option value="bhiwani_rural">भिवानी ग्रामीण</option><option value="bawani_khera">बवानी खेड़ा</option>';
+            } else if (dist === 'charkhi_dadri') {
+                villageSelect.innerHTML += '<option value="dadri_city">दादरी शहर</option><option value="bodal">बोदल</option><option value="Jhojhu_kalan">झोझू कलां</option><option value="makrana">मकराना</option><option value="kodma">कोदमा</option>';
+            } else if (dist === 'hisar') {
+                villageSelect.innerHTML += '<option value="hansi">हांसी</option><option value="adampur">आदमपुर</option><option value="nalwa">नलवा</option><option value="barwala">बरवाला</option><option value="narnaund">नारनौंद</option>';
             }
         }
 
@@ -341,15 +314,19 @@
             if(!dist || !vill) {
                 alert("कृपया पहले जिला और गाँव दोनों चुनें!");
             } else {
-                alert("आपके चुने हुए क्षेत्र की दुकानें लोड हो रही हैं...");
+                alert("चयनित गाँव की वेरिफाइड दुकानें और लोकेशन लोड हो रही हैं...");
             }
         }
 
-        // पासवर्ड प्रोटेक्टेड एडमिन लॉगिन (sub123)
         function adminLogin() {
-            let pass = prompt("पासवर्ड दर्ज करें:");
+            let pass = prompt("कृपया एडमिन पासवर्ड दर्ज करें:");
             if (pass === "sub123") {
-                alert("सफलतापूर्वक एडमिन लॉगिन हो गया!");
+                let adminAction = prompt("एडमिन पैनल: \n1. नई दुकान जोड़ें \n2. शॉप वेरिफिकेशन (लोकेशन/फोटो) \n3. सब-एडमिन मैनेज करें \n(नंबर टाइप करें):");
+                if (adminAction === "1" || adminAction === "2" || adminAction === "3") {
+                    alert("सफलतापूर्वक एडमिन डेटा अपडेट पैनल खुल गया है!");
+                } else {
+                    alert("लॉगिन सफल! मुख्य डैशबोर्ड सक्रिय है।");
+                }
             } else if (pass !== null) {
                 alert("गलत पासवर्ड!");
             }
