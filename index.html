@@ -64,7 +64,7 @@
       cursor: pointer;
     }
 
-    /* फसल कैलकुलेटर (एक लाइन में) */
+    /* फसल कैलकुलेटर (बिल्कुल एक लाइन में) */
     .calculator-box {
       background: #ffffff;
       border: 1px solid #d4edda;
@@ -109,7 +109,7 @@
       text-align: right;
     }
 
-    /* गाँव और अन्य बटन (पुरानी स्क्रीन का क्रम) */
+    /* गाँव और अन्य बटन */
     .action-box {
       background: #ffffff;
       border: 1px solid #ddd;
@@ -242,20 +242,7 @@
 
 <div class="portal-container">
 
-  <!-- 1. गाँव चुनें और अन्य बटन (जो आपकी पुरानी स्क्रीन में ऊपर थे) -->
-  <div class="action-box">
-    <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">2. गाँव चुनें:</div>
-    <select class="action-dropdown">
-      <option>-- पहले जिला चुनें --</option>
-    </select>
-    <button class="btn-green-dark">दुकानें देखें</button>
-  </div>
-
-  <a href="#" class="btn-green-main">+ अपनी दुकान / सेवा Yहाँ रजिस्टर करें (+ Add Shop)</a>
-  <a href="#" class="btn-orange">🛒 ग्रामीण बाय-सेल मार्केटप्लेस (+ Add Ad)</a>
-  <a href="#" class="btn-blue">+ My Near By Search with Location</a>
-
-  <!-- 2. AI ग्रामीण असिस्टेंट -->
+  <!-- 1. AI ग्रामीण असिस्टेंट (बिल्कुल ऊपर) -->
   <div class="ai-box">
     <div class="ai-title">🤖 AI ग्रामीण असिस्टेन्ट (सवाल पूछें)</div>
     <div class="ai-chat-display" id="chat-display">
@@ -267,7 +254,7 @@
     </div>
   </div>
 
-  <!-- 3. फसल भाव कैलकुलेटर (एक लाइन में) -->
+  <!-- 2. फसल भाव कैलकुलेटर (एक लाइन में) -->
   <div class="calculator-box">
     <div class="calc-title">🌾 फसल भाव कैलकुलेटर</div>
     <div class="calc-inline">
@@ -279,6 +266,19 @@
       <div class="calc-result" id="calc-res">कुल: ₹0</div>
     </div>
   </div>
+
+  <!-- 3. गाँव चुनें और अन्य बटन -->
+  <div class="action-box">
+    <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">2. गाँव चुनें:</div>
+    <select class="action-dropdown">
+      <option>-- पहले जिला चुनें --</option>
+    </select>
+    <button class="btn-green-dark">दुकानें देखें</button>
+  </div>
+
+  <a href="#" class="btn-green-main">+ अपनी दुकान / सेवा Yहाँ रजिस्टर करें (+ Add Shop)</a>
+  <a href="#" class="btn-orange">🛒 ग्रामीण बाय-सेल मार्केटप्लेस (+ Add Ad)</a>
+  <a href="#" class="btn-blue">+ My Near By Search with Location</a>
 
   <!-- 4. हरियाणा सरकार की मुख्य योजनाएं (जिलावार) -->
   <div class="scheme-section">
