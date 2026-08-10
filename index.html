@@ -23,7 +23,7 @@
       border: 1px solid #bce8f1;
       border-radius: 12px;
       padding: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
     .ai-title {
@@ -37,7 +37,7 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       padding: 10px;
-      height: 110px;
+      height: 100px;
       overflow-y: auto;
       font-size: 13px;
       margin-bottom: 10px;
@@ -48,7 +48,7 @@
     }
     .ai-input-group input {
       flex: 1;
-      padding: 10px;
+      padding: 9px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 14px;
@@ -58,19 +58,19 @@
       background: #28a745;
       color: white;
       border: none;
-      padding: 10px 15px;
+      padding: 9px 14px;
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    /* 2. फसल कैलकुलेटर (बिल्कुल एक लाइन में बिना गड़बड़ के) */
+    /* 2. फसल कैलकुलेटर (बिल्कुल एक लाइन में फिक्स) */
     .calculator-box {
       background: #ffffff;
       border: 1px solid #d4edda;
       border-radius: 12px;
       padding: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
     .calc-title {
@@ -107,6 +107,78 @@
       font-size: 12px;
       white-space: nowrap;
       text-align: right;
+    }
+
+    /* अन्य बटन्स का स्टाइल (आपकी स्क्रीन 2 के अनुसार) */
+    .action-box {
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .action-dropdown {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      background: #f9f9f9;
+    }
+    .btn-green-dark {
+      display: block;
+      width: 100%;
+      background: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      border: none;
+      margin-bottom: 10px;
+    }
+    .btn-green-main {
+      display: block;
+      width: 100%;
+      background: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    .btn-orange {
+      display: block;
+      width: 100%;
+      background: #f39c12;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    .btn-blue {
+      display: block;
+      width: 100%;
+      background: #1976d2;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      margin-bottom: 12px;
     }
 
     /* 3. जिलावार योजनाएं सेक्शन */
@@ -163,9 +235,6 @@
       font-size: 12px;
       font-weight: 700;
     }
-    .scheme-card a:hover {
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
@@ -196,6 +265,19 @@
       <div class="calc-result" id="calc-res">कुल: ₹0</div>
     </div>
   </div>
+
+  <!-- गाँव चुनें और अन्य बटन (स्क्रीन 2 के अनुसार) -->
+  <div class="action-box">
+    <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">2. गाँव चुनें:</div>
+    <select class="action-dropdown">
+      <option>-- पहले जिला चुनें --</option>
+    </select>
+    <button class="btn-green-dark">दुकानें देखें</button>
+  </div>
+
+  <a href="#" class="btn-green-main">+ अपनी दुकान / सेवा Yहाँ रजिस्टर करें (+ Add Shop)</a>
+  <a href="#" class="btn-orange">🛒 ग्रामीण बाय-सेल मार्केटप्लेस (+ Add Ad)</a>
+  <a href="#" class="btn-blue">+ My Near By Search with Location</a>
 
   <!-- हरियाणा सरकार की मुख्य योजनाएं (जिलावार) -->
   <div class="scheme-section">
