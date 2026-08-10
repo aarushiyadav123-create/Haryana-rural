@@ -9,7 +9,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f7f6;
       margin: 0;
-      padding: 15px;
+      padding: 10px;
       color: #333;
     }
     .portal-container {
@@ -17,13 +17,13 @@
       margin: 0 auto;
     }
 
-    /* AI असिस्टेंट स्टाइल */
+    /* 1. AI असिस्टेंट बॉक्स */
     .ai-box {
       background: #ffffff;
       border: 1px solid #bce8f1;
       border-radius: 12px;
       padding: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
     .ai-title {
@@ -37,7 +37,7 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       padding: 10px;
-      height: 120px;
+      height: 110px;
       overflow-y: auto;
       font-size: 13px;
       margin-bottom: 10px;
@@ -64,13 +64,13 @@
       cursor: pointer;
     }
 
-    /* फसल कैलकुलेटर (एक लाइन में) */
+    /* 2. फसल कैलकुलेटर (बिल्कुल एक लाइन में बिना गड़बड़ के) */
     .calculator-box {
       background: #ffffff;
       border: 1px solid #d4edda;
       border-radius: 12px;
       padding: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
     .calc-title {
@@ -81,40 +81,54 @@
     }
     .calc-inline {
       display: flex;
-      gap: 5px;
       align-items: center;
+      gap: 6px;
+      width: 100%;
     }
-    .calc-inline select, .calc-inline input {
-      flex: 1;
-      padding: 8px;
+    .calc-inline select {
+      flex: 1.2;
+      padding: 8px 4px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 12px;
+      background: #fff;
+    }
+    .calc-inline input {
+      flex: 0.9;
+      padding: 8px 6px;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 12px;
     }
     .calc-result {
+      flex: 0.9;
       font-weight: bold;
       color: #2e7d32;
-      font-size: 13px;
+      font-size: 12px;
       white-space: nowrap;
+      text-align: right;
     }
 
-    /* जिलावार योजनाएं सेक्शन */
+    /* 3. जिलावार योजनाएं सेक्शन */
     .scheme-section {
       background: #ffffff;
       border: 1px solid #e0e0e0;
       border-radius: 12px;
-      padding: 18px;
+      padding: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      margin-bottom: 15px;
     }
     .scheme-title {
       color: #1a5632;
-      margin: 0 0 5px 0;
-      font-size: 18px;
+      margin: 0 0 2px 0;
+      font-size: 17px;
       font-weight: 700;
     }
     .scheme-title-sub {
-      font-size: 14px;
+      font-size: 13px;
       color: #2d6a4f;
+      margin-bottom: 10px;
+      display: block;
     }
     .district-dropdown {
       width: 100%;
@@ -122,7 +136,7 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 14px;
-      margin: 12px 0;
+      margin-bottom: 12px;
       background: #f9f9f9;
       outline: none;
     }
@@ -131,15 +145,15 @@
       border-left: 5px solid #2e7d32;
       border-radius: 6px;
       padding: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .scheme-card h4 {
-      margin: 0 0 5px 0;
+      margin: 0 0 4px 0;
       color: #1b5e20;
-      font-size: 14px;
+      font-size: 13.5px;
     }
     .scheme-card p {
-      margin: 0 0 8px 0;
+      margin: 0 0 6px 0;
       font-size: 12px;
       color: #444;
     }
@@ -158,11 +172,11 @@
 
 <div class="portal-container">
 
-  <!-- 1. स्मार्ट AI ग्रामीण असिस्टेंट -->
+  <!-- AI ग्रामीण असिस्टेंट -->
   <div class="ai-box">
     <div class="ai-title">🤖 AI ग्रामीण असिस्टेन्ट (सवाल पूछें)</div>
     <div class="ai-chat-display" id="chat-display">
-      <div><b>असिस्टेंट:</b> नमस्ते! खेती, मौसम, मंडी भाव या सरकारी योजनाओं (जैसे पेंशन, दयालु योजना, HKRN) के बारे में कुछ भी पूछें।</div>
+      <div><b>असिस्टेंट:</b> नमस्ते! खेती, मौसम, मंडी भाव या सरकारी योजनाओं के बारे में पूछ सकते हैं।</div>
     </div>
     <div class="ai-input-group">
       <input type="text" id="user-input" placeholder="यहाँ अपना सवाल लिखें...">
@@ -170,20 +184,20 @@
     </div>
   </div>
 
-  <!-- 2. फसल भाव कैलकुलेटर (एक लाइन में - Compact) -->
+  <!-- फसल भाव कैलकुलेटर (एक लाइन में फिक्स) -->
   <div class="calculator-box">
     <div class="calc-title">🌾 फसल भाव कैलकुलेटर</div>
     <div class="calc-inline">
       <select id="crop-rate" onchange="calculateCrop()">
-        <option value="2300">गेहूँ (₹2300/क्विंटल)</option>
-        <option value="2550">बाजरा (₹2550/क्विंटल)</option>
+        <option value="2300">गेहूँ (₹2300)</option>
+        <option value="2550">बाजरा (₹2550)</option>
       </select>
       <input type="number" id="crop-wt" placeholder="क्विंटल" oninput="calculateCrop()">
       <div class="calc-result" id="calc-res">कुल: ₹0</div>
     </div>
   </div>
 
-  <!-- 3. हरियाणा सरकार की मुख्य योजनाएं (जिलावार) -->
+  <!-- हरियाणा सरकार की मुख्य योजनाएं (जिलावार) -->
   <div class="scheme-section">
     <h3 class="scheme-title">📜 हरियाणा सरकार की मुख्य योजनाएं</h3>
     <span class="scheme-title-sub">(जिलावार लाइव पोर्टल)</span>
@@ -201,35 +215,35 @@
       <!-- PPP -->
       <div class="scheme-card">
         <h4>📁 जिला <span class="dist-name">चरखी दादरी</span> - परिवार पहचान पत्र (PPP)</h4>
-        <p>फैमिली आईडी सत्यापन व सुधार सेवा।</p>
+        <p>जिला नागरिक संसाधन सूचना विभाग, फैमिली आईडी सत्यापन व सुधार सेवा।</p>
         <a href="https://meraparivar.haryana.gov.in/" target="_blank">🔗 पीपीपी पोर्टल देखें ➔</a>
       </div>
 
       <!-- Pension -->
       <div class="scheme-card">
         <h4>👵 जिला <span class="dist-name">चरखी दादरी</span> - सामाजिक सुरक्षा पेंशन</h4>
-        <p>बुढ़ापा, विधवा एवं विकलांग पेंशन आवेदन व स्टेटस।</p>
+        <p>बुढ़ापा, विधवा एवं विकलांग पेंशन आवेदन व स्टेटस जानकारी।</p>
         <a href="https://pension.socialjusticehry.gov.in/" target="_blank">🔗 पेंशन पोर्टल देखें ➔</a>
       </div>
 
-      <!-- Death Claim / Dayalu -->
+      <!-- Dayalu / Death Claim -->
       <div class="scheme-card">
         <h4>🕊️ जिला <span class="dist-name">चरखी दादरी</span> - दयालु योजना (डेथ क्लेम)</h4>
-        <p>मृत्यु या दिव्यांगता पर 1-5 लाख तक आर्थिक सहायता।</p>
+        <p>मृत्यु या दिव्यांगता पर आर्थिक सहायता (PPP आधारित)।</p>
         <a href="https://meraparivar.haryana.gov.in/" target="_blank">🔗 दयालु योजना पोर्टल देखें ➔</a>
       </div>
 
       <!-- HKRN -->
       <div class="scheme-card">
         <h4>💼 जिला <span class="dist-name">चरखी दादरी</span> - कौशल रोजगार निगम (HKRN)</h4>
-        <p>कच्चे कर्मचारियों की भर्ती और रजिस्ट्रेशन।</p>
+        <p>कच्चे कर्मचारियों की भर्ती और जॉब रजिस्ट्रेशन।</p>
         <a href="https://hkrnl.itiharyana.gov.in/" target="_blank">🔗 HKRN पोर्टल देखें ➔</a>
       </div>
 
-      <!-- Chirayu / Ayushman -->
+      <!-- Chirayu Ayushman -->
       <div class="scheme-card">
-        <h4>🏥 जिला <span class="dist-name">चरखी दादरी</span> - चिरायु हरियाणा (मुफ्त इलाज)</h4>
-        <p>5 लाख तक के मुफ्त इलाज के लिए गोल्डन कार्ड।</p>
+        <h4>🏥 जिला <span class="dist-name">चरखी दादरी</span> - चिरायु हरियाणा (आयुष्मान)</h4>
+        <p>5 लाख रुपये तक के मुफ्त इलाज के लिए गोल्डन कार्ड।</p>
         <a href="https://chirayuayushmanharyana.in/" target="_blank">🔗 चिरायु पोर्टल देखें ➔</a>
       </div>
     </div>
@@ -238,7 +252,7 @@
 </div>
 
 <script>
-  // 1. स्मार्ट AI लॉजिक (स्मार्ट जवाब देने के लिए)
+  // AI जवाब देने का लॉजिक
   function handleAIQuery() {
     let inputField = document.getElementById('user-input');
     let chatDisplay = document.getElementById('chat-display');
@@ -246,34 +260,30 @@
     
     if(query === "") return;
 
-    // यूजर का सवाल चैट में जोड़ें
-    chatDisplay.innerHTML += `<div style="margin: 5px 0;"><b>आप:</b> ${inputField.value}</div>`;
-    
+    chatDisplay.innerHTML += `<div style="margin: 4px 0;"><b>आप:</b> ${inputField.value}</div>`;
     let botReply = "खेती, मौसम, मंडी भाव या सरकारी योजनाओं से जुड़ा सवाल पूछें।";
 
-    // जवाब के नियम (Knowledge Base)
     if(query.includes('पेंशन') || query.includes('pension')) {
       botReply = "पेंशन के आवेदन और स्टेटस के लिए नीचे 'सामाजिक सुरक्षा पेंशन' पोर्टल का लिंक दिया गया है।";
-    } else if(query.includes('डेथ') || query.includes('death') || query.includes('दयालु') || query.includes('claim')) {
-      botReply = "डेथ क्लेम (दयालु योजना) के लिए परिवार पहचान पत्र होना जरूरी है। नीचे 'दयालु योजना' का लिंक देखें।";
-    } else if(query.includes('कौशल') || query.includes('hkrn') || query.includes('नौकरी')) {
+    } else if(query.includes('डेथ') || query.includes('death') || query.includes('दयालु')) {
+      botReply = "दयालु योजना (डेथ क्लेम) के लिए परिवार पहचान पत्र जरूरी है। नीचे पोर्टल का लिंक देखें।";
+    } else if(query.includes('कौशल') || query.includes('hkrn')) {
       botReply = "कौशल रोजगार निगम (HKRN) के जरिए नौकरी और रजिस्ट्रेशन के लिए नीचे HKRN पोर्टल पर जाएं।";
-    } else if(query.includes('भाव') || query.includes('मंडी') || query.includes('rate')) {
-      botReply = "गेहूँ का भाव ₹2300 और बाजरा का भाव ₹2550 प्रति क्विंटल है। ऊपर कैलकुलेटर का उपयोग कर सकते हैं।";
-    } else if(query.includes('मौसम') || query.includes('weather')) {
+    } else if(query.includes('भाव') || query.includes('मंडी')) {
+      botReply = "गेहूँ का भाव ₹2300 और बाजरा का भाव ₹2550 प्रति क्विंटल है।";
+    } else if(query.includes('मौसम')) {
       botReply = "आज आपके क्षेत्र का मौसम साफ एवं धूप वाला है (लगभग 27.8°C)।";
     }
 
-    // बॉट का जवाब चैट में जोड़ें
     setTimeout(() => {
-      chatDisplay.innerHTML += `<div style="margin: 5px 0; color: #155724;"><b>असिस्टेंट:</b> ${botReply}</div>`;
+      chatDisplay.innerHTML += `<div style="margin: 4px 0; color: #155724;"><b>असिस्टेंट:</b> ${botReply}</div>`;
       chatDisplay.scrollTop = chatDisplay.scrollHeight;
-    }, 300);
+    }, 200);
 
     inputField.value = "";
   }
 
-  // 2. फसल कैलकुलेटर लॉजिक (एक लाइन के लिए)
+  // कैलकुलेटर एक लाइन का लॉजिक
   function calculateCrop() {
     let rate = parseFloat(document.getElementById('crop-rate').value) || 0;
     let wt = parseFloat(document.getElementById('crop-wt').value) || 0;
@@ -281,7 +291,7 @@
     document.getElementById('calc-res').innerText = `कुल: ₹${total}`;
   }
 
-  // 3. जिला बदलने का लॉजिक
+  // जिला बदलने का लॉजिक
   document.getElementById('district-select').addEventListener('change', function() {
     let selectedDistrict = this.value;
     let distSpans = document.querySelectorAll('.dist-name');
