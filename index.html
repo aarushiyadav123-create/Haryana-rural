@@ -47,12 +47,14 @@
         .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); }
-        .btn-danger { background: #d32f2f; color: white; padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
+        .btn-danger { background: #d32f2f; color: white; padding: 5px 10px; font-size: 0.75rem; border-radius: 4px; border: none; cursor: pointer; }
+        .btn-success { background: #2e7d32; color: white; padding: 5px 10px; font-size: 0.75rem; border-radius: 4px; border: none; cursor: pointer; margin-right: 4px; }
         .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
         .map-btn { background: #00838f; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; margin-top: 4px; }
 
-        .add-shop-toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .add-shop-form-container { display: none; background: #ffffff; border: 2px dashed var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .toggle-bar-secondary { background: var(--secondary); }
+        .collapsible-form-container { display: none; background: #ffffff; border: 2px dashed var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
 
         .result-box { margin-top: 15px; }
         .shop-item { background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px; margin-bottom: 12px; border-radius: 6px; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
@@ -145,13 +147,13 @@
         </div>
 
         <!-- ➕ Add Shop Toggle Bar -->
-        <div class="add-shop-toggle-bar" onclick="toggleAddShopForm()">
+        <div class="toggle-bar" onclick="toggleSection('addShopFormBox', 'toggleIcon1')">
             <span id="t-add-shop-bar">➕ अपनी दुकान / सेवा यहाँ रजिस्टर करें (+ Add Shop)</span>
-            <span id="toggleIcon">▼</span>
+            <span id="toggleIcon1">▼</span>
         </div>
 
         <!-- दुकान रजिस्टर करने का फॉर्म -->
-        <div class="add-shop-form-container" id="addShopFormBox">
+        <div class="collapsible-form-container" id="addShopFormBox">
             <h2 id="t-form-heading" style="font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px;">नया दुकान/सेवा रजिस्ट्रेशन फॉर्म</h2>
             
             <div class="form-group">
@@ -171,7 +173,7 @@
             </div>
 
             <div class="form-group">
-                <label id="t-f-vill-label">गाँव का नाम (ड्रॉपdown से चुनें या अपना नया गाँव खुद टाइप करें):</label>
+                <label id="t-f-vill-label">गाँव का नाम:</label>
                 <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम यहाँ लिखें या चुनें...">
                 <datalist id="regVillageList"></datalist>
             </div>
@@ -205,13 +207,19 @@
             </div>
 
             <div class="btn-box">
-                <button class="custom-btn" id="t-f-submit-btn" onclick="registerService()">सीधे पोर्टल पर लाइव करें</button>
+                <button class="custom-btn" id="t-f-submit-btn" onclick="registerService()">सत्यापन के लिए एडमिन को भेजें</button>
             </div>
         </div>
 
-        <!-- 🛒 NEW: Buy & Sell Marketplace Section -->
-        <div class="card" style="border: 2px solid var(--secondary);">
-            <h2 id="t-buysell-heading" style="color: var(--secondary);">🛒 ग्रामीण बाय-सेल (Buy & Sell) मार्केटप्लेस</h2>
+        <!-- 🛒 Buy & Sell Toggle Bar -->
+        <div class="toggle-bar toggle-bar-secondary" onclick="toggleSection('buySellFormBox', 'toggleIcon2')">
+            <span>🛒 ग्रामीण बाय-सेल मार्केटप्लेस (+ Add Ad)</span>
+            <span id="toggleIcon2">▼</span>
+        </div>
+
+        <!-- बाय-सेल फॉर्म बॉक्स -->
+        <div class="collapsible-form-container" id="buySellFormBox" style="border-color: var(--secondary);">
+            <h2 id="t-buysell-heading" style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 10px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px;">🛒 ग्रामीण बाय-सेल (Buy & Sell) विज्ञापन</h2>
             <p style="font-size: 0.85rem; color: #555; margin-bottom: 12px;">पुराना सामान, ट्रैक्टर, पशु या फसल बेचने के लिए फोटो और टोकन फीस के साथ विज्ञापन डालें।</p>
             
             <div class="form-group">
@@ -238,7 +246,7 @@
             <!-- UPI Payment Token Box -->
             <div style="background: #fff8e1; border: 1px dashed var(--secondary); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
                 <p style="font-size: 0.85rem; font-weight: bold; color: #b71c1c; margin-bottom: 6px;">⚡ विज्ञापन शुल्क (Token Fee: ₹10):</p>
-                <p style="font-size: 0.8rem; color: #444; margin-bottom: 6px;">फर्जी विज्ञापनों से बचाने के लिए ₹10 टोकन फीस इस UPI ID पर भेजें: <strong>rajesh@ybl</strong> या नीचे दिए गए QR को स्कैन करें। फिर UTR/Transaction ID नीचे भरें।</p>
+                <p style="font-size: 0.8rem; color: #444; margin-bottom: 6px;">फर्जी विज्ञापनों से बचाने के लिए ₹10 टोकन फीस इस UPI ID पर भेजें: <strong>rajesh@ybl</strong>। फिर UTR/Transaction ID नीचे भरें।</p>
                 <div class="form-group" style="margin-bottom: 5px;">
                     <label style="font-size: 0.8rem;">UPI Transaction ID / UTR No:</label>
                     <input type="text" id="bsUtr" placeholder="UPI Ref / Transaction ID यहाँ लिखें" style="padding: 8px; font-size: 0.9rem;">
@@ -246,11 +254,12 @@
             </div>
 
             <div class="btn-box">
-                <button class="custom-btn btn-secondary" onclick="publishBuySellAd()">विज्ञापन लाइव करें (Submit Ad)</button>
+                <button class="custom-btn btn-secondary" onclick="publishBuySellAd()">सत्यापन के लिए भेजें (Submit Ad)</button>
             </div>
+        </div>
 
-            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
-            
+        <!-- उपलब्ध विज्ञापन सूची हमेशा नीचे दिखेगी -->
+        <div class="card" style="border: 1px solid #ddd;">
             <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 10px;">📋 उपलब्ध विज्ञापन (Marketplace Listings):</h3>
             <div id="buySellListContainer"></div>
         </div>
@@ -301,10 +310,18 @@
                 <div id="adminControls" style="display:none; margin-top: 15px; text-align: left;">
                     <p id="t-admin-success" style="color: green; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px;">✔ एडमिन एक्सेस मिल गया!</p>
 
-                    <h4 id="t-all-shops-title" style="font-size: 0.95rem; color: var(--primary); margin-bottom: 5px;">📋 पोर्टल की सभी दुकानें (डिलीट करने की पावर):</h4>
+                    <!-- 🔴 Pending Shops Approval Section -->
+                    <h4 style="font-size: 0.95rem; color: #b71c1c; margin-bottom: 5px;">⏳ सत्यापन के लिए पेंडिंग दुकानें (Pending Shops):</h4>
+                    <div id="pendingShopsList" style="margin-bottom: 15px; background: #fff; padding: 8px; border-radius: 6px;"></div>
+
+                    <!-- 🔴 Pending Ads Approval Section -->
+                    <h4 style="font-size: 0.95rem; color: #b71c1c; margin-bottom: 5px;">⏳ सत्यापन के लिए पेंडिंग विज्ञापन (Pending Ads):</h4>
+                    <div id="pendingAdsList" style="margin-bottom: 15px; background: #fff; padding: 8px; border-radius: 6px;"></div>
+
+                    <h4 id="t-all-shops-title" style="font-size: 0.95rem; color: var(--primary); margin-bottom: 5px;">📋 लाइव दुकानें (डिलिट करने की पावर):</h4>
                     <div id="allShopsList"></div>
 
-                    <h4 style="font-size: 0.95rem; color: var(--secondary); margin-top: 15px; margin-bottom: 5px;">🛒 बाय-सेल विज्ञापन सूची:</h4>
+                    <h4 style="font-size: 0.95rem; color: var(--secondary); margin-top: 15px; margin-bottom: 5px;">🛒 लाइव बाय-सेल विज्ञापन सूची:</h4>
                     <div id="adminBuySellList" style="max-height: 150px; overflow-y: auto; margin-bottom: 10px;"></div>
 
                     <h4 style="font-size: 0.95rem; color: var(--secondary); margin-top: 15px; margin-bottom: 5px;">📥 प्राप्त फीडबैक सूची:</h4>
@@ -350,7 +367,7 @@
                 fVillLabel: "गाँव का नाम:",
                 fCatLabel: "श्रेणी (Category चुनें):",
                 fPhoneLabel: "मोबाइल नंबर:",
-                fSubmitBtn: "सीधे पोर्टल पर लाइव करें",
+                fSubmitBtn: "सत्यापन के लिए एडमिन को भेजें",
                 schemeHeading: "📜 हरियाणा सरकार की मुख्य योजनाएं (जिलावार लाइव पोर्टल)",
                 schemeLabel: "अपने जिले के अनुसार योजनाओं का पोर्टल देखें:",
                 feedbackHeading: "💬 सुझाव एवं फीडबैक (Feedback)",
@@ -359,7 +376,7 @@
                 adminPassPlaceholder: "पासवर्ड दर्ज करें",
                 adminLoginBtn: "लॉगिन करें",
                 adminSuccess: "✔ एडमिन एक्सेस मिल गया!",
-                allShopsTitle: "📋 पोर्टल की सभी दुकानें (डिलीट करने की पावर):",
+                allShopsTitle: "📋 लाइव दुकानें (डिलिट करने की पावर):",
                 footer: "&copy; 2026 हरियाणा ग्रामीण सेवा पोर्टल | संस्थापक: राजेश यादव (माल्कोश)"
             },
             en: {
@@ -389,7 +406,7 @@
                 fVillLabel: "Village Name:",
                 fCatLabel: "Select Category:",
                 fPhoneLabel: "Mobile Number:",
-                fSubmitBtn: "Publish Live on Portal",
+                fSubmitBtn: "Send to Admin for Verification",
                 schemeHeading: "📜 Haryana Govt Major Schemes (District-wise Live)",
                 schemeLabel: "View scheme portals according to your district:",
                 feedbackHeading: "💬 Suggestions & Feedback",
@@ -398,7 +415,7 @@
                 adminPassPlaceholder: "Enter password",
                 adminLoginBtn: "Login",
                 adminSuccess: "✔ Admin access granted!",
-                allShopsTitle: "📋 All Portal Shops (Delete Power):",
+                allShopsTitle: "📋 Live Shops (Delete Power):",
                 footer: "&copy; 2026 Haryana Rural Service Portal | Founder: Rajesh Yadav (Malkosh)"
             }
         };
@@ -553,9 +570,9 @@
             });
         }
 
-        function toggleAddShopForm() {
-            const formBox = document.getElementById('addShopFormBox');
-            const icon = document.getElementById('toggleIcon');
+        function toggleSection(formId, iconId) {
+            const formBox = document.getElementById(formId);
+            const icon = document.getElementById(iconId);
             if (formBox.style.display === 'block') {
                 formBox.style.display = 'none';
                 icon.textContent = '▼';
@@ -676,52 +693,34 @@
                 return;
             }
 
-            for (let distKey in villageData) {
-                if (distKey !== district) {
-                    let exactMatch = villageData[distKey].some(v => v.toLowerCase().includes(village.toLowerCase()));
-                    if (exactMatch) {
-                        let distNames = {rohtak: "रोहतक", bhiwani: "भिवानी", hisar: "हिसार", charkhi_dadri: "चरखी दादरी"};
-                        alert(`❌ [System Error]: "${village}" गाँव '${distNames[distKey]}' जिले के अंतर्गत आता है, इसे सही जिले के साथ चुनें।`);
-                        return;
-                    }
-                }
-            }
-
             if(photoInput.files && photoInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    saveShopData(name, district, village, category, phone, lat, lng, e.target.result);
+                    saveToPendingQueue(name, district, village, category, phone, lat, lng, e.target.result);
                 };
                 reader.readAsDataURL(photoInput.files[0]);
             } else {
-                saveShopData(name, district, village, category, phone, lat, lng, "");
+                saveToPendingQueue(name, district, village, category, phone, lat, lng, "");
             }
         }
 
-        function saveShopData(name, district, village, category, phone, lat, lng, photo) {
+        function saveToPendingQueue(name, district, village, category, phone, lat, lng, photo) {
             let newShop = { id: Date.now(), name, district, village, category, phone, lat, lng, photo };
-            let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
-            approvedShops.push(newShop);
-            localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            pendingShops.push(newShop);
+            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
 
-            let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + district) || '[]');
-            if(!customVillages.includes(village)) {
-                customVillages.push(village);
-                localStorage.setItem('addedVillages_' + district, JSON.stringify(customVillages));
-            }
-
-            alert(currentLang === 'hi' ? 'दुकान सफलतापूर्वक रजिस्टर होकर पोर्टल पर लाइव हो गई है!' : 'Shop registered and published live on portal successfully!');
+            alert(currentLang === 'hi' ? 'दुकान का रजिस्ट्रेशन फॉर्म एडमिन के पास सत्यापन (Verification) के लिए भेज दिया गया है। एडमिन द्वारा duyệt (Approve) होने के बाद यह दिखेगा।' : 'Shop registration sent to admin for verification!');
+            
             document.getElementById('regShopName').value = '';
             document.getElementById('regVillageInput').value = '';
             document.getElementById('regPhone').value = '';
             document.getElementById('regPhoto').value = '';
             document.getElementById('locationStatus').textContent = '';
             document.getElementById('addShopFormBox').style.display = 'none';
-            document.getElementById('toggleIcon').textContent = '▼';
-            updateRegVillageDropdown();
+            document.getElementById('toggleIcon1').textContent = '▼';
         }
 
-        // 🛒 Buy & Sell Functions
         function publishBuySellAd() {
             const title = document.getElementById('bsItemName').value.trim();
             const location = document.getElementById('bsLocation').value.trim();
@@ -738,34 +737,36 @@
             if(photoInput.files && photoInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    saveBuySellAd(title, location, price, phone, utr, e.target.result);
+                    saveToPendingAds(title, location, price, phone, utr, e.target.result);
                 };
                 reader.readAsDataURL(photoInput.files[0]);
             } else {
-                saveBuySellAd(title, location, price, phone, utr, "");
+                saveToPendingAds(title, location, price, phone, utr, "");
             }
         }
 
-        function saveBuySellAd(title, location, price, phone, utr, photo) {
-            let ads = JSON.parse(localStorage.getItem('buySellAds') || '[]');
-            ads.push({ id: Date.now(), title, location, price, phone, utr, photo });
-            localStorage.setItem('buySellAds', JSON.stringify(ads));
+        function saveToPendingAds(title, location, price, phone, utr, photo) {
+            let pendingAds = JSON.parse(localStorage.getItem('pendingAds') || '[]');
+            pendingAds.push({ id: Date.now(), title, location, price, phone, utr, photo });
+            localStorage.setItem('pendingAds', JSON.stringify(pendingAds));
 
-            alert(currentLang === 'hi' ? 'आपका विज्ञापन सत्यापन के लिए जमा हो गया है! एडमिन द्वारा चेक होने के बाद यह लाइव दिखेगा।' : 'Ad submitted for verification!');
+            alert(currentLang === 'hi' ? 'आपका विज्ञापन सत्यापन के लिए एडमिन के पास भेज दिया गया है।' : 'Ad submitted for admin verification!');
+            
             document.getElementById('bsItemName').value = '';
             document.getElementById('bsLocation').value = '';
             document.getElementById('bsPrice').value = '';
             document.getElementById('bsPhone').value = '';
             document.getElementById('bsUtr').value = '';
             document.getElementById('bsPhoto').value = '';
-            loadBuySellAds();
+            document.getElementById('buySellFormBox').style.display = 'none';
+            document.getElementById('toggleIcon2').textContent = '▼';
         }
 
         function loadBuySellAds() {
             let ads = JSON.parse(localStorage.getItem('buySellAds') || '[]');
             let container = document.getElementById('buySellListContainer');
             if(ads.length === 0) {
-                container.innerHTML = `<p style="font-size: 0.85rem; color: #666;">अभी कोई विज्ञापन उपलब्ध नहीं है।</p>`;
+                container.innerHTML = `<p style="font-size: 0.85rem; color: #666;">अभी कोई सत्यापित विज्ञापन उपलब्ध नहीं है।</p>`;
                 return;
             }
             let html = '';
@@ -795,7 +796,7 @@
             let feedbacks = JSON.parse(localStorage.getItem('portalFeedbacks') || '[]');
             feedbacks.push({ name, msg, date: new Date().toLocaleDateString() });
             localStorage.setItem('portalFeedbacks', JSON.stringify(feedbacks));
-            alert(currentLang === 'hi' ? 'आपका सुझाव सफलतापूर्वक प्राप्त हो गया है। धन्यवाद!' : 'Feedback submitted successfully.');
+            alert(currentLang === 'hi' ? 'आपका सुझाव सफलतापूर्वक प्राप्त हो गया है। धन्यवाद।' : 'Feedback submitted successfully.');
             document.getElementById('fbName').value = '';
             document.getElementById('fbMsg').value = '';
         }
@@ -809,6 +810,8 @@
             const pass = document.getElementById('adminPass').value;
             if(pass === 'admin123') {
                 document.getElementById('adminControls').style.display = 'block';
+                loadPendingShops();
+                loadPendingAds();
                 loadAllShops();
                 loadAdminBuySellAds();
                 loadFeedbacks();
@@ -818,6 +821,110 @@
             }
         }
 
+        // 🔄 Admin Approval Functions
+        function loadPendingShops() {
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            let container = document.getElementById('pendingShopsList');
+            if(pendingShops.length === 0) {
+                container.innerHTML = '<p style="font-size:0.8rem; color:#777;">कोई नई दुकान पेंडिंग नहीं है।</p>';
+                return;
+            }
+            let html = '';
+            pendingShops.forEach((s, idx) => {
+                html += `
+                    <div style="background: #f1f8e9; padding: 6px; margin-bottom: 6px; font-size: 0.8rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${s.name}</strong> (${s.village}, ${s.district})<br>
+                            <span style="color:#555;">श्रेणी: ${s.category} | फोन: ${s.phone}</span>
+                        </div>
+                        <div>
+                            <button class="btn-success" onclick="approveShop(${idx})">Approve</button>
+                            <button class="btn-danger" onclick="rejectPendingShop(${idx})">Reject</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function approveShop(index) {
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
+            
+            let shopToApprove = pendingShops[index];
+            approvedShops.push(shopToApprove);
+            pendingShops.splice(index, 1);
+
+            localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
+            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+
+            let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + shopToApprove.district) || '[]');
+            if(!customVillages.includes(shopToApprove.village)) {
+                customVillages.push(shopToApprove.village);
+                localStorage.setItem('addedVillages_' + shopToApprove.district, JSON.stringify(customVillages));
+            }
+
+            alert("दुकान अप्रूव हो गई है और अब जनता को दिखने लगी है!");
+            loadPendingShops();
+            loadAllShops();
+        }
+
+        function rejectPendingShop(index) {
+            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+            pendingShops.splice(index, 1);
+            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+            loadPendingShops();
+        }
+
+        function loadPendingAds() {
+            let pendingAds = JSON.parse(localStorage.getItem('pendingAds') || '[]');
+            let container = document.getElementById('pendingAdsList');
+            if(pendingAds.length === 0) {
+                container.innerHTML = '<p style="font-size:0.8rem; color:#777;">कोई नया विज्ञापन पेंडिंग नहीं है।</p>';
+                return;
+            }
+            let html = '';
+            pendingAds.forEach((ad, idx) => {
+                html += `
+                    <div style="background: #fff8e1; padding: 6px; margin-bottom: 6px; font-size: 0.8rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${ad.title}</strong> - ₹${ad.price}<br>
+                            <span style="color:#555;">स्थान: ${ad.location} | UTR: ${ad.utr}</span>
+                        </div>
+                        <div>
+                            <button class="btn-success" onclick="approveAd(${idx})">Approve</button>
+                            <button class="btn-danger" onclick="rejectPendingAd(${idx})">Reject</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function approveAd(index) {
+            let pendingAds = JSON.parse(localStorage.getItem('pendingAds') || '[]');
+            let ads = JSON.parse(localStorage.getItem('buySellAds') || '[]');
+            
+            let adToApprove = pendingAds[index];
+            ads.push(adToApprove);
+            pendingAds.splice(index, 1);
+
+            localStorage.setItem('buySellAds', JSON.stringify(ads));
+            localStorage.setItem('pendingAds', JSON.stringify(pendingAds));
+
+            alert("विज्ञापन अप्रूव हो गया है!");
+            loadPendingAds();
+            loadAdminBuySellAds();
+            loadBuySellAds();
+        }
+
+        function rejectPendingAd(index) {
+            let pendingAds = JSON.parse(localStorage.getItem('pendingAds') || '[]');
+            pendingAds.splice(index, 1);
+            localStorage.setItem('pendingAds', JSON.stringify(pendingAds));
+            loadPendingAds();
+        }
+
         function loadAllShops() {
             let defaultHidden = JSON.parse(localStorage.getItem('hiddenDefaultShops') || '[]');
             let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
@@ -825,12 +932,12 @@
             let html = '';
 
             if(!defaultHidden.includes("default_shyam")) {
-                html += `<div style="background: #fff; padding: 6px; margin-bottom: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;"><span>श्री श्याम जनरल स्टोर</span><button class="btn-danger" onclick="deleteDefaultShop()">डिलिट</button></div>`;
+                html += `<div style="background: #fff; padding: 6px; margin-bottom: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;"><span>श्री श्याम जनरल स्टोर (माल्कोश)</span><button class="btn-danger" onclick="deleteDefaultShop()">डिलिट</button></div>`;
             }
             approvedShops.forEach((s, index) => {
                 html += `<div style="background: #fff; padding: 6px; margin-bottom: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;"><span>${s.name} (${s.village})</span><button class="btn-danger" onclick="deleteApprovedShop(${index})">डिलिट</button></div>`;
             });
-            listDiv.innerHTML = html || 'कोई दुकान नहीं';
+            listDiv.innerHTML = html || 'कोई लाइव दुकान नहीं';
         }
 
         function loadAdminBuySellAds() {
