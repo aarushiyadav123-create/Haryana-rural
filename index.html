@@ -19,8 +19,6 @@
       min-height: 100vh;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    /* टॉप फाउंडर बार और एडमिन बटन */
     .founder-bar {
       background: #1e3d2f;
       color: #ffeb3b;
@@ -40,10 +38,7 @@
       font-size: 11px;
       font-weight: bold;
       cursor: pointer;
-      text-decoration: none;
     }
-
-    /* मुख्य हरा बैनर */
     .hero-banner {
       background: #1b5e20;
       color: white;
@@ -66,8 +61,6 @@
       border-radius: 20px;
       font-size: 11px;
     }
-
-    /* मौसम विजेट */
     .weather-box {
       background: #00838f;
       color: white;
@@ -85,8 +78,6 @@
       font-size: 20px;
       font-weight: bold;
     }
-
-    /* न्यूज और मंडी बार */
     .ticker-box {
       background: #fff8e1;
       border: 1px solid #ffe082;
@@ -105,8 +96,6 @@
       margin-bottom: 4px;
       font-weight: bold;
     }
-
-    /* गाँव खोजने वाला मुख्य सेक्शन */
     .search-section {
       background: #ffffff;
       border: 1px solid #e0e0e0;
@@ -185,20 +174,17 @@
 
 <div class="portal-container">
 
-  <!-- संस्थापक और एडमिन पैनल बटन -->
   <div class="founder-bar">
     <span>👩‍💻 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
     <button class="admin-btn" onclick="openAdmin()">⚙️ Admin</button>
   </div>
 
-  <!-- मुख्य बैनर -->
   <div class="hero-banner">
     <h1>हरियाणा ग्रामीण सेवा</h1>
     <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
     <div class="hero-badge">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
   </div>
 
-  <!-- मौसम विजेट -->
   <div class="weather-box">
     <div class="weather-left">
       <strong>🌤️ हरियाणा लाइव मौसम</strong><br>
@@ -207,7 +193,6 @@
     <div class="weather-right">27.9°C</div>
   </div>
 
-  <!-- न्यूज और मंडी भाव बार -->
   <div class="ticker-box">
     <span style="background: #f39c12; color: white; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: bold;">ताज़ा लोकल न्यूज़</span>
     <span style="font-size: 12px; margin-left: 5px;">जिम्मेदारी - totaltv.in • बिजली अपडेट जारी</span>
@@ -217,7 +202,6 @@
     </div>
   </div>
 
-  <!-- अपने गाँव की सेवाएँ खोजें (ओरिजिनल लेआउट) -->
   <div class="search-section">
     <div class="search-title">🔍 अपने गाँव की सेवाएँ खोजें</div>
     
@@ -240,7 +224,6 @@
     <button class="btn-green">दुकानें देखें</button>
   </div>
 
-  <!-- नीचे वाले एक्शन बटन -->
   <div style="padding: 0 12px 20px 12px;">
     <a href="#" class="btn-green">+ अपनी दुकान / सेवा Yहाँ रजिस्टर करें (+ Add Shop)</a>
     <a href="#" class="btn-orange">🛒 ग्रामीण बाय-सेल मार्केटप्लेस (+ Add Ad)</a>
@@ -250,7 +233,6 @@
 </div>
 
 <script>
-  // सभी गाँवों का डेटा जो जिला बदलने पर अपने आप आएगा
   const villagesData = {
     "चरखी दादरी": ["माल्कोश / Malkosh", "बाढड़ा", "झोझू कलां", "डडेरा", "गोपी"],
     "रोहतक": ["इ Ismaila-B", "मदीना", "कलानौर", "सांपला", "बोहर"],
