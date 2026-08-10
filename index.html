@@ -670,7 +670,6 @@
             }
         }
 
-        // 🛠️ फिक्स किया गया मुख्य रजिस्टर फंक्शन
         function registerService() {
             const name = document.getElementById('regShopName').value.trim();
             const district = document.getElementById('regDistrict').value;
@@ -692,7 +691,6 @@
                     saveToPendingQueue(name, district, village, category, phone, lat, lng, e.target.result);
                 };
                 reader.onerror = function() {
-                    // अगर फोटो लोड होने में दिक्कत आए, तो बिना फोटो के सेव कर देगा ताकि फॉर्म अटके नहीं
                     saveToPendingQueue(name, district, village, category, phone, lat, lng, "");
                 };
                 reader.readAsDataURL(photoInput.files[0]);
@@ -710,7 +708,6 @@
 
                 alert(currentLang === 'hi' ? 'सफलतापूर्वक! दुकान का रजिस्ट्रेशन एडमिन के पास सत्यापन के लिए भेज दिया गया है।' : 'Success! Shop registration sent to admin for verification!');
                 
-                // फॉर्म रीसेट करें
                 document.getElementById('regShopName').value = '';
                 document.getElementById('regVillageInput').value = '';
                 document.getElementById('regPhone').value = '';
@@ -848,27 +845,37 @@
             container.innerHTML = html;
         }
 
+        // 🛠️ पूरी तरह सुधारा गया Approve फंक्शन ताकि यह कभी फेल न हो
         function approveShop(index) {
-            let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
-            let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
-            
-            if(pendingShops[index]) {
-                let shopToApprove = pendingShops[index];
-                approvedShops.push(shopToApprove);
-                pendingShops.splice(index, 1);
+            try {
+                let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
+                let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
+                
+                if(pendingShops[index]) {
+                    let shopToApprove = pendingShops[index];
+                    
+                    // सुरक्षित रूप से अप्रूव्ड लिस्ट में जोड़ें
+                    approvedShops.push(shopToApprove);
+                    // पेंडिंग लिस्ट से हटाएं
+                    pendingShops.splice(index, 1);
 
-                localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
-                localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+                    localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
+                    localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
 
-                let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + shopToApprove.district) || '[]');
-                if(!customVillages.includes(shopToApprove.village)) {
-                    customVillages.push(shopToApprove.village);
-                    localStorage.setItem('addedVillages_' + shopToApprove.district, JSON.stringify(customVillages));
+                    let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + shopToApprove.district) || '[]');
+                    if(!customVillages.includes(shopToApprove.village)) {
+                        customVillages.push(shopToApprove.village);
+                        localStorage.setItem('addedVillages_' + shopToApprove.district, JSON.stringify(customVillages));
+                    }
+
+                    alert("दुकान सफलतापूर्वक अप्रूव और लाइव कर दी गई है!");
+                    loadPendingShops();
+                    loadAllShops();
+                } else {
+                    alert("एरर: दुकान का डेटा नहीं मिला।");
                 }
-
-                alert("दुकान सफलतापूर्वक अप्रूव हो गई है!");
-                loadPendingShops();
-                loadAllShops();
+            } catch (err) {
+                alert("अप्रूव करने में त्रुटि आई: " + err.message);
             }
         }
 
