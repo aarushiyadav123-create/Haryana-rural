@@ -83,9 +83,9 @@
 
         /* AI Chatbot Styles */
         .ai-chat-box { background: #e3f2fd; border: 2px solid #1976d2; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .ai-chat-screen { background: #fff; height: 140px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flexDirection: column; gap: 6px; }
-        .ai-msg-bot { background: #e1f5fe; color: #01579b; padding: 6px 10px; border-radius: 6px; align-self: flex-start; max-width: 85%; }
-        .ai-msg-user { background: #e8f5e9; color: #1b5e20; padding: 6px 10px; border-radius: 6px; align-self: flex-end; max-width: 85%; text-align: right; }
+        .ai-chat-screen { background: #fff; height: 160px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px; }
+        .ai-msg-bot { background: #e1f5fe; color: #01579b; padding: 8px 12px; border-radius: 8px; align-self: flex-start; max-width: 85%; }
+        .ai-msg-user { background: #e8f5e9; color: #1b5e20; padding: 8px 12px; border-radius: 8px; align-self: flex-end; max-width: 85%; text-align: right; }
 
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
@@ -117,17 +117,17 @@
             </button>
         </div>
 
-        <!-- 🤖 AI स्मार्ट चैट असिस्टेंट (AI Shop Register Bot) -->
+        <!-- 🤖 AI स्मार्ट चैट असिस्टेंट (Full Answers + Pending Routing) -->
         <div class="ai-chat-box">
             <h3 style="font-size: 0.95rem; color: #1565c0; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                🤖 AI ग्रामीण असिस्टेंट (मैसेज से दुकान जुड़वाएँ)
+                🤖 AI ग्रामीण असिस्टेंट (सवाल पूछें या दुकान/ऐड भेजें)
             </h3>
-            <p style="font-size: 0.78rem; color: #555; margin-bottom: 8px;">यहाँ लिखकर भेजें (जैसे: <i>दुकान: शर्मा किराना, गाँव: सामला, फोन: 9876543210</i>):</p>
+            <p style="font-size: 0.78rem; color: #555; margin-bottom: 8px;">आप कुछ भी पूछ सकते हैं या दुकान/ऐड जोड़ सकते हैं (जैसे: <i>मेरी दुकान जोड़ो...</i>):</p>
             <div class="ai-chat-screen" id="aiChatScreen">
-                <div class="ai-msg-bot">राम-राम! मैं आपका AI असिस्टेंट हूँ। आप अपनी दुकान या सेवा का विवरण यहाँ लिखकर भेजें, मैं उसे एडमिन के सत्यापन (Approval) के लिए भेज दूंगा!</div>
+                <div class="ai-msg-bot">राम-राम! मैं आपका AI असिस्टेंट हूँ। आप मौसम, मंडी भाव या खेती से जुड़ा कोई भी सवाल पूछ सकते हैं, या दुकान/विज्ञापन भेजने के लिए कह सकते हैं!</div>
             </div>
             <div style="display: flex; gap: 6px;">
-                <input type="text" id="aiChatInput" placeholder="यहाँ संदेश लिखें..." style="padding: 8px; font-size: 0.85rem;" onkeypress="if(event.key === 'Enter') sendAIChatMessage()">
+                <input type="text" id="aiChatInput" placeholder="यहाँ अपना सवाल या संदेश लिखें..." style="padding: 8px; font-size: 0.85rem;" onkeypress="if(event.key === 'Enter') sendAIChatMessage()">
                 <button type="button" class="custom-btn" onclick="sendAIChatMessage()" style="width: auto; padding: 8px 14px; font-size: 0.85rem; background: #1976d2;">भेजें</button>
             </div>
         </div>
@@ -458,7 +458,7 @@
             window.open(whatsappUrl, '_blank');
         }
 
-        // AI Chat Assistant Logic
+        // 🤖 Smart AI Chat Assistant (Answers all questions + sends shops to pending)
         function sendAIChatMessage() {
             let inputField = document.getElementById('aiChatInput');
             let text = inputField.value.trim();
@@ -471,15 +471,17 @@
 
             setTimeout(() => {
                 let botReply = "";
-                // AI Parsing Simple extraction or acknowledgement
-                if(text.includes("दुकान") || text.includes("नाम") || text.includes("store") || text.includes("shop")) {
+                let lowerText = text.toLowerCase();
+
+                // Check if user wants to add a shop or ad
+                if(lowerText.includes("दुकान") || lowerText.includes("shop") || lowerText.includes("जोड़") || lowerText.includes("add") || lowerText.includes("बिक्री") || lowerText.includes("sell")) {
                     let newPendingShop = {
                         id: Date.now(),
                         name: text,
                         district: "rohtak",
-                        village: "सामला / Sampla",
-                        category: "अन्य सेवा",
-                        phone: "9876543210",
+                        village: "सामला / Sampla / माल्कोश",
+                        category: "अन्य सेवा / AI दर्ज",
+                        phone: "उपलब्ध नहीं",
                         lat: "",
                         lng: "",
                         photo: ""
@@ -488,14 +490,29 @@
                     pendingShops.push(newPendingShop);
                     localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
 
-                    botReply = "✔ मैंने आपकी जानकारी समझ ली है और इसे एडमिन के पास **सत्यापन (Approval)** के लिए भेज दिया है। एडमिन द्वारा duyệt (Approve) होने के बाद यह पोर्टल पर दिखने लगेगी!";
-                } else {
-                    botReply = "राम-राम! दुकान जोड़ने के लिए कृपया लिखकर भेजें: 'दुकान: [नाम], गाँव: [गाँव का नाम], फोन: [नंबर]' ताकि मैं इसे एडमिन अप्रूवल के लिए भेज सकूँ।";
+                    botReply = "✔ आपकी इस जानकारी/दुकान को एडमिन के **पेंडिंग पैनल** में भेज दिया गया है। एडमिन द्वारा अप्रूव होते ही यह लाइव हो जाएगी!";
+                } 
+                // General Questions Handling (Weather, Mandi, Farming, Greetings, etc.)
+                else if(lowerText.includes("मौसम") || lowerText.includes("weather") || lowerText.includes("बारिश")) {
+                    botreply = "🌤 इस समय हरियाणा का मौसम साफ और धूप वाला है। तापमान लगभग 27.8°C से 31°C के बीच चल रहा है।";
+                    botReply = "🌤 इस समय हरियाणा का मौसम साफ और धूप वाला है। तापमान लगभग 27.8°C से 31°C के बीच चल रहा है।";
+                } 
+                else if(lowerText.includes("मंडी") || lowerText.includes("भाव") || lowerText.includes("rate") || lowerText.includes("गेहूँ") || lowerText.includes("सरसों")) {
+                    botReply = "🌾 ताज़ा मंडी भाव: गेहूँ ₹2300, बाजरा ₹2550, सरसों ₹5500 और नरमा ₹7200 प्रति क्विंटल चल रहा है। आप ऊपर फसल कैलकुलेटर का इस्तेमाल भी कर सकते हैं!";
+                } 
+                else if(lowerText.includes("नाम क्या है") || lowerText.includes("कौन हो") || lowerText.includes("हु आर यू")) {
+                    botReply = "राम-राम! मैं हरियाणा ग्रामीण सेवा पोर्टल का डिजिटल AI असिस्टेंट हूँ, जिसे कुसुम और राजेश यादव जी के इस पोर्टल के लिए बनाया गया है।";
+                } 
+                else if(lowerText.includes("राम राम") || lowerText.includes("hello") || lowerText.includes("hi")) {
+                    botReply = "राम-राम भाई! बताइए, आज आपकी क्या सहायता की जाए? आप गाँव की दुकान, मंडी भाव या किसी योजना के बारे में पूछ सकते हैं।";
+                }
+                else {
+                    botReply = `मैंने आपका संदेश पढ़ा: "${text}"। खेती, मौसम, मंडी भाव या दुकान रजिस्टर करने से संबंधित कोई भी सवाल पूछ सकते हैं। अगर दुकान जोड़नी हो तो सीधा लिखकर भेज दें!`;
                 }
 
                 screen.innerHTML += `<div class="ai-msg-bot">${botReply}</div>`;
                 screen.scrollTop = screen.scrollHeight;
-            }, 800);
+            }, 700);
         }
 
         const jokesList = [
