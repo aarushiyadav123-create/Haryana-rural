@@ -5,315 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>हरियाणा ग्रामीण सेवा</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f4f4f4; 
-            margin: 0; 
-            padding: 0; 
-            color: #333;
-        }
-        .founder-bar {
-            background-color: #1b5e20;
-            color: #ffeb3b;
-            padding: 8px 15px;
-            font-size: 0.85rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .founder-bar button {
-            background: #ffeb3b;
-            color: #1b5e20;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        header { 
-            background-color: #2e7d32; 
-            color: white; 
-            padding: 15px; 
-            text-align: center; 
-            position: relative;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 1.6rem;
-        }
-        header p {
-            margin: 4px 0 0 0;
-            font-size: 0.85rem;
-            color: #e8f5e9;
-        }
-        /* प्लस बटन स्टाइल */
+        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        header { background-color: #2e7d32; color: white; padding: 15px; text-align: center; position: relative; }
+        header h1 { margin: 0; font-size: 1.5rem; }
+        
+        /* प्लस बटन */
         .menu-btn {
-            position: absolute; right: 15px; top: 12px;
+            position: absolute; right: 15px; top: 15px;
             background: #ffeb3b; color: #2e7d32; border: none;
-            width: 38px; height: 38px; border-radius: 50%;
+            width: 40px; height: 40px; border-radius: 50%;
             font-size: 24px; font-weight: bold; cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        /* ड्रॉपडाउन मेनू */
+
+        /* ड्रॉपडाउन (जो "+" के अंदर है) */
         .dropdown {
             display: none; background: white; border: 1px solid #ddd;
-            position: absolute; right: 15px; top: 60px;
-            width: 210px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 100; text-align: left;
+            position: absolute; right: 10px; top: 60px;
+            width: 200px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 100;
         }
         .dropdown a {
-            display: block; padding: 10px 15px; border-bottom: 1px solid #eee;
-            text-decoration: none; color: #2e7d32; font-weight: bold; font-size: 0.9rem;
+            display: block; padding: 12px; border-bottom: 1px solid #eee;
+            text-decoration: none; color: #333; font-weight: bold;
         }
-        .dropdown a:last-child { border-bottom: none; }
-        .dropdown a:active { background: #e8f5e9; }
 
-        .container { 
-            padding: 15px; 
-            max-width: 600px;
-            margin: auto;
-        }
-        .weather-card {
-            background: linear-gradient(135deg, #00838b, #006064);
-            color: white;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-        }
-        .search-card {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid #ddd;
-            margin-bottom: 15px;
-        }
-        .search-card h3 {
-            margin-top: 0;
-            color: #2e7d32;
-            font-size: 1.05rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 8px;
-        }
-        .form-group {
-            margin-bottom: 12px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1rem;
-            background: #fff;
-        }
-        .submit-btn {
-            background: #1b5e20;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        #dynamic-display {
-            background: white;
-            border: 2px solid #2e7d32;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: none;
-        }
-        .close-btn {
-            background: #d32f2f;
-            color: white;
-            border: none;
-            padding: 3px 8px;
-            border-radius: 4px;
-            float: right;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-        .admin-area {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .admin-btn {
-            background: #2e7d32;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: bold;
-            width: 100%;
-        }
+        .container { padding: 20px; }
+        .box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        .btn-main { background: #1b5e20; color: white; width: 100%; padding: 12px; border: none; border-radius: 5px; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
-<body onload="playRamRamVoice()">
+<body>
 
-    <div class="founder-bar">
-        <span>👩‍🌾 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-        <button onclick="alert('English translation coming soon!')">English</button>
+<header>
+    <h1>हरियाणा ग्रामीण सेवा</h1>
+    <button class="menu-btn" onclick="toggleMenu()">+</button>
+</header>
+
+<!-- प्लस बटन के अंदर के ऑप्शन -->
+<div id="menu" class="dropdown">
+    <a href="#" onclick="actionAlert('Add Shop')">➕ Add Shop</a>
+    <a href="#" onclick="actionAlert('Govt Schemes')">📜 Govt Schemes</a>
+    <a href="#" onclick="actionAlert('Nearby Search')">📍 My Nearby</a>
+    <a href="#" onclick="actionAlert('Entertainment')">🎭 मनोरंजन</a>
+    <a href="#" onclick="adminLogin()">🔒 Admin Login</a>
+</div>
+
+<div class="container">
+    <div class="box">
+        <label>जिला चुनें:</label>
+        <select id="district" onchange="loadVillages()">
+            <option value="">-- जिला --</option>
+            <option value="mahendragarh">महेंद्रगढ़</option>
+            <option value="rewari">रेवाड़ी</option>
+        </select>
+
+        <label>गाँव चुनें:</label>
+        <select id="village">
+            <option value="">-- पहले जिला चुनें --</option>
+        </select>
+        
+        <button class="btn-main" onclick="alert('दुकानें खुल रही हैं...')">दुकानें देखें</button>
     </div>
+</div>
 
-    <header>
-        <h1>हरियाणा ग्रामीण सेवा</h1>
-        <p>गाँव की हर दुकान, हर सेवा - आपके मोबाइल पर</p>
-        <button class="menu-btn" onclick="toggleMenu()">+</button>
-    </header>
+<script>
+    function toggleMenu() {
+        let m = document.getElementById('menu');
+        m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+    }
 
-    <!-- प्लस (+) बटन का मेनू -->
-    <div id="menu" class="dropdown">
-        <a href="#" onclick="showFeature('add_shop')">➕ Add Shop (दुकान जोड़ें)</a>
-        <a href="#" onclick="showFeature('schemes')">📜 सरकारी योजनाएँ (Govt Schemes)</a>
-        <a href="#" onclick="showFeature('nearby')">📍 My Nearby Search</a>
-        <a href="#" onclick="showFeature('entertainment')">🎭 मनोरंजन & जोक्स</a>
-        <a href="#" onclick="adminLogin()">🔒 Admin Panel Login</a>
-    </div>
+    function actionAlert(feature) {
+        toggleMenu(); // मेनू बंद कर दे
+        alert(feature + " जल्द ही अपडेट होगा!");
+    }
 
-    <div class="container">
+    function adminLogin() {
+        toggleMenu();
+        let pass = prompt("Admin Password:");
+        if (pass === "sub123") alert("Welcome Admin!");
+    }
 
-        <div class="weather-card">
-            <div>
-                <strong>⛅ हरियाणा लाइव मौसम</strong>
-                <div style="font-size: 0.75rem; opacity: 0.9;">साफ एवं धूप | 33.2°C</div>
-            </div>
-            <div style="font-size: 1.2rem; font-weight: bold;">1.4 km/h</div>
-        </div>
-
-        <div id="dynamic-display">
-            <button class="close-btn" onclick="closeBox()">बंद करें ✕</button>
-            <div id="display-content"></div>
-        </div>
-
-        <div class="search-card">
-            <h3>🔍 अपने गाँव की सेवाएँ खोजें</h3>
-            
-            <div class="form-group">
-                <label>जिला चुनें:</label>
-                <select id="district-select" onchange="loadVillages()">
-                    <option value="">-- जिला चुनें --</option>
-                    <option value="mahendragarh">महेंद्रगढ़ (माल्कोश)</option>
-                    <option value="rewari">रेवाड़ी</option>
-                    <option value="gurugram">गुरुग्राम</option>
-                    <option value="jhajjar">झज्जर</option>
-                    <option value="rohtak">रोहतक</option>
-                    <option value="bhiwani">भिवानी</option>
-                    <option value="charkhi_dadri">चरखी दादरी</option>
-                    <option value="hisar">हिसार</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>गाँव चुनें:</label>
-                <select id="village-select">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-
-            <button class="submit-btn" onclick="searchServices()">दुकानें देखें</button>
-        </div>
-
-    </div>
-
-    <div class="admin-area" style="padding: 0 15px; max-width: 600px; margin: auto;">
-        <button class="admin-btn" onclick="adminLogin()">🔒 Admin & Shop Registration Panel</button>
-    </div>
-
-    <script>
-        function playRamRamVoice() {
-            if ('speechSynthesis' in window) {
-                let speech = new SpeechSynthesisUtterance("राम-राम भाइयो, हरियाणा ग्रामीण सेवा में आपका स्वागत है।");
-                speech.lang = 'hi-IN';
-                speech.rate = 0.9;
-                window.speechSynthesis.speak(speech);
-            }
-        }
-
-        function toggleMenu() {
-            let m = document.getElementById('menu');
-            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function showFeature(type) {
-            toggleMenu();
-            const box = document.getElementById('dynamic-display');
-            const content = document.getElementById('display-content');
-            box.style.display = 'block';
-
-            if (type === 'add_shop') {
-                content.innerHTML = `<h3>➕ Add Shop (दुकान रजिस्टर करें)</h3><p>यहाँ दुकानदार अपनी दुकान का नाम, कैटेगरी, लाइव लोकेशन और फोटो अपलोड करके जोड़ सकते हैं।</p>`;
-            } else if (type === 'schemes') {
-                content.innerHTML = `<h3>📜 सरकारी योजनाएँ (Govt Schemes)</h3><p>हरियाणा सरकार की ताज़ा ग्रामीण योजनाएं, पशुधन बीमा, पेंशन और कृषि सब्सिडी की जानकारी।</p>`;
-            } else if (type === 'nearby') {
-                content.innerHTML = `<h3>📍 My Nearby Search</h3><p>आपके आस-पास की खुली हुई दुकानें और सेवाएँ खोजी जा रही हैं...</p>`;
-            } else if (type === 'entertainment') {
-                content.innerHTML = `<h3>🎭 मनोरंजन & जोक्स</h3><p><strong>ताऊ का जोक:</strong> भाई, फोन में सब कुछ आ लिया, बस घर बैठे चाय बनाने वाली मशीन आनी बाकी है!</p>`;
-            }
-        }
-
-        function closeBox() {
-            document.getElementById('dynamic-display').style.display = 'none';
-        }
-
-        function loadVillages() {
-            let dist = document.getElementById('district-select').value;
-            let villageSelect = document.getElementById('village-select');
-            villageSelect.innerHTML = '<option value="">--गाँव चुनें--</option>';
-            
-            if (dist === 'mahendragarh') {
-                villageSelect.innerHTML += '<option value="malkosh">माल्कोश</option><option value="kanina">कनीना</option><option value="narnaul">नारनौल</option>';
-            } else if (dist === 'rewari') {
-                villageSelect.innerHTML += '<option value="kosli">कोसली</option><option value="rewari_rural">रेवाड़ी ग्रामीण</option><option value="bawal">बावल</option>';
-            } else if (dist === 'gurugram') {
-                villageSelect.innerHTML += '<option value="pataudi">पटौदी</option><option value="farrukhnagar">फर्रुखनगर</option><option value="sohna">सोहना</option>';
-            } else if (dist === 'jhajjar') {
-                villageSelect.innerHTML += '<option value="ismaila">इस्माइला</option><option value="bahadurgarh">बहादुरगढ़</option><option value="beri">बेरी</option>';
-            } else if (dist === 'rohtak') {
-                villageSelect.innerHTML += '<option value="kiloi">किलोई</option><option value="kalanaur">कलानौर</option><option value="meham">महम</option><option value="lakhan_majra">लाखन माजरा</option><option value="sanghi">सांघी</option>';
-            } else if (dist === 'bhiwani') {
-                villageSelect.innerHTML += '<option value="siwani">सिवानी</option><option value="loharu">लोहारू</option><option value="tosham">तोशाम</option><option value="bhiwani_rural">भिवानी ग्रामीण</option><option value="bawani_khera">बवानी खेड़ा</option>';
-            } else if (dist === 'charkhi_dadri') {
-                villageSelect.innerHTML += '<option value="dadri_city">दादरी शहर</option><option value="bodal">bodal</option><option value="jhojhu_kalan">झोझू कलां</option>';
-            } else if (dist === 'hisar') {
-                villageSelect.innerHTML += '<option value="hansi">हांसी</option><option value="adampur">आदमपुर</option><option value="barwala">बरवाला</option>';
-            }
-        }
-
-        function searchServices() {
-            let dist = document.getElementById('district-select').value;
-            let vill = document.getElementById('village-select').value;
-            if(!dist || !vill) {
-                alert("कृपया पहले जिला और गाँव दोनों चुनें!");
-            } else {
-                alert("चयनित क्षेत्र की वेरिफाइड दुकानें लोड हो रही हैं...");
-            }
-        }
-
-        function adminLogin() {
-            if(document.getElementById('menu').style.display === 'block') toggleMenu();
-            let pass = prompt("कृपया एडमिन पासवर्ड दर्ज करें:");
-            if (pass === "sub123") {
-                alert("सफलतापूर्वक एडमिन पैनल खुल गया है!");
-            } else if (pass !== null) {
-                alert("गलत पासवर्ड!");
-            }
-        }
-    </script>
+    function loadVillages() {
+        // गाँव लोड करने का कोड
+    }
+</script>
 
 </body>
 </html>
