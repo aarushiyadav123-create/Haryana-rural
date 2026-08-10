@@ -47,8 +47,8 @@
         .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); }
-        .btn-danger { background: #d32f2f; color: white; padding: 5px 10px; font-size: 0.75rem; border-radius: 4px; border: none; cursor: pointer; }
-        .btn-success { background: #2e7d32; color: white; padding: 5px 10px; font-size: 0.75rem; border-radius: 4px; border: none; cursor: pointer; margin-right: 4px; }
+        .btn-danger { background: #d32f2f; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
+        .btn-success { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; margin-right: 6px; }
         .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
         .map-btn { background: #00838f; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; margin-top: 4px; }
 
@@ -465,8 +465,9 @@
             updateDistrictSchemes();
         }
 
+        // रोहतक की लिस्ट में 'सामला / Sampla' जोड़ दिया गया है
         const villageData = {
-            rohtak: ["इस्मला / Ismaila", "कलानौर / Kalanaur", "मदीना / Madina", "बहू अकबरपुर / Bhalu Akbarpur", "संघान / Sanghan", "रिटौली / Ritolli", "सुन्दराणा / Sundrana", "भैंसरवाल कलाँ / Bhainswar Kalan", "खरावड़ / Kharawar", "आनंदपुर / Anandpur", "टिकरी / Tikri", "गरनावठी / Garnawathi", "महेहम / Meham"],
+            rohtak: ["सामला / Sampla", "इस्मला / Ismaila", "कलानौर / Kalanaur", "मदीना / Madina", "बहू अकबरपुर / Bhalu Akbarpur", "संघान / Sanghan", "रिटौली / Ritolli", "सुन्दराणा / Sundrana", "भैंसरवाल कलाँ / Bhainswar Kalan", "खरावड़ / Kharawar", "आनंदपुर / Anandpur", "टिकरी / Tikri", "गरनावठी / Garnawathi", "महेहम / Meham"],
             bhiwani: ["लोहारू / Loharu", "बाढड़ा / Badhra", "सिवानी / Siwani", "दिनोद / Dinod", "बवानी खेड़ा / Bawani Khera", "तोशाम / Tosham", "किरावड़ / Kirawad", "बिमला / Bimala", "बामला / Bamla", "खरक कलाँ / Kharak Kalan", "बहल / Behal", "सिंगाणी / Singani", "सान्गा / Sanga", "झुप्पा / Jhuppa"],
             hisar: ["हाँसी / Hansi", "बरवाला / Barwala", "नारनौंद / Narnaund", "उकलाना / Uklana", "आदमपुर / Adampur", "अग्रोहा / Agroha", "सिसाय / Sisai", "राया / Raya", "ढंढूर / Dhandhoor", "किरथान / Kirthan", "मसूदपुर / Masoodpur", "डानी गोपाल / Dani Gopal", "मित्ताथल / Mittathal"],
             charkhi_dadri: ["माल्कोश / Malkosh", "बाढड़ा / Badhra", "झोझू कलां / Jhojhu Kalan", "बोध कलां / Bodh Kalan", "डूडवा / Dudwa", "चरखी दादरी शहर / Charkhi Dadri City", "पैंघुवा / Panghuwa", "मानकावास / Mankawas", "कैलियाणा / Kailyana", "मोड़ी / Modi", "गोपी / Gopi", "पिचौपा कलाँ / Pichoupa Kalan", "अचिजपुरा / Achijpura", "किरावड़ / Kirawad"]
@@ -511,7 +512,7 @@
                     document.getElementById('autoNewsTicker').innerHTML = newsList.join(" &nbsp;&bull;&nbsp; ");
                 }
             } catch (error) {
-                document.getElementById('autoNewsTicker').innerHTML = currentLang === 'hi' ? "माल्कोश व आसपास के गाँवों में विकास कार्य जारी | हरियाणा ग्रामीण सेवा पोर्टल निरंतर अपडेट है।" : "Development work continues in Malkosh and surrounding villages | Portal is fully updated.";
+                document.getElementById('autoNewsTicker').innerHTML = currentLang === 'hi' ? "माल्कोश व सामला के आसपास गाँवों में विकास कार्य जारी | हरियाणा ग्रामीण सेवा पोर्टल निरंतर अपडेट है।" : "Development work continues in Malkosh, Sampla and surrounding villages.";
             }
         }
 
@@ -710,7 +711,7 @@
             pendingShops.push(newShop);
             localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
 
-            alert(currentLang === 'hi' ? 'दुकान का रजिस्ट्रेशन फॉर्म एडमिन के पास सत्यापन (Verification) के लिए भेज दिया गया है। एडमिन द्वारा duyệt (Approve) होने के बाद यह दिखेगा।' : 'Shop registration sent to admin for verification!');
+            alert(currentLang === 'hi' ? 'दुकान का रजिस्ट्रेशन फॉर्म एडमिन के पास सत्यापन के लिए भेज दिया गया है।' : 'Shop registration sent to admin for verification!');
             
             document.getElementById('regShopName').value = '';
             document.getElementById('regVillageInput').value = '';
@@ -821,7 +822,7 @@
             }
         }
 
-        // 🔄 Admin Approval Functions
+        // 🔄 सुधरे हुए एप्रूव और रिजेक्ट फंक्शन्स (अब तुरंत काम करेंगे)
         function loadPendingShops() {
             let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
             let container = document.getElementById('pendingShopsList');
@@ -832,14 +833,14 @@
             let html = '';
             pendingShops.forEach((s, idx) => {
                 html += `
-                    <div style="background: #f1f8e9; padding: 6px; margin-bottom: 6px; font-size: 0.8rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="background: #f1f8e9; padding: 8px; margin-bottom: 6px; font-size: 0.8rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <strong>${s.name}</strong> (${s.village}, ${s.district})<br>
                             <span style="color:#555;">श्रेणी: ${s.category} | फोन: ${s.phone}</span>
                         </div>
                         <div>
-                            <button class="btn-success" onclick="approveShop(${idx})">Approve</button>
-                            <button class="btn-danger" onclick="rejectPendingShop(${idx})">Reject</button>
+                            <button type="button" class="btn-success" onclick="approveShop(${idx})">Approve</button>
+                            <button type="button" class="btn-danger" onclick="rejectPendingShop(${idx})">Reject</button>
                         </div>
                     </div>
                 `;
@@ -851,22 +852,24 @@
             let pendingShops = JSON.parse(localStorage.getItem('pendingShops') || '[]');
             let approvedShops = JSON.parse(localStorage.getItem('approvedShops') || '[]');
             
-            let shopToApprove = pendingShops[index];
-            approvedShops.push(shopToApprove);
-            pendingShops.splice(index, 1);
+            if(pendingShops[index]) {
+                let shopToApprove = pendingShops[index];
+                approvedShops.push(shopToApprove);
+                pendingShops.splice(index, 1);
 
-            localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
-            localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
+                localStorage.setItem('approvedShops', JSON.stringify(approvedShops));
+                localStorage.setItem('pendingShops', JSON.stringify(pendingShops));
 
-            let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + shopToApprove.district) || '[]');
-            if(!customVillages.includes(shopToApprove.village)) {
-                customVillages.push(shopToApprove.village);
-                localStorage.setItem('addedVillages_' + shopToApprove.district, JSON.stringify(customVillages));
+                let customVillages = JSON.parse(localStorage.getItem('addedVillages_' + shopToApprove.district) || '[]');
+                if(!customVillages.includes(shopToApprove.village)) {
+                    customVillages.push(shopToApprove.village);
+                    localStorage.setItem('addedVillages_' + shopToApprove.district, JSON.stringify(customVillages));
+                }
+
+                alert("दुकान सफलताપૂર્વक अप्रूव हो गई है!");
+                loadPendingShops();
+                loadAllShops();
             }
-
-            alert("दुकान अप्रूव हो गई है और अब जनता को दिखने लगी है!");
-            loadPendingShops();
-            loadAllShops();
         }
 
         function rejectPendingShop(index) {
@@ -886,14 +889,14 @@
             let html = '';
             pendingAds.forEach((ad, idx) => {
                 html += `
-                    <div style="background: #fff8e1; padding: 6px; margin-bottom: 6px; font-size: 0.8rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="background: #fff8e1; padding: 8px; margin-bottom: 6px; font-size: 0.8rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <strong>${ad.title}</strong> - ₹${ad.price}<br>
                             <span style="color:#555;">स्थान: ${ad.location} | UTR: ${ad.utr}</span>
                         </div>
                         <div>
-                            <button class="btn-success" onclick="approveAd(${idx})">Approve</button>
-                            <button class="btn-danger" onclick="rejectPendingAd(${idx})">Reject</button>
+                            <button type="button" class="btn-success" onclick="approveAd(${idx})">Approve</button>
+                            <button type="button" class="btn-danger" onclick="rejectPendingAd(${idx})">Reject</button>
                         </div>
                     </div>
                 `;
@@ -905,17 +908,19 @@
             let pendingAds = JSON.parse(localStorage.getItem('pendingAds') || '[]');
             let ads = JSON.parse(localStorage.getItem('buySellAds') || '[]');
             
-            let adToApprove = pendingAds[index];
-            ads.push(adToApprove);
-            pendingAds.splice(index, 1);
+            if(pendingAds[index]) {
+                let adToApprove = pendingAds[index];
+                ads.push(adToApprove);
+                pendingAds.splice(index, 1);
 
-            localStorage.setItem('buySellAds', JSON.stringify(ads));
-            localStorage.setItem('pendingAds', JSON.stringify(pendingAds));
+                localStorage.setItem('buySellAds', JSON.stringify(ads));
+                localStorage.setItem('pendingAds', JSON.stringify(pendingAds));
 
-            alert("विज्ञापन अप्रूव हो गया है!");
-            loadPendingAds();
-            loadAdminBuySellAds();
-            loadBuySellAds();
+                alert("विज्ञापन सफलताપૂર્વक अप्रूव हो गया है!");
+                loadPendingAds();
+                loadAdminBuySellAds();
+                loadBuySellAds();
+            }
         }
 
         function rejectPendingAd(index) {
@@ -932,10 +937,10 @@
             let html = '';
 
             if(!defaultHidden.includes("default_shyam")) {
-                html += `<div style="background: #fff; padding: 6px; margin-bottom: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;"><span>श्री श्याम जनरल स्टोर (माल्कोश)</span><button class="btn-danger" onclick="deleteDefaultShop()">डिलिट</button></div>`;
+                html += `<div style="background: #fff; padding: 6px; margin-bottom: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;"><span>श्री श्याम जनरल स्टोर (माल्कोश)</span><button type="button" class="btn-danger" onclick="deleteDefaultShop()">डिलिट</button></div>`;
             }
             approvedShops.forEach((s, index) => {
-                html += `<div style="background: #fff; padding: 6px; margin-bottom: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;"><span>${s.name} (${s.village})</span><button class="btn-danger" onclick="deleteApprovedShop(${index})">डिलिट</button></div>`;
+                html += `<div style="background: #fff; padding: 6px; margin-bottom: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;"><span>${s.name} (${s.village})</span><button type="button" class="btn-danger" onclick="deleteApprovedShop(${index})">डिलिट</button></div>`;
             });
             listDiv.innerHTML = html || 'कोई लाइव दुकान नहीं';
         }
@@ -948,7 +953,7 @@
                 html += `
                     <div style="background: #fff; padding: 6px; margin-bottom: 4px; border-radius: 4px; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
                         <span>${ad.title} (UTR: ${ad.utr})</span>
-                        <button class="btn-danger" onclick="deleteBuySellAd(${idx})">डिलिट</button>
+                        <button type="button" class="btn-danger" onclick="deleteBuySellAd(${idx})">डिलिट</button>
                     </div>
                 `;
             });
