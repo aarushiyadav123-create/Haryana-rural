@@ -3,24 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">हरियाणा ग्रामीण सेवा</title>
+    <title id="page-title">हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f4f4f4; 
+            background-color: #f4f6f8; 
             margin: 0; 
             padding: 0; 
             color: #333;
-        }
-        .weather-banner {
-            background-color: #00695c;
-            color: white;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            font-weight: bold;
         }
         .founder-bar {
             background-color: #1b5e20;
@@ -30,12 +20,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: bold;
         }
         .lang-btn {
             background: #ffeb3b;
             color: #1b5e20;
             border: none;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
@@ -44,237 +35,193 @@
         header { 
             background-color: #2e7d32; 
             color: white; 
-            padding: 15px; 
+            padding: 20px 15px; 
             text-align: center; 
-            position: relative;
+            border-bottom: 4px solid #1b5e20;
         }
         header h1 {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
         }
         .portal-badge {
-            background: #ffeb3b;
-            color: #1b5e20;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffeb3b;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: bold;
             display: inline-block;
-            margin-top: 4px;
+            margin-top: 8px;
+            border: 1px solid rgba(255, 235, 59, 0.4);
         }
-        .menu-btn {
-            position: absolute; right: 15px; top: 15px;
-            background: #ffeb3b; color: #2e7d32; border: none;
-            width: 38px; height: 38px; border-radius: 50%;
-            font-size: 24px; font-weight: bold; cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .dropdown {
-            display: none; background: white; border: 1px solid #ddd;
-            position: absolute; right: 15px; top: 60px;
-            width: 240px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 100; text-align: left;
-        }
-        .dropdown a {
-            display: block; padding: 10px 15px; border-bottom: 1px solid #eee;
-            text-decoration: none; color: #2e7d32; font-weight: bold; font-size: 0.9rem;
-        }
-        .dropdown a:last-child { border-bottom: none; }
-        .dropdown a:active { background: #e8f5e9; }
-
         .container { 
-            padding: 15px; 
+            padding: 12px; 
             max-width: 600px;
             margin: auto;
         }
+        .weather-card {
+            background: linear-gradient(135deg, #00838b, #00acc1);
+            color: white;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .weather-card h3 { margin: 0 0 4px 0; font-size: 1.05rem; }
+        .weather-card p { margin: 0; font-size: 0.82rem; opacity: 0.95; }
+        .weather-temp { font-size: 1.5rem; font-weight: bold; }
+
+        .ticker-card {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #d84315;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mandi-card {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: #2e7d32;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .search-card {
             background: white;
             border-radius: 10px;
             padding: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid #c8e6c9;
-            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
         }
         .search-card h3 {
             margin-top: 0;
             color: #1b5e20;
-            font-size: 1rem;
+            font-size: 1.05rem;
             border-bottom: 1px solid #eee;
             padding-bottom: 8px;
         }
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .form-group label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             font-weight: bold;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             color: #333;
         }
-        .form-group select, .form-group input {
+        /* 🛠️ यहाँ सेलेक्ट बॉक्स की पैडिंग और चौड़ाई को ठीक किया गया है ताकि नाम बिल्कुल न कटे */
+        .form-group select {
             width: 100%;
-            padding: 9px;
-            border: 1px solid #ccc;
+            padding: 12px 10px;
+            border: 2px solid #2e7d32;
             border-radius: 6px;
-            font-size: 0.95rem;
-            background: #fff;
-            box-sizing: border-box;
-        }
-
-        .categories-scroll {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 5px 0;
-            white-space: nowrap;
-        }
-        .cat-chip {
-            background: #f1f8e9;
-            border: 1px solid #c8e6c9;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 1rem;
             font-weight: bold;
-            color: #2e7d32;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+            background: #fff;
+            color: #1b5e20;
+            box-sizing: border-box;
+            appearance: auto;
         }
-        .cat-chip.active {
+        .main-btn {
             background: #1b5e20;
             color: white;
-            border-color: #1b5e20;
-        }
-
-        .single-action-bar {
-            margin-top: 12px;
-            display: flex;
-            gap: 8px;
-        }
-        .single-btn {
-            flex: 1;
-            background: #e8f5e9;
-            border: 1px solid #2e7d32;
-            color: #1b5e20;
-            padding: 9px;
-            border-radius: 6px;
-            font-size: 0.85rem;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
             font-weight: bold;
+            border-radius: 6px;
             cursor: pointer;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .single-btn:active {
-            background: #c8e6c9;
-        }
+        .main-btn:active { background: #0e3b12; }
 
-        .list-section h3 {
-            font-size: 1rem;
-            color: #2e7d32;
-            margin-bottom: 10px;
+        .scheme-item {
+            background: #f1f8e9;
+            border-left: 4px solid #2e7d32;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
         }
-        .item-card {
-            background: white;
-            border-left: 5px solid #2e7d32;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 10px;
-        }
-        .item-card h4 {
-            margin: 0 0 5px 0;
-            font-size: 1rem;
-            color: #111;
-        }
-        .verified-badge {
-            background: #e8f5e9;
-            color: #2e7d32;
-            font-size: 0.75rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            float: right;
-            font-weight: bold;
-        }
-        .item-card p {
-            margin: 4px 0;
-            font-size: 0.85rem;
-            color: #555;
-        }
-        .qr-btn {
-            background: #e8f5e9;
-            color: #1b5e20;
-            border: 1px solid #2e7d32;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 5px;
-            display: inline-block;
-        }
-        #dynamic-box {
+        .scheme-item h4 { margin: 0 0 4px 0; font-size: 0.9rem; color: #1b5e20; }
+        .scheme-item p { margin: 0 0 6px 0; font-size: 0.8rem; color: #555; }
+        .scheme-item a { color: #1b5e20; font-weight: bold; font-size: 0.8rem; text-decoration: none; }
+
+        #dynamic-result-box {
             display: none;
             background: white;
-            border: 2px solid #2e7d32;
+            border: 2px solid #00acc1;
             padding: 15px;
             border-radius: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .close-box-btn {
-            background: #d32f2f;
-            color: white;
-            border: none;
-            padding: 3px 8px;
-            border-radius: 4px;
-            float: right;
-            cursor: pointer;
-            font-weight: bold;
         }
     </style>
 </head>
 <body onload="initApp()">
 
-    <div class="weather-banner">
-        <span>🌤️ हरियाणा लाइव मौसम: साफ एवं धूप</span>
-        <span>33.2°C | 1.4 km/h</span>
-    </div>
-
     <div class="founder-bar">
-        <span id="txt-founder">👨‍💼 संस्थापक: राजेश यादव (माल्कोश)</span>
+        <span id="txt-founder">👨‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
         <button class="lang-btn" onclick="toggleLanguage()" id="lang-toggle-btn">English</button>
     </div>
 
     <header>
         <h1 id="txt-header-title">हरियाणा ग्रामीण सेवा</h1>
-        <span class="portal-badge" id="txt-badge">गाँव की हर दुकान, हर सेवा - आपके मोबाइल पर</span>
-        <button class="menu-btn" onclick="toggleMenu()">+</button>
+        <div class="portal-badge" id="txt-badge">गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</div>
+        <div style="font-size: 0.75rem; color: #ffeb3b; margin-top: 5px;" id="txt-subbadge">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
     </header>
-
-    <div id="menu" class="dropdown">
-        <a href="#" onclick="openFeature('buysell')">🛒 <span id="m-buysell">गाँव का Buy-Sell (खरीद-बिक्री)</span></a>
-        <a href="#" onclick="openFeature('schemes')">📜 <span id="m-schemes">सरकारी योजनाएँ</span></a>
-        <a href="#" onclick="openFeature('jokes')">🎭 <span id="m-jokes">हरियाणवी लोकल चुटकुले</span></a>
-        <a href="#" onclick="openFeature('qr')">📱 <span id="m-qr">Shop QR Code जनरेटर</span></a>
-        <a href="#" onclick="adminLogin()">🔒 <span id="m-admin">Admin Panel</span></a>
-    </div>
 
     <div class="container">
 
-        <div id="dynamic-box">
-            <button class="close-box-btn" onclick="closeDynamicBox()">बंद करें ✕</button>
-            <div id="dynamic-content"></div>
+        <!-- 🌤️ लाइव मौसम -->
+        <div class="weather-card">
+            <div>
+                <h3>🌤️ हरियाणा लाइव मौसम</h3>
+                <p>हवा की गति: 7.3 km/h | स्थिति: साफ एवं धूप</p>
+            </div>
+            <div class="weather-temp">27.9°C</div>
         </div>
 
+        <!-- 📢 ताज़ा न्यूज़ टिकर -->
+        <div class="ticker-card">
+            <span style="background: #ff8f00; color: white; padding: 2px 6px; border-radius: 4px; font-size:0.75rem;">ताज़ा लोकल न्यूज़</span>
+            <marquee scrollamount="4">हरियाणा ग्रामीण अपडेट: जिला और गाँव चयन की समस्या को पूरी तरह ठीक कर दिया गया है!</marquee>
+        </div>
+
+        <!-- 🌾 मंडी भाव -->
+        <div class="mandi-card">
+            <span>🌾 हरियाणवी मंडी भाव (आज का ताजा)</span>
+            <span style="background:#2e7d32; color:white; padding:3px 8px; border-radius:4px; font-size:0.75rem;">लाइव अपडेट</span>
+        </div>
+
+        <!-- 🔍 मुख्य सर्च सेक्शन -->
         <div class="search-card">
             <h3 id="txt-search-title">🔍 अपने गाँव की सेवाएँ खोजें</h3>
             
             <div class="form-group">
-                <label id="txt-lbl-dist">जिला चुनें:</label>
+                <label id="txt-lbl-dist">1. जिला चुनें:</label>
                 <select id="district-select" onchange="updateVillages()">
-                    <option value="mahendragarh">महेंद्रगढ़ (माल्कोश)</option>
                     <option value="charkhi_dadri">चरखी दादरी</option>
+                    <option value="mahendragarh">महेंद्रगढ़ (माल्कोश)</option>
                     <option value="rewari">रेवाड़ी</option>
                     <option value="rohtak">रोहतक</option>
                     <option value="bhiwani">भिवानी</option>
@@ -283,67 +230,100 @@
             </div>
 
             <div class="form-group">
-                <label id="txt-lbl-vill">गाँव चुनें या लिखें:</label>
-                <select id="village-select" style="margin-bottom: 5px;">
-                    <!-- जिले के हिसाब से गाँव यहाँ लोड होंगे -->
+                <label id="txt-lbl-vill">2. गाँव चुनें:</label>
+                <select id="village-select">
+                    <!-- गाँव लोड होंगे -->
                 </select>
-                <input type="text" id="village-input" placeholder="गाँव का नाम लिखकर खोजें..." onkeyup="validateVillageMatch()" style="margin-top: 4px;">
-                <div id="village-error" style="color: #d32f2f; font-size: 0.75rem; font-weight: bold; margin-top: 3px;"></div>
             </div>
 
-            <div class="form-group">
-                <label id="txt-lbl-cat">श्रेणी चुनें:</label>
-                <div class="categories-scroll">
-                    <div class="cat-chip active" onclick="selectCategory(this)">सभी सेवाएँ</div>
-                    <div class="cat-chip" onclick="selectCategory(this)">🛒 शॉप/किराना</div>
-                    <div class="cat-chip" onclick="selectCategory(this)">💊 मेडिकल</div>
-                    <div class="cat-chip" onclick="selectCategory(this)">🚜 कृषि यंत्र</div>
-                    <div class="cat-chip" onclick="selectCategory(this)">🥛 डेयरी</div>
-                </div>
-            </div>
-
-            <div class="single-action-bar">
-                <button class="single-btn" onclick="openFeature('add')">➕ Add Shop (दुकान जोड़ें)</button>
-                <button class="single-btn" style="background:#e0f7fa; border-color:#00acc1; color:#006064;" onclick="searchNearbyGPS()">📍 मेरे पास की दुकानें</button>
-            </div>
+            <button class="main-btn" onclick="searchServices()">दुकानें देखें</button>
         </div>
 
-        <!-- 👇 BUY-SELL (खरीद-बिक्री) सेक्शन -->
-        <div class="search-card" style="border-color: #ffb300; background: #fffdf8;">
-            <h3 style="color: #b78103;">🛒 गाँव का Buy-Sell (खरीद-बिक्री)</h3>
-            <p style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">गाँव में पुराना सामान, ट्रैक्टर या पशु खरीदने और बेचने के लिए विज्ञापन डालें:</p>
-            <input type="text" id="bs-item" placeholder="चीज़ का नाम (जैसे: ट्रैक्टर, भैंस, साइकिल)" style="width:100%; padding:8px; margin-bottom:6px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
-            <input type="text" id="bs-price" placeholder="कीमत (Price)" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
-            <button style="background: #ff8f00; color: white; border: none; padding: 8px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer;" onclick="postBuySellItem()">विज्ञापन पोस्ट करें</button>
+        <!-- 👇 1. अपनी दुकान रजिस्टर करें -->
+        <div class="search-card" style="border-color: #2e7d32; background: #f4faf4;">
+            <h3 style="color: #1b5e20;">➕ अपनी दुकान / सेवा यहाँ रजिस्टर करें</h3>
+            <div class="form-group" style="margin-bottom:8px;">
+                <input type="text" id="shop-name-in" placeholder="दुकान का नाम (Shop Name)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+            </div>
+            <div class="form-group" style="margin-bottom:8px;">
+                <input type="text" id="shop-owner-in" placeholder="संचालक का नाम (Owner Name)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <input type="text" id="shop-phone-in" placeholder="मोबाइल नंबर (Mobile No)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+            </div>
+            <button style="background:#2e7d32; color:white; border:none; width:100%; padding:11px; font-weight:bold; border-radius:6px; cursor:pointer;" onclick="submitNewShop()">दुकान सबमिट करें</button>
         </div>
 
-        <!-- 👇 MY NEARBY SEARCH WITH LOCATION सेक्शन (Buy-Sell के ठीक नीचे) -->
+        <!-- 👇 2. ग्रामीण बाय-सेल मार्केटप्लेस -->
+        <div class="search-card" style="border-color: #ff9800; background: #fffdf8;">
+            <h3 style="color: #e65100;">🛒 ग्रामीण बाय-सेल मार्केटप्लेस (विज्ञापन डालें)</h3>
+            <div class="form-group" style="margin-bottom:8px;">
+                <input type="text" id="bs-item-in" placeholder="चीज़ का नाम (जैसे: ट्रैक्टर, भैंस, साइकिल)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+                <input type="text" id="bs-price-in" placeholder="कीमत (Price)" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+            </div>
+            <button style="background:#f57c00; color:white; border:none; width:100%; padding:11px; font-weight:bold; border-radius:6px; cursor:pointer;" onclick="postBuySellAd()">विज्ञापन पोस्ट करें</button>
+        </div>
+
+        <!-- 👇 3. मेरे पास की दुकानें -->
         <div class="search-card" style="border-color: #00acc1; background: #f0fafd;">
             <h3 style="color: #006064;">📍 मेरे पास की दुकानें (My Near By Search)</h3>
-            <p style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">जीपीएस (GPS) के जरिए अपने बिल्कुल नजदीक की दुकानें और सेवाएं खोजें:</p>
-            <button style="background: #00acc1; color: white; border: none; padding: 9px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer;" onclick="searchNearbyGPS()">📍 मेरी लोकेशन से सर्च करें</button>
+            <p style="font-size: 0.82rem; color: #555; margin-bottom: 10px;">जीपीएस (GPS) के माध्यम से अपने बिल्कुल नजदीक की दुकानें तुरंत खोजें:</p>
+            <button style="background: #00acc1; color: white; border: none; padding: 11px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer;" onclick="searchNearbyGPS()">📍 मेरी लोकेशन से सर्च करें</button>
         </div>
 
-        <!-- 👇 MANORANJAN CHUTKULE (मनोरंजन चुटकुले) सेक्शन (उसके भी नीचे) -->
+        <!-- 👇 4. मनोरंजन चुटकुले -->
         <div class="search-card" style="border-color: #ab47bc; background: #fbf5fc;">
             <h3 style="color: #7b1fa2;">🎭 मनोरंजन चुटकुले (Haryanvi Jokes)</h3>
-            <div style="background: white; padding: 10px; border-radius: 6px; border-left: 4px solid #ab47bc; font-size: 0.9rem; color: #333;" id="joke-box">
+            <div style="background: white; padding: 10px; border-radius: 6px; border-left: 4px solid #ab47bc; font-size: 0.88rem; color: #333;" id="joke-box">
                 "एक बार ताऊ खेत मैं बैठ्या था, और बोल्या — दुनिया चाँद पै पहुंच गी, पर इब ताऊ पै कोई यो कोन्या बतांदा कि हुक्के की नली कसूती साफ क्यूं कोन्या होती! 😂"
             </div>
-            <button style="background: #ab47bc; color: white; border: none; padding: 7px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 8px; font-size: 0.85rem;" onclick="loadNewJoke()">दूसरा चुटकुला पढ़ें 🔄</button>
+            <button style="background: #ab47bc; color: white; border: none; padding: 9px; width: 100%; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 8px; font-size: 0.85rem;" onclick="loadNewJoke()">दूसरा चुटकुला पढ़ें 🔄</button>
         </div>
 
-        <div class="list-section">
-            <h3 id="txt-list-title">📋 उपलब्ध लिस्ट</h3>
-            
-            <div class="item-card">
-                <span class="verified-badge" id="badge-verified">✔ सत्यापित</span>
-                <h4>Kusum kiryana store - <span id="txt-owner">संचालक</span>: Pooja</h4>
-                <p>📍 <span id="txt-addr">पता</span>: Near Shiv Mandir Bamla Road, माल्कोश</p>
-                <p>📞 <span id="txt-contact">संपर्क</span>: 9992821782</p>
-                <p style="font-size: 0.75rem; color: #2e7d32; font-weight: bold;">श्रेणी: किराना / शॉप</p>
-                <button class="qr-btn" onclick="showShopQR('Kusum Kiryana Store', '9992821782')">📱 Shop QR Code देखें</button>
+        <!-- dynamic result display box -->
+        <div id="dynamic-result-box">
+            <button style="background: #d32f2f; color: white; border: none; padding: 4px 10px; border-radius: 4px; float: right; cursor: pointer; font-weight: bold;" onclick="document.getElementById('dynamic-result-box').style.display='none'">बंद करें ✕</button>
+            <div id="dynamic-result-content"></div>
+        </div>
+
+        <!-- 📜 सरकारी योजनाएँ -->
+        <div class="search-card">
+            <h3>📜 हरियाणा सरकार की मुख्य योजनाएँ (जिलावार लाइव पोर्टल)</h3>
+            <div class="form-group" style="margin-bottom: 10px;">
+                <label style="font-size:0.8rem;">अपने जिले के अनुसार योजनाओं का पोर्टल देखें:</label>
+                <select id="scheme-dist" onchange="updateSchemes()">
+                    <option value="dadri">चरखी दादरी</option>
+                    <option value="mahendragarh">महेंद्रगढ़</option>
+                    <option value="rewari">रेवाड़ी</option>
+                </select>
             </div>
+            <div id="scheme-list-area">
+                <div class="scheme-item">
+                    <h4>📁 जिला चरखी दादरी - परिवार पहचान पत्र (PPP)</h4>
+                    <p>जिला नागरिक संसाधन सूचना विभाग, चरखी दादरी के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा।</p>
+                    <a href="https://meraparivar.haryana.gov.in" target="_blank">🔗 पीपीपी पोर्टल (चरखी दादरी लाइव) &rarr;</a>
+                </div>
+                <div class="scheme-item">
+                    <h4>👵 जिला चरखी दादरी - सामाजिक सुरक्षा पेंशन</h4>
+                    <p>बुढ़ापा, विधवा एवं विकलांग पेंशन के लाइव आवेदन व स्टेटस की जानकारी (चरखी दादरी समाज कल्याण शाखा)।</p>
+                    <a href="https://socialjustice.haryana.gov.in" target="_blank">🔗 पेंशन पोर्टल देखें &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 💬 फीडबैक -->
+        <div class="search-card">
+            <h3 style="color: #37474f;">💬 सुझाव एवं फीडबैक (Feedback)</h3>
+            <input type="text" placeholder="आपका नाम..." style="width:100%; padding:10px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;">
+            <textarea placeholder="अपना सुझाव या शिकायत यहाँ लिखें..." style="width:100%; padding:10px; height:60px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;"></textarea>
+            <button style="background: #2e7d32; color: white; border: none; padding: 10px 15px; font-weight: bold; border-radius: 6px; cursor: pointer;" onclick="alert('आपका फीडबैक सफलतापूर्वक दर्ज हो गया है!')">फीडबैक भेजें</button>
+        </div>
+
+        <!-- 🔒 ADMIN -->
+        <div style="margin-bottom: 20px;">
+            <button style="background: #ffa000; color: white; border: none; width: 100%; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 0.95rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" onclick="adminLogin()">🔒 एडमिन / वेरिफिकेशन पैनल</button>
         </div>
 
     </div>
@@ -352,8 +332,8 @@
         let currentLang = 'hi';
 
         const districtVillages = {
-            "mahendragarh": ["माल्कोश", "कचरी", "नारनौल", "महेंद्रगढ़"],
             "charkhi_dadri": ["दादरी शहर", "बाढ़डा", "पैंतावास", "झोझू कलाँ"],
+            "mahendragarh": ["माल्कोश / Malkosh", "कचरी", "नारनौल", "महेंद्रगढ़"],
             "rewari": ["रेवाड़ी शहर", "बावल", "धारूहेड़ा", "कोसली"],
             "rohtak": ["रोहतक शहर", "इस्माइला", "कलानौर", "महेम"],
             "bhiwani": ["भिवानी शहर", "बामला", "लोहारू", "सिवानी"],
@@ -368,69 +348,7 @@
         ];
 
         function initApp() {
-            applyLanguageSettings();
             updateVillages();
-        }
-
-        function toggleMenu() {
-            let m = document.getElementById('menu');
-            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function closeDynamicBox() {
-            document.getElementById('dynamic-box').style.display = 'none';
-        }
-
-        function toggleLanguage() {
-            currentLang = (currentLang === 'hi') ? 'en' : 'hi';
-            applyLanguageSettings();
-        }
-
-        function applyLanguageSettings() {
-            let root = document.getElementById('html-root');
-            root.setAttribute('lang', currentLang);
-
-            if (currentLang === 'en') {
-                document.getElementById('lang-toggle-btn').innerText = "हिन्दी";
-                document.getElementById('page-title').innerText = "Haryana Grameen Seva";
-                document.getElementById('txt-founder').innerText = "👨‍💼 Founder: Rajesh Yadav (Malkosh)";
-                document.getElementById('txt-header-title').innerText = "Haryana Grameen Seva";
-                document.getElementById('txt-badge').innerText = "Every village shop, every service - on your mobile";
-                document.getElementById('txt-search-title').innerText = "🔍 Search Village Services";
-                document.getElementById('txt-lbl-dist').innerText = "Select District:";
-                document.getElementById('txt-lbl-vill').innerText = "Select or Type Village:";
-                document.getElementById('txt-lbl-cat').innerText = "Select Category:";
-                document.getElementById('txt-list-title').innerText = "📋 Available List";
-                document.getElementById('txt-owner').innerText = "Owner";
-                document.getElementById('txt-addr').innerText = "Address";
-                document.getElementById('txt-contact').innerText = "Contact";
-                
-                document.getElementById('m-buysell').innerText = "Village Buy-Sell (खरीद-बिक्री)";
-                document.getElementById('m-schemes').innerText = "Govt Schemes";
-                document.getElementById('m-jokes').innerText = "Haryanvi Local Jokes";
-                document.getElementById('m-qr').innerText = "Shop QR Code Generator";
-                document.getElementById('m-admin').innerText = "Admin Panel";
-            } else {
-                document.getElementById('lang-toggle-btn').innerText = "English";
-                document.getElementById('page-title').innerText = "हरियाणा ग्रामीण सेवा";
-                document.getElementById('txt-founder').innerText = "👨‍💼 संस्थापक: राजेश यादव (माल्कोश)";
-                document.getElementById('txt-header-title').innerText = "हरियाणा ग्रामीण सेवा";
-                document.getElementById('txt-badge').innerText = "गाँव की हर दुकान, हर सेवा - आपके मोबाइल पर";
-                document.getElementById('txt-search-title').innerText = "🔍 अपने गाँव की सेवाएँ खोजें";
-                document.getElementById('txt-lbl-dist').innerText = "जिला चुनें:";
-                document.getElementById('txt-lbl-vill').innerText = "गाँव चुनें या लिखें:";
-                document.getElementById('txt-lbl-cat').innerText = "श्रेणी चुनें:";
-                document.getElementById('txt-list-title').innerText = "📋 उपलब्ध लिस्ट";
-                document.getElementById('txt-owner').innerText = "संचालक";
-                document.getElementById('txt-addr').innerText = "पता";
-                document.getElementById('txt-contact').innerText = "संपर्क";
-
-                document.getElementById('m-buysell').innerText = "गाँव का Buy-Sell (खरीद-बिक्री)";
-                document.getElementById('m-schemes').innerText = "सरकारी योजनाएँ";
-                document.getElementById('m-jokes').innerText = "हरियाणवी लोकल चुटकुले";
-                document.getElementById('m-qr').innerText = "Shop QR Code जनरेटर";
-                document.getElementById('m-admin').innerText = "Admin Panel";
-            }
         }
 
         function updateVillages() {
@@ -445,59 +363,48 @@
                 opt.innerText = v;
                 villSelect.appendChild(opt);
             });
-            document.getElementById('village-input').value = "";
-            document.getElementById('village-error').innerText = "";
         }
 
-        function validateVillageMatch() {
-            let dist = document.getElementById('district-select').value;
-            let typedVal = document.getElementById('village-input').value.trim().toLowerCase();
-            let errDiv = document.getElementById('village-error');
-            
-            if(!typedVal) {
-                errDiv.innerText = "";
+        function submitNewShop() {
+            let name = document.getElementById('shop-name-in').value;
+            if(!name) {
+                alert("कृपया दुकान का नाम दर्ज करें!");
                 return;
             }
-
-            let validVillages = districtVillages[dist] || [];
-            let matchFound = validVillages.some(v => v.toLowerCase().includes(typedVal));
-
-            if(!matchFound) {
-                errDiv.innerText = "⚠️ गलत जिला या गाँव! इस जिले में यह गाँव उपलब्ध नहीं है।";
-            } else {
-                errDiv.innerText = "";
-            }
+            alert("बधाई हो! आपकी दुकान वेरिफिकेशन के लिए सफलतापूर्वक सबमिट हो गई है।");
+            document.getElementById('shop-name-in').value = "";
+            document.getElementById('shop-owner-in').value = "";
+            document.getElementById('shop-phone-in').value = "";
         }
 
-        function postBuySellItem() {
-            let item = document.getElementById('bs-item').value;
-            let price = document.getElementById('bs-price').value;
-            if(!item || !price) {
-                alert("कृपया सामान का नाम और कीमत दोनों दर्ज करें!");
+        function postBuySellAd() {
+            let item = document.getElementById('bs-item-in').value;
+            if(!item) {
+                alert("कृपया सामान का नाम दर्ज करें!");
                 return;
             }
-            alert("बधाई हो! आपका विज्ञापन Buy-Sell में सफलतापूर्वक लाइव कर दिया गया है।");
-            document.getElementById('bs-item').value = "";
-            document.getElementById('bs-price').value = "";
+            alert("आपका विज्ञापन बाय-सेल मार्केटप्लेस में लाइव कर दिया गया है!");
+            document.getElementById('bs-item-in').value = "";
+            document.getElementById('bs-price-in').value = "";
         }
 
         function searchNearbyGPS() {
             if (!navigator.geolocation) {
-                alert("आपका ब्राउज़र जीपीएस (GPS) सपोर्ट नहीं करता है।");
+                alert("आपका ब्राउज़र जीपीएस सपोर्ट नहीं करता है।");
                 return;
             }
-            alert("आपकी लाइव जीपीएस लोकेशन डिटेक्ट की जा रही है... कृपया प्रतीक्षा करें।");
+            alert("आपकी लाइव जीपीएस लोकेशन डिटेक्ट की जा रही है...");
             navigator.geolocation.getCurrentPosition((position) => {
-                let box = document.getElementById('dynamic-box');
-                let content = document.getElementById('dynamic-content');
+                let box = document.getElementById('dynamic-result-box');
+                let content = document.getElementById('dynamic-result-content');
                 box.style.display = 'block';
                 content.innerHTML = `
                     <h3 style="color:#006064; margin-top:0;">📍 आपके नज़दीकी दुकानें (GPS आधारित)</h3>
-                    <p style="font-size:0.85rem; color:#555;">अक्षांश (Lat): ${position.coords.latitude.toFixed(4)}, देशांतर (Lng): ${position.coords.longitude.toFixed(4)}</p>
-                    <div style="background:#e0f7fa; padding:10px; border-radius:6px; margin-top:8px; border-left:4px solid #00acc1;">
-                        <strong>Kusum Kiryana Store</strong><br>
-                        <span style="font-size:0.8rem; color:#333;">दूरी: आपके बिलकुल पास (माल्कोश रोड)</span><br>
-                        <a href="tel:9992821782" style="display:inline-block; margin-top:5px; background:#006064; color:white; padding:4px 8px; border-radius:4px; text-decoration:none; font-size:0.8rem; font-weight:bold;">📞 कॉल करें</a>
+                    <p style="font-size:0.82rem; color:#555;">Lat: ${position.coords.latitude.toFixed(4)}, Lng: ${position.coords.longitude.toFixed(4)}</p>
+                    <div style="background:#e0f7fa; padding:10px; border-radius:6px; border-left:4px solid #00acc1;">
+                        <strong>माल्कोश जनरल स्टोर</strong><br>
+                        <span style="font-size:0.78rem; color:#333;">दूरी: बिल्कुल नजदीक (गाँव मुख्य मार्ग)</span><br>
+                        <a href="tel:9992821782" style="display:inline-block; margin-top:5px; background:#006064; color:white; padding:3px 8px; border-radius:4px; text-decoration:none; font-size:0.75rem; font-weight:bold;">📞 कॉल करें</a>
                     </div>
                 `;
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -511,110 +418,35 @@
             document.getElementById('joke-box').innerText = haryanviJokes[randomIndex];
         }
 
-        function openFeature(type) {
-            let menu = document.getElementById('menu');
-            if(menu) menu.style.display = 'none';
-            
-            let box = document.getElementById('dynamic-box');
-            let content = document.getElementById('dynamic-content');
-            box.style.display = 'block';
-
-            if (type === 'add') {
-                content.innerHTML = `
-                    <h3 style="color:#1b5e20; margin-top:0;">➕ Add Shop / नई दुकान जोड़ें</h3>
-                    <input type="text" placeholder="दुकान का नाम (Shop Name)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
-                    <input type="text" placeholder="मालिक का नाम (Owner Name)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
-                    <input type="text" placeholder="मोबाइल नंबर (Mobile No)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
-                    <input type="text" placeholder="गाँव का नाम (Village Name)" style="width:100%; padding:8px; margin-bottom:8px; box-sizing:border-box;">
-                    <button style="background:#1b5e20; color:white; border:none; padding:9px; width:100%; font-weight:bold; border-radius:5px; cursor:pointer;" onclick="alert('दुकान सफलतापूर्वक सबमिट हो गई है!')">सबमिट करें</button>
-                `;
-            } else if (type === 'buysell') {
-                content.innerHTML = `
-                    <h3 style="color:#b78103; margin-top:0;">🛒 गाँव का Buy-Sell मार्केटप्लेस</h3>
-                    <p style="font-size:0.85rem; color:#555;">पुराना ट्रैक्टर, पशु या सामान बेचने या खरीदने के लिए विज्ञापन डालें:</p>
-                    <input type="text" placeholder="सामान का नाम (जैसे: भैंस, ट्रैक्टर, बाइक)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
-                    <input type="text" placeholder="कीमत (Price)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
-                    <input type="text" placeholder="मोबाइल नंबर" style="width:100%; padding:8px; margin-bottom:8px; box-sizing:border-box;">
-                    <button style="background:#ff8f00; color:white; border:none; padding:9px; width:100%; font-weight:bold; border-radius:5px; cursor:pointer;" onclick="alert('आपका विज्ञापन Buy-Sell में लाइव कर दिया गया है!')">विज्ञापन पोस्ट करें</button>
-                `;
-            } else if (type === 'schemes') {
-                content.innerHTML = `
-                    <h3 style="color:#1b5e20; margin-top:0;">📜 हरियाणा सरकार की मुख्य योजनाएँ</h3>
-                    <div style="background:#e8f5e9; padding:10px; border-radius:6px; margin-bottom:8px; border-left:4px solid #2e7d32;">
-                        <strong>परिवार पहचान पत्र (PPP पोर्टल):</strong><br>
-                        <a href="https://meraparivar.haryana.gov.in" target="_blank" style="color:#1b5e20; font-weight:bold; font-size:0.85rem;">🔗 meraparivar.haryana.gov.in देखें &rarr;</a>
-                    </div>
-                    <div style="background:#e8f5e9; padding:10px; border-radius:6px; border-left:4px solid #2e7d32;">
-                        <strong>सामाजिक सुरक्षा पेंशन पोर्टल:</strong><br>
-                        <a href="https://socialjustice.haryana.gov.in" target="_blank" style="color:#1b5e20; font-weight:bold; font-size:0.85rem;">🔗 socialjustice.haryana.gov.in देखें &rarr;</a>
-                    </div>
-                `;
-            } else if (type === 'jokes') {
-                content.innerHTML = `
-                    <h3 style="color:#7b1fa2; margin-top:0;">🎭 हरियाणवी लोकल चुटकुले</h3>
-                    <div style="background:#fbf5fc; padding:10px; border-radius:6px; font-size:0.95rem; border-left:4px solid #ab47bc;">
-                        <strong>ताऊ का जोक:</strong><br>
-                        एक बार ताऊ बोल्या — "इब यो जमाना आ लिया, ब्याह में डीजे की जगह सीधा जनरेटर पावै है, पर चाय फेर भी हाथ की बनानी पड़े है!" 😂
-                    </div>
-                `;
-            } else if (type === 'qr') {
-                content.innerHTML = `
-                    <h3 style="color:#1b5e20; margin-top:0;">📱 Shop QR Code जनरेटर</h3>
-                    <input type="text" id="shop-upi" placeholder="दुकानदार का UPI ID या नंबर दर्ज करें" style="width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:5px; box-sizing:border-box;">
-                    <button style="background:#1b5e20; color:white; border:none; padding:8px 12px; border-radius:5px; font-weight:bold; cursor:pointer; width:100%;" onclick="generateQRDisplay()">QR Code जनरेट करें</button>
-                    <div id="qr-display-area" style="text-align:center; margin-top:10px;"></div>
-                `;
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showShopQR(shopName, phone) {
-            let box = document.getElementById('dynamic-box');
-            let content = document.getElementById('dynamic-content');
+        function searchServices() {
+            let dist = document.getElementById('district-select').value;
+            let vill = document.getElementById('village-select').value;
+            let box = document.getElementById('dynamic-result-box');
+            let content = document.getElementById('dynamic-result-content');
             box.style.display = 'block';
             content.innerHTML = `
-                <h3 style="color:#1b5e20; margin-top:0;">📱 ${shopName} - QR Code</h3>
-                <p style="font-size:0.9rem;">संपर्क नंबर: <strong>${phone}</strong></p>
-                <div style="background:#e8f5e9; padding:20px; text-align:center; border-radius:8px; border:2px dashed #2e7d32;">
-                    <div style="font-size: 3rem;">⬛ 📱 ⬛</div>
-                    <p style="font-size:0.85rem; margin-top:5px; font-weight:bold;">(डिजिटल पेमेंट क्यूआर)</p>
+                <h3 style="color:#1b5e20; margin-top:0;">📋 ${vill} (${dist}) की सेवाएँ</h3>
+                <div style="background:#e8f5e9; padding:10px; border-radius:6px; border-left:4px solid #2e7d32;">
+                    <strong>सुभाष किराना स्टोर</strong><br>
+                    <span style="font-size:0.8rem;">संचालक: सुभाष कुमार | संपर्क: 9876543210</span><br>
+                    <span style="font-size:0.75rem; color:#2e7d32; font-weight:bold;">✔ सत्यापित दुकान</span>
                 </div>
             `;
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function generateQRDisplay() {
-            let val = document.getElementById('shop-upi').value;
-            let area = document.getElementById('qr-display-area');
-            if(!val) {
-                alert("कृपया पहले यूज़र आईडी या नंबर दर्ज करें!");
-                return;
-            }
-            area.innerHTML = `
-                <div style="background:#fff; padding:15px; border:2px solid #2e7d32; border-radius:8px; display:inline-block;">
-                    <div style="font-size:2.5rem;">🔲 🔳 🔲</div>
-                    <p style="font-size:0.85rem; margin:5px 0 0 0; color:#1b5e20; font-weight:bold;">UPI: ${val}</p>
-                </div>
-            `;
         }
 
         function adminLogin() {
-            let menu = document.getElementById('menu');
-            if(menu) menu.style.display = 'none';
-
             let pass = prompt("Admin Password दर्ज करें:");
             if (pass === "sub123") {
-                let box = document.getElementById('dynamic-box');
-                let content = document.getElementById('dynamic-content');
+                let box = document.getElementById('dynamic-result-box');
+                let content = document.getElementById('dynamic-result-content');
                 box.style.display = 'block';
                 content.innerHTML = `
                     <h3 style="color:#d32f2f; margin-top:0;">🔒 Admin Control Panel</h3>
-                    <p style="font-size:0.85rem;">लटकती हुई नई लिस्टिंग और दुकानें:</p>
-                    <div style="background:#f9f9f9; padding:10px; border:1px solid #ccc; border-radius:6px; margin-bottom:8px;">
-                        <strong>Kusum Kiryana Store</strong> (Bamla Road)<br>
-                        <span style="font-size:0.75rem; color:gray;">स्टेटस: पेंडिंग वेरिफिकेशन</span><br><br>
-                        <button style="background:#2e7d32; color:white; border:none; padding:5px 10px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="alert('दुकान का वेरिफिकेशन Approved हो गया है!')">✔ Approved</button>
-                        <button style="background:#d32f2f; color:white; border:none; padding:5px 10px; border-radius:4px; font-weight:bold; cursor:pointer; margin-left:5px;" onclick="alert('दुकान डिलीट कर दी गई है!')">❌ Delete</button>
+                    <p style="font-size:0.85rem;">पेंडिंग दुकानें वेरिफिकेशन के लिए:</p>
+                    <div style="background:#f9f9f9; padding:8px; border:1px solid #ccc; border-radius:6px;">
+                        <strong>नया रजिस्ट्रेशन (माल्कोश)</strong><br>
+                        <button style="background:#2e7d32; color:white; border:none; padding:4px 8px; border-radius:4px; font-weight:bold; cursor:pointer;" onclick="alert('Approved!')">✔ Approve</button>
                     </div>
                 `;
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -623,10 +455,56 @@
             }
         }
 
-        function selectCategory(el) {
-            let chips = document.querySelectorAll('.cat-chip');
-            chips.forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
+        function toggleLanguage() {
+            currentLang = (currentLang === 'hi') ? 'en' : 'hi';
+            if(currentLang === 'en') {
+                document.getElementById('page-title').innerText = "Haryana Grameen Seva - Digital Gram Portal";
+                document.getElementById('txt-founder').innerText = "👨‍💼 Founder: Kusum w/o Rajesh Yadav Malkosh";
+                document.getElementById('txt-header-title').innerText = "Haryana Grameen Seva";
+                document.getElementById('txt-badge').innerText = "Every village shop, every service - on your mobile";
+                document.getElementById('txt-subbadge').innerText = "Digital Malkosh & Haryana Portal";
+                document.getElementById('txt-search-title').innerText = "🔍 Search Village Services";
+                document.getElementById('txt-lbl-dist').innerText = "1. Select District:";
+                document.getElementById('txt-lbl-vill').innerText = "2. Select Village:";
+                document.getElementById('lang-toggle-btn').innerText = "हिन्दी";
+            } else {
+                document.getElementById('page-title').innerText = "हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल";
+                document.getElementById('txt-founder').innerText = "👨‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश";
+                document.getElementById('txt-header-title').innerText = "हरियाणा ग्रामीण सेवा";
+                document.getElementById('txt-badge').innerText = "गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर";
+                document.getElementById('txt-subbadge').innerText = "डिजिटल माल्कोश & हरियाणा पोर्टल";
+                document.getElementById('txt-search-title').innerText = "🔍 अपने गाँव की सेवाएँ खोजें";
+                document.getElementById('txt-lbl-dist').innerText = "1. जिला चुनें:";
+                document.getElementById('txt-lbl-vill').innerText = "2. गाँव चुनें:";
+                document.getElementById('lang-toggle-btn').innerText = "English";
+            }
+        }
+
+        function updateSchemes() {
+            let sDist = document.getElementById('scheme-dist').value;
+            let area = document.getElementById('scheme-list-area');
+            if(sDist === 'mahendragarh') {
+                area.innerHTML = `
+                    <div class="scheme-item">
+                        <h4>📁 जिला महेंद्रगढ़ - परिवार पहचान पत्र (PPP)</h4>
+                        <p>नारनौल व महेंद्रगढ़ क्षेत्र के लिए फैमिली आईडी सुधार सेवा。</p>
+                        <a href="https://meraparivar.haryana.gov.in" target="_blank">🔗 पोर्टल देखें &rarr;</a>
+                    </div>
+                `;
+            } else {
+                area.innerHTML = `
+                    <div class="scheme-item">
+                        <h4>📁 जिला चरखी दादरी - परिवार पहचान पत्र (PPP)</h4>
+                        <p>जिला नागरिक संसाधन सूचना विभाग, चरखी दादरी के अंतर्गत फैमिली आईडी सत्यापन व सुधार सेवा।</p>
+                        <a href="https://meraparivar.haryana.gov.in" target="_blank">🔗 पीपीपी पोर्टल (चरखी दादरी लाइव) &rarr;</a>
+                    </div>
+                    <div class="scheme-item">
+                        <h4>👵 जिला चरखी दादरी - सामाजिक सुरक्षा पेंशन</h4>
+                        <p>बुढ़ापा, विधवा एवं विकलांग पेंशन के लाइव आवेदन व स्टेटस की जानकारी।</p>
+                        <a href="https://socialjustice.haryana.gov.in" target="_blank">🔗 पेंशन पोर्टल देखें &rarr;</a>
+                    </div>
+                `;
+            }
         }
     </script>
 
