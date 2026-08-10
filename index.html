@@ -20,7 +20,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    /* टॉप फाउंडर बार */
+    /* टॉप फाउंडर बार और एडमिन बटन */
     .founder-bar {
       background: #1e3d2f;
       color: #ffeb3b;
@@ -31,7 +31,7 @@
       align-items: center;
       font-weight: bold;
     }
-    .admin-link {
+    .admin-btn {
       background: #ffeb3b;
       color: #333;
       border: none;
@@ -39,8 +39,8 @@
       border-radius: 4px;
       font-size: 11px;
       font-weight: bold;
-      text-decoration: none;
       cursor: pointer;
+      text-decoration: none;
     }
 
     /* मुख्य हरा बैनर */
@@ -98,15 +98,15 @@
     .mandi-badge {
       background: #2e7d32;
       color: white;
-      padding: 3px 8px;
+      padding: 2px 6px;
       border-radius: 4px;
-      font-size: 12px;
+      font-size: 11px;
       display: inline-block;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       font-weight: bold;
     }
 
-    /* खोज सेक्शन (गाँव ऑटोमैटिक बदलने वाला) */
+    /* गाँव खोजने वाला मुख्य सेक्शन */
     .search-section {
       background: #ffffff;
       border: 1px solid #e0e0e0;
@@ -179,61 +179,16 @@
       font-size: 15px;
       margin-bottom: 12px;
     }
-
-    /* हरियाणा सरकार की मुख्य योजनाएं सेक्शन */
-    .scheme-section {
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
-      margin: 12px 12px 20px 12px;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-    }
-    .scheme-title {
-      color: #1b5e20;
-      margin: 0 0 2px 0;
-      font-size: 16px;
-      font-weight: bold;
-    }
-    .scheme-title-sub {
-      font-size: 12px;
-      color: #2d6a4f;
-      margin-bottom: 12px;
-      display: block;
-    }
-    .scheme-card {
-      background: #eef5eb;
-      border-left: 5px solid #1b5e20;
-      border-radius: 6px;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-    .scheme-card h4 {
-      margin: 0 0 3px 0;
-      color: #1b5e20;
-      font-size: 13px;
-    }
-    .scheme-card p {
-      margin: 0 0 5px 0;
-      font-size: 11.5px;
-      color: #444;
-    }
-    .scheme-card a {
-      text-decoration: none;
-      color: #1b5e20;
-      font-size: 11.5px;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
 
 <div class="portal-container">
 
-  <!-- संस्थापक बार और एडमिन पैनल लिंक -->
+  <!-- संस्थापक और एडमिन पैनल बटन -->
   <div class="founder-bar">
     <span>👩‍💻 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-    <a href="#" class="admin-link" onclick="openAdminPanel()">⚙️ Admin</a>
+    <button class="admin-btn" onclick="openAdmin()">⚙️ Admin</button>
   </div>
 
   <!-- मुख्य बैनर -->
@@ -252,22 +207,22 @@
     <div class="weather-right">27.9°C</div>
   </div>
 
-  <!-- लोकल न्यूज / मंडी भाव बार -->
+  <!-- न्यूज और मंडी भाव बार -->
   <div class="ticker-box">
     <span style="background: #f39c12; color: white; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: bold;">ताज़ा लोकल न्यूज़</span>
     <span style="font-size: 12px; margin-left: 5px;">जिम्मेदारी - totaltv.in • बिजली अपडेट जारी</span>
-    <div style="margin-top: 8px;">
+    <div style="margin-top: 6px;">
       <span class="mandi-badge">🌾 मंडी भाव</span>
       <div style="font-size: 12px; color: #333;">गेहूँ: ₹2300/क्विंटल | बाजरा: ₹2550/क्विंटल</div>
     </div>
   </div>
 
-  <!-- अपने गाँव की सेवाएँ खोजें (ऑटोमैटिक गाँव बदलने वाला सेक्शन) -->
+  <!-- अपने गाँव की सेवाएँ खोजें (ओरिजिनल लेआउट) -->
   <div class="search-section">
     <div class="search-title">🔍 अपने गाँव की सेवाएँ खोजें</div>
     
     <label class="label-text">1. जिला चुनें:</label>
-    <select id="district-select" class="dropdown-select" onchange="updateVillages()">
+    <select id="district-select" class="dropdown-select" onchange="loadVillages()">
       <option value="चरखी दादरी">चरखी दादरी</option>
       <option value="रोहतक">रोहतक</option>
       <option value="झज्जर">झज्जर</option>
@@ -285,56 +240,18 @@
     <button class="btn-green">दुकानें देखें</button>
   </div>
 
-  <!-- अन्य एक्शन बटन -->
-  <div style="padding: 0 12px;">
+  <!-- नीचे वाले एक्शन बटन -->
+  <div style="padding: 0 12px 20px 12px;">
     <a href="#" class="btn-green">+ अपनी दुकान / सेवा Yहाँ रजिस्टर करें (+ Add Shop)</a>
     <a href="#" class="btn-orange">🛒 ग्रामीण बाय-सेल मार्केटप्लेस (+ Add Ad)</a>
     <a href="#" class="btn-blue">+ My Near By Search with Location</a>
   </div>
 
-  <!-- हरियाणा सरकार की मुख्य योजनाएं (जिलावार) -->
-  <div class="scheme-section">
-    <h3 class="scheme-title">📜 हरियाणा सरकार की मुख्य योजनाएं</h3>
-    <span class="scheme-title-sub">(जिलावार लाइव पोर्टल)</span>
-    
-    <div id="scheme-cards">
-      <div class="scheme-card">
-        <h4>📁 जिला <span class="dist-name">चरखी दादरी</span> - परिवार पहचान पत्र (PPP)</h4>
-        <p>जिला नागरिक संसाधन सूचना विभाग, फैमिली आईडी सत्यापन व सुधार सेवा।</p>
-        <a href="https://meraparivar.haryana.gov.in/" target="_blank">🔗 पीपीपी पोर्टल देखें ➔</a>
-      </div>
-
-      <div class="scheme-card">
-        <h4>👵 जिला <span class="dist-name">चरखी दादरी</span> - सामाजिक सुरक्षा पेंशन</h4>
-        <p>बुढ़ापा, विधवा एवं विकलांग पेंशन आवेदन व स्टेटस जानकारी।</p>
-        <a href="https://pension.socialjusticehry.gov.in/" target="_blank">🔗 पेंशन पोर्टल देखें ➔</a>
-      </div>
-
-      <div class="scheme-card">
-        <h4>🕊️ जिला <span class="dist-name">चरखी दादरी</span> - दयालु योजना (डेथ क्लेम)</h4>
-        <p>मृत्यु या दिव्यांगता पर आर्थिक सहायता (PPP आधारित)।</p>
-        <a href="https://meraparivar.haryana.gov.in/" target="_blank">🔗 दयालु योजना पोर्टल देखें ➔</a>
-      </div>
-
-      <div class="scheme-card">
-        <h4>💼 जिला <span class="dist-name">चरखी दादरी</span> - कौशल रोजगार निगम (HKRN)</h4>
-        <p>कच्चे कर्मचारियों की भर्ती और जॉब रजिस्ट्रेशन।</p>
-        <a href="https://hkrnl.itiharyana.gov.in/" target="_blank">🔗 HKRN पोर्टल देखें ➔</a>
-      </div>
-
-      <div class="scheme-card">
-        <h4>🏥 जिला <span class="dist-name">चरखी दादरी</span> - चिरायु हरियाणा (आयुष्मान)</h4>
-        <p>5 लाख रुपये तक के मुफ्त इलाज के लिए गोल्डन कार्ड।</p>
-        <a href="https://chirayuayushmanharyana.in/" target="_blank">🔗 चिरायु पोर्टल देखें ➔</a>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 <script>
-  // जिलों के हिसाब से गाँव ऑटोमैटिक लोड करने का डेटा
-  const villageData = {
+  // सभी गाँवों का डेटा जो जिला बदलने पर अपने आप आएगा
+  const villagesData = {
     "चरखी दादरी": ["माल्कोश / Malkosh", "बाढड़ा", "झोझू कलां", "डडेरा", "गोपी"],
     "रोहतक": ["इ Ismaila-B", "मदीना", "कलानौर", "सांपला", "बोहर"],
     "झज्जर": ["बादली", "बेरी", "मातनहेल", "दुजाना", "छारा"],
@@ -343,37 +260,26 @@
     "जींद": ["जुलाना", "नरवाना", "सफीदों", "उचाना"]
   };
 
-  function updateVillages() {
-    let districtSelect = document.getElementById('district-select');
-    let villageSelect = document.getElementById('village-select');
-    let selectedDistrict = districtSelect.value;
+  function loadVillages() {
+    let district = document.getElementById('district-select').value;
+    let villageDropdown = document.getElementById('village-select');
+    villageDropdown.innerHTML = "";
 
-    // गाँव का ड्रॉपडाउन खाली करें
-    villageSelect.innerHTML = "";
-
-    // नए गाँवों की लिस्ट जोड़ें
-    if (villageData[selectedDistrict]) {
-      villageData[selectedDistrict].forEach(function(village) {
+    if(villagesData[district]) {
+      villagesData[district].forEach(function(v) {
         let opt = document.createElement('option');
-        opt.value = village;
-        opt.textContent = village;
-        villageSelect.appendChild(opt);
+        opt.value = v;
+        opt.textContent = v;
+        villageDropdown.appendChild(opt);
       });
     }
-
-    // नीचे योजनाओं में भी जिले का नाम बदलें
-    let distSpans = document.querySelectorAll('.dist-name');
-    distSpans.forEach(function(span) {
-      span.textContent = selectedDistrict;
-    });
   }
 
-  // एडमिन पैनल ओपन करने का फंक्शन
-  function openAdminPanel() {
-    let password = prompt("कृपया एडमिन पासवर्ड दर्ज करें:");
-    if (password === "1234" || password === "admin") {
-      alert("एडमिन पैनल में आपका स्वागत है! यहाँ से आप नए गाँव या सेवा जोड़ सकते हैं।");
-    } else if (password !== null) {
+  function openAdmin() {
+    let pass = prompt("एडमिन पासवर्ड दर्ज करें:");
+    if(pass === "1234" || pass === "admin") {
+      alert("एडमिन पैनल लॉगिन सफल!");
+    } else if(pass !== null) {
       alert("गलत पासवर्ड!");
     }
   }
