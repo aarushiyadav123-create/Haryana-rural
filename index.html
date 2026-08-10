@@ -3,168 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>लोकल डिजिटल पोर्टल - हरियाणा</title>
+    <title>लोकल डिजिटल पोर्टल</title>
     <style>
-        :root {
-            --primary-color: #ff6f00;
-            --bg-color: #f9f9f9;
-            --text-color: #333;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: linear-gradient(135deg, #ff8f00, #e65100);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .ram-ram-banner {
-            background-color: #fff3e0;
-            color: #d84315;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-bottom: 1px solid #ffe0b2;
-        }
-        .container {
-            padding: 15px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .btn-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .app-btn {
-            background: white;
-            border: 2px solid #ffb74d;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #e65100;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: 0.2s;
-        }
-        .app-btn:active {
-            transform: scale(0.98);
-            background: #fff8e1;
-        }
-        .section-card {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .section-card h3 {
-            margin-top: 0;
-            color: #e65100;
-        }
-        /* Hidden Admin Button Style */
-        .hidden-admin-area {
-            text-align: center;
-            margin-top: 30px;
-            opacity: 0.05; /* बहुत हल्का ताकि आम यूजर को आसानी से न दिखे */
-            transition: opacity 0.3s;
-        }
-        .hidden-admin-area:hover {
-            opacity: 1; /* छूने या होवर करने पर दिखेगा */
-        }
-        .admin-trigger-btn {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
+        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        /* पुरानी ग्रीन थीम */
+        header { background-color: #2e7d32; color: white; padding: 15px; text-align: center; }
+        .ram-ram { background-color: #c8e6c9; color: #1b5e20; padding: 10px; text-align: center; font-weight: bold; }
+        .container { padding: 15px; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .app-btn { background: white; border: 2px solid #2e7d32; padding: 15px; border-radius: 8px; text-align: center; color: #2e7d32; font-weight: bold; cursor: pointer; }
+        
+        /* नया डिस्प्ले एरिया */
+        #display-area { background: white; border: 2px solid #2e7d32; padding: 15px; border-radius: 8px; margin-top: 10px; display: none; }
+        .close-btn { background: #d32f2f; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; float: right; }
+        
+        /* एडमिन बटन */
+        .admin-area { text-align: center; margin-top: 20px; opacity: 0.05; }
+        .admin-area:hover { opacity: 1; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h2>गाँव और ज़िला डिजिटल पोर्टल</h2>
-    </header>
-
-    <!-- राम-राम अभिवादन बैनर -->
-    <div class="ram-ram-banner">
-        🙏 राम-राम भाइयो! आपके अपने इलाके का डिजिटल साथी
-    </div>
+    <header><h1>गाँव और ज़िला पोर्टल</h1></header>
+    <div class="ram-ram">🙏 राम-राम भाइयो!</div>
 
     <div class="container">
-        
-        <!-- मेन फीचर्स बटन ग्रिड -->
         <div class="btn-grid">
-            <div class="app-btn" onclick="openNearbySearch()">📍 My Nearby Search</div>
-            <div class="app-btn" onclick="openCategories()">📂 सभी कैटेगरीज</div>
-            <div class="app-btn" onclick="openEntertainment()">🎭 मनोरंजन & जोक्स</div>
-            <div class="app-btn" onclick="openShopQR()">📷 Shop QR Generator</div>
+            <div class="app-btn" onclick="show('📍 Nearby Search')">My Nearby Search</div>
+            <div class="app-btn" onclick="show('📂 Categories')">सभी कैटेगरीज</div>
+            <div class="app-btn" onclick="show('🎭 मनोरंजन')">मनोरंजन & जोक्स</div>
+            <div class="app-btn" onclick="show('📷 Shop QR')">Shop QR</div>
         </div>
 
-        <!-- मनोरंजन / टाइम-पास विजेट -->
-        <div class="section-card">
-            <h3>🌟 आज का खास</h3>
-            <p id="daily-joke">"हरियाणवी चुटकुला: ताऊ बोले — बेटा इंटरनेट पे न्यूटन का नियम तो ठीक है, पर यो बता कैटلي (केतली) में चाय कड़की कैयाँ होवै है!"</p>
-            <button onclick="changeJoke()" style="background:#ffb74d; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; font-weight:bold;">दूसरा चुटकुला देखें</button>
+        <div id="display-area">
+            <button class="close-btn" onclick="hide()">बंद करें</button>
+            <div id="content"></div>
         </div>
-
     </div>
 
-    <!-- सीक्रेट एडमिन बटन (जो सामान्य रूप से छिपा रहता है) -->
-    <div class="hidden-admin-area">
-        <button class="admin-trigger-btn" onclick="checkAdminLogin()">🔒 Admin Login</button>
+    <div class="admin-area">
+        <button onclick="adminLogin()">Admin Login</button>
     </div>
 
     <script>
-        function openNearbySearch() {
-            alert("लोकेशन चालू हो रही है... आपके आसपास के बैंक, एटीएम, दुकानें और फैक्ट्रियां खोजी जा रही हैं!");
+        function show(text) {
+            document.getElementById('content').innerHTML = "<h3>" + text + "</h3><p>यहाँ जानकारी अपडेट हो रही है...</p>";
+            document.getElementById('display-area').style.display = "block";
         }
-
-        function openCategories() {
-            alert("कैटेगरीज खुल रही हैं: किराना, मेडिकल, होटल, बैंक और जॉब्स!");
-        }
-
-        function openEntertainment() {
-            alert("मनोरंजन सेक्शन: हरियाणवी किस्से और पहेलियाँ लोड हो रही हैं!");
-        }
-
-        function openShopQR() {
-            alert("दुकान का QR कोड जनरेटर और स्कैनर खुल रहा है!");
-        }
-
-        function changeJoke() {
-            const jokes = [
-                "ताऊ: भाई इब मोबाइल में ही सब कुछ आ लिया, बस खेत जोतने वाली मशीन और रहनी बाकी है!",
-                "बालक: मास्टर जी, अंग्रेजी में 'कैट' माने बिल्ली होवै है, फेर 'कैटलॉग' का मतलब बिल्ली की आग होवै है क्या?",
-                "सुमित: भाई आज मौसम सुहाना है, चाय पी ली के?"
-            ];
-            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-            document.getElementById("daily-joke").innerText = '"' + randomJoke + '"';
-        }
-
-        // पासवर्ड प्रोटेक्टेड एडमिन लॉगिन (पासवर्ड: sub123)
-        function checkAdminLogin() {
-            let password = prompt("कृपया एडमिन पासवर्ड दर्ज करें:");
-            if (password === "sub123") {
-                alert("सफलतापूर्वक लॉगिन हो गया! अब आप एडमिन पैनल मैनेज कर सकते हैं।");
-            } else if (password !== null) {
-                alert("गलत पासवर्ड! एक्सेस अस्वीकृत।");
-            }
+        function hide() { document.getElementById('display-area').style.display = "none"; }
+        
+        function adminLogin() {
+            let pass = prompt("पासवर्ड दर्ज करें:");
+            if (pass === "sub123") alert("लॉगिन सफल!");
+            else alert("गलत पासवर्ड!");
         }
     </script>
-
 </body>
 </html>
