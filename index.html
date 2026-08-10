@@ -148,7 +148,6 @@
             border-color: #1b5e20;
         }
 
-        /* केवल एकमात्र 'Add Shop' बटन श्रेणी के नीचे */
         .single-action-bar {
             margin-top: 12px;
         }
@@ -241,20 +240,21 @@
     </div>
 
     <div class="founder-bar">
-        <span id="txt-founder">🌾 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
+        <span id="txt-founder">🌾 Founder: Kusum w/o Rajesh यादव Malkosh</span>
         <button class="lang-btn" onclick="toggleLanguage()" id="lang-toggle-btn">हिन्दी / English</button>
     </div>
 
     <header>
-        <h1 id="txt-header-title">हरियाणा ग्रामीण सेवा</h1>
-        <span class="portal-badge" id="txt-badge">गाँव की हर दुकान, हर सेवा - आपके मोबाइल पर</span>
+        <h1 id="txt-header-title">Haryana Grameen Seva</h1>
+        <span class="portal-badge" id="txt-badge">Every village shop, every service - on your mobile</span>
         <button class="menu-btn" onclick="toggleMenu()">+</button>
     </header>
 
     <div id="menu" class="dropdown">
-        <a href="#" onclick="openFeature('schemes')">📜 <span id="m-schemes">सरकारी योजनाएँ</span></a>
-        <a href="#" onclick="openFeature('jokes')">🎭 <span id="m-jokes">हरियाणवी लोकल चुटकुले</span></a>
-        <a href="#" onclick="openFeature('qr')">📱 <span id="m-qr">Shop QR Code जनरेटर</span></a>
+        <a href="#" onclick="openFeature('buysell')">🛒 <span id="m-buysell">गाँव का Buy-Sell (खरीद-बिक्री)</span></a>
+        <a href="#" onclick="openFeature('schemes')">📜 <span id="m-schemes">Govt Schemes</span></a>
+        <a href="#" onclick="openFeature('jokes')">🎭 <span id="m-jokes">Haryanvi Local Jokes</span></a>
+        <a href="#" onclick="openFeature('qr')">📱 <span id="m-qr">Shop QR Code Generator</span></a>
         <a href="#" onclick="adminLogin()">🔒 <span id="m-admin">Admin Panel</span></a>
     </div>
 
@@ -266,10 +266,10 @@
         </div>
 
         <div class="search-card">
-            <h3 id="txt-search-title">🔍 अपने गाँव की सेवाएँ खोजें</h3>
+            <h3 id="txt-search-title">🔍 Search Village Services</h3>
             
             <div class="form-group">
-                <label id="txt-lbl-dist">जिला चुनें:</label>
+                <label id="txt-lbl-dist">Select District:</label>
                 <select id="district-select" onchange="updateVillages()">
                     <option value="mahendragarh">महेंद्रगढ़ (माल्कोश)</option>
                     <option value="charkhi_dadri">चरखी दादरी</option>
@@ -281,7 +281,7 @@
             </div>
 
             <div class="form-group">
-                <label id="txt-lbl-vill">गाँव चुनें या लिखें:</label>
+                <label id="txt-lbl-vill">Select or Type Village:</label>
                 <select id="village-select" style="margin-bottom: 5px;">
                     <option value="malkosh">माल्कोश</option>
                     <option value="kachri">कचरी</option>
@@ -292,7 +292,7 @@
             </div>
 
             <div class="form-group">
-                <label id="txt-lbl-cat">श्रेणी चुनें:</label>
+                <label id="txt-lbl-cat">Select Category:</label>
                 <div class="categories-scroll">
                     <div class="cat-chip active" onclick="selectCategory(this)">सभी सेवाएँ</div>
                     <div class="cat-chip" onclick="selectCategory(this)">🛒 शॉप/किराना</div>
@@ -302,20 +302,19 @@
                 </div>
             </div>
 
-            <!-- केवल एकमात्र 'Add Shop' बटन श्रेणी के नीचे (लोकेशन और फोटो फॉर्म के अंदर खुलेंगे) -->
             <div class="single-action-bar">
                 <button class="single-btn" onclick="openFeature('add')">➕ Add Shop (दुकान जोड़ें)</button>
             </div>
         </div>
 
         <div class="list-section">
-            <h3 id="txt-list-title">📋 उपलब्ध लिस्ट</h3>
+            <h3 id="txt-list-title">📋 Available List</h3>
             
             <div class="item-card">
                 <span class="verified-badge" id="badge-verified">✔ सत्यापित</span>
-                <h4>Kusum kiryana store - <span id="txt-owner">संचालक</span>: Pooja</h4>
-                <p>📍 <span id="txt-addr">पता</span>: Near Shiv Mandir Bamla Road, माल्कोश</p>
-                <p>📞 <span id="txt-contact">संपर्क</span>: 9992821782</p>
+                <h4>Kusum kiryana store - <span id="txt-owner">Owner</span>: Pooja</h4>
+                <p>📍 <span id="txt-addr">Address</span>: Near Shiv Mandir Bamla Road, माल्कोश</p>
+                <p>📞 <span id="txt-contact">Contact</span>: 9992821782</p>
                 <p style="font-size: 0.75rem; color: #2e7d32; font-weight: bold;">श्रेणी: किराना / शॉप</p>
                 <button class="qr-btn" onclick="showShopQR('Kusum Kiryana Store', '9992821782')">📱 Shop QR Code देखें</button>
             </div>
@@ -373,6 +372,7 @@
                 document.getElementById('txt-addr').innerText = "Address";
                 document.getElementById('txt-contact').innerText = "Contact";
                 
+                document.getElementById('m-buysell').innerText = "Village Buy-Sell (खरीद-बिक्री)";
                 document.getElementById('m-schemes').innerText = "Govt Schemes";
                 document.getElementById('m-jokes').innerText = "Haryanvi Local Jokes";
                 document.getElementById('m-qr').innerText = "Shop QR Code Generator";
@@ -392,6 +392,7 @@
                 document.getElementById('txt-addr').innerText = "पता";
                 document.getElementById('txt-contact').innerText = "संपर्क";
 
+                document.getElementById('m-buysell').innerText = "गाँव का Buy-Sell (खरीद-बिक्री)";
                 document.getElementById('m-schemes').innerText = "सरकारी योजनाएँ";
                 document.getElementById('m-jokes').innerText = "हरियाणवी लोकल चुटकुले";
                 document.getElementById('m-qr').innerText = "Shop QR Code जनरेटर";
@@ -444,7 +445,6 @@
             box.style.display = 'block';
 
             if (type === 'add') {
-                // Add Shop फॉर्म, जिसमें लोकेशन और फोटो अपलोड अंदर ही दिए गए हैं
                 content.innerHTML = `
                     <h3 style="color:#1b5e20; margin-top:0;">➕ Add Shop / नई दुकान जोड़ें</h3>
                     <input type="text" placeholder="दुकान का नाम (Shop Name)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
@@ -463,6 +463,15 @@
                     </div>
 
                     <button style="background:#1b5e20; color:white; border:none; padding:9px; width:100%; font-weight:bold; border-radius:5px; cursor:pointer;" onclick="alert('दुकान सफलतापूर्वक सबमिट हो गई है! एडमिन अप्रूवल के बाद यह लिस्ट में दिखेगी।')">सबमिट करें</button>
+                `;
+            } else if (type === 'buysell') {
+                content.innerHTML = `
+                    <h3 style="color:#1b5e20; margin-top:0;">🛒 गाँव का Buy-Sell (खरीद-बिक्री)</h3>
+                    <p style="font-size:0.85rem; color:#555;">अपने गाँव में पुरानी बाइक, पशु, या कृषि यंत्र बेचने या खरीदने के लिए विज्ञापन डालें:</p>
+                    <input type="text" placeholder="चीज़ का नाम (जैसे: भैंस, ट्रैक्टर, मोटरसाइकिल)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
+                    <input type="text" placeholder="कीमत (Price)" style="width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box;">
+                    <input type="text" placeholder="मोबाइल नंबर" style="width:100%; padding:8px; margin-bottom:8px; box-sizing:border-box;">
+                    <button style="background:#1b5e20; color:white; border:none; padding:9px; width:100%; font-weight:bold; border-radius:5px; cursor:pointer;" onclick="alert('आपका विज्ञापन Buy-Sell में जोड़ दिया गया है!')">विज्ञापन पोस्ट करें</button>
                 `;
             } else if (type === 'jokes') {
                 content.innerHTML = `
