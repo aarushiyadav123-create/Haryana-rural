@@ -64,7 +64,7 @@
       cursor: pointer;
     }
 
-    /* फसल कैलकुलेटर (बिल्कुल एक लाइन में) */
+    /* फसल कैलकुलेटर (एक लाइन में) */
     .calculator-box {
       background: #ffffff;
       border: 1px solid #d4edda;
@@ -109,7 +109,7 @@
       text-align: right;
     }
 
-    /* गाँव और अन्य बटन */
+    /* गाँव और अन्य बटन (पुरानी स्क्रीन का क्रम) */
     .action-box {
       background: #ffffff;
       border: 1px solid #ddd;
@@ -242,32 +242,7 @@
 
 <div class="portal-container">
 
-  <!-- AI ग्रामीण असिस्टेंट -->
-  <div class="ai-box">
-    <div class="ai-title">🤖 AI ग्रामीण असिस्टेन्ट (सवाल पूछें)</div>
-    <div class="ai-chat-display" id="chat-display">
-      <div><b>असिस्टेंट:</b> नमस्ते! खेती, मौसम, मंडी भाव या सरकारी योजनाओं के बारे में पूछ सकते हैं।</div>
-    </div>
-    <div class="ai-input-group">
-      <input type="text" id="user-input" placeholder="यहाँ अपना सवाल लिखें...">
-      <button onclick="handleAIQuery()">भेजें</button>
-    </div>
-  </div>
-
-  <!-- फसल भाव कैलकुलेटर (एक लाइन में) -->
-  <div class="calculator-box">
-    <div class="calc-title">🌾 फसल भाव कैलकुलेटर</div>
-    <div class="calc-inline">
-      <select id="crop-rate" onchange="calculateCrop()">
-        <option value="2300">गेहूँ (₹2300)</option>
-        <option value="2550">बाजरा (₹2550)</option>
-      </select>
-      <input type="number" id="crop-wt" placeholder="क्विंटल" oninput="calculateCrop()">
-      <div class="calc-result" id="calc-res">कुल: ₹0</div>
-    </div>
-  </div>
-
-  <!-- गाँव चुनें और अन्य बटन -->
+  <!-- 1. गाँव चुनें और अन्य बटन (जो आपकी पुरानी स्क्रीन में ऊपर थे) -->
   <div class="action-box">
     <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">2. गाँव चुनें:</div>
     <select class="action-dropdown">
@@ -280,7 +255,32 @@
   <a href="#" class="btn-orange">🛒 ग्रामीण बाय-सेल मार्केटप्लेस (+ Add Ad)</a>
   <a href="#" class="btn-blue">+ My Near By Search with Location</a>
 
-  <!-- हरियाणा सरकार की मुख्य योजनाएं (जिलावार) -->
+  <!-- 2. AI ग्रामीण असिस्टेंट -->
+  <div class="ai-box">
+    <div class="ai-title">🤖 AI ग्रामीण असिस्टेन्ट (सवाल पूछें)</div>
+    <div class="ai-chat-display" id="chat-display">
+      <div><b>असिस्टेंट:</b> नमस्ते! खेती, मौसम, मंडी भाव या सरकारी योजनाओं के बारे में पूछ सकते हैं।</div>
+    </div>
+    <div class="ai-input-group">
+      <input type="text" id="user-input" placeholder="यहाँ अपना सवाल लिखें...">
+      <button onclick="handleAIQuery()">भेजें</button>
+    </div>
+  </div>
+
+  <!-- 3. फसल भाव कैलकुलेटर (एक लाइन में) -->
+  <div class="calculator-box">
+    <div class="calc-title">🌾 फसल भाव कैलकुलेटर</div>
+    <div class="calc-inline">
+      <select id="crop-rate" onchange="calculateCrop()">
+        <option value="2300">गेहूँ (₹2300)</option>
+        <option value="2550">बाजरा (₹2550)</option>
+      </select>
+      <input type="number" id="crop-wt" placeholder="क्विंटल" oninput="calculateCrop()">
+      <div class="calc-result" id="calc-res">कुल: ₹0</div>
+    </div>
+  </div>
+
+  <!-- 4. हरियाणा सरकार की मुख्य योजनाएं (जिलावार) -->
   <div class="scheme-section">
     <h3 class="scheme-title">📜 हरियाणा सरकार की मुख्य योजनाएं</h3>
     <span class="scheme-title-sub">(जिलावार लाइव पोर्टल)</span>
