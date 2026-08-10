@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल (फुल वर्जन)</title>
+  <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,12 +17,12 @@
       margin: 0 auto;
       background: #ffffff;
       min-height: 100vh;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     .founder-bar {
       background: #1e3d2f;
       color: #ffeb3b;
-      padding: 10px 15px;
+      padding: 10px 14px;
       font-size: 13px;
       display: flex;
       justify-content: space-between;
@@ -33,7 +33,7 @@
       background: #ffeb3b;
       color: #333;
       border: none;
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 4px;
       font-size: 11px;
       font-weight: bold;
@@ -43,14 +43,14 @@
       background: #1b5e20;
       color: white;
       text-align: center;
-      padding: 30px 15px;
+      padding: 25px 15px;
     }
     .hero-banner h1 {
-      margin: 0 0 8px 0;
-      font-size: 26px;
+      margin: 0 0 6px 0;
+      font-size: 24px;
     }
     .hero-banner p {
-      margin: 0 0 12px 0;
+      margin: 0 0 10px 0;
       font-size: 13px;
       opacity: 0.9;
     }
@@ -64,8 +64,8 @@
     .welcome-box {
       background: #fff8e1;
       border: 1px solid #ffe082;
-      margin: 15px;
-      padding: 12px;
+      margin: 12px;
+      padding: 10px;
       border-radius: 8px;
       text-align: center;
       font-size: 14px;
@@ -77,47 +77,18 @@
       background: #27ae60;
       color: white;
       text-align: center;
-      margin: 0 15px 15px 15px;
-      padding: 11px;
+      margin: 0 12px 12px 12px;
+      padding: 10px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
       font-size: 13px;
     }
-    
-    /* सेवा कार्ड सेक्शन */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      padding: 0 15px;
-      margin-bottom: 15px;
-    }
-    .service-card {
-      background: #f9f9f9;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      transition: 0.2s;
-    }
-    .service-card h3 {
-      margin: 0 0 5px 0;
-      font-size: 14px;
-      color: #1b5e20;
-    }
-    .service-card p {
-      margin: 0;
-      font-size: 11px;
-      color: #666;
-    }
-
-    /* AI ग्रामीण असिस्टेंट बॉक्स */
     .ai-box {
       background: #ffffff;
       border: 1px solid #bce8f1;
       border-radius: 12px;
-      margin: 15px;
+      margin: 12px;
       padding: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
@@ -137,7 +108,7 @@
       border: 1px solid #bce8f1;
       border-radius: 8px;
       padding: 10px;
-      height: 110px;
+      height: 90px;
       overflow-y: auto;
       font-size: 12px;
       margin-bottom: 10px;
@@ -149,7 +120,7 @@
     }
     .ai-input-group input {
       flex: 1;
-      padding: 10px;
+      padding: 9px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 13px;
@@ -159,45 +130,16 @@
       background: #2980b9;
       color: white;
       border: none;
-      padding: 10px 16px;
+      padding: 9px 14px;
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
     }
-
-    /* डायरेक्ट्री और पंचायत लिस्टिंग */
-    .directory-section {
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      margin: 15px;
-      padding: 15px;
-    }
-    .directory-title {
-      font-size: 15px;
-      font-weight: bold;
-      color: #1b5e20;
-      margin-bottom: 10px;
-    }
-    .directory-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      font-size: 13px;
-    }
-    .directory-list li {
-      padding: 8px 10px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    /* मौसम विजेट */
     .weather-box {
       background: #00838f;
       color: white;
-      margin: 15px;
-      padding: 14px 18px;
+      margin: 12px;
+      padding: 12px 15px;
       border-radius: 10px;
       display: flex;
       justify-content: space-between;
@@ -207,16 +149,8 @@
       font-size: 13px;
     }
     .weather-right {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
-    }
-    
-    .footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 11px;
-      color: #777;
-      background: #f1f1f1;
     }
   </style>
 </head>
@@ -224,7 +158,7 @@
 
 <div class="portal-container">
 
-  <!-- संस्थापक और ट्रांसलेट बार -->
+  <!-- संस्थापक और ट्रांसलेट बटन -->
   <div class="founder-bar">
     <span>👩‍💻 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
     <button class="translate-btn">🌐 English (Translate)</button>
@@ -239,7 +173,7 @@
 
   <!-- वेलकम मैसेज -->
   <div class="welcome-box">
-    राम-राम भाइयो! इस डिजिटल ग्राम पोर्टल पर आपका स्वागत है
+    राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है
   </div>
 
   <!-- व्हाट्सएप शेयर बटन -->
@@ -247,50 +181,17 @@
     📢 इस डिजिटल पोर्टल को WhatsApp पर शेयर करें
   </a>
 
-  <!-- ग्रामीण सेवा कार्ड्स -->
-  <div class="services-grid">
-    <div class="service-card">
-      <h3>🛒 स्थानीय दुकानें</h3>
-      <p>गाँव के किराना व स्टोर</p>
-    </div>
-    <div class="service-card">
-      <h3>🌾 कृषि व मंडी</h3>
-      <p>ताज़ा फसल व भाव</p>
-    </div>
-    <div class="service-card">
-      <h3>📜 सरकारी योजना</h3>
-      <p>पेंशन, पीपीपी व अन्य</p>
-    </div>
-    <div class="service-card">
-      <h3>📞 आपातकालीन</h3>
-      <p>सरपंच, डॉक्टर व पुलिस</p>
-    </div>
-  </div>
-
   <!-- AI ग्रामीण असिस्टेंट बॉक्स -->
   <div class="ai-box">
     <div class="ai-title">🤖 AI ग्रामीण असिस्टेन्ट (सवाल पूछें या दुकान/एड भेजें)</div>
     <div class="ai-desc">आप कुछ भी पूछ सकते हैं या दुकान/एड जोड़ सकते हैं (जैसे: मेरी दुकान जोड़ो...):</div>
-    
     <div class="ai-chat-display" id="chat-display">
       <div><b>असिस्टेंट:</b> राम-राम! मैं आपका AI असिस्टेंट हूँ। आप मौसम, मंडी भाव या खेती से जुड़ा कोई भी सवाल पूछ सकते हैं, या दुकान/विज्ञापन भेजने के लिए कह सकते हैं!</div>
     </div>
-    
     <div class="ai-input-group">
       <input type="text" id="user-input" placeholder="यहाँ अपना सवाल या संदेश लिखें...">
       <button onclick="handleAIQuery()">भेजें</button>
     </div>
-  </div>
-
-  <!-- ग्राम पंचायत और डायरेक्ट्री सेक्शन -->
-  <div class="directory-section">
-    <div class="directory-title">📋 ग्राम संपर्क एवं महत्वपूर्ण डायरेक्ट्री</div>
-    <ul class="directory-list">
-      <li><span>सरपंच महोदय (ग्राम पंचायत)</span> <strong>98765XXXXX</strong></li>
-      <li><span>ग्राम सचिव (Development Office)</span> <strong>94160XXXXX</strong></li>
-      <li><span>पशु अस्पताल / डॉक्टर</span> <strong>99112XXXXX</strong></li>
-      <li><span>कोटा डीलर / राशन डिपो</span> <strong>98123XXXXX</strong></li>
-    </ul>
   </div>
 
   <!-- मौसम विजेट -->
@@ -300,11 +201,6 @@
       हवा की गति: 7.3 km/h | स्थिति: साफ एवं धूप
     </div>
     <div class="weather-right">27.9°C</div>
-  </div>
-
-  <!-- फुटर -->
-  <div class="footer">
-    © सर्वाधिकार सुरक्षित - हरियाणा ग्रामीण सेवा पोर्टल (डिजिटल माल्कोश)
   </div>
 
 </div>
@@ -328,8 +224,6 @@
       botReply = "धन्यवाद! आपकी दुकान की जानकारी दर्ज करने की प्रक्रिया शुरू कर दी गई है।";
     } else if(lowerQuery.includes('भाव') || lowerQuery.includes('mandi')) {
       botReply = "वर्तमान मंडी भाव: गेहूँ ₹2300/क्विंटल और बाजरा ₹2550/क्विंटल है।";
-    } else if(lowerQuery.includes('सरपंच') || lowerQuery.includes('number')) {
-      botReply = "सरपंच साहब का संपर्क नंबर डायरेक्ट्री सेक्शन में नीचे दिया गया है।";
     }
 
     setTimeout(() => {
