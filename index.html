@@ -63,7 +63,7 @@
         .shop-info h4 { color: var(--primary); font-size: 1rem; }
         .shop-info p { font-size: 0.82rem; color: #666; margin-top: 3px; }
 
-        /* Gallery - Single Horizontal Scroll Line */
+        /* Public Gallery - Single Line Horizontal Scroll */
         .gallery-single-line { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scroll-behavior: smooth; }
         .gallery-single-line::-webkit-scrollbar { height: 6px; }
         .gallery-single-line::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
@@ -86,7 +86,7 @@
         .ai-msg-bot { background: #e1f5fe; color: #01579b; padding: 8px 12px; border-radius: 8px; align-self: flex-start; max-width: 85%; }
         .ai-msg-user { background: #e8f5e9; color: #1b5e20; padding: 8px 12px; border-radius: 8px; align-self: flex-end; max-width: 85%; text-align: right; }
 
-        .scheme-item { background: #e1f5fe; border-left: 4px solid var(--govt-blue); padding: 10px; margin-bottom: 8px; border-radius: 6px; font-size: 0.85rem; }
+        .scheme-item { background: #e1f5fe; border-left: 4px solid var(--govt-blue); padding: 10px; margin-bottom: 10px; border-radius: 6px; font-size: 0.85rem; }
 
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
@@ -119,32 +119,6 @@
             </button>
         </div>
 
-        <!-- NEW: Haryana Govt Schemes Section with Toggle + Button -->
-        <div class="toggle-bar toggle-bar-govt" onclick="toggleSection('govtSchemesBox', 'toggleIconGovt')">
-            <span>🏛️ हरियाणा सरकारी योजनाएं (+ Haryana Schemes)</span>
-            <span id="toggleIconGovt">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="govtSchemesBox" style="border-color: var(--govt-blue);">
-            <h2 style="color: var(--govt-blue); font-size: 1.1rem; margin-bottom: 10px;">📋 मुख्य हरियाणा राज्य योजनाएं</h2>
-            
-            <div class="scheme-item">
-                <strong>🌾 मेरी फसल मेरा ब्योरा (MFMB):</strong> कृषि उपज बिक्री एवं प्राकृतिक आपदा राहत हेतु रजिस्ट्रेशन।
-            </div>
-            <div class="scheme-item">
-                <strong>🆔 परिवार पहचान पत्र (PPP):</strong> हरियाणा राशन कार्ड, पेंशन व सरकारी योजनाओं हेतु मुख्य ID।
-            </div>
-            <div class="scheme-item">
-                <strong>💧 मेरा पानी मेरी विरासत:</strong> धान की जगह अन्य फसल उगाने पर ₹7000 प्रति एकड़ सहायता।
-            </div>
-
-            <div class="btn-box" style="margin-top: 15px;">
-                <a href="https://saralharyana.gov.in/" target="_blank" class="custom-btn btn-govt">
-                    🔗 सरल हरियाणा पोर्टल पर जाएं (Apply Online) ↗
-                </a>
-            </div>
-        </div>
-
         <div class="ai-chat-box">
             <h3 style="font-size: 0.95rem; color: #1565c0; margin-bottom: 8px;">🤖 AI ग्रामीण असिस्टेंट</h3>
             <p style="font-size: 0.78rem; color: #555; margin-bottom: 8px;">मौसम, मंडी भाव या दुकान जोड़ने से जुड़ा सवाल पूछें:</p>
@@ -169,7 +143,7 @@
             <span class="news-title-tag">📢 ताज़ा न्यूज़</span>
             <div class="news-ticker">
                 <marquee id="autoNewsTicker" behavior="scroll" direction="left" scrollamount="5">
-                    हरियाणा ग्रामीण विकास योजना 2026 के तहत नई सड़कों की स्वीकृति | कृषि सब्सिडी पोर्टल शुरू।
+                    हरियाणा ग्रामीण विकास योजना 2026 के तहत नई सड़कों की स्वीकृति | कृषि सब्सिडी व HKRN भर्ती पोर्टल शुरू।
                 </marquee>
             </div>
         </div>
@@ -183,6 +157,7 @@
             </div>
         </div>
 
+        <!-- Search Section -->
         <div class="card">
             <h2>🔍 अपने गाँव की सेवाएँ खोजें</h2>
             <div class="form-group">
@@ -199,6 +174,18 @@
                     <option value="ambala">अंबाला (Ambala)</option>
                     <option value="karnal">करनाल (Karnal)</option>
                     <option value="sonipat">सोनीपत (Sonipat)</option>
+                    <option value="panipat">पानीपत (Panipat)</option>
+                    <option value="faridabad">फरीदाबाद (Faridabad)</option>
+                    <option value="rewari">रेवाड़ी (Rewari)</option>
+                    <option value="palwal">पलवल (Palwal)</option>
+                    <option value="yamunanagar">यमुनानगर (Yamunanagar)</option>
+                    <option value="kurukshetra">कुरुक्षेत्र (Kurukshetra)</option>
+                    <option value="jind">जींद (Jind)</option>
+                    <option value="kaithal">कैथल (Kaithal)</option>
+                    <option value="fatehabad">फतेहाबाद (Fatehabad)</option>
+                    <option value="panchkula">पंचकुला (Panchkula)</option>
+                    <option value="nuh">नूंह (Nuh)</option>
+                    <option value="mahendragarh">महेंद्रगढ़ (Mahendragarh)</option>
                 </select>
             </div>
 
@@ -247,7 +234,7 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव चुनें (केवल चुने हुए जिले के गाँव उपलब्ध होंगे):</label>
+                <label>गाँव चुनें:</label>
                 <select id="regVillageSelect">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
@@ -322,7 +309,7 @@
             </div>
         </div>
 
-        <!-- PUBLIC GALLERY: Single Line Horizontal Scroll -->
+        <!-- PUBLIC GALLERY: Single Line Horizontal View -->
         <div class="card" style="border: 1px solid #ddd;">
             <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 10px;">🏛️ गाँव गैलरी व दर्शनीय स्थल (Public Gallery):</h3>
             <div id="publicPlacesContainer" class="gallery-single-line"></div>
@@ -366,6 +353,40 @@
         <div class="card" style="border: 1px solid #ddd;">
             <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 10px;">📋 उपलब्ध विज्ञापन (Listings):</h3>
             <div id="buySellListContainer"></div>
+        </div>
+
+        <!-- Haryana Government Schemes Below Buy/Sell -->
+        <div class="toggle-bar toggle-bar-govt" onclick="toggleSection('govtSchemesBox', 'toggleIconGovt')">
+            <span>🏛️ हरियाणा सरकारी योजनाएं (+ Haryana Govt Schemes)</span>
+            <span id="toggleIconGovt">▼</span>
+        </div>
+
+        <div class="collapsible-form-container" id="govtSchemesBox" style="border-color: var(--govt-blue);">
+            <h2 style="color: var(--govt-blue); font-size: 1.1rem; margin-bottom: 10px;">📋 मुख्य हरियाणा सरकारी योजनाएं</h2>
+            
+            <div class="scheme-item">
+                <strong>💼 HKRN (हरियाणा कौशल रोज़गार निगम):</strong> संविदा (Contractual) सरकारी नौकरियों के लिए ऑनलाइन रजिस्ट्रेशन एवं आवेदन।
+                <br><a href="https://hkrnl.itiharyana.gov.in/" target="_blank" style="color:var(--govt-blue); font-weight:bold; font-size:0.8rem;">👉 HKRN पोर्टल पर जाएं ↗</a>
+            </div>
+
+            <div class="scheme-item">
+                <strong>💔 दयालु योजना (DAYALU Death Claim):</strong> दुर्घटनावश मृत्यु या दिव्यांगता पर ₹1 लाख से ₹5 लाख तक की आर्थिक सहायता (PPP ID आवश्यक)।
+                <br><a href="https://dapsy.finhry.gov.in/" target="_blank" style="color:var(--govt-blue); font-weight:bold; font-size:0.8rem;">👉 दयालु योजना क्लेम पोर्टल ↗</a>
+            </div>
+
+            <div class="scheme-item">
+                <strong>🌾 मेरी फसल मेरा ब्योरा (MFMB):</strong> कृषि उपज सरकारी मंडी बिक्री व फसल नुकसान भरपाई हेतु पोर्टल।
+            </div>
+
+            <div class="scheme-item">
+                <strong>🆔 परिवार पहचान पत्र (PPP):</strong> हरियाणा राशन कार्ड, पेंशन व अन्य सभी सरकारी सेवाओं की मुख्य ID।
+            </div>
+
+            <div class="btn-box" style="margin-top: 15px;">
+                <a href="https://saralharyana.gov.in/" target="_blank" class="custom-btn btn-govt">
+                    🔗 अंत्योदय सरल हरियाणा पोर्टल (Apply Online) ↗
+                </a>
+            </div>
         </div>
 
         <div class="card" style="border-left: 4px solid #d32f2f; padding: 12px;">
@@ -416,17 +437,30 @@
     </footer>
 
     <script>
+        // Comprehensive Haryana Districts & Villages List
         const villagesData = {
-            charkhi_dadri: ["माल्कोश", "बाढड़ा", "झुझू", "चरखी दादरी", "बॉन्ड कलां", "अचिना"],
-            rohtak: ["सांपला", "कलानौर", "महम", "किलोई", "लाखनमाजरा", "बोहर", "गढ़ी सांपला"],
-            bhiwani: ["बवानी खेड़ा", "तोशाम", "सिवाणी", "लोहारू", "तिगड़ाना", "गुज़रानी"],
-            hisar: ["हंसी", "आदमपुर", "बरवाला", "उकलाना", "नारनौंद", "बांस"],
-            jhajjar: ["बहादुरगढ़", "बेरी", "मातनहेल", "बादली", "साल्हावास"],
-            gurugram: ["सोहना", "पटौदी", "फरुखनगर", "मानसर"],
-            sirsa: ["डबवाली", "एलानाबाद", "रनिया", "कालावाली"],
-            ambala: ["नारायणगढ़", "बराड़ा", "शहजादपुर"],
-            karnal: ["घरौंडा", "असंध", "इंद्री", "तरावड़ी"],
-            sonipat: ["गन्नौर", "गोहाना", "खरखौदा", "राई"]
+            charkhi_dadri: ["माल्कोश", "बाढड़ा", "झुझू", "चरखी दादरी", "बॉन्ड कलां", "अचिना", "सांकरोद", "मानकावास"],
+            rohtak: ["सांपला", "कलानौर", "महम", "किलोई", "लाखनमाजरा", "बोहर", "गढ़ी सांपला", "बलांद"],
+            bhiwani: ["बवानी खेड़ा", "तोशाम", "सिवाणी", "लोहारू", "तिगड़ाना", "गुज़रानी", "धनाना"],
+            hisar: ["हंसी", "आदमपुर", "बरवाला", "उकलाना", "नारनौंद", "बांस", "सातरोड"],
+            jhajjar: ["बहादुरगढ़", "बेरी", "मातनहेल", "बादली", "साल्हावास", "छारा", "दुजाना"],
+            gurugram: ["सोहना", "पटौदी", "फरुखनगर", "मानसर", "बिलासपुर"],
+            sirsa: ["डबवाली", "एलानाबाद", "रनिया", "कालावाली", "माधोसिंघाना"],
+            ambala: ["नारायणगढ़", "बराड़ा", "शहजादपुर", "मुलाना"],
+            karnal: ["घरौंडा", "असंध", "इंद्री", "तरावड़ी", "कुंजपुरा"],
+            sonipat: ["गन्नौर", "गोहाना", "खरखौदा", "राई", "मुरथल"],
+            panipat: ["समालखा", "इसराना", "बापोली", "मडलौडा"],
+            faridabad: ["बल्लभगढ़", "तिगांव", "मोहना"],
+            rewari: ["बावल", "कोसली", "धारूहेड़ा", "खोड़"],
+            palwal: ["होडल", "हथीन", "हसनपुर"],
+            yamunanagar: ["जगाधरी", "रादौर", "साढौरा", "छछरौली"],
+            kurukshetra: ["थानेसर", "पेहोवा", "शाहबाद", "लाडवा"],
+            jind: ["नरवाना", "उचाना", "सफीदों", "जुलाना"],
+            kaithal: ["गुहला", "पुंडरी", "राजौंद", "सीवान"],
+            fatehabad: ["टोहाना", "रतिया", "भूना"],
+            panchkula: ["कालका", "पिंजौर", "रायपुर रानी"],
+            nuh: ["फिरोजपुर झिरका", "पुन्हाना", "ताउड़ू"],
+            mahendragarh: ["नारनौल", "कनीना", "अटेली", "सतनाली"]
         };
 
         const jokes = [
@@ -596,7 +630,6 @@
             renderAdminPanel();
         }
 
-        // Place submission sent to Admin Approval
         function submitPlaceForApproval() {
             const title = document.getElementById("placeTitle").value;
             const dist = document.getElementById("placeDistrict").value;
@@ -669,7 +702,6 @@
             container.innerHTML = html;
         }
 
-        // Render Approved Places in Single Line Horizontal View
         function renderPlaces() {
             const container = document.getElementById("publicPlacesContainer");
             const approvedPlaces = JSON.parse(localStorage.getItem("approvedPlaces") || "[]");
@@ -814,7 +846,7 @@
             if (text.includes("दुकान")) reply = "नीचे 'दुकान रजिस्टर करें' फॉर्म भरकर आप अपनी दुकान जोड़ सकते हैं।";
             else if (text.includes("मौसम")) reply = "आज का मौसम साफ है, तापमान 32°C है।";
             else if (text.includes("भाव") || text.includes("मंडी")) reply = "आज गेहूँ का भाव ₹2300 और सरसों ₹5500 प्रति क्विंटल है।";
-            else if (text.includes("योजना")) reply = "ऊपर 'हरियाणा सरकारी योजनाएं' बटन पर क्लिक करके सरल पोर्टल पर जा सकते हैं।";
+            else if (text.includes("योजना") || text.includes("hkrn") || text.includes("दयालु")) reply = "नीचे 'हरियाणा सरकारी योजनाएं' सेक्शन में HKRN व दयालु क्लेम का डायरेक्ट पोर्टल लिंक है।";
 
             setTimeout(() => {
                 screen.innerHTML += `<div class="ai-msg-bot">${reply}</div>`;
