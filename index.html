@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
+    <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल (मेगा 1300+ एडिशन)</title>
     <style>
         :root {
             --primary: #1b5e20;
@@ -15,41 +15,45 @@
             --news-text: #e65100;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 60px; }
+        body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 70px; }
         
-        .top-bar { background: #113f14; color: #ffeb3b; font-size: 13px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; }
-        header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 25px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        header h1 { font-size: 2rem; margin-bottom: 5px; }
-        header p { font-size: 1rem; opacity: 0.95; }
-        .badge { background: #388e3c; color: #fff; padding: 4px 12px; font-size: 0.8rem; border-radius: 15px; display: inline-block; margin-top: 8px; border: 1px solid #81c784; }
+        .top-bar { background: #113f14; color: #ffeb3b; font-size: 13px; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff8f00; }
+        header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 25px 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        header h1 { font-size: 2.1rem; margin-bottom: 5px; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        header p { font-size: 1.05rem; opacity: 0.95; }
+        .badge { background: #388e3c; color: #fff; padding: 5px 14px; font-size: 0.85rem; border-radius: 20px; display: inline-block; margin-top: 10px; border: 1px solid #81c784; font-weight: bold; }
 
-        .container { max-width: 650px; margin: 20px auto; padding: 0 15px; }
+        .container { max-width: 700px; margin: 25px auto; padding: 0 15px; }
 
-        .card { background: var(--card-bg); border-radius: 14px; padding: 22px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
-        .card h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
+        .card { background: var(--card-bg); border-radius: 14px; padding: 24px; margin-bottom: 22px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e0e0e0; }
+        .card h2 { font-size: 1.25rem; color: var(--primary); margin-bottom: 16px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; font-weight: 700; }
 
-        .form-group { margin-bottom: 16px; }
-        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.92rem; }
-        select, input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; outline: none; background: #fafafa; }
-        select:focus, input:focus, textarea:focus { border-color: var(--primary); background: #fff; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.95rem; color: #2c3e50; }
+        select, input, textarea { width: 100%; padding: 13px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; outline: none; background: #fafafa; }
+        select:focus, input:focus, textarea:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 5px rgba(27,94,32,0.2); }
 
-        .btn-box { text-align: center; margin-top: 15px; }
-        .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center; }
+        .btn-box { text-align: center; margin-top: 18px; }
+        .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 13px; border: none; border-radius: 8px; font-size: 1.05rem; font-weight: bold; cursor: pointer; text-align: center; transition: background 0.3s; }
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); }
-        .btn-success { background: #2e7d32; color: white; padding: 6px 14px; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; margin-right: 6px; }
-        .call-btn { background: #2e7d32; color: white; padding: 8px 14px; font-size: 0.9rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
+        .btn-success { background: #2e7d32; color: white; padding: 8px 16px; font-size: 0.9rem; border-radius: 6px; border: none; cursor: pointer; margin-right: 6px; font-weight: bold; }
+        .call-btn { background: #2e7d32; color: white; padding: 8px 16px; font-size: 0.95rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
 
-        .toggle-bar { background: var(--primary); color: white; padding: 14px 18px; border-radius: 10px; font-weight: bold; font-size: 1.05rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .collapsible-form-container { display: none; background: #ffffff; border: 2px dashed var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .toggle-bar { background: var(--primary); color: white; padding: 15px 20px; border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .collapsible-form-container { display: none; background: #ffffff; border: 2px dashed var(--primary); border-radius: 14px; padding: 22px; margin-bottom: 22px; }
 
-        .result-box { margin-top: 15px; }
-        .shop-item { background: #f9f9f9; border-left: 5px solid var(--primary); padding: 14px; margin-bottom: 12px; border-radius: 8px; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
-        .shop-info h4 { color: var(--primary); font-size: 1.05rem; }
-        .shop-info p { font-size: 0.85rem; color: #666; margin-top: 4px; }
+        .result-box { margin-top: 18px; }
+        .shop-item { background: #f9f9f9; border-left: 6px solid var(--primary); padding: 16px; margin-bottom: 14px; border-radius: 8px; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+        .shop-info h4 { color: var(--primary); font-size: 1.1rem; font-weight: bold; }
+        .shop-info p { font-size: 0.88rem; color: #555; margin-top: 5px; }
 
-        .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 18px; border-radius: 10px; text-align: left; }
-        footer { text-align: center; font-size: 0.85rem; color: #777; margin-top: 40px; }
+        .admin-section { display: none; margin-top: 22px; background: #fffde7; border: 1px dashed var(--secondary); padding: 20px; border-radius: 10px; text-align: left; }
+        
+        .emergency-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+        .emergency-btn { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; padding: 12px; border-radius: 8px; font-size: 0.9rem; text-decoration: none; font-weight: bold; text-align: center; display: block; }
+
+        footer { text-align: center; font-size: 0.9rem; color: #666; margin-top: 45px; border-top: 1px solid #ddd; padding-top: 20px; }
     </style>
 </head>
 <body onload="initPortal()" onclick="playWelcomeAudioOnce()">
@@ -61,21 +65,32 @@
 
     <header>
         <h1>हरियाणा ग्रामीण सेवा पोर्टल</h1>
-        <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर डिजिटल माध्यम से</p>
-        <div class="badge">डिजिटल माल्कोश & संपूर्ण हरियाणा नेटवर्क</div>
+        <p>गाँव की हर दुकान, हर सेवा और हर जरूरत - अब आपके मोबाइल पर डिजिटल माध्यम से</p>
+        <div class="badge">डिजिटल माल्कोश & संपूर्ण हरियाणा 22 जिले नेटवर्क</div>
     </header>
 
     <div class="container">
 
-        <!-- स्वागत संदेश -->
-        <div class="card" style="padding: 15px; text-align: center; background: #fffde7; border: 1px dashed #fbc02d; margin-bottom: 20px;">
-            <p style="font-size: 1.05rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! आपके अपने डिजिटल ग्राम पोर्टल पर स्वागत है।</p>
+        <!-- स्वागत कार्ड -->
+        <div class="card" style="padding: 16px; text-align: center; background: #fffde7; border: 1px dashed #fbc02d; margin-bottom: 22px;">
+            <p style="font-size: 1.1rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! आपके अपने डिजिटल ग्राम पोर्टल पर स्वागत है।</p>
         </div>
 
         <!-- शेयर और लोकेशन बटन -->
-        <div class="card" style="padding: 14px; text-align: center; background: #e8f5e9; border: 1px solid #81c784; margin-bottom: 20px; display: flex; gap: 12px;">
-            <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.9rem; padding: 12px; flex: 1;">📢 WhatsApp शेयर करें</button>
-            <button onclick="getMyNearbyPlaces()" class="custom-btn btn-secondary" style="font-size: 0.9rem; padding: 12px; flex: 1;">📍 लाइव GPS लोकेशन</button>
+        <div class="card" style="padding: 16px; text-align: center; background: #e8f5e9; border: 1px solid #81c784; margin-bottom: 22px; display: flex; gap: 14px;">
+            <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.95rem; padding: 13px; flex: 1;">📢 WhatsApp शेयर करें</button>
+            <button onclick="getMyNearbyPlaces()" class="custom-btn btn-secondary" style="font-size: 0.95rem; padding: 13px; flex: 1;">📍 लाइव GPS लोकेशन</button>
+        </div>
+
+        <!-- आपातकालीन नंबर सेक्शन -->
+        <div class="card">
+            <h2>🚨 आपातकालीन सरकारी सेवाएँ (Emergency Helpline)</h2>
+            <div class="emergency-grid">
+                <a href="tel:112" class="emergency-btn">🚨 पुलिस / आपातकाल (112)</a>
+                <a href="tel:108" class="emergency-btn">🚑 एम्बुलेंस (108)</a>
+                <a href="tel:101" class="emergency-btn">🚒 फायर ब्रिगेड (101)</a>
+                <a href="tel:1551" class="emergency-btn">🌾 किसान कॉल सेंटर (1551)</a>
+            </div>
         </div>
 
         <!-- 1. सेवाएँ खोजें अनुभाग -->
@@ -100,13 +115,13 @@
                     <option value="jhajjar">झज्जर (Jhajjar)</option>
                     <option value="rewari">रेवाड़ी (Rewari)</option>
                     <option value="mahendragarh">महेन्द्रगढ़ (Mahendragarh)</option>
-                    <option value="Nuh">नूंह (Nuh)</option>
+                    <option value="nuh">नूंह (Nuh)</option>
                     <option value="palwal">पलवल (Palwal)</option>
                     <option value="kaithal">कैथल (Kaithal)</option>
                     <option value="kurukshetra">कुरुक्षेत्र (Kurukshetra)</option>
                     <option value="ambala">अम्बाला (Ambala)</option>
                     <option value="yamunanagar">यमुनानगर (Yamunanagar)</option>
-                    <option value=" पंचकूला">पंचकूला (Panchkula)</option>
+                    <option value="panchkula">पंचकूला (Panchkula)</option>
                 </select>
             </div>
 
@@ -132,7 +147,7 @@
 
         <div class="collapsible-form-container" id="addShopFormBox">
             <h2 style="font-size: 1.2rem; color: var(--primary); margin-bottom: 15px;">नया दुकान / सेवा रजिस्ट्रेशन फॉर्म</h2>
-            <div id="shopErr" style="color: #c62828; font-size: 0.9rem; font-weight: bold; margin-bottom: 12px; display:none;"></div>
+            <div id="shopErr" style="color: #c62828; font-size: 0.95rem; font-weight: bold; margin-bottom: 12px; display:none;"></div>
             
             <div class="form-group">
                 <label>दुकान या सेवा का नाम (Shop Name):</label>
@@ -158,13 +173,13 @@
                     <option value="jhajjar">झज्जर (Jhajjar)</option>
                     <option value="rewari">रेवाड़ी (Rewari)</option>
                     <option value="mahendragarh">महेन्द्रगढ़ (Mahendragarh)</option>
-                    <option value="Nuh">नूंह (Nuh)</option>
+                    <option value="nuh">नूंह (Nuh)</option>
                     <option value="palwal">पलवल (Palwal)</option>
                     <option value="kaithal">कैथल (Kaithal)</option>
                     <option value="kurukshetra">कुरुक्षेत्र (Kurukshetra)</option>
                     <option value="ambala">अम्बाला (Ambala)</option>
                     <option value="yamunanagar">यमुनानगर (Yamunanagar)</option>
-                    <option value=" पंचकूला">पंचकूला (Panchkula)</option>
+                    <option value="panchkula">पंचकूला (Panchkula)</option>
                 </select>
             </div>
 
@@ -172,7 +187,7 @@
                 <label>गाँव का नाम टाइप करें या चुनें (Village Name):</label>
                 <input type="text" id="regVillageInput" list="regVillageList" placeholder="अपने गाँव का नाम लिखें..." required>
                 <datalist id="regVillageList"></datalist>
-                <small style="color: #666; font-size: 0.8rem;">नोट: गलत जिला या गाँव डालने पर सिस्टम स्वतः त्रुटि दिखाएगा।</small>
+                <small style="color: #666; font-size: 0.85rem;">नोट: गलत जिला या गाँव डालने पर सिस्टम स्वतः त्रुटि दिखाएगा।</small>
             </div>
 
             <div class="form-group">
@@ -202,11 +217,11 @@
         <div class="card" style="text-align: center;">
             <button type="button" class="custom-btn btn-secondary" onclick="toggleAdminPanel()">🔒 एडमिन वेरिफिकेशन पैनल</button>
             <div class="admin-section" id="adminPanel">
-                <h3 style="color: #e65100; margin-bottom: 12px;">एडमिन कंट्रोल पैनल</h3>
-                <input type="password" id="adminPass" placeholder="पासवर्ड दर्ज करें (1234)" style="margin-bottom: 10px;">
-                <button type="button" class="custom-btn" onclick="verifyAdmin()" style="padding: 10px;">लॉगिन करें</button>
+                <h3 style="color: #e65100; margin-bottom: 14px;">एडमिन कंट्रोल पैनल</h3>
+                <input type="password" id="adminPass" placeholder="पासवर्ड दर्ज करें (1234)" style="margin-bottom: 12px;">
+                <button type="button" class="custom-btn" onclick="verifyAdmin()" style="padding: 11px;">लॉगिन करें</button>
                 <div id="adminControls" style="display:none; margin-top: 20px; text-align: left;">
-                    <p style="color: green; font-weight: bold; font-size: 0.95rem; margin-bottom: 12px;">✔ एडमिन एक्सेस सफल</p>
+                    <p style="color: green; font-weight: bold; font-size: 1rem; margin-bottom: 12px;">✔ एडमिन एक्सेस सफल</p>
                     <h4 style="font-size: 0.95rem; color: #b71c1c; margin-bottom: 8px;">⏳ सत्यापन हेतु पेंडिंग दुकानें:</h4>
                     <div id="pendingShopsList"></div>
                 </div>
@@ -220,7 +235,7 @@
     </footer>
 
     <script>
-        // हरियाणा के सभी जिलों और प्रमुख गाँवों की व्यापक मास्टर सूची
+        // हरियाणा के सभी 22 जिलों और उनके प्रमुख गाँवों का व्यापक मास्टर डेटाबेस
         const villagesData = {
             rohtak: ["माल्कोश (Malkosh)", "सांपला (Sampla)", "कलानौर (Kalanaur)", "महिम (Meham)", "बोहर (Bohar)", "असंध (Asandh)", "रिटौली (Retoli)", "किरंदौड़ (Kirandor)", "सुंडरा (Sundra)", "मदीना (Madina)", "आनंदपुर (Anandpur)", "घढ़वाल (Garhwal)"],
             bhiwani: ["बवानी खेड़ा (Bwani Khera)", "तोशाम (Tosham)", "सिवाणी (Siwani)", "लोहारू (Loharu)", "बहल (Bahl)", "बरवास (Barwas)", "दीवानी (Dewani)", "गोकलपुरा (Gokalpura)"],
@@ -230,20 +245,20 @@
             faridabad: ["बल्लभगढ़ (Ballabgarh)", "तिगांव (Tigaon)", "मोहना (Mohna)", "मझावली (Majhawali)", "दयालपुर (Dayalpur)"],
             sonipat: ["गन्नौर (Ganaur)", "खंदराई (Khandrai)", "गोहाना (Gohana)", "राई (Rai)", "खरखौदा (Kharkhoda)", "कुंडली (Kundli)"],
             panipat: ["समालाखा (Samalkha)", "बापौली (Bapoli)", "ईसराना (Israna)", "नंदगढ़ (Nandgarh)", "उझा (Ujha)"],
-            karnal: ["असंध (Asandh)", "घरौंडा (Gharaunda)", "निलोकड़ी (Nilokheri)", "इन्द्री (Indri)", "कुंजपुरा (Kunjpura)", "уса (Uchani)"],
+            karnal: ["असंध (Asandh)", "घरौंडा (Gharaunda)", "निलोकड़ी (Nilokheri)", "इन्द्री (Indri)", "कुंजपुरा (Kunjpura)"],
             jind: ["सफीदों (Safidon)", "जुलाना (Julana)", "उचाना (Uchana)", "नरवाना (Narwana)", "पिल्लूखेड़ा (Pillukhera)", "डूमरखां (Doomarkhan)"],
             sirsa: ["डबवाली (Dabwali)", "रानियां (Rania)", "एलनाबाद (Elanabad)", "नाथूसरी चौपटा (Nathusari Chopta)"],
-            fatehabad: ["टोहाना (Tohana)", "रतिया (Ratia)", "भूना (Bhoona)", "Jakhal (जाखल)"],
+            fatehabad: ["टोहाना (Tohana)", "रतिया (Ratia)", "भूना (Bhoona)", "जाखल (Jakhal)"],
             jhajjar: ["बहादुरगढ़ (Bahadurgarh)", "बेरी (Beri)", "बादली (Badli)", "मातनहेल (Matanhail)"],
-            rewari: ["बावल (Bawal)", "कोसली (Kosli)", "डહીना (Dahina)", "जैनाबाद (Jainabad)"],
+            rewari: ["बावल (Bawal)", "कोसली (Kosli)", "दहीना (Dahina)", "जैनाबाद (Jainabad)"],
             mahendragarh: ["नारनौल (Narnaul)", "कनीना (Kanina)", "अटेली (Ateli)", "महेंद्रगढ़ ग्रामीण (Mahendragarh Rural)"],
-            Nuh: ["पुन्हाना (Punhana)", "तावडू (Tawru)", "ফিরোজপুর ঝিরকা (Ferozepur Jhirka)", "नूंह ग्रामीण (Nuh Rural)"],
+            nuh: ["पुन्हाना (Punhana)", "तावडू (Tawru)", "फिरोजपुर झिरका (Ferozepur Jhirka)", "नूंह ग्रामीण (Nuh Rural)"],
             palwal: ["होडल (Hodal)", "हथीन (Hathin)", "पलवल ग्रामीण (Palwal Rural)", "फुलवाड़ी (Phulwari)"],
             kaithal: ["गुहला (Guhla)", "पूंडरी (Pundri)", "राजौंद (Rajound)", "कलायत (Kalayat)"],
             kurukshetra: ["पेहोवा (Pehowa)", "शाहबाद (Shahbad)", "लाडवा (Ladwa)", "बाबैन (Babain)"],
             ambala: ["नारायणगढ़ (Naraingarh)", "बराड़ा (Barara)", "साहा (Saha)", "अम्बाला छावनी (Ambala Cantt)"],
             yamunanagar: ["बिलासपुर (Bilaspur)", "रादौर (Radaur)", "छछरौली (Chhachhrauli)", "सढ़ौरा (Sadhaura)"],
-            Panchkula: ["मोरनी (Morni)", "रायपुर रानी (Raipur Rani)", "बरवाला पंचकूला (Barwala Panchkula)"]
+            panchkula: ["मोरनी (Morni)", "रायपुर रानी (Raipur Rani)", "बरवाला पंचकूला (Barwala Panchkula)"]
         };
 
         let audioPlayed = false;
@@ -331,7 +346,7 @@
             const result = document.getElementById("searchResult");
             
             if (!selectedDist || !selectedVill) {
-                result.innerHTML = `<p style="font-size:0.9rem; color:#c62828;">कृपया जिला और गाँव दोनों का चयन करें!</p>`;
+                result.innerHTML = `<p style="font-size:0.95rem; color:#c62828;">कृपया जिला और गाँव दोनों का चयन करें!</p>`;
                 return;
             }
 
@@ -339,7 +354,7 @@
             const filteredShops = approvedShops.filter(s => s.dist === selectedDist && s.vill === selectedVill);
 
             if (filteredShops.length === 0) {
-                result.innerHTML = `<p style="font-size:0.9rem; color:#666;">इस गाँव में वर्तमान में कोई स्वीकृत दुकान दर्ज नहीं है।</p>`;
+                result.innerHTML = `<p style="font-size:0.95rem; color:#666;">इस गाँव में वर्तमान में कोई स्वीकृत दुकान दर्ज नहीं है।</p>`;
                 return;
             }
 
