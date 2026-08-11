@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
+    <title id="t-title">हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
     <style>
         :root {
             --primary: #1b5e20;
@@ -18,12 +18,23 @@
         body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 50px; }
         
         .top-bar { background: #113f14; color: #ffeb3b; font-size: 13px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; }
+        .lang-btn { background: #ffc107; color: #000; border: none; padding: 5px 12px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 12px; }
+
         header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 20px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         header h1 { font-size: 1.8rem; margin-bottom: 5px; }
         header p { font-size: 0.95rem; opacity: 0.9; }
         .badge { background: #388e3c; color: #fff; padding: 3px 10px; font-size: 0.75rem; border-radius: 12px; display: inline-block; margin-top: 5px; border: 1px solid #81c784; }
 
         .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+
+        .weather-card { background: linear-gradient(135deg, #00acc1, #00838f); color: white; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .weather-title { font-size: 1rem; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+
+        .news-container { background: var(--news-bg); border-left: 4px solid var(--secondary); padding: 10px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .news-title-tag { background: var(--secondary); color: #fff; padding: 4px 8px; font-size: 0.8rem; font-weight: bold; border-radius: 4px; margin-right: 10px; white-space: nowrap; z-index: 2; }
+        .news-ticker { width: 100%; overflow: hidden; white-space: nowrap; }
+        .news-ticker marquee { font-size: 0.9rem; color: var(--news-text); font-weight: 600; width: 100%; display: block; }
+
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
 
@@ -36,6 +47,7 @@
         .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); }
+        .btn-success { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; margin-right: 6px; }
         .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
 
         .toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -47,23 +59,50 @@
         .shop-info h4 { color: var(--primary); font-size: 1rem; }
         .shop-info p { font-size: 0.82rem; color: #666; margin-top: 3px; }
 
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 10px; }
+        .gallery-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .gallery-card img { width: 100%; height: 100px; object-fit: cover; }
+        .gallery-card-body { padding: 8px; }
+        .gallery-card-body h5 { font-size: 0.85rem; color: var(--primary); }
+        .gallery-card-body p { font-size: 0.75rem; color: #666; }
+
         .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; text-align: left; }
+        .emergency-single-line { display: flex; justify-content: space-between; align-items: center; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+        .emergency-single-line a { flex: 1; min-width: 75px; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; padding: 8px 4px; border-radius: 6px; font-size: 0.78rem; text-decoration: none; font-weight: bold; text-align: center; white-space: nowrap; }
+
+        .joke-box { background: #fffde7; border: 1px dashed #fbc02d; padding: 15px; border-radius: 8px; text-align: center; margin-top: 10px; }
+        .joke-text { font-size: 0.95rem; color: #5d4037; font-weight: 600; margin-bottom: 10px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+
+        .ai-chat-box { background: #e3f2fd; border: 2px solid #1976d2; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .ai-chat-screen { background: #fff; height: 160px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px; }
+        .ai-msg-bot { background: #e1f5fe; color: #01579b; padding: 8px 12px; border-radius: 8px; align-self: flex-start; max-width: 85%; }
+        .ai-msg-user { background: #e8f5e9; color: #1b5e20; padding: 8px 12px; border-radius: 8px; align-self: flex-end; max-width: 85%; text-align: right; }
+
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
 </head>
-<body onload="initPortal()">
+<body onload="initPortal()" onclick="playWelcomeAudioOnce()">
 
     <div class="top-bar">
-        <span>👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
+        <span id="t-founder">👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
     </div>
 
     <header>
-        <h1>हरियाणा ग्रामीण सेवा</h1>
-        <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
-        <div class="badge">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
+        <h1 id="t-main-heading">हरियाणा ग्रामीण सेवा</h1>
+        <p id="t-sub-heading">गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
+        <div class="badge" id="t-badge">डिजिटल माल्कोश & हरियाणा पोर्टल</div>
     </header>
 
     <div class="container">
+
+        <div class="card" style="padding: 12px; text-align: center; background: #fffde7; border: 1px dashed #fbc02d; margin-bottom: 15px;">
+            <p style="font-size: 1rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है</p>
+        </div>
+
+        <div class="card" style="padding: 12px; text-align: center; background: #e8f5e9; border: 1px solid #81c784; margin-bottom: 15px; display: flex; gap: 10px;">
+            <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.85rem; padding: 10px; flex: 1;">📢 WhatsApp शेयर</button>
+            <button onclick="getMyNearbyPlaces()" class="custom-btn btn-secondary" style="font-size: 0.85rem; padding: 10px; flex: 1;">📍 लाइव लोकेशन</button>
+        </div>
 
         <!-- 1. अपने गाँव की सेवाएँ खोजें -->
         <div class="card">
@@ -179,6 +218,8 @@
             charkhi_dadri: ["बाढड़ा (Badhra)", "झुझू (Jhuhtu)", "दादरी (Dadri)", "कादमा (Kadma)"]
         };
 
+        let audioPlayed = false;
+
         function safeDataLoader() {
             if (!localStorage.getItem("approvedShops")) {
                 localStorage.setItem("approvedShops", JSON.stringify([
@@ -193,6 +234,17 @@
         function initPortal() {
             safeDataLoader();
             renderAdminLists();
+        }
+
+        function playWelcomeAudioOnce() {
+            if (!audioPlayed) {
+                audioPlayed = true;
+                if ('speechSynthesis' in window) {
+                    const speech = new SpeechSynthesisUtterance("राम राम भाइयो! पोर्टल पर आपका स्वागत है।");
+                    speech.lang = "hi-IN";
+                    window.speechSynthesis.speak(speech);
+                }
+            }
         }
 
         // सर्च के लिए ड्रॉपडाउन अपडेट
@@ -296,7 +348,6 @@
             }
 
             // जिला और गाँव का मिलान चेक (Wrong District/Village Error Validation)
-            // यह चेक करेगा कि टाइप किया गया गाँव उस जिले की लिस्ट में है या नहीं
             const validVillages = villagesData[dist] || [];
             const isMatch = validVillages.some(v => v.toLowerCase() === vill.toLowerCase());
 
@@ -336,9 +387,15 @@
             const pShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
             let sDiv = document.getElementById("pendingShopsList");
             if(sDiv) {
-                if(pShops.length === 0) sDiv.innerHTML = "<small>कोई पेंडिंग दुकान नहीं।</small>";
-                else {
-                    sDiv.innerHTML = pShops.map(s => `<div>${s.name} (${s.vill}) <button onclick="approveShop(${s.id})" style="background:green; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">मंजूर</button></div>`).join('');
+                if(pShops.length === 0) {
+                    sDiv.innerHTML = "<small>कोई पेंडिंग दुकान नहीं।</small>";
+                } else {
+                    sDiv.innerHTML = pShops.map(s => `
+                        <div style="background:#fff; padding:8px; margin-bottom:5px; border-radius:4px; display:flex; justify-content:space-between; align-items:center;">
+                            <span>${s.name} (${s.vill})</span>
+                            <button onclick="approveShop(${s.id})" class="btn-success">मंजूर</button>
+                        </div>
+                    `).join('');
                 }
             }
         }
@@ -356,13 +413,15 @@
                 alert("दुकान स्वीकृत कर दी गई है!");
             }
         }
-<!-- आपका सारा HTML कोड यहाँ खत्म होगा -->
 
-    <!-- यहाँ वह पूरा JavaScript कोड डालना है -->
-    <script>
-        // (वह पूरा JS कोड यहाँ रहेगा)
+        function shareOnWhatsApp() {
+            const url = window.location.href;
+            window.open(`https://api.whatsapp.com/send?text=हरियाणा ग्रामीण सेवा पोर्टल देखें: ${url}`, '_blank');
+        }
+
+        function getMyNearbyPlaces() {
+            alert("लोकेशन फ़ीचर सक्रिय है।");
+        }
     </script>
-</body>
-</html>    </script>
 </body>
 </html>
