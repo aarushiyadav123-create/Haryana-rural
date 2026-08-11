@@ -192,10 +192,9 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव का नाम (कोई भी गाँव जैसे निम्डी, माल्कोश आदि टाइप करें):</label>
-                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम यहाँ लिखें...">
-                <datalist id="regVillageList"></datalist>
-                <small style="color: #2e7d32; font-size: 0.75rem; font-weight: bold;">💡 यदि आपका गाँव लिस्ट में नहीं है, तो सीधा कीबोर्ड से टाइप कर सकते हैं या नीचे GPS से मैप डिटेक्ट करवा सकते हैं।</small>
+                <label>गाँव का नाम:</label>
+                <input type="text" id="regVillageInput" placeholder="नीचे GPS बटन दबाकर मैप से वेरीफाई करें">
+                <small style="color: #c62828; font-size: 0.75rem; font-weight: bold;">⚠️ बिना GPS मैप वेरीफिकेशन के फॉर्म सबमिट नहीं होगा!</small>
             </div>
 
             <div class="form-group">
@@ -214,10 +213,10 @@
             </div>
 
             <div class="form-group" style="background: #e8f5e9; padding: 12px; border-radius: 8px; border: 1px solid #81c784;">
-                <label style="color: #2e7d32; margin-bottom: 8px;">📍 GPS लाइव लोकेशन व मैप वेरीफिकेशन:</label>
+                <label style="color: #2e7d32; margin-bottom: 8px;">📍 अनिवार्य GPS मैप वेरीफिकेशन:</label>
                 <div style="display: flex; gap: 8px; margin-bottom: 10px;">
-                    <button type="button" class="custom-btn" onclick="fetchLocationFromGPS()" style="background: #0277bd; font-size: 0.8rem; padding: 8px; flex: 1;">📍 GPS से ऑटो-डिटेक्ट करें</button>
-                    <input type="text" id="regGPSCoord" placeholder="GPS कोऑर्डिनेट्स" readonly style="flex: 1; font-size: 0.8rem; background: #fff;">
+                    <button type="button" class="custom-btn" onclick="fetchLocationFromGPS()" style="background: #0277bd; font-size: 0.8rem; padding: 8px; flex: 1;">📍 GPS से मैप डिटेक्ट व वेरीफाई करें</button>
+                    <input type="text" id="regGPSCoord" placeholder="GPS कोऑर्डिनेट्स (अनिवार्य)" readonly style="flex: 1; font-size: 0.8rem; background: #fff;">
                 </div>
                 <div>
                     <label style="font-size: 0.8rem; color: #444;">दुकान की फोटो (कैमरा/गैलरी से):</label>
@@ -435,40 +434,45 @@
         }
 
         function updateRegVillageDropdown() {
-            const dist = document.getElementById("regDistrict").value;
-            const list = document.getElementById("regVillageList");
-            list.innerHTML = '';
-            document.getElementById("regVillageInput").value = '';
-
-            if (dist && villagesData[dist]) {
-                villagesData[dist].forEach(v => {
-                    list.innerHTML += `<option value="${v}">`;
-                });
-            }
+            // जिला बदलने पर गाँव इनपुट को साफ़ कर दिया जाएगा ताकि बिना जीपीएस के कोई वैल्यू न रहे
+            document.getElementById("regVillageInput").value = "";
+            document.getElementById("regGPSCoord").value = "";
         }
 
-        // मैप और जीपीएस की मदद से सही जिला और गाँव ऑटो-डिटेक्ट करना (अब लिस्ट की पाबंदी नहीं, कोई भी नया गाँव चल जाएगा)
+        // सख्त मैप और जीपीएस वेरीफिकेशन (अब बिना GPS के या बिना मैच हुए फॉर्म सबमिट नहीं होगा)
         async function fetchLocationFromGPS() {
+            const selectedDist = document.getElementById("regDistrict").value;
+            if (!selectedDist) {
+                alert("कृपया पहले ऊपर 'जिला चुनें'!");
+                return;
+            }
+
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(async (position) => {
                     const lat = position.coords.latitude;
                     const lng = position.coords.longitude;
-                    const coordStr = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-                    document.getElementById("regGPSCoord").value = coordStr;
-
+                    
                     try {
                         let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10&addressdetails=1`);
                         let data = await response.json();
                         
                         if(data && data.address) {
+                            let detectedDist = data.address.state_district || data.address.county || data.address.city || "";
                             let detectedVillage = data.address.village || data.address.town || data.address.suburb || data.address.hamlet || "";
-                            if(detectedVillage) {
-                                document.getElementById("regVillageInput").value = detectedVillage;
+                            
+                            // सख्त चेकिंग: क्या GPS उसी जिले का है जो फॉर्म में चुना गया है?
+                            if(detectedDist.toLowerCase().includes(selectedDist.toLowerCase()) || selectedDist.toLowerCase().includes(detectedDist.toLowerCase().replace("district","").trim())) {
+                                document.getElementById("regGPSCoord").value = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+                                document.getElementById("regVillageInput").value = detectedVillage || "GPS वेरीफाइड लोकेशन";
+                                alert(`✅ सफलता!\nGPS से सही जिले (${selectedDist}) की पुष्टि हो गई है।`);
+                            } else {
+                                alert(`❌ गलती: आपका GPS वर्तमान में (${detectedDist}) बता रहा है, जबकि आपने फॉर्म में (${selectedDist}) चुना है! कृपया सही जिले में रहकर वेरीफाई करें।`);
+                                document.getElementById("regGPSCoord").value = "";
+                                document.getElementById("regVillageInput").value = "";
                             }
-                            alert(`📍 GPS से लोकेशन मिल गई!\nगाँव/इलाका: ${detectedVillage || 'दर्ज हो गया'}`);
                         }
                     } catch (e) {
-                        alert("GPS कोऑर्डिनेट्स ले लिए गए हैं!");
+                        alert("नेटवर्क त्रुटि: मैप से जिला वेरीफाई नहीं हो सका।");
                     }
                 }, () => { 
                     alert("कृपया जीपीएस (GPS) की अनुमति दें।"); 
@@ -554,8 +558,14 @@
             const isPremium = document.getElementById("premiumAdToggle").checked;
             const utr = document.getElementById("regUtr").value;
 
-            if (!name || !dist || !vill || !phone) {
-                alert("कृपया दुकान का नाम, जिला, गाँव और मोबाइल नंबर भरें!");
+            if (!name || !dist || !phone) {
+                alert("कृपया दुकान का नाम, जिला और मोबाइल नंबर भरें!");
+                return;
+            }
+
+            // सख्त नियम: बिना GPS वेरीफिकेशन के आगे नहीं बढ़ने देगा!
+            if (!gps) {
+                alert("⚠️ सुरक्षा चेतावनी: बिना 'GPS से मैप डिटेक्ट व वेरीफाई करें' बटन दबाए फॉर्म सबमिट नहीं हो सकता! कृपया पहले GPS वेरीफाई करें।");
                 return;
             }
 
@@ -581,7 +591,7 @@
             pendingShops.push({ name, dist, vill, phone, gps, isPremium, utr, photo, id: Date.now() });
             localStorage.setItem("pendingShops", JSON.stringify(pendingShops));
 
-            alert("सत्यापन हेतु भेज दिया गया है!");
+            alert("सफलतापूर्वक एडमिन सत्यापन हेतु भेज दिया गया है!");
             document.getElementById("addShopFormBox").style.display = "none";
             renderAdminPanel();
         }
@@ -703,7 +713,7 @@
             let lowerText = text.toLowerCase();
 
             if (lowerText.includes("दुकान") || lowerText.includes("जोड़") || lowerText.includes("register")) {
-                reply = "जी, दुकान जोड़ने खातिर ऊपर 'दुकान रजिस्टर करें' वाले बटन पर क्लिक करके फॉर्म भर दो जी!";
+                reply = "जी, दुकान जोड़ने खातिर ऊपर 'दुकान रजिस्टर करें' वाले बटन पर क्लिक करके GPS मैप वेरीफाई करना जरूरी सै!";
             } else if (lowerText.includes("मौसम") || lowerText.includes("तापक") || lowerText.includes("barish")) {
                 reply = "अरै भाई, आज मौसम बिल्कुल साफ सै अर तापमान 32 डिग्री सैल्सियस सै!";
             } else if (lowerText.includes("भाव") || lowerText.includes("मंडी") || lowerText.includes("rate")) {
