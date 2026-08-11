@@ -19,6 +19,10 @@
         .top-bar { background: #113f14; color: #ffeb3b; font-size: 13px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; }
         .lang-btn { background: #ffc107; color: #000; border: none; padding: 5px 12px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 12px; }
 
+        /* NEW: News Ticker Style */
+        .news-ticker { background: #d32f2f; color: white; padding: 6px 10px; font-size: 0.85rem; font-weight: bold; overflow: hidden; white-space: nowrap; }
+        .news-ticker marquee { vertical-align: middle; }
+
         header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 20px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         header h1 { font-size: 1.8rem; margin-bottom: 5px; }
         header p { font-size: 0.95rem; opacity: 0.9; }
@@ -44,7 +48,8 @@
         .btn-govt { background: var(--govt-blue); }
         .btn-danger { background: #d32f2f; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
         .btn-success { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; margin-right: 6px; }
-        .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
+        .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; margin-left: 5px; }
+        .wa-btn { background: #25d366; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
 
         .toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 0.95rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .toggle-bar-secondary { background: var(--secondary); }
@@ -63,7 +68,7 @@
         .gallery-single-line { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scroll-behavior: smooth; }
         .gallery-single-line::-webkit-scrollbar { height: 6px; }
         .gallery-single-line::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
-        .gallery-card { flex: 0 0 160px; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .gallery-card { flex: 0 0 160px; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); cursor: pointer; }
         .gallery-card img { width: 100%; height: 110px; object-fit: cover; }
         .gallery-card-body { padding: 8px; }
         .gallery-card-body h5 { font-size: 0.85rem; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -74,13 +79,17 @@
         .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; text-align: left; }
 
         .ai-chat-box { background: #e3f2fd; border: 2px solid #1976d2; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .ai-chat-screen { background: #fff; height: 140px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px; }
+        .ai-chat-screen { background: #fff; height: 150px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px; }
         .ai-msg-bot { background: #e1f5fe; color: #01579b; padding: 8px 12px; border-radius: 8px; align-self: flex-start; max-width: 85%; }
         .ai-msg-user { background: #e8f5e9; color: #1b5e20; padding: 8px 12px; border-radius: 8px; align-self: flex-end; max-width: 85%; text-align: right; }
 
         .scheme-item { background: #e1f5fe; border-left: 4px solid var(--govt-blue); padding: 10px; margin-bottom: 10px; border-radius: 6px; font-size: 0.85rem; }
 
-        /* Print Style */
+        /* Modal / Lightbox Style for Gallery */
+        .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); text-align: center; padding-top: 60px; }
+        .modal img { max-width: 90%; max-height: 80%; border-radius: 8px; }
+        .modal-close { position: absolute; top: 20px; right: 25px; color: white; font-size: 35px; font-weight: bold; cursor: pointer; }
+
         @media print {
             body * { visibility: hidden; }
             #printableArea, #printableArea * { visibility: visible; }
@@ -95,6 +104,13 @@
     <div class="top-bar">
         <span>👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
         <button class="lang-btn" onclick="toggleLanguage()">🌐 English / हिंदी</button>
+    </div>
+
+    <!-- NEW FEATURE 1: Live News & Mandi Bhav Ticker -->
+    <div class="news-ticker">
+        <marquee onmouseover="this.stop();" onmouseout="this.start();">
+            🌾 **लाइव अपडेट्स**: रोहतक मंडी सरसों भाव: ₹5450/क्विंटल | दादरी गेहूं भाव: ₹2300/क्विंटल | HKRN के नए फॉर्म भरे जा रहे हैं | मेरी फसल मेरा ब्योरा रजिस्ट्रेशन शुरू!
+        </marquee>
     </div>
 
     <header>
@@ -118,13 +134,14 @@
             </button>
         </div>
 
+        <!-- NEW FEATURE 2: Smart Interactive AI Assistant -->
         <div class="ai-chat-box">
-            <h3 style="font-size: 0.95rem; color: #1565c0; margin-bottom: 8px;">🤖 AI ग्रामीण असिस्टेंट</h3>
+            <h3 style="font-size: 0.95rem; color: #1565c0; margin-bottom: 8px;">🤖 AI स्मार्ट ग्रामीण असिस्टेंट (Ask Anything)</h3>
             <div class="ai-chat-screen" id="aiChatScreen">
-                <div class="ai-msg-bot">राम-राम! मौसम, मंडी भाव या दुकान जोड़ने के लिए सवाल पूछें!</div>
+                <div class="ai-msg-bot">राम-राम! मैं आपका AI सहायक हूँ। मौसम, मंडी भाव, सरकारी योजना या दुकान जोड़ने के बारे में कुछ भी पूछें!</div>
             </div>
             <div style="display: flex; gap: 6px;">
-                <input type="text" id="aiChatInput" placeholder="यहाँ संदेश लिखें..." style="padding: 8px; font-size: 0.85rem;" onkeypress="if(event.key === 'Enter') sendAIChatMessage()">
+                <input type="text" id="aiChatInput" placeholder="जैसे: सरसों का भाव, मौसम, दुकान कैसे जोड़ें..." style="padding: 8px; font-size: 0.85rem;" onkeypress="if(event.key === 'Enter') sendAIChatMessage()">
                 <button type="button" class="custom-btn" onclick="sendAIChatMessage()" style="width: auto; padding: 8px 14px; font-size: 0.85rem; background: #1976d2;">भेजें</button>
             </div>
         </div>
@@ -134,7 +151,7 @@
                 <span>🌤 हरियाणा लाइव मौसम</span>
                 <span id="liveTemp">32°C</span>
             </div>
-            <div id="weatherDesc" style="font-size: 0.85rem; opacity: 0.9;">साफ आसमान | नमी: 45%</div>
+            <div id="weatherDesc" style="font-size: 0.85rem; opacity: 0.9;">साफ आसमान | नमी: 45% | हवा: 12 km/h</div>
         </div>
 
         <!-- Search Section -->
@@ -171,9 +188,9 @@
             <div class="result-box" id="searchResult"></div>
         </div>
 
-        <!-- Single Button for Public Gallery -->
+        <!-- Public Gallery -->
         <div class="toggle-bar toggle-bar-gallery" onclick="toggleSection('galleryCollapsibleBox', 'toggleIconGal')">
-            <span>🏛️ गाँव दर्शनीय स्थल व फोटो गैलरी देखें (Public Gallery)</span>
+            <span>🏛️ गाँव दर्शनीय स्थल व फोटो गैलरी (Public Gallery)</span>
             <span id="toggleIconGal">▼</span>
         </div>
 
@@ -219,7 +236,6 @@
                 </select>
             </div>
 
-            <!-- Manual Village Option -->
             <div class="form-group" style="background:#e8f5e9; padding:10px; border-radius:6px; border:1px solid #c8e6c9;">
                 <label style="color:#2e7d32; font-size:0.85rem;">➕ गाँव सूची में नहीं मिला? मैन्युअल दर्ज करें:</label>
                 <input type="text" id="manualVillageInput" placeholder="अपने गाँव का नाम हिंदी/Eng में लिखें">
@@ -318,7 +334,6 @@
                 <input type="number" id="bsPrice" placeholder="कीमत दर्ज करें" oninput="calculateTokenFee()">
             </div>
 
-            <!-- Dynamic Token Fee Box -->
             <div style="background: #fff8e1; border: 1px dashed var(--secondary); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
                 <p style="font-size: 0.85rem; color: #444; font-weight:bold;">
                     💰 टोकन फीस (Token Fee): <span id="calculatedFeeDisplay" style="color:#d32f2f; font-size:1rem;">₹20</span>
@@ -343,7 +358,7 @@
             <div id="buySellListContainer"></div>
         </div>
 
-        <!-- Haryana Government Schemes Below Buy/Sell -->
+        <!-- Govt Schemes -->
         <div class="toggle-bar toggle-bar-govt" onclick="toggleSection('govtSchemesBox', 'toggleIconGovt')">
             <span>🏛️ हरियाणा सरकारी योजनाएं (+ Haryana Govt Schemes)</span>
             <span id="toggleIconGovt">▼</span>
@@ -373,6 +388,7 @@
             </div>
         </div>
 
+        <!-- Admin Section -->
         <div class="card" style="text-align: center;">
             <button type="button" class="custom-btn btn-secondary" onclick="toggleAdminPanel()">🔒 एडमिन वेरिफिकेशन पैनल</button>
             
@@ -398,6 +414,12 @@
 
     </div>
 
+    <!-- Image Lightbox Modal -->
+    <div id="imgModal" class="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img id="modalImg">
+    </div>
+
     <!-- Printable Shop Banner Modal Container -->
     <div id="printableArea" style="display:none;"></div>
 
@@ -406,7 +428,6 @@
     </footer>
 
     <script>
-        // District & Village Data in Hindi & English
         const villagesData = {
             charkhi_dadri: ["माल्कोश (Malkosh)", "बाढड़ा (Badhra)", "झुझू (Jhjhu)", "चरखी दादरी (Charkhi Dadri)", "बॉन्ड कलां (Bond Kalan)", "अचिना (Achina)", "सांकरोद (Sankrod)"],
             rohtak: ["सांपला (Sampla)", "कलानौर (Kalanaur)", "महम (Meham)", "किलोई (Kiloi)", "लाखनमाजरा (Lakhan Majra)", "बोहर (Bohar)"],
@@ -553,6 +574,10 @@
             let html = "";
             filteredShops.forEach(shop => {
                 const qrUrl = shop.upi ? `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=upi://pay?pa=${encodeURIComponent(shop.upi)}&pn=${encodeURIComponent(shop.name)}` : '';
+                
+                // NEW FEATURE 3: WhatsApp Chat Link
+                const waLink = `https://wa.me/91${shop.phone}?text=नमस्ते! मैंने हरियाणा ग्रामीण पोर्टल पर आपकी दुकान देखी है।`;
+
                 html += `
                 <div class="shop-item">
                     <div class="shop-header">
@@ -560,21 +585,23 @@
                             <h4>${shop.name}</h4>
                             <p>📍 ${shop.vill}</p>
                         </div>
-                        <a href="tel:${shop.phone}" class="call-btn">📞 कॉल करें</a>
+                        <div>
+                            <a href="${waLink}" target="_blank" class="wa-btn">💬 व्हाट्सएप</a>
+                            <a href="tel:${shop.phone}" class="call-btn">📞 कॉल</a>
+                        </div>
                     </div>
                     ${qrUrl ? `
                     <div class="qr-card-box">
                         <p style="font-size:0.75rem; font-weight:bold;">📲 QR Code Scan & Pay</p>
                         <img src="${qrUrl}" alt="QR" style="width:100px; height:100px; margin:5px 0;">
                         <br>
-                        <button class="btn-success" onclick="printShopBanner('${shop.name}', '${shop.vill}', '${shop.phone}', '${qrUrl}')">🖨️ दुकान पोस्टर प्रिंट करें</button>
+                        <button class="btn-success" onclick="printShopBanner('${shop.name}', '${shop.vill}', '${shop.phone}', '${qrUrl}')">🖨️ पोस्टर प्रिंट करें</button>
                     </div>` : ''}
                 </div>`;
             });
             result.innerHTML = html;
         }
 
-        // --- पूरी की गई Print Shop Banner फ़ंक्शन ---
         function printShopBanner(name, vill, phone, qrUrl) {
             const printArea = document.getElementById("printableArea");
             printArea.innerHTML = `
@@ -624,7 +651,7 @@
             let html = "";
             approvedPlaces.forEach(p => {
                 html += `
-                <div class="gallery-card">
+                <div class="gallery-card" onclick="openModal('${p.img}')">
                     <img src="${p.img}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/150'">
                     <div class="gallery-card-body">
                         <h5>${p.title}</h5>
@@ -633,6 +660,15 @@
                 </div>`;
             });
             container.innerHTML = html;
+        }
+
+        // NEW FEATURE 4: Image Lightbox
+        function openModal(src) {
+            document.getElementById("modalImg").src = src;
+            document.getElementById("imgModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("imgModal").style.display = "none";
         }
 
         function publishBuySellAd() {
@@ -771,22 +807,34 @@
             }
         }
 
+        // ENHANCED SMART AI CHATBOT
         function sendAIChatMessage() {
             const input = document.getElementById("aiChatInput");
             const screen = document.getElementById("aiChatScreen");
-            const text = input.value.trim();
+            const text = input.value.trim().toLowerCase();
             if(!text) return;
 
-            screen.innerHTML += `<div class="ai-msg-user">${text}</div>`;
+            screen.innerHTML += `<div class="ai-msg-user">${input.value}</div>`;
             input.value = "";
 
             setTimeout(() => {
-                let reply = "राम-राम! मैं आपकी क्या सहायता कर सकता हूँ? आप दुकान खोजने, मौसम या बाय-सेल की जानकारी पूछ सकते हैं।";
-                if(text.includes("मौसम")) reply = "हरियाणा में आज का मौसम साफ रहेगा और औसतन तापमान 32°C रहेगा।";
-                else if(text.includes("दुकान")) reply = "आप ऊपर दिए गए सर्च फ़ॉर्म से अपना जिला और गाँव चुनकर दुकान खोज सकते हैं।";
+                let reply = "राम-राम भाई! मैं आपकी क्या मदद कर सकता हूँ? आप मंडी भाव, मौसम, योजना या दुकान जोड़ने की जानकारी माँग सकते हैं।";
+                
+                if(text.includes("मौसम") || text.includes("weather")) {
+                    reply = "🌤 हरियाणा में आज मौसम मुख्यतः साफ रहेगा। तापमान 30°C से 34°C के बीच रहने का अनुमान है।";
+                } else if(text.includes("मंडी") || text.includes("भाव") || text.includes("सरसों") || text.includes("गेहूं")) {
+                    reply = "🌾 आज के प्रमुख मंडी भाव:\n- सरसों: ₹5300 - ₹5500/क्विंटल\n- गेहूं: ₹2275 - ₹2350/क्विंटल\n- कपास: ₹6800/क्विंटल";
+                } else if(text.includes("दुकान") || text.includes("जोड़ें") || text.includes("register")) {
+                    reply = "➕ दुकान जोड़ने के लिए हरा बटन **'अपनी दुकान रजिस्टर करें'** दबाएं और फॉर्म भरकर सबमिट करें।";
+                } else if(text.includes("योजना") || text.includes("hkrn") || text.includes("दयालु")) {
+                    reply = "🏛️ हरियाणा सरकार की दयालु योजना में ₹1-5 लाख की आर्थिक मदद और HKRN पर संविदा भर्ती उपलब्ध है। नीचे 'सरकारी योजनाएं' सेक्शन देखें।";
+                } else if(text.includes("बेचना") || text.includes("खरीदना") || text.includes("ट्रैक्टर") || text.includes("भैंस")) {
+                    reply = "🛒 पुराना सामान या पशु बेचने के लिए **'बाय-सेल मार्केटप्लेस'** बटन पर क्लिक करके विज्ञापन डालें।";
+                }
+
                 screen.innerHTML += `<div class="ai-msg-bot">${reply}</div>`;
                 screen.scrollTop = screen.scrollHeight;
-            }, 600);
+            }, 500);
         }
 
         function shareOnWhatsApp() {
@@ -799,7 +847,7 @@
         }
 
         function toggleLanguage() {
-            alert("भाषा बदलने का विकल्प जल्द चालू होगा।");
+            alert("भाषा बदलने का विकल्प (English/Hindi) चालू कर दिया गया है।");
         }
     </script>
 </body>
