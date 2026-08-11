@@ -338,7 +338,77 @@
 
         <!-- Emergency Helplines -->
         <div class="card" style="border-left: 4px solid #d32f2f;">
-            <h2>🚨 आपातकालीन हेल्पलाइन (Emergency Helplines)</h2>
+                    <!-- 🚨 आपातकालीन, गैलरी और मुख्य स्थान बटन सेक्शन -->
+        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin: 20px 0; text-align: center;">
+            <h3 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.2rem;">📌 त्वरित सुविधाएँ (Quick Links)</h3>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                
+                <button onclick="toggleEmergencyModal()" style="background: #e74c3c; color: white; border: none; padding: 12px 20px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; min-width: 140px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                    🚨 आपातकालीन
+                </button>
+
+                <button onclick="toggleGalleryModal()" style="background: #3498db; color: white; border: none; padding: 12px 20px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; min-width: 140px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                    📸 गाँव की गैलरी
+                </button>
+
+                <button onclick="togglePlacesModal()" style="background: #27ae60; color: white; border: none; padding: 12px 20px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; min-width: 140px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                    📍 मुख्य स्थान
+                </button>
+
+            </div>
+        </div>
+
+        <!-- 🚨 आपातकालीन पॉप-अप -->
+        <div id="emergencyModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center;">
+            <div style="background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 400px; text-align: left; position: relative;">
+                <h3 style="color: #e74c3c; margin-top: 0;">🚨 आपातकालीन हेल्पलाइन</h3>
+                <p style="margin: 8px 0;">👮 **पुलिस (Police):** <a href="tel:112" style="color: #3498db; font-weight: bold;">112</a></p>
+                <p style="margin: 8px 0;">🚑 **एम्बुलेंस (Ambulance):** <a href="tel:108" style="color: #3498db; font-weight: bold;">108</a></p>
+                <p style="margin: 8px 0;">🚒 **फायर ब्रिगेड:** <a href="tel:101" style="color: #3498db; font-weight: bold;">101</a></p>
+                <p style="margin: 8px 0;">⚡ **बिजली निगम (Bijli):** <a href="tel:1912" style="color: #3498db; font-weight: bold;">1912</a></p>
+                <button onclick="toggleEmergencyModal()" style="background: #333; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin-top: 15px; width: 100%;">बंद करें</button>
+            </div>
+        </div>
+
+        <!-- 📸 गाँव की गैलरी पॉप-अप -->
+        <div id="galleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center;">
+            <div style="background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; position: relative;">
+                <h3 style="color: #3498db; margin-top: 0;">📸 गाँव की गैलरी</h3>
+                <p style="color: #666; font-size: 0.95rem;">गाँव की तस्वीरें यहाँ जोड़ी जाएँगी। (जल्द अपडेट होगी)</p>
+                <button onclick="toggleGalleryModal()" style="background: #333; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin-top: 15px; width: 100%;">बंद करें</button>
+            </div>
+        </div>
+
+        <!-- 📍 मुख्य स्थान पॉप-अप -->
+        <div id="placesModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center;">
+            <div style="background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 400px; text-align: left; position: relative;">
+                <h3 style="color: #27ae60; margin-top: 0;">📍 गाँव के मुख्य स्थान</h3>
+                <ul style="padding-left: 20px; color: #444; line-height: 1.6;">
+                    <li>गाँव का मुख्य मंदिर</li>
+                    <li>राजकीय वरिष्ठ माध्यमिक विद्यालय</li>
+                    <li>ग्राम पंचायत कार्यालय / चौपाल</li>
+                    <li>सार्वजनिक धर्मशाला</li>
+                </ul>
+                <button onclick="togglePlacesModal()" style="background: #333; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin-top: 15px; width: 100%;">बंद करें</button>
+            </div>
+        </div>
+
+        <!-- JavaScript (इसे फ़ाइल के बिल्कुल अंत में </body> से ठीक पहले डालें) -->
+        <script>
+            function toggleEmergencyModal() {
+                var modal = document.getElementById('emergencyModal');
+                modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+            }
+            function toggleGalleryModal() {
+                var modal = document.getElementById('galleryModal');
+                modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+            }
+            function togglePlacesModal() {
+                var modal = document.getElementById('placesModal');
+                modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+            }
+        </script>
+
             <p style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">जरूरत पड़ने पर तुरंत इन नंबरों पर संपर्क करें:</p>
             <div class="emergency-grid">
                 <div class="emergency-box">
