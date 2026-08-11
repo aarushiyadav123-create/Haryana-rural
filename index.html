@@ -58,6 +58,18 @@
         👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश
     </div>
 
+    <!-- ⚡ ताज़ा लोकल न्यूज़ पट्टी (पुराना फीचर) -->
+    <div style="background: #fffae6; padding: 10px; border-bottom: 1px solid #ffe0b2; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
+        <span style="background: #e67e22; color: white; padding: 2px 8px; border-radius: 4px; font-weight: bold; margin-right: 10px; font-size: 0.8rem;">📢 ताज़ा लोकल न्यूज़</span>
+        <span>गाँव: सुबह से जलाभिषेक के लिए मंदिर में उमड़ी भक्तों की भीड़।</span>
+    </div>
+
+    <!-- 🌾 मंडी भाव पट्टी (पुराना फीचर) -->
+    <div style="background: #e8f8f5; padding: 8px 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #d4efdf; font-size: 0.85rem;">
+        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold;">⚡ मंडी भाव</span>
+        <span style="font-weight: bold; color: #2c3e50;">गेहूँ: ₹2300 | बाजरा: ₹2550 | सरसो: ₹5500</span>
+    </div>
+
     <div class="container">
 
         <!-- स्वागत संदेश -->
@@ -65,16 +77,14 @@
             <p style="font-size: 1.1rem; font-weight: bold; margin: 0;">राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है</p>
         </div>
 
-        <!-- AI ग्रामीण असिस्टेंट (वॉयस/फॉर्म सपोर्ट) -->
+        <!-- AI ग्रामीण असिस्टेंट (बोलकर या फॉर्म से जोड़ें) -->
         <div class="card">
             <h3>🤖 AI ग्रामीण असिस्टेंट (बोलकर या फॉर्म से जोड़ें)</h3>
             <p style="font-size: 0.9rem; color: #666;">माइक दबाकर बोलें या नीचे लिखकर अपनी दुकान/सेवा एडमिन को भेजें:</p>
-            
             <div style="background: #f9f9f9; padding: 12px; border-radius: 8px; border-left: 4px solid #3498db; margin-top: 10px; margin-bottom: 12px;">
                 राम-राम! माइक बटन दबाकर बोलें या अपनी दुकान की पूरी जानकारी यहाँ दर्ज करें।
             </div>
-
-            <button onclick="startVoiceAssistant()" style="background: #e67e22; color: white; border: none; padding: 10px 15px; border-radius: 6px; font-weight: bold; width: 100%; margin-bottom: 10px;">
+            <button onclick="startVoiceAssistant()" style="background: #e67e22; color: white; border: none; padding: 10px 15px; border-radius: 6px; font-weight: bold; width: 100%;">
                 🎙️ बोलकर जानकारी दें (Voice AI)
             </button>
         </div>
@@ -115,9 +125,9 @@
 
         <!-- 😂 हरियाणवी चुटकुले -->
         <div class="card">
-            <h2>😂 हरियाणवी & देसी चुटकुले</h2>
+            <h2>😂 हरियाणवी & देसी चुटकुले (Manoranjan Live)</h2>
             <div style="background: #fdf2e9; padding: 12px; border-radius: 8px; font-style: italic; color: #d35400;">
-                "ताऊ तन्ने कल खेत में कती लेट कर दिया? ताऊ बोला: बेटा बैल ने कंप्यूटर सीख लिया था!"
+                "एक आदमी बोला: यार मेरा फोन खो गया! दूसरा बोला: पुलिस स्टेशन जा, रिपोर्ट लिखा दे! पहला बोला: पुलिस वाले तो खुद मेरा फोन ढूंढन खातिर..."
             </div>
         </div>
 
@@ -219,7 +229,7 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- 🎛️ JavaScript (पॉप-अप, कैमरा, GPS और एडमिन अप्रूवल) -->
+    <!-- 🎛️ JavaScript -->
     <!-- ========================================== -->
     <script>
         function toggleEmergencyModal() {
@@ -235,7 +245,7 @@
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // AI वॉइस असिस्टेंट फ़ंक्शन (बोलकर जानकारी भरने के लिए)
+        // AI वॉइस असिस्टेंट
         function startVoiceAssistant() {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
                 alert('आपका ब्राउज़र वॉइस कमांड सपोर्ट नहीं करता।');
@@ -245,11 +255,11 @@
             const recognition = new SpeechRecognition();
             recognition.lang = 'hi-IN';
             
-            alert('माइक चालू है... अब बोलिए (जैसे अपनी दुकान का नाम और विवरण)।');
+            alert('माइक चालू है... अब बोलिए (अपनी दुकान या स्थान का नाम)।');
             
             recognition.onresult = function(event) {
                 let speechText = event.results[0][0].transcript;
-                alert('आपने बोला: "' + speechText + '"\nअब मुख्य स्थान वाले बटन पर क्लिक करके फोटो और जीपीएस लोकेशन के साथ फॉर्म सबमिट करें।');
+                alert('आपने बोला: "' + speechText + '"\nअब मुख्य स्थान वाले फॉर्म में यह नाम आ जाएगा।');
                 togglePlacesModal();
                 document.getElementById('placeName').value = speechText;
             };
@@ -257,7 +267,7 @@
             recognition.start();
         }
 
-        // गैलरी फोटो सबमिट (एडमिन सत्यापन के लिए)
+        // गैलरी फोटो सबमिट (एडमिन अप्रूवल के लिए)
         function submitGalleryPhoto(event) {
             event.preventDefault();
             let name = document.getElementById('uploaderName').value;
@@ -284,7 +294,7 @@
             }
         }
 
-        // जीपीएस लोकेशन निकालने का फंक्शन
+        // जीपीएस लोकेशन
         function getLiveLocation() {
             if (navigator.geolocation) {
                 document.getElementById('placeLocation').value = "लोकेशन खोजी जा रही है...";
@@ -293,7 +303,7 @@
                     let lon = position.coords.longitude;
                     document.getElementById('placeLocation').value = `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`;
                 }, function(error) {
-                    alert('लोकेशन नहीं मिल पाई। कृपया अपना जीपीएस (GPS) चालू करें।');
+                    alert('लोकेशन नहीं मिल पाई। कृपया जीपीएस (GPS) चालू करें।');
                     document.getElementById('placeLocation').value = "";
                 });
             } else {
@@ -301,7 +311,7 @@
             }
         }
 
-        // मुख्य स्थान / दुकान सबमिट (फोटो और जीपीएस के साथ एडमिन के पास)
+        // मुख्य स्थान सबमिट (फोटो और जीपीएस के साथ एडमिन के पास)
         function submitNewPlace(event) {
             event.preventDefault();
             let name = document.getElementById('placeName').value;
