@@ -68,13 +68,11 @@
         .joke-box { background: #fffde7; border: 1px dashed #fbc02d; padding: 15px; border-radius: 8px; text-align: center; margin-top: 10px; }
         .joke-text { font-size: 0.95rem; color: #5d4037; font-weight: 600; margin-bottom: 10px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
 
-        /* AI चैट बॉक्स अपडेटेड */
         .ai-chat-box { background: #e3f2fd; border: 2px solid #1976d2; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .ai-chat-screen { background: #fff; height: 180px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px; }
         .ai-msg-bot { background: #e1f5fe; color: #01579b; padding: 8px 12px; border-radius: 8px; align-self: flex-start; max-width: 85%; }
         .ai-msg-user { background: #e8f5e9; color: #1b5e20; padding: 8px 12px; border-radius: 8px; align-self: flex-end; max-width: 85%; text-align: right; }
 
-        /* योजना कार्ड स्टाइल */
         .scheme-item { background: #fff; border: 1px solid #c8e6c9; border-left: 4px solid var(--primary); padding: 12px; border-radius: 8px; margin-bottom: 10px; }
         .scheme-item h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 4px; }
         .scheme-item p { font-size: 0.8rem; color: #555; margin-bottom: 8px; }
@@ -101,7 +99,6 @@
             <p style="font-size: 1rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है</p>
         </div>
 
-        <!-- न्यूज़ और मंडी भाव -->
         <div class="news-container">
             <span class="news-title-tag">📢 ताज़ा न्यूज़</span>
             <div class="news-ticker">
@@ -128,7 +125,6 @@
             <div style="font-size: 0.85rem; opacity: 0.9;">साफ आसमान और हल्की धूप | नमी: 45%</div>
         </div>
 
-        <!-- WhatsApp शेयर और पास की जगहें -->
         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
             <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.9rem; padding: 12px; flex: 1; text-align: center;">
                 📢 WhatsApp शेयर
@@ -138,7 +134,6 @@
             </button>
         </div>
 
-        <!-- AI ग्रामीण असिस्टेंट (Voice & Haryanvi Enhanced) -->
         <div class="ai-chat-box">
             <h3 style="font-size: 0.95rem; color: #1565c0; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
                 <span>🤖 AI हरियाणवी असिस्टेंट (बोलकर पूछें)</span>
@@ -197,10 +192,10 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव का नाम (मैन्युअल टाइप या लिस्ट से चुनें):</label>
-                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम लिखें..." oninput="validateVillageInput()">
+                <label>गाँव का नाम (कोई भी गाँव जैसे निम्डी, माल्कोश आदि टाइप करें):</label>
+                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम यहाँ लिखें...">
                 <datalist id="regVillageList"></datalist>
-                <small id="villageErrorMsg" style="color: #d32f2f; font-size: 0.75rem; display: none; font-weight: bold; margin-top: 3px;">⚠️ चेतावनी: यह गाँव चुने गए जिले में दर्ज नहीं है! सही गाँव भरें।</small>
+                <small style="color: #2e7d32; font-size: 0.75rem; font-weight: bold;">💡 यदि आपका गाँव लिस्ट में नहीं है, तो सीधा कीबोर्ड से टाइप कर सकते हैं या नीचे GPS से मैप डिटेक्ट करवा सकते हैं।</small>
             </div>
 
             <div class="form-group">
@@ -219,9 +214,9 @@
             </div>
 
             <div class="form-group" style="background: #e8f5e9; padding: 12px; border-radius: 8px; border: 1px solid #81c784;">
-                <label style="color: #2e7d32; margin-bottom: 8px;">📍 GPS लाइव लोकेशन व फोटो जोड़ें:</label>
+                <label style="color: #2e7d32; margin-bottom: 8px;">📍 GPS लाइव लोकेशन व मैप वेरीफिकेशन:</label>
                 <div style="display: flex; gap: 8px; margin-bottom: 10px;">
-                    <button type="button" class="custom-btn" onclick="fetchShopLiveLocation()" style="background: #0277bd; font-size: 0.8rem; padding: 8px; flex: 1;">📍 लाइव लोकेशन भरें</button>
+                    <button type="button" class="custom-btn" onclick="fetchLocationFromGPS()" style="background: #0277bd; font-size: 0.8rem; padding: 8px; flex: 1;">📍 GPS से ऑटो-डिटेक्ट करें</button>
                     <input type="text" id="regGPSCoord" placeholder="GPS कोऑर्डिनेट्स" readonly style="flex: 1; font-size: 0.8rem; background: #fff;">
                 </div>
                 <div>
@@ -283,9 +278,13 @@
             <div id="buySellListContainer"></div>
         </div>
 
-        <!-- हरियाणा सरकारी योजनाएँ व पोर्टल (विवरण सहित) -->
-        <div class="card" style="background: #f1f8e9; border: 1px solid #c8e6c9;">
-            <h2>🚀 हरियाणा सरकारी योजनाएँ व पोर्टल</h2>
+        <!-- हरियाणा सरकारी योजनाएँ व पोर्टल -->
+        <div class="toggle-bar" style="background: #2e7d32; margin-bottom: 10px;" onclick="toggleSection('schemeBoxContainer', 'toggleIconSchemes')">
+            <span>🚀 हरियाणा सरकारी योजनाएँ व पोर्टल (+ Schemes)</span>
+            <span id="toggleIconSchemes">▼</span>
+        </div>
+
+        <div class="collapsible-form-container" id="schemeBoxContainer" style="background: #f1f8e9; border-color: #2e7d32;">
             <p style="font-size: 0.85rem; color: #444; margin-bottom: 12px;">नीचे दी गई सरकारी योजनाओं की जानकारी पढ़ें और सीधे पोर्टल पर जाएं:</p>
             
             <div class="scheme-item">
@@ -351,7 +350,7 @@
         const villagesData = {
             "Ambala": ["Ambala", "Barara", "Naraingarh", "Shahzadpur"],
             "Bhiwani": ["Bhiwani", "Bawani Khera", "Tosham", "Siwani", "Loharu"],
-            "Charkhi Dadri": ["Malkosh", "Badhra", "Jhojhu Kalan", "Dadri", "Bond Kalan"],
+            "Charkhi Dadri": ["Malkosh", "Badhra", "Jhojhu Kalan", "Dadri", "Bond Kalan", "Nimdi"],
             "Faridabad": ["Faridabad", "Ballabgarh", "Tigaon"],
             "Fatehabad": ["Fatehabad", "Tohana", "Ratia"],
             "Gurugram": ["Gurugram", "Pataudi", "Farrukhnagar", "Sohna"],
@@ -440,7 +439,6 @@
             const list = document.getElementById("regVillageList");
             list.innerHTML = '';
             document.getElementById("regVillageInput").value = '';
-            document.getElementById("villageErrorMsg").style.display = 'none';
 
             if (dist && villagesData[dist]) {
                 villagesData[dist].forEach(v => {
@@ -449,29 +447,34 @@
             }
         }
 
-        /* मैन्युअल टाइप गाँव ऑटोमैटिक फिल्टर वैलिडेशन */
-        function validateVillageInput() {
-            const dist = document.getElementById("regDistrict").value;
-            const enteredVill = document.getElementById("regVillageInput").value.trim().toLowerCase();
-            const errorMsg = document.getElementById("villageErrorMsg");
+        // मैप और जीपीएस की मदद से सही जिला और गाँव ऑटो-डिटेक्ट करना (अब लिस्ट की पाबंदी नहीं, कोई भी नया गाँव चल जाएगा)
+        async function fetchLocationFromGPS() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    const coordStr = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+                    document.getElementById("regGPSCoord").value = coordStr;
 
-            if (!dist) {
-                return;
-            }
-
-            if (enteredVill === "") {
-                errorMsg.style.display = 'none';
-                return;
-            }
-
-            const validVillages = villagesData[dist].map(v => v.toLowerCase());
-            // अगर मैन्युअल रूप से टाइप किया गया गाँव उस जिले की लिस्ट में मैच नहीं होता
-            const isMatch = validVillages.some(v => v.includes(enteredVill));
-
-            if (!isMatch && enteredVill.length > 2) {
-                errorMsg.style.display = 'block';
+                    try {
+                        let response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10&addressdetails=1`);
+                        let data = await response.json();
+                        
+                        if(data && data.address) {
+                            let detectedVillage = data.address.village || data.address.town || data.address.suburb || data.address.hamlet || "";
+                            if(detectedVillage) {
+                                document.getElementById("regVillageInput").value = detectedVillage;
+                            }
+                            alert(`📍 GPS से लोकेशन मिल गई!\nगाँव/इलाका: ${detectedVillage || 'दर्ज हो गया'}`);
+                        }
+                    } catch (e) {
+                        alert("GPS कोऑर्डिनेट्स ले लिए गए हैं!");
+                    }
+                }, () => { 
+                    alert("कृपया जीपीएस (GPS) की अनुमति दें।"); 
+                });
             } else {
-                errorMsg.style.display = 'none';
+                alert("आपका ब्राउज़र जीपीएस सपोर्ट नहीं करता।");
             }
         }
 
@@ -503,21 +506,6 @@
                 );
             } else {
                 alert("Geolocation समर्थित नहीं है।");
-            }
-        }
-
-        function fetchShopLiveLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const coordStr = `${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)}`;
-                        document.getElementById("regGPSCoord").value = coordStr;
-                        alert("लाइव लोकेशन सफलतापूर्वक ले ली गई है!");
-                    },
-                    () => { alert("लोकेशन प्राप्त करने में असफल। कृपया जीपीएस ऑन करें।"); }
-                );
-            } else {
-                alert("आपका ब्राउज़र लोकेशन सपोर्ट नहीं करता।");
             }
         }
 
@@ -565,19 +553,9 @@
             const gps = document.getElementById("regGPSCoord").value;
             const isPremium = document.getElementById("premiumAdToggle").checked;
             const utr = document.getElementById("regUtr").value;
-            const errorMsgDisplay = document.getElementById("villageErrorMsg");
 
             if (!name || !dist || !vill || !phone) {
-                alert("कृपया सभी विवरण भरें!");
-                return;
-            }
-
-            // सुरक्षा जाँच: गलत गाँव सबमिट न हो
-            const validVillages = villagesData[dist].map(v => v.toLowerCase());
-            const isMatch = validVillages.some(v => v === vill.toLowerCase() || v.includes(vill.toLowerCase()));
-            if (!isMatch) {
-                errorMsgDisplay.style.display = 'block';
-                alert("गलत जिला या गाँव! यह गाँव इस जिले से संबंधित नहीं है। कृपया सही गाँव भरें।");
+                alert("कृपया दुकान का नाम, जिला, गाँव और मोबाइल नंबर भरें!");
                 return;
             }
 
@@ -712,7 +690,6 @@
             renderAdminPanel();
         }
 
-        /* AI बोलकर और हरियाणवी में जवाब देने वाला फंक्शन */
         function sendAIChatMessage() {
             const input = document.getElementById("aiChatInput");
             const screen = document.getElementById("aiChatScreen");
@@ -738,11 +715,10 @@
             setTimeout(() => {
                 screen.innerHTML += `<div class="ai-msg-bot">${reply}</div>`;
                 screen.scrollTop = screen.scrollHeight;
-                speakText(reply); // बोलकर सुनाएगा भी
+                speakText(reply);
             }, 400);
         }
 
-        /* माइक से बोलकर टाइप करने का फीचर (Speech Recognition) */
         function startVoiceInput() {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
                 alert("थारा ब्राउज़र बोलकर टाइप करने की अनुमति नहीं देता जी।");
