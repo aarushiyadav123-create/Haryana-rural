@@ -13,6 +13,7 @@
             --text-color: #333333;
             --news-bg: #fff3e0;
             --news-text: #e65100;
+            --govt-blue: #0288d1;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 50px; }
@@ -44,15 +45,17 @@
         select:focus, input:focus, textarea:focus { border-color: var(--primary); background: #fff; }
 
         .btn-box { text-align: center; margin-top: 15px; }
-        .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
+        .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); }
+        .btn-govt { background: var(--govt-blue); }
         .btn-danger { background: #d32f2f; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
         .btn-success { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; margin-right: 6px; }
         .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
 
         .toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .toggle-bar-secondary { background: var(--secondary); }
+        .toggle-bar-govt { background: var(--govt-blue); }
         .collapsible-form-container { display: none; background: #ffffff; border: 2px dashed var(--primary); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
 
         .result-box { margin-top: 15px; }
@@ -60,12 +63,15 @@
         .shop-info h4 { color: var(--primary); font-size: 1rem; }
         .shop-info p { font-size: 0.82rem; color: #666; margin-top: 3px; }
 
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 10px; }
-        .gallery-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
-        .gallery-card img { width: 100%; height: 100px; object-fit: cover; }
+        /* Gallery - Single Horizontal Scroll Line */
+        .gallery-single-line { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scroll-behavior: smooth; }
+        .gallery-single-line::-webkit-scrollbar { height: 6px; }
+        .gallery-single-line::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        .gallery-card { flex: 0 0 150px; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .gallery-card img { width: 100%; height: 110px; object-fit: cover; }
         .gallery-card-body { padding: 8px; }
-        .gallery-card-body h5 { font-size: 0.85rem; color: var(--primary); }
-        .gallery-card-body p { font-size: 0.75rem; color: #666; }
+        .gallery-card-body h5 { font-size: 0.85rem; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .gallery-card-body p { font-size: 0.75rem; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; text-align: left; }
         
@@ -79,6 +85,8 @@
         .ai-chat-screen { background: #fff; height: 160px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px; }
         .ai-msg-bot { background: #e1f5fe; color: #01579b; padding: 8px 12px; border-radius: 8px; align-self: flex-start; max-width: 85%; }
         .ai-msg-user { background: #e8f5e9; color: #1b5e20; padding: 8px 12px; border-radius: 8px; align-self: flex-end; max-width: 85%; text-align: right; }
+
+        .scheme-item { background: #e1f5fe; border-left: 4px solid var(--govt-blue); padding: 10px; margin-bottom: 8px; border-radius: 6px; font-size: 0.85rem; }
 
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
@@ -109,6 +117,32 @@
             <button onclick="getMyNearbyPlaces()" class="custom-btn btn-secondary" style="font-size: 0.85rem; padding: 10px; flex: 1;">
                 📍 My Nearby Places
             </button>
+        </div>
+
+        <!-- NEW: Haryana Govt Schemes Section with Toggle + Button -->
+        <div class="toggle-bar toggle-bar-govt" onclick="toggleSection('govtSchemesBox', 'toggleIconGovt')">
+            <span>🏛️ हरियाणा सरकारी योजनाएं (+ Haryana Schemes)</span>
+            <span id="toggleIconGovt">▼</span>
+        </div>
+
+        <div class="collapsible-form-container" id="govtSchemesBox" style="border-color: var(--govt-blue);">
+            <h2 style="color: var(--govt-blue); font-size: 1.1rem; margin-bottom: 10px;">📋 मुख्य हरियाणा राज्य योजनाएं</h2>
+            
+            <div class="scheme-item">
+                <strong>🌾 मेरी फसल मेरा ब्योरा (MFMB):</strong> कृषि उपज बिक्री एवं प्राकृतिक आपदा राहत हेतु रजिस्ट्रेशन।
+            </div>
+            <div class="scheme-item">
+                <strong>🆔 परिवार पहचान पत्र (PPP):</strong> हरियाणा राशन कार्ड, पेंशन व सरकारी योजनाओं हेतु मुख्य ID।
+            </div>
+            <div class="scheme-item">
+                <strong>💧 मेरा पानी मेरी विरासत:</strong> धान की जगह अन्य फसल उगाने पर ₹7000 प्रति एकड़ सहायता।
+            </div>
+
+            <div class="btn-box" style="margin-top: 15px;">
+                <a href="https://saralharyana.gov.in/" target="_blank" class="custom-btn btn-govt">
+                    🔗 सरल हरियाणा पोर्टल पर जाएं (Apply Online) ↗
+                </a>
+            </div>
         </div>
 
         <div class="ai-chat-box">
@@ -149,18 +183,16 @@
             </div>
         </div>
 
-        <!-- Corrected District & Village Search -->
         <div class="card">
             <h2>🔍 अपने गाँव की सेवाएँ खोजें</h2>
             <div class="form-group">
                 <label>1. जिला चुनें (Select District):</label>
                 <select id="districtSelect" onchange="updateVillageDropdown()">
                     <option value="">-- जिला चुनें --</option>
+                    <option value="charkhi_dadri">चरखी दादरी (Charkhi Dadri)</option>
                     <option value="rohtak">रोहतक (Rohtak)</option>
                     <option value="bhiwani">भिवानी (Bhiwani)</option>
-
                     <option value="hisar">हिसार (Hisar)</option>
-                    <option value="charkhi_dadri">चरखी दादरी (Charkhi Dadri)</option>
                     <option value="jhajjar">झज्जर (Jhajjar)</option>
                     <option value="gurugram">गुरुग्राम (Gurugram)</option>
                     <option value="sirsa">सिरसा (Sirsa)</option>
@@ -201,10 +233,10 @@
                 <label>जिला चुनें:</label>
                 <select id="regDistrict" onchange="updateRegVillageDropdown()">
                     <option value="">-- जिला चुनें --</option>
+                    <option value="charkhi_dadri">चरखी दादरी</option>
                     <option value="rohtak">रोहतक</option>
                     <option value="bhiwani">भिवानी</option>
                     <option value="hisar">हिसार</option>
-                    <option value="charkhi_dadri">चरखी दादरी</option>
                     <option value="jhajjar">झज्जर</option>
                     <option value="gurugram">गुरुग्राम</option>
                     <option value="sirsa">सिरसा</option>
@@ -215,9 +247,10 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव का नाम:</label>
-                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम लिखें...">
-                <datalist id="regVillageList"></datalist>
+                <label>गाँव चुनें (केवल चुने हुए जिले के गाँव उपलब्ध होंगे):</label>
+                <select id="regVillageSelect">
+                    <option value="">-- पहले जिला चुनें --</option>
+                </select>
             </div>
 
             <div class="form-group">
@@ -254,8 +287,26 @@
                 <input type="text" id="placeTitle" placeholder="जैसे: प्राचीन शिव मंदिर / माल्कोश चौपाल">
             </div>
             <div class="form-group">
-                <label>गाँव और जिला:</label>
-                <input type="text" id="placeLoc" placeholder="जैसे: माल्कोश (रोहतक)">
+                <label>जिला चुनें:</label>
+                <select id="placeDistrict" onchange="updatePlaceVillageDropdown()">
+                    <option value="">-- जिला चुनें --</option>
+                    <option value="charkhi_dadri">चरखी दादरी</option>
+                    <option value="rohtak">रोहतक</option>
+                    <option value="bhiwani">भिवानी</option>
+                    <option value="hisar">हिसार</option>
+                    <option value="jhajjar">झज्जर</option>
+                    <option value="gurugram">गुरुग्राम</option>
+                    <option value="sirsa">सिरसा</option>
+                    <option value="ambala">अंबाला</option>
+                    <option value="karnal">करनाल</option>
+                    <option value="sonipat">सोनीपत</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>गाँव चुनें:</label>
+                <select id="placeVillageSelect">
+                    <option value="">-- पहले जिला चुनें --</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>विवरण (Description):</label>
@@ -271,9 +322,10 @@
             </div>
         </div>
 
+        <!-- PUBLIC GALLERY: Single Line Horizontal Scroll -->
         <div class="card" style="border: 1px solid #ddd;">
             <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 10px;">🏛️ गाँव गैलरी व दर्शनीय स्थल (Public Gallery):</h3>
-            <div id="publicPlacesContainer" class="gallery-grid"></div>
+            <div id="publicPlacesContainer" class="gallery-single-line"></div>
         </div>
 
         <div class="toggle-bar toggle-bar-secondary" onclick="toggleSection('buySellFormBox', 'toggleIcon2')">
@@ -317,7 +369,7 @@
         </div>
 
         <div class="card" style="border-left: 4px solid #d32f2f; padding: 12px;">
-            <h3 style="color: #c62828; margin-bottom: 8px; font-size: 0.95rem;">🚨 आपतकालीन नंबर:</h3>
+            <h3 style="color: #c62828; margin-bottom: 8px; font-size: 0.95rem;">🚨 आपातकालीन नंबर:</h3>
             <div class="emergency-single-line">
                 <a href="tel:112">👮 पुलिस 112</a>
                 <a href="tel:108">🚑 एम्बुलेंस 108</a>
@@ -348,7 +400,7 @@
                     <h4 style="font-size: 0.9rem; color: #b71c1c;">⏳ पेंडिंग दुकानें:</h4>
                     <div id="pendingShopsList" style="margin-bottom: 15px;"></div>
 
-                    <h4 style="font-size: 0.9rem; color: #b71c1c;">⏳ पेंडिंग स्थान / फोटो:</h4>
+                    <h4 style="font-size: 0.9rem; color: #b71c1c;">⏳ पेंडिंग स्थान / फोटो (गैलरी):</h4>
                     <div id="pendingPlacesList" style="margin-bottom: 15px;"></div>
 
                     <h4 style="font-size: 0.9rem; color: #b71c1c;">⏳ पेंडिंग विज्ञापन:</h4>
@@ -364,12 +416,11 @@
     </footer>
 
     <script>
-        // Updated Accurate Haryana Villages & Tehsil Data
         const villagesData = {
-            rohtak: ["माल्कोश", "सांपला", "कलानौर", "महम", "किलोई", "लाखनमाजरा", "बोहर", "गढ़ी सांपला"],
+            charkhi_dadri: ["माल्कोश", "बाढड़ा", "झुझू", "चरखी दादरी", "बॉन्ड कलां", "अचिना"],
+            rohtak: ["सांपला", "कलानौर", "महम", "किलोई", "लाखनमाजरा", "बोहर", "गढ़ी सांपला"],
             bhiwani: ["बवानी खेड़ा", "तोशाम", "सिवाणी", "लोहारू", "तिगड़ाना", "गुज़रानी"],
             hisar: ["हंसी", "आदमपुर", "बरवाला", "उकलाना", "नारनौंद", "बांस"],
-            charkhi_dadri: ["बाढड़ा", "झुझू", "दादरी", "बॉन्ड कलां", "अचिना"],
             jhajjar: ["बहादुरगढ़", "बेरी", "मातनहेल", "बादली", "साल्हावास"],
             gurugram: ["सोहना", "पटौदी", "फरुखनगर", "मानसर"],
             sirsa: ["डबवाली", "एलानाबाद", "रनिया", "कालावाली"],
@@ -389,7 +440,7 @@
         function safeDataLoader() {
             if (!localStorage.getItem("approvedShops")) {
                 localStorage.setItem("approvedShops", JSON.stringify([
-                    { id: 101, name: "शर्मा किराना स्टोर", dist: "rohtak", vill: "माल्कोश", phone: "9812345678" }
+                    { id: 101, name: "शर्मा किराना स्टोर", dist: "charkhi_dadri", vill: "माल्कोश", phone: "9812345678" }
                 ]));
             }
             if (!localStorage.getItem("approvedAds")) {
@@ -397,7 +448,7 @@
             }
             if (!localStorage.getItem("approvedPlaces")) {
                 localStorage.setItem("approvedPlaces", JSON.stringify([
-                    { id: 301, title: "माल्कोश चौपाल", loc: "माल्कोश (रोहतक)", desc: "ऐतिहासिक ग्राम चौपाल", img: "https://via.placeholder.com/150" }
+                    { id: 301, title: "माल्कोश चौपाल", loc: "माल्कोश (चरखी दादरी)", desc: "ऐतिहासिक ग्राम चौपाल", img: "https://via.placeholder.com/150" }
                 ]));
             }
             if (!localStorage.getItem("pendingShops")) {
@@ -441,11 +492,22 @@
 
         function updateRegVillageDropdown() {
             const dist = document.getElementById("regDistrict").value;
-            const list = document.getElementById("regVillageList");
-            list.innerHTML = '';
+            const villSelect = document.getElementById("regVillageSelect");
+            villSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
             if (dist && villagesData[dist]) {
                 villagesData[dist].forEach(v => {
-                    list.innerHTML += `<option value="${v}">`;
+                    villSelect.innerHTML += `<option value="${v}">${v}</option>`;
+                });
+            }
+        }
+
+        function updatePlaceVillageDropdown() {
+            const dist = document.getElementById("placeDistrict").value;
+            const villSelect = document.getElementById("placeVillageSelect");
+            villSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+            if (dist && villagesData[dist]) {
+                villagesData[dist].forEach(v => {
+                    villSelect.innerHTML += `<option value="${v}">${v}</option>`;
                 });
             }
         }
@@ -512,11 +574,16 @@
         function registerService() {
             const name = document.getElementById("regShopName").value;
             const dist = document.getElementById("regDistrict").value;
-            const vill = document.getElementById("regVillageInput").value;
+            const vill = document.getElementById("regVillageSelect").value;
             const phone = document.getElementById("regPhone").value;
 
             if (!name || !dist || !vill || !phone) {
-                alert("सभी विवरण भरें!");
+                alert("त्रुटि (Error): कृपया सभी विवरण भरें और अपने जिले का गाँव चुनें!");
+                return;
+            }
+
+            if (!villagesData[dist] || !villagesData[dist].includes(vill)) {
+                alert("गलत गाँव (Error): यह गाँव चुने गए जिले का हिस्सा नहीं है!");
                 return;
             }
 
@@ -524,27 +591,36 @@
             pendingShops.push({ name, dist, vill, phone, id: Date.now() });
             localStorage.setItem("pendingShops", JSON.stringify(pendingShops));
 
-            alert("सत्यापन हेतु भेज दिया गया है!");
+            alert("सत्यापन हेतु एडमिन के पास भेज दिया गया है!");
             document.getElementById("addShopFormBox").style.display = "none";
             renderAdminPanel();
         }
 
+        // Place submission sent to Admin Approval
         function submitPlaceForApproval() {
             const title = document.getElementById("placeTitle").value;
-            const loc = document.getElementById("placeLoc").value;
+            const dist = document.getElementById("placeDistrict").value;
+            const vill = document.getElementById("placeVillageSelect").value;
             const desc = document.getElementById("placeDesc").value;
             const img = document.getElementById("placeImgUrl").value;
 
-            if (!title || !loc || !desc) {
-                alert("स्थान का नाम, स्थान विवरण भरें!");
+            if (!title || !dist || !vill || !desc) {
+                alert("त्रुटि (Error): कृपया स्थान का नाम, जिला, गाँव और विवरण चुनें!");
                 return;
             }
 
+            if (!villagesData[dist] || !villagesData[dist].includes(vill)) {
+                alert("गलत गाँव (Error): यह गाँव चुने गए जिले का हिस्सा नहीं है!");
+                return;
+            }
+
+            const locText = `${vill} (${dist})`;
+
             const pendingPlaces = JSON.parse(localStorage.getItem("pendingPlaces") || "[]");
-            pendingPlaces.push({ title, loc, desc, img, id: Date.now() });
+            pendingPlaces.push({ title, loc: locText, desc, img, id: Date.now() });
             localStorage.setItem("pendingPlaces", JSON.stringify(pendingPlaces));
 
-            alert("गाँव की फोटो/स्थान एडमिन अप्रूवल के लिए भेज दिया गया है!");
+            alert("गाँव की फोटो/स्थान एडमिन अप्रूवल (सत्यापन) के लिए भेज दिया गया है!");
             document.getElementById("placeFormBox").style.display = "none";
             renderAdminPanel();
         }
@@ -593,12 +669,13 @@
             container.innerHTML = html;
         }
 
+        // Render Approved Places in Single Line Horizontal View
         function renderPlaces() {
             const container = document.getElementById("publicPlacesContainer");
             const approvedPlaces = JSON.parse(localStorage.getItem("approvedPlaces") || "[]");
 
             if (approvedPlaces.length === 0) {
-                container.innerHTML = `<p style="font-size:0.85rem; color:#666; padding:10px;">कोई स्थान उपलब्ध नहीं है।</p>`;
+                container.innerHTML = `<p style="font-size:0.85rem; color:#666; padding:10px;">कोई स्थान/फोटो उपलब्ध नहीं है।</p>`;
                 return;
             }
 
@@ -608,8 +685,8 @@
                 <div class="gallery-card">
                     <img src="${p.img || 'https://via.placeholder.com/150'}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/150'">
                     <div class="gallery-card-body">
-                        <h5>${p.title}</h5>
-                        <p>📍 ${p.loc}</p>
+                        <h5 title="${p.title}">${p.title}</h5>
+                        <p title="${p.loc}">📍 ${p.loc}</p>
                     </div>
                 </div>`;
             });
@@ -649,7 +726,7 @@
                     </div>
                 `).join("");
 
-            placesList.innerHTML = pendingPlaces.length === 0 ? "<p style='font-size:0.8rem;'>कोई फोटो/स्थान पेंडिंग नहीं।</p>" :
+            placesList.innerHTML = pendingPlaces.length === 0 ? "<p style='font-size:0.8rem;'>कोई स्थान/फोटो पेंडिंग नहीं।</p>" :
                 pendingPlaces.map(p => `
                     <div style="font-size:0.8rem; margin-bottom:6px; border-bottom:1px solid #ddd; padding:4px;">
                         <strong>${p.title}</strong> (${p.loc}) <br>
@@ -737,6 +814,7 @@
             if (text.includes("दुकान")) reply = "नीचे 'दुकान रजिस्टर करें' फॉर्म भरकर आप अपनी दुकान जोड़ सकते हैं।";
             else if (text.includes("मौसम")) reply = "आज का मौसम साफ है, तापमान 32°C है।";
             else if (text.includes("भाव") || text.includes("मंडी")) reply = "आज गेहूँ का भाव ₹2300 और सरसों ₹5500 प्रति क्विंटल है।";
+            else if (text.includes("योजना")) reply = "ऊपर 'हरियाणा सरकारी योजनाएं' बटन पर क्लिक करके सरल पोर्टल पर जा सकते हैं।";
 
             setTimeout(() => {
                 screen.innerHTML += `<div class="ai-msg-bot">${reply}</div>`;
