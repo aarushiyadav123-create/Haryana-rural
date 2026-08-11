@@ -68,10 +68,16 @@
         .joke-box { background: #fffde7; border: 1px dashed #fbc02d; padding: 15px; border-radius: 8px; text-align: center; margin-top: 10px; }
         .joke-text { font-size: 0.95rem; color: #5d4037; font-weight: 600; margin-bottom: 10px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
 
+        /* AI चैट बॉक्स अपडेटेड */
         .ai-chat-box { background: #e3f2fd; border: 2px solid #1976d2; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .ai-chat-screen { background: #fff; height: 160px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px; }
+        .ai-chat-screen { background: #fff; height: 180px; border: 1px solid #bbdefb; border-radius: 8px; padding: 10px; overflow-y: auto; font-size: 0.85rem; margin-bottom: 10px; display: flex; flex-direction: column; gap: 6px; }
         .ai-msg-bot { background: #e1f5fe; color: #01579b; padding: 8px 12px; border-radius: 8px; align-self: flex-start; max-width: 85%; }
         .ai-msg-user { background: #e8f5e9; color: #1b5e20; padding: 8px 12px; border-radius: 8px; align-self: flex-end; max-width: 85%; text-align: right; }
+
+        /* योजना कार्ड स्टाइल */
+        .scheme-item { background: #fff; border: 1px solid #c8e6c9; border-left: 4px solid var(--primary); padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+        .scheme-item h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 4px; }
+        .scheme-item p { font-size: 0.8rem; color: #555; margin-bottom: 8px; }
 
         footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 30px; }
     </style>
@@ -122,7 +128,7 @@
             <div style="font-size: 0.85rem; opacity: 0.9;">साफ आसमान और हल्की धूप | नमी: 45%</div>
         </div>
 
-        <!-- WhatsApp शेयर और पास की जगहें (एक लाइन में बटन) -->
+        <!-- WhatsApp शेयर और पास की जगहें -->
         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
             <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.9rem; padding: 12px; flex: 1; text-align: center;">
                 📢 WhatsApp शेयर
@@ -132,13 +138,17 @@
             </button>
         </div>
 
+        <!-- AI ग्रामीण असिस्टेंट (Voice & Haryanvi Enhanced) -->
         <div class="ai-chat-box">
-            <h3 style="font-size: 0.95rem; color: #1565c0; margin-bottom: 8px;">🤖 AI ग्रामीण असिस्टेंट</h3>
+            <h3 style="font-size: 0.95rem; color: #1565c0; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🤖 AI हरियाणवी असिस्टेंट (बोलकर पूछें)</span>
+                <button type="button" onclick="startVoiceInput()" style="background: #d32f2f; color: white; border: none; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer;">🎙️ बोलें</button>
+            </h3>
             <div class="ai-chat-screen" id="aiChatScreen">
-                <div class="ai-msg-bot">राम-राम! मैं आपका AI असिस्टेंट हूँ। मौसम, मंडी भाव या खेती से जुड़ा सवाल पूछें!</div>
+                <div class="ai-msg-bot">राम-राम! कै हाल सै थारा? मौसम, मंडी भाव या खेती-बाड़ी की बात पूछो सुण कै बताऊँगा!</div>
             </div>
             <div style="display: flex; gap: 6px;">
-                <input type="text" id="aiChatInput" placeholder="संदेश लिखें..." style="padding: 8px; font-size: 0.85rem;" onkeypress="if(event.key === 'Enter') sendAIChatMessage()">
+                <input type="text" id="aiChatInput" placeholder="यहाँ टाइप करें या माइक दबाएँ..." style="padding: 8px; font-size: 0.85rem;" onkeypress="if(event.key === 'Enter') sendAIChatMessage()">
                 <button type="button" class="custom-btn" onclick="sendAIChatMessage()" style="width: auto; padding: 8px 14px; font-size: 0.85rem; background: #1976d2;">भेजें</button>
             </div>
         </div>
@@ -187,9 +197,10 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव का नाम:</label>
-                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम लिखें...">
+                <label>गाँव का नाम (मैन्युअल टाइप या लिस्ट से चुनें):</label>
+                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम लिखें..." oninput="validateVillageInput()">
                 <datalist id="regVillageList"></datalist>
+                <small id="villageErrorMsg" style="color: #d32f2f; font-size: 0.75rem; display: none; font-weight: bold; margin-top: 3px;">⚠️ चेतावनी: यह गाँव चुने गए जिले में दर्ज नहीं है! सही गाँव भरें।</small>
             </div>
 
             <div class="form-group">
@@ -207,7 +218,6 @@
                 <input type="tel" id="regPhone" placeholder="10 अंकों का नंबर">
             </div>
 
-            <!-- लाइव लोकेशन और फोटो अपलोड बटन -->
             <div class="form-group" style="background: #e8f5e9; padding: 12px; border-radius: 8px; border: 1px solid #81c784;">
                 <label style="color: #2e7d32; margin-bottom: 8px;">📍 GPS लाइव लोकेशन व फोटो जोड़ें:</label>
                 <div style="display: flex; gap: 8px; margin-bottom: 10px;">
@@ -220,7 +230,6 @@
                 </div>
             </div>
 
-            <!-- दुकान विज्ञापन प्रीमियम बटन (₹100/महीना) -->
             <div class="form-group" style="background: #fff8e1; padding: 12px; border-radius: 8px; border: 1px dashed #ffa000;">
                 <label style="color: #ef6c00; display: flex; align-items: center; gap: 8px; cursor: pointer;">
                     <input type="checkbox" id="premiumAdToggle" onchange="togglePaymentBox()" style="width: 20px; height: 20px;"> 
@@ -274,19 +283,27 @@
             <div id="buySellListContainer"></div>
         </div>
 
-        <!-- हरियाणा सरकारी योजनाएँ व पोर्टल (बाय-सेल के नीचे सेट किया गया) -->
+        <!-- हरियाणा सरकारी योजनाएँ व पोर्टल (विवरण सहित) -->
         <div class="card" style="background: #f1f8e9; border: 1px solid #c8e6c9;">
             <h2>🚀 हरियाणा सरकारी योजनाएँ व पोर्टल</h2>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <a href="https://hkrnl.hrhry.in/" target="_blank" class="custom-btn" style="background: #0277bd; font-size: 0.85rem; padding: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
-                    <span>👨‍💼 हरियाणा कौशल रोजगार निगम (HKRN)</span> <span>🔗 जाएं</span>
-                </a>
-                <a href="https://saralharyana.gov.in/" target="_blank" class="custom-btn" style="background: #e65100; font-size: 0.85rem; padding: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
-                    <span>🏛️ सरल हरियाणा (ई-सेवाएँ व अंत्योदय)</span> <span>🔗 जाएं</span>
-                </a>
-                <a href="https://agriharyana.gov.in/" target="_blank" class="custom-btn" style="background: #2e7d32; font-size: 0.85rem; padding: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
-                    <span>🌾 मेरी फसल-मेरा ब्यौरा (कृषि विभाग)</span> <span>🔗 जाएं</span>
-                </a>
+            <p style="font-size: 0.85rem; color: #444; margin-bottom: 12px;">नीचे दी गई सरकारी योजनाओं की जानकारी पढ़ें और सीधे पोर्टल पर जाएं:</p>
+            
+            <div class="scheme-item">
+                <h4>👨‍💼 हरियाणा कौशल रोजगार निगम (HKRN)</h4>
+                <p>हरियाणा सरकार के विभागों और बोर्डों में पक्की/कच्ची नौकरी (कौशल रोजगार) के लिए ऑनलाइन आवेदन और रजिस्ट्रेशन यहाँ होता है।</p>
+                <a href="https://hkrnl.hrhry.in/" target="_blank" class="call-btn" style="background: #0277bd;">🔗 पोर्टल पर जाएं</a>
+            </div>
+
+            <div class="scheme-item">
+                <h4>🏛️ सरल हरियाणा (ई-सेवाएँ व अंत्योदय)</h4>
+                <p>जाति प्रमाण पत्र, आय प्रमाण पत्र, परिवार पहचान पत्र (PPP) और राशन कार्ड जैसी 500+ सरकारी सेवाओं का लाभ लेने के लिए मुख्य पोर्टल।</p>
+                <a href="https://saralharyana.gov.in/" target="_blank" class="call-btn" style="background: #e65100;">🔗 पोर्टल पर जाएं</a>
+            </div>
+
+            <div class="scheme-item">
+                <h4>🌾 मेरी फसल-मेरा ब्यौरा (कृषि विभाग)</h4>
+                <p>किसान अपनी फसल का पंजीकरण कराकर मुआवजा, सरकारी खरीद, और कृषि सब्सिडी का सीधा लाभ इस पोर्टल के माध्यम से ले सकते हैं।</p>
+                <a href="https://agriharyana.gov.in/" target="_blank" class="call-btn" style="background: #2e7d32;">🔗 पोर्टल पर जाएं</a>
             </div>
         </div>
 
@@ -394,11 +411,16 @@
         function playWelcomeAudioOnce() {
             if (!audioPlayed) {
                 audioPlayed = true;
-                if ('speechSynthesis' in window) {
-                    const speech = new SpeechSynthesisUtterance("राम राम भाइयो! पोर्टल पर आपका स्वागत है।");
-                    speech.lang = "hi-IN";
-                    window.speechSynthesis.speak(speech);
-                }
+                speakText("राम राम भाइयो! पोर्टल पर आपका स्वागत है।");
+            }
+        }
+
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const speech = new SpeechSynthesisUtterance(text);
+                speech.lang = "hi-IN";
+                window.speechSynthesis.speak(speech);
             }
         }
 
@@ -417,10 +439,39 @@
             const dist = document.getElementById("regDistrict").value;
             const list = document.getElementById("regVillageList");
             list.innerHTML = '';
+            document.getElementById("regVillageInput").value = '';
+            document.getElementById("villageErrorMsg").style.display = 'none';
+
             if (dist && villagesData[dist]) {
                 villagesData[dist].forEach(v => {
                     list.innerHTML += `<option value="${v}">`;
                 });
+            }
+        }
+
+        /* मैन्युअल टाइप गाँव ऑटोमैटिक फिल्टर वैलिडेशन */
+        function validateVillageInput() {
+            const dist = document.getElementById("regDistrict").value;
+            const enteredVill = document.getElementById("regVillageInput").value.trim().toLowerCase();
+            const errorMsg = document.getElementById("villageErrorMsg");
+
+            if (!dist) {
+                return;
+            }
+
+            if (enteredVill === "") {
+                errorMsg.style.display = 'none';
+                return;
+            }
+
+            const validVillages = villagesData[dist].map(v => v.toLowerCase());
+            // अगर मैन्युअल रूप से टाइप किया गया गाँव उस जिले की लिस्ट में मैच नहीं होता
+            const isMatch = validVillages.some(v => v.includes(enteredVill));
+
+            if (!isMatch && enteredVill.length > 2) {
+                errorMsg.style.display = 'block';
+            } else {
+                errorMsg.style.display = 'none';
             }
         }
 
@@ -481,7 +532,7 @@
             }
 
             const approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            const filteredShops = approvedShops.filter(s => s.dist === selectedDist && s.vill === selectedVill);
+            const filteredShops = approvedShops.filter(s => s.dist === selectedDist && s.vill.toLowerCase() === selectedVill.toLowerCase());
 
             if (filteredShops.length === 0) {
                 result.innerHTML = `<p style="font-size:0.85rem; color:#666;">इस गाँव में कोई दुकान दर्ज नहीं है।</p>`;
@@ -509,14 +560,24 @@
         function registerService() {
             const name = document.getElementById("regShopName").value;
             const dist = document.getElementById("regDistrict").value;
-            const vill = document.getElementById("regVillageInput").value;
+            const vill = document.getElementById("regVillageInput").value.trim();
             const phone = document.getElementById("regPhone").value;
             const gps = document.getElementById("regGPSCoord").value;
             const isPremium = document.getElementById("premiumAdToggle").checked;
             const utr = document.getElementById("regUtr").value;
+            const errorMsgDisplay = document.getElementById("villageErrorMsg");
 
             if (!name || !dist || !vill || !phone) {
                 alert("कृपया सभी विवरण भरें!");
+                return;
+            }
+
+            // सुरक्षा जाँच: गलत गाँव सबमिट न हो
+            const validVillages = villagesData[dist].map(v => v.toLowerCase());
+            const isMatch = validVillages.some(v => v === vill.toLowerCase() || v.includes(vill.toLowerCase()));
+            if (!isMatch) {
+                errorMsgDisplay.style.display = 'block';
+                alert("गलत जिला या गाँव! यह गाँव इस जिले से संबंधित नहीं है। कृपया सही गाँव भरें।");
                 return;
             }
 
@@ -611,7 +672,7 @@
             const pendingAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
 
             document.getElementById("pendingShopsList").innerHTML = pendingShops.length === 0 ? "<p style='font-size:0.8rem;'>कोई दुकान पेंडिंग नहीं।</p>" :
-                pendingShops.map(s => `<div style="font-size:0.8rem; margin-bottom:6px; border-bottom:1px solid #ddd; padding:4px;"><strong>${s.name}</strong> (${s.vill}) ${s.isPremium ? '<span style="color:red">[प्रीमियम ₹100]</span>':''}<br><button class="btn-success" onclick="approveShop(${s.id})">स्वीकृत</button><button class="btn-danger" onclick="rejectShop(${s.id})">हटाएं</button></div>`).join("");
+                pendingShops.map(s => `<div style="font-size:0.8rem; margin-bottom:6px; border-bottom:1px solid #ddd; padding:4px;"><strong>${s.name}</strong> (${s.vill}, ${s.dist}) ${s.isPremium ? '<span style="color:red">[प्रीमियम ₹100]</span>':''}<br><button class="btn-success" onclick="approveShop(${s.id})">स्वीकृत</button><button class="btn-danger" onclick="rejectShop(${s.id})">हटाएं</button></div>`).join("");
 
             document.getElementById("pendingAdsList").innerHTML = pendingAds.length === 0 ? "<p style='font-size:0.8rem;'>कोई विज्ञापन पेंडिंग नहीं।</p>" :
                 pendingAds.map(a => `<div style="font-size:0.8rem; margin-bottom:6px; border-bottom:1px solid #ddd; padding:4px;"><strong>${a.title}</strong> - ₹${a.price}<br><button class="btn-success" onclick="approveAd(${a.id})">स्वीकृत</button><button class="btn-danger" onclick="rejectAd(${a.id})">हटाएं</button></div>`).join("");
@@ -651,6 +712,7 @@
             renderAdminPanel();
         }
 
+        /* AI बोलकर और हरियाणवी में जवाब देने वाला फंक्शन */
         function sendAIChatMessage() {
             const input = document.getElementById("aiChatInput");
             const screen = document.getElementById("aiChatScreen");
@@ -660,19 +722,58 @@
             screen.innerHTML += `<div class="ai-msg-user">${text}</div>`;
             input.value = "";
 
-            let reply = "राम-राम! आपका संदेश मिला।";
-            if (text.includes("दुकान")) reply = "दुकान रजिस्टर करें फॉर्म का उपयोग करें।";
-            else if (text.includes("मौसम")) reply = "आज तापमान 32°C है।";
-            else if (text.includes("भाव")) reply = "गेहूँ ₹2300 और सरसों ₹5500 प्रति क्विंटल है।";
+            let reply = "राम-राम भाइ! थारा सवाल समझ में कोन्या आया, दोबारा बतायो जी।";
+            let lowerText = text.toLowerCase();
+
+            if (lowerText.includes("दुकान") || lowerText.includes("जोड़") || lowerText.includes("register")) {
+                reply = "जी, दुकान जोड़ने खातिर ऊपर 'दुकान रजिस्टर करें' वाले बटन पर क्लिक करके फॉर्म भर दो जी!";
+            } else if (lowerText.includes("मौसम") || lowerText.includes("तापक") || lowerText.includes("barish")) {
+                reply = "अरै भाई, आज मौसम बिल्कुल साफ सै अर तापमान 32 डिग्री सैल्सियस सै!";
+            } else if (lowerText.includes("भाव") || lowerText.includes("मंडी") || lowerText.includes("rate")) {
+                reply = "मंडी में गेहूँ का भाव 2300 रुपये अर सरसों का भाव 5500 रुपये प्रति क्विंटल चल रिया सै जी!";
+            } else if (lowerText.includes("योजना") || lowerText.includes("scheme")) {
+                reply = "पोर्टल पै नीचे सरल हरियाणा, कौशल रोजगार निगम अर मेरी फसल मेरा ब्यौरा की सरकारी योजना दी गई सै!";
+            }
 
             setTimeout(() => {
                 screen.innerHTML += `<div class="ai-msg-bot">${reply}</div>`;
                 screen.scrollTop = screen.scrollHeight;
+                speakText(reply); // बोलकर सुनाएगा भी
             }, 400);
         }
 
+        /* माइक से बोलकर टाइप करने का फीचर (Speech Recognition) */
+        function startVoiceInput() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("थारा ब्राउज़र बोलकर टाइप करने की अनुमति नहीं देता जी।");
+                return;
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = "hi-IN";
+            recognition.start();
+
+            recognition.onstart = function() {
+                document.getElementById("aiChatInput").placeholder = "सुन रिया हूँ, बोलिए...";
+            };
+
+            recognition.onresult = function(event) {
+                const speechToText = event.results[0][0].transcript;
+                document.getElementById("aiChatInput").value = speechToText;
+                document.getElementById("aiChatInput").placeholder = "संदेश लिखें...";
+                sendAIChatMessage();
+            };
+
+            recognition.onerror = function() {
+                document.getElementById("aiChatInput").placeholder = "संदेश लिखें...";
+                alert("आवाज़ साफ नहीं आई, दोबारा बोलिए।");
+            };
+        }
+
         function getNewJoke() {
-            document.getElementById("jokeDisplay").innerText = jokes[Math.floor(Math.random() * jokes.length)];
+            const joke = jokes[Math.floor(Math.random() * jokes.length)];
+            document.getElementById("jokeDisplay").innerText = joke;
+            speakText(joke);
         }
 
         function shareOnWhatsApp() {
