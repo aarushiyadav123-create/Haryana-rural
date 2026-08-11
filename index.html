@@ -60,13 +60,6 @@
         .shop-info h4 { color: var(--primary); font-size: 1rem; }
         .shop-info p { font-size: 0.82rem; color: #666; margin-top: 3px; }
 
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 10px; }
-        .gallery-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
-        .gallery-card img { width: 100%; height: 100px; object-fit: cover; }
-        .gallery-card-body { padding: 8px; }
-        .gallery-card-body h5 { font-size: 0.85rem; color: var(--primary); }
-        .gallery-card-body p { font-size: 0.75rem; color: #666; }
-
         .admin-section { display: none; margin-top: 20px; background: #fffde7; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; text-align: left; }
         
         .emergency-single-line { display: flex; justify-content: space-between; align-items: center; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
@@ -102,7 +95,7 @@
             <p style="font-size: 1rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है</p>
         </div>
 
-        <!-- न्यूज़ और मंडी भाव (ऊपर खिसकाए गए) -->
+        <!-- न्यूज़ और मंडी भाव -->
         <div class="news-container">
             <span class="news-title-tag">📢 ताज़ा न्यूज़</span>
             <div class="news-ticker">
@@ -129,28 +122,14 @@
             <div style="font-size: 0.85rem; opacity: 0.9;">साफ आसमान और हल्की धूप | नमी: 45%</div>
         </div>
 
-        <!-- शेयर, पास की जगहें और सरकारी योजनाएँ (एक ही सेक्शन में कंबाइन) -->
-        <div class="card" style="background: #f1f8e9; border: 1px solid #c8e6c9;">
-            <h2>🚀 त्वरित सेवाएँ व सरकारी पोर्टल</h2>
-            <div style="display: flex; gap: 10px; margin-bottom: 12px;">
-                <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.85rem; padding: 10px; flex: 1;">
-                    📢 WhatsApp शेयर
-                </button>
-                <button onclick="getMyNearbyPlaces()" class="custom-btn btn-secondary" style="font-size: 0.85rem; padding: 10px; flex: 1;">
-                    📍 पास की जगहें
-                </button>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <a href="https://hkrnl.hrhry.in/" target="_blank" class="custom-btn" style="background: #0277bd; font-size: 0.85rem; padding: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
-                    <span>👨‍💼 हरियाणा कौशल रोजगार निगम (HKRN)</span> <span>🔗 जाएं</span>
-                </a>
-                <a href="https://saralharyana.gov.in/" target="_blank" class="custom-btn" style="background: #e65100; font-size: 0.85rem; padding: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
-                    <span>🏛️ सरल हरियाणा (ई-सेवाएँ व अंत्योदय)</span> <span>🔗 जाएं</span>
-                </a>
-                <a href="https://agriharyana.gov.in/" target="_blank" class="custom-btn" style="background: #2e7d32; font-size: 0.85rem; padding: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
-                    <span>🌾 मेरी फसल-मेरा ब्यौरा (कृषि विभाग)</span> <span>🔗 जाएं</span>
-                </a>
-            </div>
+        <!-- WhatsApp शेयर और पास की जगहें (एक लाइन में बटन) -->
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.9rem; padding: 12px; flex: 1; text-align: center;">
+                📢 WhatsApp शेयर
+            </button>
+            <button onclick="getMyNearbyPlaces()" class="custom-btn btn-secondary" style="font-size: 0.9rem; padding: 12px; flex: 1; text-align: center;">
+                📍 पास की जगहें
+            </button>
         </div>
 
         <div class="ai-chat-box">
@@ -228,7 +207,7 @@
                 <input type="tel" id="regPhone" placeholder="10 अंकों का नंबर">
             </div>
 
-            <!-- लाइव लोकेशन और फोटो अपलोड बटन (नई सुविधा) -->
+            <!-- लाइव लोकेशन और फोटो अपलोड बटन -->
             <div class="form-group" style="background: #e8f5e9; padding: 12px; border-radius: 8px; border: 1px solid #81c784;">
                 <label style="color: #2e7d32; margin-bottom: 8px;">📍 GPS लाइव लोकेशन व फोटो जोड़ें:</label>
                 <div style="display: flex; gap: 8px; margin-bottom: 10px;">
@@ -295,38 +274,20 @@
             <div id="buySellListContainer"></div>
         </div>
 
-        <!-- गाँव गैलरी व दर्शनीय स्थल (बाय-सेल के नीचे सेट किया गया) -->
-        <div class="toggle-bar toggle-bar-secondary" onclick="toggleSection('placeFormBox', 'toggleIconPlace')">
-            <span>🏛 गाँव का स्थान / फोटो जोड़ें</span>
-            <span id="toggleIconPlace">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="placeFormBox" style="border-color: var(--secondary);">
-            <h2 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 10px;">📸 प्रसिद्ध जगह जोड़ें</h2>
-            <div class="form-group">
-                <label>स्थान / मंदिर का नाम:</label>
-                <input type="text" id="placeTitle" placeholder="जैसे: माल्कोश चौपाल">
+        <!-- हरियाणा सरकारी योजनाएँ व पोर्टल (बाय-सेल के नीचे सेट किया गया) -->
+        <div class="card" style="background: #f1f8e9; border: 1px solid #c8e6c9;">
+            <h2>🚀 हरियाणा सरकारी योजनाएँ व पोर्टल</h2>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <a href="https://hkrnl.hrhry.in/" target="_blank" class="custom-btn" style="background: #0277bd; font-size: 0.85rem; padding: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                    <span>👨‍💼 हरियाणा कौशल रोजगार निगम (HKRN)</span> <span>🔗 जाएं</span>
+                </a>
+                <a href="https://saralharyana.gov.in/" target="_blank" class="custom-btn" style="background: #e65100; font-size: 0.85rem; padding: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                    <span>🏛️ सरल हरियाणा (ई-सेवाएँ व अंत्योदय)</span> <span>🔗 जाएं</span>
+                </a>
+                <a href="https://agriharyana.gov.in/" target="_blank" class="custom-btn" style="background: #2e7d32; font-size: 0.85rem; padding: 10px; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+                    <span>🌾 मेरी फसल-मेरा ब्यौरा (कृषि विभाग)</span> <span>🔗 जाएं</span>
+                </a>
             </div>
-            <div class="form-group">
-                <label>गाँव और जिला:</label>
-                <input type="text" id="placeLoc" placeholder="जैसे: माल्कोश (चरखी दादरी)">
-            </div>
-            <div class="form-group">
-                <label>विवरण:</label>
-                <textarea id="placeDesc" rows="2" placeholder="जानकारी दें..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>फोटो URL:</label>
-                <input type="url" id="placeImgUrl" placeholder="https://...">
-            </div>
-            <div class="btn-box">
-                <button type="button" class="custom-btn btn-secondary" onclick="submitPlaceForApproval()">सबमिट करें</button>
-            </div>
-        </div>
-
-        <div class="card" style="border: 1px solid #ddd;">
-            <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 10px;">🏛️ गाँव गैलरी व दर्शनीय स्थल:</h3>
-            <div id="publicPlacesContainer" class="gallery-grid"></div>
         </div>
 
         <div class="card" style="border-left: 4px solid #d32f2f; padding: 12px;">
@@ -357,8 +318,6 @@
                     <p style="color: green; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px;">✔ वेरिफाइड</p>
                     <h4 style="font-size: 0.9rem; color: #b71c1c;">⏳ पेंडिंग दुकानें:</h4>
                     <div id="pendingShopsList" style="margin-bottom: 15px;"></div>
-                    <h4 style="font-size: 0.9rem; color: #b71c1c;">⏳ पेंडिंग स्थान:</h4>
-                    <div id="pendingPlacesList" style="margin-bottom: 15px;"></div>
                     <h4 style="font-size: 0.9rem; color: #b71c1c;">⏳ पेंडिंग विज्ञापन:</h4>
                     <div id="pendingAdsList"></div>
                 </div>
@@ -412,21 +371,14 @@
                 ]));
             }
             if (!localStorage.getItem("approvedAds")) localStorage.setItem("approvedAds", JSON.stringify([]));
-            if (!localStorage.getItem("approvedPlaces")) {
-                localStorage.setItem("approvedPlaces", JSON.stringify([
-                    { id: 301, title: "माल्कोश चौपाल", loc: "Malkosh (Charkhi Dadri)", desc: "ऐतिहासिक ग्राम चौपाल", img: "https://via.placeholder.com/150" }
-                ]));
-            }
             if (!localStorage.getItem("pendingShops")) localStorage.setItem("pendingShops", JSON.stringify([]));
             if (!localStorage.getItem("pendingAds")) localStorage.setItem("pendingAds", JSON.stringify([]));
-            if (!localStorage.getItem("pendingPlaces")) localStorage.setItem("pendingPlaces", JSON.stringify([]));
         }
 
         function initPortal() {
             safeDataLoader();
             populateDistricts();
             renderListings();
-            renderPlaces();
         }
 
         function populateDistricts() {
@@ -595,26 +547,6 @@
             renderAdminPanel();
         }
 
-        function submitPlaceForApproval() {
-            const title = document.getElementById("placeTitle").value;
-            const loc = document.getElementById("placeLoc").value;
-            const desc = document.getElementById("placeDesc").value;
-            const img = document.getElementById("placeImgUrl").value;
-
-            if (!title || !loc || !desc) {
-                alert("विवरण भरें!");
-                return;
-            }
-
-            const pendingPlaces = JSON.parse(localStorage.getItem("pendingPlaces") || "[]");
-            pendingPlaces.push({ title, loc, desc, img, id: Date.now() });
-            localStorage.setItem("pendingPlaces", JSON.stringify(pendingPlaces));
-
-            alert("स्थान एडमिन अप्रूवल के लिए भेज दिया गया है!");
-            document.getElementById("placeFormBox").style.display = "none";
-            renderAdminPanel();
-        }
-
         function publishBuySellAd() {
             const title = document.getElementById("bsItemName").value;
             const loc = document.getElementById("bsLocation").value;
@@ -659,29 +591,6 @@
             container.innerHTML = html;
         }
 
-        function renderPlaces() {
-            const container = document.getElementById("publicPlacesContainer");
-            const approvedPlaces = JSON.parse(localStorage.getItem("approvedPlaces") || "[]");
-
-            if (approvedPlaces.length === 0) {
-                container.innerHTML = `<p style="font-size:0.85rem; color:#666; padding:10px;">कोई स्थान उपलब्ध नहीं है।</p>`;
-                return;
-            }
-
-            let html = "";
-            approvedPlaces.forEach(p => {
-                html += `
-                <div class="gallery-card">
-                    <img src="${p.img || 'https://via.placeholder.com/150'}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/150'">
-                    <div class="gallery-card-body">
-                        <h5>${p.title}</h5>
-                        <p>📍 ${p.loc}</p>
-                    </div>
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
         function toggleAdminPanel() {
             const p = document.getElementById("adminPanel");
             p.style.display = p.style.display === "block" ? "none" : "block";
@@ -700,13 +609,9 @@
         function renderAdminPanel() {
             const pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
             const pendingAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
-            const pendingPlaces = JSON.parse(localStorage.getItem("pendingPlaces") || "[]");
 
             document.getElementById("pendingShopsList").innerHTML = pendingShops.length === 0 ? "<p style='font-size:0.8rem;'>कोई दुकान पेंडिंग नहीं।</p>" :
                 pendingShops.map(s => `<div style="font-size:0.8rem; margin-bottom:6px; border-bottom:1px solid #ddd; padding:4px;"><strong>${s.name}</strong> (${s.vill}) ${s.isPremium ? '<span style="color:red">[प्रीमियम ₹100]</span>':''}<br><button class="btn-success" onclick="approveShop(${s.id})">स्वीकृत</button><button class="btn-danger" onclick="rejectShop(${s.id})">हटाएं</button></div>`).join("");
-
-            document.getElementById("pendingPlacesList").innerHTML = pendingPlaces.length === 0 ? "<p style='font-size:0.8rem;'>कोई स्थान पेंडिंग नहीं।</p>" :
-                pendingPlaces.map(p => `<div style="font-size:0.8rem; margin-bottom:6px; border-bottom:1px solid #ddd; padding:4px;"><strong>${p.title}</strong><br><button class="btn-success" onclick="approvePlace(${p.id})">स्वीकृत</button><button class="btn-danger" onclick="rejectPlace(${p.id})">हटाएं</button></div>`).join("");
 
             document.getElementById("pendingAdsList").innerHTML = pendingAds.length === 0 ? "<p style='font-size:0.8rem;'>कोई विज्ञापन पेंडिंग नहीं।</p>" :
                 pendingAds.map(a => `<div style="font-size:0.8rem; margin-bottom:6px; border-bottom:1px solid #ddd; padding:4px;"><strong>${a.title}</strong> - ₹${a.price}<br><button class="btn-success" onclick="approveAd(${a.id})">स्वीकृत</button><button class="btn-danger" onclick="rejectAd(${a.id})">हटाएं</button></div>`).join("");
@@ -726,23 +631,6 @@
         function rejectShop(id) {
             let pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
             localStorage.setItem("pendingShops", JSON.stringify(pendingShops.filter(s => s.id !== id)));
-            renderAdminPanel();
-        }
-        function approvePlace(id) {
-            let pendingPlaces = JSON.parse(localStorage.getItem("pendingPlaces") || "[]");
-            const place = pendingPlaces.find(p => p.id === id);
-            if (place) {
-                const approvedPlaces = JSON.parse(localStorage.getItem("approvedPlaces") || "[]");
-                approvedPlaces.push(place);
-                localStorage.setItem("approvedPlaces", JSON.stringify(approvedPlaces));
-                localStorage.setItem("pendingPlaces", JSON.stringify(pendingPlaces.filter(p => p.id !== id)));
-                renderAdminPanel();
-                renderPlaces();
-            }
-        }
-        function rejectPlace(id) {
-            let pendingPlaces = JSON.parse(localStorage.getItem("pendingPlaces") || "[]");
-            localStorage.setItem("pendingPlaces", JSON.stringify(pendingPlaces.filter(p => p.id !== id)));
             renderAdminPanel();
         }
         function approveAd(id) {
