@@ -372,349 +372,64 @@
     </footer>
 
     <script>
-        const villagesData = {
-            rohtak: ["माल्कोश", "सांपला", "कलानौर", "महिम"],
-            bhiwani: ["बवानी खेड़ा", "तोशाम", "सिवाणी"],
-            hisar: ["हंसी", "अदमपुर", "बरवाला"],
-            charkhi_dadri: ["बाढड़ा", "झुझू", "दादरी"]
-        };
+      <script>
+    // 1. जिला और गाँव का पूरा डेटाबेस (आप इसमें और भी नाम जोड़ सकते हैं)
+    const villagesData = {
+        rohtak: ["माल्कोश", "सांपला", "कलानौर", "महिम", "बोहर", "असंध"],
+        bhiwani: ["बवानी खेड़ा", "तोशाम", "सिवाणी", "लोहारू"],
+        hisar: ["हंसी", "अदमपुर", "बरवाला"],
+        charkhi_dadri: ["बाढड़ा", "झुझू", "दादरी", "कादमा"]
+    };
 
-        const jokes = [
-            `"ताऊ तन्ने कल खेत में कती लेट कर दिया? ताऊ बोला: बेटा बैल ने कंप्यूटर सीख लिया था!"`,
-            `"मास्टर: बताओ अकबर ने कब तक राज किया? छात्र: सर जी, जब तक रानी ने मना नहीं किया!"`,
-            `"ताऊ डॉक्टर से: दवाई खा के जी घबरावे सै। डॉक्टर: दवाई के बाद पानी पी लिया करो। ताऊ: दवाई तैरने लगी थी!"`
-        ];
-
-        let audioPlayed = false;
-
-        function safeDataLoader() {
-            if (!localStorage.getItem("approvedShops")) {
-                localStorage.setItem("approvedShops", JSON.stringify([
-                    { id: 101, name: "शर्मा किराना स्टोर", dist: "rohtak", vill: "माल्कोश", phone: "9812345678" }
-                ]));
-            }
-            if (!localStorage.getItem("approvedAds")) {
-                localStorage.setItem("approvedAds", JSON.stringify([]));
-            }
-            if (!localStorage.getItem("approvedPlaces")) {
-                localStorage.setItem("approvedPlaces", JSON.stringify([
-                    { id: 301, title: "माल्कोश चौपाल", loc: "माल्कोश (रोहतक)", desc: "ऐतिहासिक ग्राम चौपाल", img: "https://via.placeholder.com/150" }
-                ]));
-            }
-            if (!localStorage.getItem("pendingShops")) {
-                localStorage.setItem("pendingShops", JSON.stringify([]));
-            }
-            if (!localStorage.getItem("pendingAds")) {
-                localStorage.setItem("pendingAds", JSON.stringify([]));
-            }
-            if (!localStorage.getItem("pendingPlaces")) {
-                localStorage.setItem("pendingPlaces", JSON.stringify([]));
-            }
-        }
-
-        function initPortal() {
-            safeDataLoader();
-            renderListings();
-            renderAdminLists();
-        }
-
-        function playWelcomeAudioOnce() {
-            if (!audioPlayed) {
-                audioPlayed = true;
-                if ('speechSynthesis' in window) {
-                    const speech = new SpeechSynthesisUtterance("राम राम भाइयो! पोर्टल पर आपका स्वागत है।");
-                    speech.lang = "hi-IN";
-                    window.speechSynthesis.speak(speech);
-                }
-            }
-        }
-
-        function updateVillageDropdown() {
-            const dist = document.getElementById("districtSelect").value;
-            const villSelect = document.getElementById("villageSelect");
-            villSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-            if (dist && villagesData[dist]) {
-                villagesData[dist].forEach(v => {
-                    villSelect.innerHTML += `<option value="${v}">${v}</option>`;
-                });
-            }
-        }
-
-        function updateRegVillageData() {
-            const dist = document.getElementById("regDistrict").value;
-            const list = document.getElementById("regVillageList");
-            list.innerHTML = '';
-            if (dist && villagesData[dist]) {
-                villagesData[dist].forEach(v => {
-                    list.innerHTML += `<option value="${v}">`;
-                });
-            }
-        }
-
-        function toggleSection(boxId, iconId) {
-            const box = document.getElementById(boxId);
-            const icon = document.getElementById(iconId);
-            if (box.style.display === "block") {
-                box.style.display = "none";
-                icon.innerText = "▼";
-            } else {
-                box.style.display = "block";
-                icon.innerText = "▲";
-            }
-        }
-
-        function getGPSLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const lat = position.coords.latitude.toFixed(4);
-                        const lng = position.coords.longitude.toFixed(4);
-                        document.getElementById("shopGPSLocation").value = `${lat}, ${lng}`;
-                        alert("✅ GPS लोकेशन ले ली गई है!");
-                    },
-                    () => { alert("कृपया GPS लोकेशन की अनुमति दें!"); }
-                );
-            } else {
-                alert("आपका ब्राउज़र Geolocation सपोर्ट नहीं करता है।");
-            }
-        }
-
-        function getMyNearbyPlaces() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const lat = position.coords.latitude;
-                        const lng = position.coords.longitude;
-                        alert(`आपकी लाइव लोकेशन पाई गई:\nअक्षांश (Lat): ${lat}\nदेशांतर (Lng): ${lng}\n\nआपके पास की जगहें और दुकानें फ़िल्टर की जा रही हैं!`);
-                    },
-                    () => { alert("कृपया पास की जगहें देखने के लिए लोकेशन अनुमति दें।"); }
-                );
-            } else {
-                alert("आपका ब्राउज़र Geolocation सपोर्ट नहीं करता है।");
-            }
-        }
-
-        function searchServices() {
-            const selectedDist = document.getElementById("districtSelect").value;
-            const selectedVill = document.getElementById("villageSelect").value;
-            const result = document.getElementById("searchResult");
-            
-            if (!selectedDist || !selectedVill) {
-                result.innerHTML = `<p style="font-size:0.85rem; color:#c62828;">कृपया जिला और गाँव दोनों चुनें!</p>`;
-                return;
-            }
-
-            const approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            const filteredShops = approvedShops.filter(s => s.dist === selectedDist && s.vill === selectedVill);
-
-            if (filteredShops.length === 0) {
-                result.innerHTML = `<p style="font-size:0.85rem; color:#666;">इस गाँव में कोई स्वीकृत दुकान दर्ज नहीं है।</p>`;
-                return;
-            }
-
-            let html = "";
-            filteredShops.forEach(shop => {
-                html += `
-                <div class="shop-item">
-                    <div class="shop-info">
-                        <h4>${shop.name}</h4>
-                        <p>📍 ${shop.vill} (${shop.dist})</p>
-                    </div>
-                    <a href="tel:${shop.phone}" class="call-btn">📞 कॉल करें</a>
-                </div>`;
+    // 2. जिला बदलते ही datalist को अपडेट करने वाला फंक्शन
+    function updateRegVillageData() {
+        const dist = document.getElementById("regDistrict").value;
+        const list = document.getElementById("regVillageList");
+        list.innerHTML = ''; // पुरानी लिस्ट साफ करें
+        
+        if (dist && villagesData[dist]) {
+            villagesData[dist].forEach(v => {
+                list.innerHTML += `<option value="${v}">`;
             });
-            result.innerHTML = html;
         }
+    }
 
-        function registerService() {
-            const name = document.getElementById("regShopName").value.trim();
-            const dist = document.getElementById("regDistrict").value;
-            const vill = document.getElementById("regVillageInput").value.trim();
-            const phone = document.getElementById("regPhone").value.trim();
-            const photo = document.getElementById("shopPhoto").value;
-            const gps = document.getElementById("shopGPSLocation").value;
-            const errBox = document.getElementById("shopErr");
+    // 3. दुकान रजिस्टर करते समय जिला और गाँव का सख्त मिलान (Validation)
+    function registerService() {
+        const name = document.getElementById("regShopName").value.trim();
+        const dist = document.getElementById("regDistrict").value;
+        const vill = document.getElementById("regVillageInput").value.trim();
+        const phone = document.getElementById("regPhone").value.trim();
+        const photo = document.getElementById("shopPhoto").value;
+        const gps = document.getElementById("shopGPSLocation").value;
+        const errBox = document.getElementById("shopErr");
 
-            if (!name || !dist || !vill || !phone || !photo || !gps) {
+        // खाली फील्ड चेक
+        if (!name || !dist || !vill || !phone || !photo || !gps) {
+            if(errBox) {
                 errBox.style.display = "block";
-                errBox.innerText = "❌ त्रुटि: कृपया दुकान का नाम, जिला, गाँव, मोबाइल, फोटो और GPS लोकेशन सभी अनिवार्य रूप से भरें!";
-                return;
+                errBox.innerText = "❌ त्रुटि: कृपया सभी अनिवार्य विवरण भरें!";
             }
+            return;
+        }
 
-            // जिला और गाँव का सख्त मिलान (Strict Match Check)
-            if (!villagesData[dist] || !villagesData[dist].includes(vill)) {
+        // जिला और गाँव का मिलान चेक (Strict Check)
+        if (!villagesData[dist] || !villagesData[dist].includes(vill)) {
+            if(errBox) {
                 errBox.style.display = "block";
-                errBox.innerText = "❌ त्रुटि: '" + vill + "' जिला '" + dist + "' के अंतर्गत नहीं आता! कृपया सही जिला और उसके अंतर्गत आने वाला गाँव ही चुनें।";
-                return;
+                errBox.innerText = "❌ त्रुटि: '" + vill + "' जिला '" + dist + "' के अंतर्गत नहीं आता! कृपया सही जिला और गाँव चुनें।";
             }
-
-            errBox.style.display = "none";
-
-            const pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
-            pendingShops.push({ name, dist, vill, phone, gps, id: Date.now() });
-            localStorage.setItem("pendingShops", JSON.stringify(pendingShops));
-
-            alert("सत्यापन हेतु एडमिन के पास भेज दिया गया है!");
-            document.getElementById("addShopFormBox").style.display = "none";
-            renderAdminLists();
+            return;
         }
 
-        function submitPlaceForApproval() {
-            const title = document.getElementById("placeTitle").value;
-            const loc = document.getElementById("placeLoc").value;
-            const desc = document.getElementById("placeDesc").value;
-            const img = document.getElementById("placeImgUrl").value;
+        if(errBox) errBox.style.display = "none";
 
-            if (!title || !loc || !desc) {
-                alert("स्थान का नाम, स्थान विवरण भरें!");
-                return;
-            }
+        const pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
+        pendingShops.push({ name, dist, vill, phone, gps, id: Date.now() });
+        localStorage.setItem("pendingShops", JSON.stringify(pendingShops));
 
-            const pendingPlaces = JSON.parse(localStorage.getItem("pendingPlaces") || "[]");
-            pendingPlaces.push({ title, loc, desc, img, id: Date.now() });
-            localStorage.setItem("pendingPlaces", JSON.stringify(pendingPlaces));
-
-            alert("गाँव की फोटो/स्थान एडमिन अप्रूवल के लिए भेज दिया गया है!");
-            document.getElementById("placeFormBox").style.display = "none";
-            renderAdminLists();
-        }
-
-        function publishBuySellAd() {
-            const title = document.getElementById("bsItemName").value;
-            const loc = document.getElementById("bsLocation").value;
-            const price = document.getElementById("bsPrice").value;
-            const phone = document.getElementById("bsPhone").value;
-            const upi = document.getElementById("bsUpiId").value;
-            const utr = document.getElementById("bsUtr").value;
-
-            if (!title || !price || !phone || !utr) {
-                alert("विवरण व Transaction ID भरें!");
-                return;
-            }
-
-            const pendingAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
-            pendingAds.push({ title, loc, price, phone, upi, utr, id: Date.now() });
-            localStorage.setItem("pendingAds", JSON.stringify(pendingAds));
-
-            alert("सत्यापन हेतु भेज दिया गया है!");
-            document.getElementById("buySellFormBox").style.display = "none";
-            renderAdminLists();
-        }
-
-        function renderListings() {
-            const container = document.getElementById("buySellListContainer");
-            const approvedAds = JSON.parse(localStorage.getItem("approvedAds") || "[]");
-            
-            if (approvedAds.length === 0) {
-                container.innerHTML = `<p style="font-size:0.85rem; color:#666; padding:10px;">कोई विज्ञापन उपलब्ध नहीं है।</p>`;
-                return;
-            }
-
-            let html = "";
-            approvedAds.forEach(ad => {
-                html += `
-                <div class="shop-item">
-                    <div class="shop-info">
-                        <h4>${ad.title} - ₹${ad.price}</h4>
-                        <p>📍 ${ad.loc} ${ad.upi ? '| UPI: ' + ad.upi : ''}</p>
-                    </div>
-                    <a href="tel:${ad.phone}" class="call-btn">📞 कॉल करें</a>
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
-        function toggleAdminPanel() {
-            const p = document.getElementById("adminPanel");
-            p.style.display = p.style.display === "block" ? "none" : "block";
-        }
-
-        function verifyAdmin() {
-            const pass = document.getElementById("adminPass").value;
-            if (pass === "1234" || pass === "admin") {
-                document.getElementById("adminControls").style.display = "block";
-                renderAdminLists();
-            } else {
-                alert("गलत पासवर्ड!");
-            }
-        }
-
-        function renderAdminLists() {
-            const pShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
-            let sDiv = document.getElementById("pendingShopsList");
-            if(sDiv) {
-                if(pShops.length === 0) sDiv.innerHTML = "<small>कोई पेंडिंग दुकान नहीं।</small>";
-                else {
-                    sDiv.innerHTML = pShops.map(s => `<div>${s.name} (${s.vill}, ${s.dist}) <button onclick="approveShop(${s.id})" class="btn-success">मंजूर</button></div>`).join('');
-                }
-            }
-
-            const pAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
-            let aDiv = document.getElementById("pendingAdsList");
-            if(aDiv) {
-                if(pAds.length === 0) aDiv.innerHTML = "<small>कोई पेंडिंग विज्ञापन नहीं।</small>";
-                else {
-                    aDiv.innerHTML = pAds.map(a => `<div>${a.title} - ₹${a.price} <button onclick="approveAd(${a.id})" class="btn-success">मंजूर</button></div>`).join('');
-                }
-            }
-        }
-
-        function approveShop(id) {
-            let pShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
-            let aShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            let idx = pShops.findIndex(s => s.id === id);
-            if(idx !== -1) {
-                aShops.push(pShops[idx]);
-                pShops.splice(idx, 1);
-                localStorage.setItem("pendingShops", JSON.stringify(pShops));
-                localStorage.setItem("approvedShops", JSON.stringify(aShops));
-                renderAdminLists();
-                alert("दुकान स्वीकृत कर दी गई है!");
-            }
-        }
-
-        function approveAd(id) {
-            let pAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
-            let aAds = JSON.parse(localStorage.getItem("approvedAds") || "[]");
-            let idx = pAds.findIndex(a => a.id === id);
-            if(idx !== -1) {
-                aAds.push(pAds[idx]);
-                pAds.splice(idx, 1);
-                localStorage.setItem("pendingAds", JSON.stringify(pAds));
-                localStorage.setItem("approvedAds", JSON.stringify(aAds));
-                renderAdminLists();
-                renderListings();
-                alert("विज्ञापन स्वीकृत कर दिया गया है!");
-            }
-        }
-
-        function shareOnWhatsApp() {
-            const text = encodeURIComponent("हरियाणा ग्रामीण सेवा पोर्टल पर अपने गाँव की सेवाएँ और दुकानें देखें!");
-            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
-        }
-
-        function getNewJoke() {
-            const rand = jokes[Math.floor(Math.random() * jokes.length)];
-            document.getElementById("jokeDisplay").innerText = rand;
-        }
-
-        function sendAIChatMessage() {
-            const input = document.getElementById("aiChatInput");
-            const screen = document.getElementById("aiChatScreen");
-            if(!input.value.trim()) return;
-
-            screen.innerHTML += `<div class="ai-msg-user">${input.value}</div>`;
-            let q = input.value;
-            input.value = "";
-
-            setTimeout(() => {
-                let ans = "राम-राम! इस बारे में जल्द ही जानकारी जोड़ी जाएगी।";
-                if(q.includes("मौसम") || q.includes("weather")) ans = "हरियाणा में फिलहाल तापमान 32°C है और मौसम साफ है।";
-                else if(q.includes("भाव") || q.includes("mandi")) ans = "मंडी भाव: गेहूँ ₹2300, बाजरा ₹2550 और सरसों ₹5500 प्रति क्विंटल चल रही है।";
-                screen.innerHTML += `<div class="ai-msg-bot">${ans}</div>`;
-                screen.scrollTop = screen.scrollHeight;
-            }, 500);
-        }
-    </script>
-</body>
-</html>
+        alert("सत्यापन हेतु एडमिन के पास भेज दिया गया है!");
+        document.getElementById("addShopFormBox").style.display = "none";
+        if(typeof renderAdminLists === 'function') renderAdminLists();
+    }
+</script>
