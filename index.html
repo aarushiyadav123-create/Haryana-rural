@@ -47,8 +47,6 @@
         .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); }
-        .btn-danger { background: #d32f2f; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
-        .btn-success { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; margin-right: 6px; }
         .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
 
         .toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -169,7 +167,7 @@
 
         <div class="collapsible-form-container" id="addShopFormBox">
             <h2 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 15px;">नया दुकान रजिस्ट्रेशन फॉर्म</h2>
-            <div id="shopErr" class="text-danger small fw-bold mb-2" style="color:red; display:none;"></div>
+            <div id="shopErr" style="color: #c62828; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; display:none;"></div>
             
             <div class="form-group">
                 <label>दुकान या सेवा का नाम:</label>
@@ -188,9 +186,10 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव का नाम:</label>
-                <input type="text" id="regVillageInput" list="regVillageList" placeholder="गाँव का नाम लिखें..." required>
-                <datalist id="regVillageList"></datalist>
+                <label>गाँव का नाम (ड्रॉपडाउन से चुनें):</label>
+                <select id="regVillageSelect">
+                    <option value="">-- पहले जिला चुनें --</option>
+                </select>
             </div>
 
             <div class="form-group">
@@ -211,7 +210,7 @@
 
             <div class="form-group">
                 <label>दुकान की फोटो (अनिवार्य)*:</label>
-                <input type="file" id="shopPhoto" accept="image/*" class="form-control mb-2" required>
+                <input type="file" id="shopPhoto" accept="image/*" required>
             </div>
 
             <div class="form-group">
@@ -241,7 +240,7 @@
                 <input type="text" id="bsItemName" placeholder="जैसे: पुराना ट्रैक्टर / भैंस">
             </div>
             <div class="form-group">
-                <label>गाँव / जिला:</label>
+                <label>गाँव और जिला:</label>
                 <input type="text" id="bsLocation" placeholder="गाँव और जिला">
             </div>
             <div class="form-group">
@@ -255,7 +254,6 @@
             <div class="form-group">
                 <label>आपकी UPI ID (ऑनलाइन पेमेंट के लिए):</label>
                 <input type="text" id="bsUpiId" placeholder="उदा. example@ybl / 98123">
-                <span style="font-size: 11px; color: #666;">*ग्राहक इस UPI पर सीधे ऑनलाइन भुगतान कर सकेंगे।</span>
             </div>
 
             <div style="background: #fff8e1; border: 1px dashed var(--secondary); padding: 10px; border-radius: 8px; margin-bottom: 12px;">
@@ -268,7 +266,7 @@
             </div>
         </div>
 
-        <!-- 4. सरकारी योजनाएँ एवं डायरेक्ट पोर्टल (विज्ञापन से ऊपर) -->
+        <!-- 4. सरकारी योजनाएँ एवं डायरेक्ट पोर्टल -->
         <div class="card" style="border-left: 4px solid #1976d2;">
             <h3 style="font-size: 1rem; color: #1976d2; margin-bottom: 10px;">🏛️ 4. सरकारी योजनाएँ एवं डायरेक्ट पोर्टल</h3>
             <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -417,6 +415,7 @@
         function initPortal() {
             safeDataLoader();
             renderListings();
+            renderAdminLists();
         }
 
         function playWelcomeAudioOnce() {
@@ -443,11 +442,11 @@
 
         function updateRegVillageDropdown() {
             const dist = document.getElementById("regDistrict").value;
-            const list = document.getElementById("regVillageList");
-            list.innerHTML = '';
+            const villSelect = document.getElementById("regVillageSelect");
+            villSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
             if (dist && villagesData[dist]) {
                 villagesData[dist].forEach(v => {
-                    list.innerHTML += `<option value="${v}">`;
+                    villSelect.innerHTML += `<option value="${v}">${v}</option>`;
                 });
             }
         }
@@ -488,7 +487,7 @@
                         const lng = position.coords.longitude;
                         alert(`आपकी लाइव लोकेशन पाई गई:\nअक्षांश (Lat): ${lat}\nदेशांतर (Lng): ${lng}\n\nआपके पास की जगहें और दुकानें फ़िल्टर की जा रही हैं!`);
                     },
-                    () => { alert("कृपया पास की जगहें देखने के लिए लोकेशन अनुमति (Permission) दें।"); }
+                    () => { alert("कृपया पास की जगहें देखने के लिए लोकेशन अनुमति दें।"); }
                 );
             } else {
                 alert("आपका ब्राउज़र Geolocation सपोर्ट नहीं करता है।");
@@ -530,25 +529,35 @@
         function registerService() {
             const name = document.getElementById("regShopName").value.trim();
             const dist = document.getElementById("regDistrict").value;
-            const vill = document.getElementById("regVillageInput").value.trim();
+            const vill = document.getElementById("regVillageSelect").value;
             const phone = document.getElementById("regPhone").value.trim();
             const photo = document.getElementById("shopPhoto").value;
             const gps = document.getElementById("shopGPSLocation").value;
             const errBox = document.getElementById("shopErr");
 
+            // सख्त वैलिडेशन (Strict Match Validation)
             if (!name || !dist || !vill || !phone || !photo || !gps) {
                 errBox.style.display = "block";
-                errBox.innerText = "❌ त्रुटि: दुकान की फोटो और GPS लोकेशन अनिवार्य हैं, सभी विवरण भरें!";
+                errBox.innerText = "❌ त्रुटि: कृपया दुकान का नाम, जिला, गाँव, मोबाइल, फोटो और GPS लोकेशन सभी अनिवार्य रूप से भरें!";
                 return;
             }
+
+            // चेक करें कि चुना गया गाँव उसी जिले का है या नहीं
+            if (!villagesData[dist] || !villagesData[dist].includes(vill)) {
+                errBox.style.display = "block";
+                errBox.innerText = "❌ त्रुटि: जिला और गाँव का मिलान सही नहीं है! कृपया सही जिला और उसके अंतर्गत आने वाला गाँव ही चुनें।";
+                return;
+            }
+
             errBox.style.display = "none";
 
             const pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
             pendingShops.push({ name, dist, vill, phone, gps, id: Date.now() });
             localStorage.setItem("pendingShops", JSON.stringify(pendingShops));
 
-            alert("सत्यापन हेतु भेज दिया गया है!");
+            alert("सत्यापन हेतु एडमिन के पास भेज दिया गया है!");
             document.getElementById("addShopFormBox").style.display = "none";
+            renderAdminLists();
         }
 
         function submitPlaceForApproval() {
@@ -568,6 +577,7 @@
 
             alert("गाँव की फोटो/स्थान एडमिन अप्रूवल के लिए भेज दिया गया है!");
             document.getElementById("placeFormBox").style.display = "none";
+            renderAdminLists();
         }
 
         function publishBuySellAd() {
@@ -589,6 +599,7 @@
 
             alert("सत्यापन हेतु भेज दिया गया है!");
             document.getElementById("buySellFormBox").style.display = "none";
+            renderAdminLists();
         }
 
         function renderListings() {
@@ -623,8 +634,60 @@
             const pass = document.getElementById("adminPass").value;
             if (pass === "1234" || pass === "admin") {
                 document.getElementById("adminControls").style.display = "block";
+                renderAdminLists();
             } else {
                 alert("गलत पासवर्ड!");
+            }
+        }
+
+        function renderAdminLists() {
+            // पेंडिंग दुकानें
+            const pShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
+            let sDiv = document.getElementById("pendingShopsList");
+            if(sDiv) {
+                if(pShops.length === 0) sDiv.innerHTML = "<small>कोई पेंडिंग दुकान नहीं।</small>";
+                else {
+                    sDiv.innerHTML = pShops.map(s => `<div>${s.name} (${s.vill}, ${s.dist}) <button onclick="approveShop(${s.id})" class="btn-success">मंजूर</button></div>`).join('');
+                }
+            }
+
+            // पेंडिंग एड्स
+            const pAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
+            let aDiv = document.getElementById("pendingAdsList");
+            if(aDiv) {
+                if(pAds.length === 0) aDiv.innerHTML = "<small>कोई पेंडिंग विज्ञापन नहीं।</small>";
+                else {
+                    aDiv.innerHTML = pAds.map(a => `<div>${a.title} - ₹${a.price} <button onclick="approveAd(${a.id})" class="btn-success">मंजूर</button></div>`).join('');
+                }
+            }
+        }
+
+        function approveShop(id) {
+            let pShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
+            let aShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
+            let idx = pShops.findIndex(s => s.id === id);
+            if(idx !== -1) {
+                aShops.push(pShops[idx]);
+                pShops.splice(idx, 1);
+                localStorage.setItem("pendingShops", JSON.stringify(pShops));
+                localStorage.setItem("approvedShops", JSON.stringify(aShops));
+                renderAdminLists();
+                alert("दुकान स्वीकृत कर दी गई है!");
+            }
+        }
+
+        function approveAd(id) {
+            let pAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
+            let aAds = JSON.parse(localStorage.getItem("approvedAds") || "[]");
+            let idx = pAds.findIndex(a => a.id === id);
+            if(idx !== -1) {
+                aAds.push(pAds[idx]);
+                pAds.splice(idx, 1);
+                localStorage.setItem("pendingAds", JSON.stringify(pAds));
+                localStorage.setItem("approvedAds", JSON.stringify(aAds));
+                renderAdminLists();
+                renderListings();
+                alert("विज्ञापन स्वीकृत कर दिया गया है!");
             }
         }
 
