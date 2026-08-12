@@ -94,6 +94,83 @@
     </header>
 
     <div class="container">
+    
+
+        <!-- 1. पास की दुकान या सेवा खोजने वाला बॉक्स (नियरबाय तुरंत लाइव) -->
+        <div class="card">
+            <h2>🔍 पास की दुकान या सेवा खोजें (तुरंत नंबर पाएं)</h2>
+            <div class="form-group">
+                <label>श्रेणी (Category) चुनें:</label>
+                <select id="searchCategory" onchange="filterListings()">
+                    <option value="all">सभी देखें (All Live)</option>
+                    <option value="shop">पक्की दुकानें (Shops)</option>
+                    <option value="tractor">ट्रैक्टर / वाहन सेवा (Free Service)</option>
+                    <option value="pandit">पंडित जी / कर्मकांड (Free Service)</option>
+                    <option value="electrician">इलेक्ट्रिशियन / मिस्त्री (Free Service)</option>
+                    <option value="plumber">प्लंबर / अन्य सेवा (Free Service)</option>
+                </select>
+            </div>
+            <div class="result-box" id="listingsContainer"></div>
+        </div>
+
+        <!-- 2. दुकान रजिस्ट्रेशन फॉर्म (QR कोड और एडमिन अप्रूवल सिस्टम के साथ) -->
+        <div class="toggle-bar" onclick="toggleForm('shopFormContainer')">
+            <span>🏪 अपनी दुकान रजिस्टर्ड करें (QR कोड प्राप्त करें)</span>
+            <span>▼</span>
+        </div>
+        <div class="collapsible-form-container" id="shopFormContainer">
+            <h3 style="color: var(--primary); margin-bottom: 12px;">दुकान पंजीकरण फॉर्म</h3>
+            <div class="form-group">
+                <label>दुकान का नाम:</label>
+                <input type="text" id="shopName" placeholder="उदा: शर्मा जनरल स्टोर">
+            </div>
+            <div class="form-group">
+                <label>दुकानदार का नाम:</label>
+                <input type="text" id="ownerName" placeholder="आपका नाम">
+            </div>
+            <div class="form-group">
+                <label>व्हाट्सएप मोबाइल नंबर (QR कोड इसी पर आएगा):</label>
+                <input type="tel" id="shopPhone" placeholder="10 अंकों का मोबाइल नंबर">
+            </div>
+            <div class="form-group">
+                <label>गाँव / क्षेत्र:</label>
+                <input type="text" id="shopVillage" placeholder="गाँव का नाम">
+            </div>
+            <button class="custom-btn" onclick="registerShop()">दुकान दर्ज करें (Admin Approval)</button>
+        </div>
+
+        <!-- 3. फ्री सेवा / फ्रीलेंसर रजिस्ट्रेशन फॉर्म (तुरंत लाइव) -->
+        <div class="toggle-bar toggle-bar-secondary" onclick="toggleForm('freeServiceFormContainer')">
+            <span>🚜 फ्री सेवा / फ्रीलेंसर जोड़ें (तुरंत लाइव)</span>
+            <span>▼</span>
+        </div>
+        <div class="collapsible-form-container" id="freeServiceFormContainer" style="border-color: var(--secondary);">
+            <h3 style="color: var(--secondary); margin-bottom: 12px;">फ्री सेवा पंजीकरण (तुरंत लाइव)</h3>
+            <div class="form-group">
+                <label>सेवा का प्रकार:</label>
+                <select id="freeServiceCategory">
+                    <option value="tractor">ट्रैक्टर / वाहन सेवा</option>
+                    <option value="pandit">पंडित जी / कर्मकांड</option>
+                    <option value="electrician">इलेक्ट्रिशियन</option>
+                    <option value="plumber">प्लंबर</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>आपका नाम:</label>
+                <input type="text" id="freeName" placeholder="नाम">
+            </div>
+            <div class="form-group">
+                <label>मोबाइल नंबर:</label>
+                <input type="tel" id="freePhone" placeholder="मोबाइल नंबर">
+            </div>
+            <div class="form-group">
+                <label>गाँव:</label>
+                <input type="text" id="freeVillage" placeholder="गाँव का नाम">
+            </div>
+            <button class="custom-btn btn-secondary" onclick="registerFreeService()">तुरंत लाइव करें</button>
+        </div>
+
+    </div>
 
         <div class="card" style="padding: 12px; text-align: center; background: #fffde7; border: 1px dashed #fbc02d; margin-bottom: 15px;">
             <p style="font-size: 1rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है</p>
