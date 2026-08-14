@@ -119,7 +119,6 @@
         }
 
         .mandatory { color: #d32f2f; font-weight: bold; }
-
         .btn-box { text-align: center; margin-top: 15px; }
 
         .custom-btn {
@@ -644,7 +643,7 @@
     </footer>
 
     <script>
-        // बिल्कुल सटीक और अलग किए गए जिलों, ब्लॉकों और गाँवों का डेटाबेस
+        // शुद्ध और अलग किए गए जिलों, ब्लॉकों और गाँवों का कड़ा डेटाबेस (Strict Mapping)
         const haryanaMasterData = {
             "ROHTAK": {
                 "ROHTAK": ["Bohar", "Karanoti", "Sanghi", "Pakasma", "Garhi", "Kheri", "Anwal", "Baliana", "Chiri", "Dehri", "Garanwathi", "Karor", "Katesra", "Kharawar", "Kheri Sadh", "Makarana", "Nangal", "Nidana", "Pahrawar", "Rurki", "Simri", "Tiana", "Titoli"],
@@ -728,7 +727,7 @@
             const statusMsg = document.getElementById("apiVillageStatus");
 
             villSel.innerHTML = '<option value="">-- सभी गाँव लोड हो रहे हैं... --</option>';
-            statusMsg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">✔ ${block} ब्लॉक के सही गाँव लोड हो गए हैं!</span>`;
+            statusMsg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">✔ ${block} ब्लॉक के सटीक गाँव लोड हो गए हैं!</span>`;
 
             setTimeout(() => {
                 villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
@@ -739,7 +738,7 @@
                 } else {
                     villSel.innerHTML += `<option value="Main Village">मुख्य गाँव / अन्य</option>`;
                 }
-            }, 300);
+            }, 200);
         }
 
         function onVillageSelected() {
@@ -884,7 +883,7 @@
                     </div>`;
                 });
             } else {
-                html += `<p style="font-size:0.85rem; color:#666; margin-top:10px;">नोट: इस गाँव में अभी कोई स्थानीय दुकान रजिस्टर्ड नहीं है। ऊपर दिए गए 'दुकान जोड़ें' विकल्प से जोड़ सकते हैं।</p>`;
+                html += `<p style="font-size:0.85rem; color:#666; margin-top:10px;">नोट: इस गाँव में अभी कोई स्थानीय दुकान रजिस्टर्ड नहीं है।</p>`;
             }
 
             result.innerHTML = html;
