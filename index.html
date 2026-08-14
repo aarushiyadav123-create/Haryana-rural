@@ -11,6 +11,7 @@
             --secondary: #ff8f00;
             --accent: #d84315;
             --purple: #4a148c;
+            --govt-green: #00695c;
             --bg-color: #f4f6f9;
             --card-bg: #ffffff;
             --text-color: #333333;
@@ -72,6 +73,7 @@
         header p {
             font-size: 1rem;
             opacity: 0.95;
+            font-weight: 500;
         }
 
         .badge {
@@ -172,6 +174,8 @@
         .btn-accent:hover { background: #bf360c; }
         .btn-purple { background: var(--purple); }
         .btn-purple:hover { background: #311b92; }
+        .btn-govt { background: var(--govt-green); color: white; }
+        .btn-govt:hover { background: #004d40; }
 
         .call-btn {
             background: #2e7d32;
@@ -204,6 +208,7 @@
         .toggle-bar.orange { background: var(--secondary); color: #000; }
         .toggle-bar.red { background: #c62828; color: #fff; }
         .toggle-bar.purple { background: var(--purple); color: #fff; }
+        .toggle-bar.govt { background: var(--govt-green); color: #fff; }
 
         .collapsible-form-container {
             display: none;
@@ -254,7 +259,7 @@
         }
 
         /* Display Items */
-        .shop-item, .event-item, .item-card {
+        .shop-item, .event-item, .item-card, .govt-card {
             background: #f9f9f9;
             border-left: 4px solid var(--primary);
             padding: 12px;
@@ -264,6 +269,31 @@
             justify-content: space-between;
             align-items: center;
             gap: 12px;
+        }
+
+        .govt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .govt-item-card {
+            background: #e0f2f1;
+            border: 1px solid #80cbc4;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #004d40;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .govt-item-card:hover {
+            transform: translateY(-3px);
+            background: #b2dfdb;
         }
 
         .shop-img-preview, .item-img-preview {
@@ -334,8 +364,8 @@
 
     <!-- Header -->
     <header>
-        <h1 id="headerTitle">हरियाणा ग्रामीण सेवा</h1>
-        <p>ग्राम डिजिटल पोर्टल, सूचना व व्यापार केंद्र</p>
+        <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
+        <p id="headerSubTitle">मेरा गाँव, सूचना व व्यापार केंद्र</p>
         <div class="badge" id="currentLocationBadge">📍 स्थान: सभी जिला व गाँव (All Haryana Covered)</div>
     </header>
 
@@ -576,6 +606,39 @@
             <div style="margin-top: 20px;" id="buySellDisplayArea"></div>
         </div>
 
+
+        <!-- 5. HARYANA GOVT SCHEMES & SERVICES (NEW SECTION BELOW BUY & SELL) -->
+        <div class="toggle-bar govt" onclick="toggleSection('govtSchemesBox', 'icon5')">
+            <span>🏛️ 5. हरियाणा सरकारी योजनाएं व सेवाएं (HKRN, PPP, पेंशन)</span>
+            <span id="icon5">▼</span>
+        </div>
+
+        <div class="collapsible-form-container" id="govtSchemesBox">
+            <h2>हरियाणा सरकारी योजनाएं एवं ऑनलाइन सेवाएं</h2>
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 12px;">सभी प्रमुख हरियाणा सरकारी पोर्टल और योजनाओं के डायरेक्ट लिंक:</p>
+
+            <div class="govt-grid">
+                <a href="https://hkrnl.itiharyana.gov.in/" target="_blank" class="govt-item-card">
+                    💼 HKRN रोज़गार पोर्टल
+                </a>
+                <a href="https://meraparivar.haryana.gov.in/" target="_blank" class="govt-item-card">
+                    🆔 परिवार पहचान पत्र (PPP)
+                </a>
+                <a href="https://pension.socialjusticehry.gov.in/" target="_blank" class="govt-item-card">
+                    👴 वृद्धावस्था / दिव्यांग पेंशन
+                </a>
+                <a href="https://edisha.gov.in/" target="_blank" class="govt-item-card">
+                    📄 ई-दिशा आय/जाति प्रमाण पत्र
+                </a>
+                <a href="https://epds.haryanafood.gov.in/" target="_blank" class="govt-item-card">
+                    🌾 BPL / AAY राशन कार्ड
+                </a>
+                <a href="https://fasal.haryana.gov.in/" target="_blank" class="govt-item-card">
+                    🚜 मेरी फसल मेरा ब्योरा
+                </a>
+            </div>
+        </div>
+
     </div>
 
     <!-- Footer -->
@@ -605,7 +668,7 @@
             "Panchkula": ["Panchkula", "Kalka", "Raipur Rani"],
             "Panipat": ["Panipat", "Samalkha", "Israna"],
             "Rewari": ["Rewari", "Bawal", "Kosli", "Dharuhera"],
-            "Rohtak": ["Rohtak", "Meham", "Sampla", "Kalanaur"],
+            "Rohtak": ["Rohtak", "Dobh", "Meham", "Sampla", "Kalanaur", "Kahnaur", "Bahlaut", "Kharak Kalan"],
             "Sirsa": ["Sirsa", "Dabwali", "Ellenabad", "Rania"],
             "Sonipat": ["Sonipat", "Gohana", "Kharkhoda", "Ganaur"],
             "Yamunanagar": ["Jagadhri", "Yamunanagar", "Bilaspur"]
@@ -649,16 +712,18 @@
             }
         }
 
+        // Updated Dynamic Header Title with "MERA GAOV"
         function onVillageSelected() {
             const dist = document.getElementById("districtSelect").value;
             const vill = document.getElementById("villageSelect").value;
             if(vill) {
-                document.getElementById("headerTitle").innerText = `गाँव ${vill} (${dist}) डिजिटल पोर्टल`;
+                document.getElementById("headerTitle").innerText = `मेरा गाँव - ${vill.toUpperCase()}`;
+                document.getElementById("headerSubTitle").innerText = `मेरा गाँव ${vill}, सूचना व व्यापार केंद्र`;
                 document.getElementById("currentLocationBadge").innerText = `📍 स्थान: गाँव ${vill}, जिला ${dist}`;
             }
         }
 
-        // --- NEW: REVERSE GEOCODING API DISTRICT CHECKING ---
+        // --- REVERSE GEOCODING API DISTRICT CHECKING WITH CASE-INSENSITIVE MATCHING ---
         async function fetchGPSLocationAndVerifyDistrict() {
             const selectedDist = document.getElementById("regDistrict").value;
             const enteredVillage = document.getElementById("regVillageInput").value.trim();
@@ -684,23 +749,23 @@
                         document.getElementById("regGPSCoord").value = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
 
                         try {
-                            // Free OpenStreetMap Reverse Geocoding API
                             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
                             const data = await response.json();
 
-                            let apiDistrict = data.address.county || data.address.state_district || data.address.city || "";
-                            apiDistrict = apiDistrict.replace("District", "").replace("जिला", "").trim();
+                            let apiDistrict = (data.address.county || data.address.state_district || data.address.city || "").toLowerCase();
+                            apiDistrict = apiDistrict.replace("district", "").replace("जिला", "").trim();
 
-                            // Checking if selected district matches API district or database
+                            let targetDist = selectedDist.toLowerCase().trim();
                             let isMatch = false;
-                            if (apiDistrict.toLowerCase().includes(selectedDist.toLowerCase()) || selectedDist.toLowerCase().includes(apiDistrict.toLowerCase())) {
+
+                            if (apiDistrict.includes(targetDist) || targetDist.includes(apiDistrict)) {
                                 isMatch = true;
                             }
 
-                            // Secondary API Check: Village - District mapping validation
+                            // Secondary API Check: Case-insensitive village matching
                             if(!isMatch && sampleVillages[selectedDist]) {
-                                const validVillages = sampleVillages[selectedDist].map(v => v.toLowerCase());
-                                if(validVillages.includes(enteredVillage.toLowerCase())) {
+                                const validVillages = sampleVillages[selectedDist].map(v => v.toLowerCase().trim());
+                                if(validVillages.includes(enteredVillage.toLowerCase().trim())) {
                                     isMatch = true;
                                 }
                             }
@@ -714,11 +779,10 @@
                             }
 
                         } catch (err) {
-                            // Fallback client check if API is slow/offline
                             let isMatchFallback = false;
                             if (sampleVillages[selectedDist]) {
-                                const validVillages = sampleVillages[selectedDist].map(v => v.toLowerCase());
-                                if(validVillages.includes(enteredVillage.toLowerCase())) {
+                                const validVillages = sampleVillages[selectedDist].map(v => v.toLowerCase().trim());
+                                if(validVillages.includes(enteredVillage.toLowerCase().trim())) {
                                     isMatchFallback = true;
                                 }
                             }
@@ -789,10 +853,10 @@
             }
         }
 
-        // Search Shops
+        // Search Shops with Case-Insensitive Matching
         function searchServices() {
-            const selectedDist = document.getElementById("districtSelect").value;
-            const selectedVill = document.getElementById("villageSelect").value;
+            const selectedDist = document.getElementById("districtSelect").value.trim().toLowerCase();
+            const selectedVill = document.getElementById("villageSelect").value.trim().toLowerCase();
             const result = document.getElementById("searchResult");
 
             if (!selectedDist || !selectedVill) {
@@ -801,10 +865,15 @@
             }
 
             const approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            const filteredShops = approvedShops.filter(s => s.dist === selectedDist && s.vill.toLowerCase() === selectedVill.toLowerCase());
+            
+            // Case-Insensitive Filter
+            const filteredShops = approvedShops.filter(s => 
+                s.dist.trim().toLowerCase() === selectedDist && 
+                s.vill.trim().toLowerCase() === selectedVill
+            );
 
             if (filteredShops.length === 0) {
-                result.innerHTML = `<p style="font-size:0.88rem; color:#666;">गाँव ${selectedVill} में अभी कोई पंजीकृत दुकान दर्ज नहीं है। आप नीचे दिए गए फ़ॉर्म से दुकान जोड़ सकते हैं!</p>`;
+                result.innerHTML = `<p style="font-size:0.88rem; color:#666;">गाँव में अभी कोई पंजीकृत दुकान दर्ज नहीं है। आप नीचे दिए गए फ़ॉर्म से दुकान जोड़ सकते हैं!</p>`;
                 return;
             }
 
@@ -872,13 +941,6 @@
             if(!title || !dist || !vill || !photo) {
                 alert("कृपया फोटो, शीर्षक, जिला और गाँव दर्ज करें!");
                 return;
-            }
-
-            // Cross Check District & Village
-            if(sampleVillages[dist] && !sampleVillages[dist].map(v => v.toLowerCase()).includes(vill.toLowerCase())) {
-                if(!confirm(`⚠️ ध्यान दें: गाँव '${vill}' जिला '${dist}' की आधिकारिक लिस्ट में नहीं मिला। क्या आप फिर भी आगे बढ़ना चाहते हैं?`)) {
-                    return;
-                }
             }
 
             let gallery = JSON.parse(localStorage.getItem("graminGallery") || "[]");
