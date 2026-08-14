@@ -137,10 +137,12 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव / Village *</label>
-                <select id="mainVillageSelect">
-                    <option value="">-- पहले ब्लॉक चुनें --</option>
-                </select>
+                <label>गाँव / Village टाइप करें या चुनें *</label>
+                <!-- यहाँ datelist का उपयोग किया गया है जिससे कोई भी गाँव नहीं छूटेगा और टाइप करते ही आ जाएगा -->
+                <input type="text" id="mainVillageInput" list="villageListOptions" placeholder="गाँव का नाम यहाँ लिखें या चुनें...">
+                <datalist id="villageListOptions">
+                    <!-- जावास्क्रिप्ट द्वारा सारे गाँव यहाँ लोड होंगे -->
+                </datalist>
             </div>
 
             <button class="custom-btn" onclick="showVillageDetails()">विवरण देखें</button>
@@ -154,36 +156,36 @@
     </footer>
 
     <script>
-        // आपके कहे अनुसार 5 मुख्य जिलों का हल्का और एकदम सही डेटाबेस
+        // आपके 5 प्रमुख जिलों का विस्तृत डेटाबेस
         const haryanaData = {
             "BHIWANI": {
-                "BHIWANI": ["Dinod", "Bidhwan", "Talu", "Nangal", "Biran", "Chang", "Nimri", "Bapora", "Dinod Kalan"],
-                "BAWANI KHERA": ["Miran", "Jatu Lohari", "Sisar", "Kairu", "Jhamuwas", "Sui", "Bawani Khera Rural"],
-                "SIWANI": ["Siwani Mandi", "Bhiwani Rohilla", "Barwala", "Ghangala", "Dariyapur", "Jali"],
-                "TOSHAM": ["Khanak", "Dhandalan", "Dang Kalan", "Bishan", "Tosham Rural"],
-                "LOHARU": ["Jui", "Sisahani", "Digwa", "Alawalpur", "Bahal", "Loharu Rural"]
+                "BHIWANI": ["Dinod", "Bidhwan", "Talu", "Nangal", "Biran", "Chang", "Nimri", "Bapora", "Dinod Kalan", "Badra", "Kitlana", "Siani", " Tigrana"],
+                "BAWANI KHERA": ["Miran", "Jatu Lohari", "Sisar", "Kairu", "Jhamuwas", "Sui", "Bawani Khera Rural", "Ranhad", "Kherari"],
+                "SIWANI": ["Siwani Mandi", "Bhiwani Rohilla", "Barwala", "Ghangala", "Dariyapur", "Jali", "Madanheri", "Dhanauri"],
+                "TOSHAM": ["Khanak", "Dhandalan", "Dang Kalan", "Bishan", "Tosham Rural", "Dhadhot", "Talwandi", "Kairu"],
+                "LOHARU": ["Jui", "Sisahani", "Digwa", "Alawalpur", "Bahal", "Loharu Rural", "Singhani", "Kari"]
             },
             "ROHTAK": {
-                "ROHTAK": ["Dobh", "Kahnaur", "Bohar", "Karanoti", "Sanghi", "Pakasma", "Simli", "Kiloi", "Assan"],
-                "SAMPLA": ["Ismaila-A", "Ismaila-B", "Gandarv", "Garhi", "Katesra", "Sampla Rural"],
-                "MEHAM": ["Madina", "Bainsi", "Morkhi", "Nindana", "Rithal", "Bhaini", "Meham Rural"],
-                "KALANAUR": ["Bhaini", "Mokhra", "Landra", "Farmana", "Kalanaur Rural"]
+                "ROHTAK": ["Dobh", "Kahnaur", "Bohar", "Karanoti", "Sanghi", "Pakasma", "Simli", "Kiloi", "Assan", "Garhi Bohar", "Anwal", "Karontha"],
+                "SAMPLA": ["Ismaila-A", "Ismaila-B", "Gandarv", "Garhi", "Katesra", "Sampla Rural", "Ghihesta", "Rattanthal"],
+                "MEHAM": ["Madina", "Bainsi", "Morkhi", "Nindana", "Rithal", "Bhaini", "Meham Rural", "Farmana", "Mokhra"],
+                "KALANAUR": ["Bhaini", "Mokhra", "Landra", "Farmana", "Kalanaur Rural", "Kherari", "Basana"]
             },
             "HISAR": {
-                "HISAR": ["Uklana", "Barwala", "Narnaund", "Hansi", "Rawalwas", "Mayyar", "Dabra", "Hisar Rural"],
-                "AGROHA": ["Kanhari", "Sadar", "Khabra", "Thuian", "Khedar", "Agroha Rural"],
-                "BARWALA": ["Kharar", "Dhani", "Beri", "Sainipura", "Kirtan", "Barwala Rural"],
-                "HANSI": ["Sainsi", "Data", "Umra", "Gurana", "Ramayan", "Sisar", "Hansi Rural"]
+                "HISAR": ["Uklana", "Barwala", "Narnaund", "Hansi", "Rawalwas", "Mayyar", "Dabra", "Hisar Rural", "Kaimri", "Gangwa", "Sisar", "Badopal"],
+                "AGROHA": ["Kanhari", "Sadar", "Khabra", "Thuian", "Khedar", "Agroha Rural", "Barwala Khurd"],
+                "BARWALA": ["Kharar", "Dhani", "Beri", "Sainipura", "Kirtan", "Barwala Rural", "Faridpur"],
+                "HANSI": ["Sainsi", "Data", "Umra", "Gurana", "Ramayan", "Sisar", "Hansi Rural", "Puthi", "Kheri"]
             },
             "CHARKHI DADRI": {
-                "BADHRA": ["Mandola", "Ranila", "Kallana", "Khadal", "Chappar", "Assal", "Akhana", "Pandwan", "Jhojhu", "Kheri", "Imloita"],
-                "CHARKHI DADRI": ["Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni", "Data", "Mankawas", "Pyal", "Maurana", "Birhi Kalan"],
+                "BADHRA": ["Mandola", "Ranila", "Kallana", "Khadal", "Chappar", "Assal", "Akhana", "Pandwan", "Jhojhu", "Kheri", "Imloita", "Badhra Rural", "Kheri", "Jatai"],
+                "CHARKHI DADRI": ["Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni", "Data", "Mankawas", "Pyal", "Maurana", "Birhi Kalan", "Dadri Rural", "Kalyana", "Bond"],
                 "BAUND": ["Achina", "Bas Ranila", "Baund Kalan", "Baund Khurd", "Hindol", "Jhinjhar", "Kasni", "Malkosh", "Sankrod", "Sanjarwas"]
             },
             "MAHENDARGARH": {
-                "NARNAUL": ["Nasibpur", "Nangal Chaudhry", "Sehlong", "Kalyana", "Narnaul Rural", "Sihor"],
-                "KANINA": ["Kanina Rural", "Kanti", "Bhojpura", "Unhani", "Nangal Sirohi"],
-                "ATELI": ["Ateli Rural", "Kajla", "Mahendragarh Rural", "Pawati", "Nizampur"]
+                "NARNAUL": ["Nasibpur", "Nangal Chaudhry", "Sehlong", "Kalyana", "Narnaul Rural", "Sihor", "Bachhod", "Dhana", "Nizampur"],
+                "KANINA": ["Kanina Rural", "Kanti", "Bhojpura", "Unhani", "Nangal Sirohi", "Sihma", "Gajipur"],
+                "ATELI": ["Ateli Rural", "Kajla", "Mahendragarh Rural", "Pawati", "Nizampur", "Baghoth", "Satnali"]
             }
         };
 
@@ -199,10 +201,12 @@
         function loadBlocks() {
             const dist = document.getElementById("mainDistrictSelect").value;
             const blockSelect = document.getElementById("mainBlockSelect");
-            const villageSelect = document.getElementById("mainVillageSelect");
+            const villageInput = document.getElementById("mainVillageInput");
+            const villageList = document.getElementById("villageListOptions");
 
             blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
-            villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+            villageInput.value = "";
+            villageList.innerHTML = "";
 
             if (dist && haryanaData[dist]) {
                 Object.keys(haryanaData[dist]).sort().forEach(block => {
@@ -214,13 +218,15 @@
         function loadVillages() {
             const dist = document.getElementById("mainDistrictSelect").value;
             const block = document.getElementById("mainBlockSelect").value;
-            const villageSelect = document.getElementById("mainVillageSelect");
+            const villageList = document.getElementById("villageListOptions");
+            const villageInput = document.getElementById("mainVillageInput");
 
-            villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+            villageInput.value = "";
+            villageList.innerHTML = "";
 
             if (dist && block && haryanaData[dist][block]) {
                 haryanaData[dist][block].sort().forEach(village => {
-                    villageSelect.innerHTML += `<option value="${village}">${village}</option>`;
+                    villageList.innerHTML += `<option value="${village}">`;
                 });
             }
         }
@@ -228,11 +234,11 @@
         function showVillageDetails() {
             const dist = document.getElementById("mainDistrictSelect").value;
             const block = document.getElementById("mainBlockSelect").value;
-            const village = document.getElementById("mainVillageSelect").value;
+            const village = document.getElementById("mainVillageInput").value;
             const resultBox = document.getElementById("searchResult");
 
             if (!dist || !block || !village) {
-                resultBox.innerHTML = `<p style="color: red; font-weight: bold; font-size: 0.9rem;">कृपया जिला, ब्लॉक और गाँव तीनों का चयन करें!</p>`;
+                resultBox.innerHTML = `<p style="color: red; font-weight: bold; font-size: 0.9rem;">कृपया जिला, ब्लॉक और गाँव का नाम भरें!</p>`;
                 return;
             }
 
@@ -242,7 +248,7 @@
                     <p style="font-size: 0.9rem; margin-top: 5px;">📍 <b>गाँव:</b> ${village}</p>
                     <p style="font-size: 0.9rem;">🏢 <b>ब्लॉक:</b> ${block}</p>
                     <p style="font-size: 0.9rem;">🏛️ <b>जिला:</b> ${dist}</p>
-                    <span style="display:inline-block; margin-top:8px; background:#e8f5e9; color:#2e7d32; padding:3px 8px; border-radius:4px; font-size:0.8rem; font-weight:bold;">✔ सफलतापूर्वक सेट हो गया है</span>
+                    <span style="display:inline-block; margin-top:8px; background:#e8f5e9; color:#2e7d32; padding:3px 8px; border-radius:4px; font-size:0.8rem; font-weight:bold;">✔ सफलतापूर्वक खोज लिया गया है</span>
                 </div>
             `;
         }
