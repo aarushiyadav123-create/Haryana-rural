@@ -144,8 +144,8 @@
     <!-- Header -->
     <header>
         <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
-        <p id="headerSubTitle">मेरा गाँव, सूचना व व्यापार केंद्र</p>
-        <div class="badge" id="currentLocationBadge">📍 हरियाणा के सभी 22 ज़िले तैयार हैं</div>
+        <p id="headerSubTitle">जिला ➔ ब्लॉक ➔ गाँव ऑटोमैटिक लोड</p>
+        <div class="badge" id="currentLocationBadge">📍 अपना जिला व ब्लॉक चुनें</div>
     </header>
 
     <div class="container">
@@ -156,17 +156,24 @@
             
             <div class="form-group">
                 <label>1. जिला चुनें (Select District) *</label>
-                <select id="mainDistrictSelect" onchange="loadVillagesForSection('mainDistrictSelect', 'mainVillageSelect', 'mainLoader')">
+                <select id="mainDistrictSelect" onchange="onDistrictChange('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
                     <option value="">-- जिला चुनें --</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>2. गाँव चुनें (Select Village) *</label>
-                <select id="mainVillageSelect" onchange="onVillageSelected()">
+                <label>2. ब्लॉक चुनें (Select Block) *</label>
+                <select id="mainBlockSelect" onchange="onBlockChange('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect', 'mainLoader')">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
-                <div id="mainLoader" class="loader-text">⌛ गाँव की सूची लोड हो रही है...</div>
+            </div>
+
+            <div class="form-group">
+                <label>3. गाँव चुनें (Village - Auto Loaded) *</label>
+                <select id="mainVillageSelect" onchange="onVillageSelected()">
+                    <option value="">-- पहले ब्लॉक चुनें --</option>
+                </select>
+                <div id="mainLoader" class="loader-text">⌛ गाँव ऑटोमैटिक लोड हो रहे हैं...</div>
             </div>
 
             <div class="btn-box">
@@ -193,21 +200,28 @@
 
             <div class="form-group">
                 <label>2. जिला चुनें (District):</label>
-                <select id="regDistrict" onchange="loadVillagesForSection('regDistrict', 'regVillage', 'regLoader')">
+                <select id="regDistrict" onchange="onDistrictChange('regDistrict', 'regBlock', 'regVillage')">
                     <option value="">-- जिला चुनें --</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>3. गाँव चुनें (Village):</label>
-                <select id="regVillage">
+                <label>3. ब्लॉक चुनें (Block):</label>
+                <select id="regBlock" onchange="onBlockChange('regDistrict', 'regBlock', 'regVillage', 'regLoader')">
                     <option value="">-- पहले जिला चुनें --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>4. गाँव चुनें (Village):</label>
+                <select id="regVillage">
+                    <option value="">-- पहले ब्लॉक चुनें --</option>
                 </select>
                 <div id="regLoader" class="loader-text">⌛ गाँव लोड हो रहे हैं...</div>
             </div>
 
             <div class="form-group">
-                <label>4. श्रेणी (Category):</label>
+                <label>5. श्रेणी (Category):</label>
                 <select id="regCategory">
                     <option value="किराना">किराना / जनरल स्टोर</option>
                     <option value="मेडिकल">मेडिकल / दवाइयां</option>
@@ -268,14 +282,20 @@
             </div>
             <div class="form-group">
                 <label>जिला चुनें:</label>
-                <select id="galDistrict" onchange="loadVillagesForSection('galDistrict', 'galVillage', 'galLoader')">
+                <select id="galDistrict" onchange="onDistrictChange('galDistrict', 'galBlock', 'galVillage')">
                     <option value="">-- जिला चुनें --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>ब्लॉक चुनें:</label>
+                <select id="galBlock" onchange="onBlockChange('galDistrict', 'galBlock', 'galVillage', 'galLoader')">
+                    <option value="">-- पहले जिला चुनें --</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>गाँव चुनें:</label>
                 <select id="galVillage">
-                    <option value="">-- पहले जिला चुनें --</option>
+                    <option value="">-- पहले ब्लॉक चुनें --</option>
                 </select>
                 <div id="galLoader" class="loader-text">⌛ गाँव लोड हो रहे हैं...</div>
             </div>
@@ -311,14 +331,20 @@
             </div>
             <div class="form-group">
                 <label>जिला चुनें:</label>
-                <select id="eventDistrict" onchange="loadVillagesForSection('eventDistrict', 'eventVillage', 'evtLoader')">
+                <select id="eventDistrict" onchange="onDistrictChange('eventDistrict', 'eventBlock', 'eventVillage')">
                     <option value="">-- जिला चुनें --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>ब्लॉक चुनें:</label>
+                <select id="eventBlock" onchange="onBlockChange('eventDistrict', 'eventBlock', 'eventVillage', 'evtLoader')">
+                    <option value="">-- पहले जिला चुनें --</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>गाँव चुनें:</label>
                 <select id="eventVillage">
-                    <option value="">-- पहले जिला चुनें --</option>
+                    <option value="">-- पहले ब्लॉक चुनें --</option>
                 </select>
                 <div id="evtLoader" class="loader-text">⌛ गाँव लोड हो रहे हैं...</div>
             </div>
@@ -398,14 +424,31 @@
 
     <!-- JavaScript App Logic -->
     <script>
-        // Haryana 22 Districts List (Guaranteed Fast Load)
-        const HARYANA_DISTRICTS = [
-            "Ambala", "Bhiwani", "Charkhi Dadri", "Faridabad", "Fatehabad", 
-            "Gurugram", "Hisar", "Jhajjar", "Jind", "Kaithal", 
-            "Karnal", "Kurukshetra", "Mahendragarh", "Nuh", "Palwal", 
-            "Panchkula", "Panipat", "Rewari", "Rohtak", "Sirsa", 
-            "Sonipat", "Yamunanagar"
-        ];
+        // Haryana Districts and Blocks Data
+        const HARYANA_DATA = {
+            "Rohtak": ["Sampla", "Rohtak", "Kalanaur", "Lakhan Majra", "Meham"],
+            "Jhajjar": ["Jhajjar", "Bhadurgarh", "Beri", "Matanhail", "Salhawas"],
+            "Hisar": ["Hisar-I", "Hisar-II", "Hansi-I", "Hansi-II", "Adampur", "Barwala", "Narnaund", "Uklana"],
+            "Bhiwani": ["Bhiwani", "Bawani Khera", "Tosham", "Siwani", "Kairu"],
+            "Charkhi Dadri": ["Charkhi Dadri", "Badhra", "Jhubbu"],
+            "Ambala": ["Ambala-I", "Ambala-II", "Barara", "Naraingarh", "Saha", "Shahzadpur"],
+            "Faridabad": ["Faridabad", "Ballabgarh", "Tigaon"],
+            "Fatehabad": ["Fatehabad", "Bhattu Kalan", "Bhuna", "Jakhal", "Ratia", "Tohana"],
+            "Gurugram": ["Gurugram", "Sohna", "Pataudi", "Farrukhnagar"],
+            "Jind": ["Jind", "Julana", "Alewa", "Narwana", "Uchana", "Safidon", "Pillukhera"],
+            "Kaithal": ["Kaithal", "Guhla", "Kalayat", "Pundri", "Rajound", "Siwan"],
+            "Karnal": ["Karnal", "Gharaunda", "Indri", "Nilokheri", "Nissing", "Assandh"],
+            "Kurukshetra": ["Thanesar", "Pehowa", "Shahbad", "Ladwa", "Babain", "Ismailabad"],
+            "Mahendragarh": ["Narnaul", "Mahendragarh", "Ateli", "Kanina", "Satnali", "Nangal Chaudhary"],
+            "Nuh": ["Nuh", "Ferozepur Jhirka", "Punahana", "Taoru", "Nagina"],
+            "Palwal": ["Palwal", "Hodal", "Hathin", "Hassanpur"],
+            "Panchkula": ["Pinjore", "Raipur Rani", "Morni"],
+            "Panipat": ["Panipat", "Samalkha", "Israna", "Madlauda", "Bapoli"],
+            "Rewari": ["Rewari", "Bawal", "Dharuhera", "Jatusana", "Khol", "Nahar"],
+            "Sirsa": ["Sirsa", "Dabwali", "Rania", "Ellenabad", "Baragudha", "Odhan", "Nathusari Chopta"],
+            "Sonipat": ["Sonipat", "Ganaur", "Gohana", "Rai", "Kharkhoda", "Mundlana"],
+            "Yamunanagar": ["Jagadhri", "Chhachhrauli", "Radaur", "Sadhaura", "Bilaspur", "Mustafabad"]
+        };
 
         let villageCache = {};
         let base64PhotoStore = {};
@@ -419,41 +462,59 @@
             loadBuySellItems();
         }
 
-        // Fill all District selects with 22 Districts immediately
+        // Fill District Dropdowns
         function populateDistrictDropdowns() {
             const selects = ["mainDistrictSelect", "regDistrict", "galDistrict", "eventDistrict"];
             selects.forEach(id => {
                 const sel = document.getElementById(id);
                 if(sel) {
                     sel.innerHTML = '<option value="">-- जिला चुनें --</option>';
-                    HARYANA_DISTRICTS.forEach(dist => {
+                    Object.keys(HARYANA_DATA).sort().forEach(dist => {
                         sel.innerHTML += `<option value="${dist}">${dist}</option>`;
                     });
                 }
             });
         }
 
-        // Fast Dynamic API: Fetches all villages for ONLY the chosen district
-        async function loadVillagesForSection(distSelectId, villageSelectId, loaderId) {
-            const dist = document.getElementById(distSelectId).value;
-            const villageSel = document.getElementById(villageSelectId);
-            const loader = document.getElementById(loaderId);
+        // When District is Changed -> Fill Blocks
+        function onDistrictChange(distId, blockId, villageId) {
+            const dist = document.getElementById(distId).value;
+            const blockSel = document.getElementById(blockId);
+            const villSel = document.getElementById(villageId);
 
-            villageSel.innerHTML = '<option value="">-- चुनें --</option>';
+            blockSel.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
+            villSel.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
 
             if(!dist) return;
 
-            // Check Cache first
-            if(villageCache[dist]) {
-                fillVillageSelect(villageSel, villageCache[dist]);
+            const blocks = HARYANA_DATA[dist] || [];
+            blocks.forEach(b => {
+                blockSel.innerHTML += `<option value="${b}">${b}</option>`;
+            });
+        }
+
+        // When Block is Changed -> Auto Load Villages from API
+        async function onBlockChange(distId, blockId, villageId, loaderId) {
+            const dist = document.getElementById(distId).value;
+            const block = document.getElementById(blockId).value;
+            const villSel = document.getElementById(villageId);
+            const loader = document.getElementById(loaderId);
+
+            villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+
+            if(!block) return;
+
+            const cacheKey = `${dist}_${block}`;
+            if(villageCache[cacheKey]) {
+                fillVillageSelect(villSel, villageCache[cacheKey]);
                 return;
             }
 
             if(loader) loader.style.display = "block";
 
             try {
-                // District Specific Pin API Call
-                const response = await fetch(`https://api.postalpincode.in/postoffice/${dist}`);
+                // Fetch Villages automatically for the selected Block/Tehsil
+                const response = await fetch(`https://api.postalpincode.in/postoffice/${block}`);
                 const data = await response.json();
 
                 let villages = [];
@@ -465,22 +526,33 @@
                     });
                 }
 
+                if(villages.length === 0) {
+                    // Fallback to District Pin Fetch if block API is sparse
+                    const respDist = await fetch(`https://api.postalpincode.in/postoffice/${dist}`);
+                    const dataDist = await respDist.json();
+                    if(dataDist && dataDist[0] && dataDist[0].PostOffice) {
+                        dataDist[0].PostOffice.forEach(po => {
+                            if(po.Name && !villages.includes(po.Name)) villages.push(po.Name);
+                        });
+                    }
+                }
+
                 villages.sort();
-                villageCache[dist] = villages; // Cache for speed
-                fillVillageSelect(villageSel, villages);
+                villageCache[cacheKey] = villages;
+                fillVillageSelect(villSel, villages);
 
             } catch (err) {
                 console.log("API Fetch error", err);
-                villageSel.innerHTML = '<option value="मुख्य गाँव">मुख्य गाँव / शहर क्षेत्र</option>';
+                villSel.innerHTML = '<option value="मुख्य गाँव">मुख्य गाँव / क्षेत्र</option>';
             } finally {
                 if(loader) loader.style.display = "none";
             }
         }
 
         function fillVillageSelect(selectElem, villagesList) {
-            selectElem.innerHTML = '<option value="">-- गाँव लिखें / चुनें --</option>';
+            selectElem.innerHTML = '<option value="">-- गाँव चुनें --</option>';
             if(villagesList.length === 0) {
-                selectElem.innerHTML += '<option value="सामान्य गाँव">सामान्य गाँव क्षेत्र</option>';
+                selectElem.innerHTML += '<option value="सामान्य गाँव क्षेत्र">सामान्य गाँव क्षेत्र</option>';
             } else {
                 villagesList.forEach(v => {
                     selectElem.innerHTML += `<option value="${v}">${v}</option>`;
@@ -490,10 +562,11 @@
 
         function onVillageSelected() {
             const vill = document.getElementById("mainVillageSelect").value;
+            const block = document.getElementById("mainBlockSelect").value;
             const dist = document.getElementById("mainDistrictSelect").value;
             if(vill) {
                 document.getElementById("headerTitle").innerText = `मेरा गाँव - ${vill.toUpperCase()}`;
-                document.getElementById("currentLocationBadge").innerText = `📍 स्थान: गाँव ${vill}, जिला ${dist}`;
+                document.getElementById("currentLocationBadge").innerText = `📍 गाँव: ${vill} | ब्लॉक: ${block} | जिला: ${dist}`;
             }
         }
 
@@ -548,11 +621,12 @@
         // Actions: Search & Registration
         function searchServices() {
             const dist = document.getElementById("mainDistrictSelect").value.toLowerCase();
+            const block = document.getElementById("mainBlockSelect").value.toLowerCase();
             const vill = document.getElementById("mainVillageSelect").value.toLowerCase();
             const res = document.getElementById("searchResult");
 
-            if(!dist || !vill) {
-                res.innerHTML = "<p style='color:red; font-size:0.85rem; font-weight:bold;'>कृपया जिला और गाँव दोनों चुनें!</p>";
+            if(!dist || !block || !vill) {
+                res.innerHTML = "<p style='color:red; font-size:0.85rem; font-weight:bold;'>कृपया जिला, ब्लॉक और गाँव सभी चुनें!</p>";
                 return;
             }
 
@@ -571,7 +645,7 @@
                     <img src="${s.photo || ''}" style="width:60px; height:60px; object-fit:cover; border-radius:6px; background:#ddd;">
                     <div style="flex:1;">
                         <h4 style="color:var(--primary);">${s.name}</h4>
-                        <p style="font-size:0.8rem; color:#555;">📍 ${s.vill} (${s.dist})</p>
+                        <p style="font-size:0.8rem; color:#555;">📍 ${s.vill} (${s.block}, ${s.dist})</p>
                     </div>
                     <a href="tel:${s.phone}" class="call-btn">📞 कॉल करें</a>
                 </div>`;
@@ -582,14 +656,15 @@
         function submitShop() {
             const name = document.getElementById("regShopName").value.trim();
             const dist = document.getElementById("regDistrict").value;
+            const block = document.getElementById("regBlock").value;
             const vill = document.getElementById("regVillage").value;
             const phone = document.getElementById("regPhone").value.trim();
 
-            if(!name || !dist || !vill || !phone) { alert("सभी विवरण भरें!"); return; }
+            if(!name || !dist || !block || !vill || !phone) { alert("सभी विवरण भरें!"); return; }
             if(!isPhoneVerified) { alert("कृपया नंबर OTP से वेरीफाई करें!"); return; }
 
             let shops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            shops.push({ id: Date.now(), name, dist, vill, phone, photo: base64PhotoStore['shopImgPrev'] });
+            shops.push({ id: Date.now(), name, dist, block, vill, phone, photo: base64PhotoStore['shopImgPrev'] });
             localStorage.setItem("approvedShops", JSON.stringify(shops));
 
             alert(`✅ दुकान '${name}' दर्ज कर ली गई है!`);
@@ -600,12 +675,13 @@
         function addGalleryImage() {
             const title = document.getElementById("galTitle").value;
             const dist = document.getElementById("galDistrict").value;
+            const block = document.getElementById("galBlock").value;
             const vill = document.getElementById("galVillage").value;
             const photo = base64PhotoStore['galImgPrev'];
-            if(!title || !dist || !vill || !photo) { alert("पूरा विवरण भरें!"); return; }
+            if(!title || !dist || !block || !vill || !photo) { alert("पूरा विवरण भरें!"); return; }
 
             let gal = JSON.parse(localStorage.getItem("graminGallery") || "[]");
-            gal.push({ title, dist, vill, photo });
+            gal.push({ title, dist, block, vill, photo });
             localStorage.setItem("graminGallery", JSON.stringify(gal));
             alert("📸 फोटो गैलरी में जुड़ गई!");
             loadGallery();
@@ -625,12 +701,13 @@
         function addVillageEvent() {
             const cat = document.getElementById("eventCategory").value;
             const dist = document.getElementById("eventDistrict").value;
+            const block = document.getElementById("eventBlock").value;
             const vill = document.getElementById("eventVillage").value;
             const details = document.getElementById("eventDetails").value;
-            if(!dist || !vill || !details) { alert("विवरण भरें!"); return; }
+            if(!dist || !block || !vill || !details) { alert("विवरण भरें!"); return; }
 
             let evts = JSON.parse(localStorage.getItem("villageEvents") || "[]");
-            evts.push({ cat, dist, vill, details });
+            evts.push({ cat, dist, block, vill, details });
             localStorage.setItem("villageEvents", JSON.stringify(evts));
             alert("📢 सूचना प्रकाशित हुई!");
             loadEvents();
