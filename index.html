@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल (Final Edition)</title>
+    <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
     <style>
         :root {
             --primary: #1b5e20;
@@ -223,7 +223,7 @@
             </div>
         </div>
 
-        <!-- ग्राम ग्रामीण गैलरी बटन -->
+        <!-- ग्राम ग्रामीण गैलरी बटन सही जगह पर -->
         <div style="margin-bottom: 20px;">
             <button onclick="alert('📸 ग्राम ग्रामीण गैलरी जल्द लाइव होगी जिसमें गाँव की तस्वीरें और वीडियो देखे जा सकेंगे!');" class="custom-btn" style="background: #0277bd; font-size: 1rem; padding: 14px;">
                 📸 ग्राम ग्रामीण गैलरी (तस्वीरें व वीडियो)
@@ -620,7 +620,7 @@
                     <button onclick="approveShop(${idx})" style="background:green; color:#fff; border:none; padding:3px 6px; border-radius:3px; margin-left:5px; cursor:pointer;">मंजूर करें</button>
                 </div>`;
             });
-            document.getElementById("pendingShopsList").innerHTML = shopListHtml || "<p style='font-size:0.8rem;'>कोई पेंडिंग दुकान नहीं है।</p>";
+            document.getElementById("pendingShopsList").innerHTML = shopListHtml || "<p style='font-size:0.80rem;'>कोई पेंडिंग दुकान नहीं है।</p>";
 
             const pendingAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
             let adListHtml = "";
@@ -630,7 +630,7 @@
                     <button onclick="approveAd(${idx})" style="background:green; color:#fff; border:none; padding:3px 6px; border-radius:3px; margin-left:5px; cursor:pointer;">मंजूर करें</button>
                 </div>`;
             });
-            document.getElementById("pendingAdsList").innerHTML = adListHtml || "<p style='font-size:0.8rem;'>कोई पेंडिंग विज्ञापन नहीं है।</p>";
+            document.getElementById("pendingAdsList").innerHTML = adListHtml || "<p style='font-size:0.80rem;'>कोई पेंडिंग विज्ञापन नहीं है।</p>";
         }
 
         function approveShop(index) {
@@ -686,19 +686,15 @@
             setTimeout(() => {
                 let botReply = "राम-राम! थारे इस सवाल की जानकारी पोर्टल पर जोड़ी जा रही है। आप ऊपर दी गई सेवाएँ देख सको हो!";
 
-                // पशुधन (Livestock / Dairy) से जुड़े सवाल
-                if (text.includes("पशु") || text.includes("भैंस") || text.includes("गाय") || text.includes("दूध") || text.includes("डॉक्टर") || text.includes("चारा")) {
+                if (text.includes("पशु") || text.includes("भैंस") || text.includes("गाय") || text.includes("दूध") || text.includes("डॉक्टर") || text.includes("चारा") || text.includes("पशुधन")) {
                     botReply = "🐮 **पशुधन सलाह:** मुर्रह भैंस या गाय को रोज़ाना संतुलित हरा चारा और खल-बीन दें। अगर पशु बीमार है, तो तुरंत अपने नज़दीकी पशु अस्पताल या हेल्पलाइन नंबर **1962** (पशु एम्बुलेंस) पर संपर्क करें!";
                 } 
-                // कृषि सलाह / मौसम (Agri Advisory) से जुड़े सवाल
-                else if (text.includes("फसल") || text.includes("खाद") || text.includes("पानी") || text.includes("यूरिया") || text.includes("मौसम") || text.includes("बीज")) {
+                else if (text.includes("फसल") || text.includes("खाद") || text.includes("पानी") || text.includes("यूरिया") || text.includes("मौसम") || text.includes("बीज") || text.includes("खेती") || text.includes("कृषि")) {
                     botReply = "🌾 **कृषि व मौसम सलाह:** मौसम साफ है, सिंचाई अपनी फसल की मिट्टी की नमी देखकर करें। यूरिया खाद का छिड़काव सुबह या शाम के वक्त हवा न चलने पर करें।";
                 } 
-                // चुटकुला या मनोरंजन
                 else if (text.includes("चुटकुला") || text.includes("हँसी") || text.includes("जोक")) {
                     botReply = "😂 ताऊ बोला: बेटा बैल ने कंप्यूटर सीख लिया था!";
                 }
-                // लोकल या जनरल बातचीत
                 else if (text.includes("राम राम") || text.includes("के हाल") || text.includes("कै हाल")) {
                     botReply = "राम-राम भाई! सब ठीक-ठाक सै, बताओ गाँव में क्या मदद चाहिए?";
                 }
