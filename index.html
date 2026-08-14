@@ -6,59 +6,60 @@
     <title>डिजिटल ग्राम पोर्टल - संपला / माल्कोश</title>
     <style>
         :root {
-            --primary-color: #ff9800;
-            --primary-dark: #e65100;
-            --secondary-color: #4caf50;
-            --info-color: #2196f3;
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
-            --text-color: #333333;
+            --primary-orange: #ff9800;
+            --dark-orange: #e65100;
+            --success-green: #4caf50;
+            --info-blue: #2196f3;
+            --purple-color: #673ab7;
+            --bg-light: #f4f7f6;
+            --card-white: #ffffff;
+            --text-main: #333333;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-color);
+            background: var(--bg-light);
             margin: 0;
-            padding: 15px;
-            color: var(--text-color);
+            padding: 20px;
+            color: var(--text-main);
             line-height: 1.6;
         }
 
         .container {
-            max-width: 700px;
-            background: var(--card-bg);
+            max-width: 750px;
+            background: var(--card-white);
             margin: auto;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
             color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(255,152,0,0.3);
+            padding: 18px 22px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(255,152,0,0.3);
         }
 
         .header h2 {
             margin: 0;
-            font-size: 20px;
+            font-size: 21px;
             letter-spacing: 0.5px;
         }
 
         .lang-toggle {
             background: white;
-            color: var(--primary-dark);
+            color: var(--dark-orange);
             border: none;
-            padding: 8px 15px;
+            padding: 8px 16px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 6px;
-            transition: 0.3s;
+            transition: background 0.3s ease;
         }
 
         .lang-toggle:hover {
@@ -67,38 +68,43 @@
 
         .section {
             margin-top: 25px;
-            padding: 20px;
+            padding: 22px;
             background: #fff8f0;
-            border: 1px dashed var(--primary-color);
+            border: 1px dashed var(--primary-orange);
             border-radius: 10px;
         }
 
         .buy-sell-section {
             background: #f1f8e9;
-            border: 1px dashed var(--secondary-color);
+            border: 1px dashed var(--success-green);
         }
 
         .ai-section {
             background: #e3f2fd;
-            border: 1px dashed var(--info-color);
+            border: 1px dashed var(--info-blue);
         }
 
         .directory-section {
             background: #ede7f6;
-            border: 1px dashed #673ab7;
+            border: 1px dashed var(--purple-color);
+        }
+
+        .community-section {
+            background: #fffde7;
+            border: 1px dashed #fbc02d;
         }
 
         h3 {
             margin-top: 0;
-            font-size: 18px;
+            font-size: 19px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         label {
             display: block;
-            margin-top: 12px;
+            margin-top: 14px;
             font-weight: 600;
             font-size: 14px;
         }
@@ -113,17 +119,17 @@
             box-sizing: border-box;
             font-size: 14px;
             background: #fff;
-            transition: border 0.3s;
+            transition: border-color 0.3s;
         }
 
         input:focus, select:focus, textarea:focus {
-            border-color: var(--primary-color);
+            border-color: var(--primary-orange);
             outline: none;
-            box-shadow: 0 0 5px rgba(255,152,0,0.3);
+            box-shadow: 0 0 6px rgba(255,152,0,0.3);
         }
 
         button.action-btn {
-            background: var(--primary-dark);
+            background: var(--dark-orange);
             color: white;
             border: none;
             padding: 14px;
@@ -131,7 +137,7 @@
             border-radius: 6px;
             width: 100%;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 16px;
             transition: opacity 0.3s;
         }
 
@@ -140,29 +146,33 @@
         }
 
         button.buy-btn {
-            background: var(--secondary-color);
+            background: var(--success-green);
         }
 
         button.ai-btn {
-            background: var(--info-color);
+            background: var(--info-blue);
+        }
+
+        button.community-btn {
+            background: #f57f17;
         }
 
         .qr-box {
             text-align: center;
             margin-top: 15px;
             background: #fff;
-            padding: 15px;
+            padding: 18px;
             border: 1px solid #ddd;
             border-radius: 8px;
         }
 
         .qr-placeholder {
             background: #f9f9f9;
-            padding: 20px;
+            padding: 22px;
             font-weight: bold;
             color: #444;
             border: 1px dashed #999;
-            margin: 10px 0;
+            margin: 12px 0;
             border-radius: 6px;
             font-size: 16px;
         }
@@ -170,22 +180,23 @@
         .note {
             font-size: 12px;
             color: #d32f2f;
-            margin-top: 5px;
+            margin-top: 6px;
             font-weight: bold;
         }
 
         .feed-card {
             background: white;
-            padding: 12px 15px;
+            padding: 12px 16px;
             margin-top: 10px;
             border-radius: 6px;
-            border-left: 4px solid var(--primary-color);
+            border-left: 4px solid var(--primary-orange);
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 14px;
         }
 
         .footer-note {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 35px;
             font-size: 13px;
             color: #666;
         }
@@ -195,15 +206,15 @@
 
 <div class="container">
     
-    <!-- Header -->
+    <!-- Top Header & Language Switcher -->
     <div class="header">
         <h2 id="portal-title">डिजिटल ग्राम पोर्टल - संपला / माल्कोश</h2>
         <button class="lang-toggle" onclick="toggleLanguage()" id="lang-btn">English</button>
     </div>
 
-    <!-- 1. गाँव के विज्ञापन और सूचनाएं (दंगल, मेला, भंडारा, सरपंच संदेश) -->
+    <!-- 1. विज्ञापन और सूचना अनुभाग (दंगल, मेला, सरपंच संदेश आदि) -->
     <div class="section">
-        <h3 id="ad-heading" style="color:#e65100;">📢 नया विज्ञापन / सूचना जोड़ें (फ्री)</h3>
+        <h3 id="ad-heading" style="color:var(--dark-orange);">📢 नया विज्ञापन / सूचना जोड़ें (फ्री)</h3>
         
         <label id="lbl-cat">श्रेणी चुनें:</label>
         <select id="ad-category">
@@ -229,9 +240,9 @@
         <button class="action-btn" onclick="submitAd()" id="btn-submit">विज्ञापन सबमिट करें</button>
     </div>
 
-    <!-- 2. Buy & Sell Section with 20 Tokens & QR Approval -->
+    <!-- 2. Buy & Sell Section (20 टोकन और QR पेमेंट अप्रूवल) -->
     <div class="section buy-sell-section">
-        <h3 id="bs-heading" style="color:#2e7d32;">🛒 Buy & Sell (खरीदें और बेचें) - 20 टोकन</h3>
+        <h3 id="bs-heading" style="color:var(--success-green);">🛒 Buy & Sell (खरीदें और बेचें) - 20 टोकन</h3>
         <p style="font-size: 13px; color: #333;" id="bs-desc">यहाँ अपना सामान बेचने या खरीदने के लिए विज्ञापन दें। पोस्ट लाइव करने के लिए 20 टोकन अनिवार्य हैं।</p>
 
         <label id="bs-lbl-item">सामान का नाम / शीर्षक:</label>
@@ -243,7 +254,7 @@
         <label id="bs-lbl-mobile">मोबाइल नंबर:</label>
         <input type="text" id="bs-mobile-bs" placeholder="अपना संपर्क नंबर">
 
-        <!-- QR Code & Token Approval Section -->
+        <!-- QR Code & Token Approval Box -->
         <div class="qr-box">
             <p style="margin: 0 0 5px 0; font-size: 14px; font-weight: bold;">UPI ID: 7015445900m1@pnb (KUSUM)[cite: 1]</p>
             <p style="font-size: 12px; color: #555;" id="qr-instruction">20 टोकन शुल्क के लिए नीचे दिए गए QR पर भुगतान करें[cite: 1]:</p>
@@ -256,7 +267,7 @@
 
     <!-- 3. गाँव की डायरेक्टरी / महत्वपूर्ण नंबर -->
     <div class="section directory-section">
-        <h3 id="dir-heading" style="color:#5e35b1;">📖 गाँव की ज़रूरी जानकारी व डायरेक्टरी</h3>
+        <h3 id="dir-heading" style="color:var(--purple-color);">📖 गाँव की ज़रूरी जानकारी व डायरेक्टरी</h3>
         <p style="font-size: 13px;" id="dir-desc">पंडित, डॉक्टर, ट्रैक्टर ड्राइवर, और बिजली मिस्त्री के संपर्क:</p>
         
         <div class="feed-card">
@@ -270,9 +281,23 @@
         </div>
     </div>
 
-    <!-- 4. AI हरियाणवी असिस्टेंट -->
+    <!-- 4. कम्युनिटी फीडबैक और सुझाव बॉक्स -->
+    <div class="section community-section">
+        <h3 id="comm-heading" style="color:#f57f17;">💬 ग्रामवासी सुझाव / शिकायत बॉक्स</h3>
+        <p style="font-size: 13px;" id="comm-desc">गाँव के विकास या समस्या से जुड़ा कोई सुझाव सीधा पंचायत तक पहुँचाएँ:</p>
+
+        <label id="comm-lbl-name">आपका नाम:</label>
+        <input type="text" id="comm-name" placeholder="नाम लिखें">
+
+        <label id="comm-lbl-msg">सुझाव या शिकायत:</label>
+        <textarea id="comm-msg" rows="2" placeholder="अपनी बात यहाँ साझा करें..."></textarea>
+
+        <button class="action-btn community-btn" onclick="submitFeedback()" id="comm-btn">सुझाव भेजें</button>
+    </div>
+
+    <!-- 5. AI हरियाणवी असिस्टेंट -->
     <div class="section ai-section">
-        <h3 id="ai-heading" style="color:#1565c0;">🤖 AI हरियाणवी असिस्टेंट</h3>
+        <h3 id="ai-heading" style="color:var(--info-blue);">🤖 AI हरियाणवी असिस्टेंट</h3>
         <p style="font-size: 13px;" id="ai-text">राम-राम! पशुधन, खेती, मौसम या गाँव से जुड़ा कोई भी सवाल पूछ सको हो!</p>
         <input type="text" id="ai-query" placeholder="यहाँ अपना सवाल लिखें...">
         <button class="action-btn ai-btn" onclick="askAI()" id="ai-btn">AI से पूछें</button>
@@ -316,6 +341,12 @@
             document.getElementById('dir-item-1').innerText = '🚜 Tractor Service / Tillage:';
             document.getElementById('dir-item-2').innerText = '⚡ Electrician:';
             document.getElementById('dir-item-3').innerText = '🐄 Veterinary Doctor:';
+
+            document.getElementById('comm-heading').innerText = '💬 Villager Feedback & Suggestion Box';
+            document.getElementById('comm-desc').innerText = 'Send suggestions or issues directly to the village committee:';
+            document.getElementById('comm-lbl-name').innerText = 'Your Name:';
+            document.getElementById('comm-lbl-msg').innerText = 'Suggestion / Complaint:';
+            document.getElementById('comm-btn').innerText = 'Send Feedback';
             
             document.getElementById('ai-heading').innerText = '🤖 AI Haryanvi Assistant';
             document.getElementById('ai-text').innerText = 'Ram-Ram! Ask any question related to farming, weather or village!';
@@ -348,6 +379,12 @@
             document.getElementById('dir-item-1').innerText = '🚜 ट्रैक्टर सर्विस / जुताई:';
             document.getElementById('dir-item-2').innerText = '⚡ बिजली मिस्त्री:';
             document.getElementById('dir-item-3').innerText = '🐄 पशु चिकित्सक:';
+
+            document.getElementById('comm-heading').innerText = '💬 ग्रामवासी सुझाव / शिकायत बॉक्स';
+            document.getElementById('comm-desc').innerText = 'गाँव के विकास या समस्या से जुड़ा कोई सुझाव सीधा पंचायत तक पहुँचाएँ:';
+            document.getElementById('comm-lbl-name').innerText = 'आपका नाम:';
+            document.getElementById('comm-lbl-msg').innerText = 'सुझाव या शिकायत:';
+            document.getElementById('comm-btn').innerText = 'सुझाव भेजें';
             
             document.getElementById('ai-heading').innerText = '🤖 AI हरियाणवी असिस्टेंट';
             document.getElementById('ai-text').innerText = 'राम-राम! पशुधन, खेती, मौसम या गाँव से जुड़ा कोई भी सवाल पूछ सको हो!';
@@ -372,6 +409,15 @@
             return;
         }
         alert(currentLang === 'hi' ? 'भुगतान और 20 टोकन सत्यापन (Approval) के लिए भेज दिया गया है। एडमिन द्वारा QR पेमेंट वेरीफाई होने के बाद विज्ञापन लाइव कर दिया जाएगा।' : 'Submitted for payment & 20 token approval. Ad will go live after admin approves the payment.');
+    }
+
+    function submitFeedback() {
+        let name = document.getElementById('comm-name').value;
+        if(!name) {
+            alert(currentLang === 'hi' ? 'कृपया अपना नाम दर्ज करें!' : 'Please enter your name!');
+            return;
+        }
+        alert(currentLang === 'hi' ? 'आपका सुझाव पंचायत तक पहुँचा दिया गया है। धन्यवाद!' : 'Your suggestion has been submitted successfully. Thank you!');
     }
 
     function askAI() {
