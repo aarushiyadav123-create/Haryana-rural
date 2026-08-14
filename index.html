@@ -3,431 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>डिजिटल ग्राम पोर्टल - संपला / माल्कोश</title>
+    <title>हरियाणा ग्रामीण सेवा Portal</title>
+    
+    <!-- ==================== 1. CSS (स्टाइलिंग) ==================== -->
     <style>
-        :root {
-            --primary-orange: #ff9800;
-            --dark-orange: #e65100;
-            --success-green: #4caf50;
-            --info-blue: #2196f3;
-            --purple-color: #673ab7;
-            --bg-light: #f4f7f6;
-            --card-white: #ffffff;
-            --text-main: #333333;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-light);
+            background-color: #f4f7f6;
             margin: 0;
-            padding: 20px;
-            color: var(--text-main);
-            line-height: 1.6;
+            padding: 15px;
+            color: #333;
         }
 
-        .container {
-            max-width: 750px;
-            background: var(--card-white);
-            margin: auto;
-            padding: 30px;
-            border-radius: 14px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-
-        .header {
+        /* टॉप एक्शन बटन्स */
+        .action-buttons-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(135deg, var(--primary-orange), var(--dark-orange));
-            color: white;
-            padding: 18px 22px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(255,152,0,0.3);
-        }
-
-        .header h2 {
-            margin: 0;
-            font-size: 21px;
-            letter-spacing: 0.5px;
-        }
-
-        .lang-toggle {
-            background: white;
-            color: var(--dark-orange);
-            border: none;
-            padding: 8px 16px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: background 0.3s ease;
-        }
-
-        .lang-toggle:hover {
-            background: #ffe0b2;
-        }
-
-        .section {
-            margin-top: 25px;
-            padding: 22px;
-            background: #fff8f0;
-            border: 1px dashed var(--primary-orange);
-            border-radius: 10px;
-        }
-
-        .buy-sell-section {
-            background: #f1f8e9;
-            border: 1px dashed var(--success-green);
-        }
-
-        .ai-section {
-            background: #e3f2fd;
-            border: 1px dashed var(--info-blue);
-        }
-
-        .directory-section {
-            background: #ede7f6;
-            border: 1px dashed var(--purple-color);
-        }
-
-        .community-section {
-            background: #fffde7;
-            border: 1px dashed #fbc02d;
-        }
-
-        h3 {
-            margin-top: 0;
-            font-size: 19px;
-            display: flex;
-            align-items: center;
             gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
-        label {
-            display: block;
-            margin-top: 14px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-top: 6px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 14px;
-            background: #fff;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--primary-orange);
-            outline: none;
-            box-shadow: 0 0 6px rgba(255,152,0,0.3);
-        }
-
-        button.action-btn {
-            background: var(--dark-orange);
-            color: white;
+        .btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 12px 15px;
+            font-weight: bold;
             border: none;
-            padding: 14px;
-            cursor: pointer;
-            border-radius: 6px;
-            width: 100%;
-            font-weight: bold;
-            font-size: 16px;
-            transition: opacity 0.3s;
-        }
-
-        button.action-btn:hover {
-            opacity: 0.9;
-        }
-
-        button.buy-btn {
-            background: var(--success-green);
-        }
-
-        button.ai-btn {
-            background: var(--info-blue);
-        }
-
-        button.community-btn {
-            background: #f57f17;
-        }
-
-        .qr-box {
-            text-align: center;
-            margin-top: 15px;
-            background: #fff;
-            padding: 18px;
-            border: 1px solid #ddd;
             border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            font-size: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.2s;
         }
 
-        .qr-placeholder {
-            background: #f9f9f9;
-            padding: 22px;
-            font-weight: bold;
-            color: #444;
-            border: 1px dashed #999;
-            margin: 12px 0;
-            border-radius: 6px;
-            font-size: 16px;
+        .btn:active { transform: scale(0.98); }
+        .btn-add-shop { background-color: #ff9800; }
+        .btn-buysell { background-color: #009688; }
+        .btn-place { background-color: #3f51b5; }
+
+        /* हरियाणा सरकारी योजनाएँ */
+        .schemes-section {
+            background: #eef7ee;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #2e7d32;
         }
 
-        .note {
-            font-size: 12px;
-            color: #d32f2f;
-            margin-top: 6px;
-            font-weight: bold;
-        }
-
-        .feed-card {
-            background: white;
-            padding: 12px 16px;
+        .schemes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
             margin-top: 10px;
+        }
+
+        .scheme-card {
+            background: white;
+            padding: 12px;
             border-radius: 6px;
-            border-left: 4px solid var(--primary-orange);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-decoration: none;
+            color: #1b5e20;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            text-align: center;
             font-size: 14px;
         }
 
-        .footer-note {
-            text-align: center;
-            margin-top: 35px;
-            font-size: 13px;
-            color: #666;
+        /* AI ग्रामीण असिस्टेंट */
+        .ai-assistant-card {
+            background: #ffffff;
+            border: 2px solid #2e7d32;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
         }
+
+        .chat-box {
+            height: 130px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .bot-msg { background: #e8f5e9; padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; font-size: 14px; }
+        .user-msg { background: #e3f2fd; padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; text-align: right; font-size: 14px; }
+
+        .chat-input-area { display: flex; gap: 8px; }
+        .chat-input-area input { flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #ccc; outline: none; }
+        .chat-input-area button { background: #2e7d32; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+        /* Nearby Categories */
+        .nearby-section { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        .category-buttons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .cat-btn { background: #f0f7f7; border: 1px solid #00796b; color: #00796b; padding: 8px 14px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+        .cat-btn:hover { background: #00796b; color: white; }
+
+        /* Popup Modals */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+        .modal-content { background: white; margin: 8% auto; padding: 20px; width: 90%; max-width: 420px; border-radius: 10px; position: relative; }
+        .close { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #888; }
+        .modal input, .modal select { width: 100%; padding: 10px; margin: 6px 0 12px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; }
+        .btn-submit { background: #2e7d32; color: white; width: 100%; padding: 12px; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; font-weight: bold; }
+        .qr-preview-box { text-align: center; background: #fafafa; padding: 10px; border: 1px dashed #ccc; margin-bottom: 12px; border-radius: 6px; }
+        .btn-print { background: #0288d1; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    
-    <!-- Top Header & Language Switcher -->
-    <div class="header">
-        <h2 id="portal-title">डिजिटल ग्राम पोर्टल - संपला / माल्कोश</h2>
-        <button class="lang-toggle" onclick="toggleLanguage()" id="lang-btn">English</button>
+    <!-- ==================== 2. HTML (संरचना) ==================== -->
+
+    <!-- मुख्य 3 बटन्स -->
+    <div class="action-buttons-container">
+        <button onclick="openModal('shopModal')" class="btn btn-add-shop">1. ➕ Add Shop</button>
+        <button onclick="openModal('buySellModal')" class="btn btn-buysell">2. ➕ Add Buy / Sell</button>
+        <button onclick="openModal('placeModal')" class="btn btn-place">3. ➕ Add Place & Photo</button>
     </div>
 
-    <!-- 1. विज्ञापन और सूचना अनुभाग (दंगल, मेला, सरपंच संदेश आदि) -->
-    <div class="section">
-        <h3 id="ad-heading" style="color:var(--dark-orange);">📢 नया विज्ञापन / सूचना जोड़ें (फ्री)</h3>
-        
-        <label id="lbl-cat">श्रेणी चुनें:</label>
-        <select id="ad-category">
-            <option value="dangal">खेल-कुश्ती दंगल (Dangal)</option>
-            <option value="mela">गाँव का मेला / भंडारा (Mela/Bhandara)</option>
-            <option value="sarpanch">सरपंच / ग्राम पंचायत संदेश (Sarpanch Notice)</option>
-            <option value="mandi">गाँव की मंडी / फसल भाव (Mandi Rates)</option>
-            <option value="other">गाँव की अन्य महत्वपूर्ण बात (Other Info)</option>
-        </select>
-
-        <label id="lbl-title">विज्ञापन का शीर्षक:</label>
-        <input type="text" id="ad-title" placeholder="जैसे: बाबा दंगल या गाँव की मीटिंग">
-
-        <label id="lbl-location">गाँव / स्थान:</label>
-        <input type="text" id="ad-location" value="Sampla / Malkosh" readonly style="background: #e0e0e0; cursor: not-allowed;">
-
-        <label id="lbl-desc">विवरण / समय / कीमत (₹ यदि लागू हो):</label>
-        <textarea id="ad-details" rows="3" placeholder="ूरी जानकारी यहाँ लिखें..."></textarea>
-
-        <label id="lbl-mobile">मोबाइल नंबर:</label>
-        <input type="text" id="ad-mobile" placeholder="संपर्क नंबर">
-
-        <button class="action-btn" onclick="submitAd()" id="btn-submit">विज्ञापन सबमिट करें</button>
-    </div>
-
-    <!-- 2. Buy & Sell Section (20 टोकन और QR पेमेंट अप्रूवल) -->
-    <div class="section buy-sell-section">
-        <h3 id="bs-heading" style="color:var(--success-green);">🛒 Buy & Sell (खरीदें और बेचें) - 20 टोकन</h3>
-        <p style="font-size: 13px; color: #333;" id="bs-desc">यहाँ अपना सामान बेचने या खरीदने के लिए विज्ञापन दें। पोस्ट लाइव करने के लिए 20 टोकन अनिवार्य हैं।</p>
-
-        <label id="bs-lbl-item">सामान का नाम / शीर्षक:</label>
-        <input type="text" id="bs-item" placeholder="जैसे: ट्रैक्टर, पशु या अन्य कृषि उपकरण">
-
-        <label id="bs-lbl-price">मूल्य (₹):</label>
-        <input type="number" id="bs-price" placeholder="कीमत दर्ज करें">
-
-        <label id="bs-lbl-mobile">मोबाइल नंबर:</label>
-        <input type="text" id="bs-mobile-bs" placeholder="अपना संपर्क नंबर">
-
-        <!-- QR Code & Token Approval Box -->
-        <div class="qr-box">
-            <p style="margin: 0 0 5px 0; font-size: 14px; font-weight: bold;">UPI ID: 7015445900m1@pnb (KUSUM)[cite: 1]</p>
-            <p style="font-size: 12px; color: #555;" id="qr-instruction">20 टोकन शुल्क के लिए नीचे दिए गए QR पर भुगतान करें[cite: 1]:</p>
-            <div class="qr-placeholder">[ PNB QR CODE IMAGE / SCAN & PAY ][cite: 1]</div>
-            <p class="note" id="qr-note">*पेमेंट करने के बाद एडमिन द्वारा अप्रूव (Approve) होने पर ही 20 टोकन क्रेडिट होंगे और Buy/Sell विज्ञापन लाइव होगा।</p>
-        </div>
-
-        <button class="action-btn buy-btn" onclick="submitBuySell()" style="margin-top: 15px;" id="btn-bs-submit">20 टोकन के साथ Buy/Sell विज्ञापन डालें</button>
-    </div>
-
-    <!-- 3. गाँव की डायरेक्टरी / महत्वपूर्ण नंबर -->
-    <div class="section directory-section">
-        <h3 id="dir-heading" style="color:var(--purple-color);">📖 गाँव की ज़रूरी जानकारी व डायरेक्टरी</h3>
-        <p style="font-size: 13px;" id="dir-desc">पंडित, डॉक्टर, ट्रैक्टर ड्राइवर, और बिजली मिस्त्री के संपर्क:</p>
-        
-        <div class="feed-card">
-            <strong id="dir-item-1">🚜 ट्रैक्टर सर्विस / जुताई:</strong> रमेश कुमार (98765XXXXX)
-        </div>
-        <div class="feed-card">
-            <strong id="dir-item-2">⚡ बिजली मिस्त्री:</strong> सुरेश फौजी (94160XXXXX)
-        </div>
-        <div class="feed-card">
-            <strong id="dir-item-3">🐄 पशु चिकित्सक:</strong> डॉ. अनिल अहलावत (92550XXXXX)
+    <!-- सरकारी योजनाएँ (Direct Official Links) -->
+    <div class="schemes-section">
+        <h3 style="margin:0;">🏛️ हरियाणा सरकारी योजनाएँ (Direct Portals)</h3>
+        <div class="schemes-grid">
+            <a href="https://merafasalharbyora.haryana.gov.in/" target="_blank" class="scheme-card">🌾 मेरी फसल मेरा ब्योरा Portal</a>
+            <a href="https://ppp.haryana.gov.in/" target="_blank" class="scheme-card">🆔 परिवार पहचान पत्र (PPP)</a>
+            <a href="https://saralharyana.gov.in/" target="_blank" class="scheme-card">📑 सरल पोर्टल (सभी प्रमाणपत्र)</a>
+            <a href="https://pmsuryaghar.gov.in/" target="_blank" class="scheme-card">☀️ पीएम सूर्य घर योजना</a>
         </div>
     </div>
 
-    <!-- 4. कम्युनिटी फीडबैक और सुझाव बॉक्स -->
-    <div class="section community-section">
-        <h3 id="comm-heading" style="color:#f57f17;">💬 ग्रामवासी सुझाव / शिकायत बॉक्स</h3>
-        <p style="font-size: 13px;" id="comm-desc">गाँव के विकास या समस्या से जुड़ा कोई सुझाव सीधा पंचायत तक पहुँचाएँ:</p>
-
-        <label id="comm-lbl-name">आपका नाम:</label>
-        <input type="text" id="comm-name" placeholder="नाम लिखें">
-
-        <label id="comm-lbl-msg">सुझाव या शिकायत:</label>
-        <textarea id="comm-msg" rows="2" placeholder="अपनी बात यहाँ साझा करें..."></textarea>
-
-        <button class="action-btn community-btn" onclick="submitFeedback()" id="comm-btn">सुझाव भेजें</button>
+    <!-- AI ग्रामीण असिस्टेंट -->
+    <div class="ai-assistant-card">
+        <h3 style="margin-top:0;">🤖 AI ग्रामीण असिस्टेंट (खेती व मौसम सहायता)</h3>
+        <div class="chat-box" id="chatBox">
+            <div class="bot-msg">राम-राम भाई! मैं आपका डिजिटल सहायक हूँ। मुझसे मौसम, मंडी भाव, फसल की बीमारी या दवा के बारे में पूछें!</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="userInput" placeholder="यहाँ फसल की बीमारी, दवा या गाँव के बारे में लिखें...">
+            <button onclick="sendAIMessage()">भेजें</button>
+        </div>
     </div>
 
-    <!-- 5. AI हरियाणवी असिस्टेंट -->
-    <div class="section ai-section">
-        <h3 id="ai-heading" style="color:var(--info-blue);">🤖 AI हरियाणवी असिस्टेंट</h3>
-        <p style="font-size: 13px;" id="ai-text">राम-राम! पशुधन, खेती, मौसम या गाँव से जुड़ा कोई भी सवाल पूछ सको हो!</p>
-        <input type="text" id="ai-query" placeholder="यहाँ अपना सवाल लिखें...">
-        <button class="action-btn ai-btn" onclick="askAI()" id="ai-btn">AI से पूछें</button>
-        <div id="ai-response" style="margin-top: 12px; font-size: 14px; color: #0d47a1; font-weight: bold;"></div>
+    <!-- पास की सुविधाएँ -->
+    <div class="nearby-section">
+        <h3 style="margin-top:0;">📍 पास की सुविधाएँ (Nearby Categories)</h3>
+        <div class="category-buttons">
+            <button class="cat-btn">🏨 होटल / ढाबे</button>
+            <button class="cat-btn">🏦 बैंक</button>
+            <button class="cat-btn">🏧 ATM</button>
+            <button class="cat-btn">⛽ पेट्रोल पंप</button>
+            <button class="cat-btn">🏥 अस्पताल / क्लिनिक</button>
+            <button class="cat-btn">🛍️ अन्य सभी दुकानें</button>
+        </div>
     </div>
 
-    <div class="footer-note">
-        <p>© 2026 Digital Gram Portal - Sampla / Malkosh. All Rights Reserved.</p>
+    <!-- =============== POPUP FORMS (MODALS) =============== -->
+
+    <!-- MODAL 1: Add Shop (QR + Manual Validation + Admin) -->
+    <div id="shopModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('shopModal')">&times;</span>
+            <h3 style="margin-top:0;">🏪 नई दुकान जोड़ें (Admin Approval)</h3>
+            <form id="shopForm" onsubmit="submitForm(event, 'Shop')">
+                <label>दुकान का नाम:</label>
+                <input type="text" required placeholder="उदा. रामू किराना स्टोर">
+
+                <label>ज़िला चुनें (District):</label>
+                <select id="shopDistrict" onchange="updateVillages('shopDistrict', 'shopVillage')" required>
+                    <option value="">-- ज़िला चुनें --</option>
+                    <option value="Rohtak">रोहतक (Rohtak)</option>
+                    <option value="Jhajjar">झज्जर (Jhajjar)</option>
+                    <option value="Hisar">हिसार (Hisar)</option>
+                </select>
+
+                <label>गाँव चुनें (Village):</label>
+                <select id="shopVillage" required disabled>
+                    <option value="">-- पहले ज़िला चुनें --</option>
+                </select>
+
+                <label>व्हाट्सएप / संपर्क नंबर:</label>
+                <input type="tel" pattern="[0-9]{10}" placeholder="10 अंकों का मोबाइल नंबर" required>
+
+                <div class="qr-preview-box">
+                    <p style="margin:5px 0;"><b>आपकी दुकान का क्यूआर कोड (Poster):</b></p>
+                    <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=HaryanaRuralService" alt="QR Code"><br>
+                    <button type="button" class="btn-print" onclick="window.print()">🖨️ पोस्टर / QR Code प्रिंट करें</button>
+                </div>
+
+                <button type="submit" class="btn-submit">सबमिट करें (एडमिन अप्रूवल हेतु)</button>
+            </form>
+        </div>
     </div>
 
-</div>
+    <!-- MODAL 2: Add Buy / Sell -->
+    <div id="buySellModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('buySellModal')">&times;</span>
+            <h3 style="margin-top:0;">🛒 सामान खरीदें / बेचें</h3>
+            <form onsubmit="submitForm(event, 'BuySell')">
+                <label>सामान का नाम (भैंस, ट्रैक्टर आदि):</label>
+                <input type="text" required>
+                <label>दाम (₹):</label>
+                <input type="number" required>
+                <label>ज़िला:</label>
+                <select id="buyDistrict" onchange="updateVillages('buyDistrict', 'buyVillage')" required>
+                    <option value="">-- ज़िला चुनें --</option>
+                    <option value="Rohtak">रोहतक (Rohtak)</option>
+                    <option value="Jhajjar">झज्जर (Jhajjar)</option>
+                    <option value="Hisar">हिसार (Hisar)</option>
+                </select>
+                <label>गाँव:</label>
+                <select id="buyVillage" required disabled>
+                    <option value="">-- पहले ज़िला चुनें --</option>
+                </select>
+                <button type="submit" class="btn-submit">सबमिट करें</button>
+            </form>
+        </div>
+    </div>
 
-<script>
-    let currentLang = 'hi';
+    <!-- MODAL 3: Add Place & Photo -->
+    <div id="placeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('placeModal')">&times;</span>
+            <h3 style="margin-top:0;">🏞️ प्रसिद्ध जगह और फोटो जोड़ें</h3>
+            <form onsubmit="submitForm(event, 'Place')">
+                <label>जगह का नाम (उदा. मंदिर, चौपाल):</label>
+                <input type="text" required>
+                <label>ज़िला:</label>
+                <select id="placeDistrict" onchange="updateVillages('placeDistrict', 'placeVillage')" required>
+                    <option value="">-- ज़िला चुनें --</option>
+                    <option value="Rohtak">रोहतक (Rohtak)</option>
+                    <option value="Jhajjar">झज्जर (Jhajjar)</option>
+                    <option value="Hisar">हिसार (Hisar)</option>
+                </select>
+                <label>गाँव:</label>
+                <select id="placeVillage" required disabled>
+                    <option value="">-- पहले ज़िला चुनें --</option>
+                </select>
+                <label>फोटो अपलोड करें:</label>
+                <input type="file" accept="image/*" required>
+                <button type="submit" class="btn-submit">सबमिट करें (एडमिन रिव्यू)</button>
+            </form>
+        </div>
+    </div>
 
-    function toggleLanguage() {
-        if(currentLang === 'hi') {
-            currentLang = 'en';
-            document.getElementById('lang-btn').innerText = 'हिंदी';
-            document.getElementById('portal-title').innerText = 'Digital Gram Portal - Sampla / Malkosh';
-            
-            document.getElementById('ad-heading').innerText = '📢 Add New Ad / Notice (Free)';
-            document.getElementById('lbl-cat').innerText = 'Select Category:';
-            document.getElementById('lbl-title').innerText = 'Ad Title / Info:';
-            document.getElementById('lbl-location').innerText = 'Village / Location:';
-            document.getElementById('lbl-desc').innerText = 'Details / Price:';
-            document.getElementById('lbl-mobile').innerText = 'Mobile Number:';
-            document.getElementById('btn-submit').innerText = 'Submit Ad';
-            
-            document.getElementById('bs-heading').innerText = '🛒 Buy & Sell - 20 Tokens';
-            document.getElementById('bs-desc').innerText = 'Post ads to buy or sell items. 20 tokens required to make the post live.';
-            document.getElementById('bs-lbl-item').innerText = 'Item Name / Title:';
-            document.getElementById('bs-lbl-price').innerText = 'Price (₹):';
-            document.getElementById('bs-lbl-mobile').innerText = 'Mobile Number:';
-            document.getElementById('qr-instruction').innerText = 'Scan QR below to pay for 20 token fee[cite: 1]:';
-            document.getElementById('qr-note').innerText = '*Post will go live and 20 tokens will be credited only after admin approves the payment.';
-            document.getElementById('btn-bs-submit').innerText = 'Submit Buy/Sell Ad with 20 Tokens';
-            
-            document.getElementById('dir-heading').innerText = '📖 Village Directory & Important Contacts';
-            document.getElementById('dir-desc').innerText = 'Contacts for local mechanics, doctors, and tractor services:';
-            document.getElementById('dir-item-1').innerText = '🚜 Tractor Service / Tillage:';
-            document.getElementById('dir-item-2').innerText = '⚡ Electrician:';
-            document.getElementById('dir-item-3').innerText = '🐄 Veterinary Doctor:';
+    <!-- ==================== 3. JAVASCRIPT (लॉजिक) ==================== -->
+    <script>
+        // 1. ज़िला और गाँव का डेटा (Strict Mapping)
+        const districtVillageData = {
+            "Rohtak": ["मालकोश (Malkosh)", "साम्पला (Sampla)", "महम (Meham)", "कलानौर (Kalanaur)"],
+            "Jhajjar": ["बहादुरगढ़ (Bahadurgarh)", "बेरी (Beri)", "मातनहेल (Matenhail)"],
+            "Hisar": ["हंसी (Hansi)", "आदमपुर (Adampur)", "बरवाला (Barwala)"]
+        };
 
-            document.getElementById('comm-heading').innerText = '💬 Villager Feedback & Suggestion Box';
-            document.getElementById('comm-desc').innerText = 'Send suggestions or issues directly to the village committee:';
-            document.getElementById('comm-lbl-name').innerText = 'Your Name:';
-            document.getElementById('comm-lbl-msg').innerText = 'Suggestion / Complaint:';
-            document.getElementById('comm-btn').innerText = 'Send Feedback';
-            
-            document.getElementById('ai-heading').innerText = '🤖 AI Haryanvi Assistant';
-            document.getElementById('ai-text').innerText = 'Ram-Ram! Ask any question related to farming, weather or village!';
-            document.getElementById('ai-query').placeholder = 'Type your question here...';
-            document.getElementById('ai-btn').innerText = 'Ask AI';
-        } else {
-            currentLang = 'hi';
-            document.getElementById('lang-btn').innerText = 'English';
-            document.getElementById('portal-title').innerText = 'डिजिटल ग्राम पोर्टल - संपला / माल्कोश';
-            
-            document.getElementById('ad-heading').innerText = '📢 नया विज्ञापन / सूचना जोड़ें (फ्री)';
-            document.getElementById('lbl-cat').innerText = 'श्रेणी चुनें:';
-            document.getElementById('lbl-title').innerText = 'विज्ञापन का शीर्षक:';
-            document.getElementById('lbl-location').innerText = 'गाँव / स्थान:';
-            document.getElementById('lbl-desc').innerText = 'विवरण / समय / कीमत (₹ यदि लागू हो):';
-            document.getElementById('lbl-mobile').innerText = 'मोबाइल नंबर:';
-            document.getElementById('btn-submit').innerText = 'विज्ञापन सबमिट करें';
-            
-            document.getElementById('bs-heading').innerText = '🛒 Buy & Sell (खरीदें और बेचें) - 20 टोकन';
-            document.getElementById('bs-desc').innerText = 'यहाँ अपना सामान बेचने या खरीदने के लिए विज्ञापन दें। पोस्ट लाइव करने के लिए 20 टोकन अनिवार्य हैं।';
-            document.getElementById('bs-lbl-item').innerText = 'सामान का नाम / शीर्षक:';
-            document.getElementById('bs-lbl-price').innerText = 'मूल्य (₹):';
-            document.getElementById('bs-lbl-mobile').innerText = 'मोबाइल नंबर:';
-            document.getElementById('qr-instruction').innerText = '20 टोकन शुल्क के लिए नीचे दिए गए QR पर भुगतान करें[cite: 1]:';
-            document.getElementById('qr-note').innerText = '*पेमेंट करने के बाद एडमिन द्वारा अप्रूव (Approve) होने पर ही 20 टोकन क्रेडिट होंगे और Buy/Sell विज्ञापन लाइव होगा।';
-            document.getElementById('btn-bs-submit').innerText = '20 टोकन के साथ Buy/Sell विज्ञापन डालें';
-            
-            document.getElementById('dir-heading').innerText = '📖 गाँव की ज़रूरी जानकारी व डायरेक्टरी';
-            document.getElementById('dir-desc').innerText = 'पंडित, डॉक्टर, ट्रैक्टर ड्राइवर, और बिजली मिस्त्री के संपर्क:';
-            document.getElementById('dir-item-1').innerText = '🚜 ट्रैक्टर सर्विस / जुताई:';
-            document.getElementById('dir-item-2').innerText = '⚡ बिजली मिस्त्री:';
-            document.getElementById('dir-item-3').innerText = '🐄 पशु चिकित्सक:';
+        // 2. ऑटोमैटिक गाँव अपडेट फ़ंक्शन
+        function updateVillages(districtId, villageId) {
+            const districtSelect = document.getElementById(districtId);
+            const villageSelect = document.getElementById(villageId);
+            const selectedDistrict = districtSelect.value;
 
-            document.getElementById('comm-heading').innerText = '💬 ग्रामवासी सुझाव / शिकायत बॉक्स';
-            document.getElementById('comm-desc').innerText = 'गाँव के विकास या समस्या से जुड़ा कोई सुझाव सीधा पंचायत तक पहुँचाएँ:';
-            document.getElementById('comm-lbl-name').innerText = 'आपका नाम:';
-            document.getElementById('comm-lbl-msg').innerText = 'सुझाव या शिकायत:';
-            document.getElementById('comm-btn').innerText = 'सुझाव भेजें';
-            
-            document.getElementById('ai-heading').innerText = '🤖 AI हरियाणवी असिस्टेंट';
-            document.getElementById('ai-text').innerText = 'राम-राम! पशुधन, खेती, मौसम या गाँव से जुड़ा कोई भी सवाल पूछ सको हो!';
-            document.getElementById('ai-query').placeholder = 'यहाँ अपना सवाल लिखें...';
-            document.getElementById('ai-btn').innerText = 'AI से पूछें';
+            villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+
+            if (selectedDistrict && districtVillageData[selectedDistrict]) {
+                villageSelect.disabled = false;
+                districtVillageData[selectedDistrict].forEach(village => {
+                    const option = document.createElement('option');
+                    option.value = village;
+                    option.textContent = village;
+                    villageSelect.appendChild(option);
+                });
+            } else {
+                villageSelect.disabled = true;
+                alert("त्रुटि: कृपया पहले सूची से सही ज़िला चुनें!");
+            }
         }
-    }
 
-    function submitAd() {
-        let title = document.getElementById('ad-title').value;
-        if(!title) {
-            alert(currentLang === 'hi' ? 'कृपया शीर्षक भरें!' : 'Please enter title!');
-            return;
+        // 3. फॉर्म सबमिशन और एडमिन अप्रूवल मैसेज
+        function submitForm(event, formType) {
+            event.preventDefault();
+            alert(`धन्यवाद! आपकी ${formType} जानकारी एडमिन (Admin Approval) के पास समीक्षा के लिए भेज दी गई है। अप्रूवल के बाद यह लाइव हो जाएगी।`);
+            event.target.reset();
+            closeModal(event.target.closest('.modal').id);
         }
-        alert(currentLang === 'hi' ? 'आपका विज्ञापन सफलतापूर्वक दर्ज कर लिया गया है!' : 'Ad submitted successfully!');
-    }
 
-    function submitBuySell() {
-        let item = document.getElementById('bs-item').value;
-        if(!item) {
-            alert(currentLang === 'hi' ? 'कृपया सामान का नाम भरें!' : 'Please enter item name!');
-            return;
+        // मोडल खोलने और बंद करने का तरीका
+        function openModal(id) { document.getElementById(id).style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+
+        // 4. AI ग्रामीण असिस्टेंट लॉजिक (फसल बीमारी व समाधान)
+        function sendAIMessage() {
+            const input = document.getElementById('userInput');
+            const chatBox = document.getElementById('chatBox');
+            const text = input.value.trim().toLowerCase();
+
+            if (!text) return;
+
+            chatBox.innerHTML += `<div class="user-msg">${input.value}</div>`;
+            input.value = '';
+
+            let reply = "राम-राम भाई! इस बारे में सटीक जानकारी के लिए आप हमारे विशेषज्ञ से संपर्क कर सकते हैं या 'मेरी फसल मेरा ब्योरा' पोर्टल देखें।";
+
+            if (text.includes("सुंडी") || text.includes("कीड़ा") || text.includes("गुलाबी")) {
+                reply = "🌾 **फसल में कीड़ा/सुंडी समाधान:** प्रोफेनोफॉस + साइपरमेथ्रिन की 350ml मात्रा प्रति एकड़ छिड़कें।";
+            } else if (text.includes("पीला") || text.includes("पत्ते")) {
+                reply = "🍂 **गेहूँ/फसल के पत्ते पीले पड़ना:** 1 किलो जिंक सल्फेट + 100 लीटर पानी का छिड़काव करें।";
+            } else if (text.includes("मौसम") || text.includes("बारिश")) {
+                reply = "☀️ **हरियाणा मौसम:** आज मौसम साफ़ रहेगा, तापमान 32°C के आसपास है।";
+            } else if (text.includes("दुकान") || text.includes("shop")) {
+                reply = "🏪 दुकान जोड़ने के लिए ऊपर दिए गए '1. Add Shop' बटन पर क्लिक करें।";
+            }
+
+            setTimeout(() => {
+                chatBox.innerHTML += `<div class="bot-msg">${reply}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 400);
         }
-        alert(currentLang === 'hi' ? 'भुगतान और 20 टोकन सत्यापन (Approval) के लिए भेज दिया गया है। एडमिन द्वारा QR पेमेंट वेरीफाई होने के बाद विज्ञापन लाइव कर दिया जाएगा।' : 'Submitted for payment & 20 token approval. Ad will go live after admin approves the payment.');
-    }
-
-    function submitFeedback() {
-        let name = document.getElementById('comm-name').value;
-        if(!name) {
-            alert(currentLang === 'hi' ? 'कृपया अपना नाम दर्ज करें!' : 'Please enter your name!');
-            return;
-        }
-        alert(currentLang === 'hi' ? 'आपका सुझाव पंचायत तक पहुँचा दिया गया है। धन्यवाद!' : 'Your suggestion has been submitted successfully. Thank you!');
-    }
-
-    function askAI() {
-        let q = document.getElementById('ai-query').value;
-        if(!q) return;
-        document.getElementById('ai-response').innerText = currentLang === 'hi' 
-            ? 'AI उत्तर: राम-राम! थारे सवाल पर काम चल रिया है, जल्दी ही जानकारी पोर्टल पर मिल जाएगी।' 
-            : 'AI Answer: Ram-Ram! Processing your query, information will be updated shortly.';
-    }
-</script>
-
+    </script>
 </body>
 </html>
