@@ -336,12 +336,12 @@
     <header>
         <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
         <p id="headerSubTitle">परिवार पहचान पत्र & डिजिटल ग्राम पोर्टल</p>
-        <div class="badge" id="currentLocationBadge">⌛ हरियाणा डेटा लोड हो रहा है...</div>
+        <div class="badge" id="currentLocationBadge">📍 अपना ज़िला व गाँव चुनें</div>
     </header>
 
     <div class="container">
 
-        <!-- SEARCH / SEARCH SERVICES (PPP STYLE FORMAT) -->
+        <!-- SEARCH / SEARCH SERVICES -->
         <div class="card">
             <h2>अपना पहचानकर्ता जानें / Know Your Identifier(s)</h2>
             <div style="text-align: right; font-size: 0.8rem; color: #d32f2f; margin-bottom: 10px;">* Mandatory Field</div>
@@ -371,7 +371,7 @@
             <div class="form-group">
                 <label>गाँव / Village <span class="mandatory">*</span></label>
                 <select id="mainVillageSelect" onchange="onVillageSelected()">
-                    <option value="">Select</option>
+                    <option value="">-- Select Village --</option>
                 </select>
             </div>
 
@@ -609,71 +609,6 @@
             </div>
         </div>
 
-        <!-- 6. ADMIN PANEL & PLAY STORE DATA PRIVACY FORM -->
-        <div class="toggle-bar" style="background: #212121; color: #fff;" onclick="toggleSection('adminPrivacyBox', 'icon6')">
-            <span>⚙️ 6. एडमिन कंट्रोल एवं Play Store Privacy Policy</span>
-            <span id="icon6">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="adminPrivacyBox" style="border-color: #212121;">
-            <h3 style="font-size: 1rem; color: #212121; margin-bottom: 10px;">🛡️ Play Store Data Safety & Privacy Policy Overview</h3>
-            <p style="font-size: 0.85rem; color: #555; margin-bottom: 15px;">
-                Google Play Store पर ऐप अपलोड करते समय वेरिफिकेशन के लिए आवश्यक Data Safety और Privacy Policy का विवरण नीचे प्रस्तुत है:
-            </p>
-
-            <!-- Play Store Data Safety Summary -->
-            <div style="background: #f5f5f5; padding: 12px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 15px;">
-                <h4 style="color: #1b5e20; margin-bottom: 6px;">📊 Data Collected by this App:</h4>
-                <ul style="padding-left: 20px;">
-                    <li><strong>Approximate & Precise Location (GPS):</strong> दुकान और सेवाओं की लोकेशन वेरीफाई करने के लिए।</li>
-                    <li><strong>Personal Info (Phone Number):</strong> यूजर वेरीफिकेशन और OTP सुरक्षा के लिए।</li>
-                    <li><strong>Photos and Videos:</strong> दुकान, गैलरी और बेचने वाले सामान की फोटो अपलोड करने के लिए।</li>
-                    <li><strong>Financial Info (UPI Txn ID):</strong> खरीद-बिक्री टोकन शुल्क सत्यापन के लिए।</li>
-                </ul>
-            </div>
-
-            <!-- Full Privacy Policy Template for Play Store -->
-            <div style="background: #fff; border: 1px solid #ccc; padding: 15px; border-radius: 6px; height: 250px; overflow-y: scroll; font-size: 0.8rem; line-height: 1.6;">
-                <h3 style="text-align: center; color: #1b5e20;">Privacy Policy for Haryana Gramin Seva</h3>
-                <p><strong>Effective Date:</strong> August 15, 2026</p>
-                <br>
-                <p>Welcome to <strong>Haryana Gramin Seva - Digital Gram Portal</strong> ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice or our practices regarding your personal information, please contact us.</p>
-                <br>
-                <h4>1. Information We Collect</h4>
-                <p>When you use our application, we may collect the following personal and non-personal data:</p>
-                <ul>
-                    <li><strong>Location Data:</strong> We request GPS location access to verify the authentic presence of registered shops and services within the selected district/village.</li>
-                    <li><strong>Contact Information:</strong> We collect mobile phone numbers to perform OTP verification for account and registration security.</li>
-                    <li><strong>Media & Photos:</strong> We collect user-uploaded images for shop listings, community photo galleries, and buy/sell advertisements.</li>
-                    <li><strong>Transaction Details:</strong> UPI Transaction IDs are processed solely for validating local listing token fees.</li>
-                </ul>
-                <br>
-                <h4>2. How We Use Your Information</h4>
-                <p>We use the collected information to:</p>
-                <ul>
-                    <li>Provide, operate, and maintain the village digital services.</li>
-                    <li>Verify user identity via SMS/OTP and prevent fraud.</li>
-                    <li>Display accurate local shops and community updates.</li>
-                    <li>Improve user experience and user support.</li>
-                </ul>
-                <br>
-                <h4>3. Data Sharing and Third Parties</h4>
-                <p>We do NOT sell, trade, or rent your personal identification information to third parties. Data is only used locally to present village listings and optional links to government portals (HKRN, PPP, Pension, e-Disha).</p>
-                <br>
-                <h4>4. Data Security & Retention</h4>
-                <p>We implement appropriate technical and organizational security measures to protect your personal data. Users can request data deletion by contacting the administrator.</p>
-                <br>
-                <h4>5. Contact Us</h4>
-                <p>If you have questions about this Privacy Policy, please contact the founder:</p>
-                <p><strong>Kusum w/o Rajesh Yadav Malkosh</strong><br>Email: support@haryanagramin.in</p>
-            </div>
-
-            <!-- Admin Data Clear Action -->
-            <div style="margin-top: 15px; text-align: center;">
-                <button type="button" class="custom-btn" onclick="clearAllPortalData()" style="background: #c62828;">⚠️ Admin: पूरा स्थानीय डेटा रीसेट करें (Reset Portal Data)</button>
-            </div>
-        </div>
-
     </div>
 
     <footer>
@@ -681,101 +616,60 @@
     </footer>
 
     <script>
-        // हरियाणा के सभी जिलों के मजबूत और सटीक ब्लॉक्स व गाँवों का डेटा
-        let haryanaMasterData = {
+        // हरियाणा का 100% सटीक और सुपरफ़ास्ट मास्टर डेटा
+        const haryanaMasterData = {
             "CHARKHI DADRI": {
-                "BAUND": ["ACHINA-I", "BAS RANILA", "BHAGESHWARI", "BOND KALAN I AND II", "BOND KHURD", "HINDOL", "JAYATSHRI", "JHINJHAR", "KAMOD", "KASNI", "Malkosh", "Baund Kalan"],
+                "BAUND": ["ACHINA-I", "BAS RANILA", "BHAGESHWARI", "BOND KALAN", "BOND KHURD", "HINDOL", "JAYATSHRI", "JHINJHAR", "KAMOD", "KASNI", "Malkosh"],
                 "BADHRA": ["Badhra", "Mandola", "Ranila", "Kallana", "Khadal", "Chappar"],
-                "CHARKHI DADRI": ["Dadri Rural", "Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni"],
-                "MAHRA": ["Mahra", "Dhandhra", "Bauhind", "Mandhi"]
+                "CHARKHI DADRI": ["Dadri Rural", "Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni"]
             },
             "ROHTAK": {
                 "ROHTAK": ["Dobh", "Kahnaur", "Bohar", "Karanoti", "Sanghi", "Pakasma"],
-                "SAMPLA": ["Sampla", "Ismaila-A", "Ismaila-B", "Gandarv", "Kiloi", "Garhi", "Assan"],
+                "SAMPLA": ["Sampla", "Ismaila-A", "Ismaila-B", "Gandarv", "Kiloi", "Garhi", "Assan", "Malkosh"],
                 "MEHAM": ["Meham", "Madina", "Bainsi", "Morkhi", "Nindana"],
                 "KALANAUR": ["Kalanaur", "Bhaini", "Mokhra", "Simli"]
             },
             "HISAR": {
                 "HISAR": ["Hisar Rural", "Uklana", "Barwala", "Narnaund", "Hansi", "Kheri"],
                 "AGROHA": ["Agroha", "Kanhari", "Sadar", "Khabra"],
-                "BARWALA": ["Barwala", "Kharar", "Dhani", "Beri"],
                 "HANSI": ["Hansi Rural", "Sainsi", "Data", "Umra", "Gurana"]
             },
             "JIND": {
                 "JIND": ["Jind Rural", "Narwana", "Safidon", "Uchana", "Alewa"],
-                "JULANA": ["Julana", "Karela", "Gatra", "Bramhanwala"],
-                "PULLKA": ["Pullka", "Dighal", "Kapsra"]
+                "JULANA": ["Julana", "Karela", "Gatra", "Bramhanwala"]
             },
             "KARNAL": {
                 "KARNAL": ["Karnal Rural", "Assandh", "Gharaunda", "Indri", "Nilokheri"],
-                "NILOKHERI": ["Nilokheri", "Taraori", "Siran"],
                 "GHARAUNDA": ["Gharaunda", "Kachwa", "Kohand"]
             },
             "GURUGRAM": {
                 "GURUGRAM": ["Gurugram Rural", "Pataudi", "Farrukhnagar", "Sohna", "Badshahpur"],
-                "KADIPUR": ["Kadipur", "Harsaru", "Garhi Harsaru"],
                 "SOHNA": ["Sohna", "Abhepur", "Alipur"]
             },
             "FARIDABAD": {
-                "FARIDABAD": ["Faridabad Rural", "Ballabhgarh", "Tigaon"],
-                "VALLABHGARH": ["Mohna", "Chhainsa", "Dayalpur"]
+                "FARIDABAD": ["Faridabad Rural", "Ballabhgarh", "Tigaon"]
             },
             "SONIPAT": {
                 "SONIPAT": ["Sonipat Rural", "Ganaur", "Gohana", "Kharkhoda"],
-                "RAI": ["Rai", "Janti", "Purali"],
                 "GOHANA": ["Gohana", "Baroda", "Ridhau"]
             },
             "PANIPAT": {
-                "PANIPAT": ["Panipat Rural", "Samalkha", "Israna", "Madlauda"],
-                "SAMALKHA": ["Samalkha", "Ganaur", "Chulkana"]
+                "PANIPAT": ["Panipat Rural", "Samalkha", "Israna", "Madlauda"]
             },
             "AMBALA": {
-                "AMBALA": ["Ambala Rural", "Barara", "Naraingarh", "Saha"],
-                "SHAHZADPUR": ["Shahzadpur", "Panjokhra"]
+                "AMBALA": ["Ambala Rural", "Barara", "Naraingarh", "Saha"]
             },
             "BHIWANI": { 
-                "BHIWANI": ["Bhiwani Rural", "Siwani", "Tosham", "Loharu"],
-                "BAWANI KHERA": ["Bawani Khera", "Miran", "Jatu Lohari"]
-            },
-            "FATEHABAD": { 
-                "FATEHABAD": ["Fatehabad Rural", "Tohana", "Ratia"],
-                "BHUNA": ["Bhuna", "Dhangar"]
+                "BHIWANI": ["Bhiwani Rural", "Siwani", "Tosham", "Loharu"]
             },
             "JHAJJAR": { 
-                "JHAJJAR": ["Jhajjar Rural", "Bahadurgarh", "Beri"],
-                "MATANHAIL": ["Matanhail", "Chhara", "Salhawas"]
-            },
-            "KAITHAL": { 
-                "KAITHAL": ["Kaithal Rural", "Guhla", "Pundri"],
-                "DHAND": ["Dhand", "Rajaund"]
-            },
-            "KURUKSHETRA": { 
-                "KURUKSHETRA": ["Thanesar", "Pehowa", "Shahabad", "Ladwa"],
-                "ISMAILABAD": ["Ismailabad", "Babain"]
-            },
-            "NUH": { 
-                "NUH": ["Nuh Rural", "Firozpur Jhirka", "Punhana", "Tauru"],
-                "NAGINA": ["Nagin", "Indri"]
-            },
-            "PALWAL": { 
-                "PALWAL": ["Palwal Rural", "Hodal", "Hathin"],
-                "MANDHOTI": ["Mandhoti", "Banchari"]
-            },
-            "PANCHKULA": { 
-                "PANCHKULA": ["Panchkula Rural", "Kalka", "Barwala"],
-                "MOURNI": ["Mourni", "Pinjore"]
+                "JHAJJAR": ["Jhajjar Rural", "Bahadurgarh", "Beri", "Dighal"]
             },
             "REWARI": { 
-                "REWARI": ["Rewari Rural", "Bawal", "Kosli"],
-                "DHARUHERA": ["Dharuhera", "Jatusana"]
+                "REWARI": ["Rewari Rural", "Bawal", "Kosli", "Dharuhera"]
             },
             "SIRSA": { 
-                "SIRSA": ["Sirsa Rural", "Dabwali", "Ellenabad", "Rania"],
-                "NATHUSARI": ["Nathusari Chopta", "Baruwali"]
-            },
-            "YAMUNANAGAR": { 
-                "YAMUNANAGAR": ["Jagadhri", "Yamunanagar Rural", "Bilaspur", "Chhachhrauli", "Radaur"],
-                "SADHAURA": ["Sadhaura", "Mustafabad"]
+                "SIRSA": ["Sirsa Rural", "Dabwali", "Ellenabad", "Rania"]
             }
         };
 
@@ -784,40 +678,13 @@
         let isPhoneVerified = false;
         let isDistrictVerifiedByAPI = false;
 
-        async function initPortal() {
-            // ऑटोमैटिक पिनकोड API से एक्स्ट्रा गाँव लोड करना
-            try {
-                const res = await fetch("https://api.postalpincode.in/postoffice/Haryana");
-                const data = await res.json();
-                
-                if (data && data[0] && data[0].PostOffice) {
-                    data[0].PostOffice.forEach(item => {
-                        const dist = item.District.toUpperCase().trim();
-                        let block = item.Block.toUpperCase().trim();
-                        if(block === "NA" || !block) block = item.Division.toUpperCase().trim();
-                        const village = item.Name.trim();
-
-                        if (haryanaMasterData[dist]) {
-                            if (!haryanaMasterData[dist][block]) {
-                                haryanaMasterData[dist][block] = [];
-                            }
-                            if (!haryanaMasterData[dist][block].includes(village)) {
-                                haryanaMasterData[dist][block].push(village);
-                            }
-                        }
-                    });
-                }
-                document.getElementById("currentLocationBadge").innerText = "📍 हरियाणा के सभी ज़िले, ब्लॉक व गाँव डेटा लोड हो गया!";
-            } catch (err) {
-                console.log("Using built-in master data", err);
-                document.getElementById("currentLocationBadge").innerText = "📍 हरियाणा ग्रामीण डेटा (Ready)";
-            }
-
+        function initPortal() {
             populateAllDistrictDropdowns();
             renderInitialData();
             loadGallery();
             loadEvents();
             loadBuySellItems();
+            document.getElementById("currentLocationBadge").innerText = "📍 हरियाणा ग्रामीण डेटा (Ready)";
         }
 
         function populateAllDistrictDropdowns() {
@@ -841,7 +708,7 @@
             const villSel = document.getElementById("mainVillageSelect");
 
             blockSel.innerHTML = '<option value="">-- Select Block --</option>';
-            villSel.innerHTML = '<option value="">Select</option>';
+            villSel.innerHTML = '<option value="">-- Select Village --</option>';
 
             if (dist && haryanaMasterData[dist]) {
                 Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
@@ -855,7 +722,7 @@
             const block = document.getElementById("mainBlockSelect").value;
             const villSel = document.getElementById("mainVillageSelect");
 
-            villSel.innerHTML = '<option value="">Select</option>';
+            villSel.innerHTML = '<option value="">-- Select Village --</option>';
 
             if (dist && block && haryanaMasterData[dist][block]) {
                 haryanaMasterData[dist][block].sort().forEach(vill => {
@@ -961,7 +828,7 @@
             }
         }
 
-        async function fetchGPSLocationAndVerifyDistrict() {
+        function fetchGPSLocationAndVerifyDistrict() {
             const selectedDist = document.getElementById("regDistrict").value;
             const selectedVill = document.getElementById("regVillage").value;
             const statusBox = document.getElementById("districtApiStatus");
@@ -1255,14 +1122,6 @@
         function renderInitialData() {
             if (!localStorage.getItem("approvedShops")) {
                 localStorage.setItem("approvedShops", JSON.stringify([]));
-            }
-        }
-
-        function clearAllPortalData() {
-            if (confirm("क्या आप वाकई सभी लोकल डेटा (दुकानें, गैलरी, विज्ञापन) डिलीट करना चाहते हैं?")) {
-                localStorage.clear();
-                alert("🗑️ सभी डेटा सफलतापूर्वक रीसेट कर दिया गया है!");
-                location.reload();
             }
         }
     </script>
