@@ -97,7 +97,6 @@
             padding-bottom: 8px;
         }
 
-        /* Weather, Mandi, News Bar Widget */
         .live-info-widget {
             background: linear-gradient(135deg, #0277bd, #00838f);
             color: white;
@@ -194,7 +193,6 @@
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); color: #000; }
         .btn-accent { background: var(--accent); }
-        .btn-purple { background: var(--purple); }
         .btn-danger { background: #d32f2f; color: white; }
 
         .call-btn {
@@ -223,8 +221,6 @@
         }
 
         .toggle-bar.orange { background: var(--secondary); color: #000; }
-        .toggle-bar.red { background: #c62828; color: #fff; }
-        .toggle-bar.purple { background: var(--purple); color: #fff; }
         .toggle-bar.govt { background: var(--govt-green); color: #fff; }
         .toggle-bar.admin { background: #37474f; color: #fff; }
 
@@ -328,7 +324,7 @@
                     🌤️ लाइव मौसम: लोड हो रहा है...
                 </div>
                 <div style="font-size: 0.8rem; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 4px;">
-                    📍 Open-Meteo API Verified
+                    📍 Live Weather API
                 </div>
             </div>
 
@@ -344,7 +340,7 @@
             <!-- LOCAL NEWS TICKER -->
             <div style="margin-top: 10px;">
                 <div class="news-ticker" id="newsTicker">
-                    📰 <b>लाइव हरियाणा ताज़ा अपडेट:</b> ग्रामीण क्षेत्रों में बिजली व सड़क सुधारीकरण कार्य जारी | मेरी फसल मेरा ब्योरा पोर्टल चालू।
+                    📰 <b>लाइव हरियाणा अपडेट:</b> ग्रामीण क्षेत्रों में बिजली व सड़क सुधारीकरण कार्य जारी | मेरी फसल मेरा ब्योरा पोर्टल चालू।
                 </div>
             </div>
         </div>
@@ -356,7 +352,7 @@
             
             <div class="form-group">
                 <label>1. जिला चुनें (Select District) *</label>
-                <select id="mainDistrictSelect" onchange="onMainDistrictChange()">
+                <select id="mainDistrictSelect" onchange="onDistrictChange('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
                     <option value="">-- जिला चुनें --</option>
                 </select>
             </div>
@@ -371,7 +367,7 @@
 
             <div class="form-group">
                 <label>3. खण्ड / ब्लॉक (Select Block / Tehsil) *</label>
-                <select id="mainBlockSelect" onchange="onMainBlockChange()">
+                <select id="mainBlockSelect" onchange="onBlockChange('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
             </div>
@@ -403,21 +399,29 @@
             </div>
 
             <div class="form-group">
-                <label>जिला चुनें (District):</label>
-                <select id="regDistrict" onchange="onRegDistrictChange()">
+                <label>1. जिला चुनें (Select District):</label>
+                <select id="regDistrict" onchange="onDistrictChange('regDistrict', 'regBlock', 'regVillage')">
                     <option value="">-- जिला चुनें --</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>खण्ड / ब्लॉक (Block):</label>
-                <select id="regBlock" onchange="onRegBlockChange()">
+                <label>2. क्षेत्र का प्रकार (Area):</label>
+                <select id="regArea">
+                    <option value="Rural">Rural (ग्रामीण)</option>
+                    <option value="Urban">Urban (शहरी)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>3. खण्ड / ब्लॉक (Block):</label>
+                <select id="regBlock" onchange="onBlockChange('regDistrict', 'regBlock', 'regVillage')">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>गाँव चुनें (Village):</label>
+                <label>4. गाँव चुनें (Village):</label>
                 <select id="regVillage">
                     <option value="">-- पहले ब्लॉक चुनें --</option>
                 </select>
@@ -452,7 +456,7 @@
         </div>
 
 
-        <!-- 1B. ADD LOCAL ARTISAN / SKILL SERVICE (बिना दुकान वाले कारीगर) -->
+        <!-- 1B. ADD LOCAL ARTISAN / SKILL SERVICE (पेंशन पोर्टल संरचना) -->
         <div class="toggle-bar orange" onclick="toggleSection('addArtisanFormBox', 'icon1b')">
             <span>➕ 1B. स्थानीय कारीगर व सेवाएँ जोड़ें (बिना दुकान - पंडित जी, मिस्त्री, गाड़ी)</span>
             <span id="icon1b">▼</span>
@@ -460,7 +464,7 @@
 
         <div class="collapsible-form-container" id="addArtisanFormBox">
             <h2>स्थानीय सेवादार / कारीगर रजिस्ट्रेशन</h2>
-            <p style="font-size:0.85rem; color:#555; margin-bottom:12px;">(अगर आपकी दुकान नहीं है लेकिन आप कोई सेवा या कारीगरी देते हैं तो यहाँ दर्ज करें)</p>
+            <p style="font-size:0.85rem; color:#555; margin-bottom:12px;">(बिना दुकान वाले स्वतंत्र सेवादार जैसे पंडित जी, मिस्त्री, गाड़ी बुकिंग आदि)</p>
             
             <div class="form-group">
                 <label>व्यक्ति / सेवादार का पूरा नाम:</label>
@@ -481,24 +485,33 @@
                 </select>
             </div>
 
+            <!-- 4-Level Pension Structure Dropdown for Artisan -->
             <div class="form-group">
-                <label>जिला चुनें:</label>
-                <select id="artDistrict" onchange="onArtDistrictChange()">
+                <label>1. जिला चुनें (Select District):</label>
+                <select id="artDistrict" onchange="onDistrictChange('artDistrict', 'artBlock', 'artVillage')">
                     <option value="">-- जिला चुनें --</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>खण्ड / ब्लॉक चुनें:</label>
-                <select id="artBlock" onchange="onArtBlockChange()">
+                <label>2. क्षेत्र का प्रकार (Area):</label>
+                <select id="artArea">
+                    <option value="Rural">Rural (ग्रामीण)</option>
+                    <option value="Urban">Urban (शहरी)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>3. खण्ड / ब्लॉक (Select Block):</label>
+                <select id="artBlock" onchange="onBlockChange('artDistrict', 'artBlock', 'artVillage')">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>गाँव चुनें:</label>
+                <label>4. गाँव / वार्ड (Select Village):</label>
                 <select id="artVillage">
-                    <option value="">-- पहले ब्लॉक चुनें --</option>
+                    <option value="">-- पहले खण्ड चुनें --</option>
                 </select>
             </div>
 
@@ -528,9 +541,9 @@
         </div>
 
 
-        <!-- 3. ADMIN PANEL FOR DELETING INVALID ENTRIES -->
+        <!-- 3. ADMIN PANEL -->
         <div class="toggle-bar admin" onclick="toggleSection('adminPanelBox', 'iconAdmin')">
-            <span>🔒 3. एडमिन पैनल (गलत दुकान / सेवा डिलीट पावर)</span>
+            <span>🔒 3. एडमिन पैनल (Admin Control Panel)</span>
             <span id="iconAdmin">▼</span>
         </div>
 
@@ -543,7 +556,7 @@
             </div>
 
             <div id="adminContent" style="display:none;">
-                <h3 style="font-size:1rem; color:#d32f2f; margin-bottom:10px;">सभी पंजीकृत दुकानें व कारीगर (Delete Power):</h3>
+                <h3 style="font-size:1rem; color:#d32f2f; margin-bottom:10px;">पंजीकृत दुकानें व कारीगर (प्रबंधन):</h3>
                 <div id="adminShopsList"></div>
             </div>
         </div>
@@ -555,34 +568,125 @@
     </footer>
 
     <script>
-        // Master Nested Data Structure: District -> Block -> Villages
+        // Master Nested Data Structure: Full 22 Districts of Haryana
         const haryanaMasterData = {
-            "ROHTAK": {
-                "ROHTAK": ["Dobh", "Bahlaut", "Kahnaur", "Kharak Kalan", "Ladhan", "Makrauli Kalan", "Sunaria"],
-                "SAMPLA": ["Sampla", "Atail", "Gari Sampla", "Ismaila 11B", "Ismaila 9B", "Kullasi", "Nissing"],
-                "MEHAM": ["Meham", "Bedwa", "Bhari", "Farmana", "Kheri Meham"],
-                "KALANAUR": ["Kalanaur", "Anwal", "Balan", "Kalinga", "Nigana"]
+            "AMBALA": {
+                "AMBALA CANTT": ["Ambala Cantt", "Babiyal", "Tangri"],
+                "AMBALA CITY": ["Ambala City", "Saha", "Shahzadpur"],
+                "BARARA": ["Barara", "Mullana", "Tandwal"]
+            },
+            "BHIWANI": {
+                "BHIWANI": ["Bhiwani", "Bawani Khera", "Bamla", "Devsar"],
+                "TOSHAM": ["Tosham", "Khanak", "Biran"],
+                "SIWANI": ["Siwani", "Mudhals", "Jhumpa"]
             },
             "CHARKHI DADRI": {
                 "BAUND": ["Malkosh", "Baund Kalan", "Rankoli", "Phogat", "Sanwar", "Chhapar"],
                 "BADHRA": ["Badhra", "Jhojhu Kalan", "Kadma", "Kari Tokha"],
                 "DADRI": ["Dadri", "Achina", "Samaspur", "Ghasola"]
             },
+            "FARIDABAD": {
+                "FARIDABAD": ["Faridabad", "Ballabgarh", "Pali"],
+                "BALLABGARH": ["Chhainsa", "Tigaon", "Mohna"]
+            },
+            "FATEHABAD": {
+                "FATEHABAD": ["Fatehabad", "Bhattu Kalan", "Bhundar"],
+                "TOHANA": ["Tohana", "Dhaman", "Jakhal"],
+                "RATIA": ["Ratia", "Bara", "Ratia Rural"]
+            },
+            "GURUGRAM": {
+                "GURUGRAM": ["Gurugram", "Kadipur", "Wazirabad"],
+                "SO
+HNA": ["Sohna", "Badshahpur", "Bhondsi"],
+                "PATAUDI": ["Pataudi", "Hailey Mandi", "Jatola"]
+            },
+            "HISAR": {
+                "HISAR": ["Hisar", "Satrod", "Gangwa"],
+                "HANSI": ["Hansi", "Umana", "Sisar"],
+                "ADAMPUR": ["Adampur", "Bhadra", "Chaudhariwas"],
+                "BARWALA": ["Barwala", "Daulatpur", "Khedar"]
+            },
             "JHAJJAR": {
                 "JHAJJAR": ["Jhajjar", "Dighal", "Gudha", "Giani"],
                 "BAHADURGARH": ["Bahadurgarh", "Sankhol", "Mandothi"],
                 "BERI": ["Beri", "Dhubaldhan", "Maji"]
+            },
+            "JIND": {
+                "JIND": ["Jind", "Intal Kalan", "Julani"],
+                "NARWANA": ["Narwana", "Dhamtan Sahib", "Uchana"],
+                "SAFIDON": ["Safidon", "Muana", "Pillukhera"]
+            },
+            "KAITHAL": {
+                "KAITHAL": ["Kaithal", "Keorak", "Dhand"],
+                "GUHLA": ["Guhla", "Cheeka", "Siwan"],
+                "KALAYAT": ["Kalayat", "Kilmach", "Kolekhan"]
+            },
+            "KARNAL": {
+                "KARNAL": ["Karnal", "Kunjpura", "Kachhwa"],
+                "GHARAUNDA": ["Gharaunda", "Gharaunda Rural", "Kohand"],
+                "ASSANDH": ["Assandh", "Jundla", "Salwan"]
+            },
+            "KURUKSHETRA": {
+                "THANESAR": ["Thanesar", "Pipli", "Kalyana"],
+                "PEHOWA": ["Pehowa", "Saraswati Nagar", "Ismailabad"],
+                "SHAHBAD": ["Shahbad", "Nalvi", "Tangar"]
+            },
+            "MAHENDRAGARH": {
+                "NARNAUL": ["Narnaul", "Nasibpur", "Kaniha"],
+                "MAHENDRAGARH": ["Mahendragarh", "Satnali", "Pali"],
+                "KANINA": ["Kanina", "Unhani", "Sehma"]
+            },
+            "NUH": {
+                "NUH": ["Nuh", "Chhachhrauli", "Indri"],
+                "FEROZEPUR JHIRKA": ["Ferozepur Jhirka", "Nagra", "Biwan"],
+                "PUNHANA": ["Punhana", "Bichhor", "Singar"]
+            },
+            "PALWAL": {
+                "PALWAL": ["Palwal", "Alawalpur", "Hathin"],
+                "HODAL": ["Hodal", "Bassan", "Sondhad"]
+            },
+            "PANCHKULA": {
+                "PANCHKULA": ["Panchkula", "Pinjore", "Kalka"],
+                "RAIPUR RANI": ["Raipur Rani", "Hangola", "Morni"]
+            },
+            "PANIPAT": {
+                "PANIPAT": ["Panipat", "Binjhol", "Kabal"],
+                "SAMALKHA": ["Samalkha", "Pattikalyana", "Patti"],
+                "ISRANA": ["Israna", "Madlauda", "Naultha"]
+            },
+            "REWARI": {
+                "REWARI": ["Rewari", "Bharawas", "Bawal"],
+                "KOSLI": ["Kosli", "Nahar", "Jatusana"]
+            },
+            "ROHTAK": {
+                "ROHTAK": ["Dobh", "Bahlaut", "Kahnaur", "Kharak Kalan", "Ladhan", "Makrauli Kalan", "Sunaria"],
+                "SAMPLA": ["Sampla", "Atail", "Gari Sampla", "Ismaila 11B", "Ismaila 9B", "Kullasi", "Nissing"],
+                "MEHAM": ["Meham", "Bedwa", "Bhari", "Farmana", "Kheri Meham"],
+                "KALANAUR": ["Kalanaur", "Anwal", "Balan", "Kalinga", "Nigana"]
+            },
+            "SIRSA": {
+                "SIRSA": ["Sirsa", "Ding", "Bhavdin"],
+                "ELLENABAD": ["Ellenabad", "Madanpur", "Santnagar"],
+                "DABWALI": ["Dabwali", "Kalanwali", "Odhan"]
+            },
+            "SONIPAT": {
+                "SONIPAT": ["Sonipat", "Rai", "Gohana"],
+                "GANNAUR": ["Gannaur", "Panchi Jatan", "Bhadana"],
+                "GOHANA": ["Gohana", "Khanpur Kalan", "Baroda"]
+            },
+            "YAMUNANAGAR": {
+                "YAMUNANAGAR": ["Yamunanagar", "Jagadhri", "Chhachhrauli"],
+                "RADAUR": ["Radaur", "Jauri", "Mustafabad"]
             }
         };
 
         let base64PhotoStore = {};
 
         function initPortal() {
-            populateAllDistrictDropdowns();
+            populateDistrictDropdowns();
             fetchLiveWeather();
         }
 
-        // Live Open-Meteo Weather API Integration (Rohtak / Haryana Region Coords)
         async function fetchLiveWeather() {
             try {
                 const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=28.8955&longitude=76.6066&current_weather=true");
@@ -596,11 +700,11 @@
             }
         }
 
-        function populateAllDistrictDropdowns() {
-            const selects = ["mainDistrictSelect", "regDistrict", "artDistrict"];
+        function populateDistrictDropdowns() {
+            const districtSelectIds = ["mainDistrictSelect", "regDistrict", "artDistrict"];
             const sortedDistricts = Object.keys(haryanaMasterData).sort();
 
-            selects.forEach(id => {
+            districtSelectIds.forEach(id => {
                 const sel = document.getElementById(id);
                 if(sel) {
                     sel.innerHTML = '<option value="">-- जिला चुनें --</option>';
@@ -611,11 +715,11 @@
             });
         }
 
-        // Search Section Dropdown Logic
-        function onMainDistrictChange() {
-            const dist = document.getElementById("mainDistrictSelect").value;
-            const blockSel = document.getElementById("mainBlockSelect");
-            const villSel = document.getElementById("mainVillageSelect");
+        // Generic Cascading Dropdown Handlers
+        function onDistrictChange(distId, blockId, villId) {
+            const dist = document.getElementById(distId).value;
+            const blockSel = document.getElementById(blockId);
+            const villSel = document.getElementById(villId);
 
             blockSel.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
             villSel.innerHTML = '<option value="">-- पहले खण्ड चुनें --</option>';
@@ -627,10 +731,10 @@
             }
         }
 
-        function onMainBlockChange() {
-            const dist = document.getElementById("mainDistrictSelect").value;
-            const block = document.getElementById("mainBlockSelect").value;
-            const villSel = document.getElementById("mainVillageSelect");
+        function onBlockChange(distId, blockId, villId) {
+            const dist = document.getElementById(distId).value;
+            const block = document.getElementById(blockId).value;
+            const villSel = document.getElementById(villId);
 
             villSel.innerHTML = '<option value="">-- गाँव / Village चुनें --</option>';
 
@@ -648,66 +752,6 @@
                 document.getElementById("headerTitle").innerText = `मेरा गाँव - ${vill.toUpperCase()}`;
                 document.getElementById("headerSubTitle").innerText = `मेरा गाँव ${vill}, सूचना व व्यापार केंद्र`;
                 document.getElementById("currentLocationBadge").innerText = `📍 स्थान: गाँव ${vill}, जिला ${dist}`;
-            }
-        }
-
-        // Shop Reg Dropdown Logic
-        function onRegDistrictChange() {
-            const dist = document.getElementById("regDistrict").value;
-            const blockSel = document.getElementById("regBlock");
-            const villSel = document.getElementById("regVillage");
-
-            blockSel.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
-            villSel.innerHTML = '<option value="">-- पहले खण्ड चुनें --</option>';
-
-            if (dist && haryanaMasterData[dist]) {
-                Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
-                    blockSel.innerHTML += `<option value="${block}">${block}</option>`;
-                });
-            }
-        }
-
-        function onRegBlockChange() {
-            const dist = document.getElementById("regDistrict").value;
-            const block = document.getElementById("regBlock").value;
-            const villSel = document.getElementById("regVillage");
-
-            villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-
-            if (dist && block && haryanaMasterData[dist][block]) {
-                haryanaMasterData[dist][block].sort().forEach(vill => {
-                    villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
-                });
-            }
-        }
-
-        // Artisan Reg Dropdown Logic
-        function onArtDistrictChange() {
-            const dist = document.getElementById("artDistrict").value;
-            const blockSel = document.getElementById("artBlock");
-            const villSel = document.getElementById("artVillage");
-
-            blockSel.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
-            villSel.innerHTML = '<option value="">-- पहले खण्ड चुनें --</option>';
-
-            if (dist && haryanaMasterData[dist]) {
-                Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
-                    blockSel.innerHTML += `<option value="${block}">${block}</option>`;
-                });
-            }
-        }
-
-        function onArtBlockChange() {
-            const dist = document.getElementById("artDistrict").value;
-            const block = document.getElementById("artBlock").value;
-            const villSel = document.getElementById("artVillage");
-
-            villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-
-            if (dist && block && haryanaMasterData[dist][block]) {
-                haryanaMasterData[dist][block].sort().forEach(vill => {
-                    villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
-                });
             }
         }
 
@@ -790,7 +834,7 @@
             location.reload();
         }
 
-        // Submit Artisan / Service Registration
+        // Submit Artisan Registration
         function submitArtisan() {
             const name = document.getElementById("artName").value.trim();
             const cat = document.getElementById("artCategory").value;
