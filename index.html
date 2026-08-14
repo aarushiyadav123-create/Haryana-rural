@@ -5,48 +5,213 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>डिजिटल ग्राम पोर्टल - संपला / माल्कोश</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; margin: 0; padding: 15px; color: #333; }
-        .container { max-width: 650px; background: white; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .header { display: flex; justify-content: space-between; align-items: center; background: #ff9800; color: white; padding: 12px 18px; border-radius: 8px; }
-        .header h3 { margin: 0; font-size: 18px; }
-        .lang-toggle { background: white; color: #ff9800; border: none; padding: 6px 12px; font-weight: bold; cursor: pointer; border-radius: 4px; }
-        
-        .section { margin-top: 20px; padding: 18px; background: #fff8f0; border: 1px dashed #ff9800; border-radius: 8px; }
-        .buy-sell-section { background: #f1f8e9; border: 1px dashed #4caf50; }
-        .ai-section { background: #e3f2fd; border: 1px dashed #2196f3; }
-        
-        label { display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
-        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 14px; }
-        
-        button.action-btn { background: #ff9800; color: white; border: none; padding: 12px; cursor: pointer; border-radius: 5px; width: 100%; font-weight: bold; font-size: 15px; }
-        button.buy-btn { background: #4caf50; }
-        button.ai-btn { background: #2196f3; }
-        
-        .qr-box { text-align: center; margin-top: 15px; background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
-        .qr-placeholder { background: #f9f9f9; padding: 15px; font-weight: bold; color: #444; border: 1px dashed #999; margin: 10px 0; border-radius: 5px; }
-        .note { font-size: 12px; color: #d32f2f; margin-top: 5px; font-weight: bold; }
+        :root {
+            --primary-color: #ff9800;
+            --primary-dark: #e65100;
+            --secondary-color: #4caf50;
+            --info-color: #2196f3;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            margin: 0;
+            padding: 15px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 700px;
+            background: var(--card-bg);
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(255,152,0,0.3);
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .lang-toggle {
+            background: white;
+            color: var(--primary-dark);
+            border: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .lang-toggle:hover {
+            background: #ffe0b2;
+        }
+
+        .section {
+            margin-top: 25px;
+            padding: 20px;
+            background: #fff8f0;
+            border: 1px dashed var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .buy-sell-section {
+            background: #f1f8e9;
+            border: 1px dashed var(--secondary-color);
+        }
+
+        .ai-section {
+            background: #e3f2fd;
+            border: 1px dashed var(--info-color);
+        }
+
+        .directory-section {
+            background: #ede7f6;
+            border: 1px dashed #673ab7;
+        }
+
+        h3 {
+            margin-top: 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background: #fff;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(255,152,0,0.3);
+        }
+
+        button.action-btn {
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            width: 100%;
+            font-weight: bold;
+            font-size: 15px;
+            transition: opacity 0.3s;
+        }
+
+        button.action-btn:hover {
+            opacity: 0.9;
+        }
+
+        button.buy-btn {
+            background: var(--secondary-color);
+        }
+
+        button.ai-btn {
+            background: var(--info-color);
+        }
+
+        .qr-box {
+            text-align: center;
+            margin-top: 15px;
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .qr-placeholder {
+            background: #f9f9f9;
+            padding: 20px;
+            font-weight: bold;
+            color: #444;
+            border: 1px dashed #999;
+            margin: 10px 0;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #d32f2f;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .feed-card {
+            background: white;
+            padding: 12px 15px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 13px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Header with Language Switcher -->
+    
+    <!-- Header -->
     <div class="header">
-        <h3 id="portal-title">डिजिटल ग्राम - संपला / माल्कोश</h3>
+        <h2 id="portal-title">डिजिटल ग्राम पोर्टल - संपला / माल्कोश</h2>
         <button class="lang-toggle" onclick="toggleLanguage()" id="lang-btn">English</button>
     </div>
 
-    <!-- गाँव के विज्ञापन (मंडी, मेला, खेल-कुश्ती दंगल, सरपंच संदेश) -->
+    <!-- 1. गाँव के विज्ञापन और सूचनाएं (दंगल, मेला, भंडारा, सरपंच संदेश) -->
     <div class="section">
-        <h4 id="ad-heading" style="margin-top:0; color:#e65100;">📢 नया विज्ञापन / सूचना जोड़ें (फ्री)</h4>
+        <h3 id="ad-heading" style="color:#e65100;">📢 नया विज्ञापन / सूचना जोड़ें (फ्री)</h3>
         
         <label id="lbl-cat">श्रेणी चुनें:</label>
         <select id="ad-category">
-            <option value="dangal">खेल-कुश्ती दंगल</option>
-            <option value="mela">गाँव का मेला / भंडारा</option>
-            <option value="sarpanch">सरपंच / ग्राम पंचायत संदेश</option>
-            <option value="mandi">गाँव की मंडी / फसल भाव</option>
-            <option value="other">गाँव की अन्य महत्वपूर्ण बात</option>
+            <option value="dangal">खेल-कुश्ती दंगल (Dangal)</option>
+            <option value="mela">गाँव का मेला / भंडारा (Mela/Bhandara)</option>
+            <option value="sarpanch">सरपंच / ग्राम पंचायत संदेश (Sarpanch Notice)</option>
+            <option value="mandi">गाँव की मंडी / फसल भाव (Mandi Rates)</option>
+            <option value="other">गाँव की अन्य महत्वपूर्ण बात (Other Info)</option>
         </select>
 
         <label id="lbl-title">विज्ञापन का शीर्षक:</label>
@@ -64,9 +229,9 @@
         <button class="action-btn" onclick="submitAd()" id="btn-submit">विज्ञापन सबमिट करें</button>
     </div>
 
-    <!-- Buy & Sell Section with 20 Tokens & QR Approval -->
+    <!-- 2. Buy & Sell Section with 20 Tokens & QR Approval -->
     <div class="section buy-sell-section">
-        <h4 id="bs-heading" style="margin-top:0; color:#2e7d32;">🛒 Buy & Sell (खरीदें और बेचें) - 20 टोकन</h4>
+        <h3 id="bs-heading" style="color:#2e7d32;">🛒 Buy & Sell (खरीदें और बेचें) - 20 टोकन</h3>
         <p style="font-size: 13px; color: #333;" id="bs-desc">यहाँ अपना सामान बेचने या खरीदने के लिए विज्ञापन दें। पोस्ट लाइव करने के लिए 20 टोकन अनिवार्य हैं।</p>
 
         <label id="bs-lbl-item">सामान का नाम / शीर्षक:</label>
@@ -76,7 +241,7 @@
         <input type="number" id="bs-price" placeholder="कीमत दर्ज करें">
 
         <label id="bs-lbl-mobile">मोबाइल नंबर:</label>
-        <input type="text" id="bs-mobile" placeholder="अपना संपर्क नंबर">
+        <input type="text" id="bs-mobile-bs" placeholder="अपना संपर्क नंबर">
 
         <!-- QR Code & Token Approval Section -->
         <div class="qr-box">
@@ -89,13 +254,33 @@
         <button class="action-btn buy-btn" onclick="submitBuySell()" style="margin-top: 15px;" id="btn-bs-submit">20 टोकन के साथ Buy/Sell विज्ञापन डालें</button>
     </div>
 
-    <!-- AI Assistant Box -->
+    <!-- 3. गाँव की डायरेक्टरी / महत्वपूर्ण नंबर -->
+    <div class="section directory-section">
+        <h3 id="dir-heading" style="color:#5e35b1;">📖 गाँव की ज़रूरी जानकारी व डायरेक्टरी</h3>
+        <p style="font-size: 13px;" id="dir-desc">पंडित, डॉक्टर, ट्रैक्टर ड्राइवर, और बिजली मिस्त्री के संपर्क:</p>
+        
+        <div class="feed-card">
+            <strong id="dir-item-1">🚜 ट्रैक्टर सर्विस / जुताई:</strong> रमेश कुमार (98765XXXXX)
+        </div>
+        <div class="feed-card">
+            <strong id="dir-item-2">⚡ बिजली मिस्त्री:</strong> सुरेश फौजी (94160XXXXX)
+        </div>
+        <div class="feed-card">
+            <strong id="dir-item-3">🐄 पशु चिकित्सक:</strong> डॉ. अनिल अहलावत (92550XXXXX)
+        </div>
+    </div>
+
+    <!-- 4. AI हरियाणवी असिस्टेंट -->
     <div class="section ai-section">
-        <h4 id="ai-heading" style="margin-top:0; color:#1565c0;">🤖 AI हरियाणवी असिस्टेंट</h4>
+        <h3 id="ai-heading" style="color:#1565c0;">🤖 AI हरियाणवी असिस्टेंट</h3>
         <p style="font-size: 13px;" id="ai-text">राम-राम! पशुधन, खेती, मौसम या गाँव से जुड़ा कोई भी सवाल पूछ सको हो!</p>
         <input type="text" id="ai-query" placeholder="यहाँ अपना सवाल लिखें...">
         <button class="action-btn ai-btn" onclick="askAI()" id="ai-btn">AI से पूछें</button>
-        <div id="ai-response" style="margin-top: 10px; font-size: 14px; color: #0d47a1; font-weight: bold;"></div>
+        <div id="ai-response" style="margin-top: 12px; font-size: 14px; color: #0d47a1; font-weight: bold;"></div>
+    </div>
+
+    <div class="footer-note">
+        <p>© 2026 Digital Gram Portal - Sampla / Malkosh. All Rights Reserved.</p>
     </div>
 
 </div>
@@ -107,7 +292,8 @@
         if(currentLang === 'hi') {
             currentLang = 'en';
             document.getElementById('lang-btn').innerText = 'हिंदी';
-            document.getElementById('portal-title').innerText = 'Digital Gram - Sampla / Malkosh';
+            document.getElementById('portal-title').innerText = 'Digital Gram Portal - Sampla / Malkosh';
+            
             document.getElementById('ad-heading').innerText = '📢 Add New Ad / Notice (Free)';
             document.getElementById('lbl-cat').innerText = 'Select Category:';
             document.getElementById('lbl-title').innerText = 'Ad Title / Info:';
@@ -121,9 +307,15 @@
             document.getElementById('bs-lbl-item').innerText = 'Item Name / Title:';
             document.getElementById('bs-lbl-price').innerText = 'Price (₹):';
             document.getElementById('bs-lbl-mobile').innerText = 'Mobile Number:';
-            document.getElementById('qr-instruction').innerText = 'Scan QR below to pay for 20 token fee:';
+            document.getElementById('qr-instruction').innerText = 'Scan QR below to pay for 20 token fee[cite: 1]:';
             document.getElementById('qr-note').innerText = '*Post will go live and 20 tokens will be credited only after admin approves the payment.';
             document.getElementById('btn-bs-submit').innerText = 'Submit Buy/Sell Ad with 20 Tokens';
+            
+            document.getElementById('dir-heading').innerText = '📖 Village Directory & Important Contacts';
+            document.getElementById('dir-desc').innerText = 'Contacts for local mechanics, doctors, and tractor services:';
+            document.getElementById('dir-item-1').innerText = '🚜 Tractor Service / Tillage:';
+            document.getElementById('dir-item-2').innerText = '⚡ Electrician:';
+            document.getElementById('dir-item-3').innerText = '🐄 Veterinary Doctor:';
             
             document.getElementById('ai-heading').innerText = '🤖 AI Haryanvi Assistant';
             document.getElementById('ai-text').innerText = 'Ram-Ram! Ask any question related to farming, weather or village!';
@@ -132,7 +324,8 @@
         } else {
             currentLang = 'hi';
             document.getElementById('lang-btn').innerText = 'English';
-            document.getElementById('portal-title').innerText = 'डिजिटल ग्राम - संपला / माल्कोश';
+            document.getElementById('portal-title').innerText = 'डिजिटल ग्राम पोर्टल - संपला / माल्कोश';
+            
             document.getElementById('ad-heading').innerText = '📢 नया विज्ञापन / सूचना जोड़ें (फ्री)';
             document.getElementById('lbl-cat').innerText = 'श्रेणी चुनें:';
             document.getElementById('lbl-title').innerText = 'विज्ञापन का शीर्षक:';
@@ -146,9 +339,15 @@
             document.getElementById('bs-lbl-item').innerText = 'सामान का नाम / शीर्षक:';
             document.getElementById('bs-lbl-price').innerText = 'मूल्य (₹):';
             document.getElementById('bs-lbl-mobile').innerText = 'मोबाइल नंबर:';
-            document.getElementById('qr-instruction').innerText = '20 टोकन शुल्क के लिए नीचे दिए गए QR पर भुगतान करें:';
+            document.getElementById('qr-instruction').innerText = '20 टोकन शुल्क के लिए नीचे दिए गए QR पर भुगतान करें[cite: 1]:';
             document.getElementById('qr-note').innerText = '*पेमेंट करने के बाद एडमिन द्वारा अप्रूव (Approve) होने पर ही 20 टोकन क्रेडिट होंगे और Buy/Sell विज्ञापन लाइव होगा।';
             document.getElementById('btn-bs-submit').innerText = '20 टोकन के साथ Buy/Sell विज्ञापन डालें';
+            
+            document.getElementById('dir-heading').innerText = '📖 गाँव की ज़रूरी जानकारी व डायरेक्टरी';
+            document.getElementById('dir-desc').innerText = 'पंडित, डॉक्टर, ट्रैक्टर ड्राइवर, और बिजली मिस्त्री के संपर्क:';
+            document.getElementById('dir-item-1').innerText = '🚜 ट्रैक्टर सर्विस / जुताई:';
+            document.getElementById('dir-item-2').innerText = '⚡ बिजली मिस्त्री:';
+            document.getElementById('dir-item-3').innerText = '🐄 पशु चिकित्सक:';
             
             document.getElementById('ai-heading').innerText = '🤖 AI हरियाणवी असिस्टेंट';
             document.getElementById('ai-text').innerText = 'राम-राम! पशुधन, खेती, मौसम या गाँव से जुड़ा कोई भी सवाल पूछ सको हो!';
