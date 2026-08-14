@@ -5,27 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>हरियाणा ग्रामीण व कृषि पोर्टल</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: #f4f7f6; color: #333; line-height: 1.6; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+    body { background-color: #f4f7f6; color: #333; line-height: 1.5; }
     header { background: #1b5e20; color: white; text-align: center; padding: 20px 10px; }
     nav { background: #2e7d32; display: flex; justify-content: center; overflow-x: auto; white-space: nowrap; }
-    nav a { color: white; padding: 12px 20px; text-decoration: none; font-weight: bold; }
+    nav a { color: white; padding: 12px 18px; text-decoration: none; font-weight: bold; }
     nav a:hover { background: #1b5e20; }
-    .container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
-    .card { background: white; padding: 20px; margin-bottom: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    h2 { color: #1b5e20; border-bottom: 2px solid #1b5e20; padding-bottom: 8px; margin-bottom: 15px; }
+    .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+    .card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h2 { color: #1b5e20; border-bottom: 2px solid #1b5e20; padding-bottom: 6px; margin-bottom: 15px; }
     .form-group { margin-bottom: 15px; }
     label { display: block; font-weight: bold; margin-bottom: 5px; }
     select, input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
-    button { background: #1b5e20; color: white; border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; }
+    select:disabled { background-color: #e9ecef; }
+    button { background: #1b5e20; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; }
     button:hover { background: #144417; }
     table { width: 100%; border-collapse: collapse; margin-top: 10px; }
     table, th, td { border: 1px solid #ddd; }
-    th, td { padding: 12px; text-align: left; }
+    th, td { padding: 10px; text-align: left; }
     th { background: #e8f5e9; color: #1b5e20; }
-    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-    .gallery img { width: 100%; height: 150px; object-fit: cover; border-radius: 6px; }
-    .news-item { border-left: 4px solid #1b5e20; padding-left: 10px; margin-bottom: 15px; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .gallery img { width: 100%; height: 130px; object-fit: cover; border-radius: 6px; }
+    .news-item { border-left: 4px solid #1b5e20; padding-left: 10px; margin-bottom: 12px; }
   </style>
 </head>
 <body>
@@ -44,41 +45,30 @@
 </nav>
 
 <div class="container">
-  <!-- 1. स्थान चयन (Location Section) -->
+  <!-- 1. Location Selection Section -->
   <section id="location" class="card">
-    <h2>1. स्थान चयन (Location Selection)</h2>
+    <h2>1. स्थान चयन (सभी 22 ज़िले)</h2>
     <div class="form-group">
       <label for="district">ज़िला (District):</label>
-      <select id="district" onchange="onDistrictChange()">
-        <option value="">-- ज़िला चुनें --</option>
-      </select>
+      <select id="district" onchange="onDistrictChange()"><option value="">-- ज़िला चुनें --</option></select>
     </div>
     <div class="form-group">
       <label for="block">ब्लॉक/तहसील (Block/Tehsil):</label>
-      <select id="block" onchange="onBlockChange()" disabled>
-        <option value="">-- पहले ज़िला चुनें --</option>
-      </select>
+      <select id="block" onchange="onBlockChange()" disabled><option value="">-- पहले ज़िला चुनें --</option></select>
     </div>
     <div class="form-group">
       <label for="village">गाँव (Village):</label>
-      <select id="village" disabled>
-        <option value="">-- पहले ब्लॉक चुनें --</option>
-      </select>
+      <select id="village" disabled><option value="">-- पहले ब्लॉक चुनें --</option></select>
     </div>
     <button onclick="saveLocation()">स्थान सेव करें</button>
   </section>
 
-  <!-- 2. लाइव मंडी भाव (Mandi Rates Section) -->
+  <!-- 2. Mandi Rates Section -->
   <section id="mandi" class="card">
     <h2>2. आज के अनाज मंडी भाव (Haryana Mandi Rates)</h2>
     <table>
       <thead>
-        <tr>
-          <th>मंडी</th>
-          <th>फसल / अनाज</th>
-          <th>न्यूनतम भाव (₹/क्विंटल)</th>
-          <th>अधिकतम भाव (₹/क्विंटल)</th>
-        </tr>
+        <tr><th>मंडी</th><th>फसल / अनाज</th><th>न्यूनतम (₹/क्विंटल)</th><th>अधिकतम (₹/क्विंटल)</th></tr>
       </thead>
       <tbody>
         <tr><td>रोहतक (Rohtak)</td><td>गेहूं (Wheat)</td><td>₹2,275</td><td>₹2,450</td></tr>
@@ -90,21 +80,18 @@
     </table>
   </section>
 
-  <!-- 3. खरीद-बिक्री (Buy/Sell Marketplace Section) -->
+  <!-- 3. Buy/Sell Marketplace Section -->
   <section id="buysell" class="card">
     <h2>3. सामान व पशु खरीद-बिक्री (Buy & Sell)</h2>
     <form onsubmit="handleBuySell(event)">
       <div class="form-group">
-        <label>आप क्या करना चाहते हैं?</label>
-        <select required>
-          <option value="sell">बेचना चाहते हैं (Sell)</option>
-          <option value="buy">खरीदना चाहते हैं (Buy)</option>
-        </select>
+        <label>प्रकार:</label>
+        <select required><option value="sell">बेचना चाहते हैं (Sell)</option><option value="buy">खरीदना चाहते हैं (Buy)</option></select>
       </div>
       <div class="form-group">
         <label>कैटेगरी चुनें:</label>
         <select required>
-          <option value="animal">पशु (गाय/भैंस/ट्रैक्टर)</option>
+          <option value="animal">पशु (गाय/भैंस)</option>
           <option value="crop">फसल / बीज / खाद</option>
           <option value="machine">कृषि यंत्र / ट्रैक्टर</option>
           <option value="land">ज़मीन / मकान</option>
@@ -121,24 +108,21 @@
       <button type="submit">विज्ञापन पोस्ट करें</button>
     </form>
   </section>
-  <!-- 4. हरियाणा लाइव न्यूज़ (Live News Section) -->
+
+  <!-- 4. Live News Section -->
   <section id="news" class="card">
     <h2>4. हरियाणा ग्रामीण एवं कृषि समाचार (Live News)</h2>
     <div class="news-item">
-      <h3>हरियाणा सरकार का किसानों के लिए बड़ा ऐलान</h3>
-      <p>मेरी फसल मेरा ब्योरा पोर्टल पर पंजीकरण की अंतिम तिथि बढ़ा दी गई है। सभी किसान जल्द रजिस्ट्रेशन करवाएं।</p>
+      <h3>मेरी फसल मेरा ब्योरा पोर्टल अपडेट</h3>
+      <p>किसानों के लिए पंजीकरण की तिथि बढ़ा दी गई है। सभी किसान जल्द से जल्द आवेदन करें।</p>
     </div>
     <div class="news-item">
-      <h3>मंडी में फसलों की आवक शुरू</h3>
-      <p>प्रदेश भर की मंडियों में उठान और भुगतान की प्रक्रिया को तेज़ करने के दिए गए कड़े निर्देश।</p>
-    </div>
-    <div class="news-item">
-      <h3>सौर ऊर्जा पंप (Solar Pump) पर 75% सब्सिडी</h3>
-      <p>कृषि विभाग द्वारा पीएम कुसुम योजना के तहत नए आवेदनों की प्रक्रिया शुरू कर दी गई है।</p>
+      <h3>सोलर पंप योजना पर 75% सब्सिडी</h3>
+      <p>पीएम कुसुम योजना के तहत नए सोलर पंपों के लिए आवेदन प्रक्रिया शुरू कर दी गई है।</p>
     </div>
   </section>
 
-  <!-- 5. फोटो गैलरी (Photo Gallery) -->
+  <!-- 5. Photo Gallery Section -->
   <section id="gallery" class="card">
     <h2>5. फोटो गैलरी (Gallery)</h2>
     <div class="gallery">
@@ -149,141 +133,39 @@
     </div>
   </section>
 </div>
+
 <script>
-  // हरियाणा के सभी 22 ज़िलों का डेटाबेस
+  // हरियाणा के सभी 22 जिलों का संपूर्ण डेटाबेेस
   const haryanaData = {
-    "Ambala (अम्बाला)": {
-      "Ambala I": ["अम्बाला शहर", "बलदेव नगर", "जनसुई", "काकरू"],
-      "Ambala II": ["शाहपुर", "साहा", "केसरी", "मिथ्यापुर"],
-      "Barara": ["बराड़ा", "मुलाना", "तलहेड़ी", "थम्बड़"],
-      "Naraingarh": ["नारायणगढ़", "शहज़ादपुर", "हंसेवाला"]
-    },
-    "Bhiwani (भिवानी)": {
-      "Bhiwani": ["भिवानी", "बापोड़ा", "देवसर", "तिगड़ाना"],
-      "Tosham": ["तोशाम", "खानक", "डाडम", "ईसरवाल"],
-      "Bawani Khera": ["बवानी खेड़ा", "बलियाली", "सुलचानी"],
-      "Siwani": ["सिवानी", "बड़वा", "झुम्पा"]
-    },
-    "Charkhi Dadri (चरखी दादरी)": {
-      "Charkhi Dadri": ["चरखी दादरी", "समसपुर", "झाझर"],
-      "Badhra": ["बाढड़ा", "कादमा", "हंसावास"],
-      "Bond Kalan": ["बौंद कलां", "सांकरोड", "रणिला"]
-    },
-    "Faridabad (फरीदाबाद)": {
-      "Faridabad": ["फरीदाबाद", "बल्लभगढ़", "तिगांव", "पल्ला"],
-      "Ballabhgarh": ["छांयसा", "महोली", "दयालपुर"]
-    },
-    "Fatehabad (फतेहाबाद)": {
-      "Fatehabad": ["फतेहाबाद", "माझरा", "धांगड़"],
-      "Ratia": ["रतिया", "लाली", "अहरवां"],
-      "Tohana": ["टोहाना", "जाखल", "कुलां"]
-    },
-    "Gurugram (गुरुग्राम)": {
-      "Gurugram": ["गुरुग्राम", "झाड़सा", "वज़ीराबाद"],
-      "Sohna": ["सोहना", "दमदमा", "भोंडसी"],
-      "Pataudi": ["पटौदी", "हेलीमंडी", "इंचपुरी"],
-      "Farrukhnagar": ["फारुखनगर", "सुल्तानपुर"]
-    },
-    "Hisar (हिसार)": {
-      "Hisar I": ["हिसार", "सातरोड", "कैमररी"],
-      "Hisar II": ["धांसू", "मिर्जापुर", "बहबलपुर"],
-      "Hansi I": ["हंसी", "उमरा", "सिसाय"],
-      "Hansi II": ["गढ़ी", "सुलचानी", "भाटोल"],
-      "Adampur": ["आदमपुर", "दड़ौली", "किशनगढ़"],
-      "Barwala": ["बरवाला", "दौलतपुर", "खेड़ड़"],
-      "Narnaund": ["नारनौंद", "बास", "खांडा खेड़ी"],
-      "Uklana": ["उकलाना", "बिठमड़ा", "प्रभुवाला"]
-    },
-    "Jhajjar (झज्जर)": {
-      "Jhajjar": ["झज्जर", "दुजाना", "गुढ़ा"],
-      "Bahadurgarh": ["बहादुरगढ़", "मांडौठी", "आसौदा"],
-      "Beri": ["बेरी", "डीघल", "दूबलधन"],
-      "Matenhail": ["मातनहेल", "छुछकवास"],
-      "Salhawas": ["साल्हावास", "कोसली रोड"]
-    },
-    "Jind (जींद)": {
-      "Jind": ["जींद", "निर्जन", "रूपगढ़"],
-      "Narwana": ["नरवाना", "धमतान साहिब"],
-      "Safidon": ["सफीदों", "हाट", "मुआना"],
-      "Uchana": ["उचाना", "कासोहन", "घसोला"],
-      "Julana": ["जुलाना", "काड़ेला"]
-    },
-    "Kaithal (कैथल)": {
-      "Kaithal": ["कैथल", "पट्टी अफगान", "देवबन"],
-      "Guhla": ["गुहला", "चीका", "भागल"],
-      "Pundri": ["पुंडरी", "फतेहपुर", "पाई"],
-      "Kalayat": ["कलायत", "मटौर", "बालू"]
-    },
-    "Karnal (करनाल)": {
-      "Karnal": ["करनाल", "उचानी", "बुढाखेड़ा"],
-      "Gharaunda": ["घरौंडा", "कोहांड"],
-      "Assandh": ["असंध", "जयसिंहपुरा"],
-      "Indri": ["इंद्री", "भादसों"],
-      "Nilokheri": ["नीलोखेड़ी", "तरावड़ी"]
-    },
-    "Kurukshetra (कुरुक्षेत्र)": {
-      "Thanesar": ["थानेसर", "अमीन", "किरमिच"],
-      "Pehowa": ["पेहोवा", "इस्माईलाबाद"],
-      "Shahbad": ["शाहबाद", "मैलानी"],
-      "Ladwa": ["लाडवा", "बैन"]
-    },
-    "Mahendragarh (महेंद्रगढ़)": {
-      "Narnaul": ["नारनौल", "अटेली"],
-      "Mahendragarh": ["महेंद्रगढ़", "कनीना"]
-    },
-    "Nuh (नूंह)": {
-      "Nuh": ["नूंह", "सालाहेड़ी"],
-      "Ferozepur Jhirka": ["फिरोजपुर झिरका"],
-      "Punhana": ["पुनहाना", "सिंगार"],
-      "Tauru": ["तावडू", "मोहम्मदपुर"]
-    },
-    "Palwal (पलवल)": {
-      "Palwal": ["पलवल", "बहीन"],
-      "Hodal": ["होडल", "हसनपुर"],
-      "Hathin": ["हथीन", "उटावड़"]
-    },
-    "Panchkula (पंचकूला)": {
-      "Panchkula": ["पंचकूला", "कालका"],
-      "Raipur Rani": ["रायपुर रानी", "मोरनी"]
-    },
-    "Panipat (पानीपत)": {
-      "Panipat": ["पानीपत", "समालखा"],
-      "Madlauda": ["मडलौडा", "बापोली"]
-    },
-    "Rewari (रेवाड़ी)": {
-      "Rewari": ["रेवाड़ी", "धारूहेड़ा"],
-      "Khol": ["खोल", "डाहिना"]
-    },
-    "Rohtak (रोहतक)": {
-      "Rohtak": ["रोहतक", "बोहर", "किरौली", "बालंद", "सुंदरपुर"],
-      "Sampla": ["साम्पला", "गांधरा", "इसमाइला", "नयाबांस", "खरावर", "दत्ताऊ"],
-      "Kalanaur": ["कलानौर", "अनवाल", "निगाना", "बसाणा", "कहनौर"],
-      "Meham": ["महम", "मोखरा", "बहलबा", "मदीना", "फरमाणा"],
-      "Lakhan Majra": ["लखन माजरा", "चंडी", "खरैंटी"]
-    },
-    "Sirsa (सिरसा)": {
-      "Sirsa": ["सिरसा", "ऐलनाबाद"],
-      "Rania": ["रानिया", "कालावाली"]
-    },
-    "Sonipat (सोनीपत)": {
-      "Sonipat": ["सोनीपत", "राई", "कुंडली"],
-      "Gannaur": ["गन्नौर", "बड़ी"],
-      "Gohana": ["गोहाना", "मुढ़लाना"],
-      "Kharkhoda": ["खरखौदा", "सैदपुर"]
-    },
-    "Yamunanagar (यमुनानगर)": {
-      "Jagadhri": ["जगाधरी", "यमुनानगर"],
-      "Radaur": ["रादौर", "सादौरा"]
-    }
+    "Ambala (अम्बाला)": {"Ambala I":["अम्बाला शहर","बलदेव नगर","जनसुई"],"Ambala II":["शाहपुर","साहा","केसरी"],"Barara":["बराड़ा","मुलाना","तलहेड़ी"],"Naraingarh":["नारायणगढ़","शहज़ादपुर"]},
+    "Bhiwani (भिवानी)": {"Bhiwani":["भिवानी","बापोड़ा","देवसर"],"Tosham":["तोशाम","खानक","डाडम"],"Bawani Khera":["बवानी खेड़ा","बलियाली"],"Siwani":["सिवानी","बड़वा","झुम्पा"]},
+    "Charkhi Dadri (चरखी दादरी)": {"Charkhi Dadri":["चरखी दादरी","समसपुर"],"Badhra":["बाढड़ा","कादमा","हंसावास"],"Bond Kalan":["बौंद कलां","सांकरोड"]},
+    "Faridabad (फरीदाबाद)": {"Faridabad":["फरीदाबाद","बल्लभगढ़","तिगांव"],"Ballabhgarh":["छांयसा","महोली","दयालपुर"]},
+    "Fatehabad (फतेहाबाद)": {"Fatehabad":["फतेहाबाद","माझरा"],"Ratia":["रतिया","लाली","अहरवां"],"Tohana":["टोहाना","जाखल","कुलां"]},
+    "Gurugram (गुरुग्राम)": {"Gurugram":["गुरुग्राम","झाड़सा"],"Sohna":["सोहना","दमदमा"],"Pataudi":["पटौदी","हेलीमंडी"],"Farrukhnagar":["फारुखनगर","सुल्तानपुर"]},
+    "Hisar (हिसार)": {"Hisar I":["हिसार","सातरोड"],"Hisar II":["धांसू","मिर्जापुर"],"Hansi I":["हंसी","उमरा","सिसाय"],"Adampur":["आदमपुर","दड़ौली"],"Barwala":["बरवाला","दौलतपुर"],"Narnaund":["नारनौंद","बास"]},
+    "Jhajjar (झज्जर)": {"Jhajjar":["झज्जर","दुजाना"],"Bahadurgarh":["बहादुरगढ़","मांडौठी"],"Beri":["बेरी","डीघल"],"Matenhail":["मातनहेल","छुछकवास"],"Salhawas":["साल्हावास"]},
+    "Jind (जींद)": {"Jind":["जींद","निर्जन"],"Narwana":["नरवाना","धमतान साहिब"],"Safidon":["सफीदों","हाट"],"Uchana":["उचाना","कासोहन"],"Julana":["जुलाना","काड़ेला"]},
+    "Kaithal (कैथल)": {"Kaithal":["कैथल","पट्टी अफगान"],"Guhla":["गुहला","चीका"],"Pundri":["पुंडरी","फतेहपुर"],"Kalayat":["कलायत","मटौर"]},
+    "Karnal (करनाल)": {"Karnal":["करनाल","उचानी"],"Gharaunda":["घरौंडा","कोहांड"],"Assandh":["असंध","जयसिंहपुरा"],"Indri":["इंद्री","भादसों"],"Nilokheri":["नीलोखेड़ी","तरावड़ी"]},
+    "Kurukshetra (कुरुक्षेत्र)": {"Thanesar":["थानेसर","अमीन"],"Pehowa":["पेहोवा","इस्माईलाबाद"],"Shahbad":["शाहबाद","मैलानी"],"Ladwa":["लाडवा","बैन"]},
+    "Mahendragarh (महेंद्रगढ़)": {"Narnaul":["नारनौल","अटेली"],"Mahendragarh":["महेंद्रगढ़","कनीना"]},
+    "Nuh (नूंह)": {"Nuh":["नूंह","सालाहेड़ी"],"Ferozepur Jhirka":["फिरोजपुर झिरका"],"Punhana":["पुनहाना","सिंगार"],"Tauru":["तावडू","मोहम्मदपुर"]},
+    "Palwal (पलवल)": {"Palwal":["पलवल","बहीन"],"Hodal":["होडल","हसनपुर"],"Hathin":["हथीन","उटावड़"]},
+    "Panchkula (पंचकूला)": {"Panchkula":["पंचकूला","कालका"],"Raipur Rani":["रायपुर रानी","मोरनी"]},
+    "Panipat (पानीपत)": {"Panipat":["पानीपत","समालखा"],"Madlauda":["मडलौडा","बापोली"]},
+    "Rewari (रेवाड़ी)": {"Rewari":["रेवाड़ी","धारूहेड़ा"],"Khol":["खोल","डाहिना"]},
+    "Rohtak (रोहतक)": {"Rohtak":["रोहतक","बोहर","किरौली","बालंद"],"Sampla":["साम्पला","गांधरा","इसमाइला","नयाबांस","खरावर"],"Kalanaur":["कलानौर","अनवाल","निगाना"],"Meham":["महम","मोखरा","बहलबा"],"Lakhan Majra":["लखन माजरा","चंडी"]},
+    "Sirsa (सिरसा)": {"Sirsa":["सिरसा","ऐलनाबाद"],"Rania":["रानिया","कालावाली"]},
+    "Sonipat (सोनीपत)": {"Sonipat":["सोनीपत","राई","कुंडली"],"Gannaur":["गन्नौर","बड़ी"],"Gohana":["गोहाना","मुढ़लाना"],"Kharkhoda":["खरखौदा","सैदपुर"]},
+    "Yamunanagar (यमुनानगर)": {"Jagadhri":["जगाधरी","यमुनानगर"],"Radaur":["रादौर","सादौरा"]}
   };
 
-  // पेज लोड होते ही ज़िला लिस्ट भरना
   window.onload = function() {
     const distSelect = document.getElementById("district");
     for (let dist in haryanaData) {
       let opt = document.createElement("option");
-      opt.value = dist;
-      opt.textContent = dist;
+      opt.value = dist; opt.textContent = dist;
       distSelect.appendChild(opt);
     }
   };
@@ -302,8 +184,7 @@
       blockSelect.disabled = false;
       for (let blk in haryanaData[selDist]) {
         let opt = document.createElement("option");
-        opt.value = blk;
-        opt.textContent = blk;
+        opt.value = blk; opt.textContent = blk;
         blockSelect.appendChild(opt);
       }
     } else {
@@ -324,8 +205,7 @@
       villageSelect.disabled = false;
       haryanaData[selDist][selBlk].forEach(function(v) {
         let opt = document.createElement("option");
-        opt.value = v;
-        opt.textContent = v;
+        opt.value = v; opt.textContent = v;
         villageSelect.appendChild(opt);
       });
     } else {
@@ -337,12 +217,8 @@
     const d = document.getElementById("district").value;
     const b = document.getElementById("block").value;
     const v = document.getElementById("village").value;
-
-    if (!d || !b || !v) {
-      alert("कृपया ज़िला, ब्लॉक और गाँव तीनों चुनें!");
-    } else {
-      alert(`स्थान सेव हो गया:\n\nज़िला: ${d}\nब्लॉक: ${b}\nगाँव: ${v}`);
-    }
+    if (!d || !b || !v) alert("कृपया ज़िला, ब्लॉक और गाँव तीनों चुनें!");
+    else alert(`स्थान सेव हो गया:\n\nज़िला: ${d}\nब्लॉक: ${b}\nगाँव: ${v}`);
   }
 
   function handleBuySell(e) {
