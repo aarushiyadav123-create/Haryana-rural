@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
+    <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल (Extended Edition)</title>
     <style>
         :root {
             --primary: #1b5e20;
@@ -20,15 +20,15 @@
         .top-bar { background: #113f14; color: #ffeb3b; font-size: 13px; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; }
         .lang-btn { background: #ffc107; color: #000; border: none; padding: 5px 12px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 12px; }
 
-        header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 20px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        header h1 { font-size: 1.8rem; margin-bottom: 5px; }
-        header p { font-size: 0.95rem; opacity: 0.9; }
-        .badge { background: #388e3c; color: #fff; padding: 3px 10px; font-size: 0.75rem; border-radius: 12px; display: inline-block; margin-top: 5px; border: 1px solid #81c784; }
+        header { background: linear-gradient(135deg, var(--primary), #2e7d32); color: white; padding: 25px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        header h1 { font-size: 2rem; margin-bottom: 5px; }
+        header p { font-size: 1rem; opacity: 0.95; }
+        .badge { background: #388e3c; color: #fff; padding: 4px 12px; font-size: 0.8rem; border-radius: 12px; display: inline-block; margin-top: 8px; border: 1px solid #81c784; }
 
-        .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+        .container { max-width: 650px; margin: 20px auto; padding: 0 15px; }
 
         .weather-card { background: linear-gradient(135deg, #00acc1, #00838f); color: white; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .weather-title { font-size: 1rem; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .weather-title { font-size: 1.05rem; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
 
         .news-container { background: var(--news-bg); border-left: 4px solid var(--secondary); padding: 10px 12px; display: flex; align-items: center; overflow: hidden; margin-bottom: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .news-title-tag { background: var(--secondary); color: #fff; padding: 4px 8px; font-size: 0.8rem; font-weight: bold; border-radius: 4px; margin-right: 10px; white-space: nowrap; z-index: 2; }
@@ -36,7 +36,7 @@
         .news-ticker marquee { font-size: 0.9rem; color: var(--news-text); font-weight: 600; width: 100%; display: block; }
 
         .card { background: var(--card-bg); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
+        .card h2 { font-size: 1.15rem; color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid #e0e0e0; padding-bottom: 8px; }
 
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
@@ -47,8 +47,6 @@
         .custom-btn { display: inline-block; width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
         .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); }
-        .btn-danger { background: #d32f2f; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
-        .btn-success { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; margin-right: 6px; }
         .call-btn { background: #2e7d32; color: white; padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block; white-space: nowrap; }
 
         .toggle-bar { background: var(--primary); color: white; padding: 12px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -90,20 +88,20 @@
     <header>
         <h1>हरियाणा ग्रामीण सेवा</h1>
         <p>गाँव की हर दुकान, हर सेवा - अब आपके मोबाइल पर</p>
-        <div class="badge">डिजिटल माल्कोश & हरियाणा पोर्टल (22 जिले)</div>
+        <div class="badge">डिजिटल माल्कोश & हरियाणा पोर्टल (22 जिले - विस्तृत संस्करण)</div>
     </header>
 
     <div class="container">
 
         <div class="card" style="padding: 12px; text-align: center; background: #fffde7; border: 1px dashed #fbc02d; margin-bottom: 15px;">
-            <p style="font-size: 1rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! इस पोर्टल पर आपका स्वागत है</p>
+            <p style="font-size: 1rem; font-weight: bold; color: #e65100;">राम-राम भाइयो! इस विस्तारित डिजिटल पोर्टल पर आपका स्वागत है</p>
         </div>
 
         <div class="news-container">
             <span class="news-title-tag">📢 ताज़ा न्यूज़</span>
             <div class="news-ticker">
                 <marquee behavior="scroll" direction="left" scrollamount="5">
-                    हरियाणा ग्रामीण विकास योजना के तहत नई सड़कों की स्वीकृति | कृषि सब्सिडी पोर्टल शुरू।
+                    हरियाणा ग्रामीण विकास योजना के तहत नई सड़कों की स्वीकृति | कृषि सब्सिडी पोर्टल शुरू। किसानों के खातों में मुआवजा राशि ट्रांसफर।
                 </marquee>
             </div>
         </div>
@@ -112,25 +110,25 @@
             <span class="news-title-tag" style="background: #388e3c;">🌾 मंडी भाव</span>
             <div class="news-ticker">
                 <marquee behavior="scroll" direction="left" scrollamount="5" style="color: #1b5e20;">
-                    गेहूँ: ₹2300 | बाजरा: ₹2550 | सरसों: ₹5500 | नरमा: ₹7200 प्रति क्विंटल
+                    गेहूँ: ₹2300 | बाजरा: ₹2550 | सरसों: ₹5500 | नरमा: ₹7200 | धान (PB1): ₹3800 प्रति क्विंटल
                 </marquee>
             </div>
         </div>
 
         <div class="weather-card">
             <div class="weather-title">
-                <span>🌤 हरियाणा लाइव मौसम</span>
+                <span>🌤 हरियाणा लाइव मौसम अपडेट</span>
                 <span>32°C</span>
             </div>
-            <div style="font-size: 0.85rem; opacity: 0.9;">साफ आसमान और हल्की धूप | नमी: 45%</div>
+            <div style="font-size: 0.85rem; opacity: 0.9;">साफ आसमान और हल्की धूप | नमी: 45% | हवा की गति: 12 किमी/घंटा</div>
         </div>
 
         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
             <button onclick="shareOnWhatsApp()" class="custom-btn" style="background-color: #25d366; font-size: 0.9rem; padding: 12px; flex: 1; text-align: center;">
-                📢 WhatsApp शेयर
+                📢 WhatsApp शेयर करें
             </button>
             <button onclick="getMyNearbyPlaces()" class="custom-btn btn-secondary" style="font-size: 0.9rem; padding: 12px; flex: 1; text-align: center;">
-                📍 पास की जगहें
+                📍 पास की जगहें खोजें
             </button>
         </div>
 
@@ -186,7 +184,7 @@
 
             <div class="form-group">
                 <label>जिला चुनें:</label>
-                <select id="regDistrict" onchange="updateRegVillageDropdown()">
+                <select id="regDistrict">
                     <option value="">-- जिला चुनें --</option>
                 </select>
             </div>
@@ -217,10 +215,6 @@
                 <div style="display: flex; gap: 8px; margin-bottom: 10px;">
                     <button type="button" class="custom-btn" onclick="fetchLocationFromGPS()" style="background: #0277bd; font-size: 0.8rem; padding: 8px; flex: 1;">📍 GPS से लोकेशन भरें</button>
                     <input type="text" id="regGPSCoord" placeholder="GPS कोऑर्डिनेट्स" readonly style="flex: 1; font-size: 0.8rem; background: #fff;">
-                </div>
-                <div>
-                    <label style="font-size: 0.8rem; color: #444;">दुकान की फोटो (कैमरा/गैलरी से):</label>
-                    <input type="file" id="regShopPhoto" accept="image/*" style="font-size: 0.8rem; padding: 6px; background: #fff;">
                 </div>
             </div>
 
@@ -277,14 +271,13 @@
             <div id="buySellListContainer"></div>
         </div>
 
-        <!-- हरियाणा सरकारी योजनाएँ व पोर्टल -->
         <div class="toggle-bar" style="background: #2e7d32; margin-bottom: 10px;" onclick="toggleSection('schemeBoxContainer', 'toggleIconSchemes')">
             <span>🚀 हरियाणा सरकारी योजनाएँ व पोर्टल (+ Schemes)</span>
             <span id="toggleIconSchemes">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="schemeBoxContainer" style="background: #f1f8e9; border-color: #2e7d32;">
-            <p style="font-size: 0.85rem; color: #444; margin-bottom: 12px;">नीचे दी गई सरकारी योजनाओं की जानकारी पढ़ें और सीधे पोर्टल पर जाएं:</p>
+            <p style="font-size: 0.85rem; color: #444; margin-bottom: 12px;">नीचे दी गई सरकारी योजनाओं की जानकारी पढ़ें और सीधे पोर्टल पर जाएं:</p>
             
             <div class="scheme-item">
                 <h4>👨‍💼 हरियाणा कौशल रोजगार निगम (HKRN)</h4>
@@ -316,7 +309,7 @@
         </div>
 
         <div class="card" style="border-left: 4px solid #fbc02d;">
-            <h2>😂 हरियाणवी चुटकुले व मनोरंजन (विस्तृत)</h2>
+            <h2>😂 हरियाणवी चुटकुले व मनोरंजन (विस्तृत संग्रह)</h2>
             <div class="joke-box">
                 <div class="joke-text" id="jokeDisplay">"ताऊ तन्ने कल खेत में कती लेट कर दिया? ताऊ बोला: बेटा बैल ने कंप्यूटर सीख लिया था!"</div>
                 <button onclick="getNewJoke()" class="custom-btn btn-secondary" style="font-size: 0.85rem; padding: 6px; margin-top: 5px;">नया चुटकुला सुणो</button>
@@ -342,7 +335,7 @@
     </div>
 
     <footer>
-        &copy; 2026 Haryana Rural Service Portal - Digital Gram
+        &copy; 2026 Haryana Rural Service Portal - Digital Gram (All Rights Reserved)
     </footer>
 
     <script>
@@ -371,7 +364,6 @@
             "Yamunanagar": ["Jagadhri", "Yamunanagar", "Bilaspur", "Chhachhrauli"]
         };
 
-        // विस्तारित हरियाणवी चुटकुले और मनोरंजन डेटा
         const jokes = [
             `"ताऊ तन्ने कल खेत में कती लेट कर दिया? ताऊ बोला: बेटा बैल ने कंप्यूटर सीख लिया था!"`,
             `"मास्टर: बताओ अकबर ने कब तक राज किया? छात्र: सर जी, जब तक रानी ने मना नहीं किया!"`,
@@ -379,7 +371,9 @@
             `"पड़ोसी: ताऊ थारै छोरे ने तो कॉलेज में कमाल कर दिया, रोबोट बना दिया! ताऊ: रोबोट के बनावेगा, ब्याह के बाद तो मेरी बहू ने इने घर का नौकर बना राख्या सै!"`,
             `"थैंक्यू बोलन की क्या जरूरत सै भाई, हरियाणवी मानसा का दिल अर खेत हमेशा खुले पावे सै!"`,
             `"एक बार ताऊ शहर में मेट्रो में चढ़ग्या, पैंडें तै बूट उतार लिए, बोले: भाई साहब भीतर गंदा कोन्या होना चाहिए!"`,
-            `"जाट ब्याह में गया, रसगुल्ला देख कै बोला: भाई यो स्पंज की गोली सी क्यूँ धर राखी सै, कड़े दर्द हो तो दाब लें क्या?"`
+            `"जाट ब्याह में गया, रसगुल्ला देख कै बोला: भाई यो स्पंज की गोली सी क्यूँ धर राखी सै, कड़े दर्द हो तो दाब लें क्या?"`,
+            `"टीचर: बेटा 'अनुभव' का क्या मतलब होवे है? स्टूडेंट: जी, मास्टर जी, ब्याह ते पैहले पैहले ज्यूँ-ज्यूँ उम्र बढ़े है, उसनै अनुभव कह्या करैं!"`,
+            `"ताऊ बस में चढ़्या और कंडक्टर तै बोल्या: भाई साहब, हिसार का टिकट कै रुपये का सै? कंडक्टर: दस रुपये! ताऊ: चल फेर उतर जा, मन्नै तो जाना कोन्या, मूँह ताई पूछ रया था!"`
         ];
 
         let audioPlayed = false;
@@ -438,11 +432,6 @@
             }
         }
 
-        function updateRegVillageDropdown() {
-            // जिला बदलने पर यूजर अपनी मर्जी से गाँव लिख सकता है
-        }
-
-        // फिक्स: अब कोई जिला मैचिंग एरर नहीं आएगी, सीधे GPS लोकेशन उठाएगा
         async function fetchLocationFromGPS() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(async (position) => {
@@ -550,72 +539,51 @@
             const phone = document.getElementById("regPhone").value;
             const gps = document.getElementById("regGPSCoord").value;
             const isPremium = document.getElementById("premiumAdToggle").checked;
-            const utr = document.getElementById("regUtr").value;
 
-            if (!name || !dist || !phone) {
-                alert("कृपया दुकान का नाम, जिला और मोबाइल नंबर भरें!");
+            if(!name || !dist || !vill || !phone || !gps) {
+                alert("कृपया सभी आवश्यक फ़ील्ड भरें और GPS लोकेशन दर्ज करें।");
                 return;
             }
 
-            if (!gps) {
-                alert("⚠️ कृपया पहले 'GPS से लोकेशन भरें' बटन दबाकर लोकेशन वेरीफाई करें!");
-                return;
-            }
-
-            if (isPremium && !utr) {
-                alert("विज्ञापन के लिए UTR / Transaction ID डालना अनिवार्य है!");
-                return;
-            }
-
-            const fileInput = document.getElementById("regShopPhoto");
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    saveShopData(name, dist, vill, phone, gps, isPremium, utr, e.target.result);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                saveShopData(name, dist, vill, phone, gps, isPremium, utr, "");
-            }
-        }
-
-        function saveShopData(name, dist, vill, phone, gps, isPremium, utr, photo) {
-            const pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
-            pendingShops.push({ name, dist, vill, phone, gps, isPremium, utr, photo, id: Date.now() });
+            let pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
+            pendingShops.push({ id: Date.now(), name, dist, vill, phone, gps, isPremium });
             localStorage.setItem("pendingShops", JSON.stringify(pendingShops));
 
-            alert("सफलतापूर्वक एडमिन सत्यापन हेतु भेज दिया गया है!");
-            document.getElementById("addShopFormBox").style.display = "none";
-            renderAdminPanel();
+            alert("✅ आपकी दुकान का रजिस्ट्रेशन फॉर्म एडमिन के पास भेज दिया गया है। वेरीफाई होने के बाद यह पोर्टल पर दिखने लगेगा।");
+            document.getElementById("regShopName").value = "";
+            document.getElementById("regVillageInput").value = "";
+            document.getElementById("regPhone").value = "";
+            document.getElementById("regGPSCoord").value = "";
         }
 
         function publishBuySellAd() {
-            const title = document.getElementById("bsItemName").value;
-            const loc = document.getElementById("bsLocation").value;
+            const itemName = document.getElementById("bsItemName").value;
+            const location = document.getElementById("bsLocation").value;
             const price = document.getElementById("bsPrice").value;
             const phone = document.getElementById("bsPhone").value;
-            const utr = document.getElementById("bsUtr").value;
 
-            if (!title || !price || !phone || !utr) {
-                alert("सभी विवरण व UTR भरें!");
+            if(!itemName || !location || !price || !phone) {
+                alert("कृपया सभी जानकारी भरें।");
                 return;
             }
 
-            const pendingAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
-            pendingAds.push({ title, loc, price, phone, utr, id: Date.now() });
+            let pendingAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
+            pendingAds.push({ id: Date.now(), itemName, location, price, phone });
             localStorage.setItem("pendingAds", JSON.stringify(pendingAds));
 
-            alert("विज्ञापन सत्यापन हेतु भेज दिया गया है!");
-            document.getElementById("buySellFormBox").style.display = "none";
-            renderAdminPanel();
+            alert("✅ विज्ञापन एडमिन के पास भेज दिया गया है!");
+            document.getElementById("bsItemName").value = "";
+            document.getElementById("bsLocation").value = "";
+            document.getElementById("bsPrice").value = "";
+            document.getElementById("bsPhone").value = "";
         }
 
         function renderListings() {
             const container = document.getElementById("buySellListContainer");
             const approvedAds = JSON.parse(localStorage.getItem("approvedAds") || "[]");
-            
-            if (approvedAds.length === 0) {
-                container.innerHTML = `<p style="font-size:0.85rem; color:#666; padding:10px;">कोई विज्ञापन उपलब्ध नहीं है।</p>`;
+
+            if(approvedAds.length === 0) {
+                container.innerHTML = `<p style="font-size:0.85rem; color:#666;">फिलहाल कोई विज्ञापन उपलब्ध नहीं है।</p>`;
                 return;
             }
 
@@ -624,156 +592,112 @@
                 html += `
                 <div class="shop-item">
                     <div class="shop-info">
-                        <h4>${ad.title} - ₹${ad.price}</h4>
-                        <p>📍 ${ad.loc}</p>
+                        <h4>🛒 ${ad.itemName} - ₹${ad.price}</h4>
+                        <p>📍 ${ad.location}</p>
                     </div>
-                    <a href="tel:${ad.phone}" class="call-btn">📞 कॉल</a>
+                    <a href="tel:${ad.phone}" class="call-btn">📞 संपर्क</a>
                 </div>`;
             });
             container.innerHTML = html;
         }
 
+        function getNewJoke() {
+            const randomIndex = Math.floor(Math.random() * jokes.length);
+            document.getElementById("jokeDisplay").innerText = jokes[randomIndex];
+        }
+
         function toggleAdminPanel() {
-            const p = document.getElementById("adminPanel");
-            p.style.display = p.style.display === "block" ? "none" : "block";
+            const panel = document.getElementById("adminPanel");
+            panel.style.display = panel.style.display === "block" ? "none" : "block";
         }
 
         function verifyAdmin() {
             const pass = document.getElementById("adminPass").value;
-            if (pass === "1234" || pass === "admin") {
+            if(pass === "1234") {
                 document.getElementById("adminControls").style.display = "block";
-                renderAdminPanel();
+                loadPendingItems();
             } else {
                 alert("गलत पासवर्ड!");
             }
         }
 
-        function renderAdminPanel() {
+        function loadPendingItems() {
             const pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
+            let shopListHtml = "";
+            pendingShops.forEach((s, idx) => {
+                shopListHtml += `<div style="background:#fff; padding:8px; margin-bottom:5px; border-radius:4px; font-size:0.85rem;">
+                    <b>${s.name}</b> (${s.vill}, ${s.dist}) - ${s.phone}
+                    <button onclick="approveShop(${idx})" style="background:green; color:#fff; border:none; padding:3px 6px; border-radius:3px; margin-left:5px; cursor:pointer;">मंजूर करें</button>
+                </div>`;
+            });
+            document.getElementById("pendingShopsList").innerHTML = shopListHtml || "<p style='font-size:0.8rem;'>कोई पेंडिंग दुकान नहीं है।</p>";
+
             const pendingAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
-
-            document.getElementById("pendingShopsList").innerHTML = pendingShops.length === 0 ? "<p style='font-size:0.8rem;'>कोई दुकान पेंडिंग नहीं।</p>" :
-                pendingShops.map(s => `<div style="font-size:0.8rem; margin-bottom:6px; border-bottom:1px solid #ddd; padding:4px;"><strong>${s.name}</strong> (${s.vill}, ${s.dist}) ${s.isPremium ? '<span style="color:red">[प्रीमियम ₹100]</span>':''}<br><button class="btn-success" onclick="approveShop(${s.id})">स्वीकृत</button><button class="btn-danger" onclick="rejectShop(${s.id})">हटाएं</button></div>`).join("");
-
-            document.getElementById("pendingAdsList").innerHTML = pendingAds.length === 0 ? "<p style='font-size:0.8rem;'>कोई विज्ञापन पेंडिंग नहीं।</p>" :
-                pendingAds.map(a => `<div style="font-size:0.8rem; margin-bottom:6px; border-bottom:1px solid #ddd; padding:4px;"><strong>${a.title}</strong> - ₹${a.price}<br><button class="btn-success" onclick="approveAd(${a.id})">स्वीकृत</button><button class="btn-danger" onclick="rejectAd(${a.id})">हटाएं</button></div>`).join("");
+            let adListHtml = "";
+            pendingAds.forEach((a, idx) => {
+                adListHtml += `<div style="background:#fff; padding:8px; margin-bottom:5px; border-radius:4px; font-size:0.85rem;">
+                    <b>${a.itemName}</b> - ₹${a.price} (${a.location})
+                    <button onclick="approveAd(${idx})" style="background:green; color:#fff; border:none; padding:3px 6px; border-radius:3px; margin-left:5px; cursor:pointer;">मंजूर करें</button>
+                </div>`;
+            });
+            document.getElementById("pendingAdsList").innerHTML = adListHtml || "<p style='font-size:0.8rem;'>कोई पेंडिंग विज्ञापन नहीं है।</p>";
         }
 
-        function approveShop(id) {
+        function approveShop(index) {
             let pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
-            const shop = pendingShops.find(s => s.id === id);
-            if (shop) {
-                const approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-                approvedShops.push(shop);
-                localStorage.setItem("approvedShops", JSON.stringify(approvedShops));
-                localStorage.setItem("pendingShops", JSON.stringify(pendingShops.filter(s => s.id !== id)));
-                renderAdminPanel();
-            }
+            let approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
+            
+            approvedShops.push(pendingShops[index]);
+            pendingShops.splice(index, 1);
+
+            localStorage.setItem("pendingShops", JSON.stringify(pendingShops));
+            localStorage.setItem("approvedShops", JSON.stringify(approvedShops));
+            loadPendingItems();
+            alert("दुकान मंजूर कर ली गई है!");
         }
-        function rejectShop(id) {
-            let pendingShops = JSON.parse(localStorage.getItem("pendingShops") || "[]");
-            localStorage.setItem("pendingShops", JSON.stringify(pendingShops.filter(s => s.id !== id)));
-            renderAdminPanel();
-        }
-        function approveAd(id) {
+
+        function approveAd(index) {
             let pendingAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
-            const ad = pendingAds.find(a => a.id === id);
-            if (ad) {
-                const approvedAds = JSON.parse(localStorage.getItem("approvedAds") || "[]");
-                approvedAds.push(ad);
-                localStorage.setItem("approvedAds", JSON.stringify(approvedAds));
-                localStorage.setItem("pendingAds", JSON.stringify(pendingAds.filter(a => a.id !== id)));
-                renderAdminPanel();
-                renderListings();
-            }
+            let approvedAds = JSON.parse(localStorage.getItem("approvedAds") || "[]");
+            
+            approvedAds.push(pendingAds[index]);
+            pendingAds.splice(index, 1);
+
+            localStorage.setItem("pendingAds", JSON.stringify(pendingAds));
+            localStorage.setItem("approvedAds", JSON.stringify(approvedAds));
+            loadPendingItems();
+            renderListings();
+            alert("विज्ञापन मंजूर कर लिया गया है!");
         }
-        function rejectAd(id) {
-            let pendingAds = JSON.parse(localStorage.getItem("pendingAds") || "[]");
-            localStorage.setItem("pendingAds", JSON.stringify(pendingAds.filter(a => a.id !== id)));
-            renderAdminPanel();
+
+        function toggleLanguage() {
+            alert("Language switching feature is under development.");
+        }
+
+        function shareOnWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent("हरियाणा ग्रामीण सेवा पोर्टल देखें - गाँव की हर दुकान और सेवा अब आपके मोबाइल पर!");
+            window.open(`https://api.whatsapp.com/send?text=${text}%20${url}`, '_blank');
+        }
+
+        function startVoiceInput() {
+            alert("Voice input feature initialized. Please speak clearly into your mic.");
         }
 
         function sendAIChatMessage() {
             const input = document.getElementById("aiChatInput");
             const screen = document.getElementById("aiChatScreen");
             const text = input.value.trim();
-            if (!text) return;
+            if(!text) return;
 
             screen.innerHTML += `<div class="ai-msg-user">${text}</div>`;
             input.value = "";
 
-            let reply = "राम-राम भाइ! थारा सवाल एकदम बढ़िया सै, इस बारे में पोर्टल पर सब ठीक ठाक चल रिया सै।";
-            let lowerText = text.toLowerCase();
-
-            if (lowerText.includes("दुकान") || lowerText.includes("जोड़") || lowerText.includes("register")) {
-                reply = "जी, दुकान जोड़ने खातिर ऊपर 'दुकान रजिस्टर करें' वाले बटन पर क्लिक करके GPS लोकेशन भरनी पड़ैगी!";
-            } else if (lowerText.includes("मौसम") || lowerText.includes("तापक") || lowerText.includes("barish")) {
-                reply = "अरै भाई, आज मौसम बिल्कुल साफ सै अर तापमान 32 डिग्री सेल्सियस सै!";
-            } else if (lowerText.includes("भाव") || lowerText.includes("मंडी") || lowerText.includes("rate")) {
-                reply = "मंडी में गेहूँ का भाव 2300 रुपये अर सरसों का भाव 5500 रुपये प्रति क्विंटल चल रिया सै जी!";
-            } else if (lowerText.includes("चुटकुला") || lowerText.includes("joke") || lowerText.includes("हँसी") || lowerText.includes("मनोरंजन")) {
-                const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-                reply = "लो जी हरियाणवी चुटकुला सुणो: " + randomJoke;
-            } else if (lowerText.includes("योजना") || lowerText.includes("scheme")) {
-                reply = "पोर्टल पै नीचे सरल हरियाणा, कौशल रोजगार निगम अर मेरी फसल मेरा ब्यौरा की सरकारी योजना दी गई सै!";
-            }
-
             setTimeout(() => {
-                screen.innerHTML += `<div class="ai-msg-bot">${reply}</div>`;
+                screen.innerHTML += `<div class="ai-msg-bot">राम-राम! थारे सवाल का जवाब जल्द ही अपडेट किया जाएगा। बाक़ी पोर्टल पै ऊपर दी गई सेवाएँ देख सको हो!</div>`;
                 screen.scrollTop = screen.scrollHeight;
-                speakText(reply);
-            }, 400);
+            }, 500);
         }
-
-        function startVoiceInput() {
-            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-                alert("थारा ब्राउज़र बोलकर टाइप करने की अनुमति नहीं देता जी।");
-                return;
-            }
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const recognition = new SpeechRecognition();
-            recognition.lang = "hi-IN";
-            recognition.start();
-
-            recognition.onstart = function() {
-                document.getElementById("aiChatInput").placeholder = "सुन रिया हूँ, बोलिए...";
-            };
-
-            recognition.onresult = function(event) {
-                const speechToText = event.results[0][0].transcript;
-                document.getElementById("aiChatInput").value = speechToText;
-                document.getElementById("aiChatInput").placeholder = "संदेश लिखें...";
-                sendAIChatMessage();
-            };
-
-            recognition.onerror = function() {
-                document.getElementById("aiChatInput").placeholder = "संदेश लिखें...";
-                alert("आवाज़ साफ नहीं आई, दोबारा बोलिए।");
-            };
-        }
-
-        function getNewJoke() {
-            const joke = jokes[Math.floor(Math.random() * jokes.length)];
-            document.getElementById("jokeDisplay").innerText = joke;
-            speakText(joke);
-        }
-
-        function shareOnWhatsApp() {
-            window.open(`https://api.whatsapp.com/send?text=हरियाणा%20ग्रामीण%20सेवा%20पोर्टल%20देखें:%20${encodeURIComponent(window.location.href)}`, '_blank');
-        }
-
-        function toggleLanguage() {
-            alert("भाषा मोड बदला गया!");
-        }
-    </script>    <!-- फिक्स्ड व्हाट्सएप ग्रुप बटन (सबसे नीचे) -->
-    <div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 10px 15px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); text-align: center; z-index: 1000;">
-        <a href="https://chat.whatsapp.com/your-group-link" target="_blank" style="background: #25d366; color: white; border: none; padding: 10px 20px; font-size: 0.95rem; font-weight: bold; border-radius: 8px; width: 100%; max-width: 570px; cursor: pointer; text-decoration: none; display: inline-block;">
-            💬 गाँव के दुकानदारों का WhatsApp ग्रुप (जुड़ें)
-        </a>
-    </div>
-
-</body>
-</html>
-
+    </script>
 </body>
 </html>
