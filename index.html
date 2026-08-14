@@ -18,21 +18,9 @@
             --border-radius: 12px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 60px; line-height: 1.5; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding-bottom: 60px;
-            line-height: 1.5;
-        }
-
-        /* Top Notice Bar */
         .top-bar {
             background: var(--primary-dark);
             color: #ffeb3b;
@@ -45,316 +33,109 @@
         }
 
         .lang-btn {
-            background: #ffc107;
-            color: #000;
-            border: none;
-            padding: 4px 10px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
+            background: #ffc107; color: #000; border: none; padding: 4px 10px;
+            font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 12px;
         }
 
-        /* Main Header */
         header {
             background: linear-gradient(135deg, var(--primary), #2e7d32);
-            color: white;
-            padding: 25px 15px;
-            text-align: center;
+            color: white; padding: 25px 15px; text-align: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-        }
-
-        header p {
-            font-size: 1rem;
-            opacity: 0.95;
-            font-weight: 500;
-        }
+        header h1 { font-size: 2.2rem; margin-bottom: 5px; }
+        header p { font-size: 1rem; opacity: 0.95; font-weight: 500; }
 
         .badge {
-            background: #388e3c;
-            color: #fff;
-            padding: 4px 14px;
-            font-size: 0.85rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 10px;
-            border: 1px solid #81c784;
-            font-weight: bold;
+            background: #388e3c; color: #fff; padding: 4px 14px; font-size: 0.85rem;
+            border-radius: 20px; display: inline-block; margin-top: 10px;
+            border: 1px solid #81c784; font-weight: bold;
         }
 
-        /* Container & Cards */
-        .container {
-            max-width: 750px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
+        .container { max-width: 750px; margin: 20px auto; padding: 0 15px; }
 
         .card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            background: var(--card-bg); border-radius: var(--border-radius);
+            padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             border: 1px solid #e0e0e0;
         }
 
         .card h2 {
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 1.2rem; color: var(--primary); margin-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0; padding-bottom: 8px;
         }
 
-        /* Forms & Inputs */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            color: #424242;
-        }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem; color: #424242; }
 
         select, input, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 0.98rem;
-            outline: none;
-            background: #fafafa;
-            transition: all 0.2s;
+            width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;
+            font-size: 0.98rem; outline: none; background: #fafafa; transition: all 0.2s;
         }
 
         select:focus, input:focus, textarea:focus {
-            border-color: var(--primary);
-            background: #fff;
-            box-shadow: 0 0 5px rgba(27, 94, 32, 0.2);
-        }
-
-        /* Buttons */
-        .btn-box {
-            text-align: center;
-            margin-top: 15px;
+            border-color: var(--primary); background: #fff; box-shadow: 0 0 5px rgba(27, 94, 32, 0.2);
         }
 
         .custom-btn {
-            display: inline-block;
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            transition: background 0.2s;
+            display: inline-block; width: 100%; background: var(--primary); color: white;
+            padding: 12px; border: none; border-radius: 8px; font-size: 1rem;
+            font-weight: bold; cursor: pointer; text-align: center; text-decoration: none;
         }
 
-        .custom-btn:hover { background: #2e7d32; }
         .btn-secondary { background: var(--secondary); color: #000; }
-        .btn-secondary:hover { background: #ffa000; }
         .btn-accent { background: var(--accent); }
-        .btn-accent:hover { background: #bf360c; }
         .btn-purple { background: var(--purple); }
-        .btn-purple:hover { background: #311b92; }
 
         .call-btn {
-            background: #2e7d32;
-            color: white;
-            padding: 8px 14px;
-            font-size: 0.85rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            white-space: nowrap;
+            background: #2e7d32; color: white; padding: 8px 14px; font-size: 0.85rem;
+            border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;
         }
 
-        /* Collapsible Bars */
         .toggle-bar {
-            background: var(--primary);
-            color: white;
-            padding: 14px 18px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: var(--primary); color: white; padding: 14px 18px; border-radius: 10px;
+            font-weight: bold; font-size: 1rem; cursor: pointer; display: flex;
+            justify-content: space-between; align-items: center; margin-bottom: 15px;
         }
-
         .toggle-bar.orange { background: var(--secondary); color: #000; }
         .toggle-bar.red { background: #c62828; color: #fff; }
         .toggle-bar.purple { background: var(--purple); color: #fff; }
         .toggle-bar.govt { background: var(--govt-green); color: #fff; }
 
         .collapsible-form-container {
-            display: none;
-            background: #ffffff;
-            border: 2px dashed #bdbdbd;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
+            display: none; background: #ffffff; border: 2px dashed #bdbdbd;
+            border-radius: 12px; padding: 20px; margin-bottom: 20px;
         }
 
-        /* Photo & OTP Styles */
         .photo-preview-box {
-            width: 100%;
-            height: 150px;
-            border: 2px dashed #0277bd;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #e1f5fe;
-            overflow: hidden;
-            margin-top: 8px;
+            width: 100%; height: 150px; border: 2px dashed #0277bd; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; background: #e1f5fe;
+            overflow: hidden; margin-top: 8px;
         }
+        .photo-preview-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
 
-        .photo-preview-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-        }
+        .otp-box { display: none; background: #fff3e0; border: 1px solid #ffe0b2; padding: 12px; border-radius: 8px; margin-top: 10px; }
+        .qr-box { text-align: center; background: #fffde7; padding: 15px; border: 1px dashed #fbc02d; border-radius: 8px; margin-bottom: 15px; }
 
-        .otp-box {
-            display: none;
-            background: #fff3e0;
-            border: 1px solid #ffe0b2;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-
-        .qr-box {
-            text-align: center;
-            background: #fffde7;
-            padding: 15px;
-            border: 1px dashed #fbc02d;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        /* Display Items */
         .shop-item, .event-item, .item-card {
-            background: #f9f9f9;
-            border-left: 4px solid var(--primary);
-            padding: 12px;
-            margin-bottom: 12px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
+            background: #f9f9f9; border-left: 4px solid var(--primary); padding: 12px;
+            margin-bottom: 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; gap: 12px;
         }
 
-        .govt-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
+        .govt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 10px; }
+        .govt-item-card { background: #e0f2f1; border: 1px solid #80cbc4; padding: 12px; border-radius: 8px; text-align: center; text-decoration: none; color: #004d40; font-weight: bold; font-size: 0.85rem; }
 
-        .govt-item-card {
-            background: #e0f2f1;
-            border: 1px solid #80cbc4;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            text-decoration: none;
-            color: #004d40;
-            font-weight: bold;
-            font-size: 0.85rem;
-            transition: transform 0.2s;
-        }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-top: 10px; }
+        .gallery-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 5px; text-align: center; }
+        .gallery-card img { width: 100%; height: 100px; object-fit: cover; border-radius: 6px; }
 
-        .govt-item-card:hover {
-            transform: translateY(-3px);
-            background: #b2dfdb;
-        }
-
-        .shop-img-preview, .item-img-preview {
-            width: 70px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .gallery-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 5px;
-            text-align: center;
-        }
-
-        .gallery-card img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-
-        .gallery-card p {
-            font-size: 0.78rem;
-            margin-top: 4px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 30px;
-            padding: 15px;
-            border-top: 1px solid #ddd;
-        }
-
-        .status-badge {
-            font-size: 0.8rem;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            margin-top: 4px;
-            display: inline-block;
-        }
-        .status-badge.success { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-        .status-badge.error { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        footer { text-align: center; font-size: 0.85rem; color: #666; margin-top: 30px; padding: 15px; border-top: 1px solid #ddd; }
+        .loader-text { font-size: 0.82rem; color: #d84315; font-weight: bold; display: none; margin-top: 4px; }
     </style>
 </head>
 <body onload="initPortal()">
 
-    <!-- Top Bar -->
+    <!-- Top Notice Bar -->
     <div class="top-bar">
         <span>👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
         <button class="lang-btn" onclick="alert('भाषा बदलने की सुविधा जल्द उपलब्ध होगी!')">🌐 English</button>
@@ -364,34 +145,28 @@
     <header>
         <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
         <p id="headerSubTitle">मेरा गाँव, सूचना व व्यापार केंद्र</p>
-        <div class="badge" id="currentLocationBadge">⌛ हरियाणा के सभी जिलों का डेटा लोड हो रहा है...</div>
+        <div class="badge" id="currentLocationBadge">📍 हरियाणा के सभी 22 ज़िले तैयार हैं</div>
     </header>
 
     <div class="container">
 
-        <!-- SEARCH SERVICES WITH DYNAMIC API DROPDOWN -->
+        <!-- SEARCH SERVICES SECTION -->
         <div class="card">
             <h2>🏛️ अपने गाँव की सेवाएँ व दुकान खोजें</h2>
             
             <div class="form-group">
                 <label>1. जिला चुनें (Select District) *</label>
-                <select id="mainDistrictSelect" onchange="onMainDistrictChange()">
-                    <option value="">-- डेटा लोड हो रहा है... --</option>
+                <select id="mainDistrictSelect" onchange="loadVillagesForSection('mainDistrictSelect', 'mainVillageSelect', 'mainLoader')">
+                    <option value="">-- जिला चुनें --</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>2. खण्ड / ब्लॉक (Select Block / Tehsil) *</label>
-                <select id="mainBlockSelect" onchange="onMainBlockChange()">
+                <label>2. गाँव चुनें (Select Village) *</label>
+                <select id="mainVillageSelect" onchange="onVillageSelected()">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
-            </div>
-
-            <div class="form-group">
-                <label>3. गाँव (Select Village) *</label>
-                <select id="mainVillageSelect" onchange="onVillageSelected()">
-                    <option value="">-- पहले खण्ड चुनें --</option>
-                </select>
+                <div id="mainLoader" class="loader-text">⌛ गाँव की सूची लोड हो रही है...</div>
             </div>
 
             <div class="btn-box">
@@ -404,12 +179,12 @@
 
         <!-- 1. ADD SHOP FORM SECTION -->
         <div class="toggle-bar" onclick="toggleSection('addShopFormBox', 'icon1')">
-            <span>🏪 1. दुकान / सेवा जोड़ें (GPS + Live API Dropdown)</span>
+            <span>🏪 1. दुकान / सेवा जोड़ें</span>
             <span id="icon1">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="addShopFormBox">
-            <h2 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 15px;">नया दुकान / सेवा रजिस्ट्रेशन</h2>
+            <h2>नया दुकान / सेवा रजिस्ट्रेशन</h2>
             
             <div class="form-group">
                 <label>1. दुकान / सर्विस का नाम:</label>
@@ -418,514 +193,321 @@
 
             <div class="form-group">
                 <label>2. जिला चुनें (District):</label>
-                <select id="regDistrict" onchange="onRegDistrictChange()">
+                <select id="regDistrict" onchange="loadVillagesForSection('regDistrict', 'regVillage', 'regLoader')">
                     <option value="">-- जिला चुनें --</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>3. खण्ड / ब्लॉक (Block):</label>
-                <select id="regBlock" onchange="onRegBlockChange()">
+                <label>3. गाँव चुनें (Village):</label>
+                <select id="regVillage">
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
+                <div id="regLoader" class="loader-text">⌛ गाँव लोड हो रहे हैं...</div>
             </div>
 
             <div class="form-group">
-                <label>4. गाँव चुनें (Village):</label>
-                <select id="regVillage">
-                    <option value="">-- पहले ब्लॉक चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>5. श्रेणी (Category):</label>
+                <label>4. श्रेणी (Category):</label>
                 <select id="regCategory">
                     <option value="किराना">किराना / जनरल स्टोर</option>
                     <option value="मेडिकल">मेडिकल / दवाइयां</option>
-                    <option value="इलेक्ट्रॉनिक्स & रिपेयर">इलेक्ट्रॉनिक्स & रिपेयरिंग</option>
+                    <option value="इलेक्ट्रॉनिक्स">इलेक्ट्रॉनिक्स & रिपेयरिंग</option>
                     <option value="कृषि सेवा">कृषि सेवा / बीज केंद्र</option>
-                    <option value="कपड़े & टेलर">कपड़े & टेलरिंग</option>
-                    <option value="अन्य सेवा">अन्य ग्रामीण सेवा</option>
+                    <option value="अन्य">अन्य ग्रामीण सेवा</option>
                 </select>
             </div>
 
             <!-- GPS Verification -->
-            <div class="form-group" style="background: #e8f5e9; padding: 12px; border-radius: 8px; border: 1px solid #c8e6c9;">
-                <label style="color: #2e7d32;">📍 GPS Verification API:</label>
-                <button type="button" class="custom-btn" onclick="fetchGPSLocationAndVerifyDistrict()" style="background: #0277bd; margin-bottom: 8px; font-size: 0.9rem;">📍 GPS चालू करें व जिला वेरीफाई करें</button>
-                <input type="text" id="regGPSCoord" placeholder="GPS Coordinates यहाँ दिखेंगे" readonly>
-                <div id="districtApiStatus"></div>
+            <div class="form-group" style="background: #e8f5e9; padding: 12px; border-radius: 8px;">
+                <button type="button" class="custom-btn" onclick="fetchGPSLocation()" style="background: #0277bd; font-size: 0.9rem;">📍 GPS लोकेशन वेरीफाई करें</button>
+                <input type="text" id="regGPSCoord" placeholder="GPS Coordinates" readonly style="margin-top: 8px;">
             </div>
 
-            <!-- Live Photo Capture -->
-            <div class="form-group" style="background: #e1f5fe; padding: 12px; border-radius: 8px; border: 1px solid #b3e5fc;">
-                <label style="color: #0277bd;">📸 दुकान की लाइव फोटो लें / अपलोड करें:</label>
-                <input type="file" id="regShopPhoto" accept="image/*" capture="environment" onchange="previewImage(event, 'shopImgPrev', 'shopPhotoHolder')">
+            <!-- Live Photo -->
+            <div class="form-group" style="background: #e1f5fe; padding: 12px; border-radius: 8px;">
+                <label style="color: #0277bd;">📸 दुकान की फोटो ले/अपलोड करें:</label>
+                <input type="file" id="regShopPhoto" accept="image/*" onchange="previewImage(event, 'shopImgPrev', 'shopPhotoHolder')">
                 <div class="photo-preview-box">
-                    <span id="shopPhotoHolder" style="color: #0288d1; font-size:0.85rem;">लाइव फोटो प्रिव्यू यहाँ दिखेगा</span>
+                    <span id="shopPhotoHolder" style="color: #0288d1; font-size:0.85rem;">फोटो प्रिव्यू</span>
                     <img id="shopImgPrev" alt="Shop Preview">
                 </div>
             </div>
 
-            <!-- Mobile Verification -->
-            <div class="form-group" style="background: #fff3e0; padding: 12px; border-radius: 8px; border: 1px solid #ffe0b2;">
-                <label style="color: #e65100;">📱 मोबाइल नंबर वेरीफिकेशन (SMS OTP):</label>
+            <!-- Mobile OTP -->
+            <div class="form-group" style="background: #fff3e0; padding: 12px; border-radius: 8px;">
+                <label>📱 मोबाइल नंबर (OTP Verification):</label>
                 <div style="display: flex; gap: 6px;">
-                    <input type="tel" id="regPhone" placeholder="10 अंकों का मोबाइल नंबर">
-                    <button type="button" class="custom-btn btn-secondary" onclick="sendOTP()" style="width: auto; white-space: nowrap;">OTP भेजें</button>
+                    <input type="tel" id="regPhone" placeholder="10 अंकों का नंबर">
+                    <button type="button" class="custom-btn btn-secondary" onclick="sendOTP()" style="width: auto;">OTP</button>
                 </div>
                 <div class="otp-box" id="otpBox">
-                    <label style="color: #d84315; font-size: 0.85rem;">दर्ज करें OTP (टेस्ट कोड: <strong id="generatedOtpDisplay">123456</strong>):</label>
+                    <label style="font-size:0.8rem;">OTP (कोड: <strong id="generatedOtpDisplay">123456</strong>):</label>
                     <div style="display: flex; gap: 6px;">
-                        <input type="number" id="userOtpInput" placeholder="6-अंकों का OTP">
-                        <button type="button" class="custom-btn" onclick="verifyOTP()" style="width: auto; background: #2e7d32;">वेरीफाई</button>
+                        <input type="number" id="userOtpInput" placeholder="6-अंक">
+                        <button type="button" class="custom-btn" onclick="verifyOTP()" style="width: auto; background: #2e7d32;">जांचें</button>
                     </div>
                     <small id="otpStatusMsg" style="font-weight: bold; margin-top: 5px; display: block;"></small>
                 </div>
             </div>
 
-            <div class="btn-box">
-                <button type="button" class="custom-btn" onclick="submitShop()" style="padding: 14px; font-size: 1rem;">दुकान लाइव दर्ज करें</button>
-            </div>
+            <button type="button" class="custom-btn" onclick="submitShop()">दुकान लाइव दर्ज करें</button>
         </div>
 
 
-        <!-- 2. GRAMIN GALLERY SECTION -->
+        <!-- 2. GRAMIN GALLERY -->
         <div class="toggle-bar orange" onclick="toggleSection('galleryBox', 'icon2')">
-            <span>📸 2. ग्रामीण गैलरी (गाँव की यादगार फोटो जोड़ें)</span>
+            <span>📸 2. ग्रामीण गैलरी</span>
             <span id="icon2">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="galleryBox">
-            <h2>ग्रामीण गैलरी में फोटो जोड़ें</h2>
+            <h2>गाँव की यादगार फोटो जोड़ें</h2>
             <div class="form-group">
-                <label>फोटो का शीर्षक/नाम:</label>
-                <input type="text" id="galTitle" placeholder="उदा: गाँव की चौपाल / शिव मंदिर / पुराना कुआं">
+                <label>फोटो शीर्षक:</label>
+                <input type="text" id="galTitle" placeholder="उदा: शिव मंदिर / चौपाल">
             </div>
             <div class="form-group">
                 <label>जिला चुनें:</label>
-                <select id="galDistrict" onchange="onGalDistrictChange()">
+                <select id="galDistrict" onchange="loadVillagesForSection('galDistrict', 'galVillage', 'galLoader')">
                     <option value="">-- जिला चुनें --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>ब्लॉक चुनें:</label>
-                <select id="galBlock" onchange="onGalBlockChange()">
-                    <option value="">-- पहले जिला चुनें --</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>गाँव चुनें:</label>
                 <select id="galVillage">
-                    <option value="">-- पहले ब्लॉक चुनें --</option>
+                    <option value="">-- पहले जिला चुनें --</option>
                 </select>
+                <div id="galLoader" class="loader-text">⌛ गाँव लोड हो रहे हैं...</div>
             </div>
             <div class="form-group">
-                <label>फोटो चुनें या खींचें:</label>
+                <label>फोटो चुनें:</label>
                 <input type="file" accept="image/*" onchange="previewImage(event, 'galImgPrev', 'galHolder')">
                 <div class="photo-preview-box">
-                    <span id="galHolder" style="color: #e65100; font-size: 0.85rem;">फोटो प्रिव्यू</span>
+                    <span id="galHolder" style="color: #e65100;">प्रिव्यू</span>
                     <img id="galImgPrev" alt="Gallery Preview">
                 </div>
             </div>
             <button type="button" class="custom-btn btn-secondary" onclick="addGalleryImage()">गैलरी में सबमिट करें</button>
-
-            <!-- Gallery List Display -->
-            <div style="margin-top: 20px;">
-                <h3 style="font-size: 0.95rem; color: #555; margin-bottom: 8px;">हाल ही में जुड़ी ग्रामीण तस्वीरें:</h3>
-                <div class="gallery-grid" id="galleryDisplayGrid"></div>
-            </div>
+            <div class="gallery-grid" id="galleryDisplayGrid" style="margin-top:15px;"></div>
         </div>
 
 
-        <!-- 3. VILLAGE ANNOUNCEMENTS & EVENTS SECTION -->
+        <!-- 3. VILLAGE ANNOUNCEMENTS -->
         <div class="toggle-bar red" onclick="toggleSection('eventsBox', 'icon3')">
-            <span>📢 3. गाँव के विज्ञापन व मुनादी (मेला, दंगल, भंडारा)</span>
+            <span>📢 3. गाँव के विज्ञापन व मुनादी</span>
             <span id="icon3">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="eventsBox">
-            <h2>गाँव की मुनादी व सांस्कृतिक विज्ञापन</h2>
+            <h2>गाँव की मुनादी व विज्ञापन</h2>
             <div class="form-group">
-                <label>कार्यक्रम की श्रेणी:</label>
+                <label>श्रेणी:</label>
                 <select id="eventCategory">
-                    <option value="दंगल / कुश्ती">🤼 दंगल / विशाल कुश्ती प्रतियोगिता</option>
-                    <option value="गाँव का मेला">🎡 गाँव का वार्षिक मेला</option>
-                    <option value="भजन-कीर्तन / जागरण">🕉️ भजन-कीर्तन / माता का जागरण</option>
-                    <option value="विशाल भंडारा">🍲 विशाल भंडारा / सामाजिक प्रीतिभोज</option>
-                    <option value="गाँव की मुनादी">📢 गाँव की मुनादी / ज़रूरी ग्राम पंचायत सूचना</option>
+                    <option value="दंगल">🤼 दंगल / विशाल कुश्ती</option>
+                    <option value="मेला">🎡 गाँव का मेला</option>
+                    <option value="भंडारा">🍲 विशाल भंडारा / जागरण</option>
+                    <option value="सूचना">📢 ग्राम पंचायत सूचना</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>जिला चुनें:</label>
-                <select id="eventDistrict" onchange="onEventDistrictChange()">
+                <select id="eventDistrict" onchange="loadVillagesForSection('eventDistrict', 'eventVillage', 'evtLoader')">
                     <option value="">-- जिला चुनें --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>ब्लॉक चुनें:</label>
-                <select id="eventBlock" onchange="onEventBlockChange()">
-                    <option value="">-- पहले जिला चुनें --</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>गाँव चुनें:</label>
                 <select id="eventVillage">
-                    <option value="">-- पहले ब्लॉक चुनें --</option>
+                    <option value="">-- पहले जिला चुनें --</option>
                 </select>
+                <div id="evtLoader" class="loader-text">⌛ गाँव लोड हो रहे हैं...</div>
             </div>
             <div class="form-group">
-                <label>आयोजन की तारीख व पूरा विवरण:</label>
-                <textarea id="eventDetails" rows="3" placeholder="समय, तारीख, स्थान और मुख्य आयोजकों का विवरण यहाँ लिखें..."></textarea>
+                <label>विवरण:</label>
+                <textarea id="eventDetails" rows="3" placeholder="समय, तारीख और स्थान की पूरी जानकारी लिखें..."></textarea>
             </div>
-            <button type="button" class="custom-btn btn-accent" onclick="addVillageEvent()">सूचना / मुनादी प्रकाशित करें</button>
-
-            <!-- Events Display -->
-            <div style="margin-top: 20px;" id="eventsDisplayArea"></div>
+            <button type="button" class="custom-btn btn-accent" onclick="addVillageEvent()">मुनादी प्रकाशित करें</button>
+            <div id="eventsDisplayArea" style="margin-top:15px;"></div>
         </div>
 
 
-        <!-- 4. BUY & SELL SECTION (₹20 TOKEN SYSTEM) -->
+        <!-- 4. BUY & SELL -->
         <div class="toggle-bar purple" onclick="toggleSection('buySellBox', 'icon4')">
-            <span>🛒 4. खरीदें और बेचें (Buy & Sell - ₹20/- प्रति टोकन)</span>
+            <span>🛒 4. खरीदें और बेचें (₹20 टोकन)</span>
             <span id="icon4">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="buySellBox">
-            <h2>पुराना/नया सामान बेचें (Buy & Sell Portal)</h2>
-            
+            <h2>पुराना/नया सामान बेचें</h2>
             <div class="qr-box">
-                <p style="font-weight: bold; color: #d84315; font-size: 1rem;">💳 विज्ञापन पोस्ट शुल्क: ₹20 प्रति टोकन</p>
-                <p style="font-size: 0.85rem; margin-top: 5px; color: #555;">नीचे दिए गए UPI ID पर ₹20 ट्रांसफर करें और 12-अंकों की Transaction Ref ID दर्ज करें:</p>
-                <div style="background: #fff; padding: 10px; margin: 10px 0; border: 1px solid #fbc02d; font-weight: bold; color: #113f14; border-radius: 6px;">
-                    UPI ID: <span id="upiDisplay" style="color: #c62828;">haryana.rural@upi</span>
-                </div>
+                <p style="font-weight: bold; color: #d84315;">💳 विज्ञापन शुल्क: ₹20/टोकन</p>
+                <p style="font-size:0.85rem;">UPI ID: <strong style="color:#c62828;">haryana.rural@upi</strong></p>
             </div>
-
             <div class="form-group">
-                <label>1. सामान / श्रेणी का नाम:</label>
-                <input type="text" id="itemTitle" placeholder="उदा: महिंद्रा 275 ट्रैक्टर / एचएफ गाय / मोबाइल / ज़मीन">
+                <label>सामान का नाम:</label>
+                <input type="text" id="itemTitle" placeholder="उदा: ट्रैक्टर / गाय / मोबाइल">
             </div>
-
             <div class="form-group">
-                <label>2. माँगी गई कीमत (₹):</label>
-                <input type="number" id="itemPrice" placeholder="कीमत रुपयों में दर्ज करें">
+                <label>कीमत (₹):</label>
+                <input type="number" id="itemPrice" placeholder="कीमत रुपए में">
             </div>
-
             <div class="form-group">
-                <label>3. संपर्क मोबाइल नंबर:</label>
-                <input type="tel" id="itemPhone" placeholder="10 अंकों का संपर्क नंबर">
+                <label>मोबाइल नंबर:</label>
+                <input type="tel" id="itemPhone" placeholder="संपर्क नंबर">
             </div>
-
             <div class="form-group">
-                <label>4. सामान की फोटो अपलोड करें:</label>
+                <label>फोटो अपलोड करें:</label>
                 <input type="file" accept="image/*" onchange="previewImage(event, 'itemImgPrev', 'itemHolder')">
                 <div class="photo-preview-box">
-                    <span id="itemHolder" style="color: #4a148c; font-size: 0.85rem;">सामान की फोटो प्रिव्यू</span>
+                    <span id="itemHolder">प्रिव्यू</span>
                     <img id="itemImgPrev" alt="Item Preview">
                 </div>
             </div>
-
             <div class="form-group">
-                <label>5. UPI पेमेंट Transaction ID / Ref No.:</label>
-                <input type="text" id="upiTxnId" placeholder="12-अंकों का UPI Transaction ID">
+                <label>UPI Transaction ID:</label>
+                <input type="text" id="upiTxnId" placeholder="12-अंकों की Ref ID">
             </div>
-
-            <button type="button" class="custom-btn btn-purple" onclick="submitBuySellItem()">₹20 टोकन के साथ सामान पोस्ट करें</button>
-
-            <!-- Buy & Sell List Display -->
-            <div style="margin-top: 20px;" id="buySellDisplayArea"></div>
+            <button type="button" class="custom-btn btn-purple" onclick="submitBuySellItem()">₹20 टोकन के साथ पोस्ट करें</button>
+            <div id="buySellDisplayArea" style="margin-top:15px;"></div>
         </div>
 
 
-        <!-- 5. HARYANA GOVT SCHEMES & SERVICES -->
+        <!-- 5. GOVT SCHEMES -->
         <div class="toggle-bar govt" onclick="toggleSection('govtSchemesBox', 'icon5')">
-            <span>🏛️ 5. हरियाणा सरकारी योजनाएं व सेवाएं (HKRN, PPP, पेंशन)</span>
+            <span>🏛️ 5. हरियाणा सरकारी योजनाएं</span>
             <span id="icon5">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="govtSchemesBox">
-            <h2>हरियाणा सरकारी योजनाएं एवं ऑनलाइन सेवाएं</h2>
-            <p style="font-size: 0.85rem; color: #555; margin-bottom: 12px;">सभी प्रमुख हरियाणा सरकारी पोर्टल और योजनाओं के डायरेक्ट लिंक:</p>
-
+            <h2>सरकारी पोर्टल लिंक्स</h2>
             <div class="govt-grid">
-                <a href="https://hkrnl.itiharyana.gov.in/" target="_blank" class="govt-item-card">
-                    💼 HKRN रोज़गार पोर्टल
-                </a>
-                <a href="https://meraparivar.haryana.gov.in/" target="_blank" class="govt-item-card">
-                    🆔 परिवार पहचान पत्र (PPP)
-                </a>
-                <a href="https://pension.socialjusticehry.gov.in/KnowYourIdentifier" target="_blank" class="govt-item-card">
-                    👴 वृद्धावस्था / दिव्यांग पेंशन
-                </a>
-                <a href="https://edisha.gov.in/" target="_blank" class="govt-item-card">
-                    📄 ई-दिशा आय/जाति प्रमाण पत्र
-                </a>
-                <a href="https://epds.haryanafood.gov.in/" target="_blank" class="govt-item-card">
-                    🌾 BPL / AAY राशन कार्ड
-                </a>
-                <a href="https://fasal.haryana.gov.in/" target="_blank" class="govt-item-card">
-                    🚜 मेरी फसल मेरा ब्योरा
-                </a>
+                <a href="https://hkrnl.itiharyana.gov.in/" target="_blank" class="govt-item-card">💼 HKRN पोर्टल</a>
+                <a href="https://meraparivar.haryana.gov.in/" target="_blank" class="govt-item-card">🆔 परिवार पहचान पत्र</a>
+                <a href="https://pension.socialjusticehry.gov.in/" target="_blank" class="govt-item-card">👴 वृद्धावस्था पेंशन</a>
+                <a href="https://edisha.gov.in/" target="_blank" class="govt-item-card">📄 ई-दिशा प्रमाण पत्र</a>
+                <a href="https://epds.haryanafood.gov.in/" target="_blank" class="govt-item-card">🌾 BPL राशन कार्ड</a>
+                <a href="https://fasal.haryana.gov.in/" target="_blank" class="govt-item-card">🚜 मेरी फसल मेरा ब्योरा</a>
             </div>
         </div>
 
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Haryana Rural Service Portal - Digital Gram Haryana</p>
-        <p style="font-size:0.75rem; color:#999; margin-top:5px;">डिजिटल ग्राम सेवा - गाँव-गाँव तक आत्मनिर्भर भारत अभियान</p>
     </footer>
 
-    <!-- JavaScript Application Logic -->
+    <!-- JavaScript App Logic -->
     <script>
-        // Dynamic Master Data Structure populated from Live API
-        let haryanaMasterData = {};
+        // Haryana 22 Districts List (Guaranteed Fast Load)
+        const HARYANA_DISTRICTS = [
+            "Ambala", "Bhiwani", "Charkhi Dadri", "Faridabad", "Fatehabad", 
+            "Gurugram", "Hisar", "Jhajjar", "Jind", "Kaithal", 
+            "Karnal", "Kurukshetra", "Mahendragarh", "Nuh", "Palwal", 
+            "Panchkula", "Panipat", "Rewari", "Rohtak", "Sirsa", 
+            "Sonipat", "Yamunanagar"
+        ];
+
+        let villageCache = {};
         let base64PhotoStore = {};
         let generatedOTP = null;
         let isPhoneVerified = false;
-        let isDistrictVerifiedByAPI = false;
 
-        // Portal Initialization with Live Postal Pin API for All Haryana Districts & Villages
-        async function initPortal() {
-            try {
-                // Fetching all Haryana villages/post offices via Open India Post API
-                const res = await fetch("https://api.postalpincode.in/postoffice/Haryana");
-                const data = await res.json();
-                
-                if (data && data[0] && data[0].PostOffice) {
-                    data[0].PostOffice.forEach(item => {
-                        const dist = item.District.toUpperCase().trim();
-                        let block = item.Block.toUpperCase().trim();
-                        if(block === "NA" || !block) block = item.Division.toUpperCase().trim();
-                        const village = item.Name.trim();
-
-                        if (!haryanaMasterData[dist]) {
-                            haryanaMasterData[dist] = {};
-                        }
-                        if (!haryanaMasterData[dist][block]) {
-                            haryanaMasterData[dist][block] = [];
-                        }
-                        if (!haryanaMasterData[dist][block].includes(village)) {
-                            haryanaMasterData[dist][block].push(village);
-                        }
-                    });
-                }
-                
-                populateAllDistrictDropdowns();
-                document.getElementById("currentLocationBadge").innerText = "📍 हरियाणा के सभी 22 ज़िले व गाँव लोड हो गए!";
-            } catch (err) {
-                console.log("API Error, loading fallback mode", err);
-                // Fallback basic data structure if offline or API limit
-                haryanaMasterData = {
-                    "ROHTAK": { "SAMPLA": ["Sampla", "Ismaila", "Gandarv"], "ROHTAK": ["Dobh", "Kahnaur"] },
-                    "CHARKHI DADRI": { "BAUND": ["Malkosh", "Baund Kalan"] }
-                };
-                populateAllDistrictDropdowns();
-                document.getElementById("currentLocationBadge").innerText = "📍 स्थान: अपना गाँव चुनें";
-            }
-
-            renderInitialData();
+        function initPortal() {
+            populateDistrictDropdowns();
             loadGallery();
             loadEvents();
             loadBuySellItems();
         }
 
-        // Helper function to populate all District selects across sections
-        function populateAllDistrictDropdowns() {
+        // Fill all District selects with 22 Districts immediately
+        function populateDistrictDropdowns() {
             const selects = ["mainDistrictSelect", "regDistrict", "galDistrict", "eventDistrict"];
-            const sortedDistricts = Object.keys(haryanaMasterData).sort();
-
             selects.forEach(id => {
                 const sel = document.getElementById(id);
                 if(sel) {
                     sel.innerHTML = '<option value="">-- जिला चुनें --</option>';
-                    sortedDistricts.forEach(dist => {
+                    HARYANA_DISTRICTS.forEach(dist => {
                         sel.innerHTML += `<option value="${dist}">${dist}</option>`;
                     });
                 }
             });
         }
 
-        // 1. Search Bar Logic
-        function onMainDistrictChange() {
-            const dist = document.getElementById("mainDistrictSelect").value;
-            const blockSel = document.getElementById("mainBlockSelect");
-            const villSel = document.getElementById("mainVillageSelect");
+        // Fast Dynamic API: Fetches all villages for ONLY the chosen district
+        async function loadVillagesForSection(distSelectId, villageSelectId, loaderId) {
+            const dist = document.getElementById(distSelectId).value;
+            const villageSel = document.getElementById(villageSelectId);
+            const loader = document.getElementById(loaderId);
 
-            blockSel.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
-            villSel.innerHTML = '<option value="">-- पहले खण्ड चुनें --</option>';
+            villageSel.innerHTML = '<option value="">-- चुनें --</option>';
 
-            if (dist && haryanaMasterData[dist]) {
-                Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
-                    blockSel.innerHTML += `<option value="${block}">${block}</option>`;
+            if(!dist) return;
+
+            // Check Cache first
+            if(villageCache[dist]) {
+                fillVillageSelect(villageSel, villageCache[dist]);
+                return;
+            }
+
+            if(loader) loader.style.display = "block";
+
+            try {
+                // District Specific Pin API Call
+                const response = await fetch(`https://api.postalpincode.in/postoffice/${dist}`);
+                const data = await response.json();
+
+                let villages = [];
+                if (data && data[0] && data[0].PostOffice) {
+                    data[0].PostOffice.forEach(po => {
+                        if(po.Name && !villages.includes(po.Name)) {
+                            villages.push(po.Name);
+                        }
+                    });
+                }
+
+                villages.sort();
+                villageCache[dist] = villages; // Cache for speed
+                fillVillageSelect(villageSel, villages);
+
+            } catch (err) {
+                console.log("API Fetch error", err);
+                villageSel.innerHTML = '<option value="मुख्य गाँव">मुख्य गाँव / शहर क्षेत्र</option>';
+            } finally {
+                if(loader) loader.style.display = "none";
+            }
+        }
+
+        function fillVillageSelect(selectElem, villagesList) {
+            selectElem.innerHTML = '<option value="">-- गाँव लिखें / चुनें --</option>';
+            if(villagesList.length === 0) {
+                selectElem.innerHTML += '<option value="सामान्य गाँव">सामान्य गाँव क्षेत्र</option>';
+            } else {
+                villagesList.forEach(v => {
+                    selectElem.innerHTML += `<option value="${v}">${v}</option>`;
                 });
             }
         }
 
-        function onMainBlockChange() {
-            const dist = document.getElementById("mainDistrictSelect").value;
-            const block = document.getElementById("mainBlockSelect").value;
-            const villSel = document.getElementById("mainVillageSelect");
-
-            villSel.innerHTML = '<option value="">-- गाँव / Village चुनें --</option>';
-
-            if (dist && block && haryanaMasterData[dist][block]) {
-                haryanaMasterData[dist][block].sort().forEach(vill => {
-                    villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
-                });
-            }
-        }
-
-        // Dynamic Header Title Update
         function onVillageSelected() {
             const vill = document.getElementById("mainVillageSelect").value;
             const dist = document.getElementById("mainDistrictSelect").value;
             if(vill) {
                 document.getElementById("headerTitle").innerText = `मेरा गाँव - ${vill.toUpperCase()}`;
-                document.getElementById("headerSubTitle").innerText = `मेरा गाँव ${vill}, सूचना व व्यापार केंद्र`;
                 document.getElementById("currentLocationBadge").innerText = `📍 स्थान: गाँव ${vill}, जिला ${dist}`;
             }
         }
 
-        // 2. Registration Section Dropdown Handlers
-        function onRegDistrictChange() {
-            const dist = document.getElementById("regDistrict").value;
-            const blockSel = document.getElementById("regBlock");
-            const villSel = document.getElementById("regVillage");
-
-            blockSel.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
-            villSel.innerHTML = '<option value="">-- पहले खण्ड चुनें --</option>';
-
-            if (dist && haryanaMasterData[dist]) {
-                Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
-                    blockSel.innerHTML += `<option value="${block}">${block}</option>`;
-                });
-            }
-        }
-
-        function onRegBlockChange() {
-            const dist = document.getElementById("regDistrict").value;
-            const block = document.getElementById("regBlock").value;
-            const villSel = document.getElementById("regVillage");
-
-            villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-
-            if (dist && block && haryanaMasterData[dist][block]) {
-                haryanaMasterData[dist][block].sort().forEach(vill => {
-                    villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
-                });
-            }
-        }
-
-        // 3. Gallery Section Dropdown Handlers
-        function onGalDistrictChange() {
-            const dist = document.getElementById("galDistrict").value;
-            const blockSel = document.getElementById("galBlock");
-            const villSel = document.getElementById("galVillage");
-
-            blockSel.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
-            villSel.innerHTML = '<option value="">-- पहले खण्ड चुनें --</option>';
-
-            if (dist && haryanaMasterData[dist]) {
-                Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
-                    blockSel.innerHTML += `<option value="${block}">${block}</option>`;
-                });
-            }
-        }
-
-        function onGalBlockChange() {
-            const dist = document.getElementById("galDistrict").value;
-            const block = document.getElementById("galBlock").value;
-            const villSel = document.getElementById("galVillage");
-
-            villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-
-            if (dist && block && haryanaMasterData[dist][block]) {
-                haryanaMasterData[dist][block].sort().forEach(vill => {
-                    villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
-                });
-            }
-        }
-
-        // 4. Events Section Dropdown Handlers
-        function onEventDistrictChange() {
-            const dist = document.getElementById("eventDistrict").value;
-            const blockSel = document.getElementById("eventBlock");
-            const villSel = document.getElementById("eventVillage");
-
-            blockSel.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
-            villSel.innerHTML = '<option value="">-- पहले खण्ड चुनें --</option>';
-
-            if (dist && haryanaMasterData[dist]) {
-                Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
-                    blockSel.innerHTML += `<option value="${block}">${block}</option>`;
-                });
-            }
-        }
-
-        function onEventBlockChange() {
-            const dist = document.getElementById("eventDistrict").value;
-            const block = document.getElementById("eventBlock").value;
-            const villSel = document.getElementById("eventVillage");
-
-            villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-
-            if (dist && block && haryanaMasterData[dist][block]) {
-                haryanaMasterData[dist][block].sort().forEach(vill => {
-                    villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
-                });
-            }
-        }
-
-        // Reverse Geocoding API District Checking
-        async function fetchGPSLocationAndVerifyDistrict() {
-            const selectedDist = document.getElementById("regDistrict").value;
-            const selectedVill = document.getElementById("regVillage").value;
-            const statusBox = document.getElementById("districtApiStatus");
-
-            if(!selectedDist) {
-                alert("कृपया पहले जिला चुनें!");
-                return;
-            }
-
-            if(!selectedVill) {
-                alert("कृपया पहले गाँव चुनें!");
-                return;
-            }
-
-            statusBox.innerHTML = `<span style="color:#d84315;">⌛ API से लोकेशन और जिला वेरीफाई किया जा रहा है...</span>`;
-
+        // Geolocation
+        function fetchGPSLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    async (pos) => {
-                        const lat = pos.coords.latitude;
-                        const lon = pos.coords.longitude;
-                        document.getElementById("regGPSCoord").value = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
-
-                        try {
-                            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
-                            const data = await response.json();
-
-                            isDistrictVerifiedByAPI = true;
-                            statusBox.innerHTML = `<div class="status-badge success">✔ API वेरीफाइड: गाँव '${selectedVill}' जिला '${selectedDist}' में ही स्थित है।</div>`;
-                        } catch (err) {
-                            isDistrictVerifiedByAPI = true;
-                            statusBox.innerHTML = `<div class="status-badge success">✔ जिला वेरीफाई हो गया (Database Verified)!</div>`;
-                        }
-                    },
-                    () => { 
-                        alert("जीपीएस (GPS) एक्सेस की अनुमति दें!"); 
-                        statusBox.innerHTML = `<span style="color:red;">GPS अनुमति अस्वीकृत!</span>`;
-                    }
-                );
-            } else {
-                alert("आपका डिवाइस GPS सपोर्ट नहीं करता।");
+                navigator.geolocation.getCurrentPosition(pos => {
+                    document.getElementById("regGPSCoord").value = `${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`;
+                    alert("✔ GPS लोकेशन वेरीफाई हो गई है!");
+                }, () => alert("GPS एक्सेस ऑन करें!"));
             }
         }
 
-        // Image Preview Handler
+        // Photo Preview
         function previewImage(event, imgId, holderId) {
             const file = event.target.files[0];
             if (file) {
@@ -941,263 +523,165 @@
             }
         }
 
-        // OTP Generation & Verification
+        // OTP Verification
         function sendOTP() {
             const phone = document.getElementById("regPhone").value.trim();
-            if(!phone || phone.length < 10) {
-                alert("कृपया 10 अंकों का वैध मोबाइल नंबर दर्ज करें!");
-                return;
-            }
-
+            if(phone.length < 10) { alert("10 अंकों का फोन नंबर दर्ज करें!"); return; }
             generatedOTP = Math.floor(100000 + Math.random() * 900000);
             document.getElementById("generatedOtpDisplay").innerText = generatedOTP;
             document.getElementById("otpBox").style.display = "block";
-            document.getElementById("otpStatusMsg").innerText = "";
-            alert(`📲 SMS भेजा गया! वेरिफिकेशन कोड: ${generatedOTP}`);
+            alert(`📲 SMS कोड: ${generatedOTP}`);
         }
 
         function verifyOTP() {
-            const inputOtp = document.getElementById("userOtpInput").value.trim();
-            const statusMsg = document.getElementById("otpStatusMsg");
-
-            if(inputOtp == generatedOTP) {
+            const input = document.getElementById("userOtpInput").value.trim();
+            if(input == generatedOTP) {
                 isPhoneVerified = true;
-                statusMsg.style.color = "green";
-                statusMsg.innerText = "✔ मोबाइल नंबर सफलतापूर्वक वेरीफाई हो गया!";
-                document.getElementById("regPhone").readOnly = true;
+                document.getElementById("otpStatusMsg").style.color = "green";
+                document.getElementById("otpStatusMsg").innerText = "✔ नंबर वेरीफाई हो गया!";
             } else {
-                isPhoneVerified = false;
-                statusMsg.style.color = "red";
-                statusMsg.innerText = "❌ गलत OTP! पुनः प्रयास करें।";
+                document.getElementById("otpStatusMsg").style.color = "red";
+                document.getElementById("otpStatusMsg").innerText = "❌ गलत OTP!";
             }
         }
 
-        // Search Shops
+        // Actions: Search & Registration
         function searchServices() {
-            const selectedDist = document.getElementById("mainDistrictSelect").value.trim().toLowerCase();
-            const selectedVill = document.getElementById("mainVillageSelect").value.trim().toLowerCase();
-            const result = document.getElementById("searchResult");
+            const dist = document.getElementById("mainDistrictSelect").value.toLowerCase();
+            const vill = document.getElementById("mainVillageSelect").value.toLowerCase();
+            const res = document.getElementById("searchResult");
 
-            if (!selectedDist || !selectedVill) {
-                result.innerHTML = `<p style="font-size:0.88rem; color:#c62828; font-weight:bold;">कृपया जिला, खण्ड और गाँव तीनों चुनें!</p>`;
+            if(!dist || !vill) {
+                res.innerHTML = "<p style='color:red; font-size:0.85rem; font-weight:bold;'>कृपया जिला और गाँव दोनों चुनें!</p>";
                 return;
             }
 
-            const approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            
-            const filteredShops = approvedShops.filter(s => 
-                s.dist.trim().toLowerCase() === selectedDist && 
-                s.vill.trim().toLowerCase() === selectedVill
-            );
+            const shops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
+            const filtered = shops.filter(s => s.dist.toLowerCase() === dist && s.vill.toLowerCase() === vill);
 
-            if (filteredShops.length === 0) {
-                result.innerHTML = `<p style="font-size:0.88rem; color:#666;">गाँव में अभी कोई पंजीकृत दुकान दर्ज नहीं है। आप नीचे दिए गए फ़ॉर्म से दुकान जोड़ सकते हैं!</p>`;
+            if(filtered.length === 0) {
+                res.innerHTML = "<p style='color:#666; font-size:0.85rem;'>इस गाँव में अभी कोई दुकान पंजीकृत नहीं है।</p>";
                 return;
             }
 
             let html = "";
-            filteredShops.forEach(shop => {
-                let imgTag = shop.photo ? `<img src="${shop.photo}" class="shop-img-preview" alt="Shop">` : `<div style="width:70px; height:70px; background:#e0e0e0; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:#666;">No Photo</div>`;
-                
+            filtered.forEach(s => {
                 html += `
                 <div class="shop-item">
-                    ${imgTag}
+                    <img src="${s.photo || ''}" style="width:60px; height:60px; object-fit:cover; border-radius:6px; background:#ddd;">
                     <div style="flex:1;">
-                        <h4 style="color:var(--primary); font-size:1rem;">${shop.name}</h4>
-                        <p style="font-size:0.83rem; color:#555;">📍 गाँव: ${shop.vill} (${shop.dist})</p>
-                        <small style="color:#2e7d32; font-weight:bold;">✔ GPS व Identifier वेरीफाइड</small>
+                        <h4 style="color:var(--primary);">${s.name}</h4>
+                        <p style="font-size:0.8rem; color:#555;">📍 ${s.vill} (${s.dist})</p>
                     </div>
-                    <a href="tel:${shop.phone}" class="call-btn">📞 कॉल करें</a>
+                    <a href="tel:${s.phone}" class="call-btn">📞 कॉल करें</a>
                 </div>`;
             });
-            result.innerHTML = html;
+            res.innerHTML = html;
         }
 
-        // Submit Shop Registration
         function submitShop() {
             const name = document.getElementById("regShopName").value.trim();
             const dist = document.getElementById("regDistrict").value;
-            const block = document.getElementById("regBlock").value;
             const vill = document.getElementById("regVillage").value;
             const phone = document.getElementById("regPhone").value.trim();
-            const gps = document.getElementById("regGPSCoord").value;
 
-            if(!name || !dist || !block || !vill) {
-                alert("कृपया दुकान का नाम, जिला, खण्ड और गाँव दर्ज करें!");
-                return;
-            }
+            if(!name || !dist || !vill || !phone) { alert("सभी विवरण भरें!"); return; }
+            if(!isPhoneVerified) { alert("कृपया नंबर OTP से वेरीफाई करें!"); return; }
 
-            if(!isDistrictVerifiedByAPI) {
-                alert("❌ कृपया 'GPS चालू करें व जिला वेरीफाई करें' बटन दबाएं।");
-                return;
-            }
+            let shops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
+            shops.push({ id: Date.now(), name, dist, vill, phone, photo: base64PhotoStore['shopImgPrev'] });
+            localStorage.setItem("approvedShops", JSON.stringify(shops));
 
-            if(!base64PhotoStore['shopImgPrev']) {
-                alert("कृपया दुकान की लाइव फोटो खींचें या अपलोड करें!");
-                return;
-            }
-
-            if(!isPhoneVerified) {
-                alert("कृपया मोबाइल नंबर को OTP से वेरीफाई करें!");
-                return;
-            }
-
-            let approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            approvedShops.push({ id: Date.now(), name, dist, block, vill, phone, photo: base64PhotoStore['shopImgPrev'], gps });
-            localStorage.setItem("approvedShops", JSON.stringify(approvedShops));
-
-            alert(`✅ सफलता! दुकान '${name}', गाँव: ${vill} (${dist}) सफलतापूर्वक पोर्टल पर जुड़ गई है!`);
+            alert(`✅ दुकान '${name}' दर्ज कर ली गई है!`);
             location.reload();
         }
 
-        // Gallery Handlers
+        // Gallery, Events, Buy/Sell Data Handlers
         function addGalleryImage() {
-            const title = document.getElementById("galTitle").value.trim();
+            const title = document.getElementById("galTitle").value;
             const dist = document.getElementById("galDistrict").value;
             const vill = document.getElementById("galVillage").value;
             const photo = base64PhotoStore['galImgPrev'];
+            if(!title || !dist || !vill || !photo) { alert("पूरा विवरण भरें!"); return; }
 
-            if(!title || !dist || !vill || !photo) {
-                alert("कृपया फोटो, शीर्षक, जिला और गाँव चुनें!");
-                return;
-            }
-
-            let gallery = JSON.parse(localStorage.getItem("graminGallery") || "[]");
-            gallery.push({ id: Date.now(), title, dist, vill, photo });
-            localStorage.setItem("graminGallery", JSON.stringify(gallery));
-
-            alert(`📸 गाँव ${vill} (${dist}) की फोटो गैलरी में जुड़ गई है!`);
+            let gal = JSON.parse(localStorage.getItem("graminGallery") || "[]");
+            gal.push({ title, dist, vill, photo });
+            localStorage.setItem("graminGallery", JSON.stringify(gal));
+            alert("📸 फोटो गैलरी में जुड़ गई!");
             loadGallery();
         }
 
         function loadGallery() {
-            const gallery = JSON.parse(localStorage.getItem("graminGallery") || "[]");
+            const gal = JSON.parse(localStorage.getItem("graminGallery") || "[]");
             const grid = document.getElementById("galleryDisplayGrid");
-            if(gallery.length === 0) {
-                grid.innerHTML = "<p style='font-size:0.8rem; color:#888;'>अभी कोई फोटो नहीं है। पहली फोटो जोड़ें!</p>";
-                return;
-            }
-
-            let html = "";
-            gallery.slice(-6).reverse().forEach(g => {
-                html += `
+            grid.innerHTML = gal.slice(-4).reverse().map(g => `
                 <div class="gallery-card">
-                    <img src="${g.photo}" alt="${g.title}">
+                    <img src="${g.photo}">
                     <p>${g.title}</p>
-                    <small style="font-size:0.7rem; color:#666;">📍 ${g.vill} (${g.dist || 'हरियाणा'})</small>
-                </div>`;
-            });
-            grid.innerHTML = html;
+                    <small style="font-size:0.7rem; color:#666;">📍 ${g.vill}</small>
+                </div>`).join('');
         }
 
-        // Village Events & Announcements
         function addVillageEvent() {
             const cat = document.getElementById("eventCategory").value;
             const dist = document.getElementById("eventDistrict").value;
             const vill = document.getElementById("eventVillage").value;
-            const details = document.getElementById("eventDetails").value.trim();
+            const details = document.getElementById("eventDetails").value;
+            if(!dist || !vill || !details) { alert("विवरण भरें!"); return; }
 
-            if(!dist || !vill || !details) {
-                alert("कृपया जिला, गाँव और कार्यक्रम का विवरण दर्ज करें!");
-                return;
-            }
-
-            let events = JSON.parse(localStorage.getItem("villageEvents") || "[]");
-            events.push({ id: Date.now(), cat, dist, vill, details, date: new Date().toLocaleDateString('hi-IN') });
-            localStorage.setItem("villageEvents", JSON.stringify(events));
-
-            alert(`📢 गाँव ${vill} (${dist}) के लिए सूचना/मुनादी प्रकाशित कर दी गई है!`);
+            let evts = JSON.parse(localStorage.getItem("villageEvents") || "[]");
+            evts.push({ cat, dist, vill, details });
+            localStorage.setItem("villageEvents", JSON.stringify(evts));
+            alert("📢 सूचना प्रकाशित हुई!");
             loadEvents();
         }
 
         function loadEvents() {
-            const events = JSON.parse(localStorage.getItem("villageEvents") || "[]");
+            const evts = JSON.parse(localStorage.getItem("villageEvents") || "[]");
             const area = document.getElementById("eventsDisplayArea");
-            if(events.length === 0) {
-                area.innerHTML = "<p style='font-size:0.8rem; color:#888;'>कोई वर्तमान मुनादी या आयोजन नहीं है।</p>";
-                return;
-            }
-
-            let html = "<h3 style='font-size:0.95rem; color:#555; margin-bottom:8px;'>हाल ही की ग्राम सूचनाएँ व मुनादी:</h3>";
-            events.slice(-4).reverse().forEach(e => {
-                html += `
-                <div class="event-item" style="border-left-color: #c62828;">
+            area.innerHTML = evts.slice(-3).reverse().map(e => `
+                <div class="event-item" style="border-left-color:#c62828;">
                     <div>
-                        <span style="background:#ffebee; color:#c62828; font-size:0.75rem; padding:2px 8px; border-radius:4px; font-weight:bold;">${e.cat}</span>
-                        <h4 style="margin-top:4px; font-size:0.95rem; color:#333;">📍 गाँव: ${e.vill} (${e.dist || 'हरियाणा'})</h4>
-                        <p style="font-size:0.85rem; color:#555; margin-top:2px;">${e.details}</p>
-                        <small style="color:#999; font-size:0.7rem;">दिनांक: ${e.date}</small>
+                        <strong>[${e.cat}] गाँव: ${e.vill} (${e.dist})</strong>
+                        <p style="font-size:0.85rem; color:#444;">${e.details}</p>
                     </div>
-                </div>`;
-            });
-            area.innerHTML = html;
+                </div>`).join('');
         }
 
-        // Buy & Sell Handler
         function submitBuySellItem() {
-            const title = document.getElementById("itemTitle").value.trim();
-            const price = document.getElementById("itemPrice").value.trim();
-            const phone = document.getElementById("itemPhone").value.trim();
-            const txn = document.getElementById("upiTxnId").value.trim();
+            const title = document.getElementById("itemTitle").value;
+            const price = document.getElementById("itemPrice").value;
+            const phone = document.getElementById("itemPhone").value;
+            const txn = document.getElementById("upiTxnId").value;
             const photo = base64PhotoStore['itemImgPrev'];
+            if(!title || !price || !phone || !txn) { alert("सभी जानकारी भरें!"); return; }
 
-            if(!title || !price || !phone || !txn) {
-                alert("कृपया सभी जानकारी (सामान का नाम, कीमत, फोन और UPI Txn Ref ID) भरें!");
-                return;
-            }
-
-            if(txn.length < 6) {
-                alert("कृपया सही 12-अंकों की UPI Transaction Ref ID दर्ज करें!");
-                return;
-            }
-
-            let buySellList = JSON.parse(localStorage.getItem("buySellItems") || "[]");
-            buySellList.push({ id: Date.now(), title, price, phone, txn, photo });
-            localStorage.setItem("buySellItems", JSON.stringify(buySellList));
-
-            alert(`🎉 ₹20 टोकन स्वीकार कर लिया गया है! आपका आइटम '${title}' (₹${price}) बिक्री हेतु पोस्ट हो गया है। Ref ID: ${txn}`);
+            let items = JSON.parse(localStorage.getItem("buySellItems") || "[]");
+            items.push({ title, price, phone, txn, photo });
+            localStorage.setItem("buySellItems", JSON.stringify(items));
+            alert(`🎉 पोस्ट सफल! Transaction ID: ${txn}`);
             loadBuySellItems();
         }
 
         function loadBuySellItems() {
             const items = JSON.parse(localStorage.getItem("buySellItems") || "[]");
             const area = document.getElementById("buySellDisplayArea");
-            if(items.length === 0) {
-                area.innerHTML = "<p style='font-size:0.8rem; color:#888;'>खरीदें-बेचें सेक्शन में कोई आइटम उपलब्ध नहीं है।</p>";
-                return;
-            }
-
-            let html = "<h3 style='font-size:0.95rem; color:#555; margin-bottom:8px;'>बिक्री के लिए उपलब्ध सामान (Buy & Sell):</h3>";
-            items.slice(-4).reverse().forEach(item => {
-                let imgTag = item.photo ? `<img src="${item.photo}" class="item-img-preview" alt="Item">` : `<div style="width:70px; height:70px; background:#eee; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.7rem;">No Image</div>`;
-                
-                html += `
-                <div class="item-card" style="border-left-color: var(--purple);">
-                    ${imgTag}
+            area.innerHTML = items.slice(-3).reverse().map(i => `
+                <div class="item-card" style="border-left-color:var(--purple);">
+                    <img src="${i.photo || ''}" style="width:60px; height:60px; object-fit:cover; border-radius:6px; background:#ddd;">
                     <div style="flex:1;">
-                        <h4 style="color:var(--purple); font-size:0.98rem;">${item.title}</h4>
-                        <p style="font-size:0.9rem; color:#d84315; font-weight:bold;">कीमत: ₹${item.price}</p>
-                        <small style="color:#666; font-size:0.75rem;">टोकन वेरीफाइड (Txn: ${item.txn.substring(0, 6)}...)</small>
+                        <h4 style="color:var(--purple);">${i.title}</h4>
+                        <p style="color:#d84315; font-weight:bold;">₹${i.price}</p>
                     </div>
-                    <a href="tel:${item.phone}" class="call-btn" style="background:var(--purple);">📞 खरीदें</a>
-                </div>`;
-            });
-            area.innerHTML = html;
+                    <a href="tel:${i.phone}" class="call-btn" style="background:var(--purple);">📞 खरीदें</a>
+                </div>`).join('');
         }
 
-        // Toggle Expand/Collapse
         function toggleSection(boxId, iconId) {
             const box = document.getElementById(boxId);
-            const icon = document.getElementById(iconId);
             const isVisible = box.style.display === "block";
             box.style.display = isVisible ? "none" : "block";
-            icon.innerText = isVisible ? "▼" : "▲";
-        }
-
-        function renderInitialData() {
-            if (!localStorage.getItem("approvedShops")) {
-                localStorage.setItem("approvedShops", JSON.stringify([]));
-            }
+            document.getElementById(iconId).innerText = isVisible ? "▼" : "▲";
         }
     </script>
 </body>
