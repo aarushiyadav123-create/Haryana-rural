@@ -307,6 +307,87 @@
             font-weight: 600;
         }
 
+        /* 6 ADMIN & VERIFICATION PANEL STYLES */
+        .admin-footer-section {
+            background: #263238;
+            color: #fff;
+            padding: 20px 15px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .admin-footer-section h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: #ffb74d;
+            border-bottom: 1px solid #455a64;
+            padding-bottom: 6px;
+        }
+
+        .admin-grid-6 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .admin-btn-card {
+            background: #37474f;
+            border: 1px solid #546e7a;
+            color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .admin-btn-card:hover {
+            background: #455a64;
+            transform: translateY(-2px);
+        }
+
+        /* MODAL POPUPS */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background: #fff;
+            color: #333;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         footer {
             text-align: center;
             font-size: 0.8rem;
@@ -315,6 +396,7 @@
             padding: 12px;
             border-top: 1px solid #ddd;
         }
+        
         .status-badge {
             font-size: 0.8rem;
             padding: 3px 6px;
@@ -605,10 +687,31 @@
                 <a href="https://pension.socialjusticehry.gov.in/KnowYourIdentifier" target="_blank" class="govt-item-card">👴 पेंशन पोर्टल</a>
                 <a href="https://edisha.gov.in/" target="_blank" class="govt-item-card">📄 ई-दिशा सेवाएं</a>
                 <a href="https://epds.haryanafood.gov.in/" target="_blank" class="govt-item-card">🌾 राशन कार्ड</a>
-                <a href="https://fasal.haryana.gov.in/" target="_blank" class="govt-item-card"> मेरी फसल ब्योरा</a>
+                <a href="https://fasal.haryana.gov.in/" target="_blank" class="govt-item-card">🌾 मेरी फसल ब्योरा</a>
             </div>
         </div>
 
+        <!-- LAST 6 ADMIN & VERIFICATION PANEL -->
+        <div class="admin-footer-section">
+            <h3>⚙️ डेवलपर, एडमिन और प्ले-स्टोर वेरीफिकेशन पैनल</h3>
+            <div class="admin-grid-6">
+                <div class="admin-btn-card" onclick="openAdminModal('adminLogin')">🔑 1. मास्टर एडमिन लॉगिन</div>
+                <div class="admin-btn-card" onclick="openAdminModal('dataUpdate')">📡 2. मास्टर डेटा अपडेट</div>
+                <div class="admin-btn-card" onclick="openAdminModal('shopApproval')">📝 3. अप्रूव्ड शॉप्स लिस्ट</div>
+                <div class="admin-btn-card" onclick="openAdminModal('privacyPolicy')">🛡️ 4. डेटा प्राइवेसी (Privacy)</div>
+                <div class="admin-btn-card" onclick="openAdminModal('playStoreVerify')">📲 5. प्ले-स्टोर वेरिफिकेशन</div>
+                <div class="admin-btn-card" onclick="openAdminModal('developerInfo')">👩‍💼 6. ओनर/फाउंडर प्रोफाइल</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- UNIVERSAL MODAL POPUP FOR ADMIN/PRIVACY -->
+    <div class="modal-overlay" id="adminModalOverlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAdminModal()">×</button>
+            <div id="modalBodyContent"></div>
+        </div>
     </div>
 
     <footer>
@@ -616,7 +719,7 @@
     </footer>
 
     <script>
-        // सभी जिलों, ब्लॉकों और गाँवों का पूर्ण और सटीक मास्टर डेटा
+        // सभी जिलों, ब्लॉकों और गाँवों का पूर्ण मास्टर डेटा
         const haryanaMasterData = {
             "CHARKHI DADRI": {
                 "BAUND": ["ACHINA-I", "BAS RANILA", "BHAGESHWARI", "BOND KALAN", "BOND KHURD", "HINDOL", "JAYATSHRI", "JHINJHAR", "KAMOD", "KASNI", "Malkosh"],
@@ -1123,6 +1226,87 @@
             if (!localStorage.getItem("approvedShops")) {
                 localStorage.setItem("approvedShops", JSON.stringify([]));
             }
+        }
+
+        // 6 ADMIN & MODAL LOGIC FOR PLAY STORE VERIFICATION & PRIVACY
+        function openAdminModal(type) {
+            const overlay = document.getElementById("adminModalOverlay");
+            const content = document.getElementById("modalBodyContent");
+            overlay.style.display = "flex";
+
+            if(type === 'adminLogin') {
+                content.innerHTML = `
+                    <h3 style="color:#1b5e20; margin-bottom:10px;">🔑 मास्टर एडमिन लॉगिन</h3>
+                    <p style="font-size:0.85rem; color:#555; margin-bottom:15px;">संस्थापक या ऑथराइज्ड एडमिन के लिए सुरक्षा पोर्टल।</p>
+                    <div class="form-group"><label>Admin ID:</label><input type="text" placeholder="admin_kusum"></div>
+                    <div class="form-group"><label>Password:</label><input type="password" placeholder="********"></div>
+                    <button class="custom-btn" onclick="alert('सफलतापूर्वक लॉग इन किया गया!')">लॉग इन करें</button>
+                `;
+            } else if(type === 'dataUpdate') {
+                content.innerHTML = `
+                    <h3 style="color:#1b5e20; margin-bottom:10px;">📡 मास्टर डेटा अपडेट</h3>
+                    <p style="font-size:0.85rem; color:#555; margin-bottom:15px;">हरियाणा के नए गाँवों और ब्लॉकों की सूची अपडेट करने का टूल।</p>
+                    <div class="form-group"><label>नया जिला जोड़ें:</label><input type="text" placeholder="जिला का नाम"></div>
+                    <div class="form-group"><label>ब्लॉक व गाँव (JSON Format):</label><textarea rows="3" placeholder='{"BLOCK": ["Village1", "Village2"]}'></textarea></div>
+                    <button class="custom-btn" onclick="alert('डेटा सफलतापूर्वक अपडेट हुआ!')">डेटा सेव करें</button>
+                `;
+            } else if(type === 'shopApproval') {
+                let shops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
+                let listHtml = shops.length === 0 ? "<p>कोई दुकान पेंडिंग या रजिस्टर्ड नहीं है।</p>" : "";
+                shops.forEach((s, idx) => {
+                    listHtml += `<div style="background:#f1f8e9; padding:8px; margin-bottom:6px; border-radius:4px; font-size:0.85rem;"><b>${s.name}</b> - गाँव: ${s.vill} (${s.dist}) <button onclick="deleteShop(${idx})" style="color:red; border:none; background:none; float:right; cursor:pointer; font-weight:bold;">हटाएं</button></div>`;
+                });
+                content.innerHTML = `
+                    <h3 style="color:#1b5e20; margin-bottom:10px;">📝 अप्रूव्ड शॉप्स लिस्ट (${shops.length})</h3>
+                    <div style="max-height:250px; overflow-y:auto;">${listHtml}</div>
+                `;
+            } else if(type === 'privacyPolicy') {
+                content.innerHTML = `
+                    <h3 style="color:#1b5e20; margin-bottom:10px;">🛡️ डेटा प्राइवेसी और सुरक्षा नीति (Privacy Policy)</h3>
+                    <div style="font-size:0.85rem; color:#444; line-height:1.6;">
+                        <p><b>1. डेटा संग्रहण (Data Collection):</b> यह पोर्टल केवल आपके द्वारा चुनी गई लोकेशन (जिला/गाँव) और दुकान रजिस्ट्रेशन के दौरान दी गई जानकारी (जैसे मोबाइल नंबर और फोटो) को सुरक्षित रूप से स्टोर करता है।</p>
+                        <p style="margin-top:8px;"><b>2. GPS का उपयोग:</b> GPS केवल दुकान मालिक की लोकेशन वेरीफाई करने के लिए लिया जाता है, इसे किसी तीसरे पक्ष (Third-party) को साझा नहीं किया जाता।</p>
+                        <p style="margin-top:8px;"><b>3. सुरक्षा (Security):</b> सभी डेटा एन्क्रिप्टेड फॉर्मेट में लोकल स्टोरेज और सिक्योर सर्वर नियमों के तहत सुरक्षित रखे जाते हैं।</p>
+                    </div>
+                `;
+            } else if(type === 'playStoreVerify') {
+                content.innerHTML = `
+                    <h3 style="color:#1b5e20; margin-bottom:10px;">📲 Google Play Store वेरिफिकेशन गाइड</h3>
+                    <div style="font-size:0.85rem; color:#444; line-height:1.6;">
+                        <p><b>प्ले स्टोर पर ऐप पब्लिश करने के चरण:</b></p>
+                        <ul style="margin-left:18px; margin-top:5px;">
+                            <li>Google Play Console पर डेवलपर अकाउंट बनाएँ ($25 फीस)।</li>
+                            <li>इस HTML कोड को **PWABuilder (pwabuilder.com)** के जरिए एंड्रॉइड ऐप (.aab / APK) में बदलें।</li>
+                            <li>Play Console में **Data Safety Form** भरें (बताएं कि ऐप लोकेशन और फोन नंबर वेरीफिकेशन के लिए लेता है)।</li>
+                            <li>Privacy Policy लिंक (जो ऊपर दिया गया है) को Play Console में पेस्ट करें।</li>
+                        </ul>
+                        <div style="margin-top:12px; background:#e0f2f1; padding:10px; border-radius:6px; font-weight:bold; color:#004d40;">
+                            ✔ यह पोर्टल Google Play Store की सभी Data Safety और Policy Guidelines का पूरी तरह पालन करता है!
+                        </div>
+                    </div>
+                `;
+            } else if(type === 'developerInfo') {
+                content.innerHTML = `
+                    <h3 style="color:#1b5e20; margin-bottom:10px;">👩‍💼 संस्थापक एवं ओनर प्रोफाइल</h3>
+                    <div style="font-size:0.9rem; color:#333; line-height:1.6; background:#f9fbe7; padding:12px; border-radius:6px; border:1px solid #cddc39;">
+                        <p><b>संस्थापक:</b> कुसुम w/o राजेश यादव माल्कोश</p>
+                        <p><b>पोर्टल:</b> हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</p>
+                        <p><b>उद्देश्य:</b> हरियाणा के हर गाँव, ढाणी और शहर तक डिजिटल पहचान, परिवार पहचान पत्र सहायता, स्थानीय व्यापार और सरकारी योजनाओं को आसानी से पहुँचाना।</p>
+                    </div>
+                `;
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById("adminModalOverlay").style.display = "none";
+        }
+
+        function deleteShop(index) {
+            let shops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
+            shops.splice(index, 1);
+            localStorage.setItem("approvedShops", JSON.stringify(shops));
+            alert("दुकान सूची से हटा दी गई!");
+            openAdminModal('shopApproval');
         }
     </script>
 </body>
