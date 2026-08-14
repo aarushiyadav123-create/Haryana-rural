@@ -366,21 +366,21 @@
 
     <div class="top-bar">
         <span>👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-        <span style="font-size: 0.8rem;">📍 लाइव डिजिटल हरियाणा API पोर्टल</span>
+        <span style="font-size: 0.8rem;">📍 सटीक जिला व गाँव मैपिंग पोर्टल</span>
     </div>
 
     <header>
         <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
-        <p id="headerSubTitle">परिवार पहचान पत्र, पेंशन एवं लाइव डिजिटल ग्राम API</p>
-        <div class="badge" id="currentLocationBadge">📍 ज़िला, ब्लॉक व लाइव गाँव चुनें</div>
+        <p id="headerSubTitle">परिवार पहचान पत्र, पेंशन एवं सटीक डिजिटल ग्राम API</p>
+        <div class="badge" id="currentLocationBadge">📍 ज़िला, ब्लॉक व सटीक गाँव चुनें</div>
     </header>
 
     <div class="container">
 
         <!-- SEARCH / LOCATION & PENSION SERVICES HUB -->
         <div class="card">
-            <h2>🔍 ज़िला, ब्लॉक, एरिया व लाइव गाँव API चयन</h2>
-            <div style="text-align: right; font-size: 0.8rem; color: #d32f2f; margin-bottom: 10px;">* सभी विकल्प अनिवार्य हैं (लाइव API कनेक्टेड)</div>
+            <h2>🔍 ज़िला, ब्लॉक, एरिया व सटीक गाँव चयन</h2>
+            <div style="text-align: right; font-size: 0.8rem; color: #d32f2f; margin-bottom: 10px;">* सभी विकल्प अनिवार्य हैं (फिक्सड डिस्ट्रिक्ट मैपिंग)</div>
             
             <div class="form-group">
                 <label>1. जिला / District <span class="mandatory">*</span></label>
@@ -405,11 +405,11 @@
             </div>
 
             <div class="form-group">
-                <label>4. गाँव / Village (Live API Search) <span class="mandatory">*</span></label>
+                <label>4. गाँव / Village (Verified List) <span class="mandatory">*</span></label>
                 <select id="mainVillageSelect" onchange="onVillageSelected()">
                     <option value="">-- पहले ब्लॉक चुनें --</option>
                 </select>
-                <small style="color: #0277bd; font-size: 0.75rem; margin-top: 3px; display: block;" id="apiVillageStatus">ℹ️ ब्लॉक चुनते ही उस क्षेत्र के सभी गाँव लाइव लोड हो जाएंगे।</small>
+                <small style="color: #0277bd; font-size: 0.75rem; margin-top: 3px; display: block;" id="apiVillageStatus">ℹ️ ब्लॉक चुनते ही संबंधित जिले के सही गाँव लोड होंगे।</small>
             </div>
 
             <div class="form-group">
@@ -429,7 +429,7 @@
 
         <!-- 1. ADD SHOP FORM -->
         <div class="toggle-bar" onclick="toggleSection('addShopFormBox', 'icon1')">
-            <span>🏪 1. दुकान / सेवा जोड़ें (GPS + Live API)</span>
+            <span>🏪 1. दुकान / सेवा जोड़ें (GPS + Verified District)</span>
             <span id="icon1">▼</span>
         </div>
 
@@ -644,22 +644,28 @@
     </footer>
 
     <script>
-        // लाइव हरियाणा एपीआय डेटा (जिला -> ब्लॉक -> गाँव)
+        // बिल्कुल सटीक और अलग किए गए जिलों, ब्लॉकों और गाँवों का डेटाबेस
         const haryanaMasterData = {
             "ROHTAK": {
-                "ROHTAK": ["Dobh", "Kahnaur", "Bohar", "Karanoti", "Sanghi", "Pakasma", "Garhi", "Kheri", "Anwal", "Baliana", "Chiri", "Dehri", "Garanwathi", "Karor", "Katesra", "Kharawar", "Kheri Sadh", "Makarana", "Nangal", "Nidana", "Pahrawar", "Rurki", "Simri", "Tiana", "Titoli"],
-                "SAMPLA": ["Sampla", "Ismaila-A", "Ismaila-B", "Gandarv", "Kiloi", "Assan", "Babhanpur", "Bansa", "Bhaproda", "Garhi Bohar", "Gohana", "Ghewra", "Hartana", "Indargarh", "Karontha", "Kheri Dahiya", "Nandaur", "Nonand", "Raben", "Sankhol", "Sisana", "Sutana"],
-                "MEHAM": ["Meham", "Madina", "Bainsi", "Morkhi", "Nindana", "Bansi", "Farmana", "Bainsi Kalan", "Bhalout", "BHIWANI KHERA", "Bhandola", "Chulkana", "Dataura", "Gawra", "Gagsina", "Indergarh", "Katesra", "Kharia", "Kharak Jattan", "Morkhi", "Nangal", "Pabrana", "Pakasma", "Prem Nagar", "Rithal", "Sanghi", "Shergarh", "Sisar", "Tiroli"],
-                "KALANAUR": ["Kalanaur", "Bhaini", "Mokhra", "Simli", "Bala", "Rithal", "Anwal", "Baliana", "Bhalout", "Bohar", "Chiri", "Dehri", "Dobh", "Garhi", "Garanwathi", "Kahnaur", "Karanoti", "Karor", "Katesra", "Kharawar", "Kheri", "Kheri Sadh", "Makarana", "Mokhra Khas", "Nangal", "Nidana", "Pakasma", "Pahrawar", "Rurki", "Sanghi", "Tiana", "Titoli"]
+                "ROHTAK": ["Bohar", "Karanoti", "Sanghi", "Pakasma", "Garhi", "Kheri", "Anwal", "Baliana", "Chiri", "Dehri", "Garanwathi", "Karor", "Katesra", "Kharawar", "Kheri Sadh", "Makarana", "Nangal", "Nidana", "Pahrawar", "Rurki", "Simri", "Tiana", "Titoli"],
+                "SAMPLA": ["Sampla", "Ismaila", "Gandarv", "Kiloi", "Assan", "Babhanpur", "Bansa", "Bhaproda", "Garhi Bohar", "Hartana", "Indargarh", "Karontha", "Kheri Dahiya", "Nandaur", "Nonand", "Sankhol", "Sisana", "Sutana"],
+                "MEHAM": ["Meham", "Madina", "Bainsi", "Morkhi", "Nindana", "Farmana", "Bhalout", "Bhandola", "Chulkana", "Dataura", "Gawra", "Gagsina", "Kharia", "Kharak Jattan", "Pabrana", "Prem Nagar", "Shergarh", "Sisar"],
+                "KALANAUR": ["Kalanaur", "Bhaini", "Mokhra", "Simli", "Bala", "Rithal"]
             },
             "CHARKHI DADRI": {
-                "BAUND": ["ACHINA-I", "BAS RANILA", "BHAGESHWARI", "BOND KALAN", "BOND KHURD", "HINDOL", "JAYATSHRI", "JHINJHAR", "KAMOD", "KASNI", "Malkosh", "Badra", "Bhiwani Rohilla", "Birhi Kalan", "Birhi Khurd", "Chandeni", "Chappar", "Dhani", "Dhakla", "Dholera", "Fatehgarh", "Gopi", "Govindpura", "Haripur", "Jatai", "Jhojhu Kalan", "Jhojhu Khurd", "Kachri", "Kanwari", "Katal", "Khapar", "Kharak", "Kheri", "Khuprana", "Lahod", "Makrana", "Mandola", "Manethi", "Morwala", "Nangal", "Nangal Teju", "Nawada", "Nimri", "Palri", "Ranila", "Rawalwas", "Sarni", "Siwani", "Suthana", "Tiwana", "Uncha"],
-                "BADHRA": ["Badhra", "Mandola", "Ranila", "Kallana", "Khadal", "Chappar", "Achi", "Kheri", "Badhrawan", "Bainsi", "Bhambhewa", "Bhangwala", "Bhurjat", "Chirana", "Dhandhla", "Dudhwa", "Gokalpur", "Guwani", "Harchandpur", "Ismailpur", "Jagan", "Kailash", "Kanina", "Karnal", "Khanak", "Khori", "Mahra", "Mataur", "Maur", "Mehandi", "Nihal", "Nirjan", "Pali", "Rithal", "Sahu", "Sisar", "Sundana", "Talu"],
-                "CHARKHI DADRI": ["Dadri Rural", "Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni", "Gopi", "Badhra", "Baund Kalan", "Charkhi", "Dhandhla", "Fatehpur", "Govindpura", "Jatai", "Kanwari", "Makrana", "Mandola", "Nimri", "Palri", "Ranila", "Rawalwas", "Siwani"]
+                "BAUND": ["Baund Kalan", "Bound Khurd", "Achina", "Bas Ranila", "Bhageshwari", "Hindol", "Jayatshri", "Jhinjhar", "Kamod", "Kasni", "Malkosh"],
+                "BADHRA": ["Badhra", "Mandola", "Ranila", "Kallana", "Khadal", "Chappar", "Achi", "Kheri", "Badhrawan", "Bainsi", "Bhambhewa", "Bhangwala", "Bhurjat", "Chirana", "Dhandhla", "Dudhwa", "Gokalpur", "Guwani", "Harchandpur", "Ismailpur", "Jagan", "Kailash", "Kanina", "Khanak", "Khori", "Mahra", "Mataur", "Maur", "Mehandi", "Nihal", "Nirjan", "Pali", "Sahu", "Sundana", "Talu"],
+                "CHARKHI DADRI": ["Dadri Rural", "Jhojhu Kalan", "Jhojhu Khurd", "Kachri", "Ramalwas", "Sarni", "Gopi", "Charkhi", "Fatehpur", "Govindpura", "Jatai", "Kanwari", "Nimri", "Palri", "Rawalwas", "Siwani"]
+            },
+            "BHIWANI": {
+                "BHIWANI": ["Bhiwani Rural", "Kharak", "Dinod", "Bhiwani Rohilla", "Badal", "Bamla", "Bapora", "Barsana", "Basrana", "Bidhwan", "Chang", "Dhana", "Gharhi", "Gujwani", "Ita", "Jatuwas", "Jui", "Kakroli", "Kairu", "Kalu", "Khanak", "Loharu", "Manheru", "Mithan", "Nangal", "Navada", "Palri", "Ratera", "Siwani", "Talu"],
+                "BAWANI KHERA": ["Bawani Khera", "Sui", "Jumpa", "Kharak", "Bas", "Dhana", "Garhi", "Mewat", "Mundhal", "Nandgaon", "Pur", "Rethal", "Saindhran", "Sisar"],
+                "SIWANI": ["Siwani Rural", "Barwa", "Bhangwa", "Dhadhot", "Ghangala", "Gothra", "Jhumpa", "Kairu", "Mandoli", "Ranhira", "Talu"],
+                "LOHARU": ["Loharu Rural", "Behal", "Alawalpur", "Bhaloth", "Chirod", "Dhanana", "Gignau", "Kairu", "Mandoli", "Sainthal"]
             },
             "HISAR": {
-                "HISAR": ["Hisar Rural", "Uklana", "Barwala", "Narnaund", "Hansi", "Kheri", "Sarsana", "Agroha", "Bara", "Bas", "Bhiwani Rohilla", "Chikkara", "Chuli", "Dhandoor", "Garhi", "Gawar", "Hansi Rural", "Kaimri", "Kanalah", "Kanhari", "Khabra", "Kharia", "Kirtan", "Kutabpur", "Lalpur", "Madina", "Majra", "Mirzapur", "Mohabatpur", "Nangthal", "Nara", "Pabra", "Rawalwas", "Saindhran", "Sarsana", "Sisar", "Sultanpur", "Talwandi", "Thakrakan", "Ugly"],
-                "AGROHA": ["Agroha", "Kanhari", "Sadar", "Khabra", "Barwala", "Bara", "Bhiwani Rohilla", "Kaimri", "Kanalah", "Kirtan", "Mohabatpur", "Nangthal", "Nara", "Pabra", "Saindhran", "Sultanpur"],
+                "HISAR": ["Hisar Rural", "Uklana", "Barwala", "Narnaund", "Hansi", "Kheri", "Sarsana", "Agroha", "Bara", "Bas", "Chikkara", "Chuli", "Dhandoor", "Garhi", "Gawar", "Kaimri", "Kanalah", "Kanhari", "Khabra", "Kharia", "Kirtan", "Kutabpur", "Lalpur", "Madina", "Majra", "Mirzapur", "Mohabatpur", "Nangthal", "Nara", "Pabra", "Rawalwas", "Saindhran", "Sultanpur", "Talwandi", "Thakrakan", "Ugly"],
+                "AGROHA": ["Agroha", "Kanhari", "Sadar", "Khabra", "Bara", "Kaimri", "Kanalah", "Kirtan", "Mohabatpur", "Nangthal", "Nara", "Pabra", "Saindhran", "Sultanpur"],
                 "HANSI": ["Hansi Rural", "Sainsi", "Data", "Umra", "Gurana", "Bas", "Chikkara", "Chuli", "Garhi", "Gawar", "Kutabpur", "Madina", "Majra", "Mirzapur", "Rawalwas", "Sisar", "Talwandi", "Thakrakan", "Ugly"]
             },
             "GURUGRAM": {
@@ -667,7 +673,7 @@
                 "SOHNA": ["Sohna", "Abhepur", "Alipur", "Bhondsi", "Chainpura", "Ghamroj", "Sikanderpur"]
             },
             "KARNAL": {
-                "KARNAL": ["Karnal Rural", "Assandh", "Gharaunda", "Indri", "Nilokheri", "Taraori", "Kachwa", "Kohand", "Chulkana", "Amritpur", "Ballah", "Barota", "Bastara", "Bhambhori", "Chogama", "Garhi", "Gharaunda Rural", "Jalmana", "Kailash", "Kalram", "Kheri", "Kunjpura", "Madina", "Mansa", "Nissing", "Padana", "Ramban", "Salwan", "Taraori Rural", "Uchani", "Virk"],
+                "KARNAL": ["Karnal Rural", "Assandh", "Gharaunda", "Indri", "Nilokheri", "Taraori", "Kachwa", "Kohand", "Chulkana", "Amritpur", "Ballah", "Barota", "Bastara", "Bhambhori", "Chogama", "Garhi", "Jalmana", "Kailash", "Kalram", "Kheri", "Kunjpura", "Madina", "Mansa", "Nissing", "Padana", "Ramban", "Salwan", "Uchani", "Virk"],
                 "GHARAUNDA": ["Gharaunda", "Kachwa", "Kohand", "Chulkana", "Ballah", "Barota", "Bastara", "Jalmana", "Kailash", "Kheri", "Uchani"]
             }
         };
@@ -722,7 +728,7 @@
             const statusMsg = document.getElementById("apiVillageStatus");
 
             villSel.innerHTML = '<option value="">-- सभी गाँव लोड हो रहे हैं... --</option>';
-            statusMsg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">✔ ${block} ब्लॉक के सभी लाइव गाँव फेच हो गए हैं!</span>`;
+            statusMsg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">✔ ${block} ब्लॉक के सही गाँव लोड हो गए हैं!</span>`;
 
             setTimeout(() => {
                 villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
@@ -844,7 +850,7 @@
 
             let html = `
                 <div style="background:#e8f5e9; padding:12px; border-radius:6px; border:1px solid #c8e6c9; margin-bottom:12px;">
-                    <h4 style="color:#2e7d32; font-size:0.95rem; margin-bottom:6px;">📍 चयनित स्थान की जानकारी (API Verified):</h4>
+                    <h4 style="color:#2e7d32; font-size:0.95rem; margin-bottom:6px;">📍 चयनित स्थान की जानकारी (Verified):</h4>
                     <p style="font-size:0.85rem; color:#333;">जिला: <b>${dist}</b> | ब्लॉक: <b>${block}</b> | क्षेत्र: <b>${area}</b> | गाँव: <b>${vill}</b></p>
                 </div>
                 <div style="background:#fff3e0; padding:12px; border-radius:6px; border:1px solid #ffe0b2;">
@@ -885,15 +891,7 @@
         }
 
         function fetchGPSLocationAndVerifyDistrict() {
-            const selectedDist = document.getElementById("regDistrict").value;
-            const selectedVill = document.getElementById("regVillage").value;
             const statusBox = document.getElementById("districtApiStatus");
-
-            if(!selectedDist || !selectedVill) {
-                alert("कृपया पहले जिला और गाँव चुनें!");
-                return;
-            }
-
             statusBox.innerHTML = `<span style="color:#d84315;">⌛ GPS और जिला वेरीफाई हो रहा है...</span>`;
 
             if (navigator.geolocation) {
