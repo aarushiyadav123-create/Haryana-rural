@@ -15,7 +15,7 @@
             padding: 0;
             color: #333;
         }
-        /* Exact Header Style from Screenshot */
+        /* Exact Original Blue Header */
         header {
             background-color: #0077b6;
             color: white;
@@ -41,7 +41,7 @@
             font-size: 0.95rem;
             display: inline-block;
         }
-        /* Top Action Bar (White Box in Screenshot) */
+        /* Action Bar Below Header */
         .top-action-bar {
             background-color: #ffffff;
             max-width: 750px;
@@ -52,7 +52,7 @@
             text-align: center;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             align-items: center;
         }
         .top-action-bar button {
@@ -64,14 +64,14 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
         .container {
             max-width: 750px;
             margin: 0 auto;
             padding: 0 15px 30px 15px;
         }
-        /* Cards Style Matching Screenshot */
+        /* Exact Card Design */
         .card {
             background: white;
             border-radius: 12px;
@@ -103,20 +103,17 @@
             margin-top: 15px;
         }
         
-        /* Specific Emergency Border (Red left line from screenshot) */
+        /* Red Left Border for Emergency */
         .emergency-card {
             border-left: 5px solid #d32f2f;
         }
-        .emergency-title {
-            color: #2b6cb0;
-        }
 
-        /* AI Chat Box Style exact to Screenshot */
+        /* AI Tau Chat Area (Identical to your Screenshot) */
         .ai-chat-container {
             background-color: #e8f4f8;
             border-radius: 8px;
             padding: 15px;
-            min-height: 200px;
+            min-height: 180px;
             max-height: 300px;
             overflow-y: auto;
             display: flex;
@@ -136,8 +133,8 @@
             line-height: 1.4;
         }
         .ai-msg-user {
-            background: #c8e6c9;
-            color: #1b5e20;
+            background: #d1e7dd;
+            color: #0f5132;
             padding: 10px 15px;
             border-radius: 8px;
             max-width: 80%;
@@ -164,9 +161,6 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
         .btn-green {
             background-color: #2e7d32;
@@ -178,7 +172,7 @@
             font-weight: bold;
         }
 
-        /* Form Controls & General UI */
+        /* Standard Inputs & Buttons */
         select, input[type="text"], input[type="number"], input[type="password"] {
             width: 100%;
             padding: 10px 12px;
@@ -198,10 +192,7 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .btn-primary:hover {
-            background-color: #005f92;
-        }
-        .emergency-item, .shop-item {
+        .item-row {
             background: #f9fbfd;
             border: 1px solid #e3e8ed;
             padding: 10px 14px;
@@ -211,8 +202,6 @@
             justify-content: space-between;
             align-items: center;
         }
-        .emergency-item h4, .shop-item h4 { margin: 0 0 4px 0; color: #222; font-size: 0.95rem;}
-        .emergency-item p, .shop-item p { margin: 0; font-size: 0.85rem; color: #666;}
         .call-btn {
             background: #0077b6;
             color: white;
@@ -231,82 +220,68 @@
             font-size: 0.85rem;
             font-weight: bold;
         }
-        .qr-modal {
+
+        /* Clean UPI Modal Popup */
+        .modal-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top:0; left:0; width:100%; height:100%;
             background: rgba(0,0,0,0.6);
-            z-index: 999;
+            z-index: 1000;
             justify-content: center;
             align-items: center;
         }
-        .qr-box {
+        .modal-card {
             background: white;
+            width: 90%;
+            max-width: 360px;
             padding: 20px;
             border-radius: 12px;
-            max-width: 350px;
-            width: 90%;
             text-align: center;
-            margin: 100px auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
     </style>
 </head>
 <body onload="initPortal()">
 
-    <!-- Header Section (As shown in screenshot) -->
+    <!-- Main Header -->
     <header>
         <h1>हरियाणा ग्रामीण सेवा पोर्टल</h1>
         <p>700+ गाँव और शहरों का सम्पूर्ण डिजिटल नेटवर्क</p>
         <div class="token-badge">🪙 आपके टोकन: <span id="userTokensDisplay">100</span> Token</div>
     </header>
 
-    <!-- Top Action Bar (As shown in screenshot) -->
+    <!-- Top Action Buttons -->
     <div class="top-action-bar">
-        <button onclick="showQRModal()">⚡ टोकन खरीदें (QR Code)</button>
-        <button onclick="shareOnWhatsApp()">📲 शेयर करें</button>
+        <button onclick="openUPIModal()">⚡ टोकन खरीदें (QR Code)</button>
+        <button onclick="sharePortal()">📲 शेयर करें</button>
     </div>
 
     <div class="container">
 
-        <!-- Emergency Contacts Section -->
+        <!-- 1. Emergency Contacts (Closed by Default) -->
         <div class="card emergency-card">
             <div class="card-header" onclick="toggleSection('emergencyBox', 'emIcon')">
-                <h3 class="card-title emergency-title">🚨 आपातकालीन सेवाएँ (Emergency Contacts)</h3>
+                <h3 class="card-title" style="color: #2b6cb0;">🚨 आपातकालीन सेवाएँ (Emergency Contacts)</h3>
                 <span class="toggle-icon" id="emIcon">▼</span>
             </div>
             <div id="emergencyBox" class="card-body" style="display: none;">
-                <div class="emergency-item">
-                    <div>
-                        <h4>हरियाणा पुलिस (Police)</h4>
-                        <p>24x7 आपातकालीन सहायता</p>
-                    </div>
+                <div class="item-row">
+                    <div><b>हरियाणा पुलिस (Police)</b><br><small>24x7 आपातकालीन सहायता</small></div>
                     <a href="tel:112" class="call-btn-red">📞 112</a>
                 </div>
-                <div class="emergency-item">
-                    <div>
-                        <h4>एम्बुलेंस (Ambulance)</h4>
-                        <p>मेडिकल इमरजेंसी</p>
-                    </div>
+                <div class="item-row">
+                    <div><b>एम्बुलेंस (Ambulance)</b><br><small>मेडिकल इमरजेंसी</small></div>
                     <a href="tel:108" class="call-btn-red">📞 108</a>
                 </div>
-                <div class="emergency-item">
-                    <div>
-                        <h4>किसान कॉल सेंटर</h4>
-                        <p>कृषि एवं फसल सलाह</p>
-                    </div>
+                <div class="item-row">
+                    <div><b>किसान कॉल सेंटर</b><br><small>कृषि सलाह</small></div>
                     <a href="tel:1551" class="call-btn">📞 1551</a>
-                </div>
-                <div class="emergency-item">
-                    <div>
-                        <h4>बिजली शिकायत (DHBVN/UHBVN)</h4>
-                        <p>बिजली कट एवं फॉल्ट शिकायत</p>
-                    </div>
-                    <a href="tel:1912" class="call-btn">📞 1912</a>
                 </div>
             </div>
         </div>
 
-        <!-- Haryanvi AI Tau Section (As shown open in screenshot) -->
+        <!-- 2. Haryanvi AI Tau (Open as in screenshot) -->
         <div class="card">
             <div class="card-header" onclick="toggleSection('aiBox', 'aiIcon')">
                 <h3 class="card-title">🤖 हरियाणवी AI ताऊ</h3>
@@ -324,7 +299,7 @@
             </div>
         </div>
 
-        <!-- Search Services (700+ Villages Integrated) -->
+        <!-- 3. Search Services Section (700+ Villages) -->
         <div class="card">
             <div class="card-header" onclick="toggleSection('searchBox', 'searchIcon')">
                 <h3 class="card-title">🔍 दुकान / सेवा खोजें (700+ गाँव)</h3>
@@ -341,11 +316,11 @@
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
                 <button class="btn-primary" onclick="searchServices()">खोजें</button>
-                <div id="searchResults" style="margin-top:15px;"></div>
+                <div id="searchResults" style="margin-top:10px;"></div>
             </div>
         </div>
 
-        <!-- Buy / Sell Market Place (20 Token Ad Cost) -->
+        <!-- 4. Mandi / Buy-Sell Market -->
         <div class="card">
             <div class="card-header" onclick="toggleSection('marketBox', 'mktIcon')">
                 <h3 class="card-title">🌾 मंडी व खरीद-बिक्री (20 टोकन/विज्ञापन)</h3>
@@ -354,103 +329,84 @@
             <div id="marketBox" class="card-body" style="display: none;">
                 <div id="approvedAdsList"></div>
                 <hr style="margin:15px 0; border:0; border-top:1px solid #eee;">
-                <h4>नया विज्ञापन पोस्ट करें</h4>
+                <h4 style="margin:0 0 10px 0;">नया विज्ञापन पोस्ट करें</h4>
                 <select id="adCategory">
                     <option value="फसल/अनाज">फसल/अनाज</option>
                     <option value="पशु (गाय/भैंस)">पशु (गाय/भैंस)</option>
                     <option value="ट्रैक्टर/मशीन">ट्रैक्टर/कृषि उपकरण</option>
-                    <option value="अन्य">अन्य सेवा</option>
                 </select>
-                <input type="text" id="adTitle" placeholder="सामान/पशु का नाम (उदा. मूर्रा भैंस)">
+                <input type="text" id="adTitle" placeholder="सामान का विवरण (उदा. मूर्रा भैंस 12L)">
                 <input type="text" id="adLocation" placeholder="गाँव / शहर का नाम">
                 <input type="text" id="adPrice" placeholder="कीमत (₹)">
                 <input type="number" id="adPhone" placeholder="मोबाइल नंबर">
-                <button class="btn-primary" onclick="postAd()">20 टोकन में विज्ञापन डालें</button>
+                <button class="btn-primary" onclick="postAd()">20 टोकन काटकर विज्ञापन डालें</button>
             </div>
         </div>
 
-        <!-- Shop Registration Section -->
-        <div class="card">
-            <div class="card-header" onclick="toggleSection('regBox', 'regIcon')">
-                <h3 class="card-title">📝 अपनी दुकान / सेवा जोड़ें</h3>
-                <span class="toggle-icon" id="regIcon">▼</span>
-            </div>
-            <div id="regBox" class="card-body" style="display: none;">
-                <input type="text" id="regShopName" placeholder="दुकान/सेवा का नाम">
-                <select id="regDistrict">
-                    <option value="">-- जिला चुनें --</option>
-                </select>
-                <input type="text" id="regVillage" placeholder="गाँव का नाम">
-                <input type="number" id="regPhone" placeholder="मोबाइल नंबर">
-                <button class="btn-primary" onclick="registerShop()">सबमिट करें (मंज़ूरी हेतु)</button>
-            </div>
-        </div>
-
-        <!-- Admin Control Option -->
+        <!-- Admin Access Button -->
         <div style="text-align:center; margin-top:20px;">
-            <button onclick="toggleAdminPanel()" style="background:none; border:none; color:#888; text-decoration:underline; cursor:pointer;">एडमिन लॉगिन</button>
+            <button onclick="toggleAdminPanel()" style="background:none; border:none; color:#777; text-decoration:underline; cursor:pointer;">एडमिन पैनल</button>
         </div>
 
-        <!-- Secure Admin Panel -->
+        <!-- Admin Panel Card -->
         <div class="card" id="adminPanel" style="display:none; background:#fff8e1; border:1px solid #ffe082;">
             <h3 style="color:#e65100; margin-top:0;">सुरक्षित एडमिन पैनल</h3>
-            <input type="password" id="adminPass" placeholder="एडमिन पासवर्ड दर्ज करें (1234)">
+            <input type="password" id="adminPass" placeholder="पासवर्ड (1234)">
             <button class="btn-primary" style="background:#e65100;" onclick="verifyAdmin()">लॉगिन</button>
 
             <div id="adminControls" style="display:none; margin-top:15px;">
-                <h4 style="margin-bottom:5px;">पेंडिंग विज्ञापन (Ads)</h4>
+                <h4>पेंडिंग विज्ञापन</h4>
                 <div id="adminPendingAds"></div>
-                <h4 style="margin-bottom:5px; margin-top:10px;">पेंडिंग रिचार्ज (Tokens)</h4>
+                <h4 style="margin-top:10px;">पेंडिंग QR रिचार्ज</h4>
                 <div id="adminPendingRecharges"></div>
             </div>
         </div>
 
     </div>
 
-    <!-- QR Code Recharge Modal -->
-    <div class="qr-modal" id="qrModal">
-        <div class="qr-box">
-            <h3 style="margin-top:0; color:#0077b6;">UPI QR रिचार्ज</h3>
-            <p style="font-size:0.9rem;">₹50 स्कैन करके <b>100 टोकन</b> प्राप्त करें:</p>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=7000000000@upi&pn=HaryanaRural" alt="QR Code">
-            <input type="text" id="txnIdInput" placeholder="UPI Transaction ID दर्ज करें" style="margin-top:10px;">
+    <!-- UPI QR Code Popup Modal -->
+    <div class="modal-overlay" id="upiModal">
+        <div class="modal-card">
+            <h3 style="margin-top:0; color:#0077b6;">🪙 टोकन रिचार्ज (UPI QR)</h3>
+            <p style="font-size:0.9rem; margin-bottom:10px;">₹50 पे करके <b>100 टोकन</b> पाएँ</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=upi://pay?pa=7000000000@upi&pn=HaryanaRural" alt="UPI QR" style="border:1px solid #ddd; padding:5px; border-radius:6px;">
+            <input type="text" id="txnIdInput" placeholder="UPI UTR / Transaction ID दर्ज करें" style="margin-top:12px;">
             <button class="btn-primary" onclick="submitRecharge()">सबमिट करें</button>
-            <button onclick="closeQRModal()" style="background:#888; border:none; color:white; padding:8px 15px; border-radius:6px; margin-top:5px; cursor:pointer; width:100%;">बंद करें</button>
+            <button onclick="closeUPIModal()" style="background:#888; border:none; color:white; padding:8px; border-radius:6px; margin-top:8px; cursor:pointer; width:100%;">बंद करें</button>
         </div>
     </div>
 
     <script>
-        // 700+ Villages Database for All 22 Districts
         const villagesData = {
-            "Ambala": ["Ambala Cantt", "Ambala City", "Barara", "Naraingarh", "Shahzadpur", "Saha", "Mullana", "Naggal", "Bakana", "Keshopur", "Panjokhra", "Tepla", "Tandwal", "Handesra"],
-            "Bhiwani": ["Bhiwani", "Bawani Khera", "Tosham", "Siwani", "Loharu", "Dinod", "Bamla", "Chang", "Devsar", "Kairu", "Jui Kalan", "Manheru", "Mundhal", "Tigrana", "Mitathal", "Bapora"],
-            "Charkhi Dadri": ["Charkhi Dadri", "Malkosh", "Badhra", "Jhojhu Kalan", "Bond Kalan", "Nimdi", "Adila", "Barsana", "Baund Kalan", "Bhagwi", "Chandeni", "Chhapar", "Ghasola", "Imlota", "Kadma", "Ranila", "Unn"],
-            "Faridabad": ["Faridabad", "Ballabgarh", "Tigaon", "Anangpur", "Atali", "Badkhal", "Bhakri", "Bhopani", "Chandawali", "Chhainsa", "Dayalpur", "Kheri Kalan", "Mohna", "Pali"],
-            "Fatehabad": ["Fatehabad", "Tohana", "Ratia", "Bhattu Kalan", "Bhuna", "Jakhal Kalan", "Gorakhpur", "Badopal", "Dhani Dult", "Dhangar", "Gillan Khera", "Kirdhan", "Rattakhera"],
-            "Gurugram": ["Gurugram", "Pataudi", "Farrukhnagar", "Sohna", "Manesar", "Badshahpur", "Bhondsi", "Garhi Harsaru", "Khandsa", "Kadipur", "Wazirabad", "Haileymandi", "Bhora Kalan"],
-            "Hisar": ["Hisar", "Hansi", "Adampur", "Barwala", "Narnaund", "Agroha", "Balsamand", "Bass", "Chaudhariwas", "Datta", "Dhansu", "Khanda Kheri", "Mangali", "Mayyar", "Mirchpur", "Siswal", "Uklana"],
-            "Jhajjar": ["Jhajjar", "Bahadurgarh", "Beri", "Matenhail", "Badli", "Dighal", "Dulhera", "Machhrauli", "Kablana", "Jahangirpur", "Sankhol", "Rohad", "Bhindawas", "Chhuchhakwas", "Jharli"],
-            "Jind": ["Jind", "Narwana", "Safidon", "Julana", "Uchana", "Alewa", "Pillukhera", "Bibipur", "Dhamtan Sahib", "Gatoli", "Igrah", "Khatkar", "Kinana", "Nidani", "Ramrai", "Uchana Kalan"],
-            "Kaithal": ["Kaithal", "Guhla", "Kalayat", "Pundri", "Rajound", "Siwan", "Cheeka", "Balu", "Dhand", "Habri", "Kolekhan", "Mundri", "Pai", "Rasina", "Seradha"],
-            "Karnal": ["Karnal", "Assandh", "Indri", "Nilokheri", "Gharaunda", "Kunjpura", "Taraori", "Nissing", "Ballah", "Jundla", "Kachhwa", "Kaimla", "Kutail", "Munak", "Rambha"],
-            "Kurukshetra": ["Thanesar", "Pehowa", "Shahbad", "Ladwa", "Ismailabad", "Babain", "Jhansa", "Barna", "Gumthala Garhu", "Kirmach", "Mathana", "Sarsa", "Umri"],
-            "Mahendragarh": ["Narnaul", "Mahendragarh", "Ateli", "Kanina", "Satnali", "Nangal Chaudhry", "Bachhod", "Bhojawas", "Dhanonda", "Dongra Ahir", "Hudina", "Khudana", "Pali"],
-            "Nuh": ["Nuh", "Ferozepur Jhirka", "Punhana", "Tauru", "Nagina", "Indri", "Ghasera", "Malab", "Mandikhera", "Pinangwan", "Ujena"],
-            "Palwal": ["Palwal", "Hodal", "Hathin", "Hasanpur", "Baghpur", "Chandhat", "Dighot", "Dudola", "Mandkola", "Mitrol", "Prithla"],
-            "Panchkula": ["Panchkula", "Kalka", "Raipur Rani", "Pinjore", "Morni", "Barwala", "Chandimandir", "Kot", "Nada Sahib"],
-            "Panipat": ["Panipat", "Samalkha", "Israna", "Madlauda", "Bapoli", "Babail", "Diwana", "Matloda", "Naultha", "Pattikalyana", "Ujha"],
-            "Rewari": ["Rewari", "Bawal", "Kosli", "Dharuhera", "Jatusana", "Khol", "Berli Kalan", "Dahina", "Gokalgarh", "Guriani", "Kanwali", "Nahar", "Saharanwas"],
-            "Rohtak": ["Rohtak", "Meham", "Sampla", "Kalanaur", "Lakhan Majra", "Asthal Bohar", "Bhalout", "Bahu Akbarpur", "Dobh", "Ismaila", "Kansala", "Kiloi", "Madina", "Mokhra", "Sanghi"],
-            "Sirsa": ["Sirsa", "Dabwali", "Ellenabad", "Rania", "Chautala", "Kalanwali", "Nathusari Chopta", "Ding", "Bara Gudha", "Darba Kalan", "Jiwan Nagar", "Odhan", "Rori"],
-            "Sonipat": ["Sonipat", "Gohana", "Kharkhoda", "Ganaur", "Murthal", "Rai", "Baroda", "Bhatgaon", "Farmana", "Hasangarh", "Juan", "Khanpur Kalan", "Khewra", "Rathdhana"],
-            "Yamunanagar": ["Jagadhri", "Yamunanagar", "Bilaspur", "Chhachhrauli", "Radaur", "Sadhaura", "Khizrabad", "Damla", "Mustafabad", "Tajewala"]
+            "Ambala": ["Ambala Cantt", "Ambala City", "Barara", "Naraingarh", "Saha"],
+            "Bhiwani": ["Bhiwani", "Bawani Khera", "Tosham", "Siwani", "Loharu", "Bamla"],
+            "Charkhi Dadri": ["Charkhi Dadri", "Badhra", "Jhojhu Kalan", "Bond Kalan"],
+            "Faridabad": ["Faridabad", "Ballabgarh", "Tigaon", "Chhainsa"],
+            "Fatehabad": ["Fatehabad", "Tohana", "Ratia", "Bhuna"],
+            "Gurugram": ["Gurugram", "Pataudi", "Farrukhnagar", "Sohna", "Manesar"],
+            "Hisar": ["Hisar", "Hansi", "Adampur", "Barwala", "Narnaund", "Agroha"],
+            "Jhajjar": ["Jhajjar", "Bahadurgarh", "Beri", "Badli", "Dighal"],
+            "Jind": ["Jind", "Narwana", "Safidon", "Julana", "Uchana"],
+            "Kaithal": ["Kaithal", "Guhla", "Kalayat", "Pundri"],
+            "Karnal": ["Karnal", "Assandh", "Indri", "Nilokheri", "Gharaunda"],
+            "Kurukshetra": ["Thanesar", "Pehowa", "Shahbad", "Ladwa"],
+            "Mahendragarh": ["Narnaul", "Mahendragarh", "Ateli", "Kanina"],
+            "Nuh": ["Nuh", "Ferozepur Jhirka", "Punhana", "Tauru"],
+            "Palwal": ["Palwal", "Hodal", "Hathin"],
+            "Panchkula": ["Panchkula", "Kalka", "Raipur Rani"],
+            "Panipat": ["Panipat", "Samalkha", "Israna"],
+            "Rewari": ["Rewari", "Bawal", "Kosli", "Dharuhera"],
+            "Rohtak": ["Rohtak", "Meham", "Sampla", "Kalanaur"],
+            "Sirsa": ["Sirsa", "Dabwali", "Ellenabad", "Rania"],
+            "Sonipat": ["Sonipat", "Gohana", "Kharkhoda", "Ganaur"],
+            "Yamunanagar": ["Jagadhri", "Yamunanagar", "Radaur", "Sadhaura"]
         };
 
         function initPortal() {
             if(!localStorage.getItem("userTokens")) localStorage.setItem("userTokens", "100");
             if(!localStorage.getItem("approvedAds")) {
                 localStorage.setItem("approvedAds", JSON.stringify([
-                    { category: "पशु (गाय/भैंस)", itemName: "मूर्रा भैंस (12 लीटर दूध)", location: "सांपला (रोहतक)", price: "₹75,000", phone: "9812345678" }
+                    { category: "पशु (गाय/भैंस)", itemName: "मूर्रा भैंस (12L दूध)", location: "सांपला (रोहतक)", price: "₹75,000", phone: "9812345678" }
                 ]));
             }
             if(!localStorage.getItem("pendingAds")) localStorage.setItem("pendingAds", JSON.stringify([]));
@@ -466,13 +422,9 @@
         }
 
         function populateDistricts() {
-            const dists = Object.keys(villagesData).sort();
             const select1 = document.getElementById("districtSelect");
-            const select2 = document.getElementById("regDistrict");
-
-            dists.forEach(d => {
+            Object.keys(villagesData).sort().forEach(d => {
                 select1.innerHTML += `<option value="${d}">${d}</option>`;
-                select2.innerHTML += `<option value="${d}">${d}</option>`;
             });
         }
 
@@ -482,7 +434,7 @@
             vSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
 
             if(dist && villagesData[dist]) {
-                villagesData[dist].sort().forEach(v => {
+                villagesData[dist].forEach(v => {
                     vSelect.innerHTML += `<option value="${v}">${v}</option>`;
                 });
             }
@@ -515,22 +467,10 @@
                 let reply = "राम-राम भाई! थारा सवाल मिल ग्या सै। जल्द ही इसपे पूरी जानकारी अपडेट करी जावेगी।";
                 if(text.toLowerCase().includes("mandi") || text.includes("मंडी") || text.includes("भाव")) {
                     reply = "राम-राम भाई! आज मंडी में गेहूँ का भाव ₹2300/क्विंटल अर सरसों का भाव ₹5450/क्विंटल चाल रह्या सै।";
-                } else if(text.includes("मौसम")) {
-                    reply = "आज हरियाणा में मौसम साफ रहैगा, बारिश की संभावना कम सै।";
                 }
                 chatScreen.innerHTML += `<div class="ai-msg-bot">${reply}</div>`;
                 chatScreen.scrollTop = chatScreen.scrollHeight;
-                speakHaryanvi(reply);
             }, 500);
-        }
-
-        function speakHaryanvi(text) {
-            if('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const speech = new SpeechSynthesisUtterance(text);
-                speech.lang = 'hi-IN';
-                window.speechSynthesis.speak(speech);
-            }
         }
 
         function startVoiceInput() {
@@ -539,20 +479,20 @@
                 const recognition = new SpeechRecognition();
                 recognition.lang = 'hi-IN';
                 recognition.start();
-                recognition.onresult = function(event) {
-                    document.getElementById("aiChatInput").value = event.results[0][0].transcript;
+                recognition.onresult = function(e) {
+                    document.getElementById("aiChatInput").value = e.results[0][0].transcript;
                     sendAIChatMessage();
                 };
             } else {
-                alert("आपके ब्राउज़र में वॉइस इनपुट उपलब्ध नहीं है।");
+                alert("वॉइस इनपुट सपोर्ट नहीं है।");
             }
         }
 
         function postAd() {
             let tokens = parseInt(localStorage.getItem("userTokens"));
             if(tokens < 20) {
-                alert("❌ आपके पास पर्याप्त टोकन नहीं हैं! विज्ञापन पोस्ट करने के लिए 20 टोकन चाहिए।");
-                showQRModal();
+                alert("❌ 20 टोकन की आवश्यकता है। टोकन रीचार्ज करें!");
+                openUPIModal();
                 return;
             }
 
@@ -562,24 +502,20 @@
             const price = document.getElementById("adPrice").value;
             const cat = document.getElementById("adCategory").value;
 
-            if(!title || !loc || !phone) {
-                alert("कृपया सभी जानकारी भरें!");
-                return;
-            }
+            if(!title || !loc || !phone) { alert("सभी जानकारी भरें!"); return; }
 
             tokens -= 20;
             localStorage.setItem("userTokens", tokens.toString());
             updateTokensDisplay();
 
-            let pendingAds = JSON.parse(localStorage.getItem("pendingAds"));
-            pendingAds.push({ id: Date.now(), category: cat, itemName: title, location: loc, price: price, phone: phone });
-            localStorage.setItem("pendingAds", JSON.stringify(pendingAds));
+            let pending = JSON.parse(localStorage.getItem("pendingAds"));
+            pending.push({ id: Date.now(), category: cat, itemName: title, location: loc, price: price, phone: phone });
+            localStorage.setItem("pendingAds", JSON.stringify(pending));
 
-            alert("✅ 20 टोकन कट गए हैं! आपका विज्ञापन एडमिन मंज़ूरी के लिए भेज दिया गया है।");
+            alert("✅ 20 टोकन कट गए! आपका विज्ञापन एडमिन मंज़ूरी के लिए भेज दिया गया है।");
             document.getElementById("adTitle").value = "";
             document.getElementById("adLocation").value = "";
             document.getElementById("adPhone").value = "";
-            document.getElementById("adPrice").value = "";
         }
 
         function renderApprovedAds() {
@@ -587,17 +523,17 @@
             const ads = JSON.parse(localStorage.getItem("approvedAds") || "[]");
 
             if(ads.length === 0) {
-                list.innerHTML = "<p style='color:#777; font-size:0.9rem;'>कोई नया विज्ञापन नहीं है।</p>";
+                list.innerHTML = "<p style='color:#777; font-size:0.85rem;'>कोई नया विज्ञापन नहीं है।</p>";
                 return;
             }
 
             let html = "";
             ads.forEach(ad => {
                 html += `
-                <div class="shop-item">
+                <div class="item-row">
                     <div>
-                        <h4>[${ad.category}] ${ad.itemName}</h4>
-                        <p>📍 ${ad.location} | 💰 ${ad.price || 'कीमत पूछें'}</p>
+                        <b>[${ad.category}] ${ad.itemName}</b><br>
+                        <small>📍 ${ad.location} | 💰 ${ad.price || 'मूल्य पूछें'}</small>
                     </div>
                     <a href="tel:${ad.phone}" class="call-btn">📞 कॉल करें</a>
                 </div>`;
@@ -605,41 +541,32 @@
             list.innerHTML = html;
         }
 
-        function showQRModal() { document.getElementById("qrModal").style.display = "flex"; }
-        function closeQRModal() { document.getElementById("qrModal").style.display = "none"; }
+        function openUPIModal() { document.getElementById("upiModal").style.display = "flex"; }
+        function closeUPIModal() { document.getElementById("upiModal").style.display = "none"; }
 
         function submitRecharge() {
             const txn = document.getElementById("txnIdInput").value.trim();
             if(!txn) { alert("Transaction ID दर्ज करें!"); return; }
 
-            let pendingRecharges = JSON.parse(localStorage.getItem("pendingRecharges"));
-            pendingRecharges.push({ id: Date.now(), txnId: txn, tokens: 100 });
-            localStorage.setItem("pendingRecharges", JSON.stringify(pendingRecharges));
+            let pending = JSON.parse(localStorage.getItem("pendingRecharges"));
+            pending.push({ id: Date.now(), txnId: txn, tokens: 100 });
+            localStorage.setItem("pendingRecharges", JSON.stringify(pending));
 
-            alert("✅ रिचार्ज रिक्वेस्ट भेज दी गई है! वेरीफाई होते ही टोकन मिल जाएँगे।");
+            alert("✅ रिचार्ज रिक्वेस्ट सबमिट हो गई!");
             document.getElementById("txnIdInput").value = "";
-            closeQRModal();
-        }
-
-        function registerShop() {
-            alert("✅ आपकी दुकान/सेवा रजिस्ट्रेशन रिक्वेस्ट एडमिन को भेज दी गई है!");
-            document.getElementById("regShopName").value = "";
-            document.getElementById("regVillage").value = "";
-            document.getElementById("regPhone").value = "";
+            closeUPIModal();
         }
 
         function toggleAdminPanel() {
-            const panel = document.getElementById("adminPanel");
-            panel.style.display = (panel.style.display === "block") ? "none" : "block";
+            const p = document.getElementById("adminPanel");
+            p.style.display = (p.style.display === "block") ? "none" : "block";
         }
 
         function verifyAdmin() {
             if(document.getElementById("adminPass").value === "1234") {
                 document.getElementById("adminControls").style.display = "block";
                 loadAdminData();
-            } else {
-                alert("❌ गलत पासवर्ड!");
-            }
+            } else { alert("❌ गलत पासवर्ड!"); }
         }
 
         function loadAdminData() {
@@ -648,66 +575,60 @@
 
             let adHtml = "";
             pendingAds.forEach(a => {
-                adHtml += `<div style="background:#fff; padding:6px; margin-bottom:5px; border-radius:4px; font-size:0.85rem;">
+                adHtml += `<div style="background:#fff; padding:6px; margin-bottom:5px; font-size:0.85rem;">
                     <b>${a.itemName}</b> (${a.location}) 
-                    <button onclick="approveAd(${a.id})" style="background:green; color:#fff; border:none; padding:2px 8px; border-radius:3px; cursor:pointer;">मंजूर करें</button>
+                    <button onclick="approveAd(${a.id})" style="background:green; color:#fff; border:none; padding:2px 6px; border-radius:3px;">Approve</button>
                 </div>`;
             });
-            document.getElementById("adminPendingAds").innerHTML = adHtml || "<p style='font-size:0.8rem;'>कोई पेंडिंग विज्ञापन नहीं</p>";
+            document.getElementById("adminPendingAds").innerHTML = adHtml || "<p style='font-size:0.8rem;'>कोई पेंडिंग नहीं</p>";
 
             let recHtml = "";
             pendingRecharges.forEach(r => {
-                recHtml += `<div style="background:#fff; padding:6px; margin-bottom:5px; border-radius:4px; font-size:0.85rem;">
+                recHtml += `<div style="background:#fff; padding:6px; margin-bottom:5px; font-size:0.85rem;">
                     Txn: <b>${r.txnId}</b> 
-                    <button onclick="approveRecharge(${r.id})" style="background:green; color:#fff; border:none; padding:2px 8px; border-radius:3px; cursor:pointer;">100 टोकन दें</button>
+                    <button onclick="approveRecharge(${r.id})" style="background:green; color:#fff; border:none; padding:2px 6px; border-radius:3px;">+100 Tokens</button>
                 </div>`;
             });
-            document.getElementById("adminPendingRecharges").innerHTML = recHtml || "<p style='font-size:0.8rem;'>कोई पेंडिंग रिचार्ज नहीं</p>";
+            document.getElementById("adminPendingRecharges").innerHTML = recHtml || "<p style='font-size:0.8rem;'>कोई पेंडिंग नहीं</p>";
         }
 
         function approveAd(id) {
-            let pendingAds = JSON.parse(localStorage.getItem("pendingAds"));
-            let approvedAds = JSON.parse(localStorage.getItem("approvedAds"));
-            const idx = pendingAds.findIndex(a => a.id === id);
+            let pending = JSON.parse(localStorage.getItem("pendingAds"));
+            let approved = JSON.parse(localStorage.getItem("approvedAds"));
+            const idx = pending.findIndex(a => a.id === id);
 
             if(idx !== -1) {
-                approvedAds.push(pendingAds[idx]);
-                pendingAds.splice(idx, 1);
-                localStorage.setItem("pendingAds", JSON.stringify(pendingAds));
-                localStorage.setItem("approvedAds", JSON.stringify(approvedAds));
-                alert("✅ विज्ञापन मंजूर कर दिया गया!");
+                approved.push(pending[idx]);
+                pending.splice(idx, 1);
+                localStorage.setItem("pendingAds", JSON.stringify(pending));
+                localStorage.setItem("approvedAds", JSON.stringify(approved));
                 loadAdminData();
                 renderApprovedAds();
             }
         }
 
         function approveRecharge(id) {
-            let pendingRecharges = JSON.parse(localStorage.getItem("pendingRecharges"));
-            const idx = pendingRecharges.findIndex(r => r.id === id);
+            let pending = JSON.parse(localStorage.getItem("pendingRecharges"));
+            const idx = pending.findIndex(r => r.id === id);
 
             if(idx !== -1) {
-                let currentTokens = parseInt(localStorage.getItem("userTokens"));
-                currentTokens += 100;
-                localStorage.setItem("userTokens", currentTokens.toString());
-                pendingRecharges.splice(idx, 1);
-                localStorage.setItem("pendingRecharges", JSON.stringify(pendingRecharges));
-                
-                alert("✅ 100 टोकन खाते में जोड़ दिए गए!");
+                let current = parseInt(localStorage.getItem("userTokens"));
+                localStorage.setItem("userTokens", (current + 100).toString());
+                pending.splice(idx, 1);
+                localStorage.setItem("pendingRecharges", JSON.stringify(pending));
                 updateTokensDisplay();
                 loadAdminData();
             }
         }
 
-        function shareOnWhatsApp() {
-            const text = "हरियाणा ग्रामीण सेवा पोर्टल - 700+ गाँव और शहरों की सेवाएँ: ";
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + window.location.href)}`, '_blank');
+        function sharePortal() {
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent("हरियाणा ग्रामीण सेवा पोर्टल: " + window.location.href)}`, '_blank');
         }
 
         function searchServices() {
             const v = document.getElementById("villageSelect").value;
-            const res = document.getElementById("searchResults");
-            if(!v) { alert("कृपया गाँव चुनें!"); return; }
-            res.innerHTML = `<p style='font-size:0.9rem; color:#0077b6;'>📍 ${v} के लिए सेवाएँ खोजी जा रही हैं...</p>`;
+            if(!v) { alert("गाँव चुनें!"); return; }
+            document.getElementById("searchResults").innerHTML = `<p style='color:#0077b6;'>📍 ${v} में सेवाएँ खोजी जा रही हैं...</p>`;
         }
     </script>
 </body>
