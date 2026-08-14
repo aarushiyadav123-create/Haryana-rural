@@ -3,1220 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मेरा गाँव - हरियाणा ग्रामीण सेवा</title>
+    <title>Mandi Marketplace System - Token Fee & Location Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #1b5e20;
-            --primary-dark: #113f14;
-            --secondary: #ff8f00;
-            --accent: #d84315;
-            --purple: #4a148c;
-            --govt-green: #00695c;
-            --bg-color: #f4f6f9;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-radius: 12px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding-bottom: 60px;
-            line-height: 1.5;
-        }
-
-        .top-bar {
-            background: var(--primary-dark);
-            color: #ffeb3b;
-            font-size: 13px;
-            padding: 8px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--secondary);
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary), #2e7d32);
-            color: white;
-            padding: 25px 15px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        header h1 {
-            font-size: 2.1rem;
-            margin-bottom: 5px;
-        }
-
-        header p {
-            font-size: 1rem;
-            opacity: 0.95;
-            font-weight: 500;
-        }
-
-        .badge {
-            background: #388e3c;
-            color: #fff;
-            padding: 4px 14px;
-            font-size: 0.85rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 10px;
-            border: 1px solid #81c784;
-            font-weight: bold;
-        }
-
-        .container {
-            max-width: 750px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            border: 1px solid #e0e0e0;
-        }
-
-        .card h2 {
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 8px;
-        }
-
-        .live-info-widget {
-            background: linear-gradient(135deg, #0277bd, #00838f);
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .widget-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
-
-        .weather-box {
-            font-size: 0.95rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .news-ticker {
-            font-size: 0.88rem;
-            background: rgba(0,0,0,0.2);
-            padding: 6px 12px;
-            border-radius: 6px;
-            width: 100%;
-        }
-
-        .mandi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .mandi-item {
-            background: rgba(255,255,255,0.15);
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            color: #424242;
-        }
-
-        select, input, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 0.98rem;
-            outline: none;
-            background: #fafafa;
-        }
-
-        select:focus, input:focus, textarea:focus {
-            border-color: var(--primary);
-            background: #fff;
-        }
-
-        .custom-btn {
-            display: inline-block;
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .custom-btn:hover { background: #2e7d32; }
-        .btn-secondary { background: var(--secondary); color: #000; }
-        .btn-accent { background: var(--accent); }
-        .btn-purple { background: var(--purple); color: white; }
-        .btn-danger { background: #d32f2f; color: white; }
-
-        .call-btn {
-            background: #2e7d32;
-            color: white;
-            padding: 8px 14px;
-            font-size: 0.85rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-        }
-
-        .toggle-bar {
-            background: var(--primary);
-            color: white;
-            padding: 14px 18px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .toggle-bar.orange { background: var(--secondary); color: #000; }
-        .toggle-bar.purple { background: var(--purple); color: #fff; }
-        .toggle-bar.red { background: var(--accent); color: #fff; }
-        .toggle-bar.govt { background: var(--govt-green); color: #fff; }
-        .toggle-bar.admin { background: #37474f; color: #fff; }
-
-        .collapsible-form-container {
-            display: none;
-            background: #ffffff;
-            border: 2px dashed #bdbdbd;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .photo-preview-box {
-            width: 100%;
-            height: 140px;
-            border: 2px dashed #0277bd;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #e1f5fe;
-            overflow: hidden;
-            margin-top: 8px;
-        }
-
-        .photo-preview-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-        }
-
-        .item-card-box {
-            background: #f9f9f9;
-            border-left: 4px solid var(--primary);
-            padding: 12px;
-            margin-bottom: 12px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .img-preview-thumb {
-            width: 65px;
-            height: 65px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .gallery-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .gallery-card img {
-            width: 100%;
-            height: 110px;
-            object-fit: cover;
-        }
-
-        .gallery-card-p {
-            padding: 6px;
-            font-size: 0.78rem;
-            color: #333;
-            text-align: center;
-        }
-
-        .govt-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .govt-item-card {
-            background: #e0f2f1;
-            border: 1px solid #80cbc4;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            text-decoration: none;
-            color: #004d40;
-            font-weight: bold;
-            font-size: 0.85rem;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 30px;
-            padding: 15px;
-            border-top: 1px solid #ddd;
-        }
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
-<body onload="initPortal()">
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
-    <div class="top-bar">
-        <span>👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-        <span>🇮🇳 हरियाणा ग्रामीण सेवा पोर्टल</span>
-    </div>
+    <!-- 1. TOP HEADER NAVIGATION -->
+    <header class="bg-indigo-900 text-white shadow-xl sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-store text-yellow-400 text-2xl"></i>
+                <h1 class="text-xl font-black tracking-wide">Mandi Market Portal</h1>
+            </div>
 
-    <header>
-        <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
-        <p id="headerSubTitle">मेरा गाँव, सूचना व व्यापार केंद्र</p>
-        <div class="badge" id="currentLocationBadge">📍 स्थान: स्मार्ट ग्रामीण फ़िल्टर</div>
+            <!-- Header Location Indicator -->
+            <div id="header-loc-display" class="hidden md:flex items-center bg-indigo-800 border border-indigo-700 px-3 py-1 rounded-full text-xs font-semibold">
+                <i class="fa-solid fa-location-dot text-red-400 mr-2"></i>
+                <span id="nav-location-text">District & Gaov: Not Set</span>
+                <button onclick="LocationModule.openModal()" class="ml-3 bg-yellow-500 text-black px-2 py-0.5 rounded text-[10px] font-bold hover:bg-yellow-400">Change</button>
+            </div>
+
+            <!-- Admin Button -->
+            <button onclick="AdminModule.openModal()" class="bg-slate-800 hover:bg-slate-950 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-200 transition flex items-center border border-slate-700">
+                <i class="fa-solid fa-user-shield text-yellow-400 mr-1.5"></i> Admin Panel
+            </button>
+        </div>
     </header>
 
-    <div class="container">
+    <!-- 2. MAIN APPLICATION CONTENT -->
+    <main class="max-w-7xl w-full mx-auto px-4 py-6 flex-grow">
 
-        <!-- LIVE WEATHER, MANDI BHAV & LOCAL NEWS WIDGET -->
-        <div class="live-info-widget">
-            <div class="widget-row">
-                <div class="weather-box" id="weatherDisplay">
-                    🌤️ लाइव मौसम: लोड हो रहा है...
-                </div>
-                <div style="font-size: 0.8rem; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 4px;">
-                    📍 Open-Meteo Weather API
-                </div>
-            </div>
-
-            <div style="font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">🌾 आज के ताज़ा मंडी भाव (अनुमानित):</div>
-            <div class="mandi-grid">
-                <div class="mandi-item">गेहूँ: ₹2,275/क्विं</div>
-                <div class="mandi-item">सरसों: ₹5,450/क्विं</div>
-                <div class="mandi-item">धान: ₹3,800/क्विं</div>
-                <div class="mandi-item">बाजरा: ₹2,200/क्विं</div>
-            </div>
-
-            <div style="margin-top: 10px;">
-                <div class="news-ticker" id="newsTicker">
-                    📰 <b>लाइव हरियाणा अपडेट:</b> ग्रामीण क्षेत्रों में बिजली व सड़क सुधारीकरण कार्य जारी | मेरी फसल मेरा ब्योरा पोर्टल चालू।
+        <!-- LOCATION WARNING BANNER -->
+        <div id="location-warning-banner" class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded-r-lg shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 text-2xl"></i>
+                <div>
+                    <h2 class="font-bold text-amber-900 text-sm">District (Zila) & Village (Gaov) Not Configured!</h2>
+                    <p class="text-xs text-amber-700">Kisi bhi item par Buy ya Sell karne ke liye location set kerna zaroori hai.</p>
                 </div>
             </div>
+            <button onclick="LocationModule.openModal()" class="bg-amber-600 text-white font-bold px-4 py-2 rounded-lg text-xs hover:bg-amber-700 shadow transition">
+                Set District & Village Now
+            </button>
         </div>
 
-
-        <!-- SEARCH SERVICES & SHOPS SECTION -->
-        <div class="card">
-            <h2>🏛️ अपने गाँव की सेवाएँ, कारीगर व दुकान खोजें</h2>
-            
-            <div class="form-group">
-                <label>1. जिला चुनें (Select District) *</label>
-                <select id="mainDistrictSelect" onchange="onDistrictChange('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
-                    <option value="">-- जिला चुनें --</option>
-                </select>
+        <!-- SEARCH & ACTION BAR -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm mb-6 flex flex-col md:flex-row justify-between items-center gap-4 border border-slate-200">
+            <div class="w-full md:w-1/2 flex items-center bg-slate-100 px-3 py-2 rounded-xl border">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 mr-2"></i>
+                <input type="text" id="search-input" onkeyup="MarketModule.filterItems()" placeholder="Search item title or village..." class="bg-transparent w-full outline-none text-xs">
             </div>
 
-            <div class="form-group">
-                <label>2. क्षेत्र का प्रकार (Select Area) *</label>
-                <select id="mainAreaSelect">
-                    <option value="Rural">Rural (ग्रामीण)</option>
-                    <option value="Urban">Urban (शहरी)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>3. खण्ड / ब्लॉक (Select Block / Tehsil) *</label>
-                <select id="mainBlockSelect" onchange="onBlockChange('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>4. गाँव / वार्ड (Select Village / Ward) *</label>
-                <select id="mainVillageSelect" onchange="onVillageSelected()">
-                    <option value="">-- पहले खण्ड चुनें --</option>
-                </select>
-            </div>
-
-            <button class="custom-btn" onclick="searchServices()">दुकानें, कारीगर व सेवाएँ देखें</button>
-            <div id="searchResult" style="margin-top: 15px;"></div>
+            <button onclick="MarketModule.triggerSellFlow()" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-3 rounded-xl shadow-lg transition text-xs flex items-center justify-center">
+                <i class="fa-solid fa-circle-plus mr-2 text-sm"></i> Post Item For Sell (+₹100 Token Fee)
+            </button>
         </div>
 
+        <!-- ITEMS GRID -->
+        <div id="items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </main>
 
-        <!-- 1. ADD SHOP FORM SECTION -->
-        <div class="toggle-bar" onclick="toggleSection('addShopFormBox', 'icon1')">
-            <span>🏪 1. दुकान / रजिस्टर्ड स्टोर जोड़ें</span>
-            <span id="icon1">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="addShopFormBox">
-            <h2>नया दुकान / स्टोर रजिस्ट्रेशन</h2>
-            
-            <div class="form-group">
-                <label>दुकान / स्टोर का नाम:</label>
-                <input type="text" id="regShopName" placeholder="उदा: वर्मा इलेक्ट्रॉनिक्स / शर्मा किराना स्टोर">
-            </div>
-
-            <div class="form-group">
-                <label>1. जिला चुनें (Select District):</label>
-                <select id="regDistrict" onchange="onDistrictChange('regDistrict', 'regBlock', 'regVillage')">
-                    <option value="">-- जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>2. क्षेत्र का प्रकार (Area):</label>
-                <select id="regArea">
-                    <option value="Rural">Rural (ग्रामीण)</option>
-                    <option value="Urban">Urban (शहरी)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>3. खण्ड / ब्लॉक (Block):</label>
-                <select id="regBlock" onchange="onBlockChange('regDistrict', 'regBlock', 'regVillage')">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>4. गाँव चुनें (Village):</label>
-                <select id="regVillage">
-                    <option value="">-- पहले ब्लॉक चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>दुकान की श्रेणी (Category):</label>
-                <select id="regCategory">
-                    <option value="किराना">किराना / जनरल स्टोर</option>
-                    <option value="मेडिकल">मेडिकल / दवाइयां</option>
-                    <option value="इलेक्ट्रॉनिक्स & रिपेयर">इलेक्ट्रॉनिक्स & रिपेयरिंग</option>
-                    <option value="कृषि सेवा">कृषि सेवा / बीज केंद्र</option>
-                    <option value="कपड़े & टेलर">कपड़े & टेलरिंग</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>संपर्क मोबाइल नंबर:</label>
-                <input type="tel" id="regPhone" placeholder="10 अंकों का मोबाइल नंबर">
-            </div>
-
-            <div class="form-group">
-                <label>📸 दुकान की फोटो अपलोड करें:</label>
-                <input type="file" accept="image/*" onchange="previewImage(event, 'shopImgPrev', 'shopPhotoHolder')">
-                <div class="photo-preview-box">
-                    <span id="shopPhotoHolder" style="color: #0288d1; font-size:0.85rem;">फोटो प्रिव्यू यहाँ दिखेगा</span>
-                    <img id="shopImgPrev" alt="Shop Preview">
-                </div>
-            </div>
-
-            <button type="button" class="custom-btn" onclick="submitShop()">दुकान दर्ज करें</button>
-        </div>
-
-
-        <!-- 1B. ADD LOCAL ARTISAN / SKILL SERVICE -->
-        <div class="toggle-bar orange" onclick="toggleSection('addArtisanFormBox', 'icon1b')">
-            <span>➕ 1B. स्थानीय कारीगर व सेवाएँ जोड़ें (बिना दुकान - पंडित जी, मिस्त्री, गाड़ी)</span>
-            <span id="icon1b">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="addArtisanFormBox">
-            <h2>स्थानीय सेवादार / कारीगर रजिस्ट्रेशन</h2>
-            <p style="font-size:0.85rem; color:#555; margin-bottom:12px;">(बिना दुकान वाले स्वतंत्र सेवादार जैसे पंडित जी, मिस्त्री, गाड़ी बुकिंग आदि)</p>
-            
-            <div class="form-group">
-                <label>व्यक्ति / सेवादार का पूरा नाम:</label>
-                <input type="text" id="artName" placeholder="उदा: पंडित रामेश्वर शास्त्री / रमेश राजमिस्त्री">
-            </div>
-
-            <div class="form-group">
-                <label>सेवा की श्रेणी (Select Service Category):</label>
-                <select id="artCategory">
-                    <option value="पंडित जी / पूजा-पाठ">🕉️ पंडित जी / पूजा-पाठ व कथा</option>
-                    <option value="राजमिस्त्री / निर्माण कार्य">🧱 राजमिस्त्री / मकान मिस्त्री</option>
-                    <option value="इलेक्ट्रिशियन / बिजली मिस्त्री">⚡ इलेक्ट्रिशियन / बिजली मिस्त्री</option>
-                    <option value="प्लंबर / नल मिस्त्री">🚰 प्लंबर / नल व पाइप मिस्त्री</option>
-                    <option value="गाड़ी / टैक्सी किराये पर">🛺 गाड़ी / बोलेरो / टैक्सी किराये हेतु</option>
-                    <option value="ट्रैक्टर / कंबाइन चालक">🚜 ट्रैक्टर / कंबाइन / थ्रेशर चालक</option>
-                    <option value="डीजे व टेंट हाउस">🎪 डीजे, साउंड व टेंट सर्विस</option>
-                    <option value="अन्य ग्रामीण सेवा">🛠️ अन्य स्वतंत्र कारीगर / सेवा</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>1. जिला चुनें (Select District):</label>
-                <select id="artDistrict" onchange="onDistrictChange('artDistrict', 'artBlock', 'artVillage')">
-                    <option value="">-- जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>2. क्षेत्र का प्रकार (Area):</label>
-                <select id="artArea">
-                    <option value="Rural">Rural (ग्रामीण)</option>
-                    <option value="Urban">Urban (शहरी)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>3. खण्ड / ब्लॉक (Select Block):</label>
-                <select id="artBlock" onchange="onBlockChange('artDistrict', 'artBlock', 'artVillage')">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>4. गाँव / वार्ड (Select Village):</label>
-                <select id="artVillage">
-                    <option value="">-- पहले खण्ड चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>संपर्क मोबाइल नंबर (Contact Number):</label>
-                <input type="tel" id="artPhone" placeholder="10 अंकों का मोबाइल नंबर">
-            </div>
-
-            <button type="button" class="custom-btn btn-secondary" onclick="submitArtisan()">कारीगर / सेवादार दर्ज करें</button>
-        </div>
-
-
-        <!-- 🛒 BUY / SELL / OLX VILLAGE MARKETPLACE -->
-        <div class="toggle-bar purple" onclick="toggleSection('buySellBox', 'iconBuySell')">
-            <span>🛍️ गाँव का बाज़ार (पुराना/नया सामान खरीदें व बेचें - OLX Style)</span>
-            <span id="iconBuySell">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="buySellBox">
-            <h2>खरीदें-बेचें (गाँव की मंडी)</h2>
-            <p style="font-size:0.85rem; color:#555; margin-bottom:12px;">ट्रैक्टर, पशु, मोबाइल, साइकिल या कोई भी सामान बेचने के लिए दर्ज करें:</p>
-            
-            <div class="form-group">
-                <label>सामान का नाम / विवरण:</label>
-                <input type="text" id="buyTitle" placeholder="उदा: महिंद्रा 275 ट्रैक्टर / एचएफ गाय 12 लीटर">
-            </div>
-
-            <div class="form-group">
-                <label>मांगी जाने वाली कीमत (Price in ₹):</label>
-                <input type="number" id="buyPrice" placeholder="उदा: 150000">
-            </div>
-
-            <div class="form-group">
-                <label>1. जिला चुनें:</label>
-                <select id="buyDistrict" onchange="onDistrictChange('buyDistrict', 'buyBlock', 'buyVillage')">
-                    <option value="">-- जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>2. क्षेत्र का प्रकार:</label>
-                <select id="buyArea">
-                    <option value="Rural">Rural (ग्रामीण)</option>
-                    <option value="Urban">Urban (शहरी)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>3. खण्ड / ब्लॉक:</label>
-                <select id="buyBlock" onchange="onBlockChange('buyDistrict', 'buyBlock', 'buyVillage')">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>4. गाँव / वार्ड:</label>
-                <select id="buyVillage">
-                    <option value="">-- पहले खण्ड चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>संपर्क नंबर:</label>
-                <input type="tel" id="buyPhone" placeholder="10 अंकों का मोबाइल नंबर">
-            </div>
-
-            <div class="form-group">
-                <label>📸 सामान की फोटो अपलोड करें:</label>
-                <input type="file" accept="image/*" onchange="previewImage(event, 'buyImgPrev', 'buyPhotoHolder')">
-                <div class="photo-preview-box">
-                    <span id="buyPhotoHolder" style="color: #0288d1; font-size:0.85rem;">फोटो प्रिव्यू यहाँ दिखेगा</span>
-                    <img id="buyImgPrev" alt="Buy Item Preview">
-                </div>
-            </div>
-
-            <button type="button" class="custom-btn btn-purple" onclick="submitBuySellItem()">बिक्री हेतु पोस्ट करें</button>
-
-            <h3 style="font-size:1rem; margin-top:20px; border-top:1px solid #ddd; padding-top:10px;">हाल ही में पोस्ट किए गए सामान:</h3>
-            <div id="buySellItemsList" style="margin-top:10px;"></div>
-        </div>
-
-
-        <!-- 🎪 LOCAL ADS, DANGAL, MELA & NOTICES -->
-        <div class="toggle-bar red" onclick="toggleSection('localEventBox', 'iconEvent')">
-            <span>🎪 लोकल विज्ञापन, मेला, कुश्ती दंगल व सूचना बोर्ड</span>
-            <span id="iconEvent">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="localEventBox">
-            <h2>लोकल इवेंट्स व दंगल सूचना बोर्ड</h2>
-            
-            <div class="form-group">
-                <label>विज्ञापन / कार्यक्रम की मुख्य सुर्खी (Title):</label>
-                <input type="text" id="eventTitle" placeholder="उदा: विशाल कुश्ती दंगल / भागवत कथा / दुकान डिस्काउंट">
-            </div>
-
-            <div class="form-group">
-                <label>विस्तृत जानकारी (Details & Date):</label>
-                <textarea id="eventDesc" rows="3" placeholder="तारीख, स्थान और मुख्य आकर्षण यहाँ लिखें..."></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>आयोजक / संपर्क नंबर:</label>
-                <input type="tel" id="eventPhone" placeholder="मोबाइल नंबर">
-            </div>
-
-            <button type="button" class="custom-btn btn-accent" onclick="submitLocalEvent()">सूचना बोर्ड पर लगाएं</button>
-
-            <h3 style="font-size:1rem; margin-top:20px; border-top:1px solid #ddd; padding-top:10px;">गाँव के ताजा विज्ञापन व दंगल:</h3>
-            <div id="localEventsList" style="margin-top:10px;"></div>
-        </div>
-
-
-        <!-- 🖼️ GRAMIN GALLERY SECTION -->
-        <div class="toggle-bar orange" onclick="toggleSection('galleryBox', 'iconGallery')">
-            <span>🖼️ ग्रामीण गैलरी (अपने गाँव की पुरानी/नयी यादें व फोटो शेयर करें)</span>
-            <span id="iconGallery">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="galleryBox">
-            <h2>ग्रामीण फोटो गैलरी</h2>
-            
-            <div class="form-group">
-                <label>फोटो का शीर्षक / जानकारी (Caption):</label>
-                <input type="text" id="galCaption" placeholder="उदा: गाँव का ऐतिहासिक मंदिर / क्रिकेट टूर्नामेंट">
-            </div>
-
-            <div class="form-group">
-                <label>📸 गाँव की फोटो चुनें:</label>
-                <input type="file" accept="image/*" onchange="previewImage(event, 'galImgPrev', 'galPhotoHolder')">
-                <div class="photo-preview-box">
-                    <span id="galPhotoHolder" style="color: #0288d1; font-size:0.85rem;">फोटो प्रिव्यू यहाँ दिखेगा</span>
-                    <img id="galImgPrev" alt="Gallery Preview">
-                </div>
-            </div>
-
-            <button type="button" class="custom-btn btn-secondary" onclick="submitGalleryPhoto()">गैलरी में अपलोड करें</button>
-
-            <h3 style="font-size:1rem; margin-top:20px; border-top:1px solid #ddd; padding-top:10px;">अपलोड की गई ग्रामीण तस्वीरें:</h3>
-            <div id="galleryDisplayGrid" class="gallery-grid"></div>
-        </div>
-
-
-        <!-- 2. HARYANA GOVT SCHEMES -->
-        <div class="toggle-bar govt" onclick="toggleSection('govtSchemesBox', 'icon2')">
-            <span>🏛️ 2. हरियाणा सरकारी योजनाएं व सेवाएं (HKRN, PPP, पेंशन)</span>
-            <span id="icon2">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="govtSchemesBox">
-            <h2>हरियाणा सरकारी योजनाएं एवं ऑनलाइन पोर्टल्स</h2>
-            <div class="govt-grid">
-                <a href="https://hkrnl.itiharyana.gov.in/" target="_blank" class="govt-item-card">💼 HKRN पोर्टल</a>
-                <a href="https://meraparivar.haryana.gov.in/" target="_blank" class="govt-item-card">🆔 परिवार पहचान पत्र</a>
-                <a href="https://pension.socialjusticehry.gov.in/KnowYourIdentifier" target="_blank" class="govt-item-card">👴 पेंशन Identifier लिस्ट</a>
-                <a href="https://edisha.gov.in/" target="_blank" class="govt-item-card">📄 ई-दिशा सेवाएँ</a>
-            </div>
-        </div>
-
-
-        <!-- 3. ADMIN PANEL -->
-        <div class="toggle-bar admin" onclick="toggleSection('adminPanelBox', 'iconAdmin')">
-            <span>🔒 3. एडमिन पैनल (Admin Control Panel)</span>
-            <span id="iconAdmin">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="adminPanelBox">
-            <h2>🔒 एडमिन कंट्रोल पैनल</h2>
-            <div class="form-group" id="adminAuthArea">
-                <label>एडमिन सिक्योरिटी पिन दर्ज करें (Default PIN: 1234):</label>
-                <input type="password" id="adminPin" placeholder="4-अंकों का पिन दर्ज करें">
-                <button type="button" class="custom-btn btn-accent" onclick="verifyAdminPin()" style="margin-top:10px;">लॉगिन करें</button>
-            </div>
-
-            <div id="adminContent" style="display:none;">
-                <h3 style="font-size:1rem; color:#d32f2f; margin-bottom:10px;">पंजीकृत डाटा (Delete Power):</h3>
-                <div id="adminShopsList"></div>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>&copy; 2026 Haryana Rural Service Portal - Digital Gram Haryana</p>
+    <!-- 3. FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-4 text-center border-t border-slate-800">
+        <p>© 2026 Mandi Express - Token Fee (₹100) & District/Gaov Flow</p>
     </footer>
 
+    <!-- ==================== MODALS SECTION ==================== -->
+
+    <!-- MODAL 1: LOCATION MODAL (DISTRICT & VILLAGE) -->
+    <div id="modal-location" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="text-base font-bold text-slate-800 flex items-center">
+                    <i class="fa-solid fa-map-location-dot text-indigo-600 mr-2"></i> Set Location (District & Village)
+                </h3>
+                <button onclick="Utils.closeModal('modal-location')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <form onsubmit="LocationModule.saveLocation(event)" class="mt-4 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Select / Enter District (Zila) *</label>
+                    <input type="text" id="loc-district" required placeholder="e.g. Rohtak, Hisar, Sonipat..." class="w-full border p-2.5 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Enter Village (Gaov) *</label>
+                    <input type="text" id="loc-village" required placeholder="e.g. Sampla, Kalanaur, Beri..." class="w-full border p-2.5 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                
+                <div class="bg-indigo-50 p-3 rounded-lg border border-indigo-100 text-[11px] text-indigo-800 flex items-start">
+                    <i class="fa-solid fa-circle-info mt-0.5 mr-2"></i>
+                    <span>District aur Gaov save hone ke baad hi aap Buy ya Sell button click kar payenge.</span>
+                </div>
+
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl shadow transition text-xs">
+                    Save Location & Continue
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: CHECKOUT MODAL (BUY/SELL WITH ₹100 TOKEN FEE) -->
+    <div id="modal-checkout" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 id="checkout-title" class="text-base font-bold text-slate-800">Order Summary</h3>
+                <button onclick="Utils.closeModal('modal-checkout')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Location Check Status -->
+            <div class="mt-4 bg-slate-50 p-3 rounded-lg text-xs border flex justify-between items-center">
+                <div>
+                    <span class="text-slate-400 block text-[10px]">Verified Location:</span>
+                    <strong id="checkout-loc" class="text-slate-800">Rohtak, Sampla</strong>
+                </div>
+                <span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-bold">Location Set</span>
+            </div>
+
+            <!-- Billing Breakdown -->
+            <div class="my-4 border rounded-xl p-4 bg-white shadow-inner space-y-2 text-xs">
+                <div class="flex justify-between text-slate-600">
+                    <span id="checkout-item-name">Base Item Price</span>
+                    <span id="checkout-base" class="font-bold text-slate-800">₹0</span>
+                </div>
+                <div class="flex justify-between text-indigo-700 font-bold">
+                    <span>Token Fee (Fixed)</span>
+                    <span id="checkout-token">+ ₹100</span>
+                </div>
+                <hr class="border-dashed">
+                <div class="flex justify-between text-sm font-extrabold text-slate-900">
+                    <span>Total Amount</span>
+                    <span id="checkout-total" class="text-emerald-600">₹100</span>
+                </div>
+            </div>
+
+            <!-- Admin UPI Container -->
+            <div id="admin-upi-box" class="hidden mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-xs text-center">
+                <p class="font-bold text-slate-700">Official Admin UPI ID:</p>
+                <p id="checkout-upi-id" class="text-sm font-mono font-bold text-indigo-900 mt-0.5">admin@upi</p>
+            </div>
+
+            <button onclick="MarketModule.confirmOrder()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow transition text-xs">
+                Confirm Transaction
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: SELL ITEM FORM MODAL -->
+    <div id="modal-sell" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="text-base font-bold text-slate-800">Create Sell Listing</h3>
+                <button onclick="Utils.closeModal('modal-sell')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <form onsubmit="MarketModule.submitSell(event)" class="mt-4 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Item Title *</label>
+                    <input type="text" id="sell-title" required placeholder="e.g. Gehun 100KG, Tractor..." class="w-full border p-2.5 rounded-lg text-xs outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Base Price (₹) *</label>
+                    <input type="number" id="sell-price" required placeholder="e.g. 2100" class="w-full border p-2.5 rounded-lg text-xs outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                
+                <div class="p-3 bg-slate-100 rounded-lg text-[11px] text-slate-600 space-y-1">
+                    <p class="font-bold text-slate-700">* Token Fee Calculation:</p>
+                    <p>Iss Listing par <strong>₹100 Token Fee</strong> auto add ho jayegi.</p>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow transition text-xs">
+                    Proceed to Confirm Listing
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: ADMIN CONFIG MODAL -->
+    <div id="modal-admin" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="text-base font-bold text-slate-800 flex items-center">
+                    <i class="fa-solid fa-sliders text-yellow-500 mr-2"></i> Admin Configuration
+                </h3>
+                <button onclick="Utils.closeModal('modal-admin')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="mt-4 space-y-4 text-xs">
+                <div class="border p-3 rounded-lg bg-slate-50 space-y-2">
+                    <label class="block font-bold text-slate-700">Set Admin UPI ID (Payment Gateway)</label>
+                    <input type="text" id="admin-upi-input" placeholder="e.g. 9876543210@paytm" class="w-full border p-2 rounded text-xs outline-none">
+                    <label class="flex items-center font-semibold text-slate-600 cursor-pointer">
+                        <input type="checkbox" id="admin-upi-toggle" class="mr-2"> Show UPI Gateway at Checkout
+                    </label>
+                </div>
+
+                <div class="border p-3 rounded-lg bg-slate-50">
+                    <p class="font-bold text-slate-700">Token Fees Configuration:</p>
+                    <p class="text-slate-500 text-[11px]">System Fee is fixed to **₹100** for all Buy & Sell operations.</p>
+                </div>
+
+                <button onclick="AdminModule.saveSettings()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl shadow transition text-xs">
+                    Save Admin Settings
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. CORE JAVASCRIPT LOGIC ENGINE -->
     <script>
-        // Master Nested Data Structure: Full 22 Districts of Haryana
-        const haryanaMasterData = {
-            "AMBALA": {
-                "AMBALA CANTT": ["Ambala Cantt", "Babiyal", "Tangri"],
-                "AMBALA CITY": ["Ambala City", "Saha", "Shahzadpur"],
-                "BARARA": ["Barara", "Mullana", "Tandwal"]
+        // APP GLOBAL STATE
+        const State = {
+            userDistrict: localStorage.getItem('mandi_dist') || '',
+            userVillage: localStorage.getItem('mandi_vill') || '',
+            tokenFee: 100, // Mandatory ₹100 Token Fee
+            adminUpi: localStorage.getItem('mandi_admin_upi') || '',
+            isUpiActive: localStorage.getItem('mandi_upi_active') === 'true',
+            pendingTx: null,
+            items: JSON.parse(localStorage.getItem('mandi_items_list')) || [
+                { id: 101, title: 'Gehun Grade-A (100KG)', price: 2200, district: 'Rohtak', village: 'Sampla', seller: 'Ramesh' },
+                { id: 102, title: 'Desi Chana (1 Quintal)', price: 5400, district: 'Hisar', village: 'Hansi', seller: 'Suresh' },
+                { id: 103, title: 'Kapas / Cotton', price: 7100, district: 'Jhajjar', village: 'Beri', seller: 'Monu' }
+            ]
+        };
+
+        // UTILITY FUNCTIONS
+        const Utils = {
+            showModal: (id) => {
+                const el = document.getElementById(id);
+                if (el) { el.classList.remove('hidden'); el.classList.add('flex'); }
             },
-            "BHIWANI": {
-                "BHIWANI": ["Bhiwani", "Bawani Khera", "Bamla", "Devsar"],
-                "TOSHAM": ["Tosham", "Khanak", "Biran"],
-                "SIWANI": ["Siwani", "Mudhals", "Jhumpa"]
-            },
-            "CHARKHI DADRI": {
-                "BAUND": ["Malkosh", "Baund Kalan", "Rankoli", "Phogat", "Sanwar", "Chhapar"],
-                "BADHRA": ["Badhra", "Jhojhu Kalan", "Kadma", "Kari Tokha"],
-                "DADRI": ["Dadri", "Achina", "Samaspur", "Ghasola"]
-            },
-            "FARIDABAD": {
-                "FARIDABAD": ["Faridabad", "Ballabgarh", "Pali"],
-                "BALLABGARH": ["Chhainsa", "Tigaon", "Mohna"]
-            },
-            "FATEHABAD": {
-                "FATEHABAD": ["Fatehabad", "Bhattu Kalan", "Bhundar"],
-                "TOHANA": ["Tohana", "Dhaman", "Jakhal"],
-                "RATIA": ["Ratia", "Bara", "Ratia Rural"]
-            },
-            "GURUGRAM": {
-                "GURUGRAM": ["Gurugram", "Kadipur", "Wazirabad"],
-                "SOHNA": ["Sohna", "Badshahpur", "Bhondsi"],
-                "PATAUDI": ["Pataudi", "Hailey Mandi", "Jatola"]
-            },
-            "HISAR": {
-                "HISAR": ["Hisar", "Satrod", "Gangwa"],
-                "HANSI": ["Hansi", "Umana", "Sisar"],
-                "ADAMPUR": ["Adampur", "Bhadra", "Chaudhariwas"],
-                "BARWALA": ["Barwala", "Daulatpur", "Khedar"]
-            },
-            "JHAJJAR": {
-                "JHAJJAR": ["Jhajjar", "Dighal", "Gudha", "Giani"],
-                "BAHADURGARH": ["Bahadurgarh", "Sankhol", "Mandothi"],
-                "BERI": ["Beri", "Dhubaldhan", "Maji"]
-            },
-            "JIND": {
-                "JIND": ["Jind", "Intal Kalan", "Julani"],
-                "NARWANA": ["Narwana", "Dhamtan Sahib", "Uchana"],
-                "SAFIDON": ["Safidon", "Muana", "Pillukhera"]
-            },
-            "KAITHAL": {
-                "KAITHAL": ["Kaithal", "Keorak", "Dhand"],
-                "GUHLA": ["Guhla", "Cheeka", "Siwan"],
-                "KALAYAT": ["Kalayat", "Kilmach", "Kolekhan"]
-            },
-            "KARNAL": {
-                "KARNAL": ["Karnal", "Kunjpura", "Kachhwa"],
-                "GHARAUNDA": ["Gharaunda", "Gharaunda Rural", "Kohand"],
-                "ASSANDH": ["Assandh", "Jundla", "Salwan"]
-            },
-            "KURUKSHETRA": {
-                "THANESAR": ["Thanesar", "Pipli", "Kalyana"],
-                "PEHOWA": ["Pehowa", "Saraswati Nagar", "Ismailabad"],
-                "SHAHBAD": ["Shahbad", "Nalvi", "Tangar"]
-            },
-            "MAHENDRAGARH": {
-                "NARNAUL": ["Narnaul", "Nasibpur", "Kaniha"],
-                "MAHENDRAGARH": ["Mahendragarh", "Satnali", "Pali"],
-                "KANINA": ["Kanina", "Unhani", "Sehma"]
-            },
-            "NUH": {
-                "NUH": ["Nuh", "Chhachhrauli", "Indri"],
-                "FEROZEPUR JHIRKA": ["Ferozepur Jhirka", "Nagra", "Biwan"],
-                "PUNHANA": ["Punhana", "Bichhor", "Singar"]
-            },
-            "PALWAL": {
-                "PALWAL": ["Palwal", "Alawalpur", "Hathin"],
-                "HODAL": ["Hodal", "Bassan", "Sondhad"]
-            },
-            "PANCHKULA": {
-                "PANCHKULA": ["Panchkula", "Pinjore", "Kalka"],
-                "RAIPUR RANI": ["Raipur Rani", "Hangola", "Morni"]
-            },
-            "PANIPAT": {
-                "PANIPAT": ["Panipat", "Binjhol", "Kabal"],
-                "SAMALKHA": ["Samalkha", "Pattikalyana", "Patti"],
-                "ISRANA": ["Israna", "Madlauda", "Naultha"]
-            },
-            "REWARI": {
-                "REWARI": ["Rewari", "Bharawas", "Bawal"],
-                "KOSLI": ["Kosli", "Nahar", "Jatusana"]
-            },
-            "ROHTAK": {
-                "ROHTAK": ["Dobh", "Bahlaut", "Kahnaur", "Kharak Kalan", "Ladhan", "Makrauli Kalan", "Sunaria"],
-                "SAMPLA": ["Sampla", "Atail", "Gari Sampla", "Ismaila 11B", "Ismaila 9B", "Kullasi", "Nissing"],
-                "MEHAM": ["Meham", "Bedwa", "Bhari", "Farmana", "Kheri Meham"],
-                "KALANAUR": ["Kalanaur", "Anwal", "Balan", "Kalinga", "Nigana"]
-            },
-            "SIRSA": {
-                "SIRSA": ["Sirsa", "Ding", "Bhavdin"],
-                "ELLENABAD": ["Ellenabad", "Madanpur", "Santnagar"],
-                "DABWALI": ["Dabwali", "Kalanwali", "Odhan"]
-            },
-            "SONIPAT": {
-                "SONIPAT": ["Sonipat", "Rai", "Gohana"],
-                "GANNAUR": ["Gannaur", "Panchi Jatan", "Bhadana"],
-                "GOHANA": ["Gohana", "Khanpur Kalan", "Baroda"]
-            },
-            "YAMUNANAGAR": {
-                "YAMUNANAGAR": ["Yamunanagar", "Jagadhri", "Chhachhrauli"],
-                "RADAUR": ["Radaur", "Jauri", "Mustafabad"]
+            closeModal: (id) => {
+                const el = document.getElementById(id);
+                if (el) { el.classList.add('hidden'); el.classList.remove('flex'); }
             }
         };
 
-        let base64PhotoStore = {};
+        // LOCATION MODULE
+        const LocationModule = {
+            init: () => {
+                LocationModule.renderUI();
+            },
+            renderUI: () => {
+                const warningBanner = document.getElementById('location-warning-banner');
+                const navBadge = document.getElementById('header-loc-display');
+                const navText = document.getElementById('nav-location-text');
 
-        function initPortal() {
-            populateDistrictDropdowns();
-            fetchLiveWeather();
-            renderBuySellItems();
-            renderLocalEvents();
-            renderGalleryPhotos();
-        }
-
-        async function fetchLiveWeather() {
-            try {
-                const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=28.8955&longitude=76.6066&current_weather=true");
-                const data = await res.json();
-                if(data && data.current_weather) {
-                    const temp = data.current_weather.temperature;
-                    document.getElementById("weatherDisplay").innerHTML = `🌤️ लाइव हरियाणा मौसम: <b>${temp}°C</b> (आज का तापमान)`;
+                if (State.userDistrict && State.userVillage) {
+                    if (warningBanner) warningBanner.classList.add('hidden');
+                    if (navBadge) navBadge.classList.remove('hidden');
+                    if (navText) navText.innerText = `${State.userDistrict}, ${State.userVillage}`;
+                } else {
+                    if (warningBanner) warningBanner.classList.remove('hidden');
+                    if (navBadge) navBadge.classList.add('hidden');
                 }
-            } catch(e) {
-                document.getElementById("weatherDisplay").innerHTML = `🌤️ लाइव मौसम: <b>31°C</b> (साफ़ मौसम)`;
+            },
+            openModal: () => {
+                document.getElementById('loc-district').value = State.userDistrict;
+                document.getElementById('loc-village').value = State.userVillage;
+                Utils.showModal('modal-location');
+            },
+            saveLocation: (e) => {
+                e.preventDefault();
+                const dist = document.getElementById('loc-district').value.trim();
+                const vill = document.getElementById('loc-village').value.trim();
+
+                if (!dist || !vill) {
+                    alert('District aur Village dono fill karein!');
+                    return;
+                }
+
+                State.userDistrict = dist;
+                State.userVillage = vill;
+                localStorage.setItem('mandi_dist', dist);
+                localStorage.setItem('mandi_vill', vill);
+
+                LocationModule.renderUI();
+                Utils.closeModal('modal-location');
+
+                if (State.pendingTx) {
+                    MarketModule.resumePendingFlow();
+                }
+            },
+            hasValidLocation: () => {
+                return Boolean(State.userDistrict && State.userVillage);
             }
-        }
+        };
 
-        function populateDistrictDropdowns() {
-            const districtSelectIds = ["mainDistrictSelect", "regDistrict", "artDistrict", "buyDistrict"];
-            const sortedDistricts = Object.keys(haryanaMasterData).sort();
+        // MARKETPLACE & TOKEN FEE MODULE
+        const MarketModule = {
+            renderItems: (filteredList = null) => {
+                const grid = document.getElementById('items-grid');
+                if (!grid) return;
+                grid.innerHTML = '';
 
-            districtSelectIds.forEach(id => {
-                const sel = document.getElementById(id);
-                if(sel) {
-                    sel.innerHTML = '<option value="">-- जिला चुनें --</option>';
-                    sortedDistricts.forEach(dist => {
-                        sel.innerHTML += `<option value="${dist}">${dist}</option>`;
-                    });
+                const listToRender = filteredList || State.items;
+
+                if(listToRender.length === 0) {
+                    grid.innerHTML = `<p class="col-span-full text-center text-slate-400 text-xs py-8">Koi item nahi mila.</p>`;
+                    return;
                 }
-            });
-        }
 
-        function onDistrictChange(distId, blockId, villId) {
-            const dist = document.getElementById(distId).value;
-            const blockSel = document.getElementById(blockId);
-            const villSel = document.getElementById(villId);
-
-            blockSel.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
-            villSel.innerHTML = '<option value="">-- पहले खण्ड चुनें --</option>';
-
-            if (dist && haryanaMasterData[dist]) {
-                Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
-                    blockSel.innerHTML += `<option value="${block}">${block}</option>`;
+                listToRender.forEach(item => {
+                    const totalWithFee = item.price + State.tokenFee;
+                    const card = document.createElement('div');
+                    card.className = "bg-white rounded-2xl shadow-sm border border-slate-200 p-5 flex flex-col justify-between hover:shadow-md transition";
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="bg-indigo-100 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                                    <i class="fa-solid fa-location-dot mr-1"></i>${item.district}, ${item.village}
+                                </span>
+                                <span class="text-[11px] text-slate-400">Seller: ${item.seller}</span>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-sm mb-1">${item.title}</h3>
+                            <div class="text-lg font-extrabold text-slate-900">₹${item.price.toLocaleString('en-IN')}</div>
+                            <p class="text-[10px] text-indigo-600 font-semibold mb-4">+ ₹${State.tokenFee} Token Fee Included on Buy</p>
+                        </div>
+                        <button onclick="MarketModule.triggerBuyFlow(${item.id})" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl text-xs shadow transition flex items-center justify-center">
+                            <i class="fa-solid fa-cart-shopping mr-2"></i> Buy Now (₹${totalWithFee.toLocaleString('en-IN')})
+                        </button>
+                    `;
+                    grid.appendChild(card);
                 });
-            }
-        }
+            },
+            filterItems: () => {
+                const query = document.getElementById('search-input').value.toLowerCase();
+                const filtered = State.items.filter(i => 
+                    i.title.toLowerCase().includes(query) || 
+                    i.village.toLowerCase().includes(query) ||
+                    i.district.toLowerCase().includes(query)
+                );
+                MarketModule.renderItems(filtered);
+            },
+            triggerBuyFlow: (id) => {
+                const item = State.items.find(i => i.id === id);
+                if (!item) return;
 
-        function onBlockChange(distId, blockId, villId) {
-            const dist = document.getElementById(distId).value;
-            const block = document.getElementById(blockId).value;
-            const villSel = document.getElementById(villId);
+                State.pendingTx = { type: 'BUY', item: item };
 
-            villSel.innerHTML = '<option value="">-- गाँव / Village चुनें --</option>';
-
-            if (dist && block && haryanaMasterData[dist][block]) {
-                haryanaMasterData[dist][block].sort().forEach(vill => {
-                    villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
-                });
-            }
-        }
-
-        function onVillageSelected() {
-            const vill = document.getElementById("mainVillageSelect").value;
-            const dist = document.getElementById("mainDistrictSelect").value;
-            if(vill) {
-                document.getElementById("headerTitle").innerText = `मेरा गाँव - ${vill.toUpperCase()}`;
-                document.getElementById("headerSubTitle").innerText = `मेरा गाँव ${vill}, सूचना व व्यापार केंद्र`;
-                document.getElementById("currentLocationBadge").innerText = `📍 स्थान: गाँव ${vill}, जिला ${dist}`;
-            }
-        }
-
-        function previewImage(event, imgId, holderId) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    base64PhotoStore[imgId] = e.target.result;
-                    const img = document.getElementById(imgId);
-                    img.src = e.target.result;
-                    img.style.display = "block";
-                    document.getElementById(holderId).style.display = "none";
+                if (!LocationModule.hasValidLocation()) {
+                    LocationModule.openModal();
+                    return;
                 }
-                reader.readAsDataURL(file);
+
+                MarketModule.openCheckout('BUY', item.title, item.price);
+            },
+            triggerSellFlow: () => {
+                State.pendingTx = { type: 'SELL' };
+
+                if (!LocationModule.hasValidLocation()) {
+                    LocationModule.openModal();
+                    return;
+                }
+
+                Utils.showModal('modal-sell');
+            },
+            submitSell: (e) => {
+                e.preventDefault();
+                const title = document.getElementById('sell-title').value.trim();
+                const price = parseInt(document.getElementById('sell-price').value);
+
+                Utils.closeModal('modal-sell');
+                MarketModule.openCheckout('SELL', title, price);
+            },
+            resumePendingFlow: () => {
+                if (!State.pendingTx) return;
+                if (State.pendingTx.type === 'BUY') {
+                    MarketModule.openCheckout('BUY', State.pendingTx.item.title, State.pendingTx.item.price);
+                } else if (State.pendingTx.type === 'SELL') {
+                    Utils.showModal('modal-sell');
+                }
+            },
+            openCheckout: (actionType, title, basePrice) => {
+                const total = basePrice + State.tokenFee;
+
+                document.getElementById('checkout-title').innerText = actionType === 'BUY' ? 'Confirm Purchase' : 'Confirm Sell Listing';
+                document.getElementById('checkout-loc').innerText = `${State.userDistrict}, ${State.userVillage}`;
+                document.getElementById('checkout-item-name').innerText = title;
+                document.getElementById('checkout-base').innerText = `₹${basePrice.toLocaleString('en-IN')}`;
+                document.getElementById('checkout-token').innerText = `+ ₹${State.tokenFee}`;
+                document.getElementById('checkout-total').innerText = `₹${total.toLocaleString('en-IN')}`;
+
+                const upiBox = document.getElementById('admin-upi-box');
+                if (State.isUpiActive && State.adminUpi) {
+                    upiBox.classList.remove('hidden');
+                    document.getElementById('checkout-upi-id').innerText = State.adminUpi;
+                } else {
+                    upiBox.classList.add('hidden');
+                }
+
+                State.pendingTx.details = { actionType, title, basePrice, total };
+                Utils.showModal('modal-checkout');
+            },
+            confirmOrder: () => {
+                const details = State.pendingTx.details;
+
+                if (details.actionType === 'SELL') {
+                    const newItem = {
+                        id: Date.now(),
+                        title: details.title,
+                        price: details.basePrice,
+                        district: State.userDistrict,
+                        village: State.userVillage,
+                        seller: 'You'
+                    };
+                    State.items.unshift(newItem);
+                    localStorage.setItem('mandi_items_list', JSON.stringify(State.items));
+                    MarketModule.renderItems();
+                }
+
+                alert(`Transaction Successfull!\n\nAction: ${details.actionType}\nDistrict: ${State.userDistrict}\nVillage: ${State.userVillage}\nTotal Paid (includes ₹100 Token Fee): ₹${details.total}`);
+
+                State.pendingTx = null;
+                Utils.closeModal('modal-checkout');
             }
-        }
+        };
 
-        // Search Both Shops and Artisans
-        function searchServices() {
-            const selectedDist = document.getElementById("mainDistrictSelect").value.trim().toLowerCase();
-            const selectedVill = document.getElementById("mainVillageSelect").value.trim().toLowerCase();
-            const result = document.getElementById("searchResult");
+        // ADMIN MODULE
+        const AdminModule = {
+            openModal: () => {
+                document.getElementById('admin-upi-input').value = State.adminUpi;
+                document.getElementById('admin-upi-toggle').checked = State.isUpiActive;
+                Utils.showModal('modal-admin');
+            },
+            saveSettings: () => {
+                const upi = document.getElementById('admin-upi-input').value.trim();
+                const active = document.getElementById('admin-upi-toggle').checked;
 
-            if (!selectedDist || !selectedVill) {
-                result.innerHTML = `<p style="font-size:0.88rem; color:#c62828; font-weight:bold;">कृपया जिला, खण्ड और गाँव तीनों चुनें!</p>`;
-                return;
+                State.adminUpi = upi;
+                State.isUpiActive = active;
+
+                localStorage.setItem('mandi_admin_upi', upi);
+                localStorage.setItem('mandi_upi_active', active);
+
+                alert('Admin UPI Configuration Saved!');
+                Utils.closeModal('modal-admin');
             }
+        };
 
-            const approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            
-            const filteredShops = approvedShops.filter(s => 
-                s.dist.trim().toLowerCase() === selectedDist && 
-                s.vill.trim().toLowerCase() === selectedVill
-            );
-
-            if (filteredShops.length === 0) {
-                result.innerHTML = `<p style="font-size:0.88rem; color:#666;">इस गाँव में अभी कोई पंजीकृत दुकान या कारीगर दर्ज नहीं है। आप ऊपर फ़ॉर्म से जोड़ सकते हैं!</p>`;
-                return;
-            }
-
-            let html = "";
-            filteredShops.forEach(shop => {
-                let imgTag = shop.photo ? `<img src="${shop.photo}" class="img-preview-thumb" alt="Shop">` : `<div style="width:65px; height:65px; background:#e0e0e0; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:#666;">No Photo</div>`;
-                let badgeType = shop.type === 'artisan' ? '🛠️ स्थानीय सेवा/कारीगर' : '🏪 स्टोर/दुकान';
-                
-                html += `
-                <div class="item-card-box">
-                    ${imgTag}
-                    <div style="flex:1;">
-                        <span style="font-size:0.75rem; background:#e8f5e9; color:#2e7d32; padding:2px 6px; border-radius:4px; font-weight:bold;">${badgeType}</span>
-                        <h4 style="color:var(--primary); font-size:1rem; margin-top:2px;">${shop.name}</h4>
-                        <p style="font-size:0.83rem; color:#555;">श्रेणी: ${shop.cat || 'सामान्य'} | गाँव: ${shop.vill}</p>
-                    </div>
-                    <a href="tel:${shop.phone}" class="call-btn">📞 कॉल करें</a>
-                </div>`;
-            });
-            result.innerHTML = html;
-        }
-
-        // Submit Shop Registration
-        function submitShop() {
-            const name = document.getElementById("regShopName").value.trim();
-            const dist = document.getElementById("regDistrict").value;
-            const block = document.getElementById("regBlock").value;
-            const vill = document.getElementById("regVillage").value;
-            const cat = document.getElementById("regCategory").value;
-            const phone = document.getElementById("regPhone").value.trim();
-
-            if(!name || !dist || !block || !vill || !phone) {
-                alert("कृपया दुकान का नाम, जिला, खण्ड, गाँव और फोन नंबर भरें!");
-                return;
-            }
-
-            let approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            approvedShops.push({ id: Date.now(), type: 'shop', name, dist, block, vill, cat, phone, photo: base64PhotoStore['shopImgPrev'] || '' });
-            localStorage.setItem("approvedShops", JSON.stringify(approvedShops));
-
-            alert(`✅ सफलता! दुकान '${name}' सफलतापूर्वक दर्ज हो गई है!`);
-            location.reload();
-        }
-
-        // Submit Artisan Registration
-        function submitArtisan() {
-            const name = document.getElementById("artName").value.trim();
-            const cat = document.getElementById("artCategory").value;
-            const dist = document.getElementById("artDistrict").value;
-            const block = document.getElementById("artBlock").value;
-            const vill = document.getElementById("artVillage").value;
-            const phone = document.getElementById("artPhone").value.trim();
-
-            if(!name || !dist || !block || !vill || !phone) {
-                alert("कृपया सेवादार का नाम, श्रेणी, जिला, गाँव और फोन नंबर भरें!");
-                return;
-            }
-
-            let approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            approvedShops.push({ id: Date.now(), type: 'artisan', name, cat, dist, block, vill, phone });
-            localStorage.setItem("approvedShops", JSON.stringify(approvedShops));
-
-            alert(`✅ सफलता! सेवा/कारीगर '${name}' (${cat}) सफलतापूर्वक दर्ज हो गया है!`);
-            location.reload();
-        }
-
-        // Buy / Sell Marketplace Logic
-        function submitBuySellItem() {
-            const title = document.getElementById("buyTitle").value.trim();
-            const price = document.getElementById("buyPrice").value.trim();
-            const dist = document.getElementById("buyDistrict").value;
-            const block = document.getElementById("buyBlock").value;
-            const vill = document.getElementById("buyVillage").value;
-            const phone = document.getElementById("buyPhone").value.trim();
-
-            if(!title || !price || !dist || !vill || !phone) {
-                alert("कृपया सामान का नाम, मूल्य, जिला, गाँव और फोन नंबर भरें!");
-                return;
-            }
-
-            let buyItems = JSON.parse(localStorage.getItem("buySellItems") || "[]");
-            buyItems.push({ id: Date.now(), title, price, dist, block, vill, phone, photo: base64PhotoStore['buyImgPrev'] || '' });
-            localStorage.setItem("buySellItems", JSON.stringify(buyItems));
-
-            alert(`✅ पोस्ट सफल! '${title}' बिक्री के लिए जोड़ दिया गया है!`);
-            location.reload();
-        }
-
-        function renderBuySellItems() {
-            const buyItems = JSON.parse(localStorage.getItem("buySellItems") || "[]");
-            const container = document.getElementById("buySellItemsList");
-
-            if(buyItems.length === 0) {
-                container.innerHTML = "<p style='font-size:0.85rem; color:#666;'>अभी कोई सामान बिक्री के लिए उपलब्ध नहीं है।</p>";
-                return;
-            }
-
-            let html = "";
-            buyItems.forEach(item => {
-                let imgTag = item.photo ? `<img src="${item.photo}" class="img-preview-thumb">` : `<div style="width:65px; height:65px; background:#eee; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.75rem;">No Photo</div>`;
-                html += `
-                <div class="item-card-box" style="border-left-color:var(--purple);">
-                    ${imgTag}
-                    <div style="flex:1;">
-                        <h4 style="color:var(--purple); font-size:0.95rem;">${item.title}</h4>
-                        <p style="font-size:0.85rem; color:#2e7d32; font-weight:bold;">₹ ${item.price}</p>
-                        <p style="font-size:0.78rem; color:#666;">📍 गाँव: ${item.vill} (${item.dist})</p>
-                    </div>
-                    <a href="tel:${item.phone}" class="call-btn" style="background:var(--purple);">📞 खरीदें</a>
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
-        // Local Events & Dangal Logic
-        function submitLocalEvent() {
-            const title = document.getElementById("eventTitle").value.trim();
-            const desc = document.getElementById("eventDesc").value.trim();
-            const phone = document.getElementById("eventPhone").value.trim();
-
-            if(!title || !desc) {
-                alert("कृपया इवेंट की सुर्खी और विवरण भरें!");
-                return;
-            }
-
-            let events = JSON.parse(localStorage.getItem("localEvents") || "[]");
-            events.push({ id: Date.now(), title, desc, phone });
-            localStorage.setItem("localEvents", JSON.stringify(events));
-
-            alert("✅ विज्ञापन/दंगल बोर्ड पर सफलतापूर्वक लग गया है!");
-            location.reload();
-        }
-
-        function renderLocalEvents() {
-            const events = JSON.parse(localStorage.getItem("localEvents") || "[]");
-            const container = document.getElementById("localEventsList");
-
-            if(events.length === 0) {
-                container.innerHTML = "<p style='font-size:0.85rem; color:#666;'>कोई नया विज्ञापन या दंगल की सूचना नहीं है।</p>";
-                return;
-            }
-
-            let html = "";
-            events.forEach(ev => {
-                html += `
-                <div class="item-card-box" style="border-left-color:var(--accent); flex-direction:column; align-items:flex-start;">
-                    <h4 style="color:var(--accent); font-size:1rem;">🎪 ${ev.title}</h4>
-                    <p style="font-size:0.85rem; color:#444; margin:4px 0;">${ev.desc}</p>
-                    ${ev.phone ? `<a href="tel:${ev.phone}" class="call-btn" style="background:var(--accent); margin-top:5px;">📞 आयोजक से बात करें</a>` : ''}
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
-        // Gallery Logic
-        function submitGalleryPhoto() {
-            const caption = document.getElementById("galCaption").value.trim();
-            const photo = base64PhotoStore['galImgPrev'];
-
-            if(!photo) {
-                alert("कृपया पहले कोई फोटो चुनें!");
-                return;
-            }
-
-            let photos = JSON.parse(localStorage.getItem("galleryPhotos") || "[]");
-            photos.push({ id: Date.now(), caption: caption || 'ग्रामीण दृश्य', photo });
-            localStorage.setItem("galleryPhotos", JSON.stringify(photos));
-
-            alert("✅ फोटो गैलरी में अपलोड हो गई!");
-            location.reload();
-        }
-
-        function renderGalleryPhotos() {
-            const photos = JSON.parse(localStorage.getItem("galleryPhotos") || "[]");
-            const container = document.getElementById("galleryDisplayGrid");
-
-            if(photos.length === 0) {
-                container.innerHTML = "<p style='font-size:0.85rem; color:#666; grid-column: 1/-1;'>गैलरी में अभी कोई फोटो नहीं है।</p>";
-                return;
-            }
-
-            let html = "";
-            photos.forEach(item => {
-                html += `
-                <div class="gallery-card">
-                    <img src="${item.photo}" alt="Gallery">
-                    <div class="gallery-card-p">${item.caption}</div>
-                </div>`;
-            });
-            container.innerHTML = html;
-        }
-
-        // Admin Panel Controls
-        function verifyAdminPin() {
-            const pin = document.getElementById("adminPin").value.trim();
-            if(pin === "1234") {
-                document.getElementById("adminAuthArea").style.display = "none";
-                document.getElementById("adminContent").style.display = "block";
-                loadAdminShopsList();
-            } else {
-                alert("❌ गलत एडमिन पिन!");
-            }
-        }
-
-        function loadAdminShopsList() {
-            const approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-            const buyItems = JSON.parse(localStorage.getItem("buySellItems") || "[]");
-            const container = document.getElementById("adminShopsList");
-
-            if(approvedShops.length === 0 && buyItems.length === 0) {
-                container.innerHTML = "<p style='font-size:0.85rem; color:#666;'>कोई रजिस्टर्ड डाटा नहीं है।</p>";
-                return;
-            }
-
-            let html = "<h4>दुकानें व कारीगर:</h4>";
-            approvedShops.forEach(item => {
-                html += `
-                <div class="item-card-box" style="border-left-color:#d32f2f;">
-                    <div style="flex:1;">
-                        <h4 style="font-size:0.95rem; color:#333;">${item.name} (${item.cat || 'सेवा'})</h4>
-                        <p style="font-size:0.8rem; color:#666;">📍 ${item.vill}, जिला: ${item.dist} | 📞 ${item.phone}</p>
-                    </div>
-                    <button class="custom-btn btn-danger" style="width:auto; padding:6px 12px; font-size:0.8rem;" onclick="deleteShopByAdmin(${item.id})">🗑️ डिलीट</button>
-                </div>`;
-            });
-
-            html += "<h4 style='margin-top:15px;'>Buy / Sell पोस्ट्स:</h4>";
-            buyItems.forEach(item => {
-                html += `
-                <div class="item-card-box" style="border-left-color:#d32f2f;">
-                    <div style="flex:1;">
-                        <h4 style="font-size:0.95rem; color:#333;">${item.title} (₹${item.price})</h4>
-                        <p style="font-size:0.8rem; color:#666;">📍 ${item.vill} | 📞 ${item.phone}</p>
-                    </div>
-                    <button class="custom-btn btn-danger" style="width:auto; padding:6px 12px; font-size:0.8rem;" onclick="deleteBuyItemByAdmin(${item.id})">🗑️ डिलीट</button>
-                </div>`;
-            });
-
-            container.innerHTML = html;
-        }
-
-        function deleteShopByAdmin(id) {
-            if(confirm("क्या आप वाकई इसे डिलीट करना चाहते हैं?")) {
-                let approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-                approvedShops = approvedShops.filter(item => item.id !== id);
-                localStorage.setItem("approvedShops", JSON.stringify(approvedShops));
-                alert("🗑️ डिलीट कर दिया गया!");
-                loadAdminShopsList();
-            }
-        }
-
-        function deleteBuyItemByAdmin(id) {
-            if(confirm("क्या आप वाकई इस प्रोडक्ट पोस्ट को डिलीट करना चाहते हैं?")) {
-                let buyItems = JSON.parse(localStorage.getItem("buySellItems") || "[]");
-                buyItems = buyItems.filter(item => item.id !== id);
-                localStorage.setItem("buySellItems", JSON.stringify(buyItems));
-                alert("🗑️ पोस्ट डिलीट कर दी गई!");
-                loadAdminShopsList();
-            }
-        }
-
-        function toggleSection(boxId, iconId) {
-            const box = document.getElementById(boxId);
-            const icon = document.getElementById(iconId);
-            const isVisible = box.style.display === "block";
-            box.style.display = isVisible ? "none" : "block";
-            icon.innerText = isVisible ? "▼" : "▲";
-        }
+        // APP INIT
+        document.addEventListener('DOMContentLoaded', () => {
+            LocationModule.init();
+            MarketModule.renderItems();
+        });
     </script>
 </body>
 </html>
