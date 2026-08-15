@@ -634,7 +634,6 @@
     </footer>
 
     <script>
-        // हरियाणा के सभी जिलों, ब्लॉकों और गाँवों का पक्का मास्टर डेटा (पूरी लिस्ट)
         let haryanaMasterData = {
             "AMBALA": {
                 "AMBALA": ["Ambala Rural", "Panjokhra", "Dora", "Sarsehri", "Tandwal", "Babalpur", "Machhonda", "Gardh", "Bara"],
@@ -768,7 +767,6 @@
             });
         }
 
-        // जिला बदलने पर उस जिले के सभी ब्लॉक लोड करना
         function updateBlockDropdown(districtId, blockId, villageId) {
             const dist = document.getElementById(districtId).value;
             const blockSel = document.getElementById(blockId);
@@ -787,7 +785,6 @@
             }
         }
 
-        // ब्लॉक बदलने पर उस ब्लॉक के अंदर आने वाले सभी गाँव लोड करना
         function updateVillageDropdown(districtId, blockId, villageId) {
             const dist = document.getElementById(districtId).value;
             const block = document.getElementById(blockId).value;
@@ -803,7 +800,6 @@
             }
         }
 
-        // इवेंट बाइंडिंग
         function onMainDistrictChange() { updateBlockDropdown("mainDistrictSelect", "mainBlockSelect", "mainVillageSelect"); }
         function onMainBlockChange() { updateVillageDropdown("mainDistrictSelect", "mainBlockSelect", "mainVillageSelect"); }
 
