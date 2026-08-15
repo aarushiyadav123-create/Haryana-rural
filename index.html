@@ -1468,28 +1468,6 @@
             box.style.display = isVisible ? "none" : "block";
             icon.innerText = isVisible ? "▼" : "▲";
         }
-    </script>// सभी गाँवों की लिस्ट ऑटोमैटिक लोड करने के लिए
-function loadAllVillages() {
-    const villageSelect = document.getElementById('mainVillageSelect');
-    
-    // आपके सारे गाँवों के नाम की लिस्ट
-    const allVillages = ["Bhaini", "Farmana", "Kalanaur", "Landra", "Mokhra", "Simli", "गाँव 7", "गाँव 8"]; // इसमें अपने सभी गाँवों के नाम जोड़ सकते हैं
-    
-    // पुराने ऑप्शन हटाकर नए जोड़ना
-    villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-    
-    allVillages.forEach(village => {
-        const option = document.createElement('option');
-        option.value = village;
-        option.textContent = village;
-        villageSelect.appendChild(option);
-    });
-}
-
-// पेज खुलते ही सारे गाँव ऑटोमैटिक आ जाएंगे
-window.onload = function() {
-    loadAllVillages();
-};
-
+    </script>
 </body>
 </html>
