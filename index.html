@@ -32,7 +32,6 @@
             line-height: 1.5;
         }
 
-        /* LIVE NEWS TICKER BAR */
         .live-news-bar {
             background: #b71c1c;
             color: #fff;
@@ -61,7 +60,6 @@
             animation: marquee 25s linear infinite;
         }
 
-        /* MANDI & WEATHER LIVE BAR */
         .mandi-weather-bar {
             background: #006064;
             color: #fff;
@@ -375,7 +373,6 @@
             font-weight: 600;
         }
 
-        /* MODAL POPUP FOR PRIVACY POLICY */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -439,15 +436,13 @@
 </head>
 <body onload="initPortal()">
 
-    <!-- LIVE NEWS TICKER -->
     <div class="live-news-bar">
         <span class="live-news-title">🔴 ताजा अपडेट (Live News)</span>
         <div style="overflow: hidden; width: 100%;">
-            <span class="live-news-ticker">हरियाणा सरकार द्वारा डिजिटल ग्राम पोर्टल शुरू किया गया है। ब्लॉक-वाइज सभी गाँवों की सूची पूरी तरह अपडेट कर दी गई है। | पोर्टल पर बिना किसी रुकावट के सीधे विवरण देखें।</span>
+            <span class="live-news-ticker">हरियाणा सरकार द्वारा डिजिटल ग्राम पोर्टल शुरू किया गया है। ब्लॉक-वाइज सभी गाँवों की सूची पूरी तरह अपडेट कर दी गई है[span_0](start_span)[span_0](end_span)। | पोर्टल पर बिना किसी रुकावट के सीधे विवरण देखें।</span>
         </div>
     </div>
 
-    <!-- MANDI BHAV & WEATHER LIVE BAR -->
     <div class="mandi-weather-bar">
         <span class="mandi-weather-title">🌾 मंडी व मौसम (Live)</span>
         <div style="overflow: hidden; width: 100%;">
@@ -464,7 +459,6 @@
         </div>
     </div>
 
-    <!-- PRIVACY POLICY MODAL -->
     <div class="modal-overlay" id="policyModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -472,13 +466,13 @@
                 <button class="modal-close-btn" onclick="closePolicyModal()">✕ बंद करें</button>
             </div>
             <p style="font-size: 0.9rem; color: #444; margin-bottom: 10px;">
-                <strong>डिजिटल ग्राम पोर्टल - हरियाणा ग्रामीण सेवा</strong> में आपका स्वागत है। हम आपकी गोपनीयता (Privacy) का पूरा सम्मान करते हैं।
+                <strong>डिजिटल ग्राम पोर्टल - हरियाणा ग्रामीण सेवा</strong> में आपका स्वागत है। हम आपकी गोपनीयता (Privacy) का पूरा सम्मान करते हैं[span_1](start_span)[span_1](end_span).
             </p>
             <ul style="font-size: 0.85rem; color: #555; padding-left: 20px; display: flex; flex-direction: column; gap: 6px;">
-                <li>हम पोर्टल पर दर्ज किए गए मोबाइल नंबर और डेटा का उपयोग केवल ग्रामीण सेवाओं, दुकान की जानकारी और पंचायत सूचनाओं के आदान-प्रदान के लिए करते हैं।</li>
-                <li>आपका व्यक्तिगत डेटा पूरी तरह सुरक्षित रहता है और किसी तृतीय पक्ष (Third-party) को नहीं बेचा जाता है।</li>
-                <li>दुकान पंजीकरण या सेवा प्रदाता जोड़ने के लिए मोबाइल नंबर का ओटीपी (OTP) सत्यापन सुरक्षा उद्देश्य के लिए अनिवार्य है।</li>
-                <li>इस पोर्टल का उपयोग करके आप हमारी शर्तों और नियमों से सहमत होते हैं।</li>
+                <li>हम पोर्टल पर दर्ज किए गए मोबाइल नंबर और डेटा का उपयोग केवल ग्रामीण सेवाओं, दुकान की जानकारी और पंचायत सूचनाओं के आदान-प्रदान के लिए करते हैं[span_2](start_span)[span_2](end_span).</li>
+                <li>आपका व्यक्तिगत डेटा पूरी तरह सुरक्षित रहता है और किसी तृतीय पक्ष (Third-party) को नहीं बेचा जाता है[span_3](start_span)[span_3](end_span).</li>
+                <li>दुकान पंजीकरण या सेवा प्रदाता जोड़ने के लिए मोबाइल नंबर का ओटीपी (OTP) सत्यापन सुरक्षा उद्देश्य के लिए अनिवार्य है[span_4](start_span)[span_4](end_span).</li>
+                <li>इस पोर्टल का उपयोग करके आप हमारी शर्तों और नियमों से सहमत होते हैं[span_5](start_span)[span_5](end_span).</li>
             </ul>
         </div>
     </div>
@@ -486,17 +480,16 @@
     <header>
         <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
         <p id="headerSubTitle">डिजिटल ग्राम पोर्टल, पंचायत मुनादी व स्थानीय बाज़ार सेवाएं</p>
-        <div class="badge" id="currentLocationBadge">📍 हरियाणा के सभी 22 ज़िले और ब्लॉक-वाइज गाँव सक्रिय</div>
+        <div class="badge" id="currentLocationBadge">📍 हरियाणा के सभी 22 ज़िले और ब्लॉक-वाइज गाँव सक्रिय[span_6](start_span)[span_6](end_span)</div>
     </header>
 
     <div class="container" id="searchSection">
 
-        <!-- SEARCH SECTION -->
         <div class="card">
-            <h2>गाँव और दुकान खोजें (Village & Shop Search)</h2>
+            <h2>गाँव और दुकान खोजें (Village & Shop Search)[span_7](start_span)[span_7](end_span)</h2>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <label style="font-size: 0.8rem; color: #2e7d32; font-weight: bold; margin: 0;"><input type="checkbox" id="rememberMeCheck" checked> मेरा गाँव याद रखें (Save Village)</label>
-                <div style="font-size: 0.8rem; color: #d32f2f;">* अनिवार्य फ़ील्ड</div>
+                <label style="font-size: 0.8rem; color: #2e7d32; font-weight: bold; margin: 0;"><input type="checkbox" id="rememberMeCheck" checked> मेरा गाँव याद रखें (Save Village)[span_8](start_span)[span_8](end_span)</label>
+                <div style="font-size: 0.8rem; color: #d32f2f;">* अनिवार्य फ़ील्ड[span_9](start_span)[span_9](end_span)</div>
             </div>
             
             <div class="form-group">
@@ -525,13 +518,7 @@
                 <label>गाँव / Village <span class="mandatory">*</span></label>
                 <select id="mainVillageSelect" onchange="onVillageSelected()">
                     <option value="">-- पहले ब्लॉक चुनें --</option>
-               <option value="Bhaini">Bhaini</option>
-    <option value="Farmana">Farmana</option>
-    <option value="Kalanaur">Kalanaur</option>
-    <option value="Landra">Landra</option>
-    <option value="Mokhra">Mokhra</option>
-    <option value="Simli">Simli</option>
-     </select>
+                </select>
             </div>
 
             <div class="btn-box">
@@ -541,14 +528,13 @@
             <div class="result-box" id="searchResult" style="margin-top: 15px;"></div>
         </div>
 
-        <!-- 1. ADD SHOP FORM -->
         <div class="toggle-bar" onclick="toggleSection('addShopFormBox', 'icon1')">
-            <span>🏪 1. दुकान / सेवा जोड़ें (GPS + Live API)</span>
+            <span>🏪 1. दुकान / सेवा जोड़ें (GPS + Live API)[span_10](start_span)[span_10](end_span)</span>
             <span id="icon1">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="addShopFormBox">
-            <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 12px;">नया दुकान / सेवा रजिस्ट्रेशन</h3>
+            <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 12px;">नया दुकान / सेवा रजिस्ट्रेशन[span_11](start_span)[span_11](end_span)</h3>
             
             <div class="form-group">
                 <label>दुकान / सर्विस का नाम:</label>
@@ -593,13 +579,13 @@
             </div>
 
             <div class="form-group" style="background: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2;">
-                <label style="color: #e65100; font-size: 0.85rem;">📱 मोबाइल नंबर वेरीफिकेशन (OTP):</label>
+                <label style="color: #e65100; font-size: 0.85rem;">📱 मोबाइल नंबर वेरीफिकेशन (OTP):[span_12](start_span)[span_12](end_span)</label>
                 <div style="display: flex; gap: 6px;">
                     <input type="tel" id="regPhone" placeholder="10 अंकों का मोबाइल नंबर">
-                    <button type="button" class="custom-btn btn-secondary" onclick="sendOTP()" style="width: auto; padding: 8px 12px; font-size: 0.85rem;">OTP भेजें</button>
+                    <button type="button" class="custom-btn btn-secondary" onclick="sendOTP()" style="width: auto; padding: 8px 12px; font-size: 0.85rem;">OTP भेजें[span_13](start_span)[span_13](end_span)</button>
                 </div>
                 <div class="otp-box" id="otpBox">
-                    <label style="color: #d84315; font-size: 0.8rem;">OTP दर्ज करें (टेस्ट कोड: <strong id="generatedOtpDisplay">123456</strong>):</label>
+                    <label style="color: #d84315; font-size: 0.8rem;">OTP दर्ज करें (टेस्ट कोड: <strong id="generatedOtpDisplay">123456</strong>):[span_14](start_span)[span_14](end_span)</label>
                     <div style="display: flex; gap: 6px;">
                         <input type="number" id="userOtpInput" placeholder="6-अंकों का OTP">
                         <button type="button" class="custom-btn" onclick="verifyOTP()" style="width: auto; background: #2e7d32; padding: 6px 10px; font-size: 0.85rem;">वेरीफाई</button>
@@ -613,14 +599,13 @@
             </div>
         </div>
 
-        <!-- 2. NEW SERVICE CATEGORIES -->
         <div class="toggle-bar blue-service" onclick="toggleSection('addServiceFormBox', 'icon1b')">
-            <span>👷‍♂️ 2. ग्रामीण सेवाएँ जोड़ें (मिस्त्री, पंडित, गाड़ी, राज मिस्त्री)</span>
+            <span>👷‍♂️ 2. ग्रामीण सेवाएँ जोड़ें (मिस्त्री, पंडित, गाड़ी, राज मिस्त्री)[span_15](start_span)[span_15](end_span)</span>
             <span id="icon1b">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="addServiceFormBox">
-            <h3 style="font-size: 1rem; color: #0277bd; margin-bottom: 12px;">ग्रामीण सेवा प्रदाता पंजीकरण (OTP सत्यापन सहित)</h3>
+            <h3 style="font-size: 1rem; color: #0277bd; margin-bottom: 12px;">ग्रामीण सेवा प्रदाता पंजीकरण (OTP सत्यापन सहित)[span_16](start_span)[span_16](end_span)</h3>
             
             <div class="form-group">
                 <label>श्रेणी चुनें (Category):</label>
@@ -660,13 +645,13 @@
             </div>
 
             <div class="form-group" style="background: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2;">
-                <label style="color: #e65100; font-size: 0.85rem;">📱 मोबाइल नंबर वेरीफिकेशन (OTP):</label>
+                <label style="color: #e65100; font-size: 0.85rem;">📱 मोबाइल नंबर वेरीफिकेशन (OTP):[span_17](start_span)[span_17](end_span)</label>
                 <div style="display: flex; gap: 6px;">
                     <input type="tel" id="servPhone" placeholder="10 अंकों का मोबाइल नंबर">
-                    <button type="button" class="custom-btn btn-secondary" onclick="sendServiceOTP()" style="width: auto; padding: 8px 12px; font-size: 0.85rem;">OTP भेजें</button>
+                    <button type="button" class="custom-btn btn-secondary" onclick="sendServiceOTP()" style="width: auto; padding: 8px 12px; font-size: 0.85rem;">OTP भेजें[span_18](start_span)[span_18](end_span)</button>
                 </div>
                 <div class="otp-box" id="servOtpBox">
-                    <label style="color: #d84315; font-size: 0.8rem;">OTP दर्ज करें (टेस्ट कोड: <strong id="servGeneratedOtpDisplay">123456</strong>):</label>
+                    <label style="color: #d84315; font-size: 0.8rem;">OTP दर्ज करें (टेस्ट कोड: <strong id="servGeneratedOtpDisplay">123456</strong>):[span_19](start_span)[span_19](end_span)</label>
                     <div style="display: flex; gap: 6px;">
                         <input type="number" id="servUserOtpInput" placeholder="6-अंकों का OTP">
                         <button type="button" class="custom-btn" onclick="verifyServiceOTP()" style="width: auto; background: #2e7d32; padding: 6px 10px; font-size: 0.85rem;">वेरीफाई</button>
@@ -682,14 +667,13 @@
             <div style="margin-top: 15px; max-height: 250px; overflow-y: auto;" id="servicesDisplayArea"></div>
         </div>
 
-        <!-- 3. GRAMIN GALLERY -->
         <div class="toggle-bar orange" onclick="toggleSection('galleryBox', 'icon2')">
-            <span>📸 3. ग्रामीण गैलरी (गाँव की यादगार फोटो)</span>
+            <span>📸 3. ग्रामीण गैलरी (गाँव की यादगार फोटो)[span_20](start_span)[span_20](end_span)</span>
             <span id="icon2">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="galleryBox">
-            <h3 style="font-size: 1rem; color: #e65100; margin-bottom: 10px;">ग्रामीण गैलरी में फोटो जोड़ें</h3>
+            <h3 style="font-size: 1rem; color: #e65100; margin-bottom: 10px;">ग्रामीण गैलरी में फोटो जोड़ें[span_21](start_span)[span_21](end_span)</h3>
             <div class="form-group">
                 <label>फोटो का शीर्षक:</label>
                 <input type="text" id="galTitle" placeholder="उदा: गाँव की चौपाल / शिव मंदिर">
@@ -722,19 +706,18 @@
             </div>
             <button type="button" class="custom-btn btn-secondary" onclick="addGalleryImage()">गैलरी में सबमिट करें</button>
             <div style="margin-top: 15px; max-height: 250px; overflow-y: auto;">
-                <h4 style="font-size: 0.9rem; color: #555; margin-bottom: 6px;">हाल की ग्रामीण तस्वीरें:</h4>
+                <h4 style="font-size: 0.9rem; color: #555; margin-bottom: 6px;">हाल की ग्रामीण तस्वीरें:[span_22](start_span)[span_22](end_span)</h4>
                 <div class="gallery-grid" id="galleryDisplayGrid"></div>
             </div>
         </div>
 
-        <!-- 4. EVENTS & ANNOUNCEMENTS -->
         <div class="toggle-bar red" onclick="toggleSection('eventsBox', 'icon3')">
-            <span>📢 4. गाँव के विज्ञापन व मुनादी (मेला, दंगल)</span>
+            <span>📢 4. गाँव के विज्ञापन व मुनादी (मेला, दंगल)[span_23](start_span)[span_23](end_span)</span>
             <span id="icon3">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="eventsBox">
-            <h3 style="font-size: 1rem; color: #c62828; margin-bottom: 10px;">गाँव की मुनादी व सांस्कृतिक विज्ञापन</h3>
+            <h3 style="font-size: 1rem; color: #c62828; margin-bottom: 10px;">गाँव की मुनादी व सांस्कृतिक विज्ञापन[span_24](start_span)[span_24](end_span)</h3>
             <div class="form-group">
                 <label>कार्यक्रम की श्रेणी:</label>
                 <select id="eventCategory">
@@ -771,17 +754,16 @@
             <div style="margin-top: 15px; max-height: 250px; overflow-y: auto;" id="eventsDisplayArea"></div>
         </div>
 
-        <!-- 5. BUY & SELL -->
         <div class="toggle-bar purple" onclick="toggleSection('buySellBox', 'icon4')">
-            <span>🛒 5. खरीदें और बेचें (₹20/- प्रति टोकन)</span>
+            <span>🛒 5. खरीदें और बेचें (₹20/- प्रति टोकन)[span_25](start_span)[span_25](end_span)</span>
             <span id="icon4">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="buySellBox">
-            <h3 style="font-size: 1rem; color: var(--purple); margin-bottom: 10px;">पुराना/नया सामान बेचें (Buy & Sell)</h3>
+            <h3 style="font-size: 1rem; color: var(--purple); margin-bottom: 10px;">पुराना/नया सामान बेचें (Buy & Sell)[span_26](start_span)[span_26](end_span)</h3>
             <div style="text-align: center; background: #fffde7; padding: 10px; border: 1px dashed #fbc02d; border-radius: 6px; margin-bottom: 10px;">
-                <p style="font-weight: bold; color: #d84315; font-size: 0.9rem;">💳 विज्ञापन शुल्क: ₹20 प्रति टोकन</p>
-                <p style="font-size: 0.8rem; margin-top: 3px; color: #555;">UPI ID: <strong style="color: #c62828;">haryana.rural@upi</strong> पर भेजें</p>
+                <p style="font-weight: bold; color: #d84315; font-size: 0.9rem;">💳 विज्ञापन शुल्क: ₹20 प्रति टोकन[span_27](start_span)[span_27](end_span)</p>
+                <p style="font-size: 0.8rem; margin-top: 3px; color: #555;">UPI ID: <strong style="color: #c62828;">haryana.rural@upi</strong> पर भेजें[span_28](start_span)[span_28](end_span)</p>
             </div>
             <div class="form-group">
                 <label>सामान का नाम:</label>
@@ -807,18 +789,17 @@
                 <label>UPI Transaction ID:</label>
                 <input type="text" id="upiTxnId" placeholder="12-अंकों का UPI Txn ID">
             </div>
-            <button type="button" class="custom-btn btn-purple" onclick="submitBuySellItem()">₹20 टोकन के साथ पोस्ट करें</button>
+            <button type="button" class="custom-btn btn-purple" onclick="submitBuySellItem()">₹20 टोकन के साथ पोस्ट करें[span_29](start_span)[span_29](end_span)</button>
             <div style="margin-top: 15px; max-height: 250px; overflow-y: auto;" id="buySellDisplayArea"></div>
         </div>
 
-        <!-- 6. GOVT SCHEMES -->
         <div class="toggle-bar govt" onclick="toggleSection('govtSchemesBox', 'icon5')">
-            <span>🏛️ 6. हरियाणा सरकारी योजनाएं (HKRN, PPP, पेंशन)</span>
+            <span>🏛️ 6. हरियाणा सरकारी योजनाएं (HKRN, PPP, पेंशन)[span_30](start_span)[span_30](end_span)</span>
             <span id="icon5">▼</span>
         </div>
 
         <div class="collapsible-form-container" id="govtSchemesBox">
-            <h3 style="font-size: 1rem; color: #004d40; margin-bottom: 10px;">हरियाणा सरकारी योजनाएं एवं ऑनलाइन सेवाएं</h3>
+            <h3 style="font-size: 1rem; color: #004d40; margin-bottom: 10px;">हरियाणा सरकारी योजनाएं एवं ऑनलाइन सेवाएं[span_31](start_span)[span_31](end_span)</h3>
             <div class="govt-grid">
                 <a href="https://hkrnl.itiharyana.gov.in/" target="_blank" class="govt-item-card">💼 HKRN रोज़गार</a>
                 <a href="https://meraparivar.haryana.gov.in/" target="_blank" class="govt-item-card">🆔 परिवार पहचान पत्र</a>
@@ -836,7 +817,7 @@
     </footer>
 
     <script>
-        let haryanaMasterData = {
+        const haryanaMasterData = {
             "AMBALA": {
                 "AMBALA": ["Ambala Rural", "Panjokhra", "Dora", "Sarsehri", "Tandwal", "Babalpur", "Machhonda", "Gardh", "Bara"],
                 "BARARA": ["Barara", "Mulana", "Dhurala", "Bhedthal", "Topra", "Dabkoli", "Naneola"],
@@ -847,7 +828,7 @@
                 "BHIWANI": ["Bhiwani Rural", "Dinod", "Bidhwan", "Talu", "Nangal", "Biran", "Chang", "Nimri", "Bapora"],
                 "BAWANI KHERA": ["Bawani Khera", "Miran", "Jatu Lohari", "Sisar", "Kairu", "Jhamuwas", "Sui"],
                 "SIWANI": ["Siwani", "Bhiwani Rohilla", "Kairu", "Barwala", "Ghangala", "Jali", "Dariyapur"],
-                "TOSHAM": ["Tosham", "Khanak", "Dhandalan", "Sisar", "Dang Kalan", "Khanak", "Bishan"],
+                "TOSHAM": ["Tosham", "Khanak", "Dhandalan", "Sisar", "Dang Kalan", "Bishan"],
                 "LOHARU": ["Loharu", "Jui", "Sisahani", "Digwa", "Alawalpur", "Kairu", "Bahal"]
             },
             "CHARKHI DADRI": {
@@ -1005,6 +986,7 @@
             const block = document.getElementById(blockId).value;
             const villSel = document.getElementById(villageId);
 
+            if(!villSel) return;
             villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
 
             if (dist && block && haryanaMasterData[dist] && haryanaMasterData[dist][block]) {
@@ -1231,9 +1213,9 @@
         }
 
         function searchServices() {
-            const selectedDist = document.getElementById("mainDistrictSelect").value.trim().toLowerCase();
-            const selectedBlock = document.getElementById("mainBlockSelect").value.trim().toLowerCase();
-            const selectedVill = document.getElementById("mainVillageSelect").value.trim().toLowerCase();
+            const selectedDist = document.getElementById("mainDistrictSelect").value.trim();
+            const selectedBlock = document.getElementById("mainBlockSelect").value.trim();
+            const selectedVill = document.getElementById("mainVillageSelect").value.trim();
             const result = document.getElementById("searchResult");
 
             if (!selectedDist || !selectedBlock || !selectedVill) {
@@ -1250,15 +1232,15 @@
             const approvedServices = JSON.parse(localStorage.getItem("approvedServicesList") || "[]");
 
             const filteredShops = approvedShops.filter(s => 
-                s.dist.trim().toLowerCase() === selectedDist && 
-                s.block.trim().toLowerCase() === selectedBlock && 
-                s.vill.trim().toLowerCase() === selectedVill
+                s.dist.trim() === selectedDist && 
+                s.block.trim() === selectedBlock && 
+                s.vill.trim() === selectedVill
             );
 
             const filteredServices = approvedServices.filter(s => 
-                s.dist.trim().toLowerCase() === selectedDist && 
-                s.block.trim().toLowerCase() === selectedBlock && 
-                s.vill.trim().toLowerCase() === selectedVill
+                s.dist.trim() === selectedDist && 
+                s.block.trim() === selectedBlock && 
+                s.vill.trim() === selectedVill
             );
 
             if (filteredShops.length === 0 && filteredServices.length === 0) {
@@ -1357,6 +1339,8 @@
         function loadGallery() {
             const gallery = JSON.parse(localStorage.getItem("graminGallery") || "[]");
             const grid = document.getElementById("galleryDisplayGrid");
+            if(!grid) return;
+
             if(gallery.length === 0) {
                 grid.innerHTML = "<p style='font-size:0.75rem; color:#888;'>कोई फोटो नहीं है।</p>";
                 return;
@@ -1397,6 +1381,8 @@
         function loadEvents() {
             const events = JSON.parse(localStorage.getItem("villageEvents") || "[]");
             const area = document.getElementById("eventsDisplayArea");
+            if(!area) return;
+
             if(events.length === 0) {
                 area.innerHTML = "<p style='font-size:0.75rem; color:#888;'>कोई सूचना नहीं है।</p>";
                 return;
@@ -1439,6 +1425,8 @@
         function loadBuySellItems() {
             const items = JSON.parse(localStorage.getItem("buySellItems") || "[]");
             const area = document.getElementById("buySellDisplayArea");
+            if(!area) return;
+
             if(items.length === 0) {
                 area.innerHTML = "<p style='font-size:0.75rem; color:#888;'>कोई आइटम उपलब्ध नहीं है।</p>";
                 return;
