@@ -408,10 +408,9 @@
             <div style="text-align: right; font-size: 0.8rem; color: #d32f2f; margin-bottom: 10px;">* अनिवार्य फ़ील्ड</div>
             
             <div class="form-group">
-                <label>जिला / District <span class="mandatory">*</span></label>
-                <select id="mainDistrictSelect" onchange="onMainDistrictChange()">
-                    <option value="">-- जिला चुनें --</option>
-                </select>
+           <select id="mainDistrictSelect" onchange="onMainDistrictChange(); loadVillagesFromFirebase('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
+    <option value="">-- जिला चुनें --</option>
+     </select>
             </div>
 
             <div class="form-group">
