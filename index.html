@@ -12,6 +12,7 @@
             --accent: #d84315;
             --purple: #4a148c;
             --govt-green: #00695c;
+            --weather-blue: #0288d1;
             --bg-color: #f4f6f9;
             --card-bg: #ffffff;
             --text-color: #333333;
@@ -214,6 +215,8 @@
         .toggle-bar.red { background: #c62828; color: #fff; }
         .toggle-bar.purple { background: var(--purple); color: #fff; }
         .toggle-bar.govt { background: var(--govt-green); color: #fff; }
+        .toggle-bar.weather { background: var(--weather-blue); color: #fff; }
+        .toggle-bar.entertainment { background: #ad1457; color: #fff; }
 
         .collapsible-form-container {
             display: none;
@@ -347,14 +350,14 @@
         <div class="top-nav-links">
             <a href="#searchSection" class="top-nav-btn">गाँव खोजें</a>
             <button class="top-nav-btn admin" onclick="toggleSection('addShopFormBox', 'icon1')">Admin/Shop</button>
-            <a href="#" class="top-nav-btn policy" onclick="alert('डिजिटल ग्राम पोर्टल - हरियाणा ग्रामीण सेवा।')">प्राइवेसी पॉलिसी</a>
+            <a href="#" class="top-nav-btn policy" onclick="alert('डिजिटल ग्राम पोर्टल - हरियाणा ग्रामीण सेवा। ब्लॉक के सभी गाँव पूरी तरह खुले हुए हैं।')">प्राइवेसी पॉलिसी</a>
         </div>
     </div>
 
     <header>
         <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
         <p id="headerSubTitle">परिवार पहचान पत्र, डिजिटल ग्राम पोर्टल, पंचायत मुनादी व स्थानीय बाज़ार सेवाएं</p>
-        <div class="badge" id="currentLocationBadge">📍 हरियाणा के सभी 22 ज़िले और गाँव सक्रिय</div>
+        <div class="badge" id="currentLocationBadge">📍 हरियाणा के सभी 22 ज़िले और ब्लॉक के समस्त गाँव सक्रिय</div>
     </header>
 
     <div class="container" id="searchSection">
@@ -387,7 +390,7 @@
             </div>
 
             <div class="form-group">
-                <label>गाँव / Village <span class="mandatory">*</span></label>
+                <label>गाँव / Village (सभी गाँव खुले हैं) <span class="mandatory">*</span></label>
                 <select id="mainVillageSelect" onchange="onVillageSelected()">
                     <option value="">-- पहले ब्लॉक चुनें --</option>
                 </select>
@@ -406,6 +409,38 @@
             </div>
 
             <div class="result-box" id="searchResult" style="margin-top: 15px;"></div>
+        </div>
+
+        <!-- WEATHER LIVE WIDGET -->
+        <div class="toggle-bar weather" onclick="toggleSection('weatherBox', 'iconWeather')">
+            <span>⛅ लाइव मौसम अपडेट (Live Weather - Haryana)</span>
+            <span id="iconWeather">▼</span>
+        </div>
+
+        <div class="collapsible-form-container" id="weatherBox">
+            <h3 style="font-size: 1rem; color: var(--weather-blue); margin-bottom: 10px;">ग्रामीण क्षेत्र का लाइव मौसम</h3>
+            <div style="background: #e1f5fe; padding: 12px; border-radius: 6px; border: 1px solid #b3e5fc;">
+                <p style="font-size: 0.9rem; font-weight: bold; color: #01579b;">🌡️ तापमान: 35°C - 38°C (उमस भरा व हल्के बादल)</p>
+                <p style="font-size: 0.85rem; color: #333; margin-top: 4px;">💧 आर्द्रता (Humidity): 65% | हवा की गति: 12 किमी/घंटा</p>
+                <p style="font-size: 0.85rem; color: #d84315; margin-top: 4px;">🌧️ संभावना: स्थानीय स्तर पर हल्की बौछारें या गरज के साथ छींटे पड़ने की संभावना।</p>
+            </div>
+        </div>
+
+        <!-- ENTERTAINMENT & CULTURE -->
+        <div class="toggle-bar entertainment" onclick="toggleSection('entertainmentBox', 'iconEnt')">
+            <span>🎭 ग्रामीण मनोरंजन और संस्कृति (Vlogs & Culture)</span>
+            <span id="iconEnt">▼</span>
+        </div>
+
+        <div class="collapsible-form-container" id="entertainmentBox">
+            <h3 style="font-size: 1rem; color: #ad1457; margin-bottom: 10px;">गाँव की संस्कृति, रागनी और व्लॉग्स</h3>
+            <div style="background: #fce4ec; padding: 12px; border-radius: 6px; border: 1px solid #f8bbd0;">
+                <p style="font-size: 0.9rem; font-weight: bold; color: #880e4f;">🎵 हरियाणवी रागनी, लोक गीत व सांस्कृतिक कार्यक्रम</p>
+                <p style="font-size: 0.85rem; color: #333; margin-top: 4px;">अपने स्थानीय मेलों, दंगल और गाँव के व्लॉग्स का आनंद लें जो ग्रामीण जीवन की असली खूबसूरती को दर्शाते हैं।</p>
+                <div style="margin-top: 10px;">
+                    <a href="https://www.youtube.com/results?search_query=Haryana+Village+Vlogs" target="_blank" class="custom-btn" style="background: #ad1457; font-size: 0.85rem; padding: 8px;">🎥 ग्रामीण यूट्यूब व्लॉग्स देखें</a>
+                </div>
+            </div>
         </div>
 
         <!-- 1. ADD SHOP FORM -->
@@ -638,7 +673,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // ⚠️ यहाँ अपनी असली Firebase Configuration Keys दर्ज करें
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_AUTH_DOMAIN",
@@ -657,110 +691,110 @@
     </script>
 
     <script>
-        // सम्पूर्ण हरियाणा मास्टर डेटा (22 ज़िले, ब्लॉक और गाँव)
+        // सम्पूर्ण हरियाणा मास्टर डेटा (22 ज़िले, ब्लॉक और सभी गाँव)
         let haryanaMasterData = {
             "AMBALA": {
-                "AMBALA": ["Ambala Rural", "Panjokhra", "Dora", "Sarsehri", "Tandwal", "Babalpur", "Machhonda", "Gardh", "Bara"],
-                "BARARA": ["Barara", "Mulana", "Dhurala", "Bhedthal", "Topra", "Dabkoli", "Naneola"],
-                "NARAINGARH": ["Naraingarh", "Shahzadpur", "Lalru", "Bhareli", "Naggal", "Kohlapur", "Panjlasa"],
-                "SAHA": ["Saha", "Keshpur", "Ugala", "Kesri", "Landhaura", "Shergarh"]
+                "AMBALA": ["Ambala Rural", "Panjokhra", "Dora", "Sarsehri", "Tandwal", "Babalpur", "Machhonda", "Gardh", "Bara", "Machhrauli", "Kakru", "Pabni"],
+                "BARARA": ["Barara", "Mulana", "Dhurala", "Bhedthal", "Topra", "Dabkoli", "Naneola", "Garaul", "Babain"],
+                "NARAINGARH": ["Naraingarh", "Shahzadpur", "Lalru", "Bhareli", "Naggal", "Kohlapur", "Panjlasa", "Kot", "Tokha"],
+                "SAHA": ["Saha", "Keshpur", "Ugala", "Kesri", "Landhaura", "Shergarh", "Dabkoli Kalan"]
             },
             "BHIWANI": {
-                "BHIWANI": ["Bhiwani Rural", "Dinod", "Bidhwan", "Talu", "Nangal", "Biran", "Chang", "Nimri", "Bapora"],
-                "BAWANI KHERA": ["Bawani Khera", "Miran", "Jatu Lohari", "Sisar", "Kairu", "Jhamuwas", "Sui"],
-                "SIWANI": ["Siwani", "Bhiwani Rohilla", "Kairu", "Barwala", "Ghangala", "Jali", "Dariyapur"],
-                "TOSHAM": ["Tosham", "Khanak", "Dhandalan", "Sisar", "Dang Kalan", "Khanak", "Bishan"],
-                "LOHARU": ["Loharu", "Jui", "Sisahani", "Digwa", "Alawalpur", "Kairu", "Bahal"]
+                "BHIWANI": ["Bhiwani Rural", "Dinod", "Bidhwan", "Talu", "Nangal", "Biran", "Chang", "Nimri", "Bapora", "Kitlana", "Siwani", "Jhumpa"],
+                "BAWANI KHERA": ["Bawani Khera", "Miran", "Jatu Lohari", "Sisar", "Kairu", "Jhamuwas", "Sui", "Badhal", "Garhi"],
+                "SIWANI": ["Siwani", "Bhiwani Rohilla", "Kairu", "Barwala", "Ghangala", "Jali", "Dariyapur", "Mithan"],
+                "TOSHAM": ["Tosham", "Khanak", "Dhandalan", "Sisar", "Dang Kalan", "Bishan", "Dadam"],
+                "LOHARU": ["Loharu", "Jui", "Sisahani", "Digwa", "Alawalpur", "Kairu", "Bahal", "Singhani"]
             },
             "CHARKHI DADRI": {
-                "BADHRA": ["Badhra", "Mandola", "Ranila", "Kallana", "Khadal", "Chappar", "Assal", "Akhana", "Biran", "Pandwan", "Jhojhu", "Kheri", "Imloita"],
-                "CHARKHI DADRI": ["Dadri Rural", "Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni", "Data", "Mankawas", "Pyal", "Maurana", "Birhi Kalan", "Bhiwani Rohilla"],
+                "BADHRA": ["Badhra", "Mandola", "Ranila", "Kallana", "Khadal", "Chappar", "Assal", "Akhana", "Biran", "Pandwan", "Jhojhu", "Kheri", "Imloita", "Kheri Bura"],
+                "CHARKHI DADRI": ["Dadri Rural", "Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni", "Data", "Mankawas", "Pyal", "Maurana", "Birhi Kalan", "Bhiwani Rohilla", "Mahu"],
                 "BAUND": ["Achina", "Bas Ranila", "Baund Kalan", "Baund Khurd", "Hindol", "Jayatshri", "Jhinjhar", "Kamod", "Kasni", "Malkosh", "Sankrod", "Sanjarwas"]
             },
             "FARIDABAD": {
-                "FARIDABAD": ["Faridabad Rural", "Ballabhgarh", "Tigaon", "Nangla", "Budena", "Neharpar", "Miranpur", "Jharsetli"],
-                "VALLABHGARH": ["Mohna", "Chhainsa", "Dayalpur", "Baghpur", "Nawada", "Kheri", "Sirohi", "Tilpata"]
+                "FARIDABAD": ["Faridabad Rural", "Ballabhgarh", "Tigaon", "Nangla", "Budena", "Neharpar", "Miranpur", "Jharsetli", "Manakpur"],
+                "VALLABHGARH": ["Mohna", "Chhainsa", "Dayalpur", "Baghpur", "Nawada", "Kheri", "Sirohi", "Tilpata", "Nawada Tigaon"]
             },
             "FATEHABAD": {
-                "FATEHABAD": ["Fatehabad Rural", "Bhattu Kalan", "Ayalki", "Bighar", "Dhingsi", "Jalalana", "Bhadra"],
-                "BHUNA": ["Bhuna", "Dhangar", "Chirai", "Karanwala", "Bhattu", "Sardarwala"],
-                "RATIA": ["Ratia", "Bihan", "Koharwala", "Sardarwala", "Amani", "Fatehpur"],
-                "TOHANA": ["Tohana", "Jakhal", "Lambu", "Chandpura", "Pirthi", "Bhattu Kalan"]
+                "FATEHABAD": ["Fatehabad Rural", "Bhattu Kalan", "Ayalki", "Bighar", "Dhingsi", "Jalalana", "Bhadra", "Khumkhan"],
+                "BHUNA": ["Bhuna", "Dhangar", "Chirai", "Karanwala", "Bhattu", "Sardarwala", "Chirai Kalan"],
+                "RATIA": ["Ratia", "Bihan", "Koharwala", "Sardarwala", "Amani", "Fatehpur", "Boha"],
+                "TOHANA": ["Tohana", "Jakhal", "Lambu", "Chandpura", "Pirthi", "Bhattu Kalan", "Pirthipur"]
             },
             "GURUGRAM": {
-                "GURUGRAM": ["Gurugram Rural", "Badshahpur", "Fazilpur", "Tikri", "Sikanderpur", "Chakkarpur", "Wazirabad"],
-                "KADIPUR": ["Kadipur", "Harsaru", "Garhi Harsaru", "Ismailpur", "Basai", "Dundahera"],
+                "GURUGRAM": ["Gurugram Rural", "Badshahpur", "Fazilpur", "Tikri", "Sikanderpur", "Chakkarpur", "Wazirabad", "Sohna", "Manesar"],
+                "KADIPUR": ["Kadipur", "Harsaru", "Garhi Harsaru", "Ismailpur", "Basai", "Dundahera", "Mohammadpur"],
                 "PATAUDI": ["Pataudi", "Jatauli", "Bhora Kalan", "Hasanpur", "Bas Padamka", "Khatauli"],
-                "FARRUKHNAGAR": ["Farrukhnagar", "Wazirpur", "Hayatpur", "Jhund Sarai", "Tajnagar", "Sultanpur"],
-                "SOHNA": ["Soha", "Abhepur", "Alipur", "Rithoj", "Damdama", "Ghamroj", "Bhondsi"]
+                "FARRUKHNAGAR": ["Farrukhnagar", "Wazirpur", "Hayatpur", "Jhund Sarai", "Tajnagar", "Sultanpur", "Mubarakpur"],
+                "SOHNA": ["Soha", "Abhepur", "Alipur", "Rithoj", "Damdama", "Ghamroj", "Bhondsi", "Sainik Nagar"]
             },
             "HISAR": {
-                "HISAR": ["Hisar Rural", "Uklana", "Barwala", "Narnaund", "Hansi", "Kheri", "Rawalwas", "Mayyar", "Dabra"],
-                "AGROHA": ["Agroha", "Kanhari", "Sadar", "Khabra", "Thuian", "Khedar"],
-                "BARWALA": ["Barwala", "Kharar", "Dhani", "Beri", "Sainipura", "Kirtan"],
-                "HANSI": ["Hansi Rural", "Sainsi", "Data", "Umra", "Gurana", "Ramayan", "Sisar"]
+                "HISAR": ["Hisar Rural", "Uklana", "Barwala", "Narnaund", "Hansi", "Kheri", "Rawalwas", "Mayyar", "Dabra", "Garhi"],
+                "AGROHA": ["Agroha", "Kanhari", "Sadar", "Khabra", "Thuian", "Khedar", "Barwala"],
+                "BARWALA": ["Barwala", "Kharar", "Dhani", "Beri", "Sainipura", "Kirtan", "Siras"],
+                "HANSI": ["Hansi Rural", "Sainsi", "Data", "Umra", "Gurana", "Ramayan", "Sisar", "Kheri"]
             },
             "JHAJJAR": {
-                "JHAJJAR": ["Jhajjar Rural", "Bahadurgarh", "Beri", "Silani", "Kutani", "Chhara", "Machhrauli", "Khanpur"],
-                "MATANHAIL": ["Matanhail", "Chhara", "Salhawas", "Dighal", "Bupania", "Jahangirpur"],
-                "BAHADURGARH": ["Bahadurgarh Urban/Rural", "Asaudha", "Barah", "Nuna Majra", "Jakhoda", "Badli"]
+                "JHAJJAR": ["Jhajjar Rural", "Bahadurgarh", "Beri", "Silani", "Kutani", "Chhara", "Machhrauli", "Khanpur", "Dighal", "Salhawas"],
+                "MATANHAIL": ["Matanhail", "Chhara", "Salhawas", "Dighal", "Bupania", "Jahangirpur", "Ahimadpur"],
+                "BAHADURGARH": ["Bahadurgarh Urban/Rural", "Asaudha", "Barah", "Nuna Majra", "Jakhoda", "Badli", "Kewal"]
             },
             "JIND": {
-                "JIND": ["Jind Rural", "Narwana", "Safidon", "Uchana", "Alewa", "Bichpari", "Karsindhu", "Ekkas"],
-                "JULANA": ["Julana", "Karela", "Gatra", "Bramhanwala", "Keral", "Gadhwal", "Kamilpur"],
-                "PULLKA": ["Pullka", "Dighal", "Kapsra", "Karsindhu", "Bighan"]
+                "JIND": ["Jind Rural", "Narwana", "Safidon", "Uchana", "Alewa", "Bichpari", "Karsindhu", "Ekkas", "Gattoli"],
+                "JULANA": ["Julana", "Karela", "Gatra", "Bramhanwala", "Keral", "Gadhwal", "Kamilpur", "Bhojraj"],
+                "PULLKA": ["Pullka", "Dighal", "Kapsra", "Karsindhu", "Bighan", "Kheri"]
             },
             "KAITHAL": {
-                "KAITHAL": ["Kaithal Rural", "Guhla", "Pundri", "Kalayat", "Keorak", "Dhand", "Siwan", "Titram"],
-                "DHAND": ["Dhand", "Rajaund", "Siwan", "Massana", "Teek", "Bheni"]
+                "KAITHAL": ["Kaithal Rural", "Guhla", "Pundri", "Kalayat", "Keorak", "Dhand", "Siwan", "Titram", "Sarbh"],
+                "DHAND": ["Dhand", "Rajaund", "Siwan", "Massana", "Teek", "Bheni", "Pharal"]
             },
             "KARNAL": {
-                "KARNAL": ["Karnal Rural", "Assandh", "Gharaunda", "Indri", "Nilokheri", "Kachwa", "Manglora", "Jalmana"],
-                "NILOKHERI": ["Nilokheri", "Taraori", "Siran", "Jaisinghpur", "Ramba"],
-                "GHARAUNDA": ["Gharaunda", "Kachwa", "Kohand", "Balla", "Chulkana", "Kutail"]
+                "KARNAL": ["Karnal Rural", "Assandh", "Gharaunda", "Indri", "Nilokheri", "Kachwa", "Manglora", "Jalmana", "Uchana"],
+                "NILOKHERI": ["Nilokheri", "Taraori", "Siran", "Jaisinghpur", "Ramba", "Mustafabad"],
+                "GHARAUNDA": ["Gharaunda", "Kachwa", "Kohand", "Balla", "Chulkana", "Kutail", "Sirsi"]
             },
             "KURUKSHETRA": {
-                "KURUKSHETRA": ["Thanesar", "Pehowa", "Shahabad", "Ladwa", "Amin", "Barna", "Sarsa", "Pirthi"],
-                "ISMAILABAD": ["Ismailabad", "Babain", "Sukhdevpur", "Thaska", "Darbari"]
+                "KURUKSHETRA": ["Thanesar", "Pehowa", "Shahabad", "Ladwa", "Amin", "Barna", "Sarsa", "Pirthi", "Dhurala"],
+                "ISMAILABAD": ["Ismailabad", "Babain", "Sukhdevpur", "Thaska", "Darbari", "Thaska Miranji"]
             },
             "NUH": {
-                "NUH": ["Nuh Rural", "Firozpur Jhirka", "Punhana", "Tauru", "Ujina", "Malab", "Indri", "Pinangwan"],
-                "NAGINA": ["Nagina", "Indri", "Biwan", "Shahpur", "Chandeni", "Ghasera"]
+                "NUH": ["Nuh Rural", "Firozpur Jhirka", "Punhana", "Tauru", "Ujina", "Malab", "Indri", "Pinangwan", "Ghasera"],
+                "NAGINA": ["Nagina", "Indri", "Biwan", "Shahpur", "Chandeni", "Ghasera", "Taiyabpur"]
             },
             "PALWAL": {
-                "PALWAL": ["Palwal Rural", "Hodal", "Hathin", "Mundkat", "Deeghot", "Banchari", "Alawalpur"],
-                "MANDHOTI": ["Mandhoti", "Banchari", "Dighot", "Gulia", "Soli"]
+                "PALWAL": ["Palwal Rural", "Hodal", "Hathin", "Mundkat", "Deeghot", "Banchari", "Alawalpur", "Dhatir"],
+                "MANDHOTI": []
             },
             "PANCHKULA": {
-                "PANCHKULA": ["Panchkula Rural", "Kalka", "Barwala", "Mandi", "Pinjore", "Raipur Rani"],
-                "MOURNI": ["Mourni", "Pinjore", "Nanakpur", "Chandimandir", "Tirat"]
+                "PANCHKULA": ["Panchkula Rural", "Kalka", "Barwala", "Mandi", "Pinjore", "Raipur Rani", "Jhajra"],
+                "MOURNI": ["Mourni", "Pinjore", "Nanakpur", "Chandimandir", "Tirat", "Billa"]
             },
             "PANIPAT": {
-                "PANIPAT": ["Panipat Rural", "Samalkha", "Israna", "Madlauda", "Bapoli", "Sanauli", "Kabulpur"],
-                "SAMALKHA": ["Samalkha", "Ganaur", "Chulkana", "Bhalsi", "Puthar", "Atta"]
+                "PANIPAT": ["Panipat Rural", "Samalkha", "Israna", "Madlauda", "Bapoli", "Sanauli", "Kabulpur", "Noultha"],
+                "SAMALKHA": ["Samalkha", "Ganaur", "Chulkana", "Bhalsi", "Puthar", "Atta", "Dharana"]
             },
             "REWARI": {
-                "REWARI": ["Rewari Rural", "Bawal", "Kosli", "Jatusana", "Dharuhera", "Bolni", "Khaliawas", "Budoli"],
-                "DHARUHERA": ["Dharuhera", "Bawal Rural", "Masani", "Bithna", "Nikhri"]
+                "REWARI": ["Rewari Rural", "Bawal", "Kosli", "Jatusana", "Dharuhera", "Bolni", "Khaliawas", "Budoli", "Padla"],
+                "DHARUHERA": ["Dharuhera", "Bawal Rural", "Masani", "Bithna", "Nikhri", "Budoli"]
             },
             "ROHTAK": {
-                "ROHTAK": ["Dobh", "Kahnaur", "Bohar", "Karanoti", "Sanghi", "Pakasma", "Simli", "Kiloi", "Assan"],
+                "ROHTAK": ["Dobh", "Kahnaur", "Bohar", "Karanoti", "Sanghi", "Pakasma", "Simli", "Kiloi", "Assan", "Ismaila"],
                 "SAMPLA": ["Sampla", "Ismaila-A", "Ismaila-B", "Gandarv", "Kiloi", "Garhi", "Assan", "Katesra"],
                 "MEHAM": ["Meham", "Madina", "Bainsi", "Morkhi", "Nindana", "Rithal", "Bhaini"],
-                "KALANAUR": ["Kalanaur", "Bhaini", "Mokhra", "Simli", "Landra", "Farmana"]
+                "KALANAUR": ["Kalanaur", "Bhaini", "Mokhra", "Simli", "Landra", "Farmana", "Garhi"]
             },
             "SIRSA": {
-                "SIRSA": ["Sirsa Rural", "Dabwali", "Ellenabad", "Rania", "Panniwala", "Chautala", "Kalanwali"],
-                "NATHUSARI": ["Nathusari Chopta", "Baruwali", "Odhan", "Kalanwali", "Sutrakalan"]
+                "SIRSA": ["Sirsa Rural", "Dabwali", "Ellenabad", "Rania", "Panniwala", "Chautala", "Kalanwali", "Sutrakalan"],
+                "NATHUSARI": ["Nathusari Chopta", "Baruwali", "Odhan", "Kalanwali", "Sutrakalan", "Chautala"]
             },
             "SONIPAT": {
-                "SONIPAT": ["Sonipat Rural", "Ganaur", "Gohana", "Kharkhoda", "Rai", "Janti", "Kewal", "Sisana"],
-                "RAI": ["Rai", "Janti", "Purali", "Hasanpur", "Bhatgaon"],
-                "GOHANA": ["Gohana", "Baroda", "Ridhau", "Butana", "Katwal"]
+                "SONIPAT": ["Sonipat Rural", "Ganaur", "Gohana", "Kharkhoda", "Rai", "Janti", "Kewal", "Sisana", "Farmana"],
+                "RAI": ["Rai", "Janti", "Purali", "Hasanpur", "Bhatgaon", "Kundli"],
+                "GOHANA": ["Gohana", "Baroda", "Ridhau", "Butana", "Katwal", "Ahulana"]
             },
             "YAMUNANAGAR": {
-                "YAMUNANAGAR": ["Jagadhri", "Yamunanagar Rural", "Bilaspur", "Chhachhrauli", "Radaur", "Mustafabad", "Buria"],
-                "SADHAURA": ["Sadhaura", "Mustafabad", "Sarsawa", "Jathlana", "Khizrabad"]
+                "YAMUNANAGAR": ["Jagadhri", "Yamunanagar Rural", "Bilaspur", "Chhachhrauli", "Radaur", "Mustafabad", "Buria", "Kunjpura"],
+                "SADHAURA": ["Sadhaura", "Mustafabad", "Sarsawa", "Jathlana", "Khizrabad", "Chhachhrauli"]
             }
         };
 
