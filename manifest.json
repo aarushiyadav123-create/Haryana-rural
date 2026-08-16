@@ -1,9 +1,11 @@
 {
+    "id": "/",
     "name": "MeraGaov",
     "short_name": "MeraGaov",
     "description": "Haryana Rural Service App",
     "start_url": "/",
     "display": "standalone",
+    "orientation": "portrait",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
     "icons": [
