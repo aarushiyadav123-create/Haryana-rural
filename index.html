@@ -427,12 +427,10 @@
 
             <div class="form-group">
                 <label>खण्ड / Block <span class="mandatory">*</span></label>
-                <select id="mainBlockSelect" onchange="onMainBlockChange()">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
+        <select id="mainBlockSelect" onchange="loadVillagesFromFirebase('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
+    <option value="">-- पहले जिला चुनें --</option>
+</select>
+ <div class="form-group">
                 <label>गाँव / Village (सभी गाँव खुले हैं) <span class="mandatory">*</span></label>
                 <select id="mainVillageSelect" onchange="onVillageSelected()">
                     <option value="">-- पहले ब्लॉक चुनें --</option>
@@ -477,7 +475,8 @@
 
             <div class="form-group">
                 <label>खण्ड / Block:</label>
-                <select id="regBlock" onchange="onRegBlockChange()">
+               <select id="regBlock" onchange="loadVillagesFromFirebase('regDistrict', 'regBlock', 'regVillage')">
+ 
                     <option value="">-- पहले जिला चुनें --</option>
                 </select>
             </div>
@@ -559,13 +558,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>ब्लॉक चुनें:</label>
-                <select id="galBlock" onchange="onGalBlockChange()">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>गाँव चुनें:</label>
+                <label>ब्लॉक 
+            <select id="galBlock" onchange="loadVillagesFromFirebase('galDistrict', 'galBlock', 'galVillage')">
+    <option value="">-- पहले जिला चुनें --</option>
+</select>
+
                 <select id="galVillage">
                     <option value="">-- पहले ब्लॉक चुनें --</option>
                 </select>
@@ -611,9 +608,10 @@
             </div>
             <div class="form-group">
                 <label>ब्लॉक चुनें:</label>
-                <select id="eventBlock" onchange="onEventBlockChange()">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
+                <select id="eventBlock" onchange="loadVillagesFromFirebase('eventDistrict', 'eventBlock', 'eventVillage')">
+    <option value="">-- पहले जिला चुनें --</option>
+</select>
+
             </div>
             <div class="form-group">
                 <label>गाँव चुनें:</label>
