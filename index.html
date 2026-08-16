@@ -390,7 +390,7 @@
 
     <header>
         <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
-        <p id="headerSubTitle">प
+        <p id="headerSubTitle">
             Haryanagramin , डिजिटल ग्राम पोर्टल, पंचायत मुनादी व स्थानीय बाज़ार सेवाएं</p>
         <div class="badge" id="currentLocationBadge">📍 हरियाणा के सभी 22 ज़िले और ब्लॉक के समस्त गाँव सक्रिय</div>
     </header>
@@ -525,6 +525,20 @@
                 <button type="button" class="custom-btn" onclick="submitShop()" style="padding: 10px;">दुकान लाइव Firebase में दर्ज करें</button>
             </div>
         </div>
+<div class="category-dropdown-box" style="margin-bottom: 15px; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <button class="category-main-btn" onclick="toggleCategoryDropdown()" style="width: 100%; padding: 12px; background: #2e7d32; color: #fff; border: none; border-radius: 6px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+        <span>🔍 1. सभी लोकल कैटेगरी (Mistri, Electrician, Pandit, Medical etc.)</span>
+        <span>▼</span>
+    </button>
+    <div id="categoryDropdownContent" class="category-dropdown-content" style="display: none; margin-top: 8px; flex-direction: column; gap: 5px;">
+        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('मिस्त्री सेवा जल्द सक्रिय होगी')">🛠️ मिस्त्री (Mistri)</a>
+        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('इलेक्ट्रीशियन सेवा जल्द सक्रिय होगी')">⚡ इलेक्ट्रीशियन (Electrician)</a>
+        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('पंडित जी सेवा जल्द सक्रिय होगी')">🙏 पंडित जी (Pandit Ji)</a>
+        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('गाड़ी किराया सेवा जल्द सक्रिय होगी')">🚕 गाड़ी किराया (Gaadi Kiraya)</a>
+        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('मेडिकल सेवा जल्द सक्रिय होगी')">🏥 मेडिकल (Medical)</a>
+        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('अन्य स्थानीय सेवाएं जल्द सक्रिय होगी')">📦 अन्य स्थानीय सेवाएँ (Other Local)</a>
+    </div>
+</div>
 
         <!-- 2. GRAMIN GALLERY -->
         <div class="toggle-bar orange" onclick="toggleSection('galleryBox', 'icon2')">
