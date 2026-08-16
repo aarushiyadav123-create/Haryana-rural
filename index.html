@@ -3,37 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daksh App - Coming Soon</title>
+    <title>Mera Gaov - Shop Registration</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
-            text-align: center;
-            padding: 50px;
-            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
             background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
         }
-        h1 {
+        h2 {
             color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
         }
-        p {
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #444;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
             font-size: 18px;
-            color: #666;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #statusMessage {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>जल्द आ रहा है! (Coming Soon)</h1>
-        <p>हमारी नई ऐप और वेबसाइट पर अभी काम चल रहा है। बहुत जल्द यह आपके सामने होगी।</p>
-        <p><b>- Team Daksh</b></p>
+        <h2>दुकान रजिस्टर करें</h2>
+        <form id="shopForm">
+            <div class="form-group">
+                <label for="shopName">दुकान का नाम:</label>
+                <input type="text" id="shopName" required placeholder="जैसे: गुप्ता जनरल स्टोर">
+            </div>
+            
+            <div class="form-group">
+                <label for="ownerName">दुकानदार का नाम:</label>
+                <input type="text" id="ownerName" required placeholder="मालिक का नाम">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">मोबाइल नंबर:</label>
+                <input type="tel" id="phone" required placeholder="10 अंकों का नंबर">
+            </div>
+
+            <div class="form-group">
+                <label for="village">गाँव का नाम:</label>
+                <input type="text" id="village" required placeholder="गाँव का नाम">
+            </div>
+
+            <button type="submit" id="submitBtn">डेटा सेव करें</button>
+        </form>
+        <p id="statusMessage"></p>
     </div>
+
+    <!-- Firebase SDK Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Aapki Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMVacjfb6W3J5lV7Jyu3bpJenPl0Nzo",
+            authDomain: "mera-gaov.firebaseapp.com",
+            projectId: "mera-gaov",
+            storageBucket: "mera-gaov.firebasestorage.app",
+            messagingSenderId: "574021786245",
+            appId: "1:574021786245:web:7f4c042f347d0cab54a7ec",
+            measurementId: "G-757L4D3657"
+        };
+
+        // Firebase Initialize karein
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const form = document.getElementById('shopForm');
+        const statusMessage = document.getElementById('statusMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerText = "सहेज रहे हैं...";
+
+            const shopName = document.getElementById('shopName').value;
+            const ownerName = document.getElementById('ownerName').value;
+            const phone = document.getElementById('phone').value;
+            const village = document.getElementById('village').value;
+
+            try {
+                // Firestore database me 'shops' naam ke collection me data save hoga
+                await addDoc(collection(db, "shops"), {
+                    shopName: shopName,
+                    ownerName: ownerName,
+                    phone: phone,
+                    village: village,
+                    createdAt: new Date()
+                });
+
+                statusMessage.style.color = "green";
+                statusMessage.innerText = "दुकान सफलतापूर्वक रजिस्टर हो गई है!";
+                form.reset();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                statusMessage.style.color = "red";
+                statusMessage.innerText = "डेटा सेव करने में त्रुटि हुई। कृपया दोबारा प्रयास करें।";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "डेटा सेव करें";
+            }
+        });
+    </script>
 </body>
 </html>
