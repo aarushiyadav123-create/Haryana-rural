@@ -1,0 +1,11 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "MeraGaov",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "MeraGaov",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}
