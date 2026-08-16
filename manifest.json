@@ -1,10 +1,9 @@
 {
-  "name": "मेरा गाँव",
-  "short_name": "मेरा गाँव",
-  "description": "मेरा गाँव - हरियाणा ग्रामीण सेवा ऐप",
+  "name": "MeraGaav",
+  "short_name": "MeraGaav",
+  "description": "Haryana Rural Service App",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff"
 }
-
