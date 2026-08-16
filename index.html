@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
+    <title>मेरा गाँव - हरियाणा ग्रामीण सेवा</title>
     <style>
         :root {
             --primary: #1b5e20;
@@ -56,7 +56,7 @@
         .top-nav-btn {
             background: #ff8f00;
             color: #000;
-            padding: 3px 8px;
+            padding: 4px 10px;
             font-size: 11px;
             font-weight: bold;
             border-radius: 4px;
@@ -67,6 +67,37 @@
         .top-nav-btn.admin { background: #d32f2f; color: #fff; }
         .top-nav-btn.shop { background: #ffc107; color: #000; }
         .top-nav-btn.policy { background: #0288d1; color: #fff; }
+
+        /* Dropdown Menu Style */
+        .menu-container { position: relative; display: inline-block; }
+        .menu-content { display: none; position: absolute; right: 0; background: #fff; min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10; border-radius: 6px; }
+        .menu-content a, .menu-content button { color: #333; padding: 10px 14px; display: block; text-decoration: none; border: none; background: none; width: 100%; text-align: left; font-size: 0.85rem; font-weight: bold; cursor: pointer; }
+        .menu-content a:hover, .menu-content button:hover { background: #f1f1f1; }
+
+        /* Service Category Grid Style */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .service-btn {
+            background: #fff;
+            border: 1px solid var(--primary);
+            padding: 10px 6px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+        .service-btn:hover {
+            background: #e8f5e9;
+        }
 
         header {
             background: linear-gradient(135deg, var(--primary), #2e7d32);
@@ -377,12 +408,16 @@
 </head>
 <body onload="initPortal()">
 
+    <!-- साफ और व्यवस्थित टॉप बार व मेन्यू -->
     <div class="top-bar">
-        <span>👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-        <div class="top-nav-links">
-            <a href="#searchSection" class="top-nav-btn">गाँव खोजें</a>
-            <button class="top-nav-btn admin" onclick="toggleSection('addShopFormBox', 'icon1')">Admin/Shop</button>
-            <a href="#" class="top-nav-btn policy" onclick="alert('डिजिटल ग्राम पोर्टल - हरियाणा ग्रामीण सेवा। ब्लॉक के सभी गाँव पूरी तरह खुले हुए हैं।')">प्राइवेसी पॉलिसी</a>
+        <span>हरियाणा ग्रामीण सेवा पोर्टल</span>
+        <div class="menu-container">
+            <button class="top-nav-btn" onclick="toggleMenu()">☰ Menu</button>
+            <div id="myDropdown" class="menu-content">
+                <a href="#searchSection">गाँव खोजें</a>
+                <button onclick="toggleSection('addShopFormBox', 'icon1')">Admin/Shop</button>
+                <a href="#" onclick="alert('डिजिटल ग्राम पोर्टल - हरियाणा ग्रामीण सेवा। ब्लॉक के सभी गाँव पूरी तरह खुले हुए हैं।')">प्राइवेसी पॉलिसी</a>
+            </div>
         </div>
     </div>
 
@@ -393,6 +428,16 @@
     </header>
 
     <div class="container" id="searchSection">
+
+        <!-- 2. लोकल सर्विस कैटेगरी बटन्स (ठीक दूसरे नंबर पर जोड़े गए) -->
+        <div class="service-grid">
+            <a href="#searchSection" class="service-btn" onclick="alert('मिस्त्री सेवा जल्द उपलब्ध होगी')">🛠️ मिस्त्री</a>
+            <a href="#searchSection" class="service-btn" onclick="alert('पंडित जी सेवा जल्द उपलब्ध होगी')">🙏 पंडित जी</a>
+            <a href="#searchSection" class="service-btn" onclick="alert('गाड़ी किराया सेवा जल्द उपलब्ध होगी')">🚕 गाड़ी किराया</a>
+            <a href="#searchSection" class="service-btn" onclick="alert('मेडिकल सेवा जल्द उपलब्ध होगी')">🏥 मेडिकल</a>
+            <a href="#searchSection" class="service-btn" onclick="alert('इलेक्ट्रीशियन सेवा जल्द उपलब्ध होगी')">⚡ इलेक्ट्रीशियन</a>
+            <a href="#searchSection" class="service-btn" onclick="alert('अन्य सेवाएँ जल्द उपलब्ध होगी')">📦 अन्य सेवा</a>
+        </div>
 
         <!-- WEATHER & MANDI BHAV SINGLE LINE UPDATED BAR -->
         <div class="info-ticker-bar">
@@ -408,9 +453,10 @@
             <div style="text-align: right; font-size: 0.8rem; color: #d32f2f; margin-bottom: 10px;">* अनिवार्य फ़ील्ड</div>
             
             <div class="form-group">
-           <select id="mainDistrictSelect" onchange="onMainDistrictChange(); loadVillagesFromFirebase('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
-    <option value="">-- जिला चुनें --</option>
-     </select>
+                <label>जिला / District <span class="mandatory">*</span></label>
+                <select id="mainDistrictSelect" onchange="onMainDistrictChange(); loadVillagesFromFirebase('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
+                    <option value="">-- जिला चुनें --</option>
+                </select>
             </div>
 
             <div class="form-group">
@@ -669,7 +715,7 @@
             </div>
         </div>
 
-        <!-- 6. ENTERTAINMENT & CULTURE (Added at 6th position) -->
+        <!-- 6. ENTERTAINMENT & CULTURE -->
         <div class="toggle-bar entertainment" onclick="toggleSection('entertainmentBox', 'iconEnt')">
             <span>🎭 6. ग्रामीण मनोरंजन और संस्कृति (Vlogs & Culture)</span>
             <span id="iconEnt">▼</span>
@@ -831,6 +877,11 @@
             loadGallery();
             loadEvents();
             loadBuySellItems();
+        }
+
+        function toggleMenu() {
+            const dropdown = document.getElementById("myDropdown");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
         }
 
         function populateAllDistrictDropdowns() {
@@ -1256,7 +1307,9 @@
             const isVisible = box.style.display === "block";
             box.style.display = isVisible ? "none" : "block";
             icon.innerText = isVisible ? "▼" : "▲";
-        }        async function loadVillagesFromFirebase(districtId, blockId, villageSelectId) {
+        }
+
+        async function loadVillagesFromFirebase(districtId, blockId, villageSelectId) {
             const selectedDist = document.getElementById(districtId).value.trim().toLowerCase();
             const villSel = document.getElementById(villageSelectId);
             
@@ -1293,7 +1346,6 @@
                 villSel.innerHTML = '<option value="">-- एरर आया, दोबारा कोशिश करें --</option>';
             }
         }
-
     </script>
 </body>
 </html>
