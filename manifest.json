@@ -1,9 +1,21 @@
 {
-  "name": "MeraGaav",
-  "short_name": "MeraGaav",
-  "description": "Haryana Rural Service App",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff"
+    "name": "MeraGaov",
+    "short_name": "MeraGaov",
+    "description": "Haryana Rural Service App",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "icons": [
+      {
+        "src": "https://via.placeholder.com/192",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "https://via.placeholder.com/512",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
 }
