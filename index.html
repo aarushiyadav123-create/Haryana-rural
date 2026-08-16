@@ -1273,11 +1273,15 @@
             box.style.display = isVisible ? "none" : "block";
             icon.innerText = isVisible ? "▼" : "▲";
         }
-
 async function loadVillagesFromFirebase(districtId, blockId, villageSelectId) {
-    const selectedDist = document.getElementById(districtId).value.trim().toLowerCase();
-    const selectedBlock = document.getElementById(blockId).value.trim().toLowerCase();
+    const rawDist = document.getElementById(districtId).value;
+    const rawBlock = document.getElementById(blockId).value;
     const villSel = document.getElementById(villageSelectId);
+    
+    const normalize = (str) => (str || "").toString().trim().toLowerCase().replace(/au/g, "ou").replace(/[^a-z0-9]/g, "");
+
+    const selectedDist = normalize(rawDist);
+    const selectedBlock = normalize(rawBlock);
     
     villSel.innerHTML = '<option value="">-- लोड हो रहा है... --</option>';
     
@@ -1287,8 +1291,8 @@ async function loadVillagesFromFirebase(districtId, blockId, villageSelectId) {
         
         querySnapshot.forEach((doc) => {
             const data = doc.data();
-            const d = (data.dist || "").trim().toLowerCase();
-            const b = (data.block || "").trim().toLowerCase();
+            const d = normalize(data.dist);
+            const b = normalize(data.block);
             const v = (data.vill || data.village || "").trim();
             
             if (d === selectedDist && b === selectedBlock && v) {
@@ -1313,6 +1317,3 @@ async function loadVillagesFromFirebase(districtId, blockId, villageSelectId) {
         villSel.innerHTML = '<option value="">-- एरर आया, दोबारा कोशिश करें --</option>';
     }
 }
-    </script>
-</body>
-</html>..
