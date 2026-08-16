@@ -342,6 +342,37 @@
             display: inline-block;
         }
         .status-badge.success { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+
+        /* Weather & Mandi Bhav Single Line Ticker Styles */
+        .info-ticker-bar {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+        }
+        .ticker-label {
+            background: #ff8f00;
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .ticker-content {
+            font-size: 0.85rem;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
     </style>
 </head>
 <body onload="initPortal()">
@@ -362,6 +393,14 @@
     </header>
 
     <div class="container" id="searchSection">
+
+        <!-- WEATHER & MANDI BHAV SINGLE LINE UPDATED BAR -->
+        <div class="info-ticker-bar">
+            <div class="ticker-label">🔔 लाइव अपडेट</div>
+            <div class="ticker-content">
+                <span>⛅ <strong>मौसम:</strong> 35°C-38°C, हल्की बौछारें संभावित | 🌾 <strong>मंडी भाव (क्विंटल):</strong> गेहूँ ₹2,275-₹2,350, धान ₹3,500-₹4,200, बाजरा ₹2,500-₹2,625, सरसों ₹5,400-₹5,650</span>
+            </div>
+        </div>
 
         <!-- SEARCH SECTION -->
         <div class="card">
@@ -410,37 +449,6 @@
             </div>
 
             <div class="result-box" id="searchResult" style="margin-top: 15px;"></div>
-        </div>
-
-        <!-- WEATHER LIVE WIDGET -->
-        <div class="toggle-bar weather" onclick="toggleSection('weatherBox', 'iconWeather')">
-            <span>⛅ लाइव मौसम अपडेट (Live Weather - Haryana)</span>
-            <span id="iconWeather">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="weatherBox">
-            <h3 style="font-size: 1rem; color: var(--weather-blue); margin-bottom: 10px;">ग्रामीण क्षेत्र का लाइव मौसम</h3>
-            <div style="background: #e1f5fe; padding: 12px; border-radius: 6px; border: 1px solid #b3e5fc;">
-                <p style="font-size: 0.9rem; font-weight: bold; color: #01579b;">🌡️ तापमान: 35°C - 38°C (उमस भरा व हल्के बादल)</p>
-                <p style="font-size: 0.85rem; color: #333; margin-top: 4px;">💧 आर्द्रता (Humidity): 65% | हवा की गति: 12 किमी/घंटा</p>
-                <p style="font-size: 0.85rem; color: #d84315; margin-top: 4px;">🌧️ संभावना: स्थानीय स्तर पर हल्की बौछारें या गरज के साथ छींटे पड़ने की संभावना।</p>
-            </div>
-        </div>
-
-        <!-- MANDI BHAV WIDGET -->
-        <div class="toggle-bar mandi" onclick="toggleSection('mandiBox', 'iconMandi')">
-            <span>🌾 आज का ताजा अनाज मंडी भाव (Mandi Rates - Haryana)</span>
-            <span id="iconMandi">▼</span>
-        </div>
-
-        <div class="collapsible-form-container" id="mandiBox">
-            <h3 style="font-size: 1rem; color: #e65100; margin-bottom: 10px;">हरियाणा की प्रमुख मंडियों के भाव (प्रति क्विंटल)</h3>
-            <div style="background: #fff3e0; padding: 12px; border-radius: 6px; border: 1px solid #ffe0b2;">
-                <p style="font-size: 0.9rem; font-weight: bold; color: #bf360c;">🌾 गेहूँ (Wheat): ₹2,275 - ₹2,350</p>
-                <p style="font-size: 0.85rem; color: #333; margin-top: 4px;">🌾 धान (Paddy/Basmati): ₹3,500 - ₹4,200</p>
-                <p style="font-size: 0.85rem; color: #333; margin-top: 4px;">🌱 बाजरा (Bajra): ₹2,500 - ₹2,625 | सरसों (Mustard): ₹5,400 - ₹5,650</p>
-                <p style="font-size: 0.75rem; color: #666; margin-top: 6px;">* भाव स्थानीय कृषि उपज मंडी समिति (APMC) के अनुमानित औसत पर आधारित हैं।</p>
-            </div>
         </div>
 
         <!-- 1. ADD SHOP FORM -->
@@ -662,7 +670,7 @@
             </div>
         </div>
 
-        <!-- 6. ENTERTAINMENT & CULTURE -->
+        <!-- 6. ENTERTAINMENT & CULTURE (Added at 6th position) -->
         <div class="toggle-bar entertainment" onclick="toggleSection('entertainmentBox', 'iconEnt')">
             <span>🎭 6. ग्रामीण मनोरंजन और संस्कृति (Vlogs & Culture)</span>
             <span id="iconEnt">▼</span>
@@ -708,7 +716,6 @@
     </script>
 
     <script>
-        // सम्पूर्ण हरियाणा मास्टर डेटा (22 ज़िले, ब्लॉक और सभी गाँव)
         let haryanaMasterData = {
             "AMBALA": {
                 "AMBALA": ["Ambala Rural", "Panjokhra", "Dora", "Sarsehri", "Tandwal", "Babalpur", "Machhonda", "Gardh", "Bara", "Machhrauli", "Kakru", "Pabni"],
