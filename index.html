@@ -12,7 +12,6 @@
             --accent: #d84315;
             --purple: #4a148c;
             --govt-green: #00695c;
-            --weather-blue: #0288d1;
             --bg-color: #f4f6f9;
             --card-bg: #ffffff;
             --text-color: #333333;
@@ -333,7 +332,7 @@
             
             <div class="form-group">
                 <label>जिला / District <span class="mandatory">*</span></label>
-                <select id="mainDistrictSelect" onchange="onMainDistrictChange(); loadVillagesFromFirebase('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
+                <select id="mainDistrictSelect" onchange="onMainDistrictChange()">
                     <option value="">-- जिला चुनें --</option>
                 </select>
             </div>
@@ -545,8 +544,8 @@
                 "TOSHAM": ["Tosham", "Khanak", "Darba", "Dudhwa"]
             },
             "CHARKHI DADRI": {
-                "BADHRA": ["Badhra", "Mandola", "Kalyana", "Jhojhu Kalan", "Achyaj"],
-                "CHARKHI DADRI": ["Dadri Rural", "Makrana", "Gnawati", "Ranila", "Unahn"]
+                "BADHRA": ["Badhra", "Mandola", "Kalyana", "Jhojhu Kalan", "Achyaj", "Kheri", "Dhandhma", "Ranhila", "Chappar", "Bound Kalan"],
+                "CHARKHI DADRI": ["Dadri Rural", "Makrana", "Gnawati", "Ranila", "Unahn", "Morwala", "Samaspur", "Jhujarwas", "Mankawas"]
             },
             "FARIDABAD": {
                 "FARIDABAD": ["Faridabad Rural", "Ballabhgarh", "Tigaon", "Mohna", "Dabua", "Nangla"],
@@ -696,21 +695,12 @@
             }
         }
 
-        function populateVillagesForDistrict(districtId, villageId) {
-            const dist = document.getElementById(districtId).value;
-            const villSel = document.getElementById(villageId);
-            villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-            if (!dist || !haryanaMasterData[dist]) return;
-            let villagesSet = new Set();
-            Object.values(haryanaMasterData[dist]).forEach(blockArr => { blockArr.forEach(v => villagesSet.add(v)); });
-            Array.from(villagesSet).sort().forEach(v => { villSel.innerHTML += `<option value="${v}">${v}</option>`; });
-        }
-
         function onMainDistrictChange() {
             updateBlockDropdown("mainDistrictSelect", "mainBlockSelect", "mainVillageSelect");
-            populateVillagesForDistrict("mainDistrictSelect", "mainVillageSelect");
         }
-        function onMainBlockChange() { updateVillageDropdown("mainDistrictSelect", "mainBlockSelect", "mainVillageSelect"); }
+        function onMainBlockChange() { 
+            updateVillageDropdown("mainDistrictSelect", "mainBlockSelect", "mainVillageSelect"); 
+        }
         function onRegDistrictChange() { updateBlockDropdown("regDistrict", "regBlock", "regVillage"); }
         function onRegBlockChange() { updateVillageDropdown("regDistrict", "regBlock", "regVillage"); }
         function onGalDistrictChange() { updateBlockDropdown("galDistrict", "galBlock", "galVillage"); }
@@ -854,22 +844,6 @@
             const isVisible = box.style.display === "block";
             box.style.display = isVisible ? "none" : "block";
             icon.innerText = isVisible ? "▼" : "▲";
-        }
-
-        async function loadVillagesFromFirebase(districtId, blockId, villageSelectId) {
-            const selectedDist = document.getElementById(districtId).value.trim().toLowerCase();
-            const villSel = document.getElementById(villageSelectId);
-            villSel.innerHTML = '<option value="">-- लोड हो रहा है... --</option>';
-            try {
-                const querySnapshot = await window.getDocs(window.collection(window.db, "haryanagramin"));
-                let villageSet = new Set();
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    if ((data.dist || "").trim().toLowerCase() === selectedDist && data.vill) villageSet.add(data.vill);
-                });
-                villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-                Array.from(villageSet).sort().forEach(vill => { villSel.innerHTML += `<option value="${vill}">${vill}</option>`; });
-            } catch(e) { villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>'; }
         }
     </script>
 </body>
