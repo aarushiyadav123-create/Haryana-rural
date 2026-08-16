@@ -3,30 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mera Gaov - Shop Registration</title>
+    <title>Mera Gaov - दुकान सूची और पंजीकरण</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             margin: 0;
             padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
         }
         .container {
+            max-width: 600px;
+            margin: 0 auto;
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
         }
-        h2 {
+        h2, h3 {
             color: #007bff;
             text-align: center;
-            margin-bottom: 20px;
         }
         .form-group {
             margin-bottom: 15px;
@@ -37,7 +32,7 @@
             font-weight: bold;
             color: #444;
         }
-        input, select {
+        input {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -64,6 +59,28 @@
             text-align: center;
             margin-top: 15px;
             font-weight: bold;
+        }
+        .shop-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .shop-card h4 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        .shop-card p {
+            margin: 3px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .shop-list-section {
+            margin-top: 30px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
         }
     </style>
 </head>
@@ -95,14 +112,18 @@
             <button type="submit" id="submitBtn">डेटा सेव करें</button>
         </form>
         <p id="statusMessage"></p>
+
+        <div class="shop-list-section">
+            <h3>Registered Shops (गाँव की दुकानें)</h3>
+            <div id="shopList">दुकानें लोड हो रही हैं...</div>
+        </div>
     </div>
 
     <!-- Firebase SDK Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Aapki Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDMVacjfb6W3J5lV7Jyu3bpJenPl0Nzo",
             authDomain: "mera-gaov.firebaseapp.com",
@@ -113,47 +134,75 @@
             measurementId: "G-757L4D3657"
         };
 
-        // Firebase Initialize karein
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
         const form = document.getElementById('shopForm');
         const statusMessage = document.getElementById('statusMessage');
+        const shopListDiv = document.getElementById('shopList');
 
+        // दुकानें लोड करने का फंक्शन
+        async function loadShops() {
+            shopListDiv.innerHTML = "लोड हो रहा है...";
+            try {
+                const querySnapshot = await getDocs(collection(db, "shops"));
+                shopListDiv.innerHTML = "";
+                
+                if (querySnapshot.empty) {
+                    shopListDiv.innerHTML = "<p>अभी कोई दुकान रजिस्टर नहीं है।</p>";
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const shop = doc.data();
+                    const card = document.createElement('div');
+                    card.className = 'shop-card';
+                    card.innerHTML = `
+                        <h4>🏪 ${shop.shopName || 'अज्ञात दुकान'}</h4>
+                        <p>👤 <b>मालिक:</b> ${shop.ownerName || shop.name || 'उपलब्ध नहीं'}</p>
+                        <p>📞 <b>मोबाइल:</b> ${shop.phone || shop.mobile || 'उपलब्ध नहीं'}</p>
+                        <p>📍 <b>गाँव:</b> ${shop.village || 'उपलब्ध नहीं'}</p>
+                    `;
+                    shopListDiv.appendChild(card);
+                });
+            } catch (error) {
+                console.error("Error loading shops: ", error);
+                shopListDiv.innerHTML = "<p style='color:red;'>दुकानें लोड करने में समस्या आई।</p>";
+            }
+        }
+
+        // फॉर्म सबमिट करने पर डेटा सेव होगा
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.innerText = "सहेज रहे हैं...";
 
-            const shopName = document.getElementById('shopName').value;
-            const ownerName = document.getElementById('ownerName').value;
-            const phone = document.getElementById('phone').value;
-            const village = document.getElementById('village').value;
-
             try {
-                // Firestore database me 'shops' naam ke collection me data save hoga
                 await addDoc(collection(db, "shops"), {
-                    shopName: shopName,
-                    ownerName: ownerName,
-                    phone: phone,
-                    village: village,
+                    shopName: document.getElementById('shopName').value,
+                    ownerName: document.getElementById('ownerName').value,
+                    phone: document.getElementById('phone').value,
+                    village: document.getElementById('village').value,
                     createdAt: new Date()
                 });
 
                 statusMessage.style.color = "green";
                 statusMessage.innerText = "दुकान सफलतापूर्वक रजिस्टर हो गई है!";
                 form.reset();
+                loadShops(); // लिस्ट तुरंत अपडेट हो जाएगी
             } catch (error) {
                 console.error("Error adding document: ", error);
                 statusMessage.style.color = "red";
-                statusMessage.innerText = "डेटा सेव करने में त्रुटि हुई। कृपया दोबारा प्रयास करें।";
+                statusMessage.innerText = "त्रुटि हुई। कृपया दोबारा प्रयास करें।";
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "डेटा सेव करें";
             }
         });
+
+        // पेज खुलते ही दुकानें लोड होंगी
+        loadShops();
     </script>
 </body>
 </html>
