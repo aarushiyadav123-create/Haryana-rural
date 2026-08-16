@@ -1257,7 +1257,44 @@
             const isVisible = box.style.display === "block";
             box.style.display = isVisible ? "none" : "block";
             icon.innerText = isVisible ? "▼" : "▲";
+        }        async function loadVillagesFromFirebase(districtId, blockId, villageSelectId) {
+            const selectedDist = document.getElementById(districtId).value.trim().toLowerCase();
+            const villSel = document.getElementById(villageSelectId);
+            
+            villSel.innerHTML = '<option value="">-- लोड हो रहा है... --</option>';
+
+            try {
+                const querySnapshot = await window.getDocs(window.collection(window.db, "haryanagramin"));
+                let villageSet = new Set();
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const d = (data.dist || "").trim().toLowerCase();
+                    const v = (data.vill || data.village || "").trim();
+
+                    if (d === selectedDist && v) {
+                        villageSet.add(v);
+                    }
+                });
+
+                villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+                
+                if (villageSet.size === 0) {
+                    villSel.innerHTML = '<option value="">-- इस ज़िले में कोई गाँव नहीं मिला --</option>';
+                    return;
+                }
+
+                const sortedVillages = Array.from(villageSet).sort((a, b) => a.localeCompare(b, 'hi'));
+                sortedVillages.forEach(vill => {
+                    villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
+                });
+
+            } catch (error) {
+                console.error("Firebase Village Load Error:", error);
+                villSel.innerHTML = '<option value="">-- एरर आया, दोबारा कोशिश करें --</option>';
+            }
         }
+
     </script>
 </body>
 </html>
