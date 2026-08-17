@@ -408,20 +408,22 @@
 </head>
 <body onload="initPortal()">
 
-    <!-- साफ और व्यवस्थित टॉप बार व मेन्यू -->
-    <div class="top-bar">
-        <span>हरियाणा ग्रामीण सेवा पोर्टल</span>
-        <div class="menu-container">
-            <button class="top-nav-btn" onclick="toggleMenu()">☰ Menu</button>
-            <div id="myDropdown" class="menu-content">
-                <a href="#searchSection">गाँव खोजें</a>
-                <button onclick="toggleSection('addShopFormBox', 'icon1')">Admin/Shop</button>
-                <a href="#" onclick="alert('डिजिटल ग्राम पोर्टल - हरियाणा ग्रामीण सेवा। ब्लॉक के सभी गाँव पूरी तरह खुले हुए हैं।')">प्राइवेसी पॉलिसी</a>
-            </div>
+<!-- साफ और व्यवस्थित टॉप बार व मेनू -->
+<div class="top-bar">
+    <span>हरियाणा ग्रामीण सेवा पोर्टल</span>
+    <div class="menu-container">
+        <button class="top-nav-btn" onclick="toggleMenu()">☰ Menu</button>
+        <div id="myDropdown" class="menu-content">
+            <a href="#searchSection">गाँव खोजें</a>
+            <a href="#aboutSection" onclick="alert('यह पोर्टल हरियाणा के गाँवों और डिजिटल सेवाओं के लिए बनाया गया है।')">About (हमारे बारे में)</a>
+            <button onclick="toggleSection('adminLoginBox', 'Admin Panel')" style="width:100%; text-align:left; background:none; border:none; padding:10px 16px; cursor:pointer; font-weight:bold; color:#333;">Admin / Sub-Admin</button>
+            <a href="#" onclick="alert('प्राइवेसी पॉलिसी: आपका डेटा सुरक्षित है।')">प्राइवेसी पॉलिसी</a>
         </div>
     </div>
+</div>
 
-   <header style="background-color: #1b5e20; text-align: center; padding: 15px; color: white;">
+
+            <header style="background-color: #1b5e20; text-align: center; padding: 15px; color: white;">
     
     <!-- 'मेरा गाँव' और बुजुर्गों/संस्कृति का प्रतीक -->
     <h1 id="headerTitle" style="color: #2ecc71; font-weight: bold; margin-bottom: 5px;">
