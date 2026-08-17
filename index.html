@@ -2,16 +2,31 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>मेरा गाँव </title>
-    <title>मेरा गाँव</title>
-    <link rel="manifest" href="manifest.json">
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js');
-      }
-    </script>
-    <style>   
-       body {
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मेरा गाँव - हरियाणा ग्रामीण सेवा</title>
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --primary-dark: #113f14;
+            --secondary: #ff8f00;
+            --accent: #d84315;
+            --purple: #4a148c;
+            --govt-green: #00695c;
+            --weather-blue: #0288d1;
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
             background-color: var(--bg-color);
             color: var(--text-color);
             padding-bottom: 60px;
@@ -1331,7 +1346,6 @@
                 villSel.innerHTML = '<option value="">-- एरर आया, दोबारा कोशिश करें --</option>';
             }
         }
-    </style>
     </script>
 </body>
 </html>
