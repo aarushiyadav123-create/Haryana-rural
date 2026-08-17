@@ -1372,7 +1372,49 @@
                 console.error("Firebase Village Load Error:", error);
                 villSel.innerHTML = '<option value="">-- एरर आया, दोबारा कोशिश करें --</option>';
             }
-        }
+        }// 1. पेज खुलते ही सारे जिले लोड करने के लिए
+window.addEventListener('DOMContentLoaded', () => {
+    const distSelect = document.getElementById('mainDistrictSelect');
+    if (!distSelect) return;
+    
+    distSelect.innerHTML = '<option value="">-- जिला चुनें --</option>';
+    for (let dist in haryanaMasterData) {
+        distSelect.innerHTML += `<option value="${dist}">${dist}</option>`;
+    }
+});
+
+// 2. जिला चुनने पर ब्लॉक लोड करने के लिए
+function loadBlocks() {
+    const selectedDist = document.getElementById('mainDistrictSelect').value;
+    const blockSelect = document.getElementById('mainBlockSelect');
+    const villageSelect = document.getElementById('mainVillageSelect');
+    
+    blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
+    villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+    
+    if (!selectedDist || !haryanaMasterData[selectedDist]) return;
+    
+    for (let block in haryanaMasterData[selectedDist]) {
+        blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
+    }
+}
+
+// 3. ब्लॉक चुनने पर सारे गाँव लोड करने के लिए
+function loadVillages() {
+    const selectedDist = document.getElementById('mainDistrictSelect').value;
+    const selectedBlock = document.getElementById('mainBlockSelect').value;
+    const villageSelect = document.getElementById('mainVillageSelect');
+    
+    villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+    
+    if (!selectedDist || !selectedBlock || !haryanaMasterData[selectedDist][selectedBlock]) return;
+    
+    const villages = haryanaMasterData[selectedDist][selectedBlock];
+    villages.forEach(village => {
+        villageSelect.innerHTML += `<option value="${village}">${village}</option>`;
+    });
+}
+
     </script>
 </body>
 </html>
