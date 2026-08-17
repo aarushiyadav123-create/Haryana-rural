@@ -479,34 +479,27 @@
             <h2>अपना पहचानकर्ता जानें / Village & Shop Search</h2>
             <div style="text-align: right; font-size: 0.8rem; color: #d32f2f; margin-bottom: 10px;">* अनिवार्य फ़ील्ड</div>
             
-            <div class="form-group">
-                <label>जिला / District <span class="mandatory">*</span></label>
-                <select id="mainDistrictSelect" onchange="onMainDistrictChange(); loadVillagesFromFirebase('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect')">
-                    <option value="">-- जिला चुनें --</option>
-                </select>
-            </div>
+       <div class="form-group">
+        <label>जिला / District <span class="mandatory">*</span></label>
+        <select id="mainDistrictSelect" onchange="loadBlocks()">
+            <option value="">-- जिला चुनें --</option>
+        </select>
+    </div>
 
-            <div class="form-group">
-                <label>क्षेत्र / Area <span class="mandatory">*</span></label>
-                <select id="mainAreaSelect">
-                    <option value="Rural">Rural (ग्रामीण)</option>
-                    <option value="Urban">Urban (शहरी)</option>
-                </select>
-            </div>
+    <div class="form-group">
+        <label>खण्ड / Block <span class="mandatory">*</span></label>
+        <select id="mainBlockSelect" onchange="loadVillages()">
+            <option value="">-- पहले जिला चुनें --</option>
+        </select>
+    </div>
 
-            <div class="form-group">
-                <label>खण्ड / Block <span class="mandatory">*</span></label>
-                <select id="mainBlockSelect" onchange="onMainBlockChange()">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>गाँव / Village (सभी गाँव खुले हैं) <span class="mandatory">*</span></label>
-                <select id="mainVillageSelect" onchange="onVillageSelected()">
-                    <option value="">-- पहले ब्लॉक चुनें --</option>
-                </select>
-            </div>
+    <div class="form-group">
+        <label>गाँव / Village <span class="mandatory">*</span></label>
+        <select id="mainVillageSelect">
+            <option value="">-- पहले ब्लॉक चुनें --</option>
+        </select>
+    </div>
+ 
 
             <div class="form-group">
                 <label>सुरक्षा कोड दर्ज करें / Enter Security Code: <span class="mandatory">*</span></label>
