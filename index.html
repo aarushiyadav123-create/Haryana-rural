@@ -75,26 +75,30 @@
         .menu-content a:hover, .menu-content button:hover { background: #f1f1f1; }
 
         /* Service Category Grid Style */
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .service-btn {
-            background: #fff;
-            border: 1px solid var(--primary);
-            padding: 10px 6px;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: var(--primary);
-            text-decoration: none;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.2s;
-        }
+.service-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.service-btn {
+    display: block;
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--primary);
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--primary);
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.2s;
+}
+
         .service-btn:hover {
             background: #e8f5e9;
         }
