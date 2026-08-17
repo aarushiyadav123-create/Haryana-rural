@@ -1240,16 +1240,18 @@ function loadVillages() {
     const selectedBlock = document.getElementById('mainBlockSelect').value;
     const villageSelect = document.getElementById('mainVillageSelect');
     
-    villageSelect.innerHTML = '<option value="">-- सभी गाँव देखें --</option>';
+    villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
     
-    if (!selectedDist || !selectedBlock || !haryanaMasterData[selectedDist][selectedBlock]) return;
+    if (!selectedDist || !selectedBlock || !haryanaMasterData[selectedDist] || !haryanaMasterData[selectedDist][selectedBlock]) {
+        return;
+    }
     
-    // चुने गए ब्लॉक के सारे गाँव एक साथ अपने आप लिस्ट में आ जाएंगे
-    const villages = [...haryanaMasterData[selectedDist][selectedBlock]].sort((a, b) => a.localeCompare(b, 'hi'));
+    const villages = haryanaMasterData[selectedDist][selectedBlock];
     villages.forEach(village => {
         villageSelect.innerHTML += `<option value="${village}">${village}</option>`;
     });
 }
+
 
 </script>
 </body>
