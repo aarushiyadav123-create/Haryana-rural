@@ -1218,7 +1218,39 @@
         const isVisible = box.style.display === "block";
         box.style.display = isVisible ? "none" : "block";
         icon.innerText = isVisible ? "▼" : "▲";
-    }
+    }function loadBlocks() {
+    const selectedDist = document.getElementById('mainDistrictSelect').value;
+    const blockSelect = document.getElementById('mainBlockSelect');
+    const villageSelect = document.getElementById('mainVillageSelect');
+    
+    blockSelect.innerHTML = '<option value="">-- सभी ब्लॉक चुनें --</option>';
+    villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+    
+    if (!selectedDist || !haryanaMasterData[selectedDist]) return;
+    
+    // सभी ब्लॉक अपने आप लोड होंगे
+    const sortedBlocks = Object.keys(haryanaMasterData[selectedDist]).sort();
+    sortedBlocks.forEach(block => {
+        blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
+    });
+}
+
+function loadVillages() {
+    const selectedDist = document.getElementById('mainDistrictSelect').value;
+    const selectedBlock = document.getElementById('mainBlockSelect').value;
+    const villageSelect = document.getElementById('mainVillageSelect');
+    
+    villageSelect.innerHTML = '<option value="">-- सभी गाँव देखें --</option>';
+    
+    if (!selectedDist || !selectedBlock || !haryanaMasterData[selectedDist][selectedBlock]) return;
+    
+    // चुने गए ब्लॉक के सारे गाँव एक साथ अपने आप लिस्ट में आ जाएंगे
+    const villages = [...haryanaMasterData[selectedDist][selectedBlock]].sort((a, b) => a.localeCompare(b, 'hi'));
+    villages.forEach(village => {
+        villageSelect.innerHTML += `<option value="${village}">${village}</option>`;
+    });
+}
+
 </script>
 </body>
 </html>
