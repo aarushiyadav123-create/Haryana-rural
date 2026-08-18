@@ -1,230 +1,317 @@
-// 1. हरियाणा का मास्टर डेटा
+// सम्पूर्ण हरियाणा मास्टर डेटा
 const haryanaMasterData = {
-    "ROHTAK": {
-        "ROHTAK": ["Dobh", "Kahnaur", "Bohar", "Kiloi", "Sanghi", "Ismaila"],
-        "SAMPLA": ["Sampla", "Ismaila-A", "Ismaila-B", "Assan", "Katesra", "Kharawar", "Gardi", "Gandhra", "Bhalout"],
-        "MEHAM": ["Meham", "Madina", "Bainsi", "Farmana", "Semshi", "Bedwa"],
-        "KALANAUR": ["Kalanaur", "Kahnana", "Anwal", "Nigana"]
-    },
-    "JHAJJAR": {
-        "JHAJJAR": ["Jhajjar Rural", "Silani", "Dighal", "Gudha", "Guraora"],
-        "BAHADURGARH": ["Bahadurgarh Rural", "Asaudha", "Mandothi", "Sankhol", "Khedi Jasaur"],
-        "BERI": ["Beri", "Dubaldhan", "Dighal", "Majra", "Baghpur"],
-        "BADLI": ["Badli", "Patauda", "Munimpur", "Yakubpur"]
+    "AMBALA": {
+        "AMBALA": ["Ambala Rural", "Panjokhra", "Dora", "Sarsehri", "Tandwal", "Babalpur", "Machhonda", "Gardh", "Bara", "Machhrauli", "Kakru", "Pabni"],
+        "BARARA": ["Barara", "Mulana", "Dhurala", "Bhedthal", "Topra", "Dabkoli", "Naneola", "Garaul", "Babain"],
+        "NARAINGARH": ["Naraingarh", "Shahzadpur", "Lalru", "Bhareli", "Naggal", "Kohlapur", "Panjlasa", "Kot", "Tokha"],
+        "SAHA": ["Saha", "Keshpur", "Ugala", "Kesri", "Landhaura", "Shergarh", "Dabkoli Kalan"]
     },
     "BHIWANI": {
-        "BHIWANI": ["Bhiwani Rural", "Dinod", "Talu", "Bapora", "Nanghal"],
-        "TOSHAM": ["Tosham", "Khanak", "Dhandalan", "Bawani Khera", "Biran"],
-        "SIWANI": ["Siwani", "Mahlana", "Gurera"],
-        "BAWANI KHERA": ["Bawani Khera", "Jamalpur", "Pur"]
-    },
-    "SONIPAT": {
-        "SONIPAT": ["Sonipat Rural", "Rai", "Murthal", "Rathdhana", "Fazilpur"],
-        "GOHANA": ["Gohana", "Khanpur Kalan", "Baroda", "Mundlana", "Bhutana"],
-        "GANNAUR": ["Gannaur", "Panchi Jatan", "Bari", "Pugthala"],
-        "KHARKHODA": ["Kharkhoda", "Pipli", "Saidpur", "Riderna"]
-    },
-    "HISAR": {
-        "HISAR": ["Hisar Rural", "Satrod", "Gangwa", "Mirzapur"],
-        "HANSI": ["Hansi", "Umra", "Sainipura", "Sultanpur"],
-        "BARWALA": ["Barwala", "Daulatpur", "Panghal"],
-        "NARNAUND": ["Narnaund", "Kheri Jalab", "Rajnthal"]
-    },
-    "JIND": {
-        "JIND": ["Jind Rural", "Kinana", "Ramrai", "Bibipur"],
-        "NARWANA": ["Narwana", "Dhamtan Sahib", "Belarkha"],
-        "UCHANA": ["Uchana", "Karsindhu", "Uchana Kalan"],
-        "JULANA": ["Julana", "Lajwana", "Kila Zafargarh"]
+        "BHIWANI": ["Bhiwani Rural", "Dinod", "Bidhwan", "Talu", "Nangal", "Biran", "Chang", "Nimri", "Bapora", "Kitlana", "Siwani", "Jhumpa"],
+        "BAWANI KHERA": ["Bawani Khera", "Miran", "Jatu Lohari", "Sisar", "Kairu", "Jhamuwas", "Sui", "Badhal", "Garhi"],
+        "SIWANI": ["Siwani", "Bhiwani Rohilla", "Kairu", "Barwala", "Ghangala", "Jali", "Dariyapur", "Mithan"],
+        "TOSHAM": ["Tosham", "Khanak", "Dhandalan", "Sisar", "Dang Kalan", "Bishan", "Dadam"],
+        "LOHARU": ["Loharu", "Jui", "Sisahani", "Digwa", "Alawalpur", "Kairu", "Bahal", "Singhani"]
     },
     "CHARKHI DADRI": {
-        "DADRI": ["Charkhi Dadri", "Bond Kalan", "Jhuppa", "Samaspur"],
-        "BADHRA": ["Badhra", "Jhui", "Kadma", "Bhandwa"]
+        "BADHRA": ["Badhra", "Mandola", "Ranila", "Kallana", "Khadal", "Chappar", "Assal", "Akhana", "Biran", "Pandwan", "Jhojhu", "Kheri", "Imloita", "Kheri Bura"],
+        "CHARKHI DADRI": ["Dadri Rural", "Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni", "Data", "Mankawas", "Pyal", "Maurana", "Birhi Kalan", "Bhiwani Rohilla", "Mahu"],
+        "BAUND": ["Achina", "Bas Ranila", "Baund Kalan", "Baund Khurd", "Hindol", "Jayatshri", "Jhinjhar", "Kamod", "Kasni", "Malkosh", "Sankrod", "Sanjarwas"]
     },
-    "GURUGRAM": {
-        "GURUGRAM": ["Gurugram Rural", "Badshahpur", "Wazirabad", "Khandsa"],
-        "SOHNA": ["Sohna", "Damdama", "Bhondsi", "Rithoj"],
-        "PATAUDI": ["Pataudi", "Helamandi", "Jatola", "Uncha Majra"]
+    "ROHTAK": {
+        "KALANAUR": [
+            "Anwal", "Bahali Anandpur", "Ballab", "Baniyani", "Basana", 
+            "Gaddhi Kheri", "Garhi Ballab", "Garnawathi", "Gudhan", "Gurnauthi", 
+            "Jindran Kalan", "Kakrana", "Kalanaur Kalan", "Kalanaur Khurd", "Kalanaur Rural", 
+            "Katesra", "Kahnaur", "Kherari", "Lahli", "Manjha", 
+            "Maroudi Jatan", "Maroudi Rangran", "Masudpur", "Matana", "Nigana", 
+            "Patwapur", "Pilana", "Sampal", "Sanga Hera", "Sundana", "Taimurpur"
+        ],
+        "SAMPLA": [
+            "Atail", "Balkara", "Bhalout", "Bora", "Dattaur", 
+            "Gandhra", "Garhi Sampla", "Hasangarh", "Ismaila 11B", "Ismaila 9B", 
+            "Kharawar", "Kullasi", "Kheri Sampla", "Naoabad", "Nishti", 
+            "Pakasma", "Rohad", "Sampla Khas"
+        ],
+        "ROHTAK": [
+            "Asthal Bohar", "Bahu Akberpur", "Bahu Jamalpur", "Baland", "Basantpur", 
+            "Bhagotipur", "Bhaiyan Pur", "Bhalot", "Bohar", "Chamaria", 
+            "Dhamar", "Dobh", "Ghuskani", "Humayunpur", "Jalalpur", 
+            "Jasia", "Kanheli", "Kansala", "Karountha", "Katwara", 
+            "Khadwali", "Kharak Churangla", "Kheri Sadh", "Kiloi Dopana", "Kiloi Khas", 
+            "Kutana", "Kutani", "Ladhot", "Maina", "Makrauli Kalan", 
+            "Makrauli Khurd", "Nasirpur", "Paharipur", "Pahrawar", "Polangi", 
+            "Rithal Narwal", "Rithal Phogat", "Rohtak Rural", "Rurki", "Sarai Ahmed", 
+            "Singhpura", "Sunaria Kalan", "Sunaria Khurd", "Sunderpur", "Titoli"
+        ],
+        "MEHAM": [
+            "Aaron", "Balam", "Beani", "Bhaini Bhairon", "Bhaini Chanderpal", 
+            "Bhaini Maharajpur", "Chiri", "Farmana Khas", "Gharethi", "Kheri Meham", 
+            "Madina Gindhran", "Madina Korsan", "Meham Rural", "Mokhra Khas", "Mokhra Kheri", 
+            "Nandal", "Nindana", "Saman", "Sarsa", "Semli"
+        ]
     },
-    "FARIDABAD": {
-        "FARIDABAD": ["Faridabad Rural", "Tigaon", "Ballabgarh", "Anangpur"],
-        "BALLABGARH": ["Ballabgarh", "Mohna", "Chhainsa", "Dayalpur"]
+    "JHAJJAR": {
+        "JHAJJAR": ["Jhajjar Rural", "Gudha", "Chhuchhakwas", "Dighal", "Bahu", "Kutani", "Dulhera", "Kablana", "Silani"],
+        "BAHADURGARH": ["Bahadurgarh Rural", "Sankhol", "Mandothi", "Rohad", "Bamdoli", "Kasshan", "Asaudha"],
+        "BERI": ["Beri Rural", "Dighal", "Dhubaldhan", "Gochhi", "Lakria", "Bhagrah"],
+        "MATANHAIL": ["Matanhail", "Chhuchhakwas", "Bahu Jholri", "Sahlawas", "Marot"]
     },
-    "KARNAL": {
-        "KARNAL": ["Karnal Rural", "Kunjpura", "Gharaunda", "Kachhwa"],
-        "ASSANDH": ["Assandh", "Jundla", "Salwan", "Rahra"],
-        "NILOKHERI": ["Nilokheri", "Taraori", "Nigdu"]
-    },
-    "AMBALA": {
-        "AMBALA": ["Ambala Rural", "Naraingarh", "Barara", "Saha"]
-    },
-    "KURUKSHETRA": {
-        "THANESAR": ["Thanesar Rural", "Shahbad", "Pehowa", "Ladwa", "Babain"]
-    },
-    "PANIPAT": {
-        "PANIPAT": ["Panipat Rural", "Samalkha", "Israna", "Bapoli", "Madlauda"]
-    },
-    "REWARI": {
-        "REWARI": ["Rewari Rural", "Bawal", "Kosli", "Dharuhera", "Dahina"]
-    },
-    "MAHENDRAGARH": {
-        "NARNAUL": ["Narnaul Rural", "Mahendragarh", "Ateli", "Kanina", "Satnali"]
-    },
-    "SIRSA": {
-        "SIRSA": ["Sirsa Rural", "Dabwali", "Ellenabad", "Rania", "Kalanwali"]
-    },
-    "FATEHABAD": {
-        "FATEHABAD": ["Fatehabad Rural", "Tohana", "Ratia", "Bhuntan Kalan"]
-    },
-    "PALWAL": {
-        "PALWAL": ["Palwal Rural", "Hodal", "Hathin", "Hassanpur"]
-    },
-    "NUH": {
-        "NUH": ["Nuh Rural", "Ferozepur Jhirka", "Punhana", "Taoru"]
-    },
-    "PANCHKULA": {
-        "PANCHKULA": ["Panchkula Rural", "Kalka", "Raipur Rani", "Pinjore"]
-    },
-    "YAMUNANAGAR": {
-        "YAMUNANAGAR": ["Yamunanagar Rural", "Jagadhri", "Radaur", "Bilaspur", "Chhachhrauli"]
-    },
-    "KAITHAL": {
-        "KAITHAL": ["Kaithal Rural", "Guhla", "Kalayat", "Pundri", "Rajound"]
+    "SONIPAT": {
+        "SONIPAT": ["Sonipat Rural", "Ganaur Rural", "Gohana Rural", "Rai", "Murthal", "Kharkhoda Rural", "Kundli", "Rathdhana", "Larsauli"],
+        "GANAUR": ["Ganaur Rural", "Badi", "Panchi Jattan", "Larsauli", "Barhi"],
+        "GOHANA": ["Gohana Rural", "Baroda", "Khanpur Kalan", "Mahra", "Bhutana"],
+        "KHARKHODA": ["Kharkhoda Rural", "Saidpur", "Pipli", "Ridhau", "Thana Kalan"]
     }
 };
 
-// 2. पेज लोड होने पर मुख्य जिले ऑटो-लोड करना
-window.onload = function() {
-    const mainDist = document.getElementById('mainDistrictSelect');
-    if (mainDist) {
-        mainDist.innerHTML = '<option value="">-- जिला चुनें --</option>';
-        Object.keys(haryanaMasterData).sort().forEach(dist => {
-            let opt = document.createElement('option');
-            opt.value = dist;
-            opt.textContent = dist;
-            mainDist.appendChild(opt);
-        });
-    }
-};
+let simulatedOTP = "";
+let isPhoneVerified = false;
 
-// 3. जिला बदलने पर ब्लॉक लोड करने का यूनिवर्सल फंक्शन
-function loadBlocksForSection(distId, blockId, villageId) {
-    const selectedDist = document.getElementById(distId).value;
-    const blockSelect = document.getElementById(blockId);
-    const villageSelect = document.getElementById(villageId);
-    
-    blockSelect.innerHTML = '<option value="">-- पहले जिला चुनें --</option>';
-    if (villageSelect) {
-        villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
-    }
-    
-    if (!selectedDist || !haryanaMasterData[selectedDist]) return;
-    
-    blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
-    const sortedBlocks = Object.keys(haryanaMasterData[selectedDist]).sort();
-    sortedBlocks.forEach(block => {
-        blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
+function initPortal() {
+    populateDistricts('mainDistrictSelect');
+    populateDistricts('regDistrict');
+    populateDistricts('galDistrict');
+    populateDistricts('eventDistrict');
+}
+
+function populateDistricts(selectId) {
+    let select = document.getElementById(selectId);
+    if (!select) return;
+    select.innerHTML = '<option value="">-- जिला चुनें --</option>';
+    Object.keys(haryanaMasterData).sort().forEach(dist => {
+        let opt = document.createElement('option');
+        opt.value = dist;
+        opt.textContent = dist;
+        select.appendChild(opt);
     });
-}
-
-// 4. ब्लॉक बदलने पर गाँव लोड करने का यूनिवर्सल फंक्शन
-function loadVillagesForSection(distId, blockId, villageId) {
-    const selectedDist = document.getElementById(distId).value;
-    const selectedBlock = document.getElementById(blockId).value;
-    const villageSelect = document.getElementById(villageId);
-    
-    villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-    
-    if (!selectedDist || !selectedBlock || !haryanaMasterData[selectedDist][selectedBlock]) return;
-    
-    const sortedVillages = haryanaMasterData[selectedDist][selectedBlock].sort();
-    sortedVillages.forEach(village => {
-        villageSelect.innerHTML += `<option value="${village}">${village}</option>`;
-    });
-}
-
-// --- मुख्य सर्च सेक्शन के लिए बाइंडिंग ---
-function loadBlocks() {
-    loadBlocksForSection('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect');
-}
-
-function loadVillages() {
-    loadVillagesForSection('mainDistrictSelect', 'mainBlockSelect', 'mainVillageSelect');
-    updateHeaderVillageName();
-}
-
-// --- दुकान रजिस्ट्रेशन (Add Shop) सेक्शन के लिए बाइंडिंग ---
-function onRegDistrictChange() {
-    loadBlocksForSection('regDistrict', 'regBlock', 'regVillage');
-}
-
-function onRegBlockChange() {
-    loadVillagesForSection('regDistrict', 'regBlock', 'regVillage');
-}
-
-// --- गैलरी सेक्शन के लिए बाइंडिंग ---
-function onGalDistrictChange() {
-    loadBlocksForSection('galDistrict', 'galBlock', 'galVillage');
-}
-
-function onGalBlockChange() {
-    loadVillagesForSection('galDistrict', 'galBlock', 'galVillage');
-}
-
-// --- इवेंट/मुनादी सेक्शन के लिए बाइंडिंग ---
-function onEventDistrictChange() {
-    loadBlocksForSection('eventDistrict', 'eventBlock', 'eventVillage');
-}
-
-function onEventBlockChange() {
-    loadVillagesForSection('eventDistrict', 'eventBlock', 'eventVillage');
-}
-
-// --- अन्य हेल्पिंग फंक्शंस ---
-function updateHeaderVillageName() {
-    const vill = document.getElementById('mainVillageSelect').value;
-    if (vill) {
-        const header = document.getElementById('headerTitle');
-        if(header) header.innerText = `👴 MeraGaov ${vill} 💨`;
-    }
-}
-
-function searchVillageData() {
-    const vill = document.getElementById('mainVillageSelect').value;
-    const res = document.getElementById('searchResult');
-    if(!vill) {
-        alert("कृपया गाँव चुनें!");
-        return;
-    }
-    if(res) {
-        res.innerHTML = `<div style="background:#e8f5e9; padding:12px; border-radius:6px; color:#2e7d32; font-weight:bold;">📍 गाँव: ${vill} सफलतापूर्वक लोड हो गया है!</div>`;
-    }
 }
 
 function toggleMenu() {
-    const d = document.getElementById("myDropdown");
-    if(d) d.style.display = (d.style.display === "block") ? "none" : "block";
+    let dropdown = document.getElementById("myDropdown");
+    dropdown.classList.toggle("show");
+}
+
+function toggleCategoryDropdown() {
+    let content = document.getElementById("catDropdownContent");
+    let arrow = document.getElementById("catArrow");
+    content.classList.toggle("show");
+    arrow.textContent = content.classList.contains("show") ? "▲" : "▼";
 }
 
 function toggleSection(boxId, iconId) {
-    const box = document.getElementById(boxId);
-    const icon = document.getElementById(iconId);
-    if(box) {
-        const isVisible = box.style.display === "block";
-        box.style.display = isVisible ? "none" : "block";
-        if(icon) icon.innerText = isVisible ? "▼" : "▲";
+    let box = document.getElementById(boxId);
+    let icon = document.getElementById(iconId);
+    if (!box) return;
+    if (box.style.display === "block") {
+        box.style.display = "none";
+        if (icon) icon.textContent = "▼";
+    } else {
+        box.style.display = "block";
+        if (icon) icon.textContent = "▲";
     }
 }
 
-function openAboutModal() { document.getElementById('aboutModal').style.display = 'block'; toggleMenu(); }
-function openAdminModal() { document.getElementById('adminModal').style.display = 'block'; toggleMenu(); }
-function openPrivacyModal() { document.getElementById('privacyModal').style.display = 'block'; toggleMenu(); }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+function loadBlocks() {
+    let dist = document.getElementById('mainDistrictSelect').value;
+    let blockSelect = document.getElementById('mainBlockSelect');
+    let villageSelect = document.getElementById('mainVillageSelect');
+    blockSelect.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
+    villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
 
-function downloadPolicy() {
-    const element = document.createElement("a");
-    const file = new Blob(["Privacy Policy - MeraGaov Portal\nFounder: KUSUM W/O RAJESH YADAV\n\n1. Data Safety Guaranteed."], {type: 'text/plain'});
-    element.href = URL.createObjectURL(file);
-    element.download = "Privacy_Policy_MeraGaov.txt";
-    document.body.appendChild(element);
-    element.click();
+    if (dist && haryanaMasterData[dist]) {
+        Object.keys(haryanaMasterData[dist]).forEach(blk => {
+            let opt = document.createElement('option');
+            opt.value = blk;
+            opt.textContent = blk;
+            blockSelect.appendChild(opt);
+        });
+    }
+}
+
+function loadVillages() {
+    let dist = document.getElementById('mainDistrictSelect').value;
+    let blk = document.getElementById('mainBlockSelect').value;
+    let villageSelect = document.getElementById('mainVillageSelect');
+    villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+
+    if (dist && blk && haryanaMasterData[dist] && haryanaMasterData[dist][blk]) {
+        haryanaMasterData[dist][blk].forEach(vlg => {
+            let opt = document.createElement('option');
+            opt.value = vlg;
+            opt.textContent = vlg;
+            villageSelect.appendChild(opt);
+        });
+    }
+}
+
+function updateHeaderVillageName() {
+    let vlg = document.getElementById('mainVillageSelect').value;
+    let subTitle = document.getElementById('headerSubTitle');
+    if (vlg) {
+        subTitle.textContent = "राम राम भाइयों, आपके गाँव (" + vlg + ") में स्वागत है";
+    } else {
+        subTitle.textContent = "राम राम भाइयों, आपके गाँव में स्वागत है";
+    }
+}
+
+function searchServices() {
+    let dist = document.getElementById('mainDistrictSelect').value;
+    let blk = document.getElementById('mainBlockSelect').value;
+    let vlg = document.getElementById('mainVillageSelect').value;
+    let code = document.getElementById('secCodeInput').value;
+    let resBox = document.getElementById('searchResult');
+
+    if (!dist || !blk || !vlg || !code) {
+        alert('कृपया सभी अनिवार्य फ़ील्ड (*) भरें!');
+        return;
+    }
+
+    resBox.innerHTML = `
+        <div style="background: #e8f5e9; border: 1px solid #a5d6a7; padding: 12px; border-radius: 6px;">
+            <h4 style="color: #2e7d32;">📍 गाँव: ${vlg} (${blk}, ${dist})</h4>
+            <p style="font-size: 0.85rem; margin-top: 5px;">सुरक्षा कोड: <strong>${code}</strong> - वेरीफाई हुआ!</p>
+            <div style="margin-top: 10px;" class="shop-item">
+                <div>
+                    <strong>शर्मा किराना स्टोर</strong>
+                    <p style="font-size: 0.8rem; color: #555;">जनरल स्टोर एवं राशन सामान</p>
+                </div>
+                <a href="tel:9876543210" class="call-btn">📞 Call</a>
+            </div>
+        </div>
+    `;
+}
+
+function onRegDistrictChange() {
+    let dist = document.getElementById('regDistrict').value;
+    let blkSel = document.getElementById('regBlock');
+    let vlgSel = document.getElementById('regVillage');
+    blkSel.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
+    vlgSel.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+    if (dist && haryanaMasterData[dist]) {
+        Object.keys(haryanaMasterData[dist]).forEach(b => {
+            let opt = document.createElement('option');
+            opt.value = b;
+            opt.textContent = b;
+            blkSel.appendChild(opt);
+        });
+    }
+}
+
+function onRegBlockChange() {
+    let dist = document.getElementById('regDistrict').value;
+    let blk = document.getElementById('regBlock').value;
+    let vlgSel = document.getElementById('regVillage');
+    vlgSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+    if (dist && blk && haryanaMasterData[dist] && haryanaMasterData[dist][blk]) {
+        haryanaMasterData[dist][blk].forEach(v => {
+            let opt = document.createElement('option');
+            opt.value = v;
+            opt.textContent = v;
+            vlgSel.appendChild(opt);
+        });
+    }
+}
+
+function fetchGPSLocationAndVerifyDistrict() {
+    let coordInput = document.getElementById('regGPSCoord');
+    let statusDiv = document.getElementById('districtApiStatus');
+    if (navigator.geolocation) {
+        statusDiv.textContent = "स्थान प्राप्त किया जा रहा है...";
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                let lat = pos.coords.latitude.toFixed(4);
+                let lng = pos.coords.longitude.toFixed(4);
+                coordInput.value = `Lat: ${lat}, Lng: ${lng}`;
+                statusDiv.innerHTML = `<span style="color: #2e7d32; font-size: 0.8rem;">✔ GPS सत्यापित! स्थान दर्ज किया गया।</span>`;
+            },
+            (err) => {
+                coordInput.value = "GPS Data Unavailable";
+                statusDiv.innerHTML = `<span style="color: #d32f2f; font-size: 0.8rem;">❌ GPS अनुमति अस्वीकृत या उपलब्ध नहीं।</span>`;
+            }
+        );
+    } else {
+        alert('आपके ब्राउज़र में GPS सुविधा समर्थित नहीं है।');
+    }
+}
+
+function sendOTP() {
+    let phone = document.getElementById('regPhone').value;
+    if (phone.length < 10) {
+        alert('कृपया 10 अंकों का वैध मोबाइल नंबर दर्ज करें!');
+        return;
+    }
+    simulatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+    document.getElementById('generatedOtpDisplay').textContent = simulatedOTP;
+    document.getElementById('otpBox').style.display = 'block';
+    alert(`OTP भेजा गया: ${simulatedOTP}`);
+}
+
+function verifyOTP() {
+    let userInput = document.getElementById('userOtpInput').value;
+    let msg = document.getElementById('otpStatusMsg');
+    if (userInput === simulatedOTP && userInput !== "") {
+        isPhoneVerified = true;
+        msg.style.color = "#2e7d32";
+        msg.textContent = "✔ मोबाइल नंबर सफलतापूर्वक वेरीफाई हो गया!";
+    } else {
+        isPhoneVerified = false;
+        msg.style.color = "#d32f2f";
+        msg.textContent = "❌ अमान्य OTP! पुनः प्रयास करें।";
+    }
+}
+
+function previewImage(event, imgId, holderId) {
+    let reader = new FileReader();
+    reader.onload = function() {
+        let output = document.getElementById(imgId);
+        let holder = document.getElementById(holderId);
+        output.src = reader.result;
+        output.style.display = 'block';
+        if (holder) holder.style.display = 'none';
+    };
+    if (event.target.files[0]) {
+        reader.readAsDataURL(event.target.files[0]);
+    }
+}
+
+async function submitShop() {
+    let name = document.getElementById('regShopName').value;
+    let dist = document.getElementById('regDistrict').value;
+    let blk = document.getElementById('regBlock').value;
+    let vlg = document.getElementById('regVillage').value;
+    let phone = document.getElementById('regPhone').value;
+
+    if (!name || !dist || !blk || !vlg || !phone) {
+        alert('कृपया सभी विवरण भरें!');
+        return;
+    }
+
+    if (!isPhoneVerified) {
+        alert('कृपया पहले OTP वेरीफाई करें!');
+        return;
+    }
+
+    try {
+        if (window.db && window.addDoc && window.collection) {
+            await window.addDoc(window.collection(window.db, "shops"), {
+                name: name,
+                district: dist,
+                block: blk,
+                village: vlg,
+                phone: phone,
+                timestamp: new Date()
+            });
+            alert('दुकान/सेवा सफलता पूर्वक Firebase में सबमिट हो गई है!');
+        } else {
+            alert('दुकान सफलतापूर्वक दर्ज की गई! (Local Mode)');
+        }
+    } catch (e) {
+        console.error(e);
+        alert('सबमिशन में त्रुटि हुई!');
+    }
+}
+
+function showPrivacyPolicy() {
+    alert("प्रप्राइवेसी पॉलिसी:\nयह पोर्टल उपयोगकर्ताओं के डेटा की सुरक्षा को प्राथमिकता देता है।");
 }
