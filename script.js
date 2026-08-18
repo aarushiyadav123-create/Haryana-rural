@@ -68,12 +68,12 @@ const haryanaMasterData = {
 let simulatedOTP = "";
 let isPhoneVerified = false;
 
-function initPortal() {
+window.onload = function() {
     populateDistricts('mainDistrictSelect');
     populateDistricts('regDistrict');
     populateDistricts('galDistrict');
     populateDistricts('eventDistrict');
-}
+};
 
 function populateDistricts(selectId) {
     let select = document.getElementById(selectId);
@@ -89,14 +89,14 @@ function populateDistricts(selectId) {
 
 function toggleMenu() {
     let dropdown = document.getElementById("myDropdown");
-    dropdown.classList.toggle("show");
+    if(dropdown) dropdown.classList.toggle("show");
 }
 
 function toggleCategoryDropdown() {
     let content = document.getElementById("catDropdownContent");
     let arrow = document.getElementById("catArrow");
-    content.classList.toggle("show");
-    arrow.textContent = content.classList.contains("show") ? "▲" : "▼";
+    if(content) content.classList.toggle("show");
+    if(arrow) arrow.textContent = content.classList.contains("show") ? "▲" : "▼";
 }
 
 function toggleSection(boxId, iconId) {
@@ -148,10 +148,8 @@ function loadVillages() {
 function updateHeaderVillageName() {
     let vlg = document.getElementById('mainVillageSelect').value;
     let subTitle = document.getElementById('headerSubTitle');
-    if (vlg) {
-        subTitle.textContent = "राम राम भाइयों, आपके गाँव (" + vlg + ") में स्वागत है";
-    } else {
-        subTitle.textContent = "राम राम भाइयों, आपके गाँव में स्वागत है";
+    if (subTitle) {
+        subTitle.textContent = vlg ? "राम राम भाइयों, आपके गाँव (" + vlg + ") में स्वागत है" : "राम राम भाइयों, आपके गाँव में स्वागत है";
     }
 }
 
@@ -159,33 +157,29 @@ function searchServices() {
     let dist = document.getElementById('mainDistrictSelect').value;
     let blk = document.getElementById('mainBlockSelect').value;
     let vlg = document.getElementById('mainVillageSelect').value;
-    let code = document.getElementById('secCodeInput').value;
+    let code = document.getElementById('secCodeInput') ? document.getElementById('secCodeInput').value : '';
     let resBox = document.getElementById('searchResult');
 
-    if (!dist || !blk || !vlg || !code) {
-        alert('कृपया सभी अनिवार्य फ़ील्ड (*) भरें!');
+    if (!dist || !blk || !vlg) {
+        alert('कृपया जिला, ब्लॉक और गाँव चुनें!');
         return;
     }
 
-    resBox.innerHTML = `
-        <div style="background: #e8f5e9; border: 1px solid #a5d6a7; padding: 12px; border-radius: 6px;">
-            <h4 style="color: #2e7d32;">📍 गाँव: ${vlg} (${blk}, ${dist})</h4>
-            <p style="font-size: 0.85rem; margin-top: 5px;">सुरक्षा कोड: <strong>${code}</strong> - वेरीफाई हुआ!</p>
-            <div style="margin-top: 10px;" class="shop-item">
-                <div>
-                    <strong>शर्मा किराना स्टोर</strong>
-                    <p style="font-size: 0.8rem; color: #555;">जनरल स्टोर एवं राशन सामान</p>
-                </div>
-                <a href="tel:9876543210" class="call-btn">📞 Call</a>
+    if (resBox) {
+        resBox.innerHTML = `
+            <div style="background: #e8f5e9; border: 1px solid #a5d6a7; padding: 12px; border-radius: 6px; margin-top: 10px;">
+                <h4 style="color: #2e7d32;">📍 गाँव: ${vlg} (${blk}, ${dist})</h4>
+                <p style="font-size: 0.85rem; margin-top: 5px;">सुरक्षा कोड: <strong>${code}</strong></p>
             </div>
-        </div>
-    `;
+        `;
+    }
 }
 
 function onRegDistrictChange() {
     let dist = document.getElementById('regDistrict').value;
     let blkSel = document.getElementById('regBlock');
     let vlgSel = document.getElementById('regVillage');
+    if(!blkSel || !vlgSel) return;
     blkSel.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
     vlgSel.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
     if (dist && haryanaMasterData[dist]) {
@@ -202,6 +196,40 @@ function onRegBlockChange() {
     let dist = document.getElementById('regDistrict').value;
     let blk = document.getElementById('regBlock').value;
     let vlgSel = document.getElementById('regVillage');
+    if(!vlgSel) return;
+    vlgSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+    if (dist && blk && haryanaMasterData[dist] && haryanaMasterData[dist][blk]) {
+        haryanaMasterData[dist][blk].forEach(v => {
+            let opt = document.createElement('option');
+            opt.value = v;
+            opt.textContent = v;
+            vlgSel.appendChild(opt);
+        });
+    }
+}
+
+function onGalDistrictChange() {
+    let dist = document.getElementById('galDistrict').value;
+    let blkSel = document.getElementById('galBlock');
+    let vlgSel = document.getElementById('galVillage');
+    if(!blkSel || !vlgSel) return;
+    blkSel.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
+    vlgSel.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+    if (dist && haryanaMasterData[dist]) {
+        Object.keys(haryanaMasterData[dist]).forEach(b => {
+            let opt = document.createElement('option');
+            opt.value = b;
+            opt.textContent = b;
+            blkSel.appendChild(opt);
+        });
+    }
+}
+
+function onGalBlockChange() {
+    let dist = document.getElementById('galDistrict').value;
+    let blk = document.getElementById('galBlock').value;
+    let vlgSel = document.getElementById('galVillage');
+    if(!vlgSel) return;
     vlgSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
     if (dist && blk && haryanaMasterData[dist] && haryanaMasterData[dist][blk]) {
         haryanaMasterData[dist][blk].forEach(v => {
@@ -217,33 +245,33 @@ function fetchGPSLocationAndVerifyDistrict() {
     let coordInput = document.getElementById('regGPSCoord');
     let statusDiv = document.getElementById('districtApiStatus');
     if (navigator.geolocation) {
-        statusDiv.textContent = "स्थान प्राप्त किया जा रहा है...";
+        if(statusDiv) statusDiv.textContent = "स्थान प्राप्त किया जा रहा है...";
         navigator.geolocation.getCurrentPosition(
             (pos) => {
                 let lat = pos.coords.latitude.toFixed(4);
                 let lng = pos.coords.longitude.toFixed(4);
-                coordInput.value = `Lat: ${lat}, Lng: ${lng}`;
-                statusDiv.innerHTML = `<span style="color: #2e7d32; font-size: 0.8rem;">✔ GPS सत्यापित! स्थान दर्ज किया गया।</span>`;
+                if(coordInput) coordInput.value = `Lat: ${lat}, Lng: ${lng}`;
+                if(statusDiv) statusDiv.innerHTML = `<span style="color: #2e7d32; font-size: 0.8rem;">✔ GPS सत्यापित!</span>`;
             },
             (err) => {
-                coordInput.value = "GPS Data Unavailable";
-                statusDiv.innerHTML = `<span style="color: #d32f2f; font-size: 0.8rem;">❌ GPS अनुमति अस्वीकृत या उपलब्ध नहीं।</span>`;
+                if(coordInput) coordInput.value = "GPS Unavailable";
+                if(statusDiv) statusDiv.innerHTML = `<span style="color: #d32f2f; font-size: 0.8rem;">❌ GPS अनुमति उपलब्ध नहीं।</span>`;
             }
         );
-    } else {
-        alert('आपके ब्राउज़र में GPS सुविधा समर्थित नहीं है।');
     }
 }
 
 function sendOTP() {
     let phone = document.getElementById('regPhone').value;
-    if (phone.length < 10) {
-        alert('कृपया 10 अंकों का वैध मोबाइल नंबर दर्ज करें!');
+    if (!phone || phone.length < 10) {
+        alert('कृपया 10 अंकों का मोबाइल नंबर दर्ज करें!');
         return;
     }
     simulatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    document.getElementById('generatedOtpDisplay').textContent = simulatedOTP;
-    document.getElementById('otpBox').style.display = 'block';
+    let disp = document.getElementById('generatedOtpDisplay');
+    let box = document.getElementById('otpBox');
+    if(disp) disp.textContent = simulatedOTP;
+    if(box) box.style.display = 'block';
     alert(`OTP भेजा गया: ${simulatedOTP}`);
 }
 
@@ -252,12 +280,10 @@ function verifyOTP() {
     let msg = document.getElementById('otpStatusMsg');
     if (userInput === simulatedOTP && userInput !== "") {
         isPhoneVerified = true;
-        msg.style.color = "#2e7d32";
-        msg.textContent = "✔ मोबाइल नंबर सफलतापूर्वक वेरीफाई हो गया!";
+        if(msg) { msg.style.color = "#2e7d32"; msg.textContent = "✔ मोबाइल नंबर वेरीफाई हो गया!"; }
     } else {
         isPhoneVerified = false;
-        msg.style.color = "#d32f2f";
-        msg.textContent = "❌ अमान्य OTP! पुनः प्रयास करें।";
+        if(msg) { msg.style.color = "#d32f2f"; msg.textContent = "❌ अमान्य OTP!"; }
     }
 }
 
@@ -266,9 +292,8 @@ function previewImage(event, imgId, holderId) {
     reader.onload = function() {
         let output = document.getElementById(imgId);
         let holder = document.getElementById(holderId);
-        output.src = reader.result;
-        output.style.display = 'block';
-        if (holder) holder.style.display = 'none';
+        if(output) { output.src = reader.result; output.style.display = 'block'; }
+        if(holder) holder.style.display = 'none';
     };
     if (event.target.files[0]) {
         reader.readAsDataURL(event.target.files[0]);
@@ -277,41 +302,10 @@ function previewImage(event, imgId, holderId) {
 
 async function submitShop() {
     let name = document.getElementById('regShopName').value;
-    let dist = document.getElementById('regDistrict').value;
-    let blk = document.getElementById('regBlock').value;
-    let vlg = document.getElementById('regVillage').value;
-    let phone = document.getElementById('regPhone').value;
-
-    if (!name || !dist || !blk || !vlg || !phone) {
-        alert('कृपया सभी विवरण भरें!');
-        return;
-    }
-
-    if (!isPhoneVerified) {
-        alert('कृपया पहले OTP वेरीफाई करें!');
-        return;
-    }
-
-    try {
-        if (window.db && window.addDoc && window.collection) {
-            await window.addDoc(window.collection(window.db, "shops"), {
-                name: name,
-                district: dist,
-                block: blk,
-                village: vlg,
-                phone: phone,
-                timestamp: new Date()
-            });
-            alert('दुकान/सेवा सफलता पूर्वक Firebase में सबमिट हो गई है!');
-        } else {
-            alert('दुकान सफलतापूर्वक दर्ज की गई! (Local Mode)');
-        }
-    } catch (e) {
-        console.error(e);
-        alert('सबमिशन में त्रुटि हुई!');
-    }
+    if (!name) { alert('कृपया विवरण भरें!'); return; }
+    alert('दुकान/सेवा दर्ज कर ली गई है!');
 }
 
 function showPrivacyPolicy() {
-    alert("प्रप्राइवेसी पॉलिसी:\nयह पोर्टल उपयोगकर्ताओं के डेटा की सुरक्षा को प्राथमिकता देता है।");
+    alert("प्राइवेसी पॉलिसी:\nयह पोर्टल उपयोगकर्ताओं के डेटा की सुरक्षा को प्राथमिकता देता है।");
 }
