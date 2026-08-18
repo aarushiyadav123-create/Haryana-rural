@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मेरा गाँव - संपूर्ण हरियाणा ग्रामीण सेवा</title>
+    <title>मेरा गाँव - सटीक हरियाणा सेवा</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
         body { background: #f4f6f9; padding: 20px; color: #333; }
@@ -15,38 +15,44 @@
         select:focus { border-color: #1b5e20; }
         .btn { background: #1b5e20; color: white; border: none; padding: 14px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px; }
         .btn:hover { background: #113f14; }
-        .status { font-size: 0.85rem; color: #d84315; font-weight: bold; margin-top: 4px; display: none; }
         .result-box { margin-top: 20px; padding: 15px; border-radius: 8px; background: #e8f5e9; border: 1px solid #a5d6a7; display: none; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>🌾 MeraGaov - संपूर्ण हरियाणा (All 7000+ Villages)</h2>
+    <h2>🌾 MeraGaov - Haryana Official Hierarchy</h2>
 
-    <!-- District -->
+    <!-- 1. District -->
     <div class="form-group">
-        <label>1. जिला चुनें (District):</label>
-        <select id="districtSelect" onchange="loadBlocks()">
+        <label>1. जिला (District):</label>
+        <select id="distSelect" onchange="loadAreas()">
             <option value="">-- जिला चुनें --</option>
         </select>
     </div>
 
-    <!-- Block -->
+    <!-- 2. Area -->
     <div class="form-group">
-        <label>2. खण्ड चुनें (Block):</label>
-        <select id="blockSelect" onchange="loadFullVillages()">
+        <label>2. सब-डिविजन / एरिया (Area):</label>
+        <select id="areaSelect" onchange="loadBlocks()">
             <option value="">-- पहले जिला चुनें --</option>
         </select>
     </div>
 
-    <!-- Village -->
+    <!-- 3. Block -->
     <div class="form-group">
-        <label>3. गाँव चुनें (Village):</label>
+        <label>3. खण्ड (Block):</label>
+        <select id="blockSelect" onchange="loadVillages()">
+            <option value="">-- पहले एरिया चुनें --</option>
+        </select>
+    </div>
+
+    <!-- 4. Village -->
+    <div class="form-group">
+        <label>4. गाँव (Village):</label>
         <select id="villageSelect">
             <option value="">-- पहले ब्लॉक चुनें --</option>
         </select>
-        <div id="loadingStatus" class="status">⌛ ब्लॉक के सभी 100+ गाँव लोड हो रहे हैं...</div>
     </div>
 
     <button class="btn" onclick="showData()">विवरण देखें (View Details)</button>
@@ -55,107 +61,124 @@
 </div>
 
 <script>
-    // Master District & Block Mapping
-    const haryanaMaster = {
-        "CHARKHI DADRI": ["BADHRA", "CHARKHI DADRI", "BAUND"],
-        "ROHTAK": ["ROHTAK", "SAMPLA", "KALANAUR", "MEHAM", "LAKHAN MAJRA"],
-        "JHAJJAR": ["JHAJJAR", "BAHADURGARH", "BERI", "BADLI", "MATANHAIL", "SALHAWAS"],
-        "JIND": ["JIND", "JULANA", "SAFIDON", "UCHANA", "NARWANA", "ALEWA", "PILLUKHERA"],
-        "SONIPAT": ["SONIPAT", "KHARKHODA", "GOHANA", "GANAUR", "RAI", "MUNDLANA"],
-        "BHIWANI": ["BHIWANI", "BAWANI KHERA", "TOSHAM", "SIWANI", "KAIRU", "BEHAL"],
-        "HISAR": ["HISAR", "HANSI", "BARWALA", "AGROHA", "NARNAND", "UKLANA", "ADAMPUR"],
-        "AMBALA": ["AMBALA", "BARARA", "NARAINGARH", "SHAHZADPUR", "SAHA"],
-        "FARIDABAD": ["FARIDABAD", "BALLABHGARH"],
-        "GURUGRAM": ["GURUGRAM", "PATAUDI", "FARRUKHNAGAR", "SOHNA"],
-        "KARNAL": ["KARNAL", "GHARAUNDA", "INDRI", "NILOKHERI", "ASSANDH", "KUNJPURA"],
-        "PANIPAT": ["PANIPAT", "SAMALKHA", "ISRANA", "MADLAUDA", "BAPOLI"],
-        "REWARI": ["REWARI", "BAWAL", "DHARUHERA", "KHOL", "JATUSANA", "NAHARCHANA"],
-        "SIRSA": ["SIRSA", "DABWALI", "RANIA", "ELLENABAD", "KALANWALI", "ODHAN", "NATHUSARI CHOPTA"],
-        "YAMUNANAGAR": ["YAMUNANAGAR", "JAGADHRI", "CHHACHHRAULI", "RADAUR", "BILASPUR", "MUSTAFABAD"]
-    };
-
-    // Load Districts on Start
-    window.onload = function() {
-        let distSelect = document.getElementById('districtSelect');
-        for (let dist in haryanaMaster) {
-            let opt = document.createElement('option');
-            opt.value = dist;
-            opt.innerText = dist;
-            distSelect.appendChild(opt);
+    // Strict Structure: District -> Area -> Block -> Villages
+    const db = {
+        "CHARKHI DADRI": {
+            "CHARKHI DADRI SUB-DIVISION": {
+                "CHARKHI DADRI": ["Dadri Rural", "Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni", "Mankawas", "Phogat", "Chhapar", "Iri", "Samaspur", "Mehrana"],
+                "BAUND": ["Achina", "Bas Ranila", "Baund Kalan", "Baund Khurd", "Hindol", "Sanjarwas", "Sankrod", "Gharethi", "Ranila"]
+            },
+            "BADHRA SUB-DIVISION": {
+                "BADHRA": ["Badhra", "Mandola", "Kallana", "Chappar", "Jhojhu Khurd", "Kheri Bura", "Kadma", "Ghuiyani", "Lawa", "Hansiwas"]
+            }
+        },
+        "ROHTAK": {
+            "ROHTAK SUB-DIVISION": {
+                "ROHTAK": ["Rohtak Rural", "Bhalout", "Kharawar", "Kheri Sadh", "Bohar", "Asthal Bohar", "Paharipur", "Sunaria Kalan", "Sunaria Khurd", "Makrauli Kalan"]
+            },
+            "SAMPLA SUB-DIVISION": {
+                "SAMPLA": ["Sampla", "Ismaila 11B", "Ismaila 9B", "Kultana", "Dattaur", "Atail", "Gandhra", "Bhadhadu", "Balku", "Ghashi", "Rohad", "Kheri Sampla", "Gijhi", "Naya Bans", "Chandi", "Nonand"]
+            },
+            "MEHAM SUB-DIVISION": {
+                "MEHAM": ["Meham", "Farmana", "Semnan", "Madina Gindhran", "Madina Korsan", "Mokhra Khas", "Mokhra Bahi", "Baini City", "Sarsa", "Nidana"],
+                "LAKHAN MAJRA": ["Lakhan Majra", "Chandi", "Nandwal", "Gharawathi", "Kharak Jattan", "Indergarh", "Titian", "Brahmanwas"]
+            },
+            "KALANAUR SUB-DIVISION": {
+                "KALANAUR": ["Kalanaur", "Kahnaur", "Anwal", "Nigana", "Kairi", "Katesara", "Jindran", "Gudhan", "Masudpur"]
+            }
+        },
+        "JHAJJAR": {
+            "JHAJJAR SUB-DIVISION": {
+                "JHAJJAR": ["Jhajjar Rural", "Silani", "Kutani", "Gudha", "Giani", "Bhurawas", "Kheri Khummar", "Suhra", "Dhani", "Talao"]
+            },
+            "BAHADURGARH SUB-DIVISION": {
+                "BAHADURGARH": ["Bahadurgarh Rural", "Asaudha Todran", "Asaudha Siwan", "Barahi", "Bamnoli", "Sankhol", "Sidhipur Lova", "Rohad", "Daboda Kalan", "Daboda Khurd", "Kanonda", "Soldha", "Jasaur Kheri"]
+            },
+            "BERI SUB-DIVISION": {
+                "BERI": ["Beri", "Dighal", "Baghpur", "Dubaldhan", "Chhara", "Gochhi", "Majra", "Wazirpur", "Bisahan", "Gangtan"]
+            },
+            "BADLI SUB-DIVISION": {
+                "BADLI": ["Badli", "Bupania", "Pelpa", "Dulhera", "Munimpur", "Yakubpur", "Gubhana", "Majri", "Pahori"]
+            }
         }
     };
 
-    function loadBlocks() {
-        let dist = document.getElementById('districtSelect').value;
-        let blockSelect = document.getElementById('blockSelect');
-        let villageSelect = document.getElementById('villageSelect');
+    // Load Districts
+    window.onload = function() {
+        let dist = document.getElementById('distSelect');
+        for (let d in db) {
+            let opt = document.createElement('option');
+            opt.value = d;
+            opt.innerText = d;
+            dist.appendChild(opt);
+        }
+    };
 
-        blockSelect.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
-        villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+    function loadAreas() {
+        let d = document.getElementById('distSelect').value;
+        let area = document.getElementById('areaSelect');
+        document.getElementById('blockSelect').innerHTML = '<option value="">-- पहले एरिया चुनें --</option>';
+        document.getElementById('villageSelect').innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+        area.innerHTML = '<option value="">-- एरिया (Sub-Division) चुनें --</option>';
 
-        if (dist && haryanaMaster[dist]) {
-            haryanaMaster[dist].forEach(block => {
+        if (d && db[d]) {
+            for (let a in db[d]) {
                 let opt = document.createElement('option');
-                opt.value = block;
-                opt.innerText = block;
-                blockSelect.appendChild(opt);
-            });
+                opt.value = a;
+                opt.innerText = a;
+                area.appendChild(opt);
+            }
         }
     }
 
-    // Auto-Fetch Complete LGD Village Data Array
-    async function loadFullVillages() {
-        let dist = document.getElementById('districtSelect').value;
-        let block = document.getElementById('blockSelect').value;
-        let villageSelect = document.getElementById('villageSelect');
-        let status = document.getElementById('loadingStatus');
+    function loadBlocks() {
+        let d = document.getElementById('distSelect').value;
+        let a = document.getElementById('areaSelect').value;
+        let block = document.getElementById('blockSelect');
+        document.getElementById('villageSelect').innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+        block.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
 
-        villageSelect.innerHTML = '<option value="">-- लोड हो रहा है... --</option>';
-        if (!block) return;
+        if (d && a && db[d][a]) {
+            for (let b in db[d][a]) {
+                let opt = document.createElement('option');
+                opt.value = b;
+                opt.innerText = b;
+                block.appendChild(opt);
+            }
+        }
+    }
 
-        status.style.display = 'block';
+    function loadVillages() {
+        let d = document.getElementById('distSelect').value;
+        let a = document.getElementById('areaSelect').value;
+        let b = document.getElementById('blockSelect').value;
+        let village = document.getElementById('villageSelect');
+        village.innerHTML = '<option value="">-- गाँव / Village चुनें --</option>';
 
-        try {
-            // Overpass Direct Node Mapping for All Rural Elements in Haryana
-            let query = `[out:json][timeout:25];area["ISO3166-2"="IN-HR"]->.a;node["place"~"village|hamlet"](area.a);out;`;
-            let res = await fetch("https://overpass-api.de/api/interpreter?data=" + encodeURIComponent(query));
-            let data = await res.json();
-
-            status.style.display = 'none';
-            villageSelect.innerHTML = '<option value="">-- अपना गाँव चुनें --</option>';
-
-            let vList = data.elements
-                .map(e => e.tags.name || e.tags["name:en"] || e.tags["name:hi"])
-                .filter(Boolean);
-
-            let uniqueVillages = [...new Set(vList)].sort();
-
-            uniqueVillages.forEach(v => {
+        if (d && a && b && db[d][a][b]) {
+            db[d][a][b].forEach(v => {
                 let opt = document.createElement('option');
                 opt.value = v;
                 opt.innerText = v;
-                villageSelect.appendChild(opt);
+                village.appendChild(opt);
             });
-
-        } catch (e) {
-            status.style.display = 'none';
-            villageSelect.innerHTML = '<option value="">-- गाँव लोड नहीं हो पाए (Retry करें) --</option>';
         }
     }
 
     function showData() {
-        let d = document.getElementById('districtSelect').value;
+        let d = document.getElementById('distSelect').value;
+        let a = document.getElementById('areaSelect').value;
         let b = document.getElementById('blockSelect').value;
         let v = document.getElementById('villageSelect').value;
 
-        if (!d || !b || !v) {
-            alert('कृपया जिला, ब्लॉक और गाँव तीनों चुनें!');
+        if (!d || !a || !b || !v) {
+            alert('कृपया चारों विकल्प चुनें!');
             return;
         }
 
-        let resBox = document.getElementById('resultBox');
-        resBox.style.display = 'block';
-        resBox.innerHTML = `<strong>📍 चयनित जानकारी:</strong><br>जिला: ${d} | ब्लॉक: ${b} | गाँव: ${v}`;
+        let res = document.getElementById('resultBox');
+        res.style.display = 'block';
+        res.innerHTML = `<strong>📍 चुना गया लोकेशन:</strong><br>जिला: ${d}<br>एरिया: ${a}<br>ब्लॉक: ${b}<br>गाँव: ${v}`;
     }
 </script>
 
