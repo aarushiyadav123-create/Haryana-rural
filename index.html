@@ -12,7 +12,6 @@
             --accent: #d84315;
             --purple: #4a148c;
             --govt-green: #00695c;
-            --weather-blue: #0288d1;
             --bg-color: #f4f6f9;
             --card-bg: #ffffff;
             --text-color: #333333;
@@ -59,7 +58,7 @@
         }
 
         .menu-container { position: relative; display: inline-block; }
-        .menu-content { display: none; position: absolute; right: 0; background: #fff; min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10; border-radius: 6px; }
+        .menu-content { display: none; position: absolute; right: 0; background: #fff; min-width: 180px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 10; border-radius: 6px; }
         .menu-content a, .menu-content button { color: #333; padding: 10px 14px; display: block; text-decoration: none; border: none; background: none; width: 100%; text-align: left; font-size: 0.85rem; font-weight: bold; cursor: pointer; }
         .menu-content a:hover, .menu-content button:hover { background: #f1f1f1; }
 
@@ -327,8 +326,8 @@
         <div id="myDropdown" class="menu-content">
             <a href="#searchSection">गाँव खोजें</a>
             <a href="#aboutSection" onclick="alert('यह पोर्टल हरियाणा के गाँवों और डिजिटल सेवाओं के लिए बनाया गया है।')">About (हमारे बारे में)</a>
-            <button onclick="toggleSection('adminLoginBox', 'Admin Panel')" style="width:100%; text-align:left; background:none; border:none; padding:10px 16px; cursor:pointer; font-weight:bold; color:#333;">Admin / Sub-Admin</button>
-            <a href="#" onclick="alert('प्राइवेसी पॉलिसी: आपका डेटा सुरक्षित है।')">प्राइवेसी पॉलिसी</a>
+            <button onclick="toggleSection('adminLoginBox', 'Admin Panel')" style="width:100%; text-align:left; background:none; border:none; padding:10px 14px; cursor:pointer; font-weight:bold; color:#333;">Admin / Sub-Admin</button>
+            <a href="#" onclick="showPrivacyPolicy()">प्राइवेसी पॉलिसी (Privacy Policy)</a>
         </div>
     </div>
 </div>
@@ -354,6 +353,7 @@
 
 <div class="container" id="searchSection">
 
+    <!-- 6 Services Buttons Ordered Sequentially -->
     <div class="service-grid">
         <a href="#searchSection" class="service-btn" onclick="alert('मिस्त्री सेवा जल्द उपलब्ध होगी')">🛠️ मिस्त्री</a>
         <a href="#searchSection" class="service-btn" onclick="alert('पंडित जी सेवा जल्द उपलब्ध होगी')">🙏 पंडित जी</a>
@@ -743,7 +743,7 @@
         },
         "PALWAL": {
             "PALWAL": ["Palwal Rural", "Hodal", "Hathin", "Mundkat", "Deeghot", "Banchari", "Alawalpur", "Dhatir"],
-            "MANDHOTI": []
+            "MANDHOTI": ["Mandhoti", "Hodal Rural", "Hathin Rural"]
         },
         "PANCHKULA": {
             "PANCHKULA": ["Panchkula Rural", "Kalka", "Barwala", "Mandi", "Pinjore", "Raipur Rani", "Jhajra"],
@@ -802,6 +802,10 @@
         dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
     }
 
+    function showPrivacyPolicy() {
+        alert("प्राइवेसी पॉलिसी (Privacy Policy):\n\n1. यह हरियाणा ग्रामीण सेवा पोर्टल स्थानीय नागरिकों की सुविधा के लिए है।\n2. आपके द्वारा दर्ज किया गया मोबाइल नंबर और डेटा पूरी तरह सुरक्षित है।\n3. हम यूजर का कोई भी व्यक्तिगत डेटा किसी तीसरे पक्ष (Third Party) के साथ साझा नहीं करते हैं।\n4. ऐप से जुड़ी किसी भी सहायता के लिए संपर्क करें।");
+    }
+
     function populateAllDistrictDropdowns() {
         const selects = ["regDistrict", "galDistrict", "eventDistrict"];
         const sortedDistricts = Object.keys(haryanaMasterData).sort();
@@ -827,9 +831,10 @@
         
         if (!selectedDist || !haryanaMasterData[selectedDist]) return;
         
-        for (let block in haryanaMasterData[selectedDist]) {
+        const sortedBlocks = Object.keys(haryanaMasterData[selectedDist]).sort();
+        sortedBlocks.forEach(block => {
             blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
-        }
+        });
     }
 
     function loadVillages() {
@@ -909,7 +914,7 @@
                     document.getElementById("regGPSCoord").value = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
 
                     isDistrictVerifiedByAPI = true;
-                    statusBox.innerHTML = `<div class="status-badge success" style="color: green; font-weight: bold;">✔ GPS व जिला सफलतापूर्वक वेरीफाई हुआ!</div>`;
+                    statusBox.innerHTML = `<div style="color: green; font-weight: bold; margin-top:4px;">✔ GPS व जिला सफलतापूर्वक वेरीफाई हुआ!</div>`;
                 },
                 () => { 
                     alert("GPS की अनुमति दें!"); 
@@ -1218,41 +1223,7 @@
         const isVisible = box.style.display === "block";
         box.style.display = isVisible ? "none" : "block";
         icon.innerText = isVisible ? "▼" : "▲";
-    }function loadBlocks() {
-    const selectedDist = document.getElementById('mainDistrictSelect').value;
-    const blockSelect = document.getElementById('mainBlockSelect');
-    const villageSelect = document.getElementById('mainVillageSelect');
-    
-    blockSelect.innerHTML = '<option value="">-- सभी ब्लॉक चुनें --</option>';
-    villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
-    
-    if (!selectedDist || !haryanaMasterData[selectedDist]) return;
-    
-    // सभी ब्लॉक अपने आप लोड होंगे
-    const sortedBlocks = Object.keys(haryanaMasterData[selectedDist]).sort();
-    sortedBlocks.forEach(block => {
-        blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
-    });
-}
-
-function loadVillages() {
-    const selectedDist = document.getElementById('mainDistrictSelect').value;
-    const selectedBlock = document.getElementById('mainBlockSelect').value;
-    const villageSelect = document.getElementById('mainVillageSelect');
-    
-    villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-    
-    if (!selectedDist || !selectedBlock || !haryanaMasterData[selectedDist] || !haryanaMasterData[selectedDist][selectedBlock]) {
-        return;
     }
-    
-    const villages = haryanaMasterData[selectedDist][selectedBlock];
-    villages.forEach(village => {
-        villageSelect.innerHTML += `<option value="${village}">${village}</option>`;
-    });
-}
-
-
 </script>
 </body>
 </html>
