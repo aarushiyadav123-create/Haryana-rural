@@ -309,3 +309,32 @@ async function submitShop() {
 function showPrivacyPolicy() {
     alert("प्राइवेसी पॉलिसी:\nयह पोर्टल उपयोगकर्ताओं के डेटा की सुरक्षा को प्राथमिकता देता है।");
 }
+function submitAd() {
+    let title = document.getElementById('adTitle') ? document.getElementById('adTitle').value : '';
+    let price = document.getElementById('adPrice') ? document.getElementById('adPrice').value : '';
+    let phone = document.getElementById('adPhone') ? document.getElementById('adPhone').value : '';
+    let txnId = document.getElementById('adTxnId') ? document.getElementById('adTxnId').value : '';
+    let area = document.getElementById('adDisplayArea');
+
+    if (!title || !price || !phone || !txnId) {
+        alert('कृपया सामान का विवरण, कीमत, फोन और UPI Txn ID भरें!');
+        return;
+    }
+
+    if (area) {
+        let item = document.createElement('div');
+        item.className = 'item-card';
+        item.innerHTML = `
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div>
+                    <strong>${title}</strong>
+                    <p style="font-size:0.85rem; color:#2e7d32; font-weight:bold;">₹${price}</p>
+                    <p style="font-size:0.75rem; color:#666;">Txn ID: ${txnId}</p>
+                </div>
+            </div>
+            <a href="tel:${phone}" class="call-btn">📞 कॉल करें</a>
+        `;
+        area.prepend(item);
+        alert('विज्ञापन समीक्षा के लिए पोस्ट कर दिया गया है!');
+    }
+}
