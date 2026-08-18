@@ -923,115 +923,7 @@
             blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
         });
     }    
-   // हरियाणा के 22 जिलों की सूची
-const haryanaDistricts = [
-    "AMBALA", "BHIWANI", "CHARKHI DADRI", "FARIDABAD", "FATEHABAD", 
-    "GURUGRAM", "HISAR", "JHAJJAR", "JIND", "KAITHAL", "KARNAL", 
-    "KURUKSHETRA", "MAHENDRAGARH", "NUH", "PALWAL", "PANCHKULA", 
-    "PANIPAT", "REWARI", "ROHTAK", "SIRSA", "SONIPAT", "YAMUNANAGAR"
-];
-
-// 1. पेज खुलते ही जिले लोड होंगे
-window.onload = function() {
-    const distSel = document.getElementById('mainDistrictSelect');
-    if(distSel) {
-        distSel.innerHTML = '<option value="">-- जिला चुनें --</option>';
-        haryanaDistricts.forEach(dist => {
-            let opt = document.createElement('option');
-            opt.value = dist;
-            opt.textContent = dist;
-            distSel.appendChild(opt);
-        });
-    }
-};
-
-// 2. जिला चुनने पर ब्लॉक ऑटो-लोड होंगे
-async function loadBlocks() {
-    const dist = document.getElementById('mainDistrictSelect').value;
-    const blockSel = document.getElementById('mainBlockSelect');
-    const villSel = document.getElementById('mainVillageSelect');
-    
-    blockSel.innerHTML = '<option value="">⏳ ब्लॉक लोड हो रहे हैं...</option>';
-    villSel.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
-
-    if(!dist) return;
-
-    try {
-        let res = await fetch(`https://api.postalpincode.in/postoffice/${dist}`);
-        let data = await res.json();
-        
-        blockSel.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
-        let blocks = new Set();
-        
-        if(data[0] && data[0].PostOffice) {
-            data[0].PostOffice.forEach(po => {
-                if(po.Block && po.Block !== "NA") blocks.add(po.Block);
-            });
-        }
-
-        blocks.forEach(blockName => {
-            let opt = document.createElement('option');
-            opt.value = blockName;
-            opt.textContent = blockName;
-            blockSel.appendChild(opt);
-        });
-    } catch (err) {
-        blockSel.innerHTML = '<option value="">ब्लॉक लोड करने में त्रुटि</option>';
-    }
-}
-
-// 3. ब्लॉक चुनने पर उस ब्लॉक के सभी गाँव ऑटो-लोड होंगे
-async function loadVillages() {
-    const block = document.getElementById('mainBlockSelect').value;
-    const villSel = document.getElementById('mainVillageSelect');
-    
-    villSel.innerHTML = '<option value="">⏳ गाँव लोड हो रहे हैं...</option>';
-
-    if(!block) return;
-
-    try {
-        let res = await fetch(`https://api.postalpincode.in/postoffice/${block}`);
-        let data = await res.json();
-        
-        villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-        let villages = new Set();
-
-        if(data[0] && data[0].PostOffice) {
-            data[0].PostOffice.forEach(po => {
-                villages.add(po.Name);
-            });
-        }
-
-        villages.forEach(villName => {
-            let opt = document.createElement('option');
-            opt.value = villName;
-            opt.textContent = villName;
-            villSel.appendChild(opt);
-        });
-    } catch (err) {
-        villSel.innerHTML = '<option value="">गाँव लोड करने में त्रुटि</option>';
-    }
-}
-
-function updateHeaderVillageName() {
-    const vill = document.getElementById('mainVillageSelect').value;
-    if(vill) {
-        document.getElementById('headerTitle').innerText = `👴 MeraGaov ${vill} 💨`;
-    }
-}
-
-function searchVillageData() {
-    const vill = document.getElementById('mainVillageSelect').value;
-    const res = document.getElementById('searchResult');
-    if(!vill) {
-        alert("कृपया गाँव चुनें!");
-        return;
-    }
-    res.innerHTML = `<div style="background:#e8f5e9; padding:12px; border-radius:6px; color:#2e7d32; font-weight:bold;">
-        📍 गाँव: ${vill} सफलतापूर्वक लोड हो गया है!
-    </div>`;
-}
-
+  
 function toggleMenu() {
     const d = document.getElementById("myDropdown");
     d.style.display = (d.style.display === "block") ? "none" : "block";
@@ -1346,5 +1238,5 @@ function downloadPolicy() {
         }
     }
 </script>
-</body>
+<script src="script.js"></script></body>
 </html>
