@@ -3,143 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मेरा गाँव - सम्पूर्ण हरियाणा ग्रामीण सेवा</title>
+    <title>मेरा गाँव - हरियाणा ग्रामीण सेवा पोर्टल</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background: #f4f6f9; padding: 20px; color: #333; }
-        .card { background: white; padding: 25px; border-radius: 12px; max-width: 550px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #e0e0e0; }
-        h2 { color: #1b5e20; text-align: center; margin-bottom: 20px; font-size: 1.4rem; }
-        .form-group { margin-bottom: 18px; }
-        label { font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.95rem; }
-        select, input[type="text"] { width: 100%; padding: 12px; border: 1px solid #b0bec5; border-radius: 8px; font-size: 1rem; outline: none; background: #fff; }
-        select:focus, input[type="text"]:focus { border-color: #1b5e20; }
-        .btn { background: #1b5e20; color: white; border: none; padding: 14px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px; }
-        .btn:hover { background: #113f14; }
-        .result-box { margin-top: 20px; padding: 15px; border-radius: 8px; background: #e8f5e9; border: 1px solid #a5d6a7; display: none; }
-        .hint { font-size: 0.8rem; color: #666; margin-top: 4px; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', 'Arial', sans-serif; 
+        }
+        
+        body { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px; 
+            color: #333; 
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #1b5e20;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .card { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0; 
+        }
+        
+        .card h2 { 
+            color: #1b5e20; 
+            margin-bottom: 20px; 
+            font-size: 1.3rem;
+        }
+        
+        .form-group { 
+            margin-bottom: 18px; 
+        }
+        
+        label { 
+            font-weight: 600; 
+            display: block; 
+            margin-bottom: 8px; 
+            font-size: 0.95rem;
+            color: #333;
+        }
+        
+        select, input[type="text"] { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px solid #b0bec5; 
+            border-radius: 8px; 
+            font-size: 1rem; 
+            outline: none; 
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus, input[type="text"]:focus { 
+            border-color: #1b5e20;
+            box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.1);
+        }
+        
+        .btn { 
+            background: linear-gradient(135deg, #1b5e20 0%, #0d3817 100%);
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            width: 100%; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover { 
+            background: linear-gradient(135deg, #0d3817 0%, #081f0f 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(27, 94, 32, 0.3);
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result-box { 
+            margin-top: 20px; 
+            padding: 20px; 
+            border-radius: 8px; 
+            background: #e8f5e9; 
+            border: 2px solid #a5d6a7; 
+            display: none;
+        }
+        
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hint { 
+            font-size: 0.8rem; 
+            color: #666; 
+            margin-top: 6px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1b5e20;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #1b5e20;
+        }
+        
+        .stat-box .number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+        
+        .stat-box .label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .error.show {
+            display: block;
+        }
+        
+        .success {
+            background: #e8f5e9;
+            color: #1b5e20;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .success.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>🌾 MeraGaov - Smart Search Haryana</h2>
-
-    <!-- 1. District -->
-    <div class="form-group">
-        <label>1. जिला (District):</label>
-        <select id="distSelect" onchange="loadBlocks()">
-            <option value="">-- जिला चुनें --</option>
-        </select>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>🌾 मेरा गाँव</h1>
+        <p>हरियाणा के सभी गाँवों की जानकारी एक ही जगह</p>
     </div>
-
-    <!-- 2. Block -->
-    <div class="form-group">
-        <label>2. खण्ड (Block):</label>
-        <select id="blockSelect" onchange="enableVillageInput()">
-            <option value="">-- पहले जिला चुनें --</option>
-        </select>
+    
+    <!-- Main Search Card -->
+    <div class="card">
+        <h2>🔍 गाँव खोजें</h2>
+        
+        <!-- District Selection -->
+        <div class="form-group">
+            <label for="districtSelect">1️⃣ जिला चुनें (District):</label>
+            <select id="districtSelect" onchange="loadBlocks()">
+                <option value="">-- जिला चुनें --</option>
+            </select>
+            <div class="hint">💡 अपने जिले को चुनें</div>
+        </div>
+        
+        <!-- Block Selection -->
+        <div class="form-group">
+            <label for="blockSelect">2️⃣ खण्ड चुनें (Block):</label>
+            <select id="blockSelect" onchange="loadVillages()">
+                <option value="">-- पहले जिला चुनें --</option>
+            </select>
+            <div class="hint">💡 अपने ब्लॉक को चुनें</div>
+        </div>
+        
+        <!-- Village Selection -->
+        <div class="form-group">
+            <label for="villageSelect">3️⃣ गाँव चुनें (Village):</label>
+            <select id="villageSelect" onchange="checkOtherVillage()">
+                <option value="">-- पहले ब्लॉक चुनें --</option>
+            </select>
+            <div class="hint">💡 अपने गाँव को चुनें</div>
+        </div>
+        
+        <!-- Custom Village Input -->
+        <div class="form-group" id="customVillageGroup" style="display: none;">
+            <input type="text" id="customVillageInput" placeholder="गाँव का नाम लिखें...">
+            <div class="hint">💡 अगर आपका गाँव सूची में नहीं है तो यहाँ नाम लिखें</div>
+        </div>
+        
+        <!-- Search Button -->
+        <button class="btn" onclick="searchVillage()">🔍 जानकारी देखें</button>
+        
+        <!-- Loading Indicator -->
+        <div class="loading" id="loadingIndicator">
+            <div class="spinner"></div>
+            <p>डेटा लोड हो रहा है...</p>
+        </div>
+        
+        <!-- Error Message -->
+        <div class="error" id="errorMessage"></div>
+        
+        <!-- Success Message -->
+        <div class="success" id="successMessage"></div>
+        
+        <!-- Result Box -->
+        <div class="result-box" id="resultBox"></div>
     </div>
-
-    <!-- 3. Village (Smart Search Box) -->
-    <div class="form-group">
-        <label>3. गाँव खोजें (Search Village):</label>
-        <input type="text" id="villageInput" placeholder="गाँव का नाम टाइप करें (जैसे: Lahli)..." list="villageList" disabled>
-        <datalist id="villageList"></datalist>
-        <div class="hint">💡 टाइप करते ही गाँव अपने आप आ जाएगा!</div>
+    
+    <!-- Statistics Card -->
+    <div class="card" id="statsCard" style="display: none;">
+        <h2>📊 हरियाणा के आँकड़े</h2>
+        <div class="stats" id="statsContainer"></div>
     </div>
-
-    <button class="btn" onclick="showData()">विवरण देखें (View Details)</button>
-
-    <div id="resultBox" class="result-box"></div>
+    
+    <!-- Firebase Status Card -->
+    <div class="card" id="firebaseStatus">
+        <h2>⚙️ Firebase स्थिति</h2>
+        <p id="firebaseStatusText">Firebase से जुड़ा जा रहा है...</p>
+    </div>
 </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+
+<!-- Our Scripts -->
+<script src="haryana-villages-complete.js"></script>
+<script src="firebase-config.js"></script>
+<script src="firebase-import.js"></script>
+
 <script>
-    // Comprehensive Master Database for Haryana Blocks
-    const masterDB = {
-        "ROHTAK": {
-            "KALANAUR": ["Anwal", "Basana", "Bhaini Surjan", "Garnauthi", "Gudhan", "Kahnaur", "Kairi", "Kalanaur Khas", "Kalanaur Rural", "Katesara", "Katwara", "Lahli", "Masudpur", "Nigana", "Pilana", "Saimpal", "Sundpur"],
-            "SAMPLA": ["Atail", "Balku", "Baproda", "Bhadhadu", "Chandi", "Dattaur", "Gandhra", "Garhi Sampla", "Ghashi", "Gijhi", "Hasangarh", "Ismaila 11B", "Ismaila 9B", "Kharhar", "Kheri Sampla", "Kultana", "Naya Bans", "Nonand", "Paksam", "Rohad", "Sampla"],
-            "ROHTAK": ["Asthal Bohar", "Baland", "Bhalout", "Bohar", "Bahu Akbarpur", "Dobh", "Garhi Majra", "Karor", "Kharawar", "Kheri Sadh", "Makrauli Kalan", "Makrauli Khurd", "Paharipur", "Rohtak Rural", "Samar Gopalpur", "Shimli", "Sukhpura", "Sunaria Kalan", "Sunaria Khurd"],
-            "MEHAM": ["Baini Chanderpal", "Baini City", "Baini Surjan", "Bedwa", "Bhaini Maharajpur", "Farmana", "Kharkara", "Kishan Garh", "Madina Gindhran", "Madina Korsan", "Meham", "Mokhra Bahi", "Mokhra Khas", "Nidana", "Sarsa", "Semnan"],
-            "LAKHAN MAJRA": ["Brahmanwas", "Chandi", "Gharawathi", "Indergarh", "Kharak Jattan", "Lakhan Majra", "Nandwal", "Naya Bans", "Titian"]
-        },
-        "CHARKHI DADRI": {
-            "BAUND": ["Achina", "Akbarpur", "Balgarh", "Bas Ranila", "Baund Kalan", "Baund Khurd", "Bhagwi", "Dhani Phogat", "Gharethi", "Hindol", "Kalyana", "Kasni", "Mankawas", "Phogat", "Ranila", "Sanjarwas", "Sankrod", "Sanwar", "Unghanwas"],
-            "CHARKHI DADRI": ["Adalpur", "Bhiwani Gate", "Birhi Kalan", "Birhi Khurd", "Charkhi", "Chhapar", "Dadri Rural", "Dhani", "Iri", "Jhagroli", "Jhojhu Kalan", "Kachri", "Kamodh", "Khedi Bura", "Loharwara", "Mehrana", "Ramalwas", "Rawaldhi", "Samaspur", "Santokhpura", "Sarni", "Tikan Kalan"],
-            "BADHRA": ["Badhra", "Chandwas", "Chhapar", "Dwarka", "Goverdhanpura", "Ghuiyani", "Hansiwas", "Jhojhu Khurd", "Kadma", "Kallana", "Kari Mod", "Kari Rupa", "Kari Tokha", "Kheri Bura", "Lad", "Lawa", "Mandola", "Nindana", "Penchead", "Surpura"]
-        },
-        "JHAJJAR": {
-            "JHAJJAR": ["Bikaner", "Bhurawas", "Chhuchhakwas", "Dadhlan", "Dhani", "Giani", "Girawar", "Goria", "Gudha", "Jhajjar Rural", "Kheri Khummar", "Kutani", "Marot", "Raiya", "Salhawas", "Silani", "Suhra", "Talao"],
-            "BAHADURGARH": ["Asaudha Siwan", "Asaudha Todran", "Bahadurgarh Rural", "Bamnoli", "Barahi", "Daboda Kalan", "Daboda Khurd", "Jasaur Kheri", "Kanonda", "Kassandesh", "Kharhar", "Luksar", "Mukundpur", "Nilothi", "Nuna Majra", "Rohad", "Sankhol", "Sidhipur Lova", "Soldha", "Zahidpur"],
-            "BERI": ["Baghpur", "Bakra", "Beri", "Bisahan", "Chimni", "Chhara", "Dighal", "Dubaldhan", "Gangtan", "Gochhi", "Lakria", "Majra", "Pahanpur", "Palra", "Wazirpur"],
-            "BADLI": ["Badli", "Bupania", "Dulhera", "Gubhana", "Lagarpur", "Machhrauli", "Majri", "Munimpur", "Pahori", "Pelpa", "Silana", "Sillani", "Sondhi", "Yakubpur"]
+    let currentData = {};
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("🚀 Application Started");
+        loadInitialData();
+        displayStatistics();
+    });
+    
+    // Load initial data from local database
+    function loadInitialData() {
+        try {
+            currentData = haryana_complete_database;
+            populateDistricts();
+            console.log("✅ Local database loaded successfully");
+            updateFirebaseStatus("✅ तैयार है");
+        } catch (error) {
+            console.error("Error loading data:", error);
+            showError("डेटा लोड करने में समस्या आई!");
         }
-    };
-
-    window.onload = function() {
-        let dist = document.getElementById('distSelect');
-        for (let d in masterDB) {
-            let opt = document.createElement('option');
-            opt.value = d;
-            opt.innerText = d;
-            dist.appendChild(opt);
-        }
-    };
-
-    function loadBlocks() {
-        let d = document.getElementById('distSelect').value;
-        let block = document.getElementById('blockSelect');
-        let villageInput = document.getElementById('villageInput');
+    }
+    
+    // Populate districts dropdown
+    function populateDistricts() {
+        const select = document.getElementById('districtSelect');
+        select.innerHTML = '<option value="">-- जिला चुनें --</option>';
         
-        block.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
-        villageInput.value = '';
-        villageInput.disabled = true;
-        document.getElementById('villageList').innerHTML = '';
-
-        if (d && masterDB[d]) {
-            for (let b in masterDB[d]) {
-                let opt = document.createElement('option');
-                opt.value = b;
-                opt.innerText = b;
-                block.appendChild(opt);
-            }
-        }
-    }
-
-    function enableVillageInput() {
-        let d = document.getElementById('distSelect').value;
-        let b = document.getElementById('blockSelect').value;
-        let villageInput = document.getElementById('villageInput');
-        let dataList = document.getElementById('villageList');
-
-        villageInput.value = '';
-        dataList.innerHTML = '';
-
-        if (d && b && masterDB[d][b]) {
-            villageInput.disabled = false;
-            masterDB[d][b].sort().forEach(v => {
-                let opt = document.createElement('option');
-                opt.value = v;
-                dataList.appendChild(opt);
+        if (currentData) {
+            Object.keys(currentData).sort().forEach(district => {
+                const option = document.createElement('option');
+                option.value = district;
+                option.textContent = district;
+                select.appendChild(option);
             });
-        } else {
-            villageInput.disabled = true;
         }
     }
-
-    function showData() {
-        let d = document.getElementById('distSelect').value;
-        let b = document.getElementById('blockSelect').value;
-        let v = document.getElementById('villageInput').value;
-
-        if (!d || !b || !v) {
-            alert('कृपया जिला, ब्लॉक और गाँव का नाम सही से भरें!');
+    
+    // Load blocks for selected district
+    function loadBlocks() {
+        const district = document.getElementById('districtSelect').value;
+        const blockSelect = document.getElementById('blockSelect');
+        const villageSelect = document.getElementById('villageSelect');
+        
+        blockSelect.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
+        villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+        document.getElementById('customVillageGroup').style.display = 'none';
+        
+        if (district && currentData[district]) {
+            Object.keys(currentData[district]).sort().forEach(block => {
+                const option = document.createElement('option');
+                option.value = block;
+                option.textContent = block;
+                blockSelect.appendChild(option);
+            });
+            showSuccess(`✅ ${district} के ब्लॉक लोड हुए`);
+        }
+    }
+    
+    // Load villages for selected block
+    function loadVillages() {
+        const district = document.getElementById('districtSelect').value;
+        const block = document.getElementById('blockSelect').value;
+        const villageSelect = document.getElementById('villageSelect');
+        
+        villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+        document.getElementById('customVillageGroup').style.display = 'none';
+        
+        if (district && block && currentData[district] && currentData[district][block]) {
+            const villages = currentData[district][block];
+            villages.sort().forEach(village => {
+                const option = document.createElement('option');
+                option.value = village;
+                option.textContent = village;
+                villageSelect.appendChild(option);
+            });
+            
+            // Add custom option
+            const otherOption = document.createElement('option');
+            otherOption.value = 'OTHER';
+            otherOption.textContent = '➕ गाँव सूची में नहीं है';
+            villageSelect.appendChild(otherOption);
+            
+            showSuccess(`✅ ${villages.length} गाँव लोड हुए`);
+        }
+    }
+    
+    // Check if "Other" village selected
+    function checkOtherVillage() {
+        const villageSelect = document.getElementById('villageSelect');
+        const customGroup = document.getElementById('customVillageGroup');
+        
+        if (villageSelect.value === 'OTHER') {
+            customGroup.style.display = 'block';
+        } else {
+            customGroup.style.display = 'none';
+        }
+    }
+    
+    // Get selected village
+    function getSelectedVillage() {
+        const villageSelect = document.getElementById('villageSelect');
+        const customInput = document.getElementById('customVillageInput');
+        
+        if (villageSelect.value === 'OTHER') {
+            return customInput.value.trim();
+        }
+        return villageSelect.value;
+    }
+    
+    // Search village and display details
+    function searchVillage() {
+        const district = document.getElementById('districtSelect').value;
+        const block = document.getElementById('blockSelect').value;
+        const village = getSelectedVillage();
+        
+        clearMessages();
+        
+        if (!district || !block || !village) {
+            showError('❌ कृपया जिला, ब्लॉक और गाँव चुनें!');
             return;
         }
-
-        let res = document.getElementById('resultBox');
-        res.style.display = 'block';
-        res.innerHTML = `<strong>📍 चयनित विवरण:</strong><br>जिला: ${d}<br>ब्लॉक: ${b}<br>गाँव: ${v}`;
+        
+        const resultBox = document.getElementById('resultBox');
+        resultBox.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <div class="spinner" style="margin: 0 auto 10px;"></div>
+                <p>जानकारी लोड हो रही है...</p>
+            </div>
+        `;
+        resultBox.classList.add('show');
+        
+        // Simulate loading delay
+        setTimeout(() => {
+            resultBox.innerHTML = `
+                <h3>📍 आपका गाँव</h3>
+                <table style="width: 100%; margin-top: 15px;">
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px; font-weight: bold; color: #666;">जिला:</td>
+                        <td style="padding: 10px; color: #1b5e20; font-weight: bold;">${district}</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px; font-weight: bold; color: #666;">खण्ड:</td>
+                        <td style="padding: 10px; color: #1b5e20; font-weight: bold;">${block}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; font-weight: bold; color: #666;">गाँव:</td>
+                        <td style="padding: 10px; color: #1b5e20; font-weight: bold;">${village}</td>
+                    </tr>
+                </table>
+                <p style="margin-top: 15px; color: #666; font-size: 0.9rem;">
+                    💚 आपके गाँव में स्वागत है! यहाँ आप सभी सरकारी सेवाएं और दुकानें देख सकते हैं।
+                </p>
+            `;
+            showSuccess(`✅ ${village} का विवरण दिखाया जा रहा है`);
+        }, 500);
+    }
+    
+    // Display statistics
+    function displayStatistics() {
+        try {
+            const stats = getStatistics();
+            const statsCard = document.getElementById('statsCard');
+            const statsContainer = document.getElementById('statsContainer');
+            
+            statsContainer.innerHTML = `
+                <div class="stat-box">
+                    <div class="number">${stats.totalDistricts}</div>
+                    <div class="label">जिले</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">${stats.totalBlocks}</div>
+                    <div class="label">खण्ड</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">${stats.totalVillages}</div>
+                    <div class="label">गाँव</div>
+                </div>
+            `;
+            
+            statsCard.style.display = 'block';
+        } catch (error) {
+            console.error("Error displaying statistics:", error);
+        }
+    }
+    
+    // Show error message
+    function showError(message) {
+        const errorDiv = document.getElementById('errorMessage');
+        errorDiv.textContent = message;
+        errorDiv.classList.add('show');
+        setTimeout(() => {
+            errorDiv.classList.remove('show');
+        }, 5000);
+    }
+    
+    // Show success message
+    function showSuccess(message) {
+        const successDiv = document.getElementById('successMessage');
+        successDiv.textContent = message;
+        successDiv.classList.add('show');
+        setTimeout(() => {
+            successDiv.classList.remove('show');
+        }, 3000);
+    }
+    
+    // Clear messages
+    function clearMessages() {
+        document.getElementById('errorMessage').classList.remove('show');
+        document.getElementById('successMessage').classList.remove('show');
+    }
+    
+    // Update Firebase status
+    function updateFirebaseStatus(status) {
+        const statusText = document.getElementById('firebaseStatusText');
+        statusText.textContent = status;
     }
 </script>
 
