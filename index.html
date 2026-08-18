@@ -62,31 +62,69 @@
         .menu-content a, .menu-content button { color: #333; padding: 10px 14px; display: block; text-decoration: none; border: none; background: none; width: 100%; text-align: left; font-size: 0.85rem; font-weight: bold; cursor: pointer; }
         .menu-content a:hover, .menu-content button:hover { background: #f1f1f1; }
 
-        .service-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        /* Single Dropdown Menu for 6 Buttons */
+        .single-category-dropdown {
+            position: relative;
             margin-bottom: 20px;
         }
 
-        .service-btn {
-            display: block;
+        .main-category-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             width: 100%;
-            background: #fff;
-            border: 1px solid var(--primary);
-            padding: 12px;
-            text-align: center;
+            background: #ffffff;
+            border: 2px solid var(--primary);
+            padding: 14px 18px;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: bold;
             color: var(--primary);
-            text-decoration: none;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.2s;
         }
 
-        .service-btn:hover { background: #e8f5e9; }
+        .category-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            border: 2px solid var(--primary);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .category-dropdown-content a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .category-dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .category-dropdown-content a:hover {
+            background: #e8f5e9;
+        }
+
+        .cat-label {
+            background: #e8f5e9;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #2e7d32;
+        }
 
         header {
             background: linear-gradient(135deg, var(--primary), #2e7d32);
@@ -135,10 +173,10 @@
 
         select, input, textarea {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px;
             border: 1px solid #b0bec5;
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             outline: none;
             background: #fff;
         }
@@ -353,14 +391,38 @@
 
 <div class="container" id="searchSection">
 
-    <!-- 6 Services Buttons Ordered Sequentially -->
-    <div class="service-grid">
-        <a href="#searchSection" class="service-btn" onclick="alert('मिस्त्री सेवा जल्द उपलब्ध होगी')">🛠️ मिस्त्री</a>
-        <a href="#searchSection" class="service-btn" onclick="alert('पंडित जी सेवा जल्द उपलब्ध होगी')">🙏 पंडित जी</a>
-        <a href="#searchSection" class="service-btn" onclick="alert('गाड़ी किराया सेवा जल्द उपलब्ध होगी')">🚕 गाड़ी किराया</a>
-        <a href="#searchSection" class="service-btn" onclick="alert('मेडिकल सेवा जल्द उपलब्ध होगी')">🏥 मेडिकल</a>
-        <a href="#searchSection" class="service-btn" onclick="alert('इलेक्ट्रीशियन सेवा जल्द उपलब्ध होगी')">⚡ इलेक्ट्रीशियन</a>
-        <a href="#searchSection" class="service-btn" onclick="alert('अन्य सेवाएँ जल्द उपलब्ध होगी')">📦 अन्य सेवा</a>
+    <!-- 6 Services Combined into 1 Single Button Dropdown -->
+    <div class="single-category-dropdown">
+        <button class="main-category-btn" onclick="toggleCategoryDropdown()">
+            <span>📂 सभी श्रेणियाँ (Category Services)</span>
+            <span id="catArrow">▼</span>
+        </button>
+        <div class="category-dropdown-content" id="catDropdownContent">
+            <a href="#searchSection" onclick="alert('मिस्त्री सेवा जल्द उपलब्ध होगी')">
+                <span>🛠️ मिस्त्री सेवा</span>
+                <span class="cat-label">View</span>
+            </a>
+            <a href="#searchSection" onclick="alert('पंडित जी सेवा जल्द उपलब्ध होगी')">
+                <span>🙏 पंडित जी सेवा</span>
+                <span class="cat-label">View</span>
+            </a>
+            <a href="#searchSection" onclick="alert('गाड़ी किराया सेवा जल्द उपलब्ध होगी')">
+                <span>🚕 गाड़ी किराया सेवा</span>
+                <span class="cat-label">View</span>
+            </a>
+            <a href="#searchSection" onclick="alert('मेडिकल सेवा जल्द उपलब्ध होगी')">
+                <span>🏥 मेडिकल सेवा</span>
+                <span class="cat-label">View</span>
+            </a>
+            <a href="#searchSection" onclick="alert('इलेक्ट्रीशियन सेवा जल्द उपलब्ध होगी')">
+                <span>⚡ इलेक्ट्रीशियन सेवा</span>
+                <span class="cat-label">View</span>
+            </a>
+            <a href="#searchSection" onclick="alert('अन्य सेवाएँ जल्द उपलब्ध होगी')">
+                <span>📦 अन्य सेवा</span>
+                <span class="cat-label">View</span>
+            </a>
+        </div>
     </div>
 
     <div class="info-ticker-bar">
@@ -800,6 +862,14 @@
     function toggleMenu() {
         const dropdown = document.getElementById("myDropdown");
         dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    function toggleCategoryDropdown() {
+        const content = document.getElementById("catDropdownContent");
+        const arrow = document.getElementById("catArrow");
+        const isVisible = content.style.display === "block";
+        content.style.display = isVisible ? "none" : "block";
+        arrow.innerText = isVisible ? "▼" : "▲";
     }
 
     function showPrivacyPolicy() {
