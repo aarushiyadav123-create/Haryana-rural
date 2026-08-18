@@ -11,17 +11,18 @@
         h2 { color: #1b5e20; text-align: center; margin-bottom: 20px; font-size: 1.4rem; }
         .form-group { margin-bottom: 18px; }
         label { font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.95rem; }
-        select { width: 100%; padding: 12px; border: 1px solid #b0bec5; border-radius: 8px; font-size: 1rem; outline: none; background: #fff; cursor: pointer; }
-        select:focus { border-color: #1b5e20; }
+        select, input[type="text"] { width: 100%; padding: 12px; border: 1px solid #b0bec5; border-radius: 8px; font-size: 1rem; outline: none; background: #fff; }
+        select:focus, input[type="text"]:focus { border-color: #1b5e20; }
         .btn { background: #1b5e20; color: white; border: none; padding: 14px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px; }
         .btn:hover { background: #113f14; }
         .result-box { margin-top: 20px; padding: 15px; border-radius: 8px; background: #e8f5e9; border: 1px solid #a5d6a7; display: none; }
+        .hint { font-size: 0.8rem; color: #666; margin-top: 4px; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>🌾 MeraGaov - Complete Haryana Database</h2>
+    <h2>🌾 MeraGaov - Smart Search Haryana</h2>
 
     <!-- 1. District -->
     <div class="form-group">
@@ -34,17 +35,17 @@
     <!-- 2. Block -->
     <div class="form-group">
         <label>2. खण्ड (Block):</label>
-        <select id="blockSelect" onchange="loadVillages()">
+        <select id="blockSelect" onchange="enableVillageInput()">
             <option value="">-- पहले जिला चुनें --</option>
         </select>
     </div>
 
-    <!-- 3. Village -->
+    <!-- 3. Village (Smart Search Box) -->
     <div class="form-group">
-        <label>3. गाँव (Village):</label>
-        <select id="villageSelect">
-            <option value="">-- पहले ब्लॉक चुनें --</option>
-        </select>
+        <label>3. गाँव खोजें (Search Village):</label>
+        <input type="text" id="villageInput" placeholder="गाँव का नाम टाइप करें (जैसे: Lahli)..." list="villageList" disabled>
+        <datalist id="villageList"></datalist>
+        <div class="hint">💡 टाइप करते ही गाँव अपने आप आ जाएगा!</div>
     </div>
 
     <button class="btn" onclick="showData()">विवरण देखें (View Details)</button>
@@ -53,13 +54,13 @@
 </div>
 
 <script>
-    // Exhaustive & Full Master Offline Haryana Database
+    // Comprehensive Master Database for Haryana Blocks
     const masterDB = {
         "ROHTAK": {
-            "KALANAUR": ["Anwal", "Basana", "Garnauthi", "Gudhan", "Kahnaur", "Kairi", "Kalanaur Khas", "Kalanaur Rural", "Katesara", "Katwara", "Lahli", "Masudpur", "Nigana", "Pilana", "Saimpal", "Sundpur"],
+            "KALANAUR": ["Anwal", "Basana", "Bhaini Surjan", "Garnauthi", "Gudhan", "Kahnaur", "Kairi", "Kalanaur Khas", "Kalanaur Rural", "Katesara", "Katwara", "Lahli", "Masudpur", "Nigana", "Pilana", "Saimpal", "Sundpur"],
             "SAMPLA": ["Atail", "Balku", "Baproda", "Bhadhadu", "Chandi", "Dattaur", "Gandhra", "Garhi Sampla", "Ghashi", "Gijhi", "Hasangarh", "Ismaila 11B", "Ismaila 9B", "Kharhar", "Kheri Sampla", "Kultana", "Naya Bans", "Nonand", "Paksam", "Rohad", "Sampla"],
-            "ROHTAK": ["Asthal Bohar", "Baland", "Bhalout", "Bohar", "Dobh", "Garhi Majra", "Karor", "Kharawar", "Kheri Sadh", "Makrauli Kalan", "Makrauli Khurd", "Paharipur", "Rohtak Rural", "Samar Gopalpur", "Shimli", "Sukhpura", "Sunaria Kalan", "Sunaria Khurd"],
-            "MEHAM": ["Baini Chanderpal", "Baini City", "Baini Surjan", "Bedwa", "Farmana", "Kharkara", "Kishan Garh", "Madina Gindhran", "Madina Korsan", "Meham", "Mokhra Bahi", "Mokhra Khas", "Nidana", "Sarsa", "Semnan"],
+            "ROHTAK": ["Asthal Bohar", "Baland", "Bhalout", "Bohar", "Bahu Akbarpur", "Dobh", "Garhi Majra", "Karor", "Kharawar", "Kheri Sadh", "Makrauli Kalan", "Makrauli Khurd", "Paharipur", "Rohtak Rural", "Samar Gopalpur", "Shimli", "Sukhpura", "Sunaria Kalan", "Sunaria Khurd"],
+            "MEHAM": ["Baini Chanderpal", "Baini City", "Baini Surjan", "Bedwa", "Bhaini Maharajpur", "Farmana", "Kharkara", "Kishan Garh", "Madina Gindhran", "Madina Korsan", "Meham", "Mokhra Bahi", "Mokhra Khas", "Nidana", "Sarsa", "Semnan"],
             "LAKHAN MAJRA": ["Brahmanwas", "Chandi", "Gharawathi", "Indergarh", "Kharak Jattan", "Lakhan Majra", "Nandwal", "Naya Bans", "Titian"]
         },
         "CHARKHI DADRI": {
@@ -72,25 +73,9 @@
             "BAHADURGARH": ["Asaudha Siwan", "Asaudha Todran", "Bahadurgarh Rural", "Bamnoli", "Barahi", "Daboda Kalan", "Daboda Khurd", "Jasaur Kheri", "Kanonda", "Kassandesh", "Kharhar", "Luksar", "Mukundpur", "Nilothi", "Nuna Majra", "Rohad", "Sankhol", "Sidhipur Lova", "Soldha", "Zahidpur"],
             "BERI": ["Baghpur", "Bakra", "Beri", "Bisahan", "Chimni", "Chhara", "Dighal", "Dubaldhan", "Gangtan", "Gochhi", "Lakria", "Majra", "Pahanpur", "Palra", "Wazirpur"],
             "BADLI": ["Badli", "Bupania", "Dulhera", "Gubhana", "Lagarpur", "Machhrauli", "Majri", "Munimpur", "Pahori", "Pelpa", "Silana", "Sillani", "Sondhi", "Yakubpur"]
-        },
-        "JIND": {
-            "JIND": ["Barsola", "Bichpari", "Bishanpura", "Ekkas", "Gattoli", "Intal Kalan", "Intal Khurd", "Jind Rural", "Karsindhu", "Kinana", "Kishanpura", "Nirjan", "Pindara"],
-            "JULANA": ["Bhojraj", "Bramhanwala", "Gadhwal", "Gatra", "Jaijaiwanti", "Julana", "Karela", "Keral", "Koth Kalan", "Lajwana Kalan", "Lajwana Khurd", "Nandgarh"],
-            "SAFIDON": ["Bahadurpur", "Hatt", "Muana", "Pillukhera", "Retoli", "Ror Kheri", "Safidon", "Singhwal", "Sink"]
-        },
-        "BHIWANI": {
-            "BHIWANI": ["Bamla", "Bapora", "Bhiwani Rural", "Biran", "Chang", "Dinod", "Devsar", "Kitlana", "Nangal", "Nimri", "Paluwas", "Phoolpura", "Rohtan"],
-            "BAWANI KHERA": ["Bawani Khera", "Bhalera", "Jamalpur", "Jatu Lohari", "Miran", "Pur", "Siam", "Sisar"],
-            "TOSHAM": ["Biran", "Dang Kalan", "Dhandalan", "Khanak", "Mirzapur", "Sandwa", "Sisar", "Tosham"]
-        },
-        "SONIPAT": {
-            "SONIPAT": ["Bhatgaon", "Jatwara", "Kewal", "Kumaspur", "Liwaspur", "Murthal", "Rai", "Rathdhana", "Sonipat Rural"],
-            "GOHANA": ["Baroda", "Bhutana", "Gohana Rural", "Katwal", "Khanpur Kalan", "Lath", "Mahra", "Mundlana", "Rindhana"],
-            "KHARKHODA": ["Bidhlan", "Farmana", "Khanda", "Kharkhoda Rural", "Matind", "Pipli", "Rohat", "Sehri", "Silana"]
         }
     };
 
-    // Initialize Districts
     window.onload = function() {
         let dist = document.getElementById('distSelect');
         for (let d in masterDB) {
@@ -104,10 +89,12 @@
     function loadBlocks() {
         let d = document.getElementById('distSelect').value;
         let block = document.getElementById('blockSelect');
-        let village = document.getElementById('villageSelect');
-
+        let villageInput = document.getElementById('villageInput');
+        
         block.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
-        village.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+        villageInput.value = '';
+        villageInput.disabled = true;
+        document.getElementById('villageList').innerHTML = '';
 
         if (d && masterDB[d]) {
             for (let b in masterDB[d]) {
@@ -119,39 +106,40 @@
         }
     }
 
-    function loadVillages() {
+    function enableVillageInput() {
         let d = document.getElementById('distSelect').value;
         let b = document.getElementById('blockSelect').value;
-        let village = document.getElementById('villageSelect');
+        let villageInput = document.getElementById('villageInput');
+        let dataList = document.getElementById('villageList');
 
-        village.innerHTML = '<option value="">-- गाँव / Village चुनें --</option>';
+        villageInput.value = '';
+        dataList.innerHTML = '';
 
         if (d && b && masterDB[d][b]) {
-            // Sort Alphabetically
-            let sortedVillages = masterDB[d][b].sort();
-            
-            sortedVillages.forEach(v => {
+            villageInput.disabled = false;
+            masterDB[d][b].sort().forEach(v => {
                 let opt = document.createElement('option');
                 opt.value = v;
-                opt.innerText = v;
-                village.appendChild(opt);
+                dataList.appendChild(opt);
             });
+        } else {
+            villageInput.disabled = true;
         }
     }
 
     function showData() {
         let d = document.getElementById('distSelect').value;
         let b = document.getElementById('blockSelect').value;
-        let v = document.getElementById('villageSelect').value;
+        let v = document.getElementById('villageInput').value;
 
         if (!d || !b || !v) {
-            alert('कृपया जिला, ब्लॉक और गाँव तीनों चुनें!');
+            alert('कृपया जिला, ब्लॉक और गाँव का नाम सही से भरें!');
             return;
         }
 
         let res = document.getElementById('resultBox');
         res.style.display = 'block';
-        res.innerHTML = `<strong>📍 चुना गया विवरण:</strong><br>जिला: ${d}<br>ब्लॉक: ${b}<br>गाँव: ${v}`;
+        res.innerHTML = `<strong>📍 चयनित विवरण:</strong><br>जिला: ${d}<br>ब्लॉक: ${b}<br>गाँव: ${v}`;
     }
 </script>
 
