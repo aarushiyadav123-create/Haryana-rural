@@ -65,7 +65,7 @@
         /* Single Dropdown Menu for 6 Services */
         .single-category-dropdown {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .main-category-btn {
@@ -372,7 +372,7 @@
 
 <header style="background-color: #1b5e20; text-align: center; padding: 15px; color: white;">
     <h1 id="headerTitle" style="color: #2ecc71; font-weight: bold; margin-bottom: 5px;">
-        👴 MeraGaov (मेरा गाँव हरियाणा) 💨
+        👴 MeraGaov (हरियाणा ग्रामीण सेवा) 💨
     </h1>
     <p id="headerSubTitle" style="font-size: 1.1rem; margin-bottom: 10px;">
         राम राम भाइयों, आपके गाँव में स्वागत है
@@ -425,6 +425,13 @@
         </div>
     </div>
 
+    <!-- नया 1B बटन: Add Category (मोबाइल से वेरीफाई करके नया जोड़ें) -->
+    <div style="margin-bottom: 20px;">
+        <button class="custom-btn btn-secondary" onclick="toggleSection('addShopFormBox', 'icon1')" style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1rem; padding: 14px;">
+            <span>➕ Add Category (मोबाइल OTP वेरीफाई करके नई दुकान/गाँव जोड़ें)</span>
+        </button>
+    </div>
+
     <div class="info-ticker-bar">
         <div class="ticker-label">🔔 लाइव अपडेट</div>
         <div class="ticker-content">
@@ -452,7 +459,7 @@
 
         <div class="form-group">
             <label>गाँव / Village <span class="mandatory">*</span></label>
-            <select id="mainVillageSelect">
+            <select id="mainVillageSelect" onchange="updateHeaderVillageName()">
                 <option value="">-- पहले ब्लॉक चुनें --</option>
             </select>
         </div>
@@ -876,6 +883,18 @@
         alert("प्राइवेसी पॉलिसी (Privacy Policy):\n\n1. यह हरियाणा ग्रामीण सेवा पोर्टल स्थानीय नागरिकों की सुविधा के लिए है।\n2. आपके द्वारा दर्ज किया गया मोबाइल नंबर और डेटा पूरी तरह सुरक्षित है।\n3. हम यूजर का कोई भी व्यक्तिगत डेटा किसी तीसरे पक्ष (Third Party) के साथ साझा नहीं करते हैं।\n4. ऐप से जुड़ी किसी भी सहायता के लिए संपर्क करें।");
     }
 
+    function updateHeaderVillageName() {
+        const villSelect = document.getElementById('mainVillageSelect');
+        const headerTitle = document.getElementById('headerTitle');
+        const selectedVillage = villSelect.value;
+
+        if (selectedVillage) {
+            headerTitle.innerHTML = `👴 MeraGaov ${selectedVillage} 💨`;
+        } else {
+            headerTitle.innerHTML = `👴 MeraGaov (हरियाणा ग्रामीण सेवा) 💨`;
+        }
+    }
+
     function populateAllDistrictDropdowns() {
         const selects = ["regDistrict", "galDistrict", "eventDistrict"];
         const sortedDistricts = Object.keys(haryanaMasterData).sort();
@@ -898,6 +917,7 @@
         
         blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
         villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+        document.getElementById('headerTitle').innerHTML = `👴 MeraGaov (हरियाणा ग्रामीण सेवा) 💨`;
         
         if (!selectedDist || !haryanaMasterData[selectedDist]) return;
         
@@ -1292,7 +1312,9 @@
         const icon = document.getElementById(iconId);
         const isVisible = box.style.display === "block";
         box.style.display = isVisible ? "none" : "block";
-        icon.innerText = isVisible ? "▼" : "▲";
+        if(icon && document.getElementById(iconId)) {
+            icon.innerText = isVisible ? "▼" : "▲";
+        }
     }
 </script>
 </body>
