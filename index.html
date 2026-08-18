@@ -47,55 +47,9 @@
         }
 
         .menu-container { position: relative; display: inline-block; }
-        .menu-content { display: none; position: absolute; right: 0; background: #fff; min-width: 180px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1000; border-radius: 6px; }
-        .menu-content a, .menu-content button { color: #333; padding: 10px 14px; display: block; text-decoration: none; border: none; background: none; width: 100%; text-align: left; font-size: 0.85rem; font-weight: bold; cursor: pointer; }
+        .menu-content { display: none; position: absolute; right: 0; background: #fff; min-width: 200px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1000; border-radius: 6px; }
+        .menu-content a, .menu-content button { color: #333; padding: 10px 14px; display: block; text-decoration: none; border: none; background: none; width: 100%; text-align: left; font-size: 0.85rem; font-weight: bold; cursor: pointer; border-bottom: 1px solid #eee; }
         .menu-content a:hover, .menu-content button:hover { background: #f1f1f1; }
-
-        .single-category-dropdown { position: relative; margin-bottom: 15px; }
-        .main-category-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            background: #ffffff;
-            border: 2px solid var(--primary);
-            padding: 14px 18px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            color: var(--primary);
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .category-dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: #ffffff;
-            border: 2px solid var(--primary);
-            border-top: none;
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            z-index: 100;
-        }
-
-        .category-dropdown-content a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 18px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        .category-dropdown-content a:last-child { border-bottom: none; }
-        .category-dropdown-content a:hover { background: #e8f5e9; }
-        .cat-label { background: #e8f5e9; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; color: #2e7d32; }
 
         header {
             background: linear-gradient(135deg, var(--primary), #2e7d32);
@@ -114,18 +68,6 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             border: 1px solid #e0e0e0;
-        }
-
-        .card h2 {
-            font-size: 1.15rem;
-            color: #ffffff;
-            background: #3f51b5;
-            padding: 10px 15px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .form-group { margin-bottom: 15px; }
@@ -148,22 +90,6 @@
             text-align: center;
             text-decoration: none;
         }
-        .custom-btn:hover { background: #303f9f; }
-        .btn-secondary { background: var(--secondary); color: #000; }
-        .btn-accent { background: var(--accent); color: #fff; }
-        .btn-purple { background: var(--purple); color: #fff; }
-
-        .call-btn {
-            background: #2e7d32;
-            color: white;
-            padding: 6px 12px;
-            font-size: 0.85rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            white-space: nowrap;
-        }
 
         .toggle-bar {
             background: var(--primary);
@@ -178,11 +104,11 @@
             align-items: center;
             margin-bottom: 12px;
         }
+        .toggle-bar.blue { background: #0277bd; }
         .toggle-bar.orange { background: #e65100; }
         .toggle-bar.red { background: #c62828; }
         .toggle-bar.purple { background: var(--purple); }
         .toggle-bar.govt { background: var(--govt-green); }
-        .toggle-bar.entertainment { background: #ad1457; }
 
         .collapsible-form-container {
             display: none;
@@ -193,66 +119,14 @@
             margin-bottom: 20px;
         }
 
-        .photo-preview-box {
-            width: 100%;
-            height: 140px;
-            border: 2px dashed #0277bd;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #e1f5fe;
-            overflow: hidden;
-            margin-top: 6px;
-        }
-        .photo-preview-box img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .service-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-top: 10px; }
+        .service-card { background: #e8f5e9; border: 1px solid #a5d6a7; padding: 10px; border-radius: 6px; text-align: center; font-weight: bold; font-size: 0.85rem; color: #1b5e20; cursor: pointer; }
 
-        .otp-box {
-            display: none;
-            background: #fff3e0;
-            border: 1px solid #ffe0b2;
-            padding: 10px;
-            border-radius: 6px;
-            margin-top: 8px;
-        }
-
-        .shop-item, .event-item, .item-card {
-            background: #f9f9f9;
-            border-left: 4px solid var(--primary);
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .govt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-top: 8px; }
-        .govt-item-card { background: #e0f2f1; border: 1px solid #80cbc4; padding: 10px; border-radius: 6px; text-align: center; text-decoration: none; color: #004d40; font-weight: bold; font-size: 0.8rem; }
-
-        .shop-img-preview, .item-img-preview { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #ccc; }
-
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 8px; }
-        .gallery-card { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 4px; text-align: center; }
-        .gallery-card img { width: 100%; height: 90px; object-fit: cover; border-radius: 4px; }
-        .gallery-card p { font-size: 0.75rem; margin-top: 3px; font-weight: 600; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+        .modal-content { background: #fff; margin: 10% auto; padding: 20px; border-radius: 8px; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; }
+        .close-btn { float: right; font-size: 1.5rem; font-weight: bold; cursor: pointer; }
 
         footer { text-align: center; font-size: 0.8rem; color: #666; margin-top: 25px; padding: 12px; border-top: 1px solid #ddd; }
-
-        .info-ticker-bar {
-            background: #fff8e1;
-            border: 1px solid #ffe082;
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            overflow: hidden;
-        }
-        .ticker-label { background: #ff8f00; color: #000; font-size: 0.75rem; font-weight: bold; padding: 4px 8px; border-radius: 4px; white-space: nowrap; }
-        .ticker-content { font-size: 0.85rem; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
     </style>
 </head>
 <body>
@@ -262,9 +136,9 @@
     <div class="menu-container">
         <button class="top-nav-btn" onclick="toggleMenu()">☰ Menu</button>
         <div id="myDropdown" class="menu-content">
-            <a href="#searchSection">गाँव खोजें</a>
-            <a href="#" onclick="alert('यह पोर्टल हरियाणा के गाँवों और डिजिटल सेवाओं के लिए बनाया गया है।')">About Us</a>
-            <a href="#" onclick="showPrivacyPolicy()">Privacy Policy</a>
+            <button onclick="openAdminModal()">👑 Admin / Sub-Admin</button>
+            <button onclick="openAboutModal()">ℹ️ About Us</button>
+            <button onclick="openPrivacyModal()">📜 Privacy Policy (Play Store)</button>
         </div>
     </div>
 </div>
@@ -272,41 +146,13 @@
 <header>
     <h1 id="headerTitle">👴 MeraGaov (हरियाणा ग्रामीण सेवा) 💨</h1>
     <p>राम राम भाइयों, आपके गाँव में स्वागत है</p>
-    <div style="background-color: #144322; padding: 8px 5px; border-radius: 8px; margin-top:10px;">
-        <div style="color: #ffeb3b; overflow: hidden; white-space: nowrap; font-weight: bold; font-size: 0.85rem;">
-            <marquee behavior="scroll" direction="left" scrollamount="5">
-                🌾 हरियाणा स्थापना दिवस: 1 नवंबर | 🐂 दूध-दही का खाना, यो है मेरा हरियाणा | 🎉 आगामी पर्व और मेलों की लाइव अपडेट्स जारी हैं!
-            </marquee>
-        </div>
-    </div>
 </header>
 
-<div class="container" id="searchSection">
+<div class="container">
 
-    <div class="single-category-dropdown">
-        <button class="main-category-btn" onclick="toggleCategoryDropdown()">
-            <span>📂 सेवा जोड़े / अन्य जानकारी</span>
-            <span id="catArrow">▼</span>
-        </button>
-        <div class="category-dropdown-content" id="catDropdownContent">
-            <a href="#searchSection" onclick="alert('मिस्त्री सेवा जल्द उपलब्ध होगी')"><span>🛠️ मिस्त्री सेवा</span><span class="cat-label">View</span></a>
-            <a href="#searchSection" onclick="alert('पंडित जी सेवा जल्द उपलब्ध होगी')"><span>🙏 पंडित जी सेवा</span><span class="cat-label">View</span></a>
-            <a href="#searchSection" onclick="alert('गाड़ी किराया सेवा जल्द उपलब्ध होगी')"><span>🚕 गाड़ी किराया सेवा</span><span class="cat-label">View</span></a>
-            <a href="#searchSection" onclick="alert('मेडिकल सेवा जल्द उपलब्ध होगी')"><span>🏥 मेडिकल सेवा</span><span class="cat-label">View</span></a>
-            <a href="#searchSection" onclick="alert('इलेक्ट्रीशियन सेवा जल्द उपलब्ध होगी')"><span>⚡ इलेक्ट्रीशियन सेवा</span><span class="cat-label">View</span></a>
-        </div>
-    </div>
-
-    <div class="info-ticker-bar">
-        <div class="ticker-label">🔔 लाइव अपडेट</div>
-        <div class="ticker-content">
-            <span>⛅ <strong>मौसम:</strong> 35°C-38°C, हल्की बौछारें संभावित | 🌾 <strong>मंडी भाव (क्विंटल):</strong> गेहूँ ₹2,275-₹2,350, धान ₹3,500-₹4,200, बाजरा ₹2,500-₹2,625</span>
-        </div>
-    </div>
-
+    <!-- MAIN SEARCH -->
     <div class="card">
-        <h2>अपना पहचानकर्ता जानें / Village & Shop Search</h2>
-        <div style="text-align: right; font-size: 0.8rem; color: #d32f2f; margin-bottom: 10px;">* अनिवार्य फ़ील्ड</div>
+        <h2 style="font-size: 1.1rem; color: #fff; background: #3f51b5; padding: 10px; border-radius: 6px; margin-bottom: 12px;">अपना गाँव एवं सेवा खोजें / Search Village</h2>
         
         <div class="form-group">
             <label>जिला / District <span class="mandatory">*</span></label>
@@ -329,400 +175,141 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label>सुरक्षा कोड (Security Code) <span class="mandatory">*</span></label>
-            <input type="text" id="secCodeInput" placeholder="उदा: YX988XJ दर्ज करें">
-        </div>
-
         <div class="btn-box">
-            <button class="custom-btn" onclick="searchServices()">विवरण देखें / View Details</button>
+            <button class="custom-btn" onclick="searchVillageData()">गाँव का डेटा व सेवाएं देखें</button>
         </div>
 
-        <div class="result-box" id="searchResult" style="margin-top: 15px;"></div>
+        <div id="searchResult" style="margin-top: 15px;"></div>
     </div>
 
-    <!-- 1. ADD SHOP FORM -->
+    <!-- 1. ADD SHOP -->
     <div class="toggle-bar" onclick="toggleSection('addShopFormBox', 'icon1')">
         <span>🏪 1. दुकान / सेवा जोड़ें (Live Registration)</span>
         <span id="icon1">▼</span>
     </div>
 
     <div class="collapsible-form-container" id="addShopFormBox">
-        <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 12px;">नया दुकान / सेवा रजिस्ट्रेशन</h3>
-        
+        <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 12px;">दुकान दर्ज करें</h3>
         <div class="form-group">
-            <label>दुकान / सर्विस का नाम:</label>
-            <input type="text" id="regShopName" placeholder="उदा: वर्मा इलेक्ट्रॉनिक्स / शर्मा किराना स्टोर">
+            <label>दुकान का नाम:</label>
+            <input type="text" id="shopName" placeholder="उदा: वर्मा किराना स्टोर">
         </div>
-
         <div class="form-group">
-            <label>जिला / District:</label>
-            <select id="regDistrict" onchange="updateBlockDropdown('regDistrict', 'regBlock', 'regVillage')">
-                <option value="">-- जिला चुनें --</option>
-            </select>
+            <label>मोबाइल नंबर:</label>
+            <input type="tel" id="shopPhone" placeholder="10 अंकों का नंबर">
         </div>
+        <button class="custom-btn" onclick="saveShop()">सबमिट करें</button>
+    </div>
 
-        <div class="form-group">
-            <label>खण्ड / Block:</label>
-            <select id="regBlock" onchange="updateVillageDropdown('regDistrict', 'regBlock', 'regVillage')">
-                <option value="">-- पहले जिला चुनें --</option>
-            </select>
-        </div>
+    <!-- 1B. SEVA JODE SECTION (PLACED BELOW BUTTON 1) -->
+    <div class="toggle-bar blue" onclick="toggleSection('sevaJodeBox', 'icon1b')">
+        <span>📂 1B. सेवा जोड़ें / अन्य सेवाएं (Mistry, Pandit, Taxi)</span>
+        <span id="icon1b">▼</span>
+    </div>
 
-        <div class="form-group">
-            <label>गाँव / Village:</label>
-            <select id="regVillage">
-                <option value="">-- पहले ब्लॉक चुनें --</option>
-            </select>
-        </div>
-
-        <div class="form-group" style="background: #e8f5e9; padding: 10px; border-radius: 6px; border: 1px solid #c8e6c9;">
-            <label style="color: #2e7d32; font-size: 0.85rem;">📍 GPS Verification:</label>
-            <button type="button" class="custom-btn" onclick="fetchGPSLocationAndVerifyDistrict()" style="background: #0277bd; margin-bottom: 6px; font-size: 0.85rem; padding: 8px;">📍 GPS चालू करें व वेरीफाई करें</button>
-            <input type="text" id="regGPSCoord" placeholder="GPS Coordinates यहाँ दिखेंगे" readonly>
-            <div id="districtApiStatus"></div>
-        </div>
-
-        <div class="form-group" style="background: #e1f5fe; padding: 10px; border-radius: 6px; border: 1px solid #b3e5fc;">
-            <label style="color: #0277bd; font-size: 0.85rem;">📸 दुकान की लाइव फोटो:</label>
-            <input type="file" id="regShopPhoto" accept="image/*" onchange="previewImage(event, 'shopImgPrev', 'shopPhotoHolder')">
-            <div class="photo-preview-box">
-                <span id="shopPhotoHolder" style="color: #0288d1; font-size: 0.8rem;">लाइव फोटो प्रिव्यू यहाँ दिखेगा</span>
-                <img id="shopImgPrev" alt="Shop Preview">
-            </div>
-        </div>
-
-        <div class="form-group" style="background: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2;">
-            <label style="color: #e65100; font-size: 0.85rem;">📱 मोबाइल नंबर वेरीफिकेशन (OTP):</label>
-            <div style="display: flex; gap: 6px;">
-                <input type="tel" id="regPhone" placeholder="10 अंकों का मोबाइल नंबर">
-                <button type="button" class="custom-btn btn-secondary" onclick="sendOTP()" style="width: auto; padding: 8px 12px; font-size: 0.85rem;">OTP भेजें</button>
-            </div>
-            <div class="otp-box" id="otpBox">
-                <label style="color: #d84315; font-size: 0.8rem;">OTP दर्ज करें (कोड: <strong id="generatedOtpDisplay">123456</strong>):</label>
-                <div style="display: flex; gap: 6px;">
-                    <input type="number" id="userOtpInput" placeholder="6-अंकों का OTP">
-                    <button type="button" class="custom-btn" onclick="verifyOTP()" style="width: auto; background: #2e7d32; padding: 6px 10px; font-size: 0.85rem;">वेरीफाई</button>
-                </div>
-                <small id="otpStatusMsg" style="font-weight: bold; margin-top: 4px; display: block;"></small>
-            </div>
-        </div>
-
-        <div class="btn-box">
-            <button type="button" class="custom-btn" onclick="submitShop()" style="padding: 10px;">दुकान लाइव दर्ज करें</button>
+    <div class="collapsible-form-container" id="sevaJodeBox">
+        <h3 style="font-size: 1rem; color: #0277bd; margin-bottom: 10px;">आवश्यक ग्रामीण सेवाएं:</h3>
+        <div class="service-list">
+            <div class="service-card" onclick="alert('मिस्त्री सेवा जल्द शुरू होगी')">🛠️ मिस्त्री सेवा</div>
+            <div class="service-card" onclick="alert('पंडित जी सेवा जल्द शुरू होगी')">🙏 पंडित जी सेवा</div>
+            <div class="service-card" onclick="alert('गाड़ी किराया सेवा जल्द शुरू होगी')">🚕 गाड़ी किराया</div>
+            <div class="service-card" onclick="alert('मेडिकल सेवा जल्द शुरू होगी')">🏥 मेडिकल सेवा</div>
+            <div class="service-card" onclick="alert('इलेक्ट्रीशियन जल्द शुरू होगी')">⚡ इलेक्ट्रीशियन</div>
         </div>
     </div>
 
-    <!-- 2. GRAMIN GALLERY -->
+    <!-- 2. GALLERY -->
     <div class="toggle-bar orange" onclick="toggleSection('galleryBox', 'icon2')">
-        <span>📸 2. ग्रामीण गैलरी (गाँव की यादगार फोटो)</span>
+        <span>📸 2. ग्रामीण गैलरी</span>
         <span id="icon2">▼</span>
     </div>
-
     <div class="collapsible-form-container" id="galleryBox">
-        <h3 style="font-size: 1rem; color: #e65100; margin-bottom: 10px;">ग्रामीण गैलरी में फोटो जोड़ें</h3>
-        <div class="form-group">
-            <label>फोटो का शीर्षक:</label>
-            <input type="text" id="galTitle" placeholder="उदा: गाँव की चौपाल / शिव मंदिर">
-        </div>
-        <div class="form-group">
-            <label>जिला चुनें:</label>
-            <select id="galDistrict" onchange="updateBlockDropdown('galDistrict', 'galBlock', 'galVillage')">
-                <option value="">-- जिला चुनें --</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>ब्लॉक चुनें:</label>
-            <select id="galBlock" onchange="updateVillageDropdown('galDistrict', 'galBlock', 'galVillage')">
-                <option value="">-- पहले जिला चुनें --</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>गाँव चुनें:</label>
-            <select id="galVillage">
-                <option value="">-- पहले ब्लॉक चुनें --</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>फोटो चुनें:</label>
-            <input type="file" accept="image/*" onchange="previewImage(event, 'galImgPrev', 'galHolder')">
-            <div class="photo-preview-box">
-                <span id="galHolder" style="color: #e65100; font-size: 0.8rem;">फोटो प्रिव्यू</span>
-                <img id="galImgPrev" alt="Gallery Preview">
-            </div>
-        </div>
-        <button type="button" class="custom-btn btn-secondary" onclick="addGalleryImage()">गैलरी में सबमिट करें</button>
-        <div style="margin-top: 15px;">
-            <h4 style="font-size: 0.9rem; color: #555; margin-bottom: 6px;">हाल की ग्रामीण तस्वीरें:</h4>
-            <div class="gallery-grid" id="galleryDisplayGrid"></div>
-        </div>
-    </div>
-
-    <!-- 3. EVENTS & ANNOUNCEMENTS -->
-    <div class="toggle-bar red" onclick="toggleSection('eventsBox', 'icon3')">
-        <span>📢 3. गाँव के विज्ञापन व मुनादी (मेला, दंगल)</span>
-        <span id="icon3">▼</span>
-    </div>
-
-    <div class="collapsible-form-container" id="eventsBox">
-        <h3 style="font-size: 1rem; color: #c62828; margin-bottom: 10px;">गाँव की मुनादी व सांस्कृतिक विज्ञापन</h3>
-        <div class="form-group">
-            <label>कार्यक्रम की श्रेणी:</label>
-            <select id="eventCategory">
-                <option value="दंगल / कुश्ती">🤼 दंगल / विशाल कुश्ती प्रतियोगिता</option>
-                <option value="गाँव का मेला">🎡 गाँव का वार्षिक मेला</option>
-                <option value="भजन-कीर्तन / जागरण">🕉️ भजन-कीर्तन / माता का जागरण</option>
-                <option value="विशाल भंडारा">🍲 विशाल भंडारा / सामाजिक प्रीतिभोज</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>जिला चुनें:</label>
-            <select id="eventDistrict" onchange="updateBlockDropdown('eventDistrict', 'eventBlock', 'eventVillage')">
-                <option value="">-- जिला चुनें --</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>ब्लॉक चुनें:</label>
-            <select id="eventBlock" onchange="updateVillageDropdown('eventDistrict', 'eventBlock', 'eventVillage')">
-                <option value="">-- पहले जिला चुनें --</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>गाँव चुनें:</label>
-            <select id="eventVillage">
-                <option value="">-- पहले ब्लॉक चुनें --</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>विवरण:</label>
-            <textarea id="eventDetails" rows="3" placeholder="समय, तारीख और स्थान का विवरण लिखें..."></textarea>
-        </div>
-        <button type="button" class="custom-btn btn-accent" onclick="addVillageEvent()">सूचना प्रकाशित करें</button>
-        <div style="margin-top: 15px;" id="eventsDisplayArea"></div>
-    </div>
-
-    <!-- 4. BUY & SELL -->
-    <div class="toggle-bar purple" onclick="toggleSection('buySellBox', 'icon4')">
-        <span>🛒 4. खरीदें और बेचें (₹20/- प्रति टोकन)</span>
-        <span id="icon4">▼</span>
-    </div>
-
-    <div class="collapsible-form-container" id="buySellBox">
-        <h3 style="font-size: 1rem; color: var(--purple); margin-bottom: 10px;">पुराना/नया सामान बेचें (Buy & Sell)</h3>
-        <div style="text-align: center; background: #fffde7; padding: 10px; border: 1px dashed #fbc02d; border-radius: 6px; margin-bottom: 10px;">
-            <p style="font-weight: bold; color: #d84315; font-size: 0.9rem;">💳 विज्ञापन शुल्क: ₹20 प्रति टोकन</p>
-            <p style="font-size: 0.8rem; margin-top: 3px; color: #555;">UPI ID: <strong style="color: #c62828;">haryana.rural@upi</strong></p>
-        </div>
-        <div class="form-group">
-            <label>सामान का नाम:</label>
-            <input type="text" id="itemTitle" placeholder="उदा: महिंद्रा ट्रैक्टर / गाय / मोबाइल">
-        </div>
-        <div class="form-group">
-            <label>कीमत (₹):</label>
-            <input type="number" id="itemPrice" placeholder="कीमत दर्ज करें">
-        </div>
-        <div class="form-group">
-            <label>संपर्क नंबर:</label>
-            <input type="tel" id="itemPhone" placeholder="10 अंकों का नंबर">
-        </div>
-        <div class="form-group">
-            <label>सामान की फोटो:</label>
-            <input type="file" accept="image/*" onchange="previewImage(event, 'itemImgPrev', 'itemHolder')">
-            <div class="photo-preview-box">
-                <span id="itemHolder" style="color: #4a148c; font-size: 0.8rem;">फोटो प्रिव्यू</span>
-                <img id="itemImgPrev" alt="Item Preview">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>UPI Transaction ID:</label>
-            <input type="text" id="upiTxnId" placeholder="12-अंकों का UPI Txn ID">
-        </div>
-        <button type="button" class="custom-btn btn-purple" onclick="submitBuySellItem()">₹20 टोकन के साथ पोस्ट करें</button>
-        <div style="margin-top: 15px;" id="buySellDisplayArea"></div>
-    </div>
-
-    <!-- 5. GOVT SCHEMES -->
-    <div class="toggle-bar govt" onclick="toggleSection('govtSchemesBox', 'icon5')">
-        <span>🏛️ 5. हरियाणा सरकारी योजनाएं (HKRN, PPP, पेंशन)</span>
-        <span id="icon5">▼</span>
-    </div>
-
-    <div class="collapsible-form-container" id="govtSchemesBox">
-        <h3 style="font-size: 1rem; color: #004d40; margin-bottom: 10px;">हरियाणा सरकारी योजनाएं एवं ऑनलाइन सेवाएं</h3>
-        <div class="govt-grid">
-            <a href="https://hkrnl.itiharyana.gov.in/" target="_blank" class="govt-item-card">💼 HKRN रोज़गार</a>
-            <a href="https://meraparivar.haryana.gov.in/" target="_blank" class="govt-item-card">🆔 परिवार पहचान पत्र</a>
-            <a href="https://pension.socialjusticehry.gov.in/" target="_blank" class="govt-item-card">👴 पेंशन पोर्टल</a>
-            <a href="https://edisha.gov.in/" target="_blank" class="govt-item-card">📄 ई-दिशा सेवाएं</a>
-            <a href="https://epds.haryanafood.gov.in/" target="_blank" class="govt-item-card">🌾 राशन कार्ड</a>
-            <a href="https://fasal.haryana.gov.in/" target="_blank" class="govt-item-card">🌾 मेरी फसल ब्योरा</a>
-        </div>
-    </div>
-
-    <!-- 6. ENTERTAINMENT & CULTURE -->
-    <div class="toggle-bar entertainment" onclick="toggleSection('entertainmentBox', 'iconEnt')">
-        <span>🎭 6. ग्रामीण मनोरंजन और संस्कृति (Vlogs & Culture)</span>
-        <span id="iconEnt">▼</span>
-    </div>
-
-    <div class="collapsible-form-container" id="entertainmentBox">
-        <h3 style="font-size: 1rem; color: #ad1457; margin-bottom: 10px;">गाँव की संस्कृति, रागनी और व्लॉग्स</h3>
-        <div style="background: #fce4ec; padding: 12px; border-radius: 6px; border: 1px solid #f8bbd0;">
-            <p style="font-size: 0.9rem; font-weight: bold; color: #880e4f;">🎵 हरियाणवी रागनी, लोक गीत व सांस्कृतिक कार्यक्रम</p>
-            <div style="margin-top: 10px;">
-                <a href="https://www.youtube.com/results?search_query=Haryana+Village+Vlogs" target="_blank" class="custom-btn" style="background: #ad1457; font-size: 0.85rem; padding: 8px;">🎥 ग्रामीण यूट्यूब व्लॉग्स देखें</a>
-            </div>
-        </div>
+        <p>गाँव की फोटो अपलोड करें और देखें।</p>
     </div>
 
 </div>
 
+<!-- MODALS -->
+<div id="aboutModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
+        <h3>About Us</h3>
+        <hr style="margin: 10px 0;">
+        <p><strong>Portal Name:</strong> MeraGaov - Haryana Rural Service</p>
+        <p><strong>Founder:</strong> KUSUM W/O RAJESH YADAV</p>
+        <p style="margin-top: 10px;">यह पोर्टल हरियाणा के सभी गाँवों को डिजिटली जोड़ने और स्थानीय ग्रामीण सेवाओं को सुलभ बनाने के लिए बनाया गया है।</p>
+    </div>
+</div>
+
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('adminModal')">&times;</span>
+        <h3>Admin / Sub-Admin Login</h3>
+        <hr style="margin: 10px 0;">
+        <div class="form-group">
+            <label>Admin ID:</label>
+            <input type="text" id="adminId" placeholder="ID दर्ज करें">
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" id="adminPass" placeholder="पासवर्ड दर्ज करें">
+        </div>
+        <button class="custom-btn" onclick="alert('लॉगिन वेरिफिकेशन प्रक्रिया चालू है')">लॉगिन करें</button>
+    </div>
+</div>
+
+<div id="privacyModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('privacyModal')">&times;</span>
+        <h3>Privacy Policy (Google Play Store Compliant)</h3>
+        <hr style="margin: 10px 0;">
+        <div style="font-size: 0.85rem; color: #444; line-height: 1.6;">
+            <p><strong>Effective Date:</strong> August 2026</p>
+            <br>
+            <p>1. <strong>Information Collection:</strong> We collect user location (GPS) and phone numbers solely for verifying local village listings.</p>
+            <p>2. <strong>Data Safety:</strong> Your personal information is never sold or shared with third-party advertisers.</p>
+            <p>3. <strong>Permissions:</strong> Camera and Storage permissions are strictly used for uploading village photos and shop pictures.</p>
+            <br>
+            <button class="custom-btn" onclick="downloadPolicy()" style="background: #2e7d32; padding: 8px;">📄 Download Privacy Policy Document</button>
+        </div>
+    </div>
+</div>
+
 <footer>
-    <p>&copy; 2026 Haryana Rural Service Portal - Digital Gram Haryana</p>
+    <p>&copy; 2026 MeraGaov Haryana - Founder: KUSUM W/O RAJESH YADAV</p>
 </footer>
 
 <script>
-    // FULL HARYANA MASTER DATA (ALL DISTRICTS, BLOCKS, AND VILLAGES)
     const haryanaMasterData = {
-        "AMBALA": {
-            "AMBALA": ["Ambala Rural", "Panjokhra", "Dora", "Sarsehri", "Tandwal", "Babalpur", "Machhonda", "Gardh", "Bara", "Machhrauli"],
-            "BARARA": ["Barara", "Mulana", "Dhurala", "Bhedthal", "Topra", "Dabkoli", "Naneola"],
-            "NARAINGARH": ["Naraingarh", "Shahzadpur", "Lalru", "Bhareli", "Naggal", "Panjlasa"],
-            "SAHA": ["Saha", "Keshpur", "Ugala", "Kesri", "Landhaura", "Shergarh"]
-        },
-        "BHIWANI": {
-            "BHIWANI": ["Bhiwani Rural", "Dinod", "Bidhwan", "Talu", "Nangal", "Biran", "Chang", "Bapora", "Kitlana"],
-            "BAWANI KHERA": ["Bawani Khera", "Miran", "Jatu Lohari", "Sisar", "Kairu", "Sui"],
-            "SIWANI": ["Siwani", "Bhiwani Rohilla", "Kairu", "Barwala", "Ghangala"],
-            "TOSHAM": ["Tosham", "Khanak", "Dhandalan", "Dang Kalan", "Dadam"],
-            "LOHARU": ["Loharu", "Jui", "Sisahani", "Digwa", "Bahal", "Singhani"]
-        },
-        "CHARKHI DADRI": {
-            "BADHRA": ["Badhra", "Mandola", "Ranila", "Chappar", "Biran", "Pandwan", "Jhojhu", "Imloita"],
-            "CHARKHI DADRI": ["Dadri Rural", "Jhojhu Kalan", "Kachri", "Ramalwas", "Sarni", "Mankawas", "Maurana"],
-            "BAUND": ["Achina", "Bas Ranila", "Baund Kalan", "Baund Khurd", "Hindol", "Sanjarwas"]
-        },
-        "FARIDABAD": {
-            "FARIDABAD": ["Faridabad Rural", "Ballabhgarh", "Tigaon", "Nangla", "Budena", "Jharsetli"],
-            "BALLABHGARH": ["Mohna", "Chhainsa", "Dayalpur", "Baghpur", "Nawada", "Tilpata"]
-        },
-        "FATEHABAD": {
-            "FATEHABAD": ["Fatehabad Rural", "Bhattu Kalan", "Ayalki", "Bighar", "Dhingsi"],
-            "BHUNA": ["Bhuna", "Dhangar", "Chirai", "Karanwala", "Sardarwala"],
-            "RATIA": ["Ratia", "Bihan", "Koharwala", "Amani", "Fatehpur"],
-            "TOHANA": ["Tohana", "Jakhal", "Lambu", "Chandpura", "Pirthi"]
-        },
-        "GURUGRAM": {
-            "GURUGRAM": ["Gurugram Rural", "Badshahpur", "Fazilpur", "Tikri", "Wazirabad", "Sohna"],
-            "PATAUDI": ["Pataudi", "Jatauli", "Bhora Kalan", "Hasanpur", "Bas Padamka"],
-            "FARRUKHNAGAR": ["Farrukhnagar", "Wazirpur", "Hayatpur", "Sultanpur"],
-            "SOHNA": ["Sohna", "Alipur", "Rithoj", "Damdama", "Bhondsi"]
-        },
-        "HISAR": {
-            "HISAR": ["Hisar Rural", "Uklana", "Barwala", "Narnaund", "Hansi", "Rawalwas", "Mayyar"],
-            "AGROHA": ["Agroha", "Kanhari", "Sadar", "Khabra", "Khedar"],
-            "HANSI": ["Hansi Rural", "Sainsi", "Data", "Umra", "Gurana", "Ramayan"]
+        "ROHTAK": {
+            "ROHTAK": ["Dobh", "Kahnaur", "Bohar", "Kiloi", "Sanghi", "Ismaila"],
+            "SAMPLA": ["Sampla", "Ismaila-A", "Ismaila-B", "Assan", "Katesra"],
+            "MEHAM": ["Meham", "Madina", "Bainsi"]
         },
         "JHAJJAR": {
-            "JHAJJAR": ["Jhajjar Rural", "Bahadurgarh", "Beri", "Silani", "Kutani", "Chhara", "Machhrauli", "Dighal", "Salhawas"],
-            "MATANHAIL": ["Matanhail", "Chhara", "Salhawas", "Dighal", "Bupania", "Jahangirpur"],
-            "BAHADURGARH": ["Bahadurgarh", "Asaudha", "Barah", "Nuna Majra", "Badli"]
+            "JHAJJAR": ["Jhajjar Rural", "Bahadurgarh", "Beri", "Silani", "Dighal"],
+            "BAHADURGARH": ["Bahadurgarh", "Asaudha", "Badli"]
         },
-        "JIND": {
-            "JIND": ["Jind Rural", "Narwana", "Safidon", "Uchana", "Alewa", "Bichpari", "Gattoli"],
-            "JULANA": ["Julana", "Karela", "Gatra", "Bramhanwala", "Gadhwal"]
-        },
-        "KAITHAL": {
-            "KAITHAL": ["Kaithal Rural", "Guhla", "Pundri", "Kalayat", "Keorak", "Dhand", "Siwan"],
-            "DHAND": ["Dhand", "Rajaund", "Siwan", "Massana", "Pharal"]
-        },
-        "KARNAL": {
-            "KARNAL": ["Karnal Rural", "Assandh", "Gharaunda", "Indri", "Nilokheri", "Kachwa"],
-            "GHARAUNDA": ["Gharaunda", "Kohand", "Balla", "Chulkana", "Kutail"]
-        },
-        "KURUKSHETRA": {
-            "KURUKSHETRA": ["Thanesar", "Pehowa", "Shahabad", "Ladwa", "Amin", "Barna"],
-            "ISMAILABAD": ["Ismailabad", "Babain", "Sukhdevpur", "Thaska"]
-        },
-        "NUH": {
-            "NUH": ["Nuh Rural", "Firozpur Jhirka", "Punhana", "Tauru", "Ujina", "Ghasera"],
-            "NAGINA": ["Nagina", "Indri", "Biwan", "Shahpur", "Chandeni"]
-        },
-        "PALWAL": {
-            "PALWAL": ["Palwal Rural", "Hodal", "Hathin", "Mundkat", "Deeghot", "Banchari"]
-        },
-        "PANCHKULA": {
-            "PANCHKULA": ["Panchkula Rural", "Kalka", "Barwala", "Pinjore", "Raipur Rani"]
-        },
-        "PANIPAT": {
-            "PANIPAT": ["Panipat Rural", "Samalkha", "Israna", "Madlauda", "Bapoli"],
-            "SAMALKHA": ["Samalkha", "Ganaur", "Chulkana", "Puthar", "Atta"]
-        },
-        "REWARI": {
-            "REWARI": ["Rewari Rural", "Bawal", "Kosli", "Jatusana", "Dharuhera"],
-            "DHARUHERA": ["Dharuhera", "Bawal Rural", "Masani", "Budoli"]
-        },
-        "ROHTAK": {
-            "ROHTAK": ["Dobh", "Kahnaur", "Bohar", "Karanoti", "Sanghi", "Pakasma", "Simli", "Kiloi", "Assan", "Ismaila", "Ismaila-A", "Ismaila-B"],
-            "SAMPLA": ["Sampla", "Ismaila-A", "Ismaila-B", "Gandarv", "Kiloi", "Garhi", "Assan", "Katesra"],
-            "MEHAM": ["Meham", "Madina", "Bainsi", "Morkhi", "Nindana", "Rithal"],
-            "KALANAUR": ["Kalanaur", "Bhaini", "Mokhra", "Simli", "Landra", "Farmana"]
-        },
-        "SIRSA": {
-            "SIRSA": ["Sirsa Rural", "Dabwali", "Ellenabad", "Rania", "Panniwala", "Chautala"]
-        },
-        "SONIPAT": {
-            "SONIPAT": ["Sonipat Rural", "Ganaur", "Gohana", "Kharkhoda", "Rai"],
-            "GOHANA": ["Gohana", "Baroda", "Ridhau", "Butana", "Katwal"]
-        },
-        "YAMUNANAGAR": {
-            "YAMUNANAGAR": ["Jagadhri", "Yamunanagar Rural", "Bilaspur", "Chhachhrauli", "Radaur"]
+        "BHIWANI": {
+            "BHIWANI": ["Bhiwani Rural", "Dinod", "Talu", "Bapora"],
+            "TOSHAM": ["Tosham", "Khanak", "Dhandalan"]
         }
     };
 
-    let base64PhotoStore = {};
-    let generatedOTP = null;
-    let isPhoneVerified = false;
-    let isDistrictVerifiedByAPI = false;
-
-    // Load Initial Setup
     window.onload = function() {
-        populateDistrictDropdown('mainDistrictSelect');
-        populateDistrictDropdown('regDistrict');
-        populateDistrictDropdown('galDistrict');
-        populateDistrictDropdown('eventDistrict');
-        loadGallery();
-        loadEvents();
-        loadBuySellItems();
-    };
-
-    function populateDistrictDropdown(id) {
-        const sel = document.getElementById(id);
-        if(!sel) return;
+        const sel = document.getElementById('mainDistrictSelect');
         sel.innerHTML = '<option value="">-- जिला चुनें --</option>';
-        Object.keys(haryanaMasterData).sort().forEach(dist => {
+        Object.keys(haryanaMasterData).forEach(dist => {
             let opt = document.createElement('option');
             opt.value = dist;
             opt.textContent = dist;
             sel.appendChild(opt);
         });
-    }
+    };
 
     function toggleMenu() {
-        const dropdown = document.getElementById("myDropdown");
-        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
-    }
-
-    function toggleCategoryDropdown() {
-        const content = document.getElementById("catDropdownContent");
-        const arrow = document.getElementById("catArrow");
-        const isVisible = content.style.display === "block";
-        content.style.display = isVisible ? "none" : "block";
-        arrow.innerText = isVisible ? "▼" : "▲";
-    }
-
-    function showPrivacyPolicy() {
-        alert("प्राइवेसी पॉलिसी:\n1. आपका डेटा सुरक्षित है।\n2. हम किसी तीसरे पक्ष के साथ डेटा शेयर नहीं करते।");
+        const d = document.getElementById("myDropdown");
+        d.style.display = (d.style.display === "block") ? "none" : "block";
     }
 
     function toggleSection(boxId, iconId) {
@@ -739,15 +326,14 @@
         const dist = document.getElementById('mainDistrictSelect').value;
         const blockSel = document.getElementById('mainBlockSelect');
         const villSel = document.getElementById('mainVillageSelect');
-
         blockSel.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
         villSel.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
 
-        if (dist && haryanaMasterData[dist]) {
-            Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
+        if(dist && haryanaMasterData[dist]) {
+            Object.keys(haryanaMasterData[dist]).forEach(b => {
                 let opt = document.createElement('option');
-                opt.value = block;
-                opt.textContent = block;
+                opt.value = b;
+                opt.textContent = b;
                 blockSel.appendChild(opt);
             });
         }
@@ -757,49 +343,13 @@
         const dist = document.getElementById('mainDistrictSelect').value;
         const block = document.getElementById('mainBlockSelect').value;
         const villSel = document.getElementById('mainVillageSelect');
-
         villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
 
-        if (dist && block && haryanaMasterData[dist] && haryanaMasterData[dist][block]) {
-            haryanaMasterData[dist][block].sort().forEach(vill => {
+        if(dist && block && haryanaMasterData[dist][block]) {
+            haryanaMasterData[dist][block].forEach(v => {
                 let opt = document.createElement('option');
-                opt.value = vill;
-                opt.textContent = vill;
-                villSel.appendChild(opt);
-            });
-        }
-    }
-
-    function updateBlockDropdown(distId, blockId, villId) {
-        const dist = document.getElementById(distId).value;
-        const blockSel = document.getElementById(blockId);
-        const villSel = document.getElementById(villId);
-
-        blockSel.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
-        if(villSel) villSel.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
-
-        if (dist && haryanaMasterData[dist]) {
-            Object.keys(haryanaMasterData[dist]).sort().forEach(block => {
-                let opt = document.createElement('option');
-                opt.value = block;
-                opt.textContent = block;
-                blockSel.appendChild(opt);
-            });
-        }
-    }
-
-    function updateVillageDropdown(distId, blockId, villId) {
-        const dist = document.getElementById(distId).value;
-        const block = document.getElementById(blockId).value;
-        const villSel = document.getElementById(villId);
-
-        villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-
-        if (dist && block && haryanaMasterData[dist] && haryanaMasterData[dist][block]) {
-            haryanaMasterData[dist][block].sort().forEach(vill => {
-                let opt = document.createElement('option');
-                opt.value = vill;
-                opt.textContent = vill;
+                opt.value = v;
+                opt.textContent = v;
                 villSel.appendChild(opt);
             });
         }
@@ -807,264 +357,35 @@
 
     function updateHeaderVillageName() {
         const vill = document.getElementById('mainVillageSelect').value;
-        const header = document.getElementById('headerTitle');
-        if (vill) {
-            header.innerText = `👴 MeraGaov ${vill} 💨`;
-        } else {
-            header.innerText = `👴 MeraGaov (हरियाणा ग्रामीण सेवा) 💨`;
+        if(vill) {
+            document.getElementById('headerTitle').innerText = `👴 MeraGaov ${vill} 💨`;
         }
     }
 
-    function fetchGPSLocationAndVerifyDistrict() {
-        const statusBox = document.getElementById("districtApiStatus");
-        statusBox.innerHTML = `<span style="color:#d84315;">⌛ GPS वेरीफाई हो रहा है...</span>`;
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                document.getElementById("regGPSCoord").value = `${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`;
-                isDistrictVerifiedByAPI = true;
-                statusBox.innerHTML = `<div style="color: green; font-weight: bold; margin-top:4px;">✔ GPS वेरीफाई हो गया!</div>`;
-            }, () => {
-                alert("GPS अनुमति दें!");
-                statusBox.innerHTML = `<span style="color:red;">GPS की अनुमति नहीं मिली।</span>`;
-            });
-        }
-    }
-
-    function previewImage(event, imgId, holderId) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                base64PhotoStore[imgId] = e.target.result;
-                const img = document.getElementById(imgId);
-                img.src = e.target.result;
-                img.style.display = "block";
-                document.getElementById(holderId).style.display = "none";
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function sendOTP() {
-        const phone = document.getElementById("regPhone").value.trim();
-        if(!phone || phone.length < 10) {
-            alert("10 अंकों का वैध मोबाइल नंबर दर्ज करें!");
-            return;
-        }
-        generatedOTP = Math.floor(100000 + Math.random() * 900000);
-        document.getElementById("generatedOtpDisplay").innerText = generatedOTP;
-        document.getElementById("otpBox").style.display = "block";
-        alert(`📲 आपका टेस्ट OTP कोड है: ${generatedOTP}`);
-    }
-
-    function verifyOTP() {
-        const inputOtp = document.getElementById("userOtpInput").value.trim();
-        const statusMsg = document.getElementById("otpStatusMsg");
-        if(inputOtp == generatedOTP) {
-            isPhoneVerified = true;
-            statusMsg.style.color = "green";
-            statusMsg.innerText = "✔ मोबाइल नंबर वेरीफाई हो गया!";
-        } else {
-            isPhoneVerified = false;
-            statusMsg.style.color = "red";
-            statusMsg.innerText = "❌ गलत OTP!";
-        }
-    }
-
-    function searchServices() {
-        const dist = document.getElementById('mainDistrictSelect').value;
+    function searchVillageData() {
         const vill = document.getElementById('mainVillageSelect').value;
-        const code = document.getElementById('secCodeInput').value;
         const res = document.getElementById('searchResult');
-
-        if (!dist || !vill) {
-            alert("कृपया जिला और गाँव दोनों चुनें!");
+        if(!vill) {
+            alert("कृपया गाँव चुनें!");
             return;
         }
-
-        if (code.toUpperCase() !== "YX988XJ") {
-            alert("सुरक्षा कोड (YX988XJ) सही दर्ज करें!");
-            return;
-        }
-
-        const approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-        const matched = approvedShops.filter(s => s.dist === dist && s.vill === vill);
-
-        if(matched.length === 0) {
-            res.innerHTML = `<div style="background:#e8f5e9; padding:10px; border-radius:6px; color:#2e7d32; font-weight:bold;">
-                ✔ गाँव: ${vill} (${dist}) का डेटा लोड हो गया है। फिलहाल कोई एक्टिव दुकान पंजीकृत नहीं है।
-            </div>`;
-            return;
-        }
-
-        let html = "";
-        matched.forEach(s => {
-            html += `
-            <div class="shop-item">
-                <img src="${s.photo}" class="shop-img-preview" alt="Shop">
-                <div style="flex:1;">
-                    <h4 style="color:var(--primary);">${s.name}</h4>
-                    <p style="font-size:0.8rem; color:#555;">📍 गाँव: ${s.vill}</p>
-                </div>
-                <a href="tel:${s.phone}" class="call-btn">📞 कॉल करें</a>
-            </div>`;
-        });
-        res.innerHTML = html;
+        res.innerHTML = `<div style="background:#e8f5e9; padding:12px; border-radius:6px; color:#2e7d32; font-weight:bold;">
+            📍 गाँव: ${vill} सफलतापूर्वक लोड हो गया है!
+        </div>`;
     }
 
-    function submitShop() {
-        const name = document.getElementById("regShopName").value.trim();
-        const dist = document.getElementById("regDistrict").value;
-        const block = document.getElementById("regBlock").value;
-        const vill = document.getElementById("regVillage").value;
-        const phone = document.getElementById("regPhone").value.trim();
-        const photo = base64PhotoStore['shopImgPrev'];
+    function openAboutModal() { document.getElementById('aboutModal').style.display = 'block'; toggleMenu(); }
+    function openAdminModal() { document.getElementById('adminModal').style.display = 'block'; toggleMenu(); }
+    function openPrivacyModal() { document.getElementById('privacyModal').style.display = 'block'; toggleMenu(); }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        if(!name || !dist || !vill || !photo) {
-            alert("सभी विवरण भरें और फोटो अपलोड करें!");
-            return;
-        }
-
-        if(!isPhoneVerified) {
-            alert("पहले OTP वेरीफाई करें!");
-            return;
-        }
-
-        let approvedShops = JSON.parse(localStorage.getItem("approvedShops") || "[]");
-        approvedShops.push({ id: Date.now(), name, dist, block, vill, phone, photo });
-        localStorage.setItem("approvedShops", JSON.stringify(approvedShops));
-
-        alert("✅ आपकी दुकान/सेवा सफलतापूर्वक लाइव दर्ज हो गई है!");
-        location.reload();
-    }
-
-    function addGalleryImage() {
-        const title = document.getElementById("galTitle").value.trim();
-        const dist = document.getElementById("galDistrict").value;
-        const vill = document.getElementById("galVillage").value;
-        const photo = base64PhotoStore['galImgPrev'];
-
-        if(!title || !dist || !vill || !photo) {
-            alert("सभी विवरण और फोटो भरें!");
-            return;
-        }
-
-        let gallery = JSON.parse(localStorage.getItem("graminGallery") || "[]");
-        gallery.push({ id: Date.now(), title, dist, vill, photo });
-        localStorage.setItem("graminGallery", JSON.stringify(gallery));
-
-        alert("📸 फोटो गैलरी में जुड़ गई!");
-        loadGallery();
-    }
-
-    function loadGallery() {
-        const gallery = JSON.parse(localStorage.getItem("graminGallery") || "[]");
-        const grid = document.getElementById("galleryDisplayGrid");
-        if(!grid) return;
-        if(gallery.length === 0) {
-            grid.innerHTML = "<p style='font-size:0.75rem; color:#888;'>कोई फोटो नहीं है।</p>";
-            return;
-        }
-
-        let html = "";
-        gallery.slice(-6).reverse().forEach(g => {
-            html += `
-            <div class="gallery-card">
-                <img src="${g.photo}" alt="${g.title}">
-                <p>${g.title}</p>
-                <small style="font-size:0.65rem; color:#666;">📍 ${g.vill}</small>
-            </div>`;
-        });
-        grid.innerHTML = html;
-    }
-
-    function addVillageEvent() {
-        const cat = document.getElementById("eventCategory").value;
-        const dist = document.getElementById("eventDistrict").value;
-        const vill = document.getElementById("eventVillage").value;
-        const details = document.getElementById("eventDetails").value.trim();
-
-        if(!dist || !vill || !details) {
-            alert("विवरण भरें!");
-            return;
-        }
-
-        let events = JSON.parse(localStorage.getItem("villageEvents") || "[]");
-        events.push({ id: Date.now(), cat, dist, vill, details });
-        localStorage.setItem("villageEvents", JSON.stringify(events));
-
-        alert("📢 सूचना प्रकाशित हो गई!");
-        loadEvents();
-    }
-
-    function loadEvents() {
-        const events = JSON.parse(localStorage.getItem("villageEvents") || "[]");
-        const area = document.getElementById("eventsDisplayArea");
-        if(!area) return;
-        if(events.length === 0) {
-            area.innerHTML = "<p style='font-size:0.75rem; color:#888;'>कोई सूचना नहीं है।</p>";
-            return;
-        }
-
-        let html = "";
-        events.slice(-4).reverse().forEach(e => {
-            html += `
-            <div class="event-item" style="border-left-color: #c62828;">
-                <div>
-                    <span style="background:#ffebee; color:#c62828; font-size:0.7rem; padding:2px 6px; border-radius:4px; font-weight:bold;">${e.cat}</span>
-                    <h5 style="margin-top:3px; font-size:0.9rem;">📍 गाँव: ${e.vill} (${e.dist})</h5>
-                    <p style="font-size:0.8rem; color:#555;">${e.details}</p>
-                </div>
-            </div>`;
-        });
-        area.innerHTML = html;
-    }
-
-    function submitBuySellItem() {
-        const title = document.getElementById("itemTitle").value.trim();
-        const price = document.getElementById("itemPrice").value.trim();
-        const phone = document.getElementById("itemPhone").value.trim();
-        const txn = document.getElementById("upiTxnId").value.trim();
-        const photo = base64PhotoStore['itemImgPrev'];
-
-        if(!title || !price || !phone || !txn) {
-            alert("सभी जानकारी भरें!");
-            return;
-        }
-
-        let buySellList = JSON.parse(localStorage.getItem("buySellItems") || "[]");
-        buySellList.push({ id: Date.now(), title, price, phone, photo });
-        localStorage.setItem("buySellItems", JSON.stringify(buySellList));
-
-        alert("🎉 आपका सामान बिक्री हेतु दर्ज हो गया!");
-        loadBuySellItems();
-    }
-
-    function loadBuySellItems() {
-        const items = JSON.parse(localStorage.getItem("buySellItems") || "[]");
-        const area = document.getElementById("buySellDisplayArea");
-        if(!area) return;
-        if(items.length === 0) {
-            area.innerHTML = "<p style='font-size:0.75rem; color:#888;'>कोई आइटम उपलब्ध नहीं है।</p>";
-            return;
-        }
-
-        let html = "";
-        items.slice(-4).reverse().forEach(item => {
-            let imgTag = item.photo ? `<img src="${item.photo}" class="item-img-preview" alt="Item">` : `<div style="width:60px; height:60px; background:#eee; border-radius:6px;"></div>`;
-            
-            html += `
-            <div class="item-card" style="border-left-color: var(--purple);">
-                ${imgTag}
-                <div style="flex:1;">
-                    <h5 style="color:var(--purple); font-size:0.9rem;">${item.title}</h5>
-                    <p style="font-size:0.85rem; color:#d84315; font-weight:bold;">कीमत: ₹${item.price}</p>
-                </div>
-                <a href="tel:${item.phone}" class="call-btn" style="background:var(--purple);">📞 खरीदें</a>
-            </div>`;
-        });
-        area.innerHTML = html;
+    function downloadPolicy() {
+        const element = document.createElement("a");
+        const file = new Blob(["Privacy Policy - MeraGaov Portal\nFounder: KUSUM W/O RAJESH YADAV\n\n1. Data Safety Guaranteed.\n2. Location used for local village search."], {type: 'text/plain'});
+        element.href = URL.createObjectURL(file);
+        element.download = "Privacy_Policy_MeraGaov.txt";
+        document.body.appendChild(element);
+        element.click();
     }
 </script>
 </body>
