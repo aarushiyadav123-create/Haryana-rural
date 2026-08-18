@@ -62,7 +62,6 @@
         .menu-content a, .menu-content button { color: #333; padding: 10px 14px; display: block; text-decoration: none; border: none; background: none; width: 100%; text-align: left; font-size: 0.85rem; font-weight: bold; cursor: pointer; }
         .menu-content a:hover, .menu-content button:hover { background: #f1f1f1; }
 
-        /* Single Dropdown Menu for 6 Services */
         .single-category-dropdown {
             position: relative;
             margin-bottom: 15px;
@@ -391,7 +390,6 @@
 
 <div class="container" id="searchSection">
 
-    <!-- सेवा जोड़े / अन्य जानकारी Dropdown Menu -->
     <div class="single-category-dropdown">
         <button class="main-category-btn" onclick="toggleCategoryDropdown()">
             <span>📂 सेवा जोड़े / अन्य जानकारी</span>
@@ -425,7 +423,6 @@
         </div>
     </div>
 
-    <!-- नया 1B बटन: Add Category (मोबाइल से वेरीफाई करके नया जोड़ें) -->
     <div style="margin-bottom: 20px;">
         <button class="custom-btn btn-secondary" onclick="toggleSection('addShopFormBox', 'icon1')" style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1rem; padding: 14px;">
             <span>➕ Add Category (मोबाइल OTP वेरीफाई करके नई दुकान/गाँव जोड़ें)</span>
@@ -927,6 +924,7 @@
         });
     }
 
+    // UPDATED FUNCTION: Fixes issue with loading villages properly
     function loadVillages() {
         const selectedDist = document.getElementById('mainDistrictSelect').value;
         const selectedBlock = document.getElementById('mainBlockSelect').value;
@@ -934,12 +932,15 @@
         
         villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
         
-        if (!selectedDist || !selectedBlock || !haryanaMasterData[selectedDist][selectedBlock]) return;
+        if (!selectedDist || !selectedBlock) return;
         
-        const villages = haryanaMasterData[selectedDist][selectedBlock];
-        villages.forEach(village => {
-            villageSelect.innerHTML += `<option value="${village}">${village}</option>`;
-        });
+        if (haryanaMasterData[selectedDist] && haryanaMasterData[selectedDist][selectedBlock]) {
+            const villages = haryanaMasterData[selectedDist][selectedBlock];
+            const sortedVillages = [...villages].sort((a, b) => a.localeCompare(b, 'hi'));
+            sortedVillages.forEach(village => {
+                villageSelect.innerHTML += `<option value="${village}">${village}</option>`;
+            });
+        }
     }
 
     function updateBlockDropdown(districtId, blockId, villageId) {
@@ -960,15 +961,18 @@
         }
     }
 
+    // UPDATED FUNCTION: Ensures form dropdowns load villages without issues
     function updateVillageDropdown(districtId, blockId, villageId) {
         const dist = document.getElementById(districtId).value;
         const block = document.getElementById(blockId).value;
         const villSel = document.getElementById(villageId);
 
+        if (!villSel) return;
         villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
 
         if (dist && block && haryanaMasterData[dist] && haryanaMasterData[dist][block]) {
-            const sortedVillages = [...haryanaMasterData[dist][block]].sort((a, b) => a.localeCompare(b, 'hi'));
+            const villages = haryanaMasterData[dist][block];
+            const sortedVillages = [...villages].sort((a, b) => a.localeCompare(b, 'hi'));
             sortedVillages.forEach(vill => {
                 villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
             });
