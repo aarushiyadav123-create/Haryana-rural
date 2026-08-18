@@ -943,41 +943,48 @@
         }
     }
 
-    function updateBlockDropdown(districtId, blockId, villageId) {
-        const dist = document.getElementById(districtId).value;
-        const blockSel = document.getElementById(blockId);
-        const villSel = document.getElementById(villageId);
-
-        blockSel.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
-        if(villSel) {
-            villSel.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
-        }
-
-        if (dist && haryanaMasterData[dist]) {
-            const sortedBlocks = Object.keys(haryanaMasterData[dist]).sort();
-            sortedBlocks.forEach(block => {
-                blockSel.innerHTML += `<option value="${block}">${block}</option>`;
-            });
-        }
+  function loadBlocks() {
+    const selectedDist = document.getElementById('mainDistrictSelect').value;
+    const blockSelect = document.getElementById('mainBlockSelect');
+    const villageSelect = document.getElementById('mainVillageSelect');
+    
+    blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
+    villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+    
+    if (!selectedDist || !haryanaMasterData[selectedDist]) return;
+    
+    // सुरक्षित तरीके से ब्लॉक की लिस्ट निकालें
+    const blocks = Object.keys(haryanaMasterData[selectedDist]);
+    blocks.forEach(block => {
+        const opt = document.createElement('option');
+        opt.value = block;
+        opt.textContent = block;
+        blockSelect.appendChild(opt);
+    });
+}
     }
 
     // UPDATED FUNCTION: Ensures form dropdowns load villages without issues
-    function updateVillageDropdown(districtId, blockId, villageId) {
-        const dist = document.getElementById(districtId).value;
-        const block = document.getElementById(blockId).value;
-        const villSel = document.getElementById(villageId);
-
-        if (!villSel) return;
-        villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-
-        if (dist && block && haryanaMasterData[dist] && haryanaMasterData[dist][block]) {
-            const villages = haryanaMasterData[dist][block];
-            const sortedVillages = [...villages].sort((a, b) => a.localeCompare(b, 'hi'));
-            sortedVillages.forEach(vill => {
-                villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
-            });
-        }
+  function loadVillages() {
+    const selectedDist = document.getElementById('mainDistrictSelect').value;
+    const selectedBlock = document.getElementById('mainBlockSelect').value;
+    const villageSelect = document.getElementById('mainVillageSelect');
+    
+    villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+    
+    if (!selectedDist || !selectedBlock) return;
+    
+    // बिना किसी क्रैश के सीधे गाँव की लिस्ट डालें
+    if (haryanaMasterData[selectedDist] && haryanaMasterData[selectedDist][selectedBlock]) {
+        const villages = haryanaMasterData[selectedDist][selectedBlock];
+        villages.forEach(village => {
+            const opt = document.createElement('option');
+            opt.value = village;
+            opt.textContent = village;
+            villageSelect.appendChild(opt);
+        });
     }
+}
 
     function onRegDistrictChange() { updateBlockDropdown("regDistrict", "regBlock", "regVillage"); }
     function onRegBlockChange() { updateVillageDropdown("regDistrict", "regBlock", "regVillage"); }
