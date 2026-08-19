@@ -38,7 +38,6 @@ const haryanaMasterData = {
     }
 };
 
-// १. गाँव की दुकानों और सेवाओं का सैंपल डेटाबेस
 let villageDatabase = [
     { district: "ROHTAK", block: "SAMPLA", village: "Kharawar", title: "रामेश्वर किराना स्टोर", category: "दुकान", price: "-", phone: "9812345678" },
     { district: "ROHTAK", block: "SAMPLA", village: "Kharawar", title: "संजय इलेक्ट्रीशियन (मिस्त्री)", category: "मिस्त्री", price: "200 रु/विज़िट", phone: "9876543210" },
@@ -69,11 +68,11 @@ function loadBlocks() {
     let dist = document.getElementById('mainDistrictSelect').value;
     let blockSelect = document.getElementById('mainBlockSelect');
     let villageSelect = document.getElementById('mainVillageSelect');
-    let customInput = document.getElementById('customVillageInput');
     
     blockSelect.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
-    villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
-    if(customInput) customInput.style.display = 'none';
+    if (villageSelect) {
+        villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+    }
 
     if (dist && haryanaMasterData[dist]) {
         Object.keys(haryanaMasterData[dist]).forEach(blk => {
@@ -85,14 +84,14 @@ function loadBlocks() {
     }
 }
 
+// खण्ड चुनते ही उस ब्लॉक के सभी गाँव सीधे ड्रॉपडाउन में लोड हो जाएंगे
 function loadVillages() {
     let dist = document.getElementById('mainDistrictSelect').value;
     let blk = document.getElementById('mainBlockSelect').value;
     let villageSelect = document.getElementById('mainVillageSelect');
-    let customInput = document.getElementById('customVillageInput');
     
+    if (!villageSelect) return;
     villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-    if(customInput) customInput.style.display = 'none';
 
     if (dist && blk && haryanaMasterData[dist] && haryanaMasterData[dist][blk]) {
         haryanaMasterData[dist][blk].forEach(vlg => {
@@ -102,31 +101,12 @@ function loadVillages() {
             villageSelect.appendChild(opt);
         });
     }
-
-    // सूची में न होने पर Custom Option
-    let otherOpt = document.createElement('option');
-    otherOpt.value = "OTHER";
-    otherOpt.textContent = "➕ गाँव सूची में नहीं है? (यहाँ नाम लिखें)";
-    villageSelect.appendChild(otherOpt);
 }
 
-function checkOtherVillage() {
-    let select = document.getElementById('mainVillageSelect');
-    let customInput = document.getElementById('customVillageInput');
-    if (select.value === "OTHER") {
-        customInput.style.display = 'block';
-    } else {
-        customInput.style.display = 'none';
-    }
-}
-
+// यह फंक्शन अब सीधे सिलेक्टेड गाँव की वैल्यू देगा
 function getSelectedVillage() {
     let select = document.getElementById('mainVillageSelect');
-    let customInput = document.getElementById('customVillageInput');
-    
-    if (select.value === "OTHER") {
-        return customInput.value.trim();
-    }
+    if (!select) return "";
     return select.value;
 }
 
@@ -146,27 +126,8 @@ function searchServices() {
     let adArea = document.getElementById('adDisplayArea');
 
     if (!dist || !blk || !vlg) {
-        alert('कृपया जिला, ब्लॉक और गाँव का चयन करें या दर्ज करें!');
+        alert('कृपया जिला, ब्लॉक और गाँव का चयन करें!');
         return;
-    }
-
-    // अगर यूजर ने 'OTHER' चुनकर कोई नया गाँव खुद टाइप किया है, तो मास्टर डेटा में खोजें कि यह गाँव किस जिले/ब्लॉक में आता है
-    let select = document.getElementById('mainVillageSelect');
-    if (select.value === "OTHER" && vlg) {
-        let foundDistrict = dist;
-        let foundBlock = blk;
-        
-        for (const [dKey, blocksObj] of Object.entries(haryanaMasterData)) {
-            for (const [bKey, villagesArr] of Object.entries(blocksObj)) {
-                if (villagesArr.some(v => v.toLowerCase() === vlg.toLowerCase())) {
-                    foundDistrict = dKey;
-                    foundBlock = bKey;
-                    break;
-                }
-            }
-        }
-        dist = foundDistrict;
-        blk = foundBlock;
     }
 
     if (resBox) {
@@ -177,7 +138,6 @@ function searchServices() {
         `;
     }
 
-    // डेटाबेस में से गाँव के हिसाब से सेवाएँ निकालें
     let matchedServices = villageDatabase.filter(item => 
         item.district.toUpperCase() === dist.toUpperCase() && 
         item.block.toUpperCase() === blk.toUpperCase() && 
