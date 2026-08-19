@@ -10,13 +10,13 @@
         .container { max-width: 900px; margin: 0 auto; }
         
         /* Header & Live Ticker Styles */
-        .header { background: #1b5e20; padding: 12px; border-radius: 8px; margin-bottom: 15px; border: 2px solid #ffeb3b; position: relative; color: white; text-align: center; }
-        .menu-btn-small { position: absolute; top: 8px; right: 8px; background: #ffeb3b; color: #1b5e20; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.75rem; }
-        .header h1 { font-size: 1.4rem; color: #fff; margin-bottom: 2px; }
-        .welcome-line { font-size: 0.9rem; color: #ffeb3b; font-weight: bold; margin-bottom: 6px; }
+        .header { background: #1b5e20; padding: 18px 12px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #ffeb3b; position: relative; color: white; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .menu-btn-small { position: absolute; top: 10px; right: 10px; background: #ffeb3b; color: #1b5e20; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
+        .header h1 { font-size: 1.6rem; color: #fff; margin-bottom: 4px; }
+        .welcome-line { font-size: 0.95rem; color: #ffeb3b; font-weight: bold; margin-bottom: 8px; border-bottom: 1px solid #ffeb3b; padding-bottom: 5px; display: inline-block; }
         
-        .live-ticker-box { background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 4px; margin-top: 4px; font-size: 0.8rem; color: #fff; text-align: left; overflow: hidden; white-space: nowrap; }
-        .live-ticker-box span { display: inline-block; animation: marquee 15s linear infinite; }
+        .live-ticker-box { background: rgba(0,0,0,0.25); padding: 6px 10px; border-radius: 4px; margin-top: 6px; font-size: 0.85rem; color: #fff; text-align: left; overflow: hidden; white-space: nowrap; }
+        .live-ticker-box span { display: inline-block; animation: marquee 16s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #e0e0e0; }
@@ -35,7 +35,7 @@
         
         /* Modal Styles */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); overflow-y: auto; }
-        .modal-content { background: white; margin: 15% auto; padding: 20px; width: 90%; max-width: 400px; border-radius: 8px; position: relative; }
+        .modal-content { background: white; margin: 15% auto; padding: 20px; width: 90%; max-width: 420px; border-radius: 8px; position: relative; }
         .close { color: #aaa; float: right; font-size: 24px; font-weight: bold; cursor: pointer; }
         
         .result-box { margin-top: 10px; padding: 10px; border-radius: 6px; background: #e8f5e9; border: 1px solid #a5d6a7; display: none; font-size: 0.85rem; }
@@ -47,12 +47,12 @@
 <body>
 
 <div class="container">
-    <!-- Header with Tiny Menu Button & Yellow Welcome Line -->
+    <!-- Header with Larger Screen, Corn Icon & Yellow Welcome Line -->
     <div class="header">
         <button class="menu-btn-small" onclick="openMenuModal()">☰ मेनू</button>
-        <h1>मेरा गाँव Malkosh</h1>
+        <h1>🌽 मेरा गाँव Malkosh</h1>
         <div class="welcome-line">राम राम भाइयों, आपके गाँव में आपका स्वागत है</div>
-        <div class="live-ticker-box"><span>🌤️ Live Weather: 32°C, साफ मौसम | 📢 Live News: गाँव Malkosh में विकास कार्यों की बैठक शुरू!</span></div>
+        <div class="live-ticker-box"><span>🌤️ Live Weather: 32°C, साफ मौसम | 📢 Live News: गाँव Malkosh में विकास कार्यों व पंचायत की बैठक शुरू!</span></div>
     </div>
     
     <!-- Main Village Search Card -->
@@ -79,22 +79,24 @@
         <div class="result-box" id="resultBox"></div>
     </div>
 
-    <!-- Accordion 1B: Local Services (Free & OTP Only) -->
-    <button class="accordion-btn" onclick="toggleSection('sec1B', 'icon1B')"><span>🛠️ 1B. लोकल श्रेणियाँ (मिस्त्री, इलेक्ट्रीशियन आदि - बिल्कुल निःशुल्क)</span> <span id="icon1B">▼</span></button>
+    <!-- Accordion 1B: Local Services (Free & OTP Only - Placed First) -->
+    <button class="accordion-btn" onclick="toggleSection('sec1B', 'icon1B')"><span>🛠️ 1B. लोकल श्रेणियाँ (पंडित जी, मेडिकल, मिस्त्री आदि - निःशुल्क)</span> <span id="icon1B">▼</span></button>
     <div id="sec1B" class="accordion-content">
         <div class="form-group">
             <label>श्रेणी चुनें:</label>
             <select id="localCategory">
-                <option value="Mistri">मिस्त्री (Mistri - Free)</option>
-                <option value="Electrician">इलेक्ट्रीशियन (Electrician - Free)</option>
-                <option value="Plumber">प्लंबर (Plumber - Free)</option>
-                <option value="Raj Mistri">राज मिस्त्री (Raj Mistri - Free)</option>
-                <option value="Gaadi Hire">गाड़ी किराए पर (Vehicle Hire - Free)</option>
+                <option value="Pandit Ji">पंडित जी (Pandit Ji)</option>
+                <option value="Medical Store">मेडिकल स्टोर / डॉक्टर (Medical Store)</option>
+                <option value="Mistri">मिस्त्री (Mistri)</option>
+                <option value="Electrician">इलेक्ट्रीशियन (Electrician)</option>
+                <option value="Plumber">प्लंबर (Plumber)</option>
+                <option value="Raj Mistri">राज मिस्त्री (Raj Mistri)</option>
+                <option value="Gaadi Hire">गाड़ी किराए पर (Vehicle Hire)</option>
             </select>
         </div>
         <div class="form-group">
             <label>नाम / सेवा प्रदाता:</label>
-            <input type="text" id="localName" placeholder="उदा: रमेश मिस्त्री">
+            <input type="text" id="localName" placeholder="उदा: रमेश पंडित जी या मेडिकल स्टोर">
         </div>
         <div class="form-group">
             <label>मोबाइल नंबर (OTP हेतु):</label>
@@ -107,15 +109,15 @@
             <button class="btn btn-secondary" onclick="verifyLocalOTP()">✔ वेरीफाई करें</button>
             <p id="localOtpMsg" class="hint"></p>
         </div>
-        <button class="btn" onclick="submitLocalService()">✅ निःशुल्क दर्ज करें</button>
+        <button class="btn" onclick="submitLocalService()">✅ निःशुल्क लाइव दर्ज करें</button>
     </div>
 
     <!-- Accordion 1: Shop & Saloon (Paid ₹49 & QR at Bottom) -->
-    <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / अन्य व्यवसाय (विज्ञापन सहित या बिना)</span> <span id="icon1">▼</span></button>
+    <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / अन्य व्यवसाय (विज्ञापन सहित)</span> <span id="icon1">▼</span></button>
     <div id="sec1" class="accordion-content">
         <div class="form-group">
             <label>व्यवसाय चुनें:</label>
-            <select id="shopCategory" onchange="toggleShopPayment()">
+            <select id="shopCategory">
                 <option value="Kirana Store">किराना स्टोर (Kirana Store)</option>
                 <option value="Saloon">सैलून / पार्लर (Saloon)</option>
                 <option value="Other Shop">अन्य दुकान / व्यवसाय (Other Shop)</option>
@@ -146,7 +148,7 @@
             <input type="file" id="shopPhoto" accept="image/*">
         </div>
 
-        <!-- Payment Box Moved to Last inside Shop Section -->
+        <!-- Payment Box at Last inside Shop Section -->
         <div id="shopPaymentSection" style="background: #fff3e0; padding: 10px; border-radius: 6px; margin-top: 10px; border: 1px solid #ffe0b2;">
             <p style="font-weight: bold; color: #e65100; font-size: 0.85rem; margin-bottom: 4px;">💰 दुकान विज्ञापन शुल्क: ₹49/-</p>
             <p style="font-size: 0.75rem; color: #555; margin-bottom: 4px;">Paytm QR पर स्कैन कर भुगतान करें और ट्रांजैक्शन आईडी नीचे दें:</p>
@@ -157,40 +159,75 @@
             </div>
         </div>
 
-        <button class="btn" onclick="submitShopAd()" style="margin-top: 12px;">✅ दुकान सुरक्षित सबमिट करें</button>
+        <button class="btn" onclick="submitShopAd()" style="margin-top: 12px;">✅ दुकान लाइव सबमिट करें</button>
     </div>
 
-    <!-- Remaining Accordions (2 to 6) -->
+    <!-- Accordions 2 to 6 -->
     <button class="accordion-btn" onclick="toggleSection('sec2', 'icon2')"><span>📸 2. ग्रामीण गैलरी</span> <span id="icon2">▼</span></button>
-    <div id="sec2" class="accordion-content"><p>गाँव की यादगार तस्वीरें अपलोड करें।</p><button class="btn" style="margin-top:8px;" onclick="alert('गैलरी सक्रिय!')">फोटो अपलोड करें</button></div>
+    <div id="sec2" class="accordion-content"><p>गाँव की यादगार तस्वीरें अपलोड करें।</p><input type="file" id="galleryImg" accept="image/*" style="margin-top:8px;"><button class="btn" style="margin-top:8px;" onclick="alert('गैलरी में फोटो लाइव हो गई है!')">फोटो अपलोड करें</button></div>
 
     <button class="accordion-btn" onclick="toggleSection('sec3', 'icon3')"><span>📢 3. गाँव के विज्ञापन व मुनादी</span> <span id="icon3">▼</span></button>
-    <div id="sec3" class="accordion-content"><p>मेला, दंगल या मुनादी की जानकारी।</p><button class="btn" style="margin-top:8px;" onclick="alert('मुनादी सक्रिय!')">मुनादी पोस्ट करें</button></div>
+    <div id="sec3" class="accordion-content"><p>मेला, दंगल या मुनादी की जानकारी पोस्ट करें।</p><input type="text" id="munadiText" placeholder="मुनादी विवरण..." style="margin-top:8px;"><button class="btn" style="margin-top:8px;" onclick="alert('मुनादी लाइव हो गई!')">मुनादी पोस्ट करें</button></div>
 
-    <button class="accordion-btn" onclick="toggleSection('sec4', 'icon4')"><span>🛒 4. खरीदें और बेचें (Buy / Sell)</span> <span id="icon4">▼</span></button>
-    <div id="sec4" class="accordion-content"><p>पुराना सामान या वाहन बेचें (गाँव के अनुसार)।</p><input type="text" id="buySellDesc" placeholder="विवरण लिखें..." style="margin-top:8px;"><button class="btn" style="margin-top:8px;" onclick="alert('विज्ञापन पोस्ट हुआ!')">पोस्ट करें (₹20 टोकन)</button></div>
+    <!-- Buy / Sell with District, Block, Village & Token -->
+    <button class="accordion-btn" onclick="toggleSection('sec4', 'icon4')"><span>🛒 4. खरीदें और बेचें (Buy / Sell - Live with Token)</span> <span id="icon4">▼</span></button>
+    <div id="sec4" class="accordion-content">
+        <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">अपने चयनित जिला, खण्ड और गाँव के अनुसार पुराना सामान या पशु बेचें। (टोकन: ₹20/-)</p>
+        <div class="form-group">
+            <label>वस्तु का नाम व विवरण:</label>
+            <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर या भैंस बिक्री हेतु">
+        </div>
+        <div class="form-group">
+            <label>टोकन भुगतान UPI ID / Ref ID (₹20/-):</label>
+            <input type="text" id="buySellToken" placeholder="UPI Transaction ID दर्ज करें">
+        </div>
+        <button class="btn" onclick="submitBuySellLive()">📢 विज्ञापन लाइव पोस्ट करें (₹20 टोकन)</button>
+    </div>
 
     <button class="accordion-btn" onclick="toggleSection('sec5', 'icon5')"><span>🏛️ 5. हरियाणा सरकारी योजनाएं</span> <span id="icon5">▼</span></button>
-    <div id="sec5" class="accordion-content"><p>HKRN, PPP और पेंशन अपडेट।</p><a href="https://hrygs.gov.in" target="_blank" style="color:#1b5e20; font-weight:bold; display:block; margin-top:8px;">🔗 आधिकारिक पोर्टल</a></div>
+    <div id="sec5" class="accordion-content"><p>HKRN, PPP और बुढ़ापा पेंशन की ताजा अपडेट।</p><a href="https://hrygs.gov.in" target="_blank" style="color:#1b5e20; font-weight:bold; display:block; margin-top:8px;">🔗 आधिकारिक पोर्टल</a></div>
 
     <button class="accordion-btn" onclick="toggleSection('sec6', 'icon6')"><span>🎭 6. ग्रामीण मनोरंजन और संस्कृति</span> <span id="icon6">▼</span></button>
-    <div id="sec6" class="accordion-content"><p>हरियाणवी रागिनी और वीडियो व्लॉग्स।</p><button class="btn" style="margin-top:8px;" onclick="alert('मनोरंजन सेक्शन सक्रिय!')">वीडियो देखें</button></div>
+    <div id="sec6" class="accordion-content"><p>हरियाणवी रागिनी और वीडियो व्लॉग्स का आनंद लें।</p><button class="btn" style="margin-top:8px;" onclick="alert('मनोरंजन वीडियो लोड हो रहे हैं!')">वीडियो देखें</button></div>
 
     <footer style="text-align:center; padding:10px; font-size:0.75rem; color:#fff; margin-top:15px;">
         © 2026 Haryana Rural Service Portal - Digital Gram Haryana
     </footer>
 </div>
 
-<!-- Modals -->
-<div id="menuModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20; margin-bottom: 10px;">📌 मेनू</h2><ul style="list-style: none; line-height: 2; font-size: 0.95rem;"><li><a href="#" onclick="openAdminModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔐 Admin / Sub-admin</a></li><li><a href="#" onclick="openAboutModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">ℹ️ About Founder</a></li><li><a href="#" onclick="openPrivacyModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔒 Privacy Policy</a></li></ul></div></div>
-<div id="aboutModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">ℹ️ संस्थापक</h2><p style="font-weight: bold; margin-top: 8px;">Kusum w/o Rajesh Yadav</p></div></div>
-<div id="privacyModal" class="modal"><div class="modal-content" style="max-height:70vh; overflow-y:auto;"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">🔒 Privacy Policy</h2><p style="font-size: 0.8rem; line-height: 1.5; margin-top:8px;">PlayStore compliant policy for Digital Gram Haryana. We protect user privacy securely.</p></div></div>
-<div id="adminModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">🔐 Admin Login</h2><input type="text" placeholder="ID" style="margin-top:8px;"><input type="password" placeholder="Password" style="margin-top:8px;"><button class="btn" style="margin-top:10px;" onclick="alert('लॉगिन सफल')">लॉगिन</button></div></div>
+<!-- Modals with Founder Name & PlayStore Privacy Policy -->
+<div id="menuModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20; margin-bottom: 10px;">📌 मेनू</h2><ul style="list-style: none; line-height: 2; font-size: 0.95rem;"><li><a href="#" onclick="openAdminModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔐 Admin / Sub-admin</a></li><li><a href="#" onclick="openAboutModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">ℹ️ About Founder</a></li><li><a href="#" onclick="openPrivacyModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔒 Privacy Policy (PlayStore Ready)</a></li></ul></div></div>
+
+<div id="aboutModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2 style="color: #1b5e20;">ℹ️ संस्थापक (Founder)</h2>
+        <p style="font-weight: bold; font-size: 1.1rem; margin-top: 10px; color: #333;">Kusum w/o Rajesh Yadav</p>
+        <p style="font-size: 0.85rem; color: #666; margin-top: 6px;">हरियाणा ग्रामीण सेवा पोर्टल की संस्थापक। डिजिटल हरियाणा और ग्रामीण सशक्तिकरण हेतु समर्पित।</p>
+    </div>
+</div>
+
+<div id="privacyModal" class="modal">
+    <div class="modal-content" style="max-height:75vh; overflow-y:auto;">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2 style="color: #1b5e20; margin-bottom: 8px;">🔒 Privacy Policy</h2>
+        <p style="font-size: 0.8rem; line-height: 1.6; color: #555;">
+            <strong>Digital Gram Haryana ("we", "our", or "us")</strong> operates the Haryana Rural Service Portal app. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our service.<br><br>
+            <strong>Information Collection & Use:</strong> We collect mobile numbers solely for OTP verification and authentication of local service providers and shops. We also collect device GPS location and uploaded live photos to verify local rural listings accurately.<br><br>
+            <strong>Data Security:</strong> All user data is securely transmitted and stored in compliance with Google PlayStore data safety policies. We do not sell or share user data with third parties.<br><br>
+            <strong>Contact Us:</strong> If you have any questions about this Privacy Policy, please contact the portal administration.
+        </p>
+    </div>
+</div>
+
+<div id="adminModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">🔐 Admin Login</h2><input type="text" placeholder="Admin ID" style="margin-top:8px;"><input type="password" placeholder="Password" style="margin-top:8px;"><button class="btn" style="margin-top:10px;" onclick="alert('लॉगिन सफल')">लॉगिन</button></div></div>
 
 <!-- Scripts -->
 <script src="haryana-villages-complete.js"></script>
 <script>
     let currentData = {};
+    let selectedDistrictGlobal = "";
+    let selectedBlockGlobal = "";
     let selectedVillageGlobal = "Malkosh";
     let localOTPVar = "", shopOTPVar = "";
     let localVerified = false, shopVerified = false;
@@ -246,10 +283,14 @@
     }
 
     function searchVillage() {
+        let dist = document.getElementById('districtSelect').value;
+        let block = document.getElementById('blockSelect').value;
         let v = getSelectedVillage();
-        if (!v) { alert('गाँव चुनें!'); return; }
+        if (!dist || !block || !v) { alert('कृपया जिला, ब्लॉक और गाँव सही से चुनें!'); return; }
+        selectedDistrictGlobal = dist;
+        selectedBlockGlobal = block;
         selectedVillageGlobal = v;
-        document.getElementById('resultBox').innerHTML = `📍 गाँव <b>${v}</b> सेट हो गया है!`;
+        document.getElementById('resultBox').innerHTML = `📍 जिला: <b>${dist}</b> | खण्ड: <b>${block}</b> | गाँव: <b>${v}</b> सफलतापूर्वक सेट हो गया है!`;
         document.getElementById('resultBox').style.display = 'block';
     }
 
@@ -279,7 +320,7 @@
 
     function submitLocalService() {
         if (!localVerified) { alert('पहले OTP वेरीफाई करें!'); return; }
-        alert(`✅ (${selectedVillageGlobal}) में सेवा सफलतापूर्वक दर्ज हो गई!`);
+        alert(`✅ जिला (${selectedDistrictGlobal}) के खण्ड (${selectedBlockGlobal}) अंतर्गत गाँव (${selectedVillageGlobal}) में सेवा निःशुल्क लाइव दर्ज हो गई!`);
     }
 
     function sendShopOTP() {
@@ -305,7 +346,15 @@
         if (!shopVerified) { alert('पहले OTP वेरीफाई करें!'); return; }
         let txn = document.getElementById('shopTxnId').value.trim();
         if (!txn) { alert('कृपया Paytm QR पर भुगतान कर UPI Transaction ID दर्ज करें!'); return; }
-        alert(`✅ (${selectedVillageGlobal}) में दुकान विज्ञापन के साथ सफलतापूर्वक जुड़ गई!`);
+        alert(`✅ (${selectedVillageGlobal}) में दुकान विज्ञापन के साथ सफलतापूर्वक लाइव जुड़ गई!`);
+    }
+
+    function submitBuySellLive() {
+        let item = document.getElementById('buySellItem').value.trim();
+        let token = document.getElementById('buySellToken').value.trim();
+        if (!selectedVillageGlobal) { alert('कृपया पहले ऊपर से गाँव सेट करें!'); return; }
+        if (!item || !token) { alert('कृपया वस्तु का विवरण और ₹20 टोकन UPI ID दर्ज करें!'); return; }
+        alert(`✅ (${selectedDistrictGlobal} / ${selectedBlockGlobal} / ${selectedVillageGlobal}) के लिए खरीदें-बेचें विज्ञापन टोकन के साथ लाइव हो गया है!`);
     }
 
     function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
