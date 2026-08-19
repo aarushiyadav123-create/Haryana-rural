@@ -50,6 +50,8 @@ let isPhoneVerified = false;
 
 window.onload = function() {
     populateDistricts('mainDistrictSelect');
+    let customInput = document.getElementById('customVillageInput');
+    if(customInput) customInput.style.display = 'none'; // एक्स्ट्रा इनपुट छिपा दें ताकि गड़बड़ न हो
 };
 
 function populateDistricts(selectId) {
@@ -69,10 +71,8 @@ function loadBlocks() {
     let blockSelect = document.getElementById('mainBlockSelect');
     let villageSelect = document.getElementById('mainVillageSelect');
     
-    blockSelect.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
-    if (villageSelect) {
-        villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
-    }
+    if(blockSelect) blockSelect.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
+    if(villageSelect) villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
 
     if (dist && haryanaMasterData[dist]) {
         Object.keys(haryanaMasterData[dist]).forEach(blk => {
@@ -117,27 +117,25 @@ function updateHeaderVillageName() {
 }
 
 function searchServices() {
-    let dist = document.getElementById('mainDistrictSelect').value;
-    let blk = document.getElementById('mainBlockSelect').value;
     let vlg = getSelectedVillage();
     let resBox = document.getElementById('searchResult');
     let adArea = document.getElementById('adDisplayArea');
 
     if (!vlg) {
-        alert('कृपया गाँव का नाम चुनें!');
+        alert('कृपया ड्रॉपडाउन से अपना गाँव चुनें!');
         return;
     }
 
-    // ऑटोमैटिकली मास्टर डेटा से सही जिला और ब्लॉक ढूंढना[span_1](start_span)[span_1](end_span)
-    let foundDistrict = dist;
-    let foundBlock = blk;
+    // ऑटोमैटिकली मास्टर डेटा से सही जिला और ब्लॉक खोज निकालना
+    let correctDistrict = "";
+    let correctBlock = "";
     let isFound = false;
 
     for (const [dKey, blocksObj] of Object.entries(haryanaMasterData)) {
         for (const [bKey, villagesArr] of Object.entries(blocksObj)) {
             if (villagesArr.some(v => v.toLowerCase() === vlg.toLowerCase())) {
-                foundDistrict = dKey;
-                foundBlock = bKey;
+                correctDistrict = dKey;
+                correctBlock = bKey;
                 isFound = true;
                 break;
             }
@@ -145,27 +143,27 @@ function searchServices() {
         if (isFound) break;
     }
 
-    dist = foundDistrict;
-    blk = foundBlock;
+    if (!isFound) {
+        correctDistrict = document.getElementById('mainDistrictSelect').value;
+        correctBlock = document.getElementById('mainBlockSelect').value;
+    }
 
     if (resBox) {
         resBox.innerHTML = `
             <div style="background: #e8f5e9; border: 1px solid #a5d6a7; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                <h4 style="color: #2e7d32; margin:0;">📍 चुने गए गाँव: ${vlg} (${blk}, ${dist})</h4>
+                <h4 style="color: #2e7d32; margin:0;">📍 चुने गए गाँव: ${vlg} (${correctBlock}, ${correctDistrict})</h4>
             </div>
         `;
     }
 
     let matchedServices = villageDatabase.filter(item => 
-        item.district.toUpperCase() === dist.toUpperCase() && 
-        item.block.toUpperCase() === blk.toUpperCase() && 
         item.village.toUpperCase() === vlg.toUpperCase()
     );
 
     if (adArea) {
         if (matchedServices.length === 0) {
             adArea.innerHTML = `<div style="padding:15px; background:#fff3cd; border-radius:6px; margin-top:10px; color:#856404;">
-                ⚠️ <strong>${vlg}</strong> (${blk}, ${dist}) गाँव में अभी कोई दुकान या सेवा दर्ज नहीं है। आप नीचे दिए गए फ़ॉर्म से अपनी दुकान जोड़ सकते हैं!
+                ⚠️ <strong>${vlg}</strong> गाँव में अभी कोई दुकान या सेवा दर्ज नहीं है। आप नीचे दिए गए फ़ॉर्म से अपनी दुकान जोड़ सकते हैं!
             </div>`;
         } else {
             adArea.innerHTML = "";
@@ -206,8 +204,10 @@ function sendOTP() {
         return;
     }
     simulatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    document.getElementById('generatedOtpDisplay').textContent = simulatedOTP;
-    document.getElementById('otpBox').style.display = 'block';
+    let display = document.getElementById('generatedOtpDisplay');
+    if(display) display.textContent = simulatedOTP;
+    let otpBox = document.getElementById('otpBox');
+    if(otpBox) otpBox.style.display = 'block';
     alert(`OTP भेजा गया: ${simulatedOTP}`);
 }
 
@@ -216,20 +216,21 @@ function verifyOTP() {
     let msg = document.getElementById('otpStatusMsg');
     if (userInput === simulatedOTP && userInput !== "") {
         isPhoneVerified = true;
-        msg.style.color = "#2e7d32"; 
-        msg.textContent = "✔ मोबाइल नंबर वेरीफाई हो गया!";
+        if(msg) {
+            msg.style.color = "#2e7d32"; 
+            msg.textContent = "✔ मोबाइल नंबर वेरीफाई हो गया!";
+        }
     } else {
         isPhoneVerified = false;
-        msg.style.color = "#d32f2f"; 
-        msg.textContent = "❌ अमान्य OTP!";
+        if(msg) {
+            msg.style.color = "#d32f2f"; 
+            msg.textContent = "❌ अमान्य OTP!";
+        }
     }
 }
 
 function submitAd() {
-    let dist = document.getElementById('mainDistrictSelect').value;
-    let blk = document.getElementById('mainBlockSelect').value;
     let vlg = getSelectedVillage();
-
     let name = document.getElementById('regShopName').value;
     let phone = document.getElementById('regPhone').value;
     let price = document.getElementById('adItemPrice').value || '-';
@@ -249,9 +250,21 @@ function submitAd() {
         return;
     }
 
+    let correctDistrict = "ROHTAK";
+    let correctBlock = "SAMPLA";
+    for (const [dKey, blocksObj] of Object.entries(haryanaMasterData)) {
+        for (const [bKey, villagesArr] of Object.entries(blocksObj)) {
+            if (villagesArr.some(v => v.toLowerCase() === vlg.toLowerCase())) {
+                correctDistrict = dKey;
+                correctBlock = bKey;
+                break;
+            }
+        }
+    }
+
     villageDatabase.push({
-        district: dist,
-        block: blk,
+        district: correctDistrict,
+        block: correctBlock,
         village: vlg,
         title: name,
         category: "नई दुकान/सेवा",
