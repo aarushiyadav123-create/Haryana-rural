@@ -76,12 +76,12 @@
         <div class="result-box" id="resultBox"></div>
     </div>
 
-    <!-- Accordion 1: Shop & Saloon (Paid with QR at Bottom - Placed First) -->
+    <!-- Accordion 1: Shop & Saloon (Submit first, QR & ad details below as per your note) -->
     <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / अन्य व्यवसाय (विज्ञापन सहित)</span> <span id="icon1">▼</span></button>
     <div id="sec1" class="accordion-content">
-        <p style="font-size:0.8rem; color:#666; margin-bottom:8px;">चयनित गाँव की व्यावसायिक दुकानें:</p>
+        <p style="font-size:0.8rem; color:#666; margin-bottom:8px;">चयनित जिला, ब्लॉक और गाँव की व्यावसायिक दुकानें:</p>
         <div id="shopDirectoryList" style="margin-bottom: 10px; max-height: 120px; overflow-y: auto;">
-            <div class="directory-item"><b>गुप्ता किराना स्टोर</b> (किराना) - मो: 9215XXXXXX</div>
+            <div class="directory-item"><b>गुप्ता किराना स्टोर</b> (किराना) - गाँव: Malkosh - मो: 9215XXXXXX</div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
         <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान विज्ञापन के साथ जोड़ें:</h3>
@@ -116,8 +116,12 @@
             <label>लाइव फोटो:</label>
             <input type="file" id="shopPhoto" accept="image/*">
         </div>
-        <!-- Payment Box at Bottom -->
-        <div style="background: #fff3e0; padding: 10px; border-radius: 6px; margin-top: 10px; border: 1px solid #ffe0b2;">
+
+        <!-- Submit Button First -->
+        <button class="btn" onclick="submitShopAd()" style="margin-top: 5px; margin-bottom: 10px;">✅ दुकान लाइव सबमिट करें</button>
+
+        <!-- UPI QR and Ad details placed below as requested -->
+        <div style="background: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2;">
             <p style="font-weight: bold; color: #e65100; font-size: 0.85rem;">💰 दुकान विज्ञापन शुल्क: ₹49/-</p>
             <p style="font-size: 0.75rem; color: #555;">Paytm QR पर स्कैन कर भुगतान करें और ट्रांजैक्शन आईडी दें:</p>
             <p style="font-size: 0.75rem; font-weight: bold; color: #1b5e20;">UPI ID: paytmqr281005050101zc5hx6...</p>
@@ -126,16 +130,14 @@
                 <input type="text" id="shopTxnId" placeholder="UPI Ref ID दर्ज करें">
             </div>
         </div>
-        <button class="btn" onclick="submitShopAd()" style="margin-top: 12px;">✅ दुकान लाइव सबमिट करें</button>
     </div>
 
-    <!-- Accordion 1B: Local Services (Free - Placed Below 1) -->
+    <!-- Accordion 1B: Local Services (Free) -->
     <button class="accordion-btn" onclick="toggleSection('sec1B', 'icon1B')"><span>🛠️ 1B. लोकल श्रेणियाँ (पंडित जी, मेडिकल, मिस्त्री आदि - निःशुल्क)</span> <span id="icon1B">▼</span></button>
     <div id="sec1B" class="accordion-content">
         <p style="font-size:0.8rem; color:#666; margin-bottom:8px;">आपके चयनित गाँव की निःशुल्क लिस्ट (देखें और जोड़ें):</p>
         <div id="localDirectoryList" style="margin-bottom: 10px; max-height: 150px; overflow-y: auto;">
-            <div class="directory-item"><b>पं. रामचन्द्र जी</b> (पंडित जी) - मो: 9896XXXXXX (गाँव: Malkosh)</div>
-            <div class="directory-item"><b>श्री बालाजी मेडिकल</b> (मेडिकल स्टोर) - मो: 9416XXXXXX</div>
+            <div class="directory-item"><b>पं. रामचन्द्र जी</b> (पंडित जी) - गाँव: Malkosh - मो: 9896XXXXXX</div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
         <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी निःशुल्क सेवा यहाँ जोड़ें:</h3>
@@ -147,8 +149,6 @@
                 <option value="Mistri">मिस्त्री (Mistri)</option>
                 <option value="Electrician">इलेक्ट्रीशियन (Electrician)</option>
                 <option value="Plumber">प्लंबर (Plumber)</option>
-                <option value="Raj Mistri">राज मिस्त्री (Raj Mistri)</option>
-                <option value="Gaadi Hire">गाड़ी किराए पर (Vehicle Hire)</option>
             </select>
         </div>
         <div class="form-group">
@@ -171,13 +171,13 @@
 
     <!-- Accordion 2 -->
     <button class="accordion-btn" onclick="toggleSection('sec2', 'icon2')"><span>📸 2. ग्रामीण गैलरी</span> <span id="icon2">▼</span></button>
-    <div id="sec2" class="accordion-content"><p>गाँव के कार्यक्रमों की तस्वीरें देखें और अपलोड करें।</p><input type="file" accept="image/*" style="margin-top:8px;"><button class="btn" style="margin-top:8px;" onclick="alert('फोटो गैलरी में लाइव हो गई!')">फोटो अपलोड करें</button></div>
+    <div id="sec2" class="accordion-content"><p>चयनित गाँव के कार्यक्रमों की तस्वीरें देखें और अपलोड करें।</p><input type="file" accept="image/*" style="margin-top:8px;"><button class="btn" style="margin-top:8px;" onclick="alert('फोटो गैलरी में लाइव हो गई!')">फोटो अपलोड करें</button></div>
 
     <!-- Accordion 3 -->
     <button class="accordion-btn" onclick="toggleSection('sec3', 'icon3')"><span>📢 3. गाँव के विज्ञापन व मुनादी</span> <span id="icon3">▼</span></button>
-    <div id="sec3" class="accordion-content"><p>गाँव में मुनादी या घोषणा पोस्ट करें।</p><input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px;"><button class="btn" style="margin-top:8px;" onclick="alert('मुनादी लाइव हो गई!')">मुनादी पोस्ट करें</button></div>
+    <div id="sec3" class="accordion-content"><p>चयनित गाँव में मुनादी या घोषणा पोस्ट करें।</p><input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px;"><button class="btn" style="margin-top:8px;" onclick="alert('मुनादी लाइव हो गई!')">मुनादी पोस्ट करें</button></div>
 
-    <!-- Accordion 4: Buy / Sell with QR Auto Open & Token -->
+    <!-- Accordion 4: Buy / Sell -->
     <button class="accordion-btn" onclick="toggleSection('sec4', 'icon4')"><span>🛒 4. खरीदें और बेचें (Buy / Sell)</span> <span id="icon4">▼</span></button>
     <div id="sec4" class="accordion-content">
         <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">चयनित जिला, ब्लॉक और गाँव के अनुसार विज्ञापन (टोकन: ₹20/-)</p>
@@ -303,7 +303,7 @@
         selectedBlockGlobal = block;
         selectedVillageGlobal = v;
         document.getElementById('displayVillageName').textContent = v;
-        document.getElementById('resultBox').innerHTML = `📍 जिला: <b>${dist}</b> | खण्ड: <b>${block}</b> | गाँव: <b>${v}</b> सफलतापूर्वक सेट हो गया है! अब नीचे के बटन खोलकर डेटा देखें।`;
+        document.getElementById('resultBox').innerHTML = `📍 जिला: <b>${dist}</b> | खण्ड: <b>${block}</b> | गाँव: <b>${v}</b> सफलतापूर्वक सेट हो गया है! अब बटनों में यही डेटा दिखेगा।`;
         document.getElementById('resultBox').style.display = 'block';
     }
 
