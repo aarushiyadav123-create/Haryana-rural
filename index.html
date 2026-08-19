@@ -9,11 +9,13 @@
         body { background: #1b5e20; min-height: 100vh; padding: 10px; color: #333; }
         .container { max-width: 900px; margin: 0 auto; }
         
-        /* Header & Live Ticker Styles */
-        .header { background: #1b5e20; padding: 18px 12px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #ffeb3b; position: relative; color: white; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .menu-btn-small { position: absolute; top: 10px; right: 10px; background: #ffeb3b; color: #1b5e20; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .header h1 { font-size: 1.6rem; color: #fff; margin-bottom: 4px; }
-        .welcome-line { font-size: 0.95rem; color: #ffeb3b; font-weight: bold; margin-bottom: 8px; border-bottom: 1px solid #ffeb3b; padding-bottom: 5px; display: inline-block; }
+        /* Header & Corner Buttons (Menu left, Lang right) */
+        .header { background: #1b5e20; padding: 22px 12px 15px 12px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #ffeb3b; position: relative; color: white; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .menu-btn-left { position: absolute; top: 10px; left: 10px; background: #ffeb3b; color: #1b5e20; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .lang-btn-right { position: absolute; top: 10px; right: 10px; background: #ffeb3b; color: #1b5e20; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
+        .header h1 { font-size: 1.5rem; color: #fff; margin-bottom: 4px; margin-top: 5px; }
+        .welcome-line { font-size: 0.9rem; color: #ffeb3b; font-weight: bold; margin-bottom: 8px; border-bottom: 1px solid #ffeb3b; padding-bottom: 5px; display: inline-block; }
         
         .live-ticker-box { background: rgba(0,0,0,0.3); padding: 6px 10px; border-radius: 4px; margin-top: 6px; font-size: 0.85rem; color: #fff; text-align: left; overflow: hidden; white-space: nowrap; border-left: 3px solid #ffeb3b; }
         .live-ticker-box span { display: inline-block; animation: marquee 18s linear infinite; }
@@ -33,7 +35,9 @@
         .accordion-btn { background: #1b5e20; color: white; width: 100%; padding: 12px; border: none; border-radius: 6px; text-align: left; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #ffeb3b; }
         .accordion-content { display: none; padding: 12px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 6px 6px; margin-top: -4px; }
         
-        /* Modal Styles */
+        /* Location Tag inside Buttons */
+        .location-badge { background: #e8f5e9; border: 1px dashed #2e7d32; padding: 6px 10px; border-radius: 4px; font-size: 0.8rem; color: #1b5e20; font-weight: bold; margin-bottom: 10px; }
+
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); overflow-y: auto; }
         .modal-content { background: white; margin: 15% auto; padding: 20px; width: 90%; max-width: 420px; border-radius: 8px; position: relative; }
         .close { color: #aaa; float: right; font-size: 24px; font-weight: bold; cursor: pointer; }
@@ -46,17 +50,18 @@
 <body>
 
 <div class="container">
-    <!-- Header with Corn Icon & Live Ticker -->
+    <!-- Header with Left Menu & Right Language Button -->
     <div class="header">
-        <button class="menu-btn-small" onclick="openMenuModal()">☰ मेनू</button>
+        <button class="menu-btn-left" onclick="openMenuModal()">☰ मेनू</button>
+        <button class="lang-btn-right" onclick="toggleLanguage()">🌐 English</button>
         <h1>🌽 मेरा गाँव <span id="displayVillageName">Malkosh</span></h1>
-        <div class="welcome-line">राम राम भाइयों, आपके अपने गाँव में आपका स्वागत है</div>
-        <div class="live-ticker-box"><span>🌤️ Live Weather: 33°C, साफ मौसम | 📢 Live News: गाँव Malkosh व आसपास के क्षेत्र में डिजिटल ग्राम सेवा अभियान शुरू!</span></div>
+        <div class="welcome-line" id="txtWelcome">राम राम भाइयों, आपके अपने गाँव में आपका स्वागत है</div>
+        <div class="live-ticker-box"><span>🌤️ Live Weather: 33°C, साफ मौसम | 📢 Live News: जिला, ब्लॉक और गाँव आधारित डिजिटल सेवा सक्रिय!</span></div>
     </div>
     
-    <!-- Village Selection Card -->
+    <!-- Global Village Selection Card -->
     <div class="card">
-        <h2>🔍 गाँव खोजें और सेट करें</h2>
+        <h2 id="txtSelectTitle">🔍 जिला, खण्ड और गाँव चुनें</h2>
         <div class="form-group">
             <label>1️⃣ जिला चुनें (District):</label>
             <select id="districtSelect" onchange="loadBlocks()"><option value="">-- जिला चुनें --</option></select>
@@ -72,14 +77,16 @@
         <div class="form-group" id="customVillageGroup" style="display: none;">
             <input type="text" id="customVillageInput" placeholder="गाँव का नाम लिखें...">
         </div>
-        <button class="btn" onclick="searchVillage()">🔍 जानकारी देखें व गाँव सेट करें</button>
+        <button class="btn" onclick="searchVillage()">🔍 जिला, ब्लॉक व गाँव सेट करें</button>
         <div class="result-box" id="resultBox"></div>
     </div>
 
-    <!-- Accordion 1: Shop & Saloon (Submit first, QR & ad details below as per your note) -->
-    <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / अन्य व्यवसाय (विज्ञापन सहित)</span> <span id="icon1">▼</span></button>
+    <!-- Accordion 1: Shop & Saloon -->
+    <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / व्यवसाय</span> <span id="icon1">▼</span></button>
     <div id="sec1" class="accordion-content">
-        <p style="font-size:0.8rem; color:#666; margin-bottom:8px;">चयनित जिला, ब्लॉक और गाँव की व्यावसायिक दुकानें:</p>
+        <!-- Button ke andar active location display -->
+        <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
+        <p style="font-size:0.8rem; color:#666; margin-bottom:8px;">इस गाँव की व्यावसायिक दुकानें:</p>
         <div id="shopDirectoryList" style="margin-bottom: 10px; max-height: 120px; overflow-y: auto;">
             <div class="directory-item"><b>गुप्ता किराना स्टोर</b> (किराना) - गाँव: Malkosh - मो: 9215XXXXXX</div>
         </div>
@@ -90,7 +97,7 @@
             <select id="shopCategory">
                 <option value="Kirana Store">किराना स्टोर (Kirana Store)</option>
                 <option value="Saloon">सैलून / पार्लर (Saloon)</option>
-                <option value="Other Shop">अन्य दुकान / व्यवसाय (Other Shop)</option>
+                <option value="Other Shop">अन्य व्यवसाय (Other Shop)</option>
             </select>
         </div>
         <div class="form-group">
@@ -117,10 +124,10 @@
             <input type="file" id="shopPhoto" accept="image/*">
         </div>
 
-        <!-- Submit Button First -->
+        <!-- Submit Button First as per your sketch note -->
         <button class="btn" onclick="submitShopAd()" style="margin-top: 5px; margin-bottom: 10px;">✅ दुकान लाइव सबमिट करें</button>
 
-        <!-- UPI QR and Ad details placed below as requested -->
+        <!-- UPI QR details below -->
         <div style="background: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2;">
             <p style="font-weight: bold; color: #e65100; font-size: 0.85rem;">💰 दुकान विज्ञापन शुल्क: ₹49/-</p>
             <p style="font-size: 0.75rem; color: #555;">Paytm QR पर स्कैन कर भुगतान करें और ट्रांजैक्शन आईडी दें:</p>
@@ -135,7 +142,8 @@
     <!-- Accordion 1B: Local Services (Free) -->
     <button class="accordion-btn" onclick="toggleSection('sec1B', 'icon1B')"><span>🛠️ 1B. लोकल श्रेणियाँ (पंडित जी, मेडिकल, मिस्त्री आदि - निःशुल्क)</span> <span id="icon1B">▼</span></button>
     <div id="sec1B" class="accordion-content">
-        <p style="font-size:0.8rem; color:#666; margin-bottom:8px;">आपके चयनित गाँव की निःशुल्क लिस्ट (देखें और जोड़ें):</p>
+        <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
+        <p style="font-size:0.8rem; color:#666; margin-bottom:8px;">इस गाँव की निःशुल्क लिस्ट:</p>
         <div id="localDirectoryList" style="margin-bottom: 10px; max-height: 150px; overflow-y: auto;">
             <div class="directory-item"><b>पं. रामचन्द्र जी</b> (पंडित जी) - गाँव: Malkosh - मो: 9896XXXXXX</div>
         </div>
@@ -147,8 +155,6 @@
                 <option value="Pandit Ji">पंडित जी (Pandit Ji)</option>
                 <option value="Medical Store">मेडिकल स्टोर / डॉक्टर (Medical Store)</option>
                 <option value="Mistri">मिस्त्री (Mistri)</option>
-                <option value="Electrician">इलेक्ट्रीशियन (Electrician)</option>
-                <option value="Plumber">प्लंबर (Plumber)</option>
             </select>
         </div>
         <div class="form-group">
@@ -169,18 +175,29 @@
         <button class="btn" onclick="submitLocalService()">✅ निःशुल्क लाइव दर्ज करें</button>
     </div>
 
-    <!-- Accordion 2 -->
+    <!-- Accordion 2: Gallery -->
     <button class="accordion-btn" onclick="toggleSection('sec2', 'icon2')"><span>📸 2. ग्रामीण गैलरी</span> <span id="icon2">▼</span></button>
-    <div id="sec2" class="accordion-content"><p>चयनित गाँव के कार्यक्रमों की तस्वीरें देखें और अपलोड करें।</p><input type="file" accept="image/*" style="margin-top:8px;"><button class="btn" style="margin-top:8px;" onclick="alert('फोटो गैलरी में लाइव हो गई!')">फोटो अपलोड करें</button></div>
+    <div id="sec2" class="accordion-content">
+        <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
+        <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">इस गाँव के कार्यक्रमों की तस्वीरें देखें और अपलोड करें:</p>
+        <input type="file" accept="image/*" style="margin-top:8px;">
+        <button class="btn" style="margin-top:8px;" onclick="alert('फोटो गैलरी में लाइव हो गई!')">फोटो अपलोड करें</button>
+    </div>
 
-    <!-- Accordion 3 -->
+    <!-- Accordion 3: Munadi -->
     <button class="accordion-btn" onclick="toggleSection('sec3', 'icon3')"><span>📢 3. गाँव के विज्ञापन व मुनादी</span> <span id="icon3">▼</span></button>
-    <div id="sec3" class="accordion-content"><p>चयनित गाँव में मुनादी या घोषणा पोस्ट करें।</p><input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px;"><button class="btn" style="margin-top:8px;" onclick="alert('मुनादी लाइव हो गई!')">मुनादी पोस्ट करें</button></div>
+    <div id="sec3" class="accordion-content">
+        <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
+        <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">इस गाँव में मुनादी या घोषणा पोस्ट करें:</p>
+        <input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px;">
+        <button class="btn" style="margin-top:8px;" onclick="alert('मुनादी लाइव हो गई!')">मुनादी पोस्ट करें</button>
+    </div>
 
     <!-- Accordion 4: Buy / Sell -->
     <button class="accordion-btn" onclick="toggleSection('sec4', 'icon4')"><span>🛒 4. खरीदें और बेचें (Buy / Sell)</span> <span id="icon4">▼</span></button>
     <div id="sec4" class="accordion-content">
-        <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">चयनित जिला, ब्लॉक और गाँव के अनुसार विज्ञापन (टोकन: ₹20/-)</p>
+        <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
+        <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">इस गाँव के अनुसार विज्ञापन (टोकन: ₹20/-)</p>
         <div class="form-group">
             <label>वस्तु विवरण:</label>
             <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु">
@@ -210,7 +227,7 @@
     </footer>
 </div>
 
-<!-- Modals with Founder Name & Malkosh -->
+<!-- Modals with Founder Info -->
 <div id="menuModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20; margin-bottom: 10px;">📌 मेनू</h2><ul style="list-style: none; line-height: 2; font-size: 0.95rem;"><li><a href="#" onclick="openAdminModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔐 Admin / Sub-admin</a></li><li><a href="#" onclick="openAboutModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">ℹ️ About Founder</a></li><li><a href="#" onclick="openPrivacyModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔒 Privacy Policy (PlayStore)</a></li></ul></div></div>
 
 <div id="aboutModal" class="modal">
@@ -227,7 +244,7 @@
         <span class="close" onclick="closeModals()">&times;</span>
         <h2 style="color: #1b5e20; margin-bottom: 8px;">🔒 Privacy Policy</h2>
         <p style="font-size: 0.8rem; line-height: 1.6; color: #555;">
-            <strong>Digital Gram Haryana</strong> operates this rural portal. We collect mobile numbers solely for OTP verification and authentication of local listings. GPS location and photos are used strictly for verified rural service listings. Data security is fully maintained as per Google PlayStore policies.
+            <strong>Digital Gram Haryana</strong> operates this rural portal. We collect mobile numbers solely for OTP verification and authentication of local listings based on District, Block, and Village. Data security is fully maintained as per Google PlayStore policies.
         </p>
     </div>
 </div>
@@ -243,6 +260,7 @@
     let selectedVillageGlobal = "Malkosh";
     let localOTPVar = "", shopOTPVar = "";
     let localVerified = false, shopVerified = false;
+    let isEnglish = false;
 
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof haryana_complete_database !== 'undefined') {
@@ -279,7 +297,7 @@
             currentData[dist][block].sort().forEach(v => {
                 let opt = document.createElement('option'); opt.value = v; opt.textContent = v; vSelect.appendChild(opt);
             });
-            let oOpt = document.createElement('option'); oOpt.value = 'OTHER'; oOpt.textContent = '➕ अन्य गाँव'; vSelect.appendChild(oOpt);
+            let oOpt = document.createElement('option'); oOpt.value = 'OTHER'; oOpt.textContent = '➕ अन्य गाँव / Other Village'; vSelect.appendChild(oOpt);
         }
     }
 
@@ -299,11 +317,20 @@
         let block = document.getElementById('blockSelect').value;
         let v = getSelectedVillage();
         if (!dist || !block || !v) { alert('कृपया जिला, ब्लॉक और गाँव सही से चुनें!'); return; }
+        
         selectedDistrictGlobal = dist;
         selectedBlockGlobal = block;
         selectedVillageGlobal = v;
+        
         document.getElementById('displayVillageName').textContent = v;
-        document.getElementById('resultBox').innerHTML = `📍 जिला: <b>${dist}</b> | खण्ड: <b>${block}</b> | गाँव: <b>${v}</b> सफलतापूर्वक सेट हो गया है! अब बटनों में यही डेटा दिखेगा।`;
+        
+        // Update all location badges inside buttons 1 to 4
+        let locText = `जिला: ${dist} | ब्लॉक: ${block} | गाँव: ${v}`;
+        document.querySelectorAll('.activeLocText').forEach(el => {
+            el.textContent = locText;
+        });
+
+        document.getElementById('resultBox').innerHTML = `📍 चयनित क्षेत्र: <b>${locText}</b> अब सभी बटनों के अंदर सक्रिय हो गया है!`;
         document.getElementById('resultBox').style.display = 'block';
     }
 
@@ -312,6 +339,20 @@
         let icon = document.getElementById(iconId);
         if (sec.style.display === "block") { sec.style.display = "none"; icon.textContent = "▼"; }
         else { sec.style.display = "block"; icon.textContent = "▲"; }
+    }
+
+    function toggleLanguage() {
+        isEnglish = !isEnglish;
+        let btn = document.querySelector('.lang-btn-right');
+        if (isEnglish) {
+            btn.textContent = "🌐 हिन्दी";
+            document.getElementById('txtWelcome').textContent = "Welcome brothers to your village portal!";
+            document.getElementById('txtSelectTitle').textContent = "🔍 Select District, Block & Village";
+        } else {
+            btn.textContent = "🌐 English";
+            document.getElementById('txtWelcome').textContent = "राम राम भाइयों, आपके अपने गाँव में आपका स्वागत है";
+            document.getElementById('txtSelectTitle').textContent = "🔍 जिला, खण्ड और गाँव चुनें";
+        }
     }
 
     function sendLocalOTP() {
@@ -340,9 +381,9 @@
         let listDiv = document.getElementById('localDirectoryList');
         let newItem = document.createElement('div');
         newItem.className = 'directory-item';
-        newItem.innerHTML = `<b>${name}</b> (${cat}) - गाँव: ${selectedVillageGlobal}`;
+        newItem.innerHTML = `<b>${name}</b> (${cat}) - जिला: ${selectedDistrictGlobal}, ब्लॉक: ${selectedBlockGlobal}, गाँव: ${selectedVillageGlobal}`;
         listDiv.prepend(newItem);
-        alert(`✅ (${selectedVillageGlobal}) में सेवा सफलतापूर्वक लाइव जोड़ दी गई है!`);
+        alert(`✅ (${selectedDistrictGlobal} / ${selectedBlockGlobal} / ${selectedVillageGlobal}) में सेवा सफलतापूर्वक लाइव जोड़ दी गई है!`);
     }
 
     function sendShopOTP() {
@@ -371,9 +412,9 @@
         let listDiv = document.getElementById('shopDirectoryList');
         let newItem = document.createElement('div');
         newItem.className = 'directory-item';
-        newItem.innerHTML = `<b>${name}</b> - गाँव: ${selectedVillageGlobal} (विज्ञापन लाइव)`;
+        newItem.innerHTML = `<b>${name}</b> - जिला: ${selectedDistrictGlobal}, गाँव: ${selectedVillageGlobal} (विज्ञापन लाइव)`;
         listDiv.prepend(newItem);
-        alert(`✅ (${selectedVillageGlobal}) में दुकान विज्ञापन के साथ सफलतापूर्वक लाइव हो गई!`);
+        alert(`✅ (${selectedDistrictGlobal} / ${selectedBlockGlobal} / ${selectedVillageGlobal}) में दुकान विज्ञापन के साथ सफलतापूर्वक लाइव हो गई!`);
     }
 
     function openBuySellQR() {
