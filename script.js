@@ -150,6 +150,25 @@ function searchServices() {
         return;
     }
 
+    // अगर यूजर ने 'OTHER' चुनकर कोई नया गाँव खुद टाइप किया है, तो मास्टर डेटा में खोजें कि यह गाँव किस जिले/ब्लॉक में आता है
+    let select = document.getElementById('mainVillageSelect');
+    if (select.value === "OTHER" && vlg) {
+        let foundDistrict = dist;
+        let foundBlock = blk;
+        
+        for (const [dKey, blocksObj] of Object.entries(haryanaMasterData)) {
+            for (const [bKey, villagesArr] of Object.entries(blocksObj)) {
+                if (villagesArr.some(v => v.toLowerCase() === vlg.toLowerCase())) {
+                    foundDistrict = dKey;
+                    foundBlock = bKey;
+                    break;
+                }
+            }
+        }
+        dist = foundDistrict;
+        blk = foundBlock;
+    }
+
     if (resBox) {
         resBox.innerHTML = `
             <div style="background: #e8f5e9; border: 1px solid #a5d6a7; padding: 10px; border-radius: 6px; margin-top: 10px;">
@@ -252,7 +271,6 @@ function submitAd() {
         return;
     }
 
-    // नया डेटा डेटाबेस में जोड़ें
     villageDatabase.push({
         district: dist,
         block: blk,
@@ -264,5 +282,5 @@ function submitAd() {
     });
 
     alert('✅ आपकी दुकान/सेवा सफलतापूर्वक दर्ज हो गई है!');
-    searchServices(); // रिफ्रेश करके तुरंत दिखाएँ
+    searchServices();
 }
