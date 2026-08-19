@@ -84,7 +84,6 @@ function loadBlocks() {
     }
 }
 
-// खण्ड चुनते ही उस ब्लॉक के सभी गाँव सीधे ड्रॉपडाउन में लोड हो जाएंगे
 function loadVillages() {
     let dist = document.getElementById('mainDistrictSelect').value;
     let blk = document.getElementById('mainBlockSelect').value;
@@ -103,7 +102,6 @@ function loadVillages() {
     }
 }
 
-// यह फंक्शन अब सीधे सिलेक्टेड गाँव की वैल्यू देगा
 function getSelectedVillage() {
     let select = document.getElementById('mainVillageSelect');
     if (!select) return "";
@@ -125,10 +123,30 @@ function searchServices() {
     let resBox = document.getElementById('searchResult');
     let adArea = document.getElementById('adDisplayArea');
 
-    if (!dist || !blk || !vlg) {
-        alert('कृपया जिला, ब्लॉक और गाँव का चयन करें!');
+    if (!vlg) {
+        alert('कृपया गाँव का नाम चुनें!');
         return;
     }
+
+    // ऑटोमैटिकली मास्टर डेटा से सही जिला और ब्लॉक ढूंढना[span_1](start_span)[span_1](end_span)
+    let foundDistrict = dist;
+    let foundBlock = blk;
+    let isFound = false;
+
+    for (const [dKey, blocksObj] of Object.entries(haryanaMasterData)) {
+        for (const [bKey, villagesArr] of Object.entries(blocksObj)) {
+            if (villagesArr.some(v => v.toLowerCase() === vlg.toLowerCase())) {
+                foundDistrict = dKey;
+                foundBlock = bKey;
+                isFound = true;
+                break;
+            }
+        }
+        if (isFound) break;
+    }
+
+    dist = foundDistrict;
+    blk = foundBlock;
 
     if (resBox) {
         resBox.innerHTML = `
@@ -147,7 +165,7 @@ function searchServices() {
     if (adArea) {
         if (matchedServices.length === 0) {
             adArea.innerHTML = `<div style="padding:15px; background:#fff3cd; border-radius:6px; margin-top:10px; color:#856404;">
-                ⚠️ <strong>${vlg}</strong> गाँव में अभी कोई दुकान या सेवा दर्ज नहीं है। आप नीचे दिए गए फ़ॉर्म से अपनी दुकान जोड़ सकते हैं!
+                ⚠️ <strong>${vlg}</strong> (${blk}, ${dist}) गाँव में अभी कोई दुकान या सेवा दर्ज नहीं है। आप नीचे दिए गए फ़ॉर्म से अपनी दुकान जोड़ सकते हैं!
             </div>`;
         } else {
             adArea.innerHTML = "";
@@ -216,8 +234,8 @@ function submitAd() {
     let phone = document.getElementById('regPhone').value;
     let price = document.getElementById('adItemPrice').value || '-';
 
-    if (!dist || !blk || !vlg) {
-        alert('कृपया पहले ऊपर अपना जिला, ब्लॉक और गाँव चुनें!');
+    if (!vlg) {
+        alert('कृपया पहले अपना गाँव चुनें!');
         return;
     }
 
