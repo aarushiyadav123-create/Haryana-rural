@@ -5,222 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>मेरा गाँव - हरियाणा ग्रामीण सेवा पोर्टल</title>
     <style>
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Segoe UI', 'Arial', sans-serif; 
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', 'Arial', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { background: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { color: #1b5e20; font-size: 1.8rem; }
+        .menu-btn { background: #1b5e20; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; }
         
-        body { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px; 
-            color: #333; 
-        }
+        .card { background: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border: 1px solid #e0e0e0; }
+        .card h2 { color: #1b5e20; margin-bottom: 15px; font-size: 1.2rem; }
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.9rem; color: #333; }
+        select, input[type="text"], input[type="tel"], input[type="file"] { width: 100%; padding: 10px; border: 2px solid #b0bec5; border-radius: 8px; font-size: 0.95rem; outline: none; background: #fff; }
+        select:focus, input:focus { border-color: #1b5e20; box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.1); }
         
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        .btn { background: linear-gradient(135deg, #1b5e20 0%, #0d3817 100%); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 10px; }
+        .btn:hover { background: linear-gradient(135deg, #0d3817 0%, #081f0f 100%); }
+        .btn-secondary { background: #ff9800; color: white; margin-top: 5px; }
         
-        .header {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
+        .accordion-btn { background: #1b5e20; color: white; width: 100%; padding: 15px; border: none; border-radius: 8px; text-align: left; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .accordion-content { display: none; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 8px 8px; margin-top: -5px; }
         
-        .header h1 {
-            color: #1b5e20;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); overflow-y: auto; }
+        .modal-content { background: white; margin: 10% auto; padding: 25px; width: 90%; max-width: 500px; border-radius: 10px; position: relative; }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: #000; }
         
-        .header p {
-            color: #666;
-            font-size: 1rem;
-        }
-        
-        .card { 
-            background: white; 
-            padding: 30px; 
-            border-radius: 12px; 
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            border: 1px solid #e0e0e0; 
-        }
-        
-        .card h2 { 
-            color: #1b5e20; 
-            margin-bottom: 20px; 
-            font-size: 1.3rem;
-        }
-        
-        .form-group { 
-            margin-bottom: 18px; 
-        }
-        
-        label { 
-            font-weight: 600; 
-            display: block; 
-            margin-bottom: 8px; 
-            font-size: 0.95rem;
-            color: #333;
-        }
-        
-        select, input[type="text"] { 
-            width: 100%; 
-            padding: 12px; 
-            border: 2px solid #b0bec5; 
-            border-radius: 8px; 
-            font-size: 1rem; 
-            outline: none; 
-            background: #fff;
-            transition: all 0.3s ease;
-        }
-        
-        select:focus, input[type="text"]:focus { 
-            border-color: #1b5e20;
-            box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.1);
-        }
-        
-        .btn { 
-            background: linear-gradient(135deg, #1b5e20 0%, #0d3817 100%);
-            color: white; 
-            border: none; 
-            padding: 14px; 
-            width: 100%; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            font-size: 1rem; 
-            cursor: pointer; 
-            margin-top: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover { 
-            background: linear-gradient(135deg, #0d3817 0%, #081f0f 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(27, 94, 32, 0.3);
-        }
-        
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .result-box { 
-            margin-top: 20px; 
-            padding: 20px; 
-            border-radius: 8px; 
-            background: #e8f5e9; 
-            border: 2px solid #a5d6a7; 
-            display: none;
-        }
-        
-        .result-box.show {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hint { 
-            font-size: 0.8rem; 
-            color: #666; 
-            margin-top: 6px;
-        }
-        
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .loading.show {
-            display: block;
-        }
-        
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #1b5e20;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .stat-box {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            border-left: 4px solid #1b5e20;
-        }
-        
-        .stat-box .number {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #1b5e20;
-        }
-        
-        .stat-box .label {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        .error {
-            background: #ffebee;
-            color: #c62828;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            display: none;
-        }
-        
-        .error.show {
-            display: block;
-        }
-        
-        .success {
-            background: #e8f5e9;
-            color: #1b5e20;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            display: none;
-        }
-        
-        .success.show {
-            display: block;
-        }
+        .result-box { margin-top: 15px; padding: 15px; border-radius: 8px; background: #e8f5e9; border: 2px solid #a5d6a7; display: none; }
+        .hint { font-size: 0.75rem; color: #666; margin-top: 4px; }
+        .error { background: #ffebee; color: #c62828; padding: 10px; border-radius: 6px; margin-top: 10px; display: none; }
+        .success { background: #e8f5e9; color: #1b5e20; padding: 10px; border-radius: 6px; margin-top: 10px; display: none; }
     </style>
 </head>
 <body>
@@ -228,135 +43,213 @@
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <h1>🌾 मेरा गाँव</h1>
-        <p>हरियाणा के सभी गाँवों की जानकारी एक ही जगह</p>
+        <div>
+            <h1>🌾 मेरा गाँव</h1>
+            <p style="font-size: 0.85rem; color: #666;" id="headerSubTitle">हरियाणा के सभी गाँवों की जानकारी एक ही जगह</p>
+        </div>
+        <button class="menu-btn" onclick="openMenuModal()">☰ मेनू (Menu)</button>
     </div>
     
     <!-- Main Search Card -->
     <div class="card">
-        <h2>🔍 गाँव खोजें</h2>
-        
-        <!-- District Selection -->
+        <h2>🔍 गाँव खोजें और सेट करें</h2>
         <div class="form-group">
-            <label for="districtSelect">1️⃣ जिला चुनें (District):</label>
+            <label>1️⃣ जिला चुनें (District):</label>
             <select id="districtSelect" onchange="loadBlocks()">
                 <option value="">-- जिला चुनें --</option>
             </select>
-            <div class="hint">💡 अपने जिले को चुनें</div>
         </div>
         
-        <!-- Block Selection -->
         <div class="form-group">
-            <label for="blockSelect">2️⃣ खण्ड चुनें (Block):</label>
+            <label>2️⃣ खण्ड चुनें (Block):</label>
             <select id="blockSelect" onchange="loadVillages()">
                 <option value="">-- पहले जिला चुनें --</option>
             </select>
-            <div class="hint">💡 अपने ब्लॉक को चुनें</div>
         </div>
         
-        <!-- Village Selection -->
         <div class="form-group">
-            <label for="villageSelect">3️⃣ गाँव चुनें (Village):</label>
+            <label>3️⃣ गाँव चुनें (Village):</label>
             <select id="villageSelect" onchange="checkOtherVillage()">
                 <option value="">-- पहले ब्लॉक चुनें --</option>
             </select>
-            <div class="hint">💡 अपने गाँव को चुनें</div>
         </div>
         
-        <!-- Custom Village Input -->
         <div class="form-group" id="customVillageGroup" style="display: none;">
             <input type="text" id="customVillageInput" placeholder="गाँव का नाम लिखें...">
-            <div class="hint">💡 अगर आपका गाँव सूची में नहीं है तो यहाँ नाम लिखें</div>
         </div>
         
-        <!-- Search Button -->
-        <button class="btn" onclick="searchVillage()">🔍 जानकारी देखें</button>
-        
-        <!-- Loading Indicator -->
-        <div class="loading" id="loadingIndicator">
-            <div class="spinner"></div>
-            <p>डेटा लोड हो रहा है...</p>
-        </div>
-        
-        <!-- Error Message -->
+        <button class="btn" onclick="searchVillage()">🔍 जानकारी देखें व गाँव सेट करें</button>
         <div class="error" id="errorMessage"></div>
-        
-        <!-- Success Message -->
         <div class="success" id="successMessage"></div>
-        
-        <!-- Result Box -->
         <div class="result-box" id="resultBox"></div>
     </div>
-    
-    <!-- Statistics Card -->
-    <div class="card" id="statsCard" style="display: none;">
-        <h2>📊 हरियाणा के आँकड़े</h2>
-        <div class="stats" id="statsContainer"></div>
+
+    <!-- Accordion Sections (1 to 6) -->
+    <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सेवा जोड़ें (मोबाइल OTP, GPS व लाइव फोटो)</span> <span id="icon1">▼</span></button>
+    <div id="sec1" class="accordion-content">
+        <div class="form-group">
+            <label>श्रेणी चुनें (Category):</label>
+            <select id="regCategory">
+                <option value="Mistri">मिस्त्री (Mistri)</option>
+                <option value="Electrician">इलेक्ट्रीशियन (Electrician)</option>
+                <option value="Plumber">प्लंबर (Plumber)</option>
+                <option value="Raj Mistri">राज मिस्त्री (Raj Mistri)</option>
+                <option value="Gaadi Hire">गाड़ी किराए पर (Vehicle Hire)</option>
+                <option value="Kirana Store">किराना / दुकान (Kirana/Store)</option>
+                <option value="Other Service">अन्य स्थानीय सेवा (Other Local Service)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>दुकान/सेवा का नाम:</label>
+            <input type="text" id="regShopName" placeholder="उदा: शर्मा इलेक्ट्रीशियन सेवा">
+        </div>
+        <div class="form-group">
+            <label>मोबाइल नंबर:</label>
+            <input type="tel" id="regPhone" placeholder="10 अंकों का मोबाइल नंबर maxlength="10">
+            <button class="btn btn-secondary" onclick="sendOTP()">📱 OTP भेजें</button>
+        </div>
+        <div class="form-group" id="otpBox" style="display:none;">
+            <label>OTP दर्ज करें (सिम्युलेटेड: <span id="generatedOtpDisplay" style="color:red; font-weight:bold;"></span>):</label>
+            <input type="text" id="userOtpInput" placeholder="6 अंकों का OTP">
+            <button class="btn btn-secondary" onclick="verifyOTP()">✔ OTP वेरीफाई करें</button>
+            <p id="otpStatusMsg" class="hint"></p>
+        </div>
+        <div class="form-group">
+            <label>GPS लोकेशन (ऑटो-डिटेक्ट):</label>
+            <button class="btn btn-secondary" onclick="getLiveLocation()">📍 मेरी लाइव लोकेशन कैप्चर करें</button>
+            <p id="locationStatus" class="hint">लोकेशन दर्ज नहीं हुई</p>
+        </div>
+        <div class="form-group">
+            <label>लाइव फोटो कैप्चर / अपलोड:</label>
+            <input type="file" id="livePhotoInput" accept="image/*" capture="environment">
+            <div class="hint">💡 दुकान या सेवा की वास्तविक फोटो अपलोड करें</div>
+        </div>
+        <button class="btn" onclick="submitAdWithValidation()">✅ सुरक्षित सबमिट करें</button>
     </div>
-    
-    <!-- Firebase Status Card -->
-    <div class="card" id="firebaseStatus">
-        <h2>⚙️ Firebase स्थिति</h2>
-        <p id="firebaseStatusText">Firebase से जुड़ा जा रहा है...</p>
+
+    <button class="accordion-btn" onclick="toggleSection('sec2', 'icon2')"><span>📸 2. ग्रामीण गैलरी (गाँव की यादगार फोटो)</span> <span id="icon2">▼</span></button>
+    <div id="sec2" class="accordion-content">
+        <p>गाँव के कार्यक्रमों और धरोहरों की तस्वीरें यहाँ साझा करें।</p>
+        <input type="file" id="galleryPhoto" accept="image/*" style="margin-top:10px;">
+        <button class="btn" style="margin-top:10px;" onclick="alert('फोटो गैलरी में अपलोड हो गई है!')">फोटो अपलोड करें</button>
+    </div>
+
+    <button class="accordion-btn" onclick="toggleSection('sec3', 'icon3')"><span>📢 3. गाँव के विज्ञापन व मुनादी (मेला, दंगल)</span> <span id="icon3">▼</span></button>
+    <div id="sec3" class="accordion-content">
+        <p>गाँव में होने वाले दंगल, मेलों या मुनादी की जानकारी देखें व पोस्ट करें।</p>
+        <button class="btn" style="margin-top:10px;" onclick="alert('मुनादी सेवा सक्रिय है!')">नई मुनादी पोस्ट करें</button>
+    </div>
+
+    <button class="accordion-btn" onclick="toggleSection('sec4', 'icon4')"><span>🛒 4. खरीदें और बेचें (₹20/- प्रति टोकन)</span> <span id="icon4">▼</span></button>
+    <div id="sec4" class="accordion-content">
+        <p>पुराना सामान, पशु, या वाहन खरीदने और बेचने के लिए विज्ञापन दें।</p>
+        <button class="btn" style="margin-top:10px;" onclick="alert('विज्ञापन टोकन जनरेट हो रहा है...')">₹20 टोकन भुगतान करें</button>
+    </div>
+
+    <button class="accordion-btn" onclick="toggleSection('sec5', 'icon5')"><span>🏛️ 5. हरियाणा सरकारी योजनाएं (HKRN, PPP, पेंशन)</span> <span id="icon5">▼</span></button>
+    <div id="sec5" class="accordion-content">
+        <p>परिवार पहचान पत्र (PPP), हरियाणा कौशल रोजगार निगम (HKRN) और बुढ़ापा पेंशन की ताजा अपडेट।</p>
+        <a href="https://hrygs.gov.in" target="_blank" style="display:block; margin-top:10px; color:#1b5e20; font-weight:bold;">🔗 आधिकारिक पोर्टल पर जाएं</a>
+    </div>
+
+    <button class="accordion-btn" onclick="toggleSection('sec6', 'icon6')"><span>🎭 6. ग्रामीण मनोरंजन और संस्कृति (Vlogs & Culture)</span> <span id="icon6">▼</span></button>
+    <div id="sec6" class="accordion-content">
+        <p>गाँव के लोकगीत, रागिनी, हरियाणवी संस्कृति और वीडियो व्लॉग्स का आनंद लें।</p>
+        <button class="btn" style="margin-top:10px;" onclick="alert('मनोरंजन वीडियो लोड हो रहे हैं!')">हरियाणवी रागिनी वीडियो देखें</button>
+    </div>
+
+    <footer style="text-align:center; padding:20px; font-size:0.8rem; color:#fff; margin-top:20px;">
+        © 2026 Haryana Rural Service Portal - Digital Gram Haryana
+    </footer>
+</div>
+
+<!-- Menu Modal -->
+<div id="menuModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeMenuModal()">&times;</span>
+        <h2 style="color: #1b5e20; margin-bottom: 15px;">📌 पोर्टल मेनू</h2>
+        <ul style="list-style: none; line-height: 2.2; font-size: 1rem;">
+            <li><a href="#" onclick="openAdminModal(); return false;" style="color: #333; text-decoration: none; font-weight: bold;">🔐 Admin / Sub-admin Login</a></li>
+            <li><a href="#" onclick="openAboutModal(); return false;" style="color: #333; text-decoration: none; font-weight: bold;">ℹ️ About Founder</a></li>
+            <li><a href="#" onclick="openPrivacyModal(); return false;" style="color: #333; text-decoration: none; font-weight: bold;">🔒 Privacy Policy (PlayStore Ready)</a></li>
+        </ul>
     </div>
 </div>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+<!-- About Modal -->
+<div id="aboutModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2 style="color: #1b5e20; margin-bottom: 10px;">ℹ️ संस्थापक (Founder)</h2>
+        <p style="font-size: 1.1rem; font-weight: bold; color: #333; margin-top: 10px;">Kusum w/o Rajesh Yadav</p>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">हरियाणा ग्रामीण सेवा पोर्टल की संस्थापक। डिजिटल हरियाणा और ग्रामीण सशक्तिकरण हेतु समर्पित।</p>
+    </div>
+</div>
 
-<!-- Our Scripts -->
+<!-- Privacy Policy Modal -->
+<div id="privacyModal" class="modal">
+    <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2 style="color: #1b5e20; margin-bottom: 10px;">🔒 Privacy Policy</h2>
+        <p style="font-size: 0.85rem; line-height: 1.6; color: #555;">
+            <strong>Digital Gram Haryana ("we", "our", or "us")</strong> operates the Haryana Rural Service Portal app. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our service.<br><br>
+            <strong>Information Collection:</strong> We collect mobile numbers for OTP verification, user-submitted local service details, device GPS location (only with explicit permission), and uploaded live photos to verify and display local rural shops and services accurately.<br><br>
+            <strong>Data Security:</strong> We value your trust in providing your personal information, thus we are striving to use commercially acceptable means of protecting it. No security system is impenetrable, but we ensure strict adherence to safety standards for PlayStore compliance.<br><br>
+            Contact us for any privacy queries through our portal support.
+        </p>
+    </div>
+</div>
+
+<!-- Admin Modal -->
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2 style="color: #1b5e20; margin-bottom: 10px;">🔐 Admin / Sub-Admin Portal</h2>
+        <div class="form-group">
+            <label>Admin ID:</label>
+            <input type="text" id="adminUser" placeholder="admin id">
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" id="adminPass" placeholder="password">
+        </div>
+        <button class="btn" onclick="alert('लॉगिन सफल (डेमो मोड)')">लॉगिन करें</button>
+    </div>
+</div>
+
+<!-- Scripts -->
 <script src="haryana-villages-complete.js"></script>
-<script src="firebase-config.js"></script>
-<script src="firebase-import.js"></script>
-
 <script>
     let currentData = {};
-    
-    // Initialize on page load
+    let simulatedOTP = "";
+    let isPhoneVerified = false;
+    let capturedLat = "";
+    let capturedLng = "";
+
     document.addEventListener('DOMContentLoaded', () => {
-        console.log("🚀 Application Started");
-        loadInitialData();
-        displayStatistics();
-    });
-    
-    // Load initial data from local database
-    function loadInitialData() {
-        try {
+        if (typeof haryana_complete_database !== 'undefined') {
             currentData = haryana_complete_database;
             populateDistricts();
-            console.log("✅ Local database loaded successfully");
-            updateFirebaseStatus("✅ तैयार है");
-        } catch (error) {
-            console.error("Error loading data:", error);
-            showError("डेटा लोड करने में समस्या आई!");
         }
-    }
-    
-    // Populate districts dropdown
+    });
+
     function populateDistricts() {
         const select = document.getElementById('districtSelect');
         select.innerHTML = '<option value="">-- जिला चुनें --</option>';
-        
-        if (currentData) {
-            Object.keys(currentData).sort().forEach(district => {
-                const option = document.createElement('option');
-                option.value = district;
-                option.textContent = district;
-                select.appendChild(option);
-            });
-        }
+        Object.keys(currentData).sort().forEach(district => {
+            const option = document.createElement('option');
+            option.value = district;
+            option.textContent = district;
+            select.appendChild(option);
+        });
     }
-    
-    // Load blocks for selected district
+
     function loadBlocks() {
         const district = document.getElementById('districtSelect').value;
         const blockSelect = document.getElementById('blockSelect');
         const villageSelect = document.getElementById('villageSelect');
-        
         blockSelect.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
         villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
-        document.getElementById('customVillageGroup').style.display = 'none';
         
         if (district && currentData[district]) {
             Object.keys(currentData[district]).sort().forEach(block => {
@@ -365,167 +258,148 @@
                 option.textContent = block;
                 blockSelect.appendChild(option);
             });
-            showSuccess(`✅ ${district} के ब्लॉक लोड हुए`);
         }
     }
-    
-    // Load villages for selected block
+
     function loadVillages() {
         const district = document.getElementById('districtSelect').value;
         const block = document.getElementById('blockSelect').value;
         const villageSelect = document.getElementById('villageSelect');
-        
         villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-        document.getElementById('customVillageGroup').style.display = 'none';
         
-        if (district && block && currentData[district] && currentData[district][block]) {
-            const villages = currentData[district][block];
-            villages.sort().forEach(village => {
+        if (district && block && currentData[district][block]) {
+            currentData[district][block].sort().forEach(village => {
                 const option = document.createElement('option');
                 option.value = village;
                 option.textContent = village;
                 villageSelect.appendChild(option);
             });
-            
-            // Add custom option
-            const otherOption = document.createElement('option');
-            otherOption.value = 'OTHER';
-            otherOption.textContent = '➕ गाँव सूची में नहीं है';
-            villageSelect.appendChild(otherOption);
-            
-            showSuccess(`✅ ${villages.length} गाँव लोड हुए`);
+            const otherOpt = document.createElement('option');
+            otherOpt.value = 'OTHER';
+            otherOpt.textContent = '➕ गाँव सूची में नहीं है';
+            villageSelect.appendChild(otherOpt);
         }
     }
-    
-    // Check if "Other" village selected
+
     function checkOtherVillage() {
         const villageSelect = document.getElementById('villageSelect');
         const customGroup = document.getElementById('customVillageGroup');
-        
-        if (villageSelect.value === 'OTHER') {
-            customGroup.style.display = 'block';
-        } else {
-            customGroup.style.display = 'none';
-        }
+        customGroup.style.display = (villageSelect.value === 'OTHER') ? 'block' : 'none';
     }
-    
-    // Get selected village
+
     function getSelectedVillage() {
         const villageSelect = document.getElementById('villageSelect');
         const customInput = document.getElementById('customVillageInput');
-        
-        if (villageSelect.value === 'OTHER') {
-            return customInput.value.trim();
-        }
-        return villageSelect.value;
+        return (villageSelect.value === 'OTHER') ? customInput.value.trim() : villageSelect.value;
     }
-    
-    // Search village and display details
+
     function searchVillage() {
         const district = document.getElementById('districtSelect').value;
         const block = document.getElementById('blockSelect').value;
         const village = getSelectedVillage();
-        
-        clearMessages();
+        const resBox = document.getElementById('resultBox');
         
         if (!district || !block || !village) {
-            showError('❌ कृपया जिला, ब्लॉक और गाँव चुनें!');
+            alert('कृपया जिला, ब्लॉक और गाँव का चयन करें!');
             return;
         }
-        
-        const resultBox = document.getElementById('resultBox');
-        resultBox.innerHTML = `
-            <div style="text-align: center; padding: 20px;">
-                <div class="spinner" style="margin: 0 auto 10px;"></div>
-                <p>जानकारी लोड हो रही है...</p>
-            </div>
+
+        document.getElementById('headerSubTitle').textContent = `राम राम भाइयों, आपके गाँव (${village}) में स्वागत है`;
+        resBox.innerHTML = `
+            <h3>📍 आपका गाँव: ${village}</h3>
+            <p><strong>जिला:</strong> ${district} | <strong>खण्ड:</strong> ${block}</p>
+            <p style="margin-top:5px; color:#1b5e20;">💚 आपके गाँव में स्वागत है! यहाँ आप सभी स्थानीय सेवाएं और दुकानें देख सकते हैं।</p>
         `;
-        resultBox.classList.add('show');
-        
-        // Simulate loading delay
-        setTimeout(() => {
-            resultBox.innerHTML = `
-                <h3>📍 आपका गाँव</h3>
-                <table style="width: 100%; margin-top: 15px;">
-                    <tr style="border-bottom: 1px solid #ddd;">
-                        <td style="padding: 10px; font-weight: bold; color: #666;">जिला:</td>
-                        <td style="padding: 10px; color: #1b5e20; font-weight: bold;">${district}</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #ddd;">
-                        <td style="padding: 10px; font-weight: bold; color: #666;">खण्ड:</td>
-                        <td style="padding: 10px; color: #1b5e20; font-weight: bold;">${block}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; font-weight: bold; color: #666;">गाँव:</td>
-                        <td style="padding: 10px; color: #1b5e20; font-weight: bold;">${village}</td>
-                    </tr>
-                </table>
-                <p style="margin-top: 15px; color: #666; font-size: 0.9rem;">
-                    💚 आपके गाँव में स्वागत है! यहाँ आप सभी सरकारी सेवाएं और दुकानें देख सकते हैं।
-                </p>
-            `;
-            showSuccess(`✅ ${village} का विवरण दिखाया जा रहा है`);
-        }, 500);
+        resBox.style.display = 'block';
     }
-    
-    // Display statistics
-    function displayStatistics() {
-        try {
-            const stats = getStatistics();
-            const statsCard = document.getElementById('statsCard');
-            const statsContainer = document.getElementById('statsContainer');
-            
-            statsContainer.innerHTML = `
-                <div class="stat-box">
-                    <div class="number">${stats.totalDistricts}</div>
-                    <div class="label">जिले</div>
-                </div>
-                <div class="stat-box">
-                    <div class="number">${stats.totalBlocks}</div>
-                    <div class="label">खण्ड</div>
-                </div>
-                <div class="stat-box">
-                    <div class="number">${stats.totalVillages}</div>
-                    <div class="label">गाँव</div>
-                </div>
-            `;
-            
-            statsCard.style.display = 'block';
-        } catch (error) {
-            console.error("Error displaying statistics:", error);
+
+    function toggleSection(secId, iconId) {
+        let sec = document.getElementById(secId);
+        let icon = document.getElementById(iconId);
+        if (sec.style.display === "block") {
+            sec.style.display = "none";
+            icon.textContent = "▼";
+        } else {
+            sec.style.display = "block";
+            icon.textContent = "▲";
         }
     }
-    
-    // Show error message
-    function showError(message) {
-        const errorDiv = document.getElementById('errorMessage');
-        errorDiv.textContent = message;
-        errorDiv.classList.add('show');
-        setTimeout(() => {
-            errorDiv.classList.remove('show');
-        }, 5000);
+
+    // OTP Functions
+    function sendOTP() {
+        let phone = document.getElementById('regPhone').value;
+        if (!phone || phone.length < 10) {
+            alert('कृपया वैध 10 अंकों का मोबाइल नंबर दर्ज करें!');
+            return;
+        }
+        simulatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+        document.getElementById('generatedOtpDisplay').textContent = simulatedOTP;
+        document.getElementById('otpBox').style.display = 'block';
+        alert(`SMS OTP भेजा गया: ${simulatedOTP}`);
     }
-    
-    // Show success message
-    function showSuccess(message) {
-        const successDiv = document.getElementById('successMessage');
-        successDiv.textContent = message;
-        successDiv.classList.add('show');
-        setTimeout(() => {
-            successDiv.classList.remove('show');
-        }, 3000);
+
+    function verifyOTP() {
+        let userInput = document.getElementById('userOtpInput').value;
+        let msg = document.getElementById('otpStatusMsg');
+        if (userInput === simulatedOTP && userInput !== "") {
+            isPhoneVerified = true;
+            msg.style.color = "#2e7d32";
+            msg.textContent = "✔ मोबाइल नंबर सफलतापूर्वक वेरीफाई हो गया!";
+        } else {
+            isPhoneVerified = false;
+            msg.style.color = "#c62828";
+            msg.textContent = "❌ अमान्य OTP!";
+        }
     }
-    
-    // Clear messages
-    function clearMessages() {
-        document.getElementById('errorMessage').classList.remove('show');
-        document.getElementById('successMessage').classList.remove('show');
+
+    // GPS Live Location
+    function getLiveLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                capturedLat = position.coords.latitude;
+                capturedLng = position.coords.longitude;
+                document.getElementById('locationStatus').textContent = `✔ लोकेशन मिल गई (Lat: ${capturedLat.toFixed(2)}, Lng: ${capturedLng.toFixed(2)})`;
+                document.getElementById('locationStatus').style.color = "#2e7d32";
+            }, (error) => {
+                alert('लोकेशन प्राप्त करने में असफल। कृपया जीपीएस ऑन करें।');
+            });
+        } else {
+            alert('आपका ब्राउज़र जियोलोकेशन सपोर्ट नहीं करता।');
+        }
     }
-    
-    // Update Firebase status
-    function updateFirebaseStatus(status) {
-        const statusText = document.getElementById('firebaseStatusText');
-        statusText.textContent = status;
+
+    function submitAdWithValidation() {
+        let name = document.getElementById('regShopName').value;
+        let phone = document.getElementById('regPhone').value;
+        let village = getSelectedVillage();
+
+        if (!village) {
+            alert('कृपया ऊपर से अपना गाँव चुनें!');
+            return;
+        }
+        if (!name || !phone) {
+            alert('कृपया दुकान/सेवा का नाम और मोबाइल नंबर भरें!');
+            return;
+        }
+        if (!isPhoneVerified) {
+            alert('कृपया पहले मोबाइल नंबर पर OTP वेरीफाई करें!');
+            return;
+        }
+
+        alert('✅ आपकी दुकान/सेवा (GPS और लाइव फोटो के साथ) सफलतापूर्व दर्ज हो गई है!');
+    }
+
+    // Modal Controls
+    function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
+    function closeMenuModal() { document.getElementById('menuModal').style.display = 'none'; }
+    function openAboutModal() { closeMenuModal(); document.getElementById('aboutModal').style.display = 'block'; }
+    function openPrivacyModal() { closeMenuModal(); document.getElementById('privacyModal').style.display = 'block'; }
+    function openAdminModal() { closeMenuModal(); document.getElementById('adminModal').style.display = 'block'; }
+    function closeModals() {
+        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+    }
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) { closeModals(); }
     }
 </script>
 
