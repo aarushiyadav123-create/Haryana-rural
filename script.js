@@ -1,4 +1,4 @@
-// सम्पूर्ण हरियाणा मास्टर डेटा
+// Firebase Setup & Master Data
 const haryanaMasterData = {
     "AMBALA": {
         "AMBALA": ["Ambala Rural", "Panjokhra", "Dora", "Sarsehri", "Tandwal", "Babalpur", "Machhonda", "Gardh", "Bara", "Machhrauli", "Kakru", "Pabni"],
@@ -38,20 +38,11 @@ const haryanaMasterData = {
     }
 };
 
-let villageDatabase = [
-    { district: "ROHTAK", block: "SAMPLA", village: "Kharawar", title: "रामेश्वर किराना स्टोर", category: "दुकान", price: "-", phone: "9812345678" },
-    { district: "ROHTAK", block: "SAMPLA", village: "Kharawar", title: "संजय इलेक्ट्रीशियन (मिस्त्री)", category: "मिस्त्री", price: "200 रु/विज़िट", phone: "9876543210" },
-    { district: "ROHTAK", block: "SAMPLA", village: "Hasangarh", title: "जय बाबा खाद-बीज भंडार", category: "दुकान", price: "-", phone: "9123456789" },
-    { district: "SONIPAT", block: "GANAUR", village: "Barhi", title: "पुराना ट्रैक्टर बेचने के लिए", category: "विज्ञापन", price: "2,50,000", phone: "9998887776" }
-];
-
 let simulatedOTP = "";
 let isPhoneVerified = false;
 
 window.onload = function() {
     populateDistricts('mainDistrictSelect');
-    let customInput = document.getElementById('customVillageInput');
-    if(customInput) customInput.style.display = 'none'; // एक्स्ट्रा इनपुट छिपा दें ताकि गड़बड़ न हो
 };
 
 function populateDistricts(selectId) {
@@ -70,9 +61,11 @@ function loadBlocks() {
     let dist = document.getElementById('mainDistrictSelect').value;
     let blockSelect = document.getElementById('mainBlockSelect');
     let villageSelect = document.getElementById('mainVillageSelect');
+    let customInput = document.getElementById('customVillageInput');
     
-    if(blockSelect) blockSelect.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
-    if(villageSelect) villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+    blockSelect.innerHTML = '<option value="">-- खण्ड / Block चुनें --</option>';
+    villageSelect.innerHTML = '<option value="">-- पहले ब्लॉक चुनें --</option>';
+    if(customInput) customInput.style.display = 'none';
 
     if (dist && haryanaMasterData[dist]) {
         Object.keys(haryanaMasterData[dist]).forEach(blk => {
@@ -88,9 +81,10 @@ function loadVillages() {
     let dist = document.getElementById('mainDistrictSelect').value;
     let blk = document.getElementById('mainBlockSelect').value;
     let villageSelect = document.getElementById('mainVillageSelect');
+    let customInput = document.getElementById('customVillageInput');
     
-    if (!villageSelect) return;
     villageSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+    if(customInput) customInput.style.display = 'none';
 
     if (dist && blk && haryanaMasterData[dist] && haryanaMasterData[dist][blk]) {
         haryanaMasterData[dist][blk].forEach(vlg => {
@@ -100,12 +94,31 @@ function loadVillages() {
             villageSelect.appendChild(opt);
         });
     }
+
+    let otherOpt = document.createElement('option');
+    otherOpt.value = "OTHER";
+    otherOpt.textContent = "➕ गाँव सूची में नहीं है? (यहाँ नाम लिखें)";
+    villageSelect.appendChild(otherOpt);
+}
+
+function checkOtherVillage() {
+    let select = document.getElementById('mainVillageSelect');
+    let customInput = document.getElementById('customVillageInput');
+    if (select.value === "OTHER") {
+        if(customInput) customInput.style.display = 'block';
+    } else {
+        if(customInput) customInput.style.display = 'none';
+    }
 }
 
 function getSelectedVillage() {
     let select = document.getElementById('mainVillageSelect');
-    if (!select) return "";
-    return select.value;
+    let customInput = document.getElementById('customVillageInput');
+    
+    if (select && select.value === "OTHER") {
+        return customInput ? customInput.value.trim() : "";
+    }
+    return select ? select.value : "";
 }
 
 function updateHeaderVillageName() {
@@ -117,70 +130,60 @@ function updateHeaderVillageName() {
 }
 
 function searchServices() {
+    let dist = document.getElementById('mainDistrictSelect').value;
+    let blk = document.getElementById('mainBlockSelect').value;
     let vlg = getSelectedVillage();
     let resBox = document.getElementById('searchResult');
     let adArea = document.getElementById('adDisplayArea');
 
-    if (!vlg) {
-        alert('कृपया ड्रॉपडाउन से अपना गाँव चुनें!');
+    if (!dist || !blk || !vlg) {
+        alert('कृपया जिला, ब्लॉक और गाँव का चयन करें!');
         return;
-    }
-
-    // ऑटोमैटिकली मास्टर डेटा से सही जिला और ब्लॉक खोज निकालना
-    let correctDistrict = "";
-    let correctBlock = "";
-    let isFound = false;
-
-    for (const [dKey, blocksObj] of Object.entries(haryanaMasterData)) {
-        for (const [bKey, villagesArr] of Object.entries(blocksObj)) {
-            if (villagesArr.some(v => v.toLowerCase() === vlg.toLowerCase())) {
-                correctDistrict = dKey;
-                correctBlock = bKey;
-                isFound = true;
-                break;
-            }
-        }
-        if (isFound) break;
-    }
-
-    if (!isFound) {
-        correctDistrict = document.getElementById('mainDistrictSelect').value;
-        correctBlock = document.getElementById('mainBlockSelect').value;
     }
 
     if (resBox) {
         resBox.innerHTML = `
             <div style="background: #e8f5e9; border: 1px solid #a5d6a7; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                <h4 style="color: #2e7d32; margin:0;">📍 चुने गए गाँव: ${vlg} (${correctBlock}, ${correctDistrict})</h4>
+                <h4 style="color: #2e7d32; margin:0;">📍 चुने गए गाँव: ${vlg} (${blk}, ${dist})</h4>
             </div>
         `;
     }
 
-    let matchedServices = villageDatabase.filter(item => 
-        item.village.toUpperCase() === vlg.toUpperCase()
-    );
-
-    if (adArea) {
-        if (matchedServices.length === 0) {
-            adArea.innerHTML = `<div style="padding:15px; background:#fff3cd; border-radius:6px; margin-top:10px; color:#856404;">
-                ⚠️ <strong>${vlg}</strong> गाँव में अभी कोई दुकान या सेवा दर्ज नहीं है। आप नीचे दिए गए फ़ॉर्म से अपनी दुकान जोड़ सकते हैं!
-            </div>`;
-        } else {
-            adArea.innerHTML = "";
-            matchedServices.forEach(item => {
-                let card = document.createElement('div');
-                card.style.cssText = "border:1px solid #ddd; background:#fff; padding:12px; border-radius:8px; margin-top:10px; display:flex; justify-content:space-between; align-items:center;";
-                card.innerHTML = `
-                    <div>
-                        <span style="background:#e8f5e9; color:#2e7d32; font-size:0.75rem; padding:2px 6px; border-radius:4px; font-weight:bold;">${item.category}</span>
-                        <h4 style="margin:5px 0 2px 0;">${item.title}</h4>
-                        ${item.price !== '-' ? `<p style="font-size:0.85rem; color:#2e7d32; font-weight:bold; margin:0;">${item.price}</p>` : ''}
-                    </div>
-                    <a href="tel:${item.phone}" style="background:#2e7d32; color:#fff; padding:8px 12px; border-radius:5px; text-decoration:none; font-size:0.85rem; font-weight:bold;">📞 कॉल करें</a>
-                `;
-                adArea.appendChild(card);
-            });
-        }
+    // Firebase से डेटा फेच करने वाला हिस्सा
+    if (typeof db !== 'undefined') {
+        db.collection("villageAds")
+          .where("district", "==", dist)
+          .where("block", "==", blk)
+          .where("village", "==", vlg)
+          .get()
+          .then((querySnapshot) => {
+              if (adArea) {
+                  if (querySnapshot.empty) {
+                      adArea.innerHTML = `<div style="padding:15px; background:#fff3cd; border-radius:6px; margin-top:10px; color:#856404;">
+                          ⚠️ <strong>${vlg}</strong> गाँव में अभी कोई दुकान या सेवा दर्ज नहीं है। नीचे दिए गए फ़ॉर्म से जोड़ें!
+                      </div>`;
+                  } else {
+                      adArea.innerHTML = "";
+                      querySnapshot.forEach((doc) => {
+                          let item = doc.data();
+                          let card = document.createElement('div');
+                          card.style.cssText = "border:1px solid #ddd; background:#fff; padding:12px; border-radius:8px; margin-top:10px; display:flex; justify-content:space-between; align-items:center;";
+                          card.innerHTML = `
+                              <div>
+                                  <span style="background:#e8f5e9; color:#2e7d32; font-size:0.75rem; padding:2px 6px; border-radius:4px; font-weight:bold;">${item.category || 'दुकान'}</span>
+                                  <h4 style="margin:5px 0 2px 0;">${item.title}</h4>
+                                  ${item.price && item.price !== '-' ? `<p style="font-size:0.85rem; color:#2e7d32; font-weight:bold; margin:0;">${item.price}</p>` : ''}
+                              </div>
+                              <a href="tel:${item.phone}" style="background:#2e7d32; color:#fff; padding:8px 12px; border-radius:5px; text-decoration:none; font-size:0.85rem; font-weight:bold;">📞 कॉल करें</a>
+                          `;
+                          adArea.appendChild(card);
+                      });
+                  }
+              }
+          })
+          .catch((error) => {
+              console.error("Error getting documents: ", error);
+          });
     }
 }
 
@@ -204,8 +207,8 @@ function sendOTP() {
         return;
     }
     simulatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    let display = document.getElementById('generatedOtpDisplay');
-    if(display) display.textContent = simulatedOTP;
+    let otpDisplay = document.getElementById('generatedOtpDisplay');
+    if(otpDisplay) otpDisplay.textContent = simulatedOTP;
     let otpBox = document.getElementById('otpBox');
     if(otpBox) otpBox.style.display = 'block';
     alert(`OTP भेजा गया: ${simulatedOTP}`);
@@ -230,13 +233,16 @@ function verifyOTP() {
 }
 
 function submitAd() {
+    let dist = document.getElementById('mainDistrictSelect').value;
+    let blk = document.getElementById('mainBlockSelect').value;
     let vlg = getSelectedVillage();
+
     let name = document.getElementById('regShopName').value;
     let phone = document.getElementById('regPhone').value;
     let price = document.getElementById('adItemPrice').value || '-';
 
-    if (!vlg) {
-        alert('कृपया पहले अपना गाँव चुनें!');
+    if (!dist || !blk || !vlg) {
+        alert('कृपया पहले जिला, ब्लॉक और गाँव चुनें!');
         return;
     }
 
@@ -250,28 +256,26 @@ function submitAd() {
         return;
     }
 
-    let correctDistrict = "ROHTAK";
-    let correctBlock = "SAMPLA";
-    for (const [dKey, blocksObj] of Object.entries(haryanaMasterData)) {
-        for (const [bKey, villagesArr] of Object.entries(blocksObj)) {
-            if (villagesArr.some(v => v.toLowerCase() === vlg.toLowerCase())) {
-                correctDistrict = dKey;
-                correctBlock = bKey;
-                break;
-            }
-        }
+    // Firebase में डेटा सेव करने का कोड
+    if (typeof db !== 'undefined') {
+        db.collection("villageAds").add({
+            district: dist,
+            block: blk,
+            village: vlg,
+            title: name,
+            category: "दुकान/सेवा",
+            price: price,
+            phone: phone,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .then(() => {
+            alert('✅ आपकी दुकान/सेवा सफलतापूर्वक Firebase में दर्ज हो गई है!');
+            searchServices();
+        })
+        .catch((error) => {
+            alert('❌ एरर: ' + error.message);
+        });
+    } else {
+        alert('Firebase कनेक्ट नहीं है!');
     }
-
-    villageDatabase.push({
-        district: correctDistrict,
-        block: correctBlock,
-        village: vlg,
-        title: name,
-        category: "नई दुकान/सेवा",
-        price: price,
-        phone: phone
-    });
-
-    alert('✅ आपकी दुकान/सेवा सफलतापूर्वक दर्ज हो गई है!');
-    searchServices();
 }
