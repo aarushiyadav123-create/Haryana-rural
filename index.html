@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
@@ -83,7 +83,7 @@
     <button class="btn btn-view-live" onclick="openLiveShopsModal()">🏪 क्षेत्र की सभी लाइव दुकानें देखें (View Live Shops)</button>
 
     <!-- Accordion 1: Shop & Saloon -->
-    <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / व्यवसाय</span> <span id="icon1">▼</span></button>
+    <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / व्यवसाय (निःशुल्क)</span> <span id="icon1">▼</span></button>
     <div id="sec1" class="accordion-content">
         <div class="location-badge">
             <span>📍 क्षेत्र: <b class="activeLocText_sec1">Charkhi Dadri | Baund | Malkosh</b></span>
@@ -93,7 +93,7 @@
             <div class="directory-item"><b>गुप्ता किराना स्टोर</b> (किराना) - गाँव: Malkosh - मो: 9215XXXXXX</div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
-        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान विज्ञापन के साथ जोड़ें:</h3>
+        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान निःशुल्क जोड़ें:</h3>
         <div class="form-group">
             <label>व्यवसाय चुनें:</label>
             <select id="shopCategory">
@@ -117,20 +117,7 @@
             <button class="btn btn-secondary" onclick="verifyShopOTP()">✔ वेरीफाई करें</button>
             <p id="shopOtpMsg" class="hint"></p>
         </div>
-        <div class="form-group" style="background: #e8f5e9; padding: 8px; border-radius: 6px; border: 1px solid #a5d6a7;">
-            <label style="display: flex; align-items: center; cursor: pointer; color: #1b5e20; margin-bottom: 0;">
-                <input type="checkbox" id="freeListingCheckbox" onchange="togglePaymentBox()" style="width: 18px; height: 18px; margin-right: 8px;"> 
-                <span>बिना विज्ञापन शुल्क (Free Listing / बिना भुगतान के जोड़ें)</span>
-            </label>
-        </div>
         <button class="btn" onclick="submitShopAd()" style="margin-top: 5px; margin-bottom: 10px;">✅ दुकान लाइव सबमिट करें</button>
-        <div id="paymentSection" style="background: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2;">
-            <p style="font-weight: bold; color: #e65100; font-size: 0.85rem;">💰 दुकान विज्ञापन शुल्क: ₹49/-</p>
-            <div class="form-group" style="margin-top: 6px; margin-bottom: 0;">
-                <label>UPI Transaction / Ref ID:</label>
-                <input type="text" id="shopTxnId" placeholder="UPI Ref ID दर्ज करें">
-            </div>
-        </div>
     </div>
 
     <!-- Accordion 1B: Local Services -->
@@ -373,11 +360,6 @@
         else { sec.style.display = "block"; icon.textContent = "▲"; }
     }
 
-    function togglePaymentBox() {
-        let isFree = document.getElementById("freeListingCheckbox").checked;
-        document.getElementById("paymentSection").style.display = isFree ? "none" : "block";
-    }
-
     function openLiveShopsModal() {
         document.getElementById('liveShopsModal').style.display = 'block';
     }
@@ -431,42 +413,29 @@
         } else { alert('गलत OTP'); }
     }
 
-    // ✅ फिक्स किया गया शॉप सबमिट फंक्शन ताकि डेटा सेव और लिस्ट में दिखे
     function submitShopAd() {
         if (!shopVerified) { 
             alert('कृपया पहले मोबाइल नंबर पर OTP वेरीफाई करें!'); 
             return; 
         }
         let name = document.getElementById('shopName').value.trim();
-        let isFree = document.getElementById('freeListingCheckbox').checked;
-        let txn = document.getElementById('shopTxnId').value.trim();
 
         if (!name) { 
             alert('कृपया दुकान का नाम दर्ज करें!'); 
             return; 
         }
 
-        if (!isFree && !txn) {
-            alert('कृपया UPI Transaction ID दर्ज करें या फ्री लिस्टिंग चेकबॉक्स चुनें!');
-            return;
-        }
-
         let loc = sectionLocations['sec1'];
         let listDiv = document.getElementById('shopDirectoryList');
         
-        // सेक्शन लिस्ट में जोड़े
         listDiv.insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - जिला: ${loc.dist}, गाँव: ${loc.village}</div>`);
-        
-        // लाइव शॉप्स मोडल में भी जोड़े ताकि "सभी लाइव दुकानें देखें" बटन पर क्लिक करने पर दिखे
         document.getElementById('allLiveShopsContainer').insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - जिला: ${loc.dist}, गाँव: ${loc.village}</div>`);
         
-        alert('✅ आपकी दुकान सफलताaपूर्वक लाइव सेव हो गई है!');
+        alert('✅ आपकी दुकान सफलतापूर्वक लाइव सेव हो गई है!');
         
-        // फॉर्म रीसेट करें
         document.getElementById('shopName').value = '';
         document.getElementById('shopPhone').value = '';
         document.getElementById('shopOtpInput').value = '';
-        document.getElementById('shopTxnId').value = '';
         document.getElementById('shopOtpBox').style.display = 'none';
         shopVerified = false;
     }
