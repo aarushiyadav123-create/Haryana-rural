@@ -3,479 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मेरा गाँव Malkosh - हरियाणा ग्रामीण सेवा पोर्टल</title>
+    <title>मेरा गाँव Malkosh - लाइव पोर्टल</title>
+    <!-- Firebase SDK (Version 10+) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // 🔥 यहाँ अपना Firebase Config पेस्ट करें (Firebase Console से)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- GLOBAL FUNCTIONS ---
+        
+        // 1. डेटा सेव करने के लिए (दुकान/सेवा)
+        window.saveToFirebase = async (collectionName, data) => {
+            try {
+                await addDoc(collection(db, collectionName), {
+                    ...data,
+                    timestamp: new Date()
+                });
+                alert("सफलतापूर्वक लाइव सेव हो गया!");
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                alert("Error: " + e.message);
+            }
+        };
+
+        // 2. लाइव डेटा सुनने के लिए (Real-time updates)
+        window.loadLiveDetails = (village) => {
+            // दुकानों के लिए
+            const qShops = query(collection(db, "shops"), where("village", "==", village));
+            onSnapshot(qShops, (snapshot) => {
+                let html = "";
+                snapshot.forEach(doc => {
+                    let s = doc.data();
+                    html += `<div class="directory-item"><b>${s.name}</b> <span class="badge-cat">${s.cat}</span><br>📞 ${s.mobile}</div>`;
+                });
+                document.getElementById('shopList').innerHTML = html || "कोई दुकान नहीं मिली";
+            });
+
+            // मुनादी के लिए
+            const qMunadi = query(collection(db, "munadi"), where("village", "==", village), orderBy("timestamp", "desc"));
+            onSnapshot(qMunadi, (snapshot) => {
+                let html = "";
+                snapshot.forEach(doc => {
+                    let m = doc.data();
+                    html += `<div class="directory-item" style="border-left-color: #ff9800;"><b>📢 ${m.msg}</b></div>`;
+                });
+                document.getElementById('munadiList').innerHTML = html;
+            });
+        };
+    </script>
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', 'Arial', sans-serif; }
-        body { background: #1b5e20; min-height: 100vh; padding: 10px; color: #333; }
-        .container { max-width: 900px; margin: 0 auto; }
-        
-        .header { background: #1b5e20; padding: 22px 12px 15px 12px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #ffeb3b; position: relative; color: white; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .menu-btn-left { position: absolute; top: 10px; left: 10px; background: #ffeb3b; color: #1b5e20; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .lang-btn-right { position: absolute; top: 10px; right: 10px; background: #ffeb3b; color: #1b5e20; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        
-        .header h1 { font-size: 1.5rem; color: #fff; margin-bottom: 4px; margin-top: 5px; }
-        .welcome-line { font-size: 0.9rem; color: #ffeb3b; font-weight: bold; margin-bottom: 8px; border-bottom: 1px solid #ffeb3b; padding-bottom: 5px; display: inline-block; }
-        
-        .live-ticker-box { background: rgba(0,0,0,0.3); padding: 6px 10px; border-radius: 4px; margin-top: 6px; font-size: 0.85rem; color: #fff; text-align: left; overflow: hidden; white-space: nowrap; border-left: 3px solid #ffeb3b; }
-        .live-ticker-box span { display: inline-block; animation: marquee 18s linear infinite; }
-        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-
-        .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #e0e0e0; }
-        .card h2 { color: #1b5e20; margin-bottom: 12px; font-size: 1.1rem; }
-        .form-group { margin-bottom: 12px; }
-        label { font-weight: 600; display: block; margin-bottom: 4px; font-size: 0.85rem; color: #333; }
-        select, input[type="text"], input[type="tel"], input[type="file"] { width: 100%; padding: 8px; border: 2px solid #b0bec5; border-radius: 6px; font-size: 0.9rem; outline: none; background: #fff; }
-        select:focus, input:focus { border-color: #1b5e20; box-shadow: 0 0 0 2px rgba(27, 94, 32, 0.1); }
-        
-        .btn { background: linear-gradient(135deg, #1b5e20 0%, #0d3817 100%); color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 0.95rem; cursor: pointer; margin-top: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
-        .btn:hover { background: #0d3817; }
-        .btn-secondary { background: #ff9800; color: white; margin-top: 4px; padding: 8px; font-size: 0.85rem; }
-        .btn-view-live { background: #0288d1; margin-bottom: 10px; }
-        
-        .accordion-btn { background: #1b5e20; color: white; width: 100%; padding: 12px; border: none; border-radius: 6px; text-align: left; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #ffeb3b; }
-        .accordion-content { display: none; padding: 12px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 6px 6px; margin-top: -4px; }
-        
-        .location-badge { background: #e8f5e9; border: 1px dashed #2e7d32; padding: 6px 10px; border-radius: 4px; font-size: 0.8rem; color: #1b5e20; font-weight: bold; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .change-loc-link { background: #2e7d32; color: #fff; border: none; padding: 2px 6px; border-radius: 3px; cursor: pointer; font-size: 0.75rem; }
-
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); overflow-y: auto; }
-        .modal-content { background: white; margin: 15% auto; padding: 20px; width: 90%; max-width: 420px; border-radius: 8px; position: relative; }
-        .close { color: #aaa; float: right; font-size: 24px; font-weight: bold; cursor: pointer; }
-        
-        .result-box { margin-top: 10px; padding: 10px; border-radius: 6px; background: #e8f5e9; border: 1px solid #a5d6a7; display: none; font-size: 0.85rem; }
-        .directory-item { background: #fff; padding: 8px; margin-bottom: 6px; border-radius: 4px; border-left: 4px solid #1b5e20; font-size: 0.85rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .hint { font-size: 0.7rem; color: #666; margin-top: 3px; }
+        /* (पुरानी CSS यहाँ रखें) */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background: #1b5e20; padding: 10px; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { background: #1b5e20; padding: 20px; border-radius: 10px; border: 2px solid #ffeb3b; color: white; text-align: center; margin-bottom: 15px; }
+        .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; }
+        .accordion-btn { background: #1b5e20; color: white; width: 100%; padding: 12px; border: none; margin-top: 5px; text-align: left; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        .accordion-content { display: none; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; }
+        .form-group { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .btn { background: #ff9800; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .directory-item { background: #fff; padding: 10px; margin-bottom: 8px; border-left: 5px solid #1b5e20; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .badge-cat { background: #e8f5e9; color: #1b5e20; font-size: 0.7rem; padding: 2px 5px; float: right; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <button class="menu-btn-left" onclick="openMenuModal()">☰ मेनू</button>
-        <button class="lang-btn-right" onclick="toggleLanguage()">🌐 English</button>
         <h1>🌽 मेरा गाँव <span id="displayVillageName">Malkosh</span></h1>
-        <div class="welcome-line" id="txtWelcome">राम राम भाइयों, आपके अपने गाँव में आपका स्वागत है</div>
-        <div class="live-ticker-box"><span>🌤️ Live Weather: 33°C, साफ मौसम | 📢 Live News: जिला, ब्लॉक और गाँव आधारित डिजिटल सेवा सक्रिय!</span></div>
+        <p>डिजिटल हरियाणा - लाइव ग्रामीण सेवा</p>
     </div>
-    
+
     <div class="card">
-        <h2 id="txtSelectTitle">🔍 मुख्य जिला, खण्ड और गाँव चुनें</h2>
-        <div class="form-group">
-            <label>1️⃣ जिला चुनें (District):</label>
-            <select id="districtSelect" onchange="loadBlocks('districtSelect', 'blockSelect', 'villageSelect')"><option value="">-- जिला चुनें --</option></select>
-        </div>
-        <div class="form-group">
-            <label>2️⃣ खण्ड चुनें (Block):</label>
-            <select id="blockSelect" onchange="loadVillages('districtSelect', 'blockSelect', 'villageSelect', 'customVillageGroup')"><option value="">-- पहले जिला चुनें --</option></select>
-        </div>
-        <div class="form-group">
-            <label>3️⃣ गाँव चुनें (Village):</label>
-            <select id="villageSelect" onchange="checkOtherVillage('villageSelect', 'customVillageGroup')"><option value="">-- पहले ब्लॉक चुनें --</option></select>
-        </div>
-        <div class="form-group" id="customVillageGroup" style="display: none;">
-            <input type="text" id="customVillageInput" placeholder="गाँव का नाम लिखें...">
-        </div>
-        <button class="btn" onclick="searchVillage()">🔍 जिला, ब्लॉक व गाँव सेट करें</button>
-        <div class="result-box" id="resultBox"></div>
+        <h3>📍 अपना गाँव बदलें</h3>
+        <select id="villageSelect" class="form-group" onchange="changeVillage()">
+            <option value="Malkosh">Malkosh</option>
+            <option value="Baund">Baund</option>
+            <option value="Ranila">Ranila</option>
+        </select>
     </div>
 
-    <!-- Live Shop View Button -->
-    <button class="btn btn-view-live" onclick="openLiveShopsModal()">🏪 क्षेत्र की सभी लाइव दुकानें देखें (View Live Shops)</button>
-
-    <!-- Accordion 1: Shop & Saloon -->
-    <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / व्यवसाय</span> <span id="icon1">▼</span></button>
+    <!-- Section: Shops -->
+    <button class="accordion-btn" onclick="toggleAcc('sec1')">🛒 दुकान / व्यवसाय (लाइव डेटा)</button>
     <div id="sec1" class="accordion-content">
-        <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec1">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec1')">बदलें</button>
-        </div>
-        <div id="shopDirectoryList" style="margin-bottom: 10px; max-height: 120px; overflow-y: auto;">
-            <div class="directory-item"><b>गुप्ता किराना स्टोर</b> (किराना) - गाँव: Malkosh - मो: 9215XXXXXX</div>
-        </div>
-        <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
-        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान विज्ञापन के साथ जोड़ें:</h3>
-        <div class="form-group">
-            <label>व्यवसाय चुनें:</label>
-            <select id="shopCategory">
-                <option value="Kirana Store">किराना स्टोर (Kirana Store)</option>
-                <option value="Saloon">सैलून / पार्लर (Saloon)</option>
-                <option value="Other Shop">अन्य व्यवसाय (Other Shop)</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>दुकान का नाम:</label>
-            <input type="text" id="shopName" placeholder="उदा: जय बाबा किराना">
-        </div>
-        <div class="form-group">
-            <label>मोबाइल नंबर:</label>
-            <input type="tel" id="shopPhone" placeholder="10 अंकों का नंबर" maxlength="10">
-            <button class="btn btn-secondary" onclick="sendShopOTP()">📱 OTP भेजें</button>
-        </div>
-        <div class="form-group" id="shopOtpBox" style="display:none;">
-            <label>OTP दर्ज करें (कोड: <span id="shopOtpDisplay" style="color:red;"></span>):</label>
-            <input type="text" id="shopOtpInput" placeholder="6 अंक">
-            <button class="btn btn-secondary" onclick="verifyShopOTP()">✔ वेरीफाई करें</button>
-            <p id="shopOtpMsg" class="hint"></p>
-        </div>
-        <div class="form-group" style="background: #e8f5e9; padding: 8px; border-radius: 6px; border: 1px solid #a5d6a7;">
-            <label style="display: flex; align-items: center; cursor: pointer; color: #1b5e20; margin-bottom: 0;">
-                <input type="checkbox" id="freeListingCheckbox" onchange="togglePaymentBox()" style="width: 18px; height: 18px; margin-right: 8px;"> 
-                <span>बिना विज्ञापन शुल्क (Free Listing / बिना भुगतान के जोड़ें)</span>
-            </label>
-        </div>
-        <button class="btn" onclick="submitShopAd()" style="margin-top: 5px; margin-bottom: 10px;">✅ दुकान लाइव सबमिट करें</button>
-        <div id="paymentSection" style="background: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2;">
-            <p style="font-weight: bold; color: #e65100; font-size: 0.85rem;">💰 दुकान विज्ञापन शुल्क: ₹49/-</p>
-            <div class="form-group" style="margin-top: 6px; margin-bottom: 0;">
-                <label>UPI Transaction / Ref ID:</label>
-                <input type="text" id="shopTxnId" placeholder="UPI Ref ID दर्ज करें">
-            </div>
-        </div>
+        <div id="shopList">लोड हो रहा है...</div>
+        <hr><br>
+        <h4>➕ अपनी दुकान जोड़ें</h4>
+        <input type="text" id="shopName" placeholder="दुकान का नाम" class="form-group">
+        <input type="text" id="shopCat" placeholder="श्रेणी (जैसे: किराना)" class="form-group">
+        <input type="tel" id="shopMobile" placeholder="मोबाइल नंबर" class="form-group">
+        <button class="btn" onclick="addShop()">Firebase पर लाइव करें</button>
     </div>
 
-    <!-- Accordion 1B: Local Services -->
-    <button class="accordion-btn" onclick="toggleSection('sec1B', 'icon1B')"><span>🛠️ 1B. लोकल श्रेणियाँ (पंडित जी, मेडिकल आदि - निःशुल्क)</span> <span id="icon1B">▼</span></button>
-    <div id="sec1B" class="accordion-content">
-        <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec1B">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec1B')">बदलें</button>
-        </div>
-        <div id="localDirectoryList" style="margin-bottom: 10px; max-height: 150px; overflow-y: auto;">
-            <div class="directory-item"><b>पं. रामचन्द्र जी</b> (पंडित जी) - गाँव: Malkosh - मो: 9896XXXXXX</div>
-        </div>
-        <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
-        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी निःशुल्क सेवा यहाँ जोड़ें:</h3>
-        <div class="form-group">
-            <label>श्रेणी:</label>
-            <select id="localCategory"><option value="Pandit Ji">पंडित जी</option><option value="Medical Store">मेडिकल स्टोर</option></select>
-        </div>
-        <div class="form-group">
-            <label>नाम:</label>
-            <input type="text" id="localName" placeholder="नाम दर्ज करें">
-        </div>
-        <div class="form-group">
-            <label>मोबाइल नंबर:</label>
-            <input type="tel" id="localPhone" placeholder="10 अंक" maxlength="10">
-            <button class="btn btn-secondary" onclick="sendLocalOTP()">📱 OTP भेजें</button>
-        </div>
-        <div class="form-group" id="localOtpBox" style="display:none;">
-            <label>OTP: <span id="localOtpDisplay" style="color:red;"></span></label>
-            <input type="text" id="localOtpInput" placeholder="OTP">
-            <button class="btn btn-secondary" onclick="verifyLocalOTP()">✔ वेरीफाई</button>
-            <p id="localOtpMsg" class="hint"></p>
-        </div>
-        <button class="btn" onclick="submitLocalService()">✅ निःशुल्क लाइव दर्ज करें</button>
-    </div>
-
-    <!-- Accordion 2: Gallery -->
-    <button class="accordion-btn" onclick="toggleSection('sec2', 'icon2')"><span>📸 2. ग्रामीण गैलरी</span> <span id="icon2">▼</span></button>
+    <!-- Section: Munadi -->
+    <button class="accordion-btn" onclick="toggleAcc('sec2')">📢 गाँव की मुनादी (Live)</button>
     <div id="sec2" class="accordion-content">
-        <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec2">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec2')">बदलें</button>
-        </div>
-        <input type="file" accept="image/*" style="margin-top:8px;">
-        <button class="btn" style="margin-top:8px;" onclick="alert('फोटो गैलरी में अपलोड हो गई!')">फोटो अपलोड करें</button>
-    </div>
-
-    <!-- Accordion 3: Munadi -->
-    <button class="accordion-btn" onclick="toggleSection('sec3', 'icon3')"><span>📢 3. गाँव के विज्ञापन व मुनादी</span> <span id="icon3">▼</span></button>
-    <div id="sec3" class="accordion-content">
-        <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec3">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec3')">बदलें</button>
-        </div>
-        <input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px;">
-        <button class="btn" style="margin-top:8px;" onclick="alert('मुनादी पोस्ट हो गई!')">मुनादी पोस्ट करें</button>
-    </div>
-
-    <!-- Accordion 4: Buy / Sell -->
-    <button class="accordion-btn" onclick="toggleSection('sec4', 'icon4')"><span>🛒 4. खरीदें और बेचें (Buy / Sell)</span> <span id="icon4">▼</span></button>
-    <div id="sec4" class="accordion-content">
-        <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec4">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec4')">बदलें</button>
-        </div>
-        <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु" style="margin-bottom:8px;">
-        <button class="btn" onclick="alert('विज्ञापन लाइव पोस्ट हो गया!')">विज्ञापन पोस्ट करें</button>
-    </div>
-
-    <!-- Accordion 5 -->
-    <button class="accordion-btn" onclick="toggleSection('sec5', 'icon5')"><span>🏛️ 5. हरियाणा सरकारी योजनाएं</span> <span id="icon5">▼</span></button>
-    <div id="sec5" class="accordion-content"><p>HKRN, परिवार पहचान पत्र और पेंशन योजना अपडेट।</p><a href="https://hrygs.gov.in" target="_blank" style="color:#1b5e20; font-weight:bold; display:block; margin-top:8px;">🔗 आधिकारिक पोर्टल</a></div>
-
-    <!-- Accordion 6 -->
-    <button class="accordion-btn" onclick="toggleSection('sec6', 'icon6')"><span>🎭 6. ग्रामीण मनोरंजन और संस्कृति</span> <span id="icon6">▼</span></button>
-    <div id="sec6" class="accordion-content"><p>हरियाणवी रागिनी, लोक गीत और वीडियो क्लिप्स।</p><button class="btn" style="margin-top:8px;" onclick="alert('मनोरंजन वीडियो लोड हो रहे हैं!')">वीडियो देखें</button></div>
-
-    <footer style="text-align:center; padding:10px; font-size:0.75rem; color:#fff; margin-top:15px;">
-        © 2026 Haryana Rural Service Portal - Digital Gram Haryana
-    </footer>
-</div>
-
-<!-- Modal for changing specific section location -->
-<div id="locationChangeModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModals()">&times;</span>
-        <h2 style="color: #1b5e20; font-size: 1rem; margin-bottom: 10px;">📍 इस सेक्शन के लिए क्षेत्र बदलें</h2>
-        <input type="hidden" id="activeSectionTarget">
-        <div class="form-group">
-            <label>जिला:</label>
-            <select id="modalDistrictSelect" onchange="loadBlocks('modalDistrictSelect', 'modalBlockSelect', 'modalVillageSelect')"><option value="">-- जिला --</option></select>
-        </div>
-        <div class="form-group">
-            <label>खण्ड:</label>
-            <select id="modalBlockSelect" onchange="loadVillages('modalDistrictSelect', 'modalBlockSelect', 'modalVillageSelect', 'modalCustomGroup')"><option value="">-- ब्लॉक --</option></select>
-        </div>
-        <div class="form-group">
-            <label>गाँव:</label>
-            <select id="modalVillageSelect" onchange="checkOtherVillage('modalVillageSelect', 'modalCustomGroup')"><option value="">-- गाँव --</option></select>
-        </div>
-        <div class="form-group" id="modalCustomGroup" style="display:none;">
-            <input type="text" id="modalCustomInput" placeholder="गाँव का नाम...">
-        </div>
-        <button class="btn" onclick="saveSectionLocation()">✔ क्षेत्र सेट करें</button>
+        <div id="munadiList"></div>
+        <textarea id="munadiMsg" placeholder="अपनी सूचना लिखें..." class="form-group"></textarea>
+        <button class="btn" onclick="addMunadi()">घोषणा पोस्ट करें</button>
     </div>
 </div>
 
-<!-- Live Shops Modal -->
-<div id="liveShopsModal" class="modal">
-    <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
-        <span class="close" onclick="closeModals()">&times;</span>
-        <h2 style="color: #1b5e20; margin-bottom: 10px;">🏪 लाइव दुकानें (Live Shops Directory)</h2>
-        <div id="allLiveShopsContainer">
-            <div class="directory-item"><b>गुप्ता किराना स्टोर</b> - गाँव: Malkosh (मो: 9215XXXXXX)</div>
-            <div class="directory-item"><b>शर्मा गारमेंट्स</b> - गाँव: Malkosh (मो: 9812XXXXXX)</div>
-        </div>
-    </div>
-</div>
-
-<!-- Other Modals -->
-<div id="menuModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20; margin-bottom: 10px;">📌 मेनू</h2><ul style="list-style: none; line-height: 2; font-size: 0.95rem;"><li><a href="#" onclick="openAboutModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">ℹ️ About Founder</a></li><li><a href="#" onclick="openPrivacyModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔒 Privacy Policy</a></li></ul></div></div>
-<div id="aboutModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">ℹ️ संस्थापक</h2><p style="font-weight: bold; font-size: 1.1rem; margin-top: 10px;">Kusum w/o Rajesh Yadav</p><p style="font-size: 0.85rem; color: #666;">गाँव: <b>Malkosh</b></p></div></div>
-<div id="privacyModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">🔒 Privacy Policy</h2><p style="font-size: 0.8rem; line-height: 1.5;">Digital Gram Haryana respects your privacy. Mobile numbers and listings are managed securely.</p></div></div>
-
-<!-- Scripts -->
-<script src="haryana-villages-complete.js"></script>
 <script>
-    let currentData = {};
-    let sectionLocations = {
-        sec1: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" },
-        sec1B: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" },
-        sec2: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" },
-        sec3: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" },
-        sec4: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" }
+    let currentVillage = "Malkosh";
+
+    function toggleAcc(id) {
+        let x = document.getElementById(id);
+        x.style.display = (x.style.display === "block") ? "none" : "block";
+    }
+
+    function changeVillage() {
+        currentVillage = document.getElementById('villageSelect').value;
+        document.getElementById('displayVillageName').innerText = currentVillage;
+        window.loadLiveDetails(currentVillage); // Firebase से उस गाँव का डेटा लोड करें
+    }
+
+    // Firebase में दुकान जोड़ना
+    async function addShop() {
+        let name = document.getElementById('shopName').value;
+        let cat = document.getElementById('shopCat').value;
+        let mobile = document.getElementById('shopMobile').value;
+        
+        if(name && mobile) {
+            await window.saveToFirebase("shops", { name, cat, mobile, village: currentVillage });
+            document.getElementById('shopName').value = "";
+        }
+    }
+
+    // Firebase में मुनादी जोड़ना
+    async function addMunadi() {
+        let msg = document.getElementById('munadiMsg').value;
+        if(msg) {
+            await window.saveToFirebase("munadi", { msg, village: currentVillage });
+            document.getElementById('munadiMsg').value = "";
+        }
+    }
+
+    // पेज लोड होते ही शुरू करें
+    window.onload = () => {
+        window.loadLiveDetails(currentVillage);
     };
-    let localOTPVar = "", shopOTPVar = "";
-    let localVerified = false, shopVerified = false;
-    let isEnglish = false;
-
-    document.addEventListener('DOMContentLoaded', () => {
-        if (typeof haryana_complete_database !== 'undefined') {
-            currentData = haryana_complete_database;
-            populateDistricts('districtSelect');
-            populateDistricts('modalDistrictSelect');
-        }
-    });
-
-    function populateDistricts(elementId) {
-        const select = document.getElementById(elementId);
-        select.innerHTML = '<option value="">-- जिला चुनें --</option>';
-        Object.keys(currentData).sort().forEach(d => {
-            let opt = document.createElement('option'); opt.value = d; opt.textContent = d; select.appendChild(opt);
-        });
-    }
-
-    function loadBlocks(distId, blockId, villageId) {
-        let dist = document.getElementById(distId).value;
-        let bSelect = document.getElementById(blockId);
-        bSelect.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
-        document.getElementById(villageId).innerHTML = '<option value="">-- पहले जिला चुनें --</option>';
-        if (dist && currentData[dist]) {
-            Object.keys(currentData[dist]).sort().forEach(b => {
-                let opt = document.createElement('option'); opt.value = b; opt.textContent = b; bSelect.appendChild(opt);
-            });
-        }
-    }
-
-    function loadVillages(distId, blockId, villageId, customGroup) {
-        let dist = document.getElementById(distId).value;
-        let block = document.getElementById(blockId).value;
-        let vSelect = document.getElementById(villageId);
-        vSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-        if (dist && block && currentData[dist][block]) {
-            currentData[dist][block].sort().forEach(v => {
-                let opt = document.createElement('option'); opt.value = v; opt.textContent = v; vSelect.appendChild(opt);
-            });
-            let oOpt = document.createElement('option'); oOpt.value = 'OTHER'; oOpt.textContent = '➕ अन्य गाँव / Other Village'; vSelect.appendChild(oOpt);
-        }
-    }
-
-    function checkOtherVillage(villageId, customGroup) {
-        let vSelect = document.getElementById(villageId);
-        document.getElementById(customGroup).style.display = (vSelect.value === 'OTHER') ? 'block' : 'none';
-    }
-
-    function getCustomOrSelected(villageId, customInputId) {
-        let vSelect = document.getElementById(villageId);
-        let custom = document.getElementById(customInputId).value.trim();
-        return (vSelect.value === 'OTHER') ? custom : vSelect.value;
-    }
-
-    function searchVillage() {
-        let dist = document.getElementById('districtSelect').value;
-        let block = document.getElementById('blockSelect').value;
-        let v = getCustomOrSelected('villageSelect', 'customVillageInput');
-        if (!dist || !block || !v) { alert('कृपया जिला, ब्लॉक और गाँव सही से चुनें!'); return; }
-        
-        ['sec1', 'sec1B', 'sec2', 'sec3', 'sec4'].forEach(sec => {
-            sectionLocations[sec] = { dist: dist, block: block, village: v };
-            updateBadgeUI(sec);
-        });
-
-        document.getElementById('displayVillageName').textContent = v;
-        let locText = `जिला: ${dist} | ब्लॉक: ${block} | गाँव: ${v}`;
-        document.getElementById('resultBox').innerHTML = `📍 मुख्य क्षेत्र सेट हुआ: <b>${locText}</b>`;
-        document.getElementById('resultBox').style.display = 'block';
-    }
-
-    function openLocationModal(secKey) {
-        document.getElementById('activeSectionTarget').value = secKey;
-        document.getElementById('locationChangeModal').style.display = 'block';
-    }
-
-    function saveSectionLocation() {
-        let secKey = document.getElementById('activeSectionTarget').value;
-        let dist = document.getElementById('modalDistrictSelect').value;
-        let block = document.getElementById('modalBlockSelect').value;
-        let v = getCustomOrSelected('modalVillageSelect', 'modalCustomInput');
-
-        if (!dist || !block || !v) { alert('कृपया सभी लोकेशन विवरण चुनें!'); return; }
-
-        sectionLocations[secKey] = { dist: dist, block: block, village: v };
-        updateBadgeUI(secKey);
-        closeModals();
-        alert('इस सेक्शन के लिए नया क्षेत्र सेट हो गया है!');
-    }
-
-    function updateBadgeUI(secKey) {
-        let loc = sectionLocations[secKey];
-        let text = `${loc.dist} | ${loc.block} | ${loc.village}`;
-        document.querySelectorAll(`.activeLocText_${secKey}`).forEach(el => {
-            el.textContent = text;
-        });
-    }
-
-    function toggleSection(id, iconId) {
-        let sec = document.getElementById(id);
-        let icon = document.getElementById(iconId);
-        if (sec.style.display === "block") { sec.style.display = "none"; icon.textContent = "▼"; }
-        else { sec.style.display = "block"; icon.textContent = "▲"; }
-    }
-
-    function togglePaymentBox() {
-        let isFree = document.getElementById("freeListingCheckbox").checked;
-        document.getElementById("paymentSection").style.display = isFree ? "none" : "block";
-    }
-
-    function openLiveShopsModal() {
-        document.getElementById('liveShopsModal').style.display = 'block';
-    }
-
-    function toggleLanguage() {
-        isEnglish = !isEnglish;
-        let btn = document.querySelector('.lang-btn-right');
-        if (isEnglish) {
-            btn.textContent = "🌐 हिन्दी";
-            document.getElementById('txtWelcome').textContent = "Welcome brothers to your village portal!";
-            document.getElementById('txtSelectTitle').textContent = "🔍 Select Main District, Block & Village";
-        } else {
-            btn.textContent = "🌐 English";
-            document.getElementById('txtWelcome').textContent = "राम राम भाइयों, आपके अपने गाँव में आपका स्वागत है";
-            document.getElementById('txtSelectTitle').textContent = "🔍 मुख्य जिला, खण्ड और गाँव चुनें";
-        }
-    }
-
-    function sendLocalOTP() {
-        localOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
-        document.getElementById('localOtpDisplay').textContent = localOTPVar;
-        document.getElementById('localOtpBox').style.display = 'block';
-        alert('सिम्युलेटेड OTP: ' + localOTPVar);
-    }
-    function verifyLocalOTP() {
-        if (document.getElementById('localOtpInput').value === localOTPVar) {
-            localVerified = true;
-            document.getElementById('localOtpMsg').textContent = "✔ वेरीफाइड!";
-        } else { alert('गलत OTP'); }
-    }
-    function submitLocalService() {
-        if (!localVerified) { alert('पहले OTP वेरीफाई करें!'); return; }
-        let name = document.getElementById('localName').value.trim();
-        let loc = sectionLocations['sec1B'];
-        if (!name) { alert('नाम दर्ज करें!'); return; }
-        let listDiv = document.getElementById('localDirectoryList');
-        listDiv.insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - गाँव: ${loc.village}</div>`);
-        alert('निःशुल्क सेवा लाइव हो गई!');
-    }
-
-    function sendShopOTP() {
-        shopOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
-        document.getElementById('shopOtpDisplay').textContent = shopOTPVar;
-        document.getElementById('shopOtpBox').style.display = 'block';
-        alert('सिम्युलेटेड OTP: ' + shopOTPVar);
-    }
-    function verifyShopOTP() {
-        if (document.getElementById('shopOtpInput').value === shopOTPVar) {
-            shopVerified = true;
-            document.getElementById('shopOtpMsg').textContent = "✔ वेरीफाइड!";
-        } else { alert('गलत OTP'); }
-    }
-
-    // ✅ फिक्स किया गया शॉप सबमिट फंक्शन ताकि डेटा सेव और लिस्ट में दिखे
-    function submitShopAd() {
-        if (!shopVerified) { 
-            alert('कृपया पहले मोबाइल नंबर पर OTP वेरीफाई करें!'); 
-            return; 
-        }
-        let name = document.getElementById('shopName').value.trim();
-        let isFree = document.getElementById('freeListingCheckbox').checked;
-        let txn = document.getElementById('shopTxnId').value.trim();
-
-        if (!name) { 
-            alert('कृपया दुकान का नाम दर्ज करें!'); 
-            return; 
-        }
-
-        if (!isFree && !txn) {
-            alert('कृपया UPI Transaction ID दर्ज करें या फ्री लिस्टिंग चेकबॉक्स चुनें!');
-            return;
-        }
-
-        let loc = sectionLocations['sec1'];
-        let listDiv = document.getElementById('shopDirectoryList');
-        
-        // सेक्शन लिस्ट में जोड़े
-        listDiv.insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - जिला: ${loc.dist}, गाँव: ${loc.village}</div>`);
-        
-        // लाइव शॉप्स मोडल में भी जोड़े ताकि "सभी लाइव दुकानें देखें" बटन पर क्लिक करने पर दिखे
-        document.getElementById('allLiveShopsContainer').insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - जिला: ${loc.dist}, गाँव: ${loc.village}</div>`);
-        
-        alert('✅ आपकी दुकान सफलताaपूर्वक लाइव सेव हो गई है!');
-        
-        // फॉर्म रीसेट करें
-        document.getElementById('shopName').value = '';
-        document.getElementById('shopPhone').value = '';
-        document.getElementById('shopOtpInput').value = '';
-        document.getElementById('shopTxnId').value = '';
-        document.getElementById('shopOtpBox').style.display = 'none';
-        shopVerified = false;
-    }
-
-    function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
-    function openAboutModal() { closeModals(); document.getElementById('aboutModal').style.display = 'block'; }
-    function openPrivacyModal() { closeModals(); document.getElementById('privacyModal').style.display = 'block'; }
-    function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
-    window.onclick = e => { if (e.target.classList.contains('modal')) closeModals(); }
 </script>
 
 </body>
