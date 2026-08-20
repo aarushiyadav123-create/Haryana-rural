@@ -58,7 +58,6 @@
         <div class="live-ticker-box"><span>🌤️ Live Weather: 33°C, साफ मौसम | 📢 Live News: जिला, ब्लॉक और गाँव आधारित डिजिटल सेवा सक्रिय!</span></div>
     </div>
     
-    <!-- Global Village Selection Card -->
     <div class="card">
         <h2 id="txtSelectTitle">🔍 मुख्य जिला, खण्ड और गाँव चुनें</h2>
         <div class="form-group">
@@ -329,7 +328,6 @@
         let v = getCustomOrSelected('villageSelect', 'customVillageInput');
         if (!dist || !block || !v) { alert('कृपया जिला, ब्लॉक और गाँव सही से चुनें!'); return; }
         
-        // Update all sections to main selection by default
         ['sec1', 'sec1B', 'sec2', 'sec3', 'sec4'].forEach(sec => {
             sectionLocations[sec] = { dist: dist, block: block, village: v };
             updateBadgeUI(sec);
@@ -432,17 +430,45 @@
             document.getElementById('shopOtpMsg').textContent = "✔ वेरीफाइड!";
         } else { alert('गलत OTP'); }
     }
+
+    // ✅ फिक्स किया गया शॉप सबमिट फंक्शन ताकि डेटा सेव और लिस्ट में दिखे
     function submitShopAd() {
-        if (!shopVerified) { alert('पहले OTP वेरीफाई करें!'); return; }
+        if (!shopVerified) { 
+            alert('कृपया पहले मोबाइल नंबर पर OTP वेरीफाई करें!'); 
+            return; 
+        }
         let name = document.getElementById('shopName').value.trim();
+        let isFree = document.getElementById('freeListingCheckbox').checked;
+        let txn = document.getElementById('shopTxnId').value.trim();
+
+        if (!name) { 
+            alert('कृपया दुकान का नाम दर्ज करें!'); 
+            return; 
+        }
+
+        if (!isFree && !txn) {
+            alert('कृपया UPI Transaction ID दर्ज करें या फ्री लिस्टिंग चेकबॉक्स चुनें!');
+            return;
+        }
+
         let loc = sectionLocations['sec1'];
-        if (!name) { alert('दुकान का नाम दर्ज करें!'); return; }
         let listDiv = document.getElementById('shopDirectoryList');
+        
+        // सेक्शन लिस्ट में जोड़े
         listDiv.insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - जिला: ${loc.dist}, गाँव: ${loc.village}</div>`);
         
-        // Also add to Live Shops list modal container
+        // लाइव शॉप्स मोडल में भी जोड़े ताकि "सभी लाइव दुकानें देखें" बटन पर क्लिक करने पर दिखे
         document.getElementById('allLiveShopsContainer').insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - जिला: ${loc.dist}, गाँव: ${loc.village}</div>`);
-        alert('दुकान सफलतापूर्वक लाइव हो गई!');
+        
+        alert('✅ आपकी दुकान सफलताaपूर्वक लाइव सेव हो गई है!');
+        
+        // फॉर्म रीसेट करें
+        document.getElementById('shopName').value = '';
+        document.getElementById('shopPhone').value = '';
+        document.getElementById('shopOtpInput').value = '';
+        document.getElementById('shopTxnId').value = '';
+        document.getElementById('shopOtpBox').style.display = 'none';
+        shopVerified = false;
     }
 
     function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
