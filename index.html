@@ -39,8 +39,7 @@
         .accordion-content { display: none; padding: 12px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 6px 6px; margin-top: -4px; }
         
         .location-badge { background: #e8f5e9; border: 1px dashed #2e7d32; padding: 6px 10px; border-radius: 4px; font-size: 0.8rem; color: #1b5e20; font-weight: bold; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .change-loc-link { background: #2e7d32; color: #fff; border: none; padding: 2px 6px; border-radius: 3px; cursor: pointer; font-size: 0.75rem; }
-
+        
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); overflow-y: auto; }
         .modal-content { background: white; margin: 15% auto; padding: 20px; width: 90%; max-width: 420px; border-radius: 8px; position: relative; }
         .close { color: #aaa; float: right; font-size: 24px; font-weight: bold; cursor: pointer; }
@@ -62,7 +61,7 @@
     </div>
     
     <div class="card">
-        <h2 id="txtSelectTitle">🔍 मुख्य जिला, खण्ड और गाँव चुनें</h2>
+        <h2 id="txtSelectTitle">🔍 मुख्य जिला, खण्ड और गाँव चुनें (Live Location)</h2>
         <div class="form-group">
             <label>1️⃣ जिला चुनें (District):</label>
             <select id="districtSelect" onchange="loadBlocks('districtSelect', 'blockSelect', 'villageSelect')"><option value="">-- जिला चुनें --</option></select>
@@ -78,7 +77,7 @@
         <div class="form-group" id="customVillageGroup" style="display: none;">
             <input type="text" id="customVillageInput" placeholder="गाँव का नाम लिखें...">
         </div>
-        <button class="btn" onclick="searchVillage()">🔍 जिला, ब्लॉक व गाँव सेट करें</button>
+        <button class="btn" onclick="searchVillage()">🔍 पूरे पोर्टल की लोकेशन सेट करें</button>
         <div class="result-box" id="resultBox"></div>
     </div>
 
@@ -89,8 +88,7 @@
     <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / व्यवसाय (निःशुल्क)</span> <span id="icon1">▼</span></button>
     <div id="sec1" class="accordion-content">
         <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec1">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec1')">बदलें</button>
+            <span>📍 वर्तमान लाइव क्षेत्र: <b class="globalLocText">Charkhi Dadri | Baund | Malkosh</b></span>
         </div>
         <div class="search-filter">
             <input type="text" id="shopSearchInput" placeholder="🔍 दुकान या नाम से खोजें..." onkeyup="filterShopList()">
@@ -99,7 +97,7 @@
             <div class="directory-item shop-item" data-name="गुप्ता किराना स्टोर"><b>गुप्ता किराना स्टोर</b> (किराना) - गाँव: Malkosh - मो: 9215XXXXXX<br><a class="whatsapp-btn" href="https://wa.me/?text=देखें%20गुप्ता%20किराना%20स्टोर,%20गाँव%20Malkosh" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
-        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान निःशुल्क जोड़ें:</h3>
+        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान निःशुल्क जोड़ें (OTP Verified):</h3>
         <div class="form-group">
             <label>व्यवसाय चुनें:</label>
             <select id="shopCategory">
@@ -118,7 +116,7 @@
             <button class="btn btn-secondary" onclick="sendShopOTP()">📱 OTP भेजें</button>
         </div>
         <div class="form-group" id="shopOtpBox" style="display:none;">
-            <label>OTP दर्ज करें (कोड: <span id="shopOtpDisplay" style="color:red;"></span>):</label>
+            <label>OTP दर्ज करें (कोड: <span id="shopOtpDisplay" style="color:red; font-weight:bold;"></span>):</label>
             <input type="text" id="shopOtpInput" placeholder="6 अंक">
             <button class="btn btn-secondary" onclick="verifyShopOTP()">✔ वेरीफाई करें</button>
             <p id="shopOtpMsg" class="hint"></p>
@@ -130,8 +128,7 @@
     <button class="accordion-btn" onclick="toggleSection('sec1B', 'icon1B')"><span>🛠️ 1B. लोकल श्रेणियाँ (पंडित जी, मेडिकल आदि - निःशुल्क)</span> <span id="icon1B">▼</span></button>
     <div id="sec1B" class="accordion-content">
         <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec1B">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec1B')">बदलें</button>
+            <span>📍 वर्तमान लाइव क्षेत्र: <b class="globalLocText">Charkhi Dadri | Baund | Malkosh</b></span>
         </div>
         <div class="search-filter">
             <input type="text" id="localSearchInput" placeholder="🔍 पंडित जी या मेडिकल खोजें..." onkeyup="filterLocalList()">
@@ -155,7 +152,7 @@
             <button class="btn btn-secondary" onclick="sendLocalOTP()">📱 OTP भेजें</button>
         </div>
         <div class="form-group" id="localOtpBox" style="display:none;">
-            <label>OTP: <span id="localOtpDisplay" style="color:red;"></span></label>
+            <label>OTP: <span id="localOtpDisplay" style="color:red; font-weight:bold;"></span></label>
             <input type="text" id="localOtpInput" placeholder="OTP">
             <button class="btn btn-secondary" onclick="verifyLocalOTP()">✔ वेरीफाई</button>
             <p id="localOtpMsg" class="hint"></p>
@@ -167,8 +164,7 @@
     <button class="accordion-btn" onclick="toggleSection('sec2', 'icon2')"><span>📸 2. ग्रामीण गैलरी</span> <span id="icon2">▼</span></button>
     <div id="sec2" class="accordion-content">
         <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec2">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec2')">बदलें</button>
+            <span>📍 वर्तमान लाइव क्षेत्र: <b class="globalLocText">Charkhi Dadri | Baund | Malkosh</b></span>
         </div>
         <input type="file" id="galleryFile" accept="image/*" style="margin-top:8px;">
         <button class="btn" style="margin-top:8px;" onclick="uploadGalleryPhoto()">फोटो अपलोड करें</button>
@@ -178,31 +174,49 @@
     <button class="accordion-btn" onclick="toggleSection('sec3', 'icon3')"><span>📢 3. गाँव के विज्ञापन व मुनादी</span> <span id="icon3">▼</span></button>
     <div id="sec3" class="accordion-content">
         <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec3">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec3')">बदलें</button>
+            <span>📍 वर्तमान लाइव क्षेत्र: <b class="globalLocText">Charkhi Dadri | Baund | Malkosh</b></span>
         </div>
-        <input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px; margin-bottom:8px;">
-        <button class="btn" onclick="postMunadi()">मुनादी पोस्ट करें</button>
-        <div id="munadiList" style="margin-top:10px; max-height: 150px; overflow-y: auto;">
+        <div id="munadiList" style="margin-bottom:10px; max-height: 150px; overflow-y: auto;">
             <div class="directory-item">📢 <b>मुनादी (Malkosh):</b> कल सुबह पूरे गाँव में बिजली बंद रहेगी।<br><a class="whatsapp-btn" href="https://wa.me/?text=मुनादी:%20कल%20सुबह%20बिजली%20बंद%20रहेगी" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
         </div>
+        <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
+        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ नई मुनादी पोस्ट करें (OTP Verified):</h3>
+        <input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-bottom:8px;">
+        <input type="tel" id="munadiPhone" placeholder="मोबाईल नंबर (10 अंक)" maxlength="10" style="margin-bottom:8px;">
+        <button class="btn btn-secondary" onclick="sendMunadiOTP()">📱 OTP भेजें</button>
+        <div class="form-group" id="munadiOtpBox" style="display:none; margin-top:8px;">
+            <label>OTP: <span id="munadiOtpDisplay" style="color:red; font-weight:bold;"></span></label>
+            <input type="text" id="munadiOtpInput" placeholder="OTP दर्ज करें">
+            <button class="btn btn-secondary" onclick="verifyMunadiOTP()">✔ वेरीफाई</button>
+            <p id="munadiOtpMsg" class="hint"></p>
+        </div>
+        <button class="btn" onclick="postMunadi()" style="margin-top:8px;">मुनादी पोस्ट करें</button>
     </div>
 
     <!-- Accordion 4: Buy / Sell -->
     <button class="accordion-btn" onclick="toggleSection('sec4', 'icon4')"><span>🛒 4. खरीदें और बेचें (Buy / Sell)</span> <span id="icon4">▼</span></button>
     <div id="sec4" class="accordion-content">
         <div class="location-badge">
-            <span>📍 क्षेत्र: <b class="activeLocText_sec4">Charkhi Dadri | Baund | Malkosh</b></span>
-            <button class="change-loc-link" onclick="openLocationModal('sec4')">बदलें</button>
+            <span>📍 वर्तमान लाइव क्षेत्र: <b class="globalLocText">Charkhi Dadri | Baund | Malkosh</b></span>
         </div>
-        <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु" style="margin-bottom:8px;">
-        <input type="text" id="buySellPrice" placeholder="मूल्य / Price (उदा: ₹ 3,50,000)" style="margin-bottom:8px;">
-        <label style="font-size: 0.8rem; margin-top: 5px;">सामान की फोटो जोड़ें:</label>
-        <input type="file" id="buySellFile" accept="image/*" style="margin-bottom:8px;">
-        <button class="btn" onclick="postBuySell()">विज्ञापन पोस्ट करें</button>
-        <div id="buySellList" style="margin-top:10px; max-height: 180px; overflow-y: auto;">
+        <div id="buySellList" style="margin-bottom:10px; max-height: 180px; overflow-y: auto;">
             <div class="directory-item">🛒 <b>पुराना ट्रैक्टर बिक्री हेतु</b> | मूल्य: ₹ 3,50,000<br><small>📍 गाँव: Malkosh, Charkhi Dadri</small><br><a class="whatsapp-btn" href="https://wa.me/?text=खरीदें/बेचें:%20पुराना%20ट्रैक्टर" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
         </div>
+        <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
+        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ नया विज्ञापन जोड़ें (OTP Verified):</h3>
+        <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु" style="margin-bottom:8px;">
+        <input type="text" id="buySellPrice" placeholder="मूल्य / Price (उदा: ₹ 3,50,000)" style="margin-bottom:8px;">
+        <label style="font-size: 0.8rem; margin-top: 5px;">सामान की फोटो:</label>
+        <input type="file" id="buySellFile" accept="image/*" style="margin-bottom:8px;">
+        <input type="tel" id="buySellPhone" placeholder="मोबाइल नंबर (10 अंक)" maxlength="10" style="margin-bottom:8px;">
+        <button class="btn btn-secondary" onclick="sendBuySellOTP()">📱 OTP भेजें</button>
+        <div class="form-group" id="buySellOtpBox" style="display:none; margin-top:8px;">
+            <label>OTP: <span id="buySellOtpDisplay" style="color:red; font-weight:bold;"></span></label>
+            <input type="text" id="buySellOtpInput" placeholder="OTP दर्ज करें">
+            <button class="btn btn-secondary" onclick="verifyBuySellOTP()">✔ वेरीफाई</button>
+            <p id="buySellOtpMsg" class="hint"></p>
+        </div>
+        <button class="btn" onclick="postBuySell()" style="margin-top:8px;">विज्ञापन पोस्ट करें</button>
     </div>
 
     <!-- Accordion 5 -->
@@ -216,31 +230,6 @@
     <footer style="text-align:center; padding:10px; font-size:0.75rem; color:#fff; margin-top:15px;">
         © 2026 Haryana Rural Service Portal - Digital Gram Haryana
     </footer>
-</div>
-
-<!-- Modal for changing specific section location -->
-<div id="locationChangeModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModals()">&times;</span>
-        <h2 style="color: #1b5e20; font-size: 1rem; margin-bottom: 10px;">📍 इस सेक्शन के लिए क्षेत्र बदलें</h2>
-        <input type="hidden" id="activeSectionTarget">
-        <div class="form-group">
-            <label>जिला:</label>
-            <select id="modalDistrictSelect" onchange="loadBlocks('modalDistrictSelect', 'modalBlockSelect', 'modalVillageSelect')"><option value="">-- जिला --</option></select>
-        </div>
-        <div class="form-group">
-            <label>खण्ड:</label>
-            <select id="modalBlockSelect" onchange="loadVillages('modalDistrictSelect', 'modalBlockSelect', 'modalVillageSelect', 'modalCustomGroup')"><option value="">-- ब्लॉक --</option></select>
-        </div>
-        <div class="form-group">
-            <label>गाँव:</label>
-            <select id="modalVillageSelect" onchange="checkOtherVillage('modalVillageSelect', 'modalCustomGroup')"><option value="">-- गाँव --</option></select>
-        </div>
-        <div class="form-group" id="modalCustomGroup" style="display:none;">
-            <input type="text" id="modalCustomInput" placeholder="गाँव का नाम...">
-        </div>
-        <button class="btn" onclick="saveSectionLocation()">✔ क्षेत्र सेट करें</button>
-    </div>
 </div>
 
 <!-- Live Shops Modal -->
@@ -264,22 +253,16 @@
 <script src="haryana-villages-complete.js"></script>
 <script>
     let currentData = {};
-    let sectionLocations = {
-        sec1: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" },
-        sec1B: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" },
-        sec2: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" },
-        sec3: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" },
-        sec4: { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" }
-    };
-    let localOTPVar = "", shopOTPVar = "";
-    let localVerified = false, shopVerified = false;
+    let globalLocation = { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" };
+    
+    let localOTPVar = "", shopOTPVar = "", munadiOTPVar = "", buySellOTPVar = "";
+    let localVerified = false, shopVerified = false, munadiVerified = false, buySellVerified = false;
     let isEnglish = false;
 
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof haryana_complete_database !== 'undefined') {
             currentData = haryana_complete_database;
             populateDistricts('districtSelect');
-            populateDistricts('modalDistrictSelect');
         }
     });
 
@@ -333,42 +316,17 @@
         let v = getCustomOrSelected('villageSelect', 'customVillageInput');
         if (!dist || !block || !v) { alert('कृपया जिला, ब्लॉक और गाँव सही से चुनें!'); return; }
         
-        ['sec1', 'sec1B', 'sec2', 'sec3', 'sec4'].forEach(sec => {
-            sectionLocations[sec] = { dist: dist, block: block, village: v };
-            updateBadgeUI(sec);
+        globalLocation = { dist: dist, block: block, village: v };
+        
+        // Update all badges globally
+        document.querySelectorAll('.globalLocText').forEach(el => {
+            el.textContent = `${dist} | ${block} | ${v}`;
         });
 
         document.getElementById('displayVillageName').textContent = v;
         let locText = `जिला: ${dist} | ब्लॉक: ${block} | गाँव: ${v}`;
         document.getElementById('resultBox').innerHTML = `📍 मुख्य क्षेत्र सेट हुआ: <b>${locText}</b>`;
         document.getElementById('resultBox').style.display = 'block';
-    }
-
-    function openLocationModal(secKey) {
-        document.getElementById('activeSectionTarget').value = secKey;
-        document.getElementById('locationChangeModal').style.display = 'block';
-    }
-
-    function saveSectionLocation() {
-        let secKey = document.getElementById('activeSectionTarget').value;
-        let dist = document.getElementById('modalDistrictSelect').value;
-        let block = document.getElementById('modalBlockSelect').value;
-        let v = getCustomOrSelected('modalVillageSelect', 'modalCustomInput');
-
-        if (!dist || !block || !v) { alert('कृपया सभी लोकेशन विवरण चुनें!'); return; }
-
-        sectionLocations[secKey] = { dist: dist, block: block, village: v };
-        updateBadgeUI(secKey);
-        closeModals();
-        alert('इस सेक्शन के लिए नया क्षेत्र सेट हो गया है!');
-    }
-
-    function updateBadgeUI(secKey) {
-        let loc = sectionLocations[secKey];
-        let text = `${loc.dist} | ${loc.block} | ${loc.village}`;
-        document.querySelectorAll(`.activeLocText_${secKey}`).forEach(el => {
-            el.textContent = text;
-        });
     }
 
     function toggleSection(id, iconId) {
@@ -378,9 +336,7 @@
         else { sec.style.display = "block"; icon.textContent = "▲"; }
     }
 
-    function openLiveShopsModal() {
-        document.getElementById('liveShopsModal').style.display = 'block';
-    }
+    function openLiveShopsModal() { document.getElementById('liveShopsModal').style.display = 'block'; }
 
     function toggleLanguage() {
         isEnglish = !isEnglish;
@@ -398,20 +354,30 @@
 
     function filterShopList() {
         let query = document.getElementById('shopSearchInput').value.toLowerCase();
-        let items = document.querySelectorAll('.shop-item');
-        items.forEach(item => {
-            let text = item.textContent.toLowerCase();
-            item.style.display = text.includes(query) ? '' : 'none';
+        document.querySelectorAll('.shop-item').forEach(item => {
+            item.style.display = item.textContent.toLowerCase().includes(query) ? '' : 'none';
         });
     }
 
     function filterLocalList() {
         let query = document.getElementById('localSearchInput').value.toLowerCase();
-        let items = document.querySelectorAll('.local-item');
-        items.forEach(item => {
-            let text = item.textContent.toLowerCase();
-            item.style.display = text.includes(query) ? '' : 'none';
+        document.querySelectorAll('.local-item').forEach(item => {
+            item.style.display = item.textContent.toLowerCase().includes(query) ? '' : 'none';
         });
+    }
+
+    // OTP functions
+    function sendShopOTP() {
+        shopOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
+        document.getElementById('shopOtpDisplay').textContent = shopOTPVar;
+        document.getElementById('shopOtpBox').style.display = 'block';
+        alert('सिम्युलेटेड OTP: ' + shopOTPVar);
+    }
+    function verifyShopOTP() {
+        if (document.getElementById('shopOtpInput').value === shopOTPVar) {
+            shopVerified = true;
+            document.getElementById('shopOtpMsg').textContent = "✔ वेरीफाइड!";
+        } else { alert('गलत OTP'); }
     }
 
     function sendLocalOTP() {
@@ -426,46 +392,45 @@
             document.getElementById('localOtpMsg').textContent = "✔ वेरीफाइड!";
         } else { alert('गलत OTP'); }
     }
-    function submitLocalService() {
-        if (!localVerified) { alert('पहले OTP वेरीफाई करें!'); return; }
-        let name = document.getElementById('localName').value.trim();
-        let loc = sectionLocations['sec1B'];
-        if (!name) { alert('नाम दर्ज करें!'); return; }
-        let listDiv = document.getElementById('localDirectoryList');
-        let waText = encodeURIComponent(`देखें ${name}, गाँव ${loc.village}`);
-        
-        let newItemHTML = `<div class="directory-item local-item" data-name="${name}"><b>${name}</b> - गाँव: ${loc.village}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
-        listDiv.insertAdjacentHTML('afterbegin', newItemHTML);
-        alert('निःशुल्क सेवा लाइव हो गई!');
-    }
 
-    function sendShopOTP() {
-        shopOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
-        document.getElementById('shopOtpDisplay').textContent = shopOTPVar;
-        document.getElementById('shopOtpBox').style.display = 'block';
-        alert('सिम्युलेटेड OTP: ' + shopOTPVar);
+    function sendMunadiOTP() {
+        munadiOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
+        document.getElementById('munadiOtpDisplay').textContent = munadiOTPVar;
+        document.getElementById('munadiOtpBox').style.display = 'block';
+        alert('सिम्युलेटेड OTP: ' + munadiOTPVar);
     }
-    function verifyShopOTP() {
-        if (document.getElementById('shopOtpInput').value === shopOTPVar) {
-            shopVerified = true;
-            document.getElementById('shopOtpMsg').textContent = "✔ वेरीफाइड!";
+    function verifyMunadiOTP() {
+        if (document.getElementById('munadiOtpInput').value === munadiOTPVar) {
+            munadiVerified = true;
+            document.getElementById('munadiOtpMsg').textContent = "✔ वेरीफाइड!";
         } else { alert('गलत OTP'); }
     }
 
+    function sendBuySellOTP() {
+        buySellOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
+        document.getElementById('buySellOtpDisplay').textContent = buySellOTPVar;
+        document.getElementById('buySellOtpBox').style.display = 'block';
+        alert('सिम्युलेटेड OTP: ' + buySellOTPVar);
+    }
+    function verifyBuySellOTP() {
+        if (document.getElementById('buySellOtpInput').value === buySellOTPVar) {
+            buySellVerified = true;
+            document.getElementById('buySellOtpMsg').textContent = "✔ वेरीफाइड!";
+        } else { alert('गलत OTP'); }
+    }
+
+    // Submissions
     function submitShopAd() {
         if (!shopVerified) { alert('कृपया पहले मोबाइल नंबर पर OTP वेरीफाई करें!'); return; }
         let name = document.getElementById('shopName').value.trim();
-        if (!name) { alert('कृपया दुकान का नाम दर्ज करें!'); return; }
+        if (!name) { alert('दुकान का नाम दर्ज करें!'); return; }
 
-        let loc = sectionLocations['sec1'];
-        let listDiv = document.getElementById('shopDirectoryList');
-        let waText = encodeURIComponent(`देखें ${name}, गाँव ${loc.village}`);
+        let waText = encodeURIComponent(`देखें ${name}, गाँव ${globalLocation.village}`);
+        let newItemHTML = `<div class="directory-item shop-item" data-name="${name}"><b>${name}</b> - गाँव: ${globalLocation.village} (जिला: ${globalLocation.dist})<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
         
-        let newItemHTML = `<div class="directory-item shop-item" data-name="${name}"><b>${name}</b> - गाँव: ${loc.village} (जिला: ${loc.dist})<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
-        listDiv.insertAdjacentHTML('afterbegin', newItemHTML);
+        document.getElementById('shopDirectoryList').insertAdjacentHTML('afterbegin', newItemHTML);
         document.getElementById('allLiveShopsContainer').insertAdjacentHTML('afterbegin', newItemHTML);
-        
-        alert('✅ आपकी दुकान सफलतापूर्वक लाइव सेव ہو ਗਈ है!');
+        alert('✅ दुकान सफलतापूर्वक लाइव हो गई!');
         document.getElementById('shopName').value = '';
         document.getElementById('shopPhone').value = '';
         document.getElementById('shopOtpInput').value = '';
@@ -473,46 +438,71 @@
         shopVerified = false;
     }
 
+    function submitLocalService() {
+        if (!localVerified) { alert('पहले OTP वेरीफाई करें!'); return; }
+        let name = document.getElementById('localName').value.trim();
+        if (!name) { alert('नाम दर्ज करें!'); return; }
+
+        let waText = encodeURIComponent(`देखें ${name}, गाँव ${globalLocation.village}`);
+        let newItemHTML = `<div class="directory-item local-item" data-name="${name}"><b>${name}</b> - गाँव: ${globalLocation.village}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
+        
+        document.getElementById('localDirectoryList').insertAdjacentHTML('afterbegin', newItemHTML);
+        alert('निःशुल्क सेवा लाइव हो गई!');
+        document.getElementById('localName').value = '';
+        document.getElementById('localPhone').value = '';
+        document.getElementById('localOtpInput').value = '';
+        document.getElementById('localOtpBox').style.display = 'none';
+        localVerified = false;
+    }
+
     function uploadGalleryPhoto() {
         let fileInput = document.getElementById('galleryFile');
         if(fileInput.files && fileInput.files[0]) {
-            let loc = sectionLocations['sec2'];
-            alert(`📸 फोटो (${fileInput.files[0].name}) सफलतापूर्वक गाँव ${loc.village} की गैलरी में अपलोड हो गई!`);
+            alert(`📸 फोटो सफलतापूर्वक गाँव ${globalLocation.village} की गैलरी में अपलोड हो गई!`);
             fileInput.value = '';
         } else { alert('कृपया पहले कोई फोटो चुनें!'); }
     }
 
     function postMunadi() {
+        if (!munadiVerified) { alert('कृपया पहले मुनादी के लिए मोबाइल नंबर OTP से वेरीफाई करें!'); return; }
         let text = document.getElementById('munadiText').value.trim();
-        let loc = sectionLocations['sec3'];
-        if(!text) { alert('कृपया मुनादी का विवरण लिखें!'); return; }
+        if(!text) { alert('मुनादी का विवरण लिखें!'); return; }
 
-        let mList = document.getElementById('munadiList');
-        let waText = encodeURIComponent(`मुनादी (${loc.village}): ${text}`);
-        mList.insertAdjacentHTML('afterbegin', `<div class="directory-item">📢 <b>मुनादी (${loc.village}):</b> ${text}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`);
-        alert('📢 मुनादी पोस्ट हो गई और आपके गाँव में दिखने लगी!');
+        let waText = encodeURIComponent(`मुनादी (${globalLocation.village}): ${text}`);
+        let newItemHTML = `<div class="directory-item">📢 <b>मुनादी (${globalLocation.village}):</b> ${text}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
+        
+        document.getElementById('munadiList').insertAdjacentHTML('afterbegin', newItemHTML);
+        alert('📢 मुनादी पोस्ट हो गई!');
         document.getElementById('munadiText').value = '';
+        document.getElementById('munadiPhone').value = '';
+        document.getElementById('munadiOtpInput').value = '';
+        document.getElementById('munadiOtpBox').style.display = 'none';
+        munadiVerified = false;
     }
 
     function postBuySell() {
+        if (!buySellVerified) { alert('कृपया पहले विज्ञापन के लिए मोबाइल नंबर OTP से वेरीफाई करें!'); return; }
         let item = document.getElementById('buySellItem').value.trim();
         let price = document.getElementById('buySellPrice').value.trim();
         let fileInput = document.getElementById('buySellFile');
-        let loc = sectionLocations['sec4'];
         
-        if(!item) { alert('कृपया वस्तु का विवरण लिखें!'); return; }
+        if(!item) { alert('वस्तु का विवरण लिखें!'); return; }
 
-        let bsList = document.getElementById('buySellList');
         let priceText = price ? ` | मूल्य: ${price}` : '';
-        let photoText = (fileInput.files && fileInput.files[0]) ? ` <br><small style="color:green;">📸 फोटो संलग्न: ${fileInput.files[0].name}</small>` : '';
-        let waText = encodeURIComponent(`खरीदें/बेचें: ${item}${priceText}, गाँव: ${loc.village}`);
+        let photoText = (fileInput.files && fileInput.files[0]) ? ` <br><small style="color:green;">📸 फोटो संलग्न</small>` : '';
+        let waText = encodeURIComponent(`खरीदें/बेचें: ${item}${priceText}, गाँव: ${globalLocation.village}`);
         
-        bsList.insertAdjacentHTML('afterbegin', `<div class="directory-item">🛒 <b>${item}</b>${priceText} ${photoText}<br><small>📍 गाँव: ${loc.village}, ${loc.dist}</small><br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`);
+        let newItemHTML = `<div class="directory-item">🛒 <b>${item}</b>${priceText} ${photoText}<br><small>📍 गाँव: ${globalLocation.village}, ${globalLocation.dist}</small><br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
         
-        alert('✅ आपका विज्ञापन (Buy / Sell) सफलतापूर्वक लाइव पोस्ट हो गया है!');
+        document.getElementById('buySellList').insertAdjacentHTML('afterbegin', newItemHTML);
+        alert('✅ विज्ञापन सफलतापूर्वक लाइव पोस्ट हो गया!');
         document.getElementById('buySellItem').value = '';
         document.getElementById('buySellPrice').value = '';
+        document.getElementById('buySellPhone').value = '';
+        document.getElementById('buySellOtpInput').value = '';
+        document.getElementById('buySellOtpBox').style.display = 'none';
         fileInput.value = '';
+        buySellVerified = false;
     }
 
     function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
