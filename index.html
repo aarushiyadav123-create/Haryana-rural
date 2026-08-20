@@ -92,7 +92,6 @@
             <span>📍 क्षेत्र: <b class="activeLocText_sec1">Charkhi Dadri | Baund | Malkosh</b></span>
             <button class="change-loc-link" onclick="openLocationModal('sec1')">बदलें</button>
         </div>
-        <!-- Live Search Filter -->
         <div class="search-filter">
             <input type="text" id="shopSearchInput" placeholder="🔍 दुकान या नाम से खोजें..." onkeyup="filterShopList()">
         </div>
@@ -182,9 +181,11 @@
             <span>📍 क्षेत्र: <b class="activeLocText_sec3">Charkhi Dadri | Baund | Malkosh</b></span>
             <button class="change-loc-link" onclick="openLocationModal('sec3')">बदलें</button>
         </div>
-        <input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px;">
-        <button class="btn" style="margin-top:8px;" onclick="postMunadi()">मुनादी पोस्ट करें</button>
-        <div id="munadiList" style="margin-top:10px;"></div>
+        <input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px; margin-bottom:8px;">
+        <button class="btn" onclick="postMunadi()">मुनादी पोस्ट करें</button>
+        <div id="munadiList" style="margin-top:10px; max-height: 150px; overflow-y: auto;">
+            <div class="directory-item">📢 <b>मुनादी (Malkosh):</b> कल सुबह पूरे गाँव में बिजली बंद रहेगी।<br><a class="whatsapp-btn" href="https://wa.me/?text=मुनादी:%20कल%20सुबह%20बिजली%20बंद%20रहेगी" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
+        </div>
     </div>
 
     <!-- Accordion 4: Buy / Sell -->
@@ -196,8 +197,12 @@
         </div>
         <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु" style="margin-bottom:8px;">
         <input type="text" id="buySellPrice" placeholder="मूल्य / Price (उदा: ₹ 3,50,000)" style="margin-bottom:8px;">
+        <label style="font-size: 0.8rem; margin-top: 5px;">सामान की फोटो जोड़ें:</label>
+        <input type="file" id="buySellFile" accept="image/*" style="margin-bottom:8px;">
         <button class="btn" onclick="postBuySell()">विज्ञापन पोस्ट करें</button>
-        <div id="buySellList" style="margin-top:10px;"></div>
+        <div id="buySellList" style="margin-top:10px; max-height: 180px; overflow-y: auto;">
+            <div class="directory-item">🛒 <b>पुराना ट्रैक्टर बिक्री हेतु</b> | मूल्य: ₹ 3,50,000<br><small>📍 गाँव: Malkosh, Charkhi Dadri</small><br><a class="whatsapp-btn" href="https://wa.me/?text=खरीदें/बेचें:%20पुराना%20ट्रैक्टर" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
+        </div>
     </div>
 
     <!-- Accordion 5 -->
@@ -391,7 +396,6 @@
         }
     }
 
-    // Live Search Filters
     function filterShopList() {
         let query = document.getElementById('shopSearchInput').value.toLowerCase();
         let items = document.querySelectorAll('.shop-item');
@@ -449,10 +453,7 @@
     }
 
     function submitShopAd() {
-        if (!shopVerified) { 
-            alert('कृपया पहले मोबाइल नंबर पर OTP वेरीफाई करें!'); 
-            return; 
-        }
+        if (!shopVerified) { alert('कृपया पहले मोबाइल नंबर पर OTP वेरीफाई करें!'); return; }
         let name = document.getElementById('shopName').value.trim();
         if (!name) { alert('कृपया दुकान का नाम दर्ज करें!'); return; }
 
@@ -464,7 +465,7 @@
         listDiv.insertAdjacentHTML('afterbegin', newItemHTML);
         document.getElementById('allLiveShopsContainer').insertAdjacentHTML('afterbegin', newItemHTML);
         
-        alert('✅ आपकी दुकान सफलतापूर्वक लाइव सेव हो गई है!');
+        alert('✅ आपकी दुकान सफलतापूर्वक लाइव सेव ہو ਗਈ है!');
         document.getElementById('shopName').value = '';
         document.getElementById('shopPhone').value = '';
         document.getElementById('shopOtpInput').value = '';
@@ -478,9 +479,7 @@
             let loc = sectionLocations['sec2'];
             alert(`📸 फोटो (${fileInput.files[0].name}) सफलतापूर्वक गाँव ${loc.village} की गैलरी में अपलोड हो गई!`);
             fileInput.value = '';
-        } else {
-            alert('कृपया पहले कोई फोटो चुनें!');
-        }
+        } else { alert('कृपया पहले कोई फोटो चुनें!'); }
     }
 
     function postMunadi() {
@@ -498,19 +497,22 @@
     function postBuySell() {
         let item = document.getElementById('buySellItem').value.trim();
         let price = document.getElementById('buySellPrice').value.trim();
+        let fileInput = document.getElementById('buySellFile');
         let loc = sectionLocations['sec4'];
         
         if(!item) { alert('कृपया वस्तु का विवरण लिखें!'); return; }
 
         let bsList = document.getElementById('buySellList');
         let priceText = price ? ` | मूल्य: ${price}` : '';
+        let photoText = (fileInput.files && fileInput.files[0]) ? ` <br><small style="color:green;">📸 फोटो संलग्न: ${fileInput.files[0].name}</small>` : '';
         let waText = encodeURIComponent(`खरीदें/बेचें: ${item}${priceText}, गाँव: ${loc.village}`);
         
-        bsList.insertAdjacentHTML('afterbegin', `<div class="directory-item">🛒 <b>${item}</b>${priceText} <br><small>📍 गाँव: ${loc.village}, ${loc.dist}</small><br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`);
+        bsList.insertAdjacentHTML('afterbegin', `<div class="directory-item">🛒 <b>${item}</b>${priceText} ${photoText}<br><small>📍 गाँव: ${loc.village}, ${loc.dist}</small><br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`);
         
         alert('✅ आपका विज्ञापन (Buy / Sell) सफलतापूर्वक लाइव पोस्ट हो गया है!');
         document.getElementById('buySellItem').value = '';
         document.getElementById('buySellPrice').value = '';
+        fileInput.value = '';
     }
 
     function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
