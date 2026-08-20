@@ -97,7 +97,7 @@
             <div class="directory-item shop-item" data-name="गुप्ता किराना स्टोर"><b>गुप्ता किराना स्टोर</b> (किराना) - गाँव: Malkosh - मो: 9215XXXXXX<br><a class="whatsapp-btn" href="https://wa.me/?text=देखें%20गुप्ता%20किराना%20स्टोर,%20गाँव%20Malkosh" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
-        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान निःशुल्क जोड़ें (OTP Verified):</h3>
+        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान निःशुल्क जोड़ें (Firebase OTP Verified):</h3>
         <div class="form-group">
             <label>व्यवसाय चुनें:</label>
             <select id="shopCategory">
@@ -113,61 +113,17 @@
         <div class="form-group">
             <label>मोबाइल नंबर:</label>
             <input type="tel" id="shopPhone" placeholder="10 अंकों का नंबर" maxlength="10">
-            <button class="btn btn-secondary" onclick="sendShopOTP()">📱 OTP भेजें</button>
+            <button class="btn btn-secondary" onclick="sendFirebaseOTP('shop')">📱 वास्तविक OTP भेजें</button>
         </div>
         <div class="form-group" id="shopOtpBox" style="display:none;">
-            <label>OTP दर्ज करें (कोड: <span id="shopOtpDisplay" style="color:red; font-weight:bold;"></span>):</label>
-            <input type="text" id="shopOtpInput" placeholder="6 अंक">
-            <button class="btn btn-secondary" onclick="verifyShopOTP()">✔ वेरीफाई करें</button>
+            <label>SMS में आया 6 अंकों का OTP दर्ज करें:</label>
+            <input type="text" id="shopOtpInput" placeholder="123456" maxlength="6">
+            <button class="btn btn-secondary" onclick="verifyFirebaseOTP('shop')">✔ OTP वेरीफाई करें</button>
             <p id="shopOtpMsg" class="hint"></p>
         </div>
+        <!-- Hidden container for reCAPTCHA -->
+        <div id="recaptcha-container-shop"></div>
         <button class="btn" onclick="submitShopAd()" style="margin-top: 5px; margin-bottom: 10px;">✅ दुकान लाइव सबमिट करें</button>
-    </div>
-
-    <!-- Accordion 1B: Local Services -->
-    <button class="accordion-btn" onclick="toggleSection('sec1B', 'icon1B')"><span>🛠️ 1B. लोकल श्रेणियाँ (पंडित जी, मेडिकल आदि - निःशुल्क)</span> <span id="icon1B">▼</span></button>
-    <div id="sec1B" class="accordion-content">
-        <div class="location-badge">
-            <span>📍 वर्तमान लाइव क्षेत्र: <b class="globalLocText">Charkhi Dadri | Baund | Malkosh</b></span>
-        </div>
-        <div class="search-filter">
-            <input type="text" id="localSearchInput" placeholder="🔍 पंडित जी या मेडिकल खोजें..." onkeyup="filterLocalList()">
-        </div>
-        <div id="localDirectoryList" style="margin-bottom: 10px; max-height: 150px; overflow-y: auto;">
-            <div class="directory-item local-item" data-name="पं. रामचन्द्र जी"><b>पं. रामचन्द्र जी</b> (पंडित जी) - गाँव: Malkosh - मो: 9896XXXXXX<br><a class="whatsapp-btn" href="https://wa.me/?text=देखें%20पं.%20रामचन्द्र%20जी,%20गाँव%20Malkosh" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
-        </div>
-        <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
-        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी निःशुल्क सेवा यहाँ जोड़ें:</h3>
-        <div class="form-group">
-            <label>श्रेणी:</label>
-            <select id="localCategory"><option value="Pandit Ji">पंडित जी</option><option value="Medical Store">मेडिकल स्टोर</option></select>
-        </div>
-        <div class="form-group">
-            <label>नाम:</label>
-            <input type="text" id="localName" placeholder="नाम दर्ज करें">
-        </div>
-        <div class="form-group">
-            <label>मोबाइल नंबर:</label>
-            <input type="tel" id="localPhone" placeholder="10 अंक" maxlength="10">
-            <button class="btn btn-secondary" onclick="sendLocalOTP()">📱 OTP भेजें</button>
-        </div>
-        <div class="form-group" id="localOtpBox" style="display:none;">
-            <label>OTP: <span id="localOtpDisplay" style="color:red; font-weight:bold;"></span></label>
-            <input type="text" id="localOtpInput" placeholder="OTP">
-            <button class="btn btn-secondary" onclick="verifyLocalOTP()">✔ वेरीफाई</button>
-            <p id="localOtpMsg" class="hint"></p>
-        </div>
-        <button class="btn" onclick="submitLocalService()">✅ निःशुल्क लाइव दर्ज करें</button>
-    </div>
-
-    <!-- Accordion 2: Gallery -->
-    <button class="accordion-btn" onclick="toggleSection('sec2', 'icon2')"><span>📸 2. ग्रामीण गैलरी</span> <span id="icon2">▼</span></button>
-    <div id="sec2" class="accordion-content">
-        <div class="location-badge">
-            <span>📍 वर्तमान लाइव क्षेत्र: <b class="globalLocText">Charkhi Dadri | Baund | Malkosh</b></span>
-        </div>
-        <input type="file" id="galleryFile" accept="image/*" style="margin-top:8px;">
-        <button class="btn" style="margin-top:8px;" onclick="uploadGalleryPhoto()">फोटो अपलोड करें</button>
     </div>
 
     <!-- Accordion 3: Munadi -->
@@ -176,20 +132,22 @@
         <div class="location-badge">
             <span>📍 वर्तमान लाइव क्षेत्र: <b class="globalLocText">Charkhi Dadri | Baund | Malkosh</b></span>
         </div>
+        <h3 style="font-size:0.85rem; color:#1b5e20; margin-bottom:5px;">📜 पुरानी और वर्तमान मुनादियाँ:</h3>
         <div id="munadiList" style="margin-bottom:10px; max-height: 150px; overflow-y: auto;">
             <div class="directory-item">📢 <b>मुनादी (Malkosh):</b> कल सुबह पूरे गाँव में बिजली बंद रहेगी।<br><a class="whatsapp-btn" href="https://wa.me/?text=मुनादी:%20कल%20सुबह%20बिजली%20बंद%20रहेगी" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
-        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ नई मुनादी पोस्ट करें (OTP Verified):</h3>
+        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ नई मुनादी पोस्ट करें (Firebase OTP Verified):</h3>
         <input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-bottom:8px;">
         <input type="tel" id="munadiPhone" placeholder="मोबाईल नंबर (10 अंक)" maxlength="10" style="margin-bottom:8px;">
-        <button class="btn btn-secondary" onclick="sendMunadiOTP()">📱 OTP भेजें</button>
+        <button class="btn btn-secondary" onclick="sendFirebaseOTP('munadi')">📱 वास्तविक OTP भेजें</button>
         <div class="form-group" id="munadiOtpBox" style="display:none; margin-top:8px;">
-            <label>OTP: <span id="munadiOtpDisplay" style="color:red; font-weight:bold;"></span></label>
-            <input type="text" id="munadiOtpInput" placeholder="OTP दर्ज करें">
-            <button class="btn btn-secondary" onclick="verifyMunadiOTP()">✔ वेरीफाई</button>
+            <label>SMS में आया OTP दर्ज करें:</label>
+            <input type="text" id="munadiOtpInput" placeholder="OTP दर्ज करें" maxlength="6">
+            <button class="btn btn-secondary" onclick="verifyFirebaseOTP('munadi')">✔ OTP वेरीफाई</button>
             <p id="munadiOtpMsg" class="hint"></p>
         </div>
+        <div id="recaptcha-container-munadi"></div>
         <button class="btn" onclick="postMunadi()" style="margin-top:8px;">मुनादी पोस्ट करें</button>
     </div>
 
@@ -203,27 +161,27 @@
             <div class="directory-item">🛒 <b>पुराना ट्रैक्टर बिक्री हेतु</b> | मूल्य: ₹ 3,50,000<br><small>📍 गाँव: Malkosh, Charkhi Dadri</small><br><a class="whatsapp-btn" href="https://wa.me/?text=खरीदें/बेचें:%20पुराना%20ट्रैक्टर" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
-        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ नया विज्ञापन जोड़ें (OTP Verified):</h3>
+        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ नया विज्ञापन जोड़ें (Firebase OTP Verified):</h3>
         <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु" style="margin-bottom:8px;">
         <input type="text" id="buySellPrice" placeholder="मूल्य / Price (उदा: ₹ 3,50,000)" style="margin-bottom:8px;">
         <label style="font-size: 0.8rem; margin-top: 5px;">सामान की फोटो:</label>
         <input type="file" id="buySellFile" accept="image/*" style="margin-bottom:8px;">
         <input type="tel" id="buySellPhone" placeholder="मोबाइल नंबर (10 अंक)" maxlength="10" style="margin-bottom:8px;">
-        <button class="btn btn-secondary" onclick="sendBuySellOTP()">📱 OTP भेजें</button>
+        <button class="btn btn-secondary" onclick="sendFirebaseOTP('buysell')">📱 वास्तविक OTP भेजें</button>
         <div class="form-group" id="buySellOtpBox" style="display:none; margin-top:8px;">
-            <label>OTP: <span id="buySellOtpDisplay" style="color:red; font-weight:bold;"></span></label>
-            <input type="text" id="buySellOtpInput" placeholder="OTP दर्ज करें">
-            <button class="btn btn-secondary" onclick="verifyBuySellOTP()">✔ वेरीफाई</button>
+            <label>SMS में आया OTP दर्ज करें:</label>
+            <input type="text" id="buySellOtpInput" placeholder="OTP दर्ज करें" maxlength="6">
+            <button class="btn btn-secondary" onclick="verifyFirebaseOTP('buysell')">✔ OTP वेरीफाई</button>
             <p id="buySellOtpMsg" class="hint"></p>
         </div>
+        <div id="recaptcha-container-buysell"></div>
         <button class="btn" onclick="postBuySell()" style="margin-top:8px;">विज्ञापन पोस्ट करें</button>
     </div>
 
-    <!-- Accordion 5 -->
+    <!-- Accordion 5 & 6 -->
     <button class="accordion-btn" onclick="toggleSection('sec5', 'icon5')"><span>🏛️ 5. हरियाणा सरकारी योजनाएं</span> <span id="icon5">▼</span></button>
     <div id="sec5" class="accordion-content"><p>HKRN, परिवार पहचान पत्र और पेंशन योजना अपडेट।</p><a href="https://hrygs.gov.in" target="_blank" style="color:#1b5e20; font-weight:bold; display:block; margin-top:8px;">🔗 आधिकारिक पोर्टल</a></div>
 
-    <!-- Accordion 6 -->
     <button class="accordion-btn" onclick="toggleSection('sec6', 'icon6')"><span>🎭 6. ग्रामीण मनोरंजन और संस्कृति</span> <span id="icon6">▼</span></button>
     <div id="sec6" class="accordion-content"><p>हरियाणवी रागिनी, लोक गीत और वीडियो क्लिप्स।</p><button class="btn" style="margin-top:8px;" onclick="alert('मनोरंजन वीडियो लोड हो रहे हैं!')">वीडियो देखें</button></div>
 
@@ -232,32 +190,31 @@
     </footer>
 </div>
 
-<!-- Live Shops Modal -->
-<div id="liveShopsModal" class="modal">
-    <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
-        <span class="close" onclick="closeModals()">&times;</span>
-        <h2 style="color: #1b5e20; margin-bottom: 10px;">🏪 लाइव दुकानें (Live Shops Directory)</h2>
-        <div id="allLiveShopsContainer">
-            <div class="directory-item"><b>गुप्ता किराना स्टोर</b> - गाँव: Malkosh (मो: 9215XXXXXX)<br><a class="whatsapp-btn" href="https://wa.me/?text=देखें%20गुप्ता%20किराना%20स्टोर,%20गाँव%20Malkosh" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
-            <div class="directory-item"><b>शर्मा गारमेंट्स</b> - गाँव: Malkosh (मो: 9812XXXXXX)<br><a class="whatsapp-btn" href="https://wa.me/?text=देखें%20शर्मा%20गारमेंट्स,%20गाँव%20Malkosh" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
-        </div>
-    </div>
-</div>
+<!-- Modals -->
+<div id="liveShopsModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20; margin-bottom: 10px;">🏪 लाइव दुकानें</h2><div id="allLiveShopsContainer"><div class="directory-item"><b>गुप्ता किराना स्टोर</b> - गाँव: Malkosh</div></div></div></div>
+<div id="menuModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">📌 मेनू</h2></div></div>
 
-<!-- Other Modals -->
-<div id="menuModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20; margin-bottom: 10px;">📌 मेनू</h2><ul style="list-style: none; line-height: 2; font-size: 0.95rem;"><li><a href="#" onclick="openAboutModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">ℹ️ About Founder</a></li><li><a href="#" onclick="openPrivacyModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔒 Privacy Policy</a></li></ul></div></div>
-<div id="aboutModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">ℹ️ संस्थापक</h2><p style="font-weight: bold; font-size: 1.1rem; margin-top: 10px;">Kusum w/o Rajesh Yadav</p><p style="font-size: 0.85rem; color: #666;">गाँव: <b>Malkosh</b></p></div></div>
-<div id="privacyModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">🔒 Privacy Policy</h2><p style="font-size: 0.8rem; line-height: 1.5;">Digital Gram Haryana respects your privacy. Mobile numbers and listings are managed securely.</p></div></div>
-
-<!-- Scripts -->
+<!-- Firebase SDK Scripts -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script src="haryana-villages-complete.js"></script>
+
 <script>
+    // --- FIREBASE CONFIGURATION (Apna Firebase Project Key yahan dalein) ---
+    const firebaseConfig = {
+        apiKey: "YOUR_FIREBASE_API_KEY",
+        authDomain: "your-project.firebaseapp.com",
+        projectId: "your-project-id",
+        storageBucket: "your-project.appspot.com",
+        messagingSenderId: "SENDER_ID",
+        appId: "APP_ID"
+    };
+    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+
     let currentData = {};
     let globalLocation = { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" };
-    
-    let localOTPVar = "", shopOTPVar = "", munadiOTPVar = "", buySellOTPVar = "";
-    let localVerified = false, shopVerified = false, munadiVerified = false, buySellVerified = false;
-    let isEnglish = false;
+    let confirmationResults = {};
+    let verifiedStatus = { shop: false, munadi: false, buysell: false };
 
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof haryana_complete_database !== 'undefined') {
@@ -317,154 +274,90 @@
         if (!dist || !block || !v) { alert('कृपया जिला, ब्लॉक और गाँव सही से चुनें!'); return; }
         
         globalLocation = { dist: dist, block: block, village: v };
-        
-        // Update all badges globally
-        document.querySelectorAll('.globalLocText').forEach(el => {
-            el.textContent = `${dist} | ${block} | ${v}`;
-        });
-
+        document.querySelectorAll('.globalLocText').forEach(el => { el.textContent = `${dist} | ${block} | ${v}`; });
         document.getElementById('displayVillageName').textContent = v;
-        let locText = `जिला: ${dist} | ब्लॉक: ${block} | गाँव: ${v}`;
-        document.getElementById('resultBox').innerHTML = `📍 मुख्य क्षेत्र सेट हुआ: <b>${locText}</b>`;
+        document.getElementById('resultBox').innerHTML = `📍 मुख्य क्षेत्र सेट हुआ: <b>जिला: ${dist} | ब्लॉक: ${block} | गाँव: ${v}</b>`;
         document.getElementById('resultBox').style.display = 'block';
     }
 
     function toggleSection(id, iconId) {
         let sec = document.getElementById(id);
         let icon = document.getElementById(iconId);
-        if (sec.style.display === "block") { sec.style.display = "none"; icon.textContent = "▼"; }
-        else { sec.style.display = "block"; icon.textContent = "▲"; }
+        sec.style.display = (sec.style.display === "block") ? "none" : "block";
+        icon.textContent = (sec.style.display === "block") ? "▲" : "▼";
     }
 
-    function openLiveShopsModal() { document.getElementById('liveShopsModal').style.display = 'block'; }
-
-    function toggleLanguage() {
-        isEnglish = !isEnglish;
-        let btn = document.querySelector('.lang-btn-right');
-        if (isEnglish) {
-            btn.textContent = "🌐 हिन्दी";
-            document.getElementById('txtWelcome').textContent = "Welcome brothers to your village portal!";
-            document.getElementById('txtSelectTitle').textContent = "🔍 Select Main District, Block & Village";
-        } else {
-            btn.textContent = "🌐 English";
-            document.getElementById('txtWelcome').textContent = "राम राम भाइयों, आपके अपने गाँव में आपका स्वागत है";
-            document.getElementById('txtSelectTitle').textContent = "🔍 मुख्य जिला, खण्ड और गाँव चुनें";
+    // --- FIREBASE PHONE AUTHENTICATION FUNCTIONS ---
+    function initRecaptcha(sectionKey) {
+        if (!window.recaptchaVerifierMap) { window.recaptchaVerifierMap = {}; }
+        if (!window.recaptchaVerifierMap[sectionKey]) {
+            window.recaptchaVerifierMap[sectionKey] = new firebase.auth.RecaptchaVerifier(`recaptcha-container-${sectionKey}`, {
+                'size': 'invisible'
+            });
         }
     }
 
-    function filterShopList() {
-        let query = document.getElementById('shopSearchInput').value.toLowerCase();
-        document.querySelectorAll('.shop-item').forEach(item => {
-            item.style.display = item.textContent.toLowerCase().includes(query) ? '' : 'none';
+    function sendFirebaseOTP(sectionKey) {
+        let phoneInputId = sectionKey === 'shop' ? 'shopPhone' : (sectionKey === 'munadi' ? 'munadiPhone' : 'buySellPhone');
+        let phoneNumber = document.getElementById(phoneInputId).value.trim();
+
+        if (phoneNumber.length !== 10) {
+            alert('कृपया 10 अंकों का सही मोबाइल नंबर दर्ज करें!');
+            return;
+        }
+
+        initRecaptcha(sectionKey);
+        let appVerifier = window.recaptchaVerifierMap[sectionKey];
+        let formattedPhone = "+91" + phoneNumber;
+
+        firebase.auth().signInWithPhoneNumber(formattedPhone, appVerifier)
+            .then((confirmationResult) => {
+                confirmationResults[sectionKey] = confirmationResult;
+                document.getElementById(`${sectionKey}OtpBox`).style.display = 'block';
+                alert('📱 वास्तविक (Real) SMS OTP आपके मोबाइल पर भेज दिया गया है!');
+            })
+            .catch((error) => {
+                console.error("SMS Error:", error);
+                alert('OTP भेजने में असफल: ' + error.message);
+            });
+    }
+
+    function verifyFirebaseOTP(sectionKey) {
+        let otpInputId = sectionKey === 'shop' ? 'shopOtpInput' : (sectionKey === 'munadi' ? 'munadiOtpInput' : 'buySellOtpInput');
+        let code = document.getElementById(otpInputId).value.trim();
+
+        if (!code || code.length !== 6) {
+            alert('कृपया 6 अंकों का सही OTP दर्ज करें!');
+            return;
+        }
+
+        confirmationResults[sectionKey].confirm(code).then((result) => {
+            verifiedStatus[sectionKey] = true;
+            document.getElementById(`${sectionKey}OtpMsg`).textContent = "✔ मोबाइल नंबर सफलतापूर्वक वेरीफाई हो गया!";
+            alert('✔ वेरिफ़िकेशन सफल!');
+        }).catch((error) => {
+            alert('गलत OTP कोड! कृपया दोबारा जाँच करें।');
         });
     }
 
-    function filterLocalList() {
-        let query = document.getElementById('localSearchInput').value.toLowerCase();
-        document.querySelectorAll('.local-item').forEach(item => {
-            item.style.display = item.textContent.toLowerCase().includes(query) ? '' : 'none';
-        });
-    }
-
-    // OTP functions
-    function sendShopOTP() {
-        shopOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
-        document.getElementById('shopOtpDisplay').textContent = shopOTPVar;
-        document.getElementById('shopOtpBox').style.display = 'block';
-        alert('सिम्युलेटेड OTP: ' + shopOTPVar);
-    }
-    function verifyShopOTP() {
-        if (document.getElementById('shopOtpInput').value === shopOTPVar) {
-            shopVerified = true;
-            document.getElementById('shopOtpMsg').textContent = "✔ वेरीफाइड!";
-        } else { alert('गलत OTP'); }
-    }
-
-    function sendLocalOTP() {
-        localOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
-        document.getElementById('localOtpDisplay').textContent = localOTPVar;
-        document.getElementById('localOtpBox').style.display = 'block';
-        alert('सिम्युलेटेड OTP: ' + localOTPVar);
-    }
-    function verifyLocalOTP() {
-        if (document.getElementById('localOtpInput').value === localOTPVar) {
-            localVerified = true;
-            document.getElementById('localOtpMsg').textContent = "✔ वेरीफाइड!";
-        } else { alert('गलत OTP'); }
-    }
-
-    function sendMunadiOTP() {
-        munadiOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
-        document.getElementById('munadiOtpDisplay').textContent = munadiOTPVar;
-        document.getElementById('munadiOtpBox').style.display = 'block';
-        alert('सिम्युलेटेड OTP: ' + munadiOTPVar);
-    }
-    function verifyMunadiOTP() {
-        if (document.getElementById('munadiOtpInput').value === munadiOTPVar) {
-            munadiVerified = true;
-            document.getElementById('munadiOtpMsg').textContent = "✔ वेरीफाइड!";
-        } else { alert('गलत OTP'); }
-    }
-
-    function sendBuySellOTP() {
-        buySellOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
-        document.getElementById('buySellOtpDisplay').textContent = buySellOTPVar;
-        document.getElementById('buySellOtpBox').style.display = 'block';
-        alert('सिम्युलेटेड OTP: ' + buySellOTPVar);
-    }
-    function verifyBuySellOTP() {
-        if (document.getElementById('buySellOtpInput').value === buySellOTPVar) {
-            buySellVerified = true;
-            document.getElementById('buySellOtpMsg').textContent = "✔ वेरीफाइड!";
-        } else { alert('गलत OTP'); }
-    }
-
-    // Submissions
+    // Submissions after OTP Verification
     function submitShopAd() {
-        if (!shopVerified) { alert('कृपया पहले मोबाइल नंबर पर OTP वेरीफाई करें!'); return; }
+        if (!verifiedStatus.shop) { alert('कृपया पहले Firebase से मोबाइल नंबर OTP वेरीफाई करें!'); return; }
         let name = document.getElementById('shopName').value.trim();
         if (!name) { alert('दुकान का नाम दर्ज करें!'); return; }
 
-        let waText = encodeURIComponent(`देखें ${name}, गाँव ${globalLocation.village}`);
-        let newItemHTML = `<div class="directory-item shop-item" data-name="${name}"><b>${name}</b> - गाँव: ${globalLocation.village} (जिला: ${globalLocation.dist})<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
+        let waText = encodeURIComponent(`देखें दुकान ${name}, गाँव ${globalLocation.village}`);
+        let newItemHTML = `<div class="directory-item shop-item"><b>${name}</b> - गाँव: ${globalLocation.village}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
         
         document.getElementById('shopDirectoryList').insertAdjacentHTML('afterbegin', newItemHTML);
-        document.getElementById('allLiveShopsContainer').insertAdjacentHTML('afterbegin', newItemHTML);
         alert('✅ दुकान सफलतापूर्वक लाइव हो गई!');
         document.getElementById('shopName').value = '';
-        document.getElementById('shopPhone').value = '';
-        document.getElementById('shopOtpInput').value = '';
+        verifiedStatus.shop = false;
         document.getElementById('shopOtpBox').style.display = 'none';
-        shopVerified = false;
-    }
-
-    function submitLocalService() {
-        if (!localVerified) { alert('पहले OTP वेरीफाई करें!'); return; }
-        let name = document.getElementById('localName').value.trim();
-        if (!name) { alert('नाम दर्ज करें!'); return; }
-
-        let waText = encodeURIComponent(`देखें ${name}, गाँव ${globalLocation.village}`);
-        let newItemHTML = `<div class="directory-item local-item" data-name="${name}"><b>${name}</b> - गाँव: ${globalLocation.village}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
-        
-        document.getElementById('localDirectoryList').insertAdjacentHTML('afterbegin', newItemHTML);
-        alert('निःशुल्क सेवा लाइव हो गई!');
-        document.getElementById('localName').value = '';
-        document.getElementById('localPhone').value = '';
-        document.getElementById('localOtpInput').value = '';
-        document.getElementById('localOtpBox').style.display = 'none';
-        localVerified = false;
-    }
-
-    function uploadGalleryPhoto() {
-        let fileInput = document.getElementById('galleryFile');
-        if(fileInput.files && fileInput.files[0]) {
-            alert(`📸 फोटो सफलतापूर्वक गाँव ${globalLocation.village} की गैलरी में अपलोड हो गई!`);
-            fileInput.value = '';
-        } else { alert('कृपया पहले कोई फोटो चुनें!'); }
     }
 
     function postMunadi() {
-        if (!munadiVerified) { alert('कृपया पहले मुनादी के लिए मोबाइल नंबर OTP से वेरीफाई करें!'); return; }
+        if (!verifiedStatus.munadi) { alert('कृपया पहले मुनादी के लिए मोबाइल नंबर OTP वेरीफाई करें!'); return; }
         let text = document.getElementById('munadiText').value.trim();
         if(!text) { alert('मुनादी का विवरण लिखें!'); return; }
 
@@ -474,40 +367,30 @@
         document.getElementById('munadiList').insertAdjacentHTML('afterbegin', newItemHTML);
         alert('📢 मुनादी पोस्ट हो गई!');
         document.getElementById('munadiText').value = '';
-        document.getElementById('munadiPhone').value = '';
-        document.getElementById('munadiOtpInput').value = '';
+        verifiedStatus.munadi = false;
         document.getElementById('munadiOtpBox').style.display = 'none';
-        munadiVerified = false;
     }
 
     function postBuySell() {
-        if (!buySellVerified) { alert('कृपया पहले विज्ञापन के लिए मोबाइल नंबर OTP से वेरीफाई करें!'); return; }
+        if (!verifiedStatus.buysell) { alert('कृपया पहले विज्ञापन के लिए मोबाइल नंबर OTP वेरीफाई करें!'); return; }
         let item = document.getElementById('buySellItem').value.trim();
         let price = document.getElementById('buySellPrice').value.trim();
-        let fileInput = document.getElementById('buySellFile');
-        
         if(!item) { alert('वस्तु का विवरण लिखें!'); return; }
 
         let priceText = price ? ` | मूल्य: ${price}` : '';
-        let photoText = (fileInput.files && fileInput.files[0]) ? ` <br><small style="color:green;">📸 फोटो संलग्न</small>` : '';
         let waText = encodeURIComponent(`खरीदें/बेचें: ${item}${priceText}, गाँव: ${globalLocation.village}`);
         
-        let newItemHTML = `<div class="directory-item">🛒 <b>${item}</b>${priceText} ${photoText}<br><small>📍 गाँव: ${globalLocation.village}, ${globalLocation.dist}</small><br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
+        let newItemHTML = `<div class="directory-item">🛒 <b>${item}</b>${priceText}<br><small>📍 गाँव: ${globalLocation.village}</small><br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
         
         document.getElementById('buySellList').insertAdjacentHTML('afterbegin', newItemHTML);
         alert('✅ विज्ञापन सफलतापूर्वक लाइव पोस्ट हो गया!');
         document.getElementById('buySellItem').value = '';
-        document.getElementById('buySellPrice').value = '';
-        document.getElementById('buySellPhone').value = '';
-        document.getElementById('buySellOtpInput').value = '';
+        verifiedStatus.buysell = false;
         document.getElementById('buySellOtpBox').style.display = 'none';
-        fileInput.value = '';
-        buySellVerified = false;
     }
 
+    function openLiveShopsModal() { document.getElementById('liveShopsModal').style.display = 'block'; }
     function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
-    function openAboutModal() { closeModals(); document.getElementById('aboutModal').style.display = 'block'; }
-    function openPrivacyModal() { closeModals(); document.getElementById('privacyModal').style.display = 'block'; }
     function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
     window.onclick = e => { if (e.target.classList.contains('modal')) closeModals(); }
 </script>
