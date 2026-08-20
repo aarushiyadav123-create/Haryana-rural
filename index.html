@@ -1,4 +1,3 @@
-
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
@@ -161,8 +160,8 @@
             <span>📍 क्षेत्र: <b class="activeLocText_sec2">Charkhi Dadri | Baund | Malkosh</b></span>
             <button class="change-loc-link" onclick="openLocationModal('sec2')">बदलें</button>
         </div>
-        <input type="file" accept="image/*" style="margin-top:8px;">
-        <button class="btn" style="margin-top:8px;" onclick="alert('फोटो गैलरी में अपलोड हो गई!')">फोटो अपलोड करें</button>
+        <input type="file" id="galleryFile" accept="image/*" style="margin-top:8px;">
+        <button class="btn" style="margin-top:8px;" onclick="uploadGalleryPhoto()">फोटो अपलोड करें</button>
     </div>
 
     <!-- Accordion 3: Munadi -->
@@ -173,7 +172,8 @@
             <button class="change-loc-link" onclick="openLocationModal('sec3')">बदलें</button>
         </div>
         <input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px;">
-        <button class="btn" style="margin-top:8px;" onclick="alert('मुनादी पोस्ट हो गई!')">मुनादी पोस्ट करें</button>
+        <button class="btn" style="margin-top:8px;" onclick="postMunadi()">मुनादी पोस्ट करें</button>
+        <div id="munadiList" style="margin-top:10px;"></div>
     </div>
 
     <!-- Accordion 4: Buy / Sell -->
@@ -183,8 +183,10 @@
             <span>📍 क्षेत्र: <b class="activeLocText_sec4">Charkhi Dadri | Baund | Malkosh</b></span>
             <button class="change-loc-link" onclick="openLocationModal('sec4')">बदलें</button>
         </div>
-        <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु" style="margin-bottom:8px;">
-        <button class="btn" onclick="alert('विज्ञापन लाइव पोस्ट हो गया!')">विज्ञापन पोस्ट करें</button>
+        <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु (मूल्य सहित)" style="margin-bottom:8px;">
+        <input type="text" id="buySellPrice" placeholder="मूल्य / Price (उदा: ₹ 3,50,000)" style="margin-bottom:8px;">
+        <button class="btn" onclick="postBuySell()">विज्ञापन पोस्ट करें</button>
+        <div id="buySellList" style="margin-top:10px;"></div>
     </div>
 
     <!-- Accordion 5 -->
@@ -419,25 +421,59 @@
             return; 
         }
         let name = document.getElementById('shopName').value.trim();
-
-        if (!name) { 
-            alert('कृपया दुकान का नाम दर्ज करें!'); 
-            return; 
-        }
+        if (!name) { alert('कृपया दुकान का नाम दर्ज करें!'); return; }
 
         let loc = sectionLocations['sec1'];
         let listDiv = document.getElementById('shopDirectoryList');
         
-        listDiv.insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - जिला: ${loc.dist}, गाँव: ${loc.village}</div>`);
-        document.getElementById('allLiveShopsContainer').insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - जिला: ${loc.dist}, गाँव: ${loc.village}</div>`);
+        let newItemHTML = `<div class="directory-item"><b>${name}</b> - गाँव: ${loc.village} (जिला: ${loc.dist})</div>`;
+        listDiv.insertAdjacentHTML('afterbegin', newItemHTML);
+        document.getElementById('allLiveShopsContainer').insertAdjacentHTML('afterbegin', newItemHTML);
         
         alert('✅ आपकी दुकान सफलतापूर्वक लाइव सेव हो गई है!');
-        
         document.getElementById('shopName').value = '';
         document.getElementById('shopPhone').value = '';
         document.getElementById('shopOtpInput').value = '';
         document.getElementById('shopOtpBox').style.display = 'none';
         shopVerified = false;
+    }
+
+    function uploadGalleryPhoto() {
+        let fileInput = document.getElementById('galleryFile');
+        if(fileInput.files && fileInput.files[0]) {
+            let loc = sectionLocations['sec2'];
+            alert(`📸 फोटो (${fileInput.files[0].name}) सफलतापूर्वक गाँव ${loc.village} की गैलरी में अपलोड हो गई!`);
+            fileInput.value = '';
+        } else {
+            alert('कृपया पहले कोई फोटो चुनें!');
+        }
+    }
+
+    function postMunadi() {
+        let text = document.getElementById('munadiText').value.trim();
+        let loc = sectionLocations['sec3'];
+        if(!text) { alert('कृपया मुनादी का विवरण लिखें!'); return; }
+
+        let mList = document.getElementById('munadiList');
+        mList.insertAdjacentHTML('afterbegin', `<div class="directory-item">📢 <b>मुनादी (${loc.village}):</b> ${text}</div>`);
+        alert('📢 मुनादी पोस्ट हो गई और आपके गाँव में दिखने लगी!');
+        document.getElementById('munadiText').value = '';
+    }
+
+    function postBuySell() {
+        let item = document.getElementById('buySellItem').value.trim();
+        let price = document.getElementById('buySellPrice').value.trim();
+        let loc = sectionLocations['sec4'];
+        
+        if(!item) { alert('कृपया वस्तु का विवरण लिखें!'); return; }
+
+        let bsList = document.getElementById('buySellList');
+        let priceText = price ? ` | मूल्य: ${price}` : '';
+        bsList.insertAdjacentHTML('afterbegin', `<div class="directory-item">🛒 <b>${item}</b>${priceText} <br><small>📍 गाँव: ${loc.village}, ${loc.dist}</small></div>`);
+        
+        alert('✅ आपका विज्ञापन (Buy / Sell) सफलतापूर्वक लाइव पोस्ट हो गया है!');
+        document.getElementById('buySellItem').value = '';
+        document.getElementById('buySellPrice').value = '';
     }
 
     function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
