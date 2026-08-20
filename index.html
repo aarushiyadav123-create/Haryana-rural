@@ -1,5 +1,23 @@
 <html lang="hi">
 <head>
+       <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDMYacgjfB6gW3J51v7Jyu3bpJenplONzo",
+        authDomain: "mera-gaov.firebaseapp.com",
+        projectId: "mera-gaov",
+        storageBucket: "mera-gaov.firebasestorage.app",
+        messagingSenderId: "574021786245",
+        appId: "1:574021786245:web:7f4c042f347d0cab54a7ec",
+        measurementId: "G-757L4D3657"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+ 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>मेरा गाँव Malkosh - हरियाणा ग्रामीण सेवा पोर्टल</title>
