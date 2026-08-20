@@ -1,21 +1,21 @@
 <html lang="hi">
 <head>
-       <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyDMYacgjfB6gW3J51v7Jyu3bpJenplONzo",
-        authDomain: "mera-gaov.firebaseapp.com",
-        projectId: "mera-gaov",
-        storageBucket: "mera-gaov.firebasestorage.app",
-        messagingSenderId: "574021786245",
-        appId: "1:574021786245:web:7f4c042f347d0cab54a7ec",
-        measurementId: "G-757L4D3657"
-      };
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMYacgjfB6gW3J51v7Jyu3bpJenplONzo",
+            authDomain: "mera-gaov.firebaseapp.com",
+            projectId: "mera-gaov",
+            storageBucket: "mera-gaov.firebasestorage.app",
+            messagingSenderId: "574021786245",
+            appId: "1:574021786245:web:7f4c042f347d0cab54a7ec",
+            measurementId: "G-757L4D3657"
+        };
 
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
     </script>
  
     <meta charset="UTF-8">
@@ -139,7 +139,7 @@
             <button class="btn btn-secondary" onclick="verifyFirebaseOTP('shop')">✔ OTP वेरीफाई करें</button>
             <p id="shopOtpMsg" class="hint"></p>
         </div>
-        <!-- Hidden container for reCAPTCHA -->
+        <!-- reCAPTCHA Container added -->
         <div id="recaptcha-container-shop"></div>
         <button class="btn" onclick="submitShopAd()" style="margin-top: 5px; margin-bottom: 10px;">✅ दुकान लाइव सबमिट करें</button>
     </div>
@@ -165,6 +165,7 @@
             <button class="btn btn-secondary" onclick="verifyFirebaseOTP('munadi')">✔ OTP वेरीफाई</button>
             <p id="munadiOtpMsg" class="hint"></p>
         </div>
+        <!-- reCAPTCHA Container added -->
         <div id="recaptcha-container-munadi"></div>
         <button class="btn" onclick="postMunadi()" style="margin-top:8px;">मुनादी पोस्ट करें</button>
     </div>
@@ -192,6 +193,7 @@
             <button class="btn btn-secondary" onclick="verifyFirebaseOTP('buysell')">✔ OTP वेरीफाई</button>
             <p id="buySellOtpMsg" class="hint"></p>
         </div>
+        <!-- reCAPTCHA Container added -->
         <div id="recaptcha-container-buysell"></div>
         <button class="btn" onclick="postBuySell()" style="margin-top:8px;">विज्ञापन पोस्ट करें</button>
     </div>
@@ -218,14 +220,14 @@
 <script src="haryana-villages-complete.js"></script>
 
 <script>
-    // --- FIREBASE CONFIGURATION (Apna Firebase Project Key yahan dalein) ---
+    // --- FIREBASE CONFIGURATION ---
     const firebaseConfig = {
-        apiKey: "YOUR_FIREBASE_API_KEY",
-        authDomain: "your-project.firebaseapp.com",
-        projectId: "your-project-id",
-        storageBucket: "your-project.appspot.com",
-        messagingSenderId: "SENDER_ID",
-        appId: "APP_ID"
+        apiKey: "AIzaSyDMYacgjfB6gW3J51v7Jyu3bpJenplONzo",
+        authDomain: "mera-gaov.firebaseapp.com",
+        projectId: "mera-gaov",
+        storageBucket: "mera-gaov.firebasestorage.app",
+        messagingSenderId: "574021786245",
+        appId: "1:574021786245:web:7f4c042f347d0cab54a7ec"
     };
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
 
@@ -305,7 +307,7 @@
         icon.textContent = (sec.style.display === "block") ? "▲" : "▼";
     }
 
-    // --- FIREBASE PHONE AUTHENTICATION FUNCTIONS ---
+    // --- FIREBASE PHONE AUTHENTICATION FUNCTIONS WITH RECAPTCHA ---
     function initRecaptcha(sectionKey) {
         if (!window.recaptchaVerifierMap) { window.recaptchaVerifierMap = {}; }
         if (!window.recaptchaVerifierMap[sectionKey]) {
