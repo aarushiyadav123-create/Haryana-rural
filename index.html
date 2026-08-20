@@ -26,10 +26,14 @@
         select, input[type="text"], input[type="tel"], input[type="file"] { width: 100%; padding: 8px; border: 2px solid #b0bec5; border-radius: 6px; font-size: 0.9rem; outline: none; background: #fff; }
         select:focus, input:focus { border-color: #1b5e20; box-shadow: 0 0 0 2px rgba(27, 94, 32, 0.1); }
         
+        .search-filter { margin-bottom: 10px; }
+        .search-filter input { border-color: #2e7d32; background: #f1f8e9; }
+
         .btn { background: linear-gradient(135deg, #1b5e20 0%, #0d3817 100%); color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 0.95rem; cursor: pointer; margin-top: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
         .btn:hover { background: #0d3817; }
         .btn-secondary { background: #ff9800; color: white; margin-top: 4px; padding: 8px; font-size: 0.85rem; }
         .btn-view-live { background: #0288d1; margin-bottom: 10px; }
+        .whatsapp-btn { background: #25d366; color: white; border: none; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 4px; }
         
         .accordion-btn { background: #1b5e20; color: white; width: 100%; padding: 12px; border: none; border-radius: 6px; text-align: left; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #ffeb3b; }
         .accordion-content { display: none; padding: 12px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 6px 6px; margin-top: -4px; }
@@ -88,8 +92,12 @@
             <span>📍 क्षेत्र: <b class="activeLocText_sec1">Charkhi Dadri | Baund | Malkosh</b></span>
             <button class="change-loc-link" onclick="openLocationModal('sec1')">बदलें</button>
         </div>
-        <div id="shopDirectoryList" style="margin-bottom: 10px; max-height: 120px; overflow-y: auto;">
-            <div class="directory-item"><b>गुप्ता किराना स्टोर</b> (किराना) - गाँव: Malkosh - मो: 9215XXXXXX</div>
+        <!-- Live Search Filter -->
+        <div class="search-filter">
+            <input type="text" id="shopSearchInput" placeholder="🔍 दुकान या नाम से खोजें..." onkeyup="filterShopList()">
+        </div>
+        <div id="shopDirectoryList" style="margin-bottom: 10px; max-height: 140px; overflow-y: auto;">
+            <div class="directory-item shop-item" data-name="गुप्ता किराना स्टोर"><b>गुप्ता किराना स्टोर</b> (किराना) - गाँव: Malkosh - मो: 9215XXXXXX<br><a class="whatsapp-btn" href="https://wa.me/?text=देखें%20गुप्ता%20किराना%20स्टोर,%20गाँव%20Malkosh" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
         <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान निःशुल्क जोड़ें:</h3>
@@ -126,8 +134,11 @@
             <span>📍 क्षेत्र: <b class="activeLocText_sec1B">Charkhi Dadri | Baund | Malkosh</b></span>
             <button class="change-loc-link" onclick="openLocationModal('sec1B')">बदलें</button>
         </div>
+        <div class="search-filter">
+            <input type="text" id="localSearchInput" placeholder="🔍 पंडित जी या मेडिकल खोजें..." onkeyup="filterLocalList()">
+        </div>
         <div id="localDirectoryList" style="margin-bottom: 10px; max-height: 150px; overflow-y: auto;">
-            <div class="directory-item"><b>पं. रामचन्द्र जी</b> (पंडित जी) - गाँव: Malkosh - मो: 9896XXXXXX</div>
+            <div class="directory-item local-item" data-name="पं. रामचन्द्र जी"><b>पं. रामचन्द्र जी</b> (पंडित जी) - गाँव: Malkosh - मो: 9896XXXXXX<br><a class="whatsapp-btn" href="https://wa.me/?text=देखें%20पं.%20रामचन्द्र%20जी,%20गाँव%20Malkosh" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
         <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी निःशुल्क सेवा यहाँ जोड़ें:</h3>
@@ -183,7 +194,7 @@
             <span>📍 क्षेत्र: <b class="activeLocText_sec4">Charkhi Dadri | Baund | Malkosh</b></span>
             <button class="change-loc-link" onclick="openLocationModal('sec4')">बदलें</button>
         </div>
-        <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु (मूल्य सहित)" style="margin-bottom:8px;">
+        <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु" style="margin-bottom:8px;">
         <input type="text" id="buySellPrice" placeholder="मूल्य / Price (उदा: ₹ 3,50,000)" style="margin-bottom:8px;">
         <button class="btn" onclick="postBuySell()">विज्ञापन पोस्ट करें</button>
         <div id="buySellList" style="margin-top:10px;"></div>
@@ -233,8 +244,8 @@
         <span class="close" onclick="closeModals()">&times;</span>
         <h2 style="color: #1b5e20; margin-bottom: 10px;">🏪 लाइव दुकानें (Live Shops Directory)</h2>
         <div id="allLiveShopsContainer">
-            <div class="directory-item"><b>गुप्ता किराना स्टोर</b> - गाँव: Malkosh (मो: 9215XXXXXX)</div>
-            <div class="directory-item"><b>शर्मा गारमेंट्स</b> - गाँव: Malkosh (मो: 9812XXXXXX)</div>
+            <div class="directory-item"><b>गुप्ता किराना स्टोर</b> - गाँव: Malkosh (मो: 9215XXXXXX)<br><a class="whatsapp-btn" href="https://wa.me/?text=देखें%20गुप्ता%20किराना%20स्टोर,%20गाँव%20Malkosh" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
+            <div class="directory-item"><b>शर्मा गारमेंट्स</b> - गाँव: Malkosh (मो: 9812XXXXXX)<br><a class="whatsapp-btn" href="https://wa.me/?text=देखें%20शर्मा%20गारमेंट्स,%20गाँव%20Malkosh" target="_blank">💬 WhatsApp पर शेयर करें</a></div>
         </div>
     </div>
 </div>
@@ -380,6 +391,25 @@
         }
     }
 
+    // Live Search Filters
+    function filterShopList() {
+        let query = document.getElementById('shopSearchInput').value.toLowerCase();
+        let items = document.querySelectorAll('.shop-item');
+        items.forEach(item => {
+            let text = item.textContent.toLowerCase();
+            item.style.display = text.includes(query) ? '' : 'none';
+        });
+    }
+
+    function filterLocalList() {
+        let query = document.getElementById('localSearchInput').value.toLowerCase();
+        let items = document.querySelectorAll('.local-item');
+        items.forEach(item => {
+            let text = item.textContent.toLowerCase();
+            item.style.display = text.includes(query) ? '' : 'none';
+        });
+    }
+
     function sendLocalOTP() {
         localOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
         document.getElementById('localOtpDisplay').textContent = localOTPVar;
@@ -398,7 +428,10 @@
         let loc = sectionLocations['sec1B'];
         if (!name) { alert('नाम दर्ज करें!'); return; }
         let listDiv = document.getElementById('localDirectoryList');
-        listDiv.insertAdjacentHTML('afterbegin', `<div class="directory-item"><b>${name}</b> - गाँव: ${loc.village}</div>`);
+        let waText = encodeURIComponent(`देखें ${name}, गाँव ${loc.village}`);
+        
+        let newItemHTML = `<div class="directory-item local-item" data-name="${name}"><b>${name}</b> - गाँव: ${loc.village}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
+        listDiv.insertAdjacentHTML('afterbegin', newItemHTML);
         alert('निःशुल्क सेवा लाइव हो गई!');
     }
 
@@ -425,8 +458,9 @@
 
         let loc = sectionLocations['sec1'];
         let listDiv = document.getElementById('shopDirectoryList');
+        let waText = encodeURIComponent(`देखें ${name}, गाँव ${loc.village}`);
         
-        let newItemHTML = `<div class="directory-item"><b>${name}</b> - गाँव: ${loc.village} (जिला: ${loc.dist})</div>`;
+        let newItemHTML = `<div class="directory-item shop-item" data-name="${name}"><b>${name}</b> - गाँव: ${loc.village} (जिला: ${loc.dist})<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
         listDiv.insertAdjacentHTML('afterbegin', newItemHTML);
         document.getElementById('allLiveShopsContainer').insertAdjacentHTML('afterbegin', newItemHTML);
         
@@ -455,7 +489,8 @@
         if(!text) { alert('कृपया मुनादी का विवरण लिखें!'); return; }
 
         let mList = document.getElementById('munadiList');
-        mList.insertAdjacentHTML('afterbegin', `<div class="directory-item">📢 <b>मुनादी (${loc.village}):</b> ${text}</div>`);
+        let waText = encodeURIComponent(`मुनादी (${loc.village}): ${text}`);
+        mList.insertAdjacentHTML('afterbegin', `<div class="directory-item">📢 <b>मुनादी (${loc.village}):</b> ${text}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`);
         alert('📢 मुनादी पोस्ट हो गई और आपके गाँव में दिखने लगी!');
         document.getElementById('munadiText').value = '';
     }
@@ -469,7 +504,9 @@
 
         let bsList = document.getElementById('buySellList');
         let priceText = price ? ` | मूल्य: ${price}` : '';
-        bsList.insertAdjacentHTML('afterbegin', `<div class="directory-item">🛒 <b>${item}</b>${priceText} <br><small>📍 गाँव: ${loc.village}, ${loc.dist}</small></div>`);
+        let waText = encodeURIComponent(`खरीदें/बेचें: ${item}${priceText}, गाँव: ${loc.village}`);
+        
+        bsList.insertAdjacentHTML('afterbegin', `<div class="directory-item">🛒 <b>${item}</b>${priceText} <br><small>📍 गाँव: ${loc.village}, ${loc.dist}</small><br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`);
         
         alert('✅ आपका विज्ञापन (Buy / Sell) सफलतापूर्वक लाइव पोस्ट हो गया है!');
         document.getElementById('buySellItem').value = '';
