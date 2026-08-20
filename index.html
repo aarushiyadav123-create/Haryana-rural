@@ -30,16 +30,21 @@
         
         .btn { background: linear-gradient(135deg, #1b5e20 0%, #0d3817 100%); color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; font-size: 0.95rem; cursor: pointer; margin-top: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
         .btn:hover { background: #0d3817; }
+        .btn-secondary { background: #ff9800; color: white; margin-top: 4px; padding: 8px; font-size: 0.85rem; }
         
         .accordion-btn { background: #1b5e20; color: white; width: 100%; padding: 12px; border: none; border-radius: 6px; text-align: left; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #ffeb3b; }
         .accordion-content { display: none; padding: 12px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 0 0 6px 6px; margin-top: -4px; }
         
+        /* Location Tag inside Buttons */
         .location-badge { background: #e8f5e9; border: 1px dashed #2e7d32; padding: 6px 10px; border-radius: 4px; font-size: 0.8rem; color: #1b5e20; font-weight: bold; margin-bottom: 10px; }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); overflow-y: auto; }
+        .modal-content { background: white; margin: 15% auto; padding: 20px; width: 90%; max-width: 420px; border-radius: 8px; position: relative; }
+        .close { color: #aaa; float: right; font-size: 24px; font-weight: bold; cursor: pointer; }
+        
         .result-box { margin-top: 10px; padding: 10px; border-radius: 6px; background: #e8f5e9; border: 1px solid #a5d6a7; display: none; font-size: 0.85rem; }
         .directory-item { background: #fff; padding: 8px; margin-bottom: 6px; border-radius: 4px; border-left: 4px solid #1b5e20; font-size: 0.85rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        
-        /* Payment Section Box */
-        .payment-box { background: #fffde7; border: 1px solid #fbc02d; padding: 10px; border-radius: 6px; margin-top: 10px; }
+        .hint { font-size: 0.7rem; color: #666; margin-top: 3px; }
     </style>
 </head>
 <body>
@@ -79,14 +84,14 @@
     <!-- Accordion 1: Shop & Saloon -->
     <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / व्यवसाय</span> <span id="icon1">▼</span></button>
     <div id="sec1" class="accordion-content">
+        <!-- Button ke andar active location display -->
         <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
         <p style="font-size:0.8rem; color:#666; margin-bottom:8px;">इस गाँव की व्यावसायिक दुकानें:</p>
         <div id="shopDirectoryList" style="margin-bottom: 10px; max-height: 120px; overflow-y: auto;">
             <div class="directory-item"><b>गुप्ता किराना स्टोर</b> (किराना) - गाँव: Malkosh - मो: 9215XXXXXX</div>
         </div>
         <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
-        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान जोड़ें:</h3>
-        
+        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी दुकान विज्ञापन के साथ जोड़ें:</h3>
         <div class="form-group">
             <label>व्यवसाय चुनें:</label>
             <select id="shopCategory">
@@ -95,13 +100,29 @@
                 <option value="Other Shop">अन्य व्यवसाय (Other Shop)</option>
             </select>
         </div>
-        
         <div class="form-group">
             <label>दुकान का नाम:</label>
             <input type="text" id="shopName" placeholder="उदा: जय बाबा किराना">
         </div>
-
-        <!-- मोबाइल नंबर और ओटीपी (अगर आपके कोड में आगे है तो यहाँ आ जाएगा) -->
+        <div class="form-group">
+            <label>मोबाइल नंबर:</label>
+            <input type="tel" id="shopPhone" placeholder="10 अंकों का नंबर" maxlength="10">
+            <button class="btn btn-secondary" onclick="sendShopOTP()">📱 OTP भेजें</button>
+        </div>
+        <div class="form-group" id="shopOtpBox" style="display:none;">
+            <label>OTP दर्ज करें (सिम्युलेटेड कोड: <span id="shopOtpDisplay" style="color:red;"></span>):</label>
+            <input type="text" id="shopOtpInput" placeholder="6 अंक">
+            <button class="btn btn-secondary" onclick="verifyShopOTP()">✔ वेरीफाई करें</button>
+            <p id="shopOtpMsg" class="hint"></p>
+        </div>
+        <div class="form-group">
+            <label>GPS लोकेशन:</label>
+            <button class="btn btn-secondary" onclick="alert('GPS लोकेशन कैप्चर हो गई!')">📍 लोकेशन कैप्चर करें</button>
+        </div>
+        <div class="form-group">
+            <label>लाइव फोटो:</label>
+            <input type="file" id="shopPhoto" accept="image/*">
+        </div>
 
         <!-- ✅ फ्री लिस्टिंग चेकबॉक्स (नया जोड़ा गया) -->
         <div class="form-group" style="background: #e8f5e9; padding: 8px; border-radius: 6px; border: 1px solid #a5d6a7;">
@@ -111,39 +132,226 @@
             </label>
         </div>
 
-        <!-- पेमेंट वाला डिब्बा (जो फ्री चेक करने पर छिप जाएगा) -->
-        <div id="paymentSection" class="payment-box">
-            <p style="font-size: 0.85rem; font-weight: bold; color: #d32f2f;">💰 दुकान विज्ञापन शुल्क: ₹49/-</p>
-            <p style="font-size: 0.75rem; color: #555; margin-bottom: 6px;">Paytm QR पर स्कैन कर भुगतान करें और ट्रांजैक्शन आईडी दें:</p>
-            <div class="form-group" style="margin-bottom: 0;">
+        <!-- Submit Button -->
+        <button class="btn" onclick="submitShopAd()" style="margin-top: 5px; margin-bottom: 10px;">✅ दुकान लाइव सबमिट करें</button>
+
+        <!-- UPI QR details below (जो फ्री चेक करने पर छिप जाएगा) -->
+        <div id="paymentSection" style="background: #fff3e0; padding: 10px; border-radius: 6px; border: 1px solid #ffe0b2;">
+            <p style="font-weight: bold; color: #e65100; font-size: 0.85rem;">💰 दुकान विज्ञापन शुल्क: ₹49/-</p>
+            <p style="font-size: 0.75rem; color: #555;">Paytm QR पर स्कैन कर भुगतान करें और ट्रांजैक्शन आईडी दें:</p>
+            <p style="font-size: 0.75rem; font-weight: bold; color: #1b5e20;">UPI ID: paytmqr281005050101zc5hx6...</p>
+            <div class="form-group" style="margin-top: 6px; margin-bottom: 0;">
                 <label>UPI Transaction / Ref ID:</label>
-                <input type="text" id="upiId" placeholder="UPI Ref ID दर्ज करें">
+                <input type="text" id="shopTxnId" placeholder="UPI Ref ID दर्ज करें">
             </div>
         </div>
+    </div>
 
-        <!-- सबमिट बटन -->
-        <button class="btn" onclick="submitShopForm()">✅ दुकान लाइव सबमिट करें</button>
+    <!-- Accordion 1B: Local Services (Free) -->
+    <button class="accordion-btn" onclick="toggleSection('sec1B', 'icon1B')"><span>🛠️ 1B. लोकल श्रेणियाँ (पंडित जी, मेडिकल, मिस्त्री आदि - निःशुल्क)</span> <span id="icon1B">▼</span></button>
+    <div id="sec1B" class="accordion-content">
+        <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
+        <p style="font-size:0.8rem; color:#666; margin-bottom:8px;">इस गाँव की निःशुल्क लिस्ट:</p>
+        <div id="localDirectoryList" style="margin-bottom: 10px; max-height: 150px; overflow-y: auto;">
+            <div class="directory-item"><b>पं. रामचन्द्र जी</b> (पंडित जी) - गाँव: Malkosh - मो: 9896XXXXXX</div>
+        </div>
+        <hr style="margin: 10px 0; border:0; border-top:1px solid #ddd;">
+        <h3 style="font-size:0.9rem; color:#1b5e20; margin-bottom:6px;">➕ अपनी निःशुल्क सेवा यहाँ जोड़ें:</h3>
+        <div class="form-group">
+            <label>श्रेणी:</label>
+            <select id="localCategory">
+                <option value="Pandit Ji">पंडित जी (Pandit Ji)</option>
+                <option value="Medical Store">मेडिकल स्टोर / डॉक्टर (Medical Store)</option>
+                <option value="Mistri">मिस्त्री (Mistri)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>नाम / दुकान:</label>
+            <input type="text" id="localName" placeholder="उदा: शर्मा पंडित जी">
+        </div>
+        <div class="form-group">
+            <label>मोबाइल नंबर:</label>
+            <input type="tel" id="localPhone" placeholder="10 अंकों का नंबर" maxlength="10">
+            <button class="btn btn-secondary" onclick="sendLocalOTP()">📱 OTP भेजें</button>
+        </div>
+        <div class="form-group" id="localOtpBox" style="display:none;">
+            <label>OTP दर्ज करें (सिम्युलेटेड कोड: <span id="localOtpDisplay" style="color:red;"></span>):</label>
+            <input type="text" id="localOtpInput" placeholder="6 अंक">
+            <button class="btn btn-secondary" onclick="verifyLocalOTP()">✔ वेरीफाई करें</button>
+            <p id="localOtpMsg" class="hint"></p>
+        </div>
+        <button class="btn" onclick="submitLocalService()">✅ निःशुल्क लाइव दर्ज करें</button>
+    </div>
+
+    <!-- Accordion 2: Gallery -->
+    <button class="accordion-btn" onclick="toggleSection('sec2', 'icon2')"><span>📸 2. ग्रामीण गैलरी</span> <span id="icon2">▼</span></button>
+    <div id="sec2" class="accordion-content">
+        <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
+        <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">इस गाँव के कार्यक्रमों की तस्वीरें देखें और अपलोड करें:</p>
+        <input type="file" accept="image/*" style="margin-top:8px;">
+        <button class="btn" style="margin-top:8px;" onclick="alert('फोटो गैलरी में लाइव हो गई!')">फोटो अपलोड करें</button>
+    </div>
+
+    <!-- Accordion 3: Munadi -->
+    <button class="accordion-btn" onclick="toggleSection('sec3', 'icon3')"><span>📢 3. गाँव के विज्ञापन व मुनादी</span> <span id="icon3">▼</span></button>
+    <div id="sec3" class="accordion-content">
+        <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
+        <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">इस गाँव में मुनादी या घोषणा पोस्ट करें:</p>
+        <input type="text" id="munadiText" placeholder="मुनादी का विवरण..." style="margin-top:8px;">
+        <button class="btn" style="margin-top:8px;" onclick="alert('मुनादी लाइव हो गई!')">मुनादी पोस्ट करें</button>
+    </div>
+
+    <!-- Accordion 4: Buy / Sell -->
+    <button class="accordion-btn" onclick="toggleSection('sec4', 'icon4')"><span>🛒 4. खरीदें और बेचें (Buy / Sell)</span> <span id="icon4">▼</span></button>
+    <div id="sec4" class="accordion-content">
+        <div class="location-badge">📍 चयनित क्षेत्र: <span class="activeLocText">जिला: Charkhi Dadri | ब्लॉक: Baund | गाँव: Malkosh</span></div>
+        <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">इस गाँव के अनुसार विज्ञापन (टोकन: ₹20/-)</p>
+        <div class="form-group">
+            <label>वस्तु विवरण:</label>
+            <input type="text" id="buySellItem" placeholder="उदा: पुराना ट्रैक्टर बिक्री हेतु">
+        </div>
+        <button class="btn btn-secondary" onclick="openBuySellQR()">📷 टोकन हेतु QR कोड देखें (₹20)</button>
+        <div id="buySellQrBox" style="display:none; text-align:center; background:#fff3e0; padding:10px; margin-top:8px; border-radius:6px;">
+            <p style="font-size:0.8rem; font-weight:bold; color:#e65100;">स्कैन करके ₹20 भुगतान करें:</p>
+            <p style="font-size:0.75rem; color:#1b5e20; font-weight:bold;">UPI: paytmqr281005050101zc5hx6...</p>
+        </div>
+        <div class="form-group" style="margin-top:8px;">
+            <label>UPI Transaction / UTR No. दर्ज करें:</label>
+            <input type="text" id="buySellToken" placeholder="UTR / Ref ID दर्ज करें">
+        </div>
+        <button class="btn" onclick="submitBuySellLive()">📢 विज्ञापन लाइव पोस्ट करें</button>
+    </div>
+
+    <!-- Accordion 5 -->
+    <button class="accordion-btn" onclick="toggleSection('sec5', 'icon5')"><span>🏛️ 5. हरियाणा सरकारी योजनाएं</span> <span id="icon5">▼</span></button>
+    <div id="sec5" class="accordion-content"><p>HKRN, परिवार पहचान पत्र और पेंशन योजना अपडेट।</p><a href="https://hrygs.gov.in" target="_blank" style="color:#1b5e20; font-weight:bold; display:block; margin-top:8px;">🔗 आधिकारिक पोर्टल</a></div>
+
+    <!-- Accordion 6 -->
+    <button class="accordion-btn" onclick="toggleSection('sec6', 'icon6')"><span>🎭 6. ग्रामीण मनोरंजन और संस्कृति</span> <span id="icon6">▼</span></button>
+    <div id="sec6" class="accordion-content"><p>हरियाणवी रागिनी, लोक गीत और वीडियो क्लिप्स।</p><button class="btn" style="margin-top:8px;" onclick="alert('मनोरंजन वीडियो लोड हो रहे हैं!')">वीडियो देखें</button></div>
+
+    <footer style="text-align:center; padding:10px; font-size:0.75rem; color:#fff; margin-top:15px;">
+        © 2026 Haryana Rural Service Portal - Digital Gram Haryana
+    </footer>
+</div>
+
+<!-- Modals with Founder Info -->
+<div id="menuModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20; margin-bottom: 10px;">📌 मेनू</h2><ul style="list-style: none; line-height: 2; font-size: 0.95rem;"><li><a href="#" onclick="openAdminModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔐 Admin / Sub-admin</a></li><li><a href="#" onclick="openAboutModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">ℹ️ About Founder</a></li><li><a href="#" onclick="openPrivacyModal(); return false;" style="color:#333; text-decoration:none; font-weight:bold;">🔒 Privacy Policy (PlayStore)</a></li></ul></div></div>
+
+<div id="aboutModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2 style="color: #1b5e20;">ℹ️ संस्थापक (Founder)</h2>
+        <p style="font-weight: bold; font-size: 1.1rem; margin-top: 10px; color: #333;">Kusum w/o Rajesh Yadav</p>
+        <p style="font-size: 0.85rem; color: #666; margin-top: 6px;">गाँव: <b>Malkosh</b> (हरियाणा ग्रामीण सेवा पोर्टल की संस्थापक)</p>
     </div>
 </div>
 
+<div id="privacyModal" class="modal">
+    <div class="modal-content" style="max-height:75vh; overflow-y:auto;">
+        <span class="close" onclick="closeModals()">&times;</span>
+        <h2 style="color: #1b5e20; margin-bottom: 8px;">🔒 Privacy Policy</h2>
+        <p style="font-size: 0.8rem; line-height: 1.6; color: #555;">
+            <strong>Digital Gram Haryana</strong> operates this rural portal. We collect mobile numbers solely for OTP verification and authentication of local listings based on District, Block, and Village. Data security is fully maintained as per Google PlayStore policies.
+        </p>
+    </div>
+</div>
+
+<div id="adminModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">🔐 Admin Login</h2><input type="text" placeholder="Admin ID" style="margin-top:8px;"><input type="password" placeholder="Password" style="margin-top:8px;"><button class="btn" style="margin-top:10px;" onclick="alert('लॉगिन सफल')">लॉगिन</button></div></div>
+
+<!-- Scripts -->
+<script src="haryana-villages-complete.js"></script>
 <script>
-    // सेक्सन खोलने/बंद करने का फंक्शन
-    function toggleSection(secId, iconId) {
-        var content = document.getElementById(secId);
-        var icon = document.getElementById(iconId);
-        if (content.style.display === "block") {
-            content.style.display = "none";
-            icon.innerText = "▼";
-        } else {
-            content.style.display = "block";
-            icon.innerText = "▲";
+    let currentData = {};
+    let selectedDistrictGlobal = "Charkhi Dadri";
+    let selectedBlockGlobal = "Baund";
+    let selectedVillageGlobal = "Malkosh";
+    let localOTPVar = "", shopOTPVar = "";
+    let localVerified = false, shopVerified = false;
+    let isEnglish = false;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof haryana_complete_database !== 'undefined') {
+            currentData = haryana_complete_database;
+            populateDistricts();
         }
+    });
+
+    function populateDistricts() {
+        const select = document.getElementById('districtSelect');
+        select.innerHTML = '<option value="">-- जिला चुनें --</option>';
+        Object.keys(currentData).sort().forEach(d => {
+            let opt = document.createElement('option'); opt.value = d; opt.textContent = d; select.appendChild(opt);
+        });
+    }
+
+    function loadBlocks() {
+        let dist = document.getElementById('districtSelect').value;
+        let bSelect = document.getElementById('blockSelect');
+        bSelect.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
+        if (dist && currentData[dist]) {
+            Object.keys(currentData[dist]).sort().forEach(b => {
+                let opt = document.createElement('option'); opt.value = b; opt.textContent = b; bSelect.appendChild(opt);
+            });
+        }
+    }
+
+    function loadVillages() {
+        let dist = document.getElementById('districtSelect').value;
+        let block = document.getElementById('blockSelect').value;
+        let vSelect = document.getElementById('villageSelect');
+        vSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
+        if (dist && block && currentData[dist][block]) {
+            currentData[dist][block].sort().forEach(v => {
+                let opt = document.createElement('option'); opt.value = v; opt.textContent = v; vSelect.appendChild(opt);
+            });
+            let oOpt = document.createElement('option'); oOpt.value = 'OTHER'; oOpt.textContent = '➕ अन्य गाँव / Other Village'; vSelect.appendChild(oOpt);
+        }
+    }
+
+    function checkOtherVillage() {
+        let vSelect = document.getElementById('villageSelect');
+        document.getElementById('customVillageGroup').style.display = (vSelect.value === 'OTHER') ? 'block' : 'none';
+    }
+
+    function getSelectedVillage() {
+        let vSelect = document.getElementById('villageSelect');
+        let custom = document.getElementById('customVillageInput').value.trim();
+        return (vSelect.value === 'OTHER') ? custom : vSelect.value;
+    }
+
+    function searchVillage() {
+        let dist = document.getElementById('districtSelect').value;
+        let block = document.getElementById('blockSelect').value;
+        let v = getSelectedVillage();
+        if (!dist || !block || !v) { alert('कृपया जिला, ब्लॉक और गाँव सही से चुनें!'); return; }
+        
+        selectedDistrictGlobal = dist;
+        selectedBlockGlobal = block;
+        selectedVillageGlobal = v;
+        
+        document.getElementById('displayVillageName').textContent = v;
+        
+        let locText = `जिला: ${dist} | ब्लॉक: ${block} | गाँव: ${v}`;
+        document.querySelectorAll('.activeLocText').forEach(el => {
+            el.textContent = locText;
+        });
+
+        document.getElementById('resultBox').innerHTML = `📍 चयनित क्षेत्र: <b>${locText}</b> अब सभी बटनों के अंदर सक्रिय हो गया है!`;
+        document.getElementById('resultBox').style.display = 'block';
+    }
+
+    function toggleSection(id, iconId) {
+        let sec = document.getElementById(id);
+        let icon = document.getElementById(iconId);
+        if (sec.style.display === "block") { sec.style.display = "none"; icon.textContent = "▼"; }
+        else { sec.style.display = "block"; icon.textContent = "▲"; }
     }
 
     // ✅ फ्री लिस्टिंग चेक होने पर पेमेंट बॉक्स छिपाने का फंक्शन
     function togglePaymentBox() {
-        var isFree = document.getElementById("freeListingCheckbox").checked;
-        var paySection = document.getElementById("paymentSection");
+        let isFree = document.getElementById("freeListingCheckbox").checked;
+        let paySection = document.getElementById("paymentSection");
         if (isFree) {
             paySection.style.display = "none"; // पेमेंट बॉक्स छिप जाएगा
         } else {
@@ -151,31 +359,114 @@
         }
     }
 
-    // ✅ फॉर्म सबमिट वैलिडेट करने का फंक्शन (एरर दूर करने के लिए)
-    function submitShopForm() {
-        var shopName = document.getElementById("shopName").value.trim();
-        var isFree = document.getElementById("freeListingCheckbox").checked;
-        var upiId = document.getElementById("upiId").value.trim();
-
-        // 1. चेक करें कि दुकान का नाम भरा है या नहीं
-        if (shopName === "") {
-            alert("कृपया दुकान का नाम दर्ज करें!");
-            document.getElementById("shopName").focus();
-            return;
+    function toggleLanguage() {
+        isEnglish = !isEnglish;
+        let btn = document.querySelector('.lang-btn-right');
+        if (isEnglish) {
+            btn.textContent = "🌐 हिन्दी";
+            document.getElementById('txtWelcome').textContent = "Welcome brothers to your village portal!";
+            document.getElementById('txtSelectTitle').textContent = "🔍 Select District, Block & Village";
+        } else {
+            btn.textContent = "🌐 English";
+            document.getElementById('txtWelcome').textContent = "राम राम भाइयों, आपके अपने गाँव में आपका स्वागत है";
+            document.getElementById('txtSelectTitle').textContent = "🔍 जिला, खण्ड और गाँव चुनें";
         }
-
-        // 2. अगर फ्री लिस्टिंग नहीं चुनी है, तभी UPI ID अनिवार्य होगी
-        if (!isFree && upiId === "") {
-            alert("कृपया UPI Transaction ID दर्ज करें या 'फ्री लिस्टिंग' पर टिक करें!");
-            document.getElementById("upiId").focus();
-            return;
-        }
-
-        // अगर सब कुछ ठीक है, तो आगे का काम सफल हो जाएगा
-        alert("बधाई हो! आपकी दुकान सफलता पूर्वक सबमिट हो गई है।");
-        
-        // यहाँ आप अपना डेटाबेस भेजने या आगे का कोड जोड़ सकते हैं
     }
+
+    function sendLocalOTP() {
+        let phone = document.getElementById('localPhone').value;
+        if (!phone || phone.length < 10) { alert('वैध 10 अंकों का नंबर दें'); return; }
+        localOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
+        document.getElementById('localOtpDisplay').textContent = localOTPVar;
+        document.getElementById('localOtpBox').style.display = 'block';
+        alert('सिम्युलेटेड OTP: ' + localOTPVar);
+    }
+
+    function verifyLocalOTP() {
+        if (document.getElementById('localOtpInput').value === localOTPVar) {
+            localVerified = true;
+            document.getElementById('localOtpMsg').textContent = "✔ OTP वेरीफाइड!";
+            document.getElementById('localOtpMsg').style.color = "green";
+        } else { alert('गलत OTP'); }
+    }
+
+    function submitLocalService() {
+        if (!localVerified) { alert('कृपया पहले OTP वेरीफाई करें!'); return; }
+        let name = document.getElementById('localName').value.trim();
+        let cat = document.getElementById('localCategory').value;
+        if (!name) { alert('नाम दर्ज करें!'); return; }
+        
+        let listDiv = document.getElementById('localDirectoryList');
+        let newItem = document.createElement('div');
+        newItem.className = 'directory-item';
+        newItem.innerHTML = `<b>${name}</b> (${cat}) - जिला: ${selectedDistrictGlobal}, ब्लॉक: ${selectedBlockGlobal}, गाँव: ${selectedVillageGlobal}`;
+        listDiv.prepend(newItem);
+        alert(`✅ (${selectedDistrictGlobal} / ${selectedBlockGlobal} / ${selectedVillageGlobal}) में सेवा सफलतापूर्वक लाइव जोड़ दी गई है!`);
+    }
+
+    function sendShopOTP() {
+        let phone = document.getElementById('shopPhone').value;
+        if (!phone || phone.length < 10) { alert('वैध नंबर दें'); return; }
+        shopOTPVar = Math.floor(100000 + Math.random() * 900000).toString();
+        document.getElementById('shopOtpDisplay').textContent = shopOTPVar;
+        document.getElementById('shopOtpBox').style.display = 'block';
+        alert('सिम्युलेटेड OTP: ' + shopOTPVar);
+    }
+
+    function verifyShopOTP() {
+        if (document.getElementById('shopOtpInput').value === shopOTPVar) {
+            shopVerified = true;
+            document.getElementById('shopOtpMsg').textContent = "✔ OTP वेरीफाइड!";
+            document.getElementById('shopOtpMsg').style.color = "green";
+        } else { alert('गलत OTP'); }
+    }
+
+    // ✅ अपडेटेड सबमिट फंक्शन (फ्री लिस्टिंग और पेड दोनों के लिए)
+    function submitShopAd() {
+        if (!shopVerified) { alert('कृपया पहले OTP वेरीफाई करें!'); return; }
+        
+        let name = document.getElementById('shopName').value.trim();
+        let isFree = document.getElementById("freeListingCheckbox").checked;
+        let txn = document.getElementById('shopTxnId').value.trim();
+
+        if (!name) { 
+            alert('कृपया दुकान का नाम दर्ज करें!'); 
+            return; 
+        }
+
+        // अगर फ्री लिस्टिंग नहीं चुनी है, तभी UPI Transaction ID देना जरूरी होगा
+        if (!isFree && !txn) { 
+            alert('दुकान का नाम और UPI Transaction ID दर्ज करें, या फ्री लिस्टिंग चुनें!'); 
+            return; 
+        }
+        
+        let listDiv = document.getElementById('shopDirectoryList');
+        let newItem = document.createElement('div');
+        newItem.className = 'directory-item';
+        newItem.innerHTML = `<b>${name}</b> - जिला: ${selectedDistrictGlobal}, गाँव: ${selectedVillageGlobal} ${isFree ? '(फ्री लिस्टिंग)' : '(विज्ञापन लाइव)'}`;
+        listDiv.prepend(newItem);
+        
+        alert(`✅ (${selectedDistrictGlobal} / ${selectedVillageGlobal}) में दुकान सफलतापूर्वक लाइव हो गई!`);
+    }
+
+    function openBuySellQR() {
+        let box = document.getElementById('buySellQrBox');
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function submitBuySellLive() {
+        let item = document.getElementById('buySellItem').value.trim();
+        let token = document.getElementById('buySellToken').value.trim();
+        if (!item || !token) { alert('विवरण और UTR No. दर्ज करें!'); return; }
+        alert(`✅ (${selectedDistrictGlobal} / ${selectedBlockGlobal} / ${selectedVillageGlobal}) के लिए खरीदें-बेचें विज्ञापन UTR के साथ लाइव हो गया है!`);
+    }
+
+    function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
+    function openAboutModal() { closeModals(); document.getElementById('aboutModal').style.display = 'block'; }
+    function openPrivacyModal() { closeModals(); document.getElementById('privacyModal').style.display = 'block'; }
+    function openAdminModal() { closeModals(); document.getElementById('adminModal').style.display = 'block'; }
+    function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
+    window.onclick = e => { if (e.target.classList.contains('modal')) closeModals(); }
 </script>
 
 </body>
