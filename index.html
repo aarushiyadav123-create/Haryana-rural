@@ -1,26 +1,13 @@
 <html lang="hi">
 <head>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDMYacgjfB6gW3J51v7Jyu3bpJenplONzo",
-            authDomain: "mera-gaov.firebaseapp.com",
-            projectId: "mera-gaov",
-            storageBucket: "mera-gaov.firebasestorage.app",
-            messagingSenderId: "574021786245",
-            appId: "1:574021786245:web:7f4c042f347d0cab54a7ec",
-            measurementId: "G-757L4D3657"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-    </script>
- 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>मेरा गाँव Malkosh - हरियाणा ग्रामीण सेवा पोर्टल</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', 'Arial', sans-serif; }
         body { background: #1b5e20; min-height: 100vh; padding: 10px; color: #333; }
@@ -64,7 +51,7 @@
         
         .result-box { margin-top: 10px; padding: 10px; border-radius: 6px; background: #e8f5e9; border: 1px solid #a5d6a7; display: none; font-size: 0.85rem; }
         .directory-item { background: #fff; padding: 8px; margin-bottom: 6px; border-radius: 4px; border-left: 4px solid #1b5e20; font-size: 0.85rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .hint { font-size: 0.7rem; color: #666; margin-top: 3px; }
+        .hint { font-size: 0.75rem; color: #2e7d32; font-weight: bold; margin-top: 4px; }
     </style>
 </head>
 <body>
@@ -99,10 +86,8 @@
         <div class="result-box" id="resultBox"></div>
     </div>
 
-    <!-- Live Shop View Button -->
     <button class="btn btn-view-live" onclick="openLiveShopsModal()">🏪 क्षेत्र की सभी लाइव दुकानें देखें (View Live Shops)</button>
 
-    <!-- Accordion 1: Shop & Saloon -->
     <button class="accordion-btn" onclick="toggleSection('sec1', 'icon1')"><span>🛒 1. दुकान / सैलून / व्यवसाय (निःशुल्क)</span> <span id="icon1">▼</span></button>
     <div id="sec1" class="accordion-content">
         <div class="location-badge">
@@ -139,12 +124,10 @@
             <button class="btn btn-secondary" onclick="verifyFirebaseOTP('shop')">✔ OTP वेरीफाई करें</button>
             <p id="shopOtpMsg" class="hint"></p>
         </div>
-        <!-- reCAPTCHA Container added -->
         <div id="recaptcha-container-shop"></div>
         <button class="btn" onclick="submitShopAd()" style="margin-top: 5px; margin-bottom: 10px;">✅ दुकान लाइव सबमिट करें</button>
     </div>
 
-    <!-- Accordion 3: Munadi -->
     <button class="accordion-btn" onclick="toggleSection('sec3', 'icon3')"><span>📢 3. गाँव के विज्ञापन व मुनादी</span> <span id="icon3">▼</span></button>
     <div id="sec3" class="accordion-content">
         <div class="location-badge">
@@ -165,12 +148,10 @@
             <button class="btn btn-secondary" onclick="verifyFirebaseOTP('munadi')">✔ OTP वेरीफाई</button>
             <p id="munadiOtpMsg" class="hint"></p>
         </div>
-        <!-- reCAPTCHA Container added -->
         <div id="recaptcha-container-munadi"></div>
         <button class="btn" onclick="postMunadi()" style="margin-top:8px;">मुनादी पोस्ट करें</button>
     </div>
 
-    <!-- Accordion 4: Buy / Sell -->
     <button class="accordion-btn" onclick="toggleSection('sec4', 'icon4')"><span>🛒 4. खरीदें और बेचें (Buy / Sell)</span> <span id="icon4">▼</span></button>
     <div id="sec4" class="accordion-content">
         <div class="location-badge">
@@ -193,227 +174,9 @@
             <button class="btn btn-secondary" onclick="verifyFirebaseOTP('buysell')">✔ OTP वेरीफाई</button>
             <p id="buySellOtpMsg" class="hint"></p>
         </div>
-        <!-- reCAPTCHA Container added -->
         <div id="recaptcha-container-buysell"></div>
         <button class="btn" onclick="postBuySell()" style="margin-top:8px;">विज्ञापन पोस्ट करें</button>
     </div>
 
-    <!-- Accordion 5 & 6 -->
     <button class="accordion-btn" onclick="toggleSection('sec5', 'icon5')"><span>🏛️ 5. हरियाणा सरकारी योजनाएं</span> <span id="icon5">▼</span></button>
-    <div id="sec5" class="accordion-content"><p>HKRN, परिवार पहचान पत्र और पेंशन योजना अपडेट।</p><a href="https://hrygs.gov.in" target="_blank" style="color:#1b5e20; font-weight:bold; display:block; margin-top:8px;">🔗 आधिकारिक पोर्टल</a></div>
-
-    <button class="accordion-btn" onclick="toggleSection('sec6', 'icon6')"><span>🎭 6. ग्रामीण मनोरंजन और संस्कृति</span> <span id="icon6">▼</span></button>
-    <div id="sec6" class="accordion-content"><p>हरियाणवी रागिनी, लोक गीत और वीडियो क्लिप्स।</p><button class="btn" style="margin-top:8px;" onclick="alert('मनोरंजन वीडियो लोड हो रहे हैं!')">वीडियो देखें</button></div>
-
-    <footer style="text-align:center; padding:10px; font-size:0.75rem; color:#fff; margin-top:15px;">
-        © 2026 Haryana Rural Service Portal - Digital Gram Haryana
-    </footer>
-</div>
-
-<!-- Modals -->
-<div id="liveShopsModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20; margin-bottom: 10px;">🏪 लाइव दुकानें</h2><div id="allLiveShopsContainer"><div class="directory-item"><b>गुप्ता किराना स्टोर</b> - गाँव: Malkosh</div></div></div></div>
-<div id="menuModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModals()">&times;</span><h2 style="color: #1b5e20;">📌 मेनू</h2></div></div>
-
-<!-- Firebase SDK Scripts -->
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-<script src="haryana-villages-complete.js"></script>
-
-<script>
-    // --- FIREBASE CONFIGURATION ---
-    const firebaseConfig = {
-        apiKey: "AIzaSyDMYacgjfB6gW3J51v7Jyu3bpJenplONzo",
-        authDomain: "mera-gaov.firebaseapp.com",
-        projectId: "mera-gaov",
-        storageBucket: "mera-gaov.firebasestorage.app",
-        messagingSenderId: "574021786245",
-        appId: "1:574021786245:web:7f4c042f347d0cab54a7ec"
-    };
-    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-
-    let currentData = {};
-    let globalLocation = { dist: "Charkhi Dadri", block: "Baund", village: "Malkosh" };
-    let confirmationResults = {};
-    let verifiedStatus = { shop: false, munadi: false, buysell: false };
-
-    document.addEventListener('DOMContentLoaded', () => {
-        if (typeof haryana_complete_database !== 'undefined') {
-            currentData = haryana_complete_database;
-            populateDistricts('districtSelect');
-        }
-    });
-
-    function populateDistricts(elementId) {
-        const select = document.getElementById(elementId);
-        select.innerHTML = '<option value="">-- जिला चुनें --</option>';
-        Object.keys(currentData).sort().forEach(d => {
-            let opt = document.createElement('option'); opt.value = d; opt.textContent = d; select.appendChild(opt);
-        });
-    }
-
-    function loadBlocks(distId, blockId, villageId) {
-        let dist = document.getElementById(distId).value;
-        let bSelect = document.getElementById(blockId);
-        bSelect.innerHTML = '<option value="">-- खण्ड चुनें --</option>';
-        document.getElementById(villageId).innerHTML = '<option value="">-- पहले जिला चुनें --</option>';
-        if (dist && currentData[dist]) {
-            Object.keys(currentData[dist]).sort().forEach(b => {
-                let opt = document.createElement('option'); opt.value = b; opt.textContent = b; bSelect.appendChild(opt);
-            });
-        }
-    }
-
-    function loadVillages(distId, blockId, villageId, customGroup) {
-        let dist = document.getElementById(distId).value;
-        let block = document.getElementById(blockId).value;
-        let vSelect = document.getElementById(villageId);
-        vSelect.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-        if (dist && block && currentData[dist][block]) {
-            currentData[dist][block].sort().forEach(v => {
-                let opt = document.createElement('option'); opt.value = v; opt.textContent = v; vSelect.appendChild(opt);
-            });
-            let oOpt = document.createElement('option'); oOpt.value = 'OTHER'; oOpt.textContent = '➕ अन्य गाँव / Other Village'; vSelect.appendChild(oOpt);
-        }
-    }
-
-    function checkOtherVillage(villageId, customGroup) {
-        let vSelect = document.getElementById(villageId);
-        document.getElementById(customGroup).style.display = (vSelect.value === 'OTHER') ? 'block' : 'none';
-    }
-
-    function getCustomOrSelected(villageId, customInputId) {
-        let vSelect = document.getElementById(villageId);
-        let custom = document.getElementById(customInputId).value.trim();
-        return (vSelect.value === 'OTHER') ? custom : vSelect.value;
-    }
-
-    function searchVillage() {
-        let dist = document.getElementById('districtSelect').value;
-        let block = document.getElementById('blockSelect').value;
-        let v = getCustomOrSelected('villageSelect', 'customVillageInput');
-        if (!dist || !block || !v) { alert('कृपया जिला, ब्लॉक और गाँव सही से चुनें!'); return; }
-        
-        globalLocation = { dist: dist, block: block, village: v };
-        document.querySelectorAll('.globalLocText').forEach(el => { el.textContent = `${dist} | ${block} | ${v}`; });
-        document.getElementById('displayVillageName').textContent = v;
-        document.getElementById('resultBox').innerHTML = `📍 मुख्य क्षेत्र सेट हुआ: <b>जिला: ${dist} | ब्लॉक: ${block} | गाँव: ${v}</b>`;
-        document.getElementById('resultBox').style.display = 'block';
-    }
-
-    function toggleSection(id, iconId) {
-        let sec = document.getElementById(id);
-        let icon = document.getElementById(iconId);
-        sec.style.display = (sec.style.display === "block") ? "none" : "block";
-        icon.textContent = (sec.style.display === "block") ? "▲" : "▼";
-    }
-
-    // --- FIREBASE PHONE AUTHENTICATION FUNCTIONS WITH RECAPTCHA ---
-    function initRecaptcha(sectionKey) {
-        if (!window.recaptchaVerifierMap) { window.recaptchaVerifierMap = {}; }
-        if (!window.recaptchaVerifierMap[sectionKey]) {
-            window.recaptchaVerifierMap[sectionKey] = new firebase.auth.RecaptchaVerifier(`recaptcha-container-${sectionKey}`, {
-                'size': 'invisible'
-            });
-        }
-    }
-
-    function sendFirebaseOTP(sectionKey) {
-        let phoneInputId = sectionKey === 'shop' ? 'shopPhone' : (sectionKey === 'munadi' ? 'munadiPhone' : 'buySellPhone');
-        let phoneNumber = document.getElementById(phoneInputId).value.trim();
-
-        if (phoneNumber.length !== 10) {
-            alert('कृपया 10 अंकों का सही मोबाइल नंबर दर्ज करें!');
-            return;
-        }
-
-        initRecaptcha(sectionKey);
-        let appVerifier = window.recaptchaVerifierMap[sectionKey];
-        let formattedPhone = "+91" + phoneNumber;
-
-        firebase.auth().signInWithPhoneNumber(formattedPhone, appVerifier)
-            .then((confirmationResult) => {
-                confirmationResults[sectionKey] = confirmationResult;
-                document.getElementById(`${sectionKey}OtpBox`).style.display = 'block';
-                alert('📱 वास्तविक (Real) SMS OTP आपके मोबाइल पर भेज दिया गया है!');
-            })
-            .catch((error) => {
-                console.error("SMS Error:", error);
-                alert('OTP भेजने में असफल: ' + error.message);
-            });
-    }
-
-    function verifyFirebaseOTP(sectionKey) {
-        let otpInputId = sectionKey === 'shop' ? 'shopOtpInput' : (sectionKey === 'munadi' ? 'munadiOtpInput' : 'buySellOtpInput');
-        let code = document.getElementById(otpInputId).value.trim();
-
-        if (!code || code.length !== 6) {
-            alert('कृपया 6 अंकों का सही OTP दर्ज करें!');
-            return;
-        }
-
-        confirmationResults[sectionKey].confirm(code).then((result) => {
-            verifiedStatus[sectionKey] = true;
-            document.getElementById(`${sectionKey}OtpMsg`).textContent = "✔ मोबाइल नंबर सफलतापूर्वक वेरीफाई हो गया!";
-            alert('✔ वेरिफ़िकेशन सफल!');
-        }).catch((error) => {
-            alert('गलत OTP कोड! कृपया दोबारा जाँच करें।');
-        });
-    }
-
-    // Submissions after OTP Verification
-    function submitShopAd() {
-        if (!verifiedStatus.shop) { alert('कृपया पहले Firebase से मोबाइल नंबर OTP वेरीफाई करें!'); return; }
-        let name = document.getElementById('shopName').value.trim();
-        if (!name) { alert('दुकान का नाम दर्ज करें!'); return; }
-
-        let waText = encodeURIComponent(`देखें दुकान ${name}, गाँव ${globalLocation.village}`);
-        let newItemHTML = `<div class="directory-item shop-item"><b>${name}</b> - गाँव: ${globalLocation.village}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
-        
-        document.getElementById('shopDirectoryList').insertAdjacentHTML('afterbegin', newItemHTML);
-        alert('✅ दुकान सफलतापूर्वक लाइव हो गई!');
-        document.getElementById('shopName').value = '';
-        verifiedStatus.shop = false;
-        document.getElementById('shopOtpBox').style.display = 'none';
-    }
-
-    function postMunadi() {
-        if (!verifiedStatus.munadi) { alert('कृपया पहले मुनादी के लिए मोबाइल नंबर OTP वेरीफाई करें!'); return; }
-        let text = document.getElementById('munadiText').value.trim();
-        if(!text) { alert('मुनादी का विवरण लिखें!'); return; }
-
-        let waText = encodeURIComponent(`मुनादी (${globalLocation.village}): ${text}`);
-        let newItemHTML = `<div class="directory-item">📢 <b>मुनादी (${globalLocation.village}):</b> ${text}<br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
-        
-        document.getElementById('munadiList').insertAdjacentHTML('afterbegin', newItemHTML);
-        alert('📢 मुनादी पोस्ट हो गई!');
-        document.getElementById('munadiText').value = '';
-        verifiedStatus.munadi = false;
-        document.getElementById('munadiOtpBox').style.display = 'none';
-    }
-
-    function postBuySell() {
-        if (!verifiedStatus.buysell) { alert('कृपया पहले विज्ञापन के लिए मोबाइल नंबर OTP वेरीफाई करें!'); return; }
-        let item = document.getElementById('buySellItem').value.trim();
-        let price = document.getElementById('buySellPrice').value.trim();
-        if(!item) { alert('वस्तु का विवरण लिखें!'); return; }
-
-        let priceText = price ? ` | मूल्य: ${price}` : '';
-        let waText = encodeURIComponent(`खरीदें/बेचें: ${item}${priceText}, गाँव: ${globalLocation.village}`);
-        
-        let newItemHTML = `<div class="directory-item">🛒 <b>${item}</b>${priceText}<br><small>📍 गाँव: ${globalLocation.village}</small><br><a class="whatsapp-btn" href="https://wa.me/?text=${waText}" target="_blank">💬 WhatsApp पर शेयर करें</a></div>`;
-        
-        document.getElementById('buySellList').insertAdjacentHTML('afterbegin', newItemHTML);
-        alert('✅ विज्ञापन सफलतापूर्वक लाइव पोस्ट हो गया!');
-        document.getElementById('buySellItem').value = '';
-        verifiedStatus.buysell = false;
-        document.getElementById('buySellOtpBox').style.display = 'none';
-    }
-
-    function openLiveShopsModal() { document.getElementById('liveShopsModal').style.display = 'block'; }
-    function openMenuModal() { document.getElementById('menuModal').style.display = 'block'; }
-    function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
-    window.onclick = e => { if (e.target.classList.contains('modal')) closeModals(); }
-</script>
-
-</body>
-</html>
+    <div id="sec5" class="accordion-content"><p>HKRN, परिवार पहचान पत्र और पेंशन योजना अपडेट।</p><a href="https://hrygs.
