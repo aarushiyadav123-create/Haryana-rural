@@ -343,7 +343,6 @@
         }
         .status-badge.success { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
 
-        /* Weather & Mandi Bhav Single Line Ticker Styles */
         .info-ticker-bar {
             background: #fff8e1;
             border: 1px solid #ffe082;
@@ -378,26 +377,23 @@
 <body onload="initPortal()">
 
     <div class="top-bar">
-        <span><div class="top-bar">
-    <span style="font-size: 11px;">👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
-    <div style="display: flex; gap: 5px;">
-        <a href="#searchSection" class="top-nav-btn">गाँव खोजें</a>
-        <button class="top-nav-btn" onclick="toggleSection('addShopFormBox', 'icon1')">Admin/Shop</button>
-        <button class="top-nav-btn" onclick="alert('डिजिटल ग्राम पोर्टल - हरियाणा ग्रामीण सेवा। सभी अधिकार सुरक्षित।')">प्राइवेसी पॉलिसी</button>
+        <span style="font-size: 11px;">👩‍💼 संस्थापक: कुसुम w/o राजेश यादव माल्कोश</span>
+        <div style="display: flex; gap: 5px;">
+            <a href="#searchSection" class="top-nav-btn">गाँव खोजें</a>
+            <button class="top-nav-btn" onclick="toggleSection('addShopFormBox', 'icon1')">Admin/Shop</button>
+            <button class="top-nav-btn" onclick="alert('डिजिटल ग्राम पोर्टल - हरियाणा ग्रामीण सेवा। सभी अधिकार सुरक्षित।')">प्राइवेसी पॉलिसी</button>
+        </div>
     </div>
-</div>
-
 
     <header>
         <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
-        <p id="headerSubTitle">
-            Haryanagramin , डिजिटल ग्राम पोर्टल, पंचायत मुनादी व स्थानीय बाज़ार सेवाएं</p>
+        <p id="headerSubTitle">Haryanagramin , डिजिटल ग्राम पोर्टल, पंचायत मुनादी व स्थानीय बाज़ार सेवाएं</p>
         <div class="badge" id="currentLocationBadge">📍 हरियाणा के सभी 22 ज़िले और ब्लॉक के समस्त गाँव सक्रिय</div>
     </header>
 
     <div class="container" id="searchSection">
 
-        <!-- WEATHER & MANDI BHAV SINGLE LINE UPDATED BAR -->
+        <!-- WEATHER & MANDI BHAV TICKER -->
         <div class="info-ticker-bar">
             <div class="ticker-label">🔔 लाइव अपडेट</div>
             <div class="ticker-content">
@@ -525,20 +521,6 @@
                 <button type="button" class="custom-btn" onclick="submitShop()" style="padding: 10px;">दुकान लाइव Firebase में दर्ज करें</button>
             </div>
         </div>
-<div class="category-dropdown-box" style="margin-bottom: 15px; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-    <button class="category-main-btn" onclick="toggleCategoryDropdown()" style="width: 100%; padding: 12px; background: #2e7d32; color: #fff; border: none; border-radius: 6px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-        <span>🔍 1. सभी लोकल कैटेगरी (Mistri, Electrician, Pandit, Medical etc.)</span>
-        <span>▼</span>
-    </button>
-    <div id="categoryDropdownContent" class="category-dropdown-content" style="display: none; margin-top: 8px; flex-direction: column; gap: 5px;">
-        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('मिस्त्री सेवा जल्द सक्रिय होगी')">🛠️ मिस्त्री (Mistri)</a>
-        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('इलेक्ट्रीशियन सेवा जल्द सक्रिय होगी')">⚡ इलेक्ट्रीशियन (Electrician)</a>
-        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('पंडित जी सेवा जल्द सक्रिय होगी')">🙏 पंडित जी (Pandit Ji)</a>
-        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('गाड़ी किराया सेवा जल्द सक्रिय होगी')">🚕 गाड़ी किराया (Gaadi Kiraya)</a>
-        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('मेडिकल सेवा जल्द सक्रिय होगी')">🏥 मेडिकल (Medical)</a>
-        <a href="#searchSection" style="padding: 8px 12px; background: #f4f6f9; color: #333; text-decoration: none; border-radius: 5px;" onclick="alert('अन्य स्थानीय सेवाएं जल्द सक्रिय होगी')">📦 अन्य स्थानीय सेवाएँ (Other Local)</a>
-    </div>
-</div>
 
         <!-- 2. GRAMIN GALLERY -->
         <div class="toggle-bar orange" onclick="toggleSection('galleryBox', 'icon2')">
@@ -687,7 +669,7 @@
             </div>
         </div>
 
-        <!-- 6. ENTERTAINMENT & CULTURE (Added at 6th position) -->
+        <!-- 6. ENTERTAINMENT & CULTURE -->
         <div class="toggle-bar entertainment" onclick="toggleSection('entertainmentBox', 'iconEnt')">
             <span>🎭 6. ग्रामीण मनोरंजन और संस्कृति (Vlogs & Culture)</span>
             <span id="iconEnt">▼</span>
@@ -884,6 +866,7 @@
             }
         }
 
+        // Fixed Village Dropdown Logic: Specifically binds selected Block villages properly
         function updateVillageDropdown(districtId, blockId, villageId) {
             const dist = document.getElementById(districtId).value;
             const block = document.getElementById(blockId).value;
@@ -899,32 +882,12 @@
             }
         }
 
-        function populateVillagesForDistrict(districtId, villageId) {
-            const dist = document.getElementById(districtId).value;
-            const villSel = document.getElementById(villageId);
-            villSel.innerHTML = '<option value="">-- गाँव चुनें --</option>';
-            if (!dist || !haryanaMasterData[dist]) return;
-
-            const villagesSet = new Set();
-            Object.values(haryanaMasterData[dist]).forEach(blockArr => {
-                blockArr.forEach(v => {
-                    if (v && v.toString().trim()) villagesSet.add(v.toString().trim());
-                });
-            });
-
-            const villages = Array.from(villagesSet);
-            villages.sort((a, b) => a.localeCompare(b, 'hi'));
-
-            villages.forEach(v => {
-                villSel.innerHTML += `<option value="${v}">${v}</option>`;
-            });
-        }
-
         function onMainDistrictChange() {
             updateBlockDropdown("mainDistrictSelect", "mainBlockSelect", "mainVillageSelect");
-            populateVillagesForDistrict("mainDistrictSelect", "mainVillageSelect");
         }
-        function onMainBlockChange() { updateVillageDropdown("mainDistrictSelect", "mainBlockSelect", "mainVillageSelect"); }
+        function onMainBlockChange() { 
+            updateVillageDropdown("mainDistrictSelect", "mainBlockSelect", "mainVillageSelect"); 
+        }
 
         function onRegDistrictChange() { updateBlockDropdown("regDistrict", "regBlock", "regVillage"); }
         function onRegBlockChange() { updateVillageDropdown("regDistrict", "regBlock", "regVillage"); }
@@ -1275,46 +1238,6 @@
             box.style.display = isVisible ? "none" : "block";
             icon.innerText = isVisible ? "▼" : "▲";
         }
-
-async function loadVillagesFromFirebase(districtId, blockId, villageSelectId) {
-    const selectedDist = document.getElementById(districtId).value.trim().toLowerCase();
-    const selectedBlock = document.getElementById(blockId).value.trim().toLowerCase();
-    const villSel = document.getElementById(villageSelectId);
-    
-    villSel.innerHTML = '<option value="">-- लोड हो रहा है... --</option>';
-    
-    try {
-        const querySnapshot = await window.getDocs(window.collection(window.db, "haryanagramin"));
-        let villageSet = new Set();
-        
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const d = (data.dist || "").trim().toLowerCase();
-            const b = (data.block || "").trim().toLowerCase();
-            const v = (data.vill || data.village || "").trim();
-            
-            if (d === selectedDist && b === selectedBlock && v) {
-                villageSet.add(v);
-            }
-        });
-        
-        villSel.innerHTML = '<option value="">-- गाँव चुनें / Select Village --</option>';
-        
-        if (villageSet.size === 0) {
-            villSel.innerHTML = '<option value="">-- इस ब्लॉक में कोई गाँव नहीं मिला --</option>';
-            return;
-        }
-        
-        const sortedVillages = Array.from(villageSet).sort((a, b) => a.localeCompare(b, 'hi'));
-        sortedVillages.forEach(vill => {
-            villSel.innerHTML += `<option value="${vill}">${vill}</option>`;
-        });
-        
-    } catch (error) {
-        console.error("Firebase Village Load Error:", error);
-        villSel.innerHTML = '<option value="">-- एरर आया, दोबारा कोशिश करें --</option>';
-    }
-}
     </script>
 </body>
-</html>..
+</html>
