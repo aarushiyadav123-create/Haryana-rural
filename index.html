@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
     <style>
-        :root { --primary: #1b5e20; --secondary: #2e7d32; --accent: #f57c00; --bg: #f4f6f8; --text: #333; }
+        :root { --primary: #1b5e20; --secondary: #2e7d32; --bg: #f4f6f8; --text: #333; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
-        .top-bar { background: #0d3b10; color: #fff; padding: 6px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
-        .top-nav-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 3px 8px; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 11px; }
+        .top-bar { background: #0d3b10; color: #fff; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
+        .menu-links { display: flex; gap: 12px; }
+        .menu-links a { color: #fff; text-decoration: none; font-size: 0.85rem; background: rgba(255,255,255,0.15); padding: 3px 8px; border-radius: 4px; }
+        .menu-links a:hover { background: rgba(255,255,255,0.3); }
         header { background: linear-gradient(135deg, #1b5e20, #2e7d32); color: white; text-align: center; padding: 15px 10px; }
         header h1 { margin: 0; font-size: 1.3rem; }
         header p { margin: 4px 0 0; font-size: 0.8rem; opacity: 0.9; }
@@ -19,68 +21,83 @@
         .form-group { margin-bottom: 10px; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 4px; color: #444; }
         .mandatory { color: red; }
-        select, input, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; }
+        select, input { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; }
         .custom-btn { background: var(--primary); color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.95rem; }
         .custom-btn:hover { background: #144517; }
         .toggle-bar { background: var(--primary); color: white; padding: 10px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
-        .toggle-bar.orange { background: #e65100; }
-        .toggle-bar.red { background: #c62828; }
-        .toggle-bar.govt { background: #01579b; }
         .collapsible-form-container { display: none; background: white; padding: 12px; border-radius: 6px; border: 1px solid #ddd; margin-bottom: 12px; }
-        .photo-preview-box { width: 100%; height: 120px; border: 2px dashed #ccc; border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-top: 6px; overflow: hidden; background: #fafafa; }
-        .photo-preview-box img { max-width: 100%; max-height: 100%; display: none; }
+        
+        /* Modal Style for About & Policy */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 8px; width: 90%; max-width: 400px; position: relative; }
+        .close-btn { float: right; font-size: 1.2rem; font-weight: bold; cursor: pointer; color: red; }
         footer { text-align: center; padding: 10px; font-size: 0.75rem; color: #666; }
     </style>
 </head>
 <body onload="initPortal()">
 
+    <!-- टॉप बार और मेनू (About & Policy) -->
     <div class="top-bar">
-        <span>👩‍💼 संस्थापक: कुसुम w/o राजेश यादव</span>
-        <div style="display: flex; gap: 5px;">
-            <a href="#searchSection" class="top-nav-btn">गाँव खोजें</a>
-            <button class="top-nav-btn" onclick="toggleSection('addShopFormBox', 'icon1')">Admin/Shop</button>
+        <span>हरियाणा ग्रामीण सेवा</span>
+        <div class="menu-links">
+            <a href="javascript:void(0)" onclick="openModal('aboutModal')">ℹ️ About</a>
+            <a href="javascript:void(0)" onclick="openModal('policyModal')">📜 Privacy Policy</a>
         </div>
     </div>
 
     <header>
         <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
-        <p>डिजिटल ग्राम पोर्टल व स्थानीय बाज़ार सेवाएं</p>
-        <div class="badge" id="currentLocationBadge">📍 हरियाणा के सभी ज़िले सक्रिय</div>
+        <p>डिजिटल ग्राम पोर्टल व स्थानीय बाज़ार</p>
+        <div class="badge" id="currentLocationBadge">📍 सभी सेवाएँ लाइव सक्रिय</div>
     </header>
 
-    <div class="container" id="searchSection">
+    <div class="container">
 
         <!-- SEARCH SECTION -->
         <div class="card">
             <h2>अपना गाँव व दुकान खोजें</h2>
+            
             <div class="form-group">
                 <label>जिला / District <span class="mandatory">*</span></label>
-                <select id="mainDistrictSelect" onchange="onMainDistrictChange()">
+                <select id="mainDistrictSelect">
                     <option value="">-- जिला चुनें --</option>
+                    <option value="AMBALA">AMBALA</option>
+                    <option value="BHIWANI">BHIWANI</option>
+                    <option value="CHARKHI DADRI">CHARKHI DADRI</option>
+                    <option value="FARIDABAD">FARIDABAD</option>
+                    <option value="FATEHABAD">FATEHABAD</option>
+                    <option value="GURUGRAM">GURUGRAM</option>
+                    <option value="HISAR">HISAR</option>
+                    <option value="JHAJJAR">JHAJJAR</option>
+                    <option value="JIND">JIND</option>
+                    <option value="KAITHAL">KAITHAL</option>
+                    <option value="KARNAL">KARNAL</option>
+                    <option value="KURUKSHETRA">KURUKSHETRA</option>
+                    <option value="MAHENDRAGARH">MAHENDRAGARH</option>
+                    <option value="NUH">NUH</option>
+                    <option value="PALWAL">PALWAL</option>
+                    <option value="PANCHKULA">PANCHKULA</option>
+                    <option value="PANIPAT">PANIPAT</option>
+                    <option value="REWARI">REWARI</option>
+                    <option value="ROHTAK">ROHTAK</option>
+                    <option value="SIRSA">SIRSA</option>
+                    <option value="SONIPAT">SONIPAT</option>
+                    <option value="YAMUNANAGAR">YAMUNANAGAR</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>खण्ड / Block <span class="mandatory">*</span></label>
-                <select id="mainBlockSelect" onchange="onMainBlockChange()">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>गाँव / Village <span class="mandatory">*</span></label>
-                <select id="mainVillageSelect" onchange="onVillageSelected()">
-                    <option value="">-- पहले ब्लॉक चुनें --</option>
-                </select>
+                <label>गाँव का नाम टाइप करें / Village Name <span class="mandatory">*</span></label>
+                <input type="text" id="mainVillageInput" placeholder="गाँव का नाम लिखें...">
             </div>
 
             <button class="custom-btn" onclick="searchServices()">विवरण देखें</button>
-            <div id="searchResult" style="margin-top: 10px;"></div>
+            <div id="searchResult" style="margin-top: 12px;"></div>
         </div>
 
         <!-- 1. ADD SHOP FORM -->
         <div class="toggle-bar" onclick="toggleSection('addShopFormBox', 'icon1')">
-            <span>🏪 1. दुकान / सेवा जोड़ें (Firebase)</span>
+            <span>🏪 दुकान / सेवा जोड़ें (Firebase Cloud)</span>
             <span id="icon1">▼</span>
         </div>
 
@@ -91,45 +108,73 @@
             </div>
             <div class="form-group">
                 <label>जिला:</label>
-                <select id="regDistrict" onchange="onRegDistrictChange()">
+                <select id="regDistrict">
                     <option value="">-- जिला चुनें --</option>
+                    <option value="AMBALA">AMBALA</option>
+                    <option value="BHIWANI">BHIWANI</option>
+                    <option value="CHARKHI DADRI">CHARKHI DADRI</option>
+                    <option value="FARIDABAD">FARIDABAD</option>
+                    <option value="FATEHABAD">FATEHABAD</option>
+                    <option value="GURUGRAM">GURUGRAM</option>
+                    <option value="HISAR">HISAR</option>
+                    <option value="JHAJJAR">JHAJJAR</option>
+                    <option value="JIND">JIND</option>
+                    <option value="KAITHAL">KAITHAL</option>
+                    <option value="KARNAL">KARNAL</option>
+                    <option value="KURUKSHETRA">KURUKSHETRA</option>
+                    <option value="MAHENDRAGARH">MAHENDRAGARH</option>
+                    <option value="NUH">NUH</option>
+                    <option value="PALWAL">PALWAL</option>
+                    <option value="PANCHKULA">PANCHKULA</option>
+                    <option value="PANIPAT">PANIPAT</option>
+                    <option value="REWARI">REWARI</option>
+                    <option value="ROHTAK">ROHTAK</option>
+                    <option value="SIRSA">SIRSA</option>
+                    <option value="SONIPAT">SONIPAT</option>
+                    <option value="YAMUNANAGAR">YAMUNANAGAR</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>ब्लॉक:</label>
-                <select id="regBlock" onchange="onRegBlockChange()">
-                    <option value="">-- पहले जिला चुनें --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>गाँव:</label>
-                <select id="regVillage">
-                    <option value="">-- पहले ब्लॉक चुनें --</option>
-                </select>
+                <label>गाँव का नाम:</label>
+                <input type="text" id="regVillage" placeholder="गाँव का नाम लिखें">
             </div>
             <div class="form-group">
                 <label>मोबाइल नंबर:</label>
                 <input type="tel" id="regPhone" placeholder="10 अंकों का नंबर">
             </div>
-            <div class="form-group">
-                <label>दुकान की फोटो:</label>
-                <input type="file" accept="image/*" onchange="previewImage(event, 'shopImgPrev', 'shopPhotoHolder')">
-                <div class="photo-preview-box">
-                    <span id="shopPhotoHolder" style="font-size: 0.8rem;">प्रिव्यू</span>
-                    <img id="shopImgPrev" alt="Preview">
-                </div>
-            </div>
-            <button type="button" class="custom-btn" onclick="submitShop()">दुकान लाइव दर्ज करें</button>
+            <button type="button" class="custom-btn" onclick="submitShop()">Firebase में लाइव दर्ज करें</button>
         </div>
 
     </div>
 
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
+            <h3 style="color: var(--primary); margin-top:0;">About Portal</h3>
+            <p><strong>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</strong></p>
+            <p>👩‍💼 <strong>संस्थापक:</strong> कुसुम w/o राजेश यादव</p>
+            <p style="font-size: 0.9rem; color: #555;">यह पोर्टल हरियाणा के सभी गाँवों और स्थानीय दुकानों को डिजिटल रूप से जोड़ने के लिए बनाया गया है।</p>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="policyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('policyModal')">&times;</span>
+            <h3 style="color: var(--primary); margin-top:0;">Privacy Policy</h3>
+            <p style="font-size: 0.85rem; color: #555;">हम आपकी गोपनीयता का सम्मान करते हैं। इस पोर्टल पर दर्ज की गई दुकान और संपर्क जानकारी केवल स्थानीय ग्रामीण सेवाओं और खोज के लिए उपयोग की जाती है। हम आपका डेटा किसी तीसरे पक्ष के साथ साझा नहीं करते हैं।</p>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2026 Haryana Rural Service Portal</p>
+        <p>&copy; 2026 Haryana Rural Service Portal - All Rights Reserved</p>
     </footer>
 
-    <!-- सही फाइल नामों से लिंकेज -->
-    <script src="haryana_data.js"></script>
+    <script>
+        function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
+        function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+    </script>
     <script type="module" src="script.js"></script>
 </body>
 </html>
