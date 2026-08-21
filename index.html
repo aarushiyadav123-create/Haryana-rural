@@ -5,176 +5,279 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</title>
     <style>
-        :root { --primary: #1b5e20; --secondary: #2e7d32; --bg: #f4f6f8; --text: #333; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
-        .top-bar { background: #0d3b10; color: #fff; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
-        .menu-links { display: flex; gap: 12px; }
-        .menu-links a { color: #fff; text-decoration: none; font-size: 0.85rem; background: rgba(255,255,255,0.15); padding: 3px 8px; border-radius: 4px; }
-        .menu-links a:hover { background: rgba(255,255,255,0.3); }
-        header { background: linear-gradient(135deg, #1b5e20, #2e7d32); color: white; text-align: center; padding: 15px 10px; }
-        header h1 { margin: 0; font-size: 1.3rem; }
-        header p { margin: 4px 0 0; font-size: 0.8rem; opacity: 0.9; }
-        .badge { background: #ffb300; color: #000; display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; margin-top: 6px; }
-        .container { max-width: 600px; margin: 10px auto; padding: 10px; }
-        .card { background: white; border-radius: 8px; padding: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 12px; }
-        .card h2 { font-size: 1.05rem; color: var(--primary); margin-top: 0; border-bottom: 2px solid #e8f5e9; padding-bottom: 6px; }
-        .form-group { margin-bottom: 10px; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 4px; color: #444; }
-        .mandatory { color: red; }
-        select, input { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; }
-        .custom-btn { background: var(--primary); color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.95rem; }
-        .custom-btn:hover { background: #144517; }
-        .toggle-bar { background: var(--primary); color: white; padding: 10px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
-        .collapsible-form-container { display: none; background: white; padding: 12px; border-radius: 6px; border: 1px solid #ddd; margin-bottom: 12px; }
+        :root {
+            --primary: #1b5e20;
+            --primary-dark: #113f14;
+            --secondary: #ff8f00;
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --border-radius: 10px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); padding-bottom: 60px; }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #2e7d32);
+            color: white; padding: 25px 15px; text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .container { max-width: 700px; margin: 20px auto; padding: 0 15px; }
+        .card { background: var(--card-bg); border-radius: var(--border-radius); padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
         
-        /* Modal Style for About & Policy */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
-        .modal-content { background: white; padding: 20px; border-radius: 8px; width: 90%; max-width: 400px; position: relative; }
-        .close-btn { float: right; font-size: 1.2rem; font-weight: bold; cursor: pointer; color: red; }
-        footer { text-align: center; padding: 10px; font-size: 0.75rem; color: #666; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+        select, input, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+
+        .custom-btn { width: 100%; background: #3f51b5; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+        .custom-btn:disabled { background: #ccc; }
+
+        .toggle-bar { background: var(--primary); color: white; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .collapsible-form { display: none; background: white; padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px; }
+
+        .photo-preview { width: 100%; height: 150px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; margin-top: 10px; border-radius: 6px; overflow: hidden; }
+        .photo-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+        #recaptcha-container { margin-top: 10px; }
     </style>
 </head>
-<body onload="initPortal()">
-
-    <!-- टॉप बार और मेनू (About & Policy) -->
-    <div class="top-bar">
-        <span>हरियाणा ग्रामीण सेवा</span>
-        <div class="menu-links">
-            <a href="javascript:void(0)" onclick="openModal('aboutModal')">ℹ️ About</a>
-            <a href="javascript:void(0)" onclick="openModal('policyModal')">📜 Privacy Policy</a>
-        </div>
-    </div>
+<body onload="initApp()">
 
     <header>
-        <h1 id="headerTitle">मेरा गाँव - हरियाणा ग्रामीण सेवा</h1>
-        <p>डिजिटल ग्राम पोर्टल व स्थानीय बाज़ार</p>
-        <div class="badge" id="currentLocationBadge">📍 सभी सेवाएँ लाइव सक्रिय</div>
+        <h1 id="mainTitle">हरियाणा ग्रामीण सेवा</h1>
+        <p>डिजिटल ग्राम पोर्टल - Dakshyadav.co.in</p>
     </header>
 
     <div class="container">
-
-        <!-- SEARCH SECTION -->
+        <!-- 1. SEARCH SECTION -->
         <div class="card">
-            <h2>अपना गाँव व दुकान खोजें</h2>
-            
+            <h3>📍 अपना गाँव खोजें</h3>
             <div class="form-group">
-                <label>जिला / District <span class="mandatory">*</span></label>
-                <select id="mainDistrictSelect">
-                    <option value="">-- जिला चुनें --</option>
-                    <option value="AMBALA">AMBALA</option>
-                    <option value="BHIWANI">BHIWANI</option>
-                    <option value="CHARKHI DADRI">CHARKHI DADRI</option>
-                    <option value="FARIDABAD">FARIDABAD</option>
-                    <option value="FATEHABAD">FATEHABAD</option>
-                    <option value="GURUGRAM">GURUGRAM</option>
-                    <option value="HISAR">HISAR</option>
-                    <option value="JHAJJAR">JHAJJAR</option>
-                    <option value="JIND">JIND</option>
-                    <option value="KAITHAL">KAITHAL</option>
-                    <option value="KARNAL">KARNAL</option>
-                    <option value="KURUKSHETRA">KURUKSHETRA</option>
-                    <option value="MAHENDRAGARH">MAHENDRAGARH</option>
-                    <option value="NUH">NUH</option>
-                    <option value="PALWAL">PALWAL</option>
-                    <option value="PANCHKULA">PANCHKULA</option>
-                    <option value="PANIPAT">PANIPAT</option>
-                    <option value="REWARI">REWARI</option>
-                    <option value="ROHTAK">ROHTAK</option>
-                    <option value="SIRSA">SIRSA</option>
-                    <option value="SONIPAT">SONIPAT</option>
-                    <option value="YAMUNANAGAR">YAMUNANAGAR</option>
-                </select>
+                <label>जिला</label>
+                <select id="searchDist" onchange="updateBlocks('searchDist', 'searchBlock', 'searchVill')"></select>
             </div>
-
             <div class="form-group">
-                <label>गाँव का नाम टाइप करें / Village Name <span class="mandatory">*</span></label>
-                <input type="text" id="mainVillageInput" placeholder="गाँव का नाम लिखें...">
+                <label>ब्लॉक</label>
+                <select id="searchBlock" onchange="updateVillages('searchDist', 'searchBlock', 'searchVill')"></select>
             </div>
-
-            <button class="custom-btn" onclick="searchServices()">विवरण देखें</button>
-            <div id="searchResult" style="margin-top: 12px;"></div>
+            <div class="form-group">
+                <label>गाँव</label>
+                <select id="searchVill"></select>
+            </div>
+            <button class="custom-btn" onclick="searchData()">डाटा देखें</button>
+            <div id="searchResults" style="margin-top:20px;"></div>
         </div>
 
-        <!-- 1. ADD SHOP FORM -->
-        <div class="toggle-bar" onclick="toggleSection('addShopFormBox', 'icon1')">
-            <span>🏪 दुकान / सेवा जोड़ें (Firebase Cloud)</span>
-            <span id="icon1">▼</span>
+        <!-- 2. ADD SHOP (LIVE OTP & GPS) -->
+        <div class="toggle-bar" onclick="toggleSection('shopBox')">
+            <span>🏪 अपनी दुकान/सेवा जोड़ें (Verified)</span>
+            <span>+</span>
+        </div>
+        <div id="shopBox" class="collapsible-form">
+            <div class="form-group">
+                <label>दुकान का नाम</label>
+                <input type="text" id="shopName" placeholder="उदा: यादव टेलर्स">
+            </div>
+            <div class="form-group">
+                <label>मोबाइल नंबर (+91)</label>
+                <div style="display:flex; gap:5px;">
+                    <input type="tel" id="shopPhone" placeholder="10 अंकों का नंबर">
+                    <button onclick="sendOTP()" id="otpBtn" style="width:120px; background: #e65100; color:white; border:none; border-radius:5px;">OTP भेजें</button>
+                </div>
+                <div id="recaptcha-container"></div>
+            </div>
+            <div id="otpVerifyBox" class="form-group" style="display:none;">
+                <label>OTP दर्ज करें</label>
+                <div style="display:flex; gap:5px;">
+                    <input type="number" id="otpInput">
+                    <button onclick="verifyOTP()" style="width:120px; background: #2e7d32; color:white; border:none; border-radius:5px;">वेरीफाई</button>
+                </div>
+            </div>
+            <div class="form-group" style="background:#f0f4f1; padding:10px; border-radius:5px;">
+                <label>📍 लाइव लोकेशन (GPS)</label>
+                <button onclick="getLocation()" class="custom-btn" style="background:#0288d1; margin-bottom:5px;">लोकेशन प्राप्त करें</button>
+                <input type="text" id="shopGPS" readonly placeholder="GPS Coordinates">
+            </div>
+            <div class="form-group">
+                <label>दुकान की फोटो</label>
+                <input type="file" accept="image/*" onchange="previewImg(this, 'shopPrev')">
+                <div class="photo-preview"><img id="shopPrev"></div>
+            </div>
+            <button class="custom-btn" id="finalShopBtn" disabled onclick="saveShop()">डेटाबेस में सेव करें</button>
         </div>
 
-        <div class="collapsible-form-container" id="addShopFormBox">
-            <div class="form-group">
-                <label>दुकान का नाम:</label>
-                <input type="text" id="regShopName" placeholder="उदा: वर्मा इलेक्ट्रॉनिक्स">
-            </div>
-            <div class="form-group">
-                <label>जिला:</label>
-                <select id="regDistrict">
-                    <option value="">-- जिला चुनें --</option>
-                    <option value="AMBALA">AMBALA</option>
-                    <option value="BHIWANI">BHIWANI</option>
-                    <option value="CHARKHI DADRI">CHARKHI DADRI</option>
-                    <option value="FARIDABAD">FARIDABAD</option>
-                    <option value="FATEHABAD">FATEHABAD</option>
-                    <option value="GURUGRAM">GURUGRAM</option>
-                    <option value="HISAR">HISAR</option>
-                    <option value="JHAJJAR">JHAJJAR</option>
-                    <option value="JIND">JIND</option>
-                    <option value="KAITHAL">KAITHAL</option>
-                    <option value="KARNAL">KARNAL</option>
-                    <option value="KURUKSHETRA">KURUKSHETRA</option>
-                    <option value="MAHENDRAGARH">MAHENDRAGARH</option>
-                    <option value="NUH">NUH</option>
-                    <option value="PALWAL">PALWAL</option>
-                    <option value="PANCHKULA">PANCHKULA</option>
-                    <option value="PANIPAT">PANIPAT</option>
-                    <option value="REWARI">REWARI</option>
-                    <option value="ROHTAK">ROHTAK</option>
-                    <option value="SIRSA">SIRSA</option>
-                    <option value="SONIPAT">SONIPAT</option>
-                    <option value="YAMUNANAGAR">YAMUNANAGAR</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>गाँव का नाम:</label>
-                <input type="text" id="regVillage" placeholder="गाँव का नाम लिखें">
-            </div>
-            <div class="form-group">
-                <label>मोबाइल नंबर:</label>
-                <input type="tel" id="regPhone" placeholder="10 अंकों का नंबर">
-            </div>
-            <button type="button" class="custom-btn" onclick="submitShop()">Firebase में लाइव दर्ज करें</button>
+        <!-- 3. FREE MARKET (BUY/SELL) -->
+        <div class="toggle-bar" style="background:#4a148c" onclick="toggleSection('marketBox')">
+            <span>🛒 गाँव का बाज़ार (मुफ्त विज्ञापन)</span>
+            <span>+</span>
+        </div>
+        <div id="marketBox" class="collapsible-form">
+            <input type="text" id="itemTitle" placeholder="क्या बेचना है? (उदा: ट्रैक्टर/भैंस)" class="form-group">
+            <input type="number" id="itemPrice" placeholder="कीमत (₹)" class="form-group">
+            <button class="custom-btn" onclick="saveMarketItem()">विज्ञापन लाइव करें</button>
         </div>
 
     </div>
 
-    <!-- About Modal -->
-    <div id="aboutModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
-            <h3 style="color: var(--primary); margin-top:0;">About Portal</h3>
-            <p><strong>हरियाणा ग्रामीण सेवा - डिजिटल ग्राम पोर्टल</strong></p>
-            <p>👩‍💼 <strong>संस्थापक:</strong> कुसुम w/o राजेश यादव</p>
-            <p style="font-size: 0.9rem; color: #555;">यह पोर्टल हरियाणा के सभी गाँवों और स्थानीय दुकानों को डिजिटल रूप से जोड़ने के लिए बनाया गया है।</p>
-        </div>
-    </div>
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    <!-- Privacy Policy Modal -->
-    <div id="policyModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('policyModal')">&times;</span>
-            <h3 style="color: var(--primary); margin-top:0;">Privacy Policy</h3>
-            <p style="font-size: 0.85rem; color: #555;">हम आपकी गोपनीयता का सम्मान करते हैं। इस पोर्टल पर दर्ज की गई दुकान और संपर्क जानकारी केवल स्थानीय ग्रामीण सेवाओं और खोज के लिए उपयोग की जाती है। हम आपका डेटा किसी तीसरे पक्ष के साथ साझा नहीं करते हैं।</p>
-        </div>
-    </div>
+        // यहाँ अपना असली Firebase कॉन्फिग डालें
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
 
-    <footer>
-        <p>&copy; 2026 Haryana Rural Service Portal - All Rights Reserved</p>
-    </footer>
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Global objects
+        window.db = db; window.auth = auth;
+        window.addDoc = addDoc; window.collection = collection;
+        window.getDocs = getDocs; window.query = query; window.where = where;
+        window.RecaptchaVerifier = RecaptchaVerifier;
+        window.signInWithPhoneNumber = signInWithPhoneNumber;
+    </script>
 
     <script>
-        function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
-        function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+        const haryanaData = {
+            "ROHTAK": {
+                "SAMPLA": ["Ismaila-A", "Ismaila-B", "Sampla", "Garhi", "Kheri"],
+                "ROHTAK": ["Dobh", "Bohar", "Assan"]
+            },
+            "JHAJJAR": {
+                "BAHADURGARH": ["Badli", "Asaudha", "Line Par"],
+                "JHAJJAR": ["Silani", "Kutani"]
+            }
+            // अन्य जिलों का डाटा यहाँ जोड़ें
+        };
+
+        let confirmationResult;
+        let isPhoneVerified = false;
+        let shopPhotoBase64 = "";
+
+        function initApp() {
+            const distSelects = ["searchDist", "searchDist"]; // Add more if needed
+            const dSelect = document.getElementById("searchDist");
+            dSelect.innerHTML = "<option>--जिला चुनें--</option>";
+            Object.keys(haryanaData).forEach(d => {
+                dSelect.innerHTML += `<option value="${d}">${d}</option>`;
+            });
+        }
+
+        function updateBlocks(dId, bId, vId) {
+            const dist = document.getElementById(dId).value;
+            const bSelect = document.getElementById(bId);
+            bSelect.innerHTML = "<option>--ब्लॉक चुनें--</option>";
+            if(haryanaData[dist]) {
+                Object.keys(haryanaData[dist]).forEach(b => {
+                    bSelect.innerHTML += `<option value="${b}">${b}</option>`;
+                });
+            }
+        }
+
+        function updateVillages(dId, bId, vId) {
+            const dist = document.getElementById(dId).value;
+            const block = document.getElementById(bId).value;
+            const vSelect = document.getElementById(vId);
+            vSelect.innerHTML = "<option>--गाँव चुनें--</option>";
+            if(haryanaData[dist][block]) {
+                haryanaData[dist][block].forEach(v => {
+                    vSelect.innerHTML += `<option value="${v}">${v}</option>`;
+                });
+            }
+        }
+
+        function toggleSection(id) {
+            const el = document.getElementById(id);
+            el.style.display = el.style.display === "block" ? "none" : "block";
+        }
+
+        // --- GPS LIVE ---
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    document.getElementById("shopGPS").value = `${pos.coords.latitude}, ${pos.coords.longitude}`;
+                    checkReady();
+                }, err => alert("कृपया GPS ऑन करें!"));
+            }
+        }
+
+        // --- LIVE OTP (Firebase) ---
+        function sendOTP() {
+            const phone = document.getElementById("shopPhone").value;
+            if(phone.length < 10) return alert("सही नंबर डालें");
+
+            window.recaptchaVerifier = new RecaptchaVerifier(window.auth, 'recaptcha-container', { 'size': 'invisible' });
+            
+            const fullPhone = "+91" + phone;
+            window.signInWithPhoneNumber(window.auth, fullPhone, window.recaptchaVerifier)
+                .then(res => {
+                    confirmationResult = res;
+                    document.getElementById("otpVerifyBox").style.display = "block";
+                    alert("OTP भेज दिया गया है");
+                }).catch(err => alert("Error: " + err.message));
+        }
+
+        function verifyOTP() {
+            const code = document.getElementById("otpInput").value;
+            confirmationResult.confirm(code).then(res => {
+                isPhoneVerified = true;
+                alert("Verified!");
+                document.getElementById("otpVerifyBox").innerHTML = "✅ Verified";
+                checkReady();
+            }).catch(err => alert("गलत OTP"));
+        }
+
+        function previewImg(input, prevId) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById(prevId).src = e.target.result;
+                shopPhotoBase64 = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function checkReady() {
+            if(isPhoneVerified && document.getElementById("shopGPS").value) {
+                document.getElementById("finalShopBtn").disabled = false;
+            }
+        }
+
+        // --- FIRESTORE ACTIONS ---
+        async function saveShop() {
+            const data = {
+                name: document.getElementById("shopName").value,
+                gps: document.getElementById("shopGPS").value,
+                photo: shopPhotoBase64,
+                village: document.getElementById("searchVill").value,
+                type: "shop"
+            };
+            await window.addDoc(window.collection(window.db, "shops"), data);
+            alert("सफलतापूर्वक दर्ज हुआ!");
+            location.reload();
+        }
+
+        async function searchData() {
+            const vill = document.getElementById("searchVill").value;
+            const q = window.query(window.collection(window.db, "shops"), window.where("village", "==", vill));
+            const snap = await window.getDocs(q);
+            let html = "";
+            snap.forEach(doc => {
+                const d = doc.data();
+                html += `<div class='card'><b>${d.name}</b><br><img src="${d.photo}" style="width:100px"></div>`;
+            });
+            document.getElementById("searchResults").innerHTML = html || "कोई डाटा नहीं मिला";
+        }
     </script>
-    <script type="module" src="script.js"></script>
 </body>
 </html>
